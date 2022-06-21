@@ -38,7 +38,7 @@ importers:
       '@types/fs-extra': ^9.0.13
       '@types/js-yaml': ^4.0.5
       ali-oss: ^6.17.1
-      breadc: ^0.4.1
+      breadc: ^0.4.2
       cli-progress: ^3.11.1
       debug: ^4.3.4
       fs-extra: ^10.1.0
@@ -47,7 +47,7 @@ importers:
     dependencies:
       '@alicloud/pop-core': 1.7.12
       ali-oss: 6.17.1
-      breadc: 0.4.1
+      breadc: 0.4.2
       cli-progress: 3.11.1
       debug: 4.3.4
       fs-extra: 10.1.0
@@ -909,10 +909,11 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /breadc/0.4.1:
-    resolution: {integrity: sha512-/cb08InIoGsY1DHiNryH7yOUKv+jtasirg5FAvFf/hCUeGeCq55saniEh3hTRXSUbS89y2EgDS0pu0k+Jt3YxA==}
+  /breadc/0.4.2:
+    resolution: {integrity: sha512-5V35WQV1oLi2pFQVlfHRhO+byZJaLJrC46wj6yh16FG2fY5QTvWduSjrYYGUICCLsepRxSIWFx0BhfmLVzVPiA==}
     dependencies:
       kolorist: 1.5.1
+      minimist: 1.2.6
     dev: false
 
   /browserslist/4.20.4:

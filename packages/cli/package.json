@@ -43,7 +43,7 @@
   "dependencies": {
     "@alicloud/pop-core": "^1.7.12",
     "ali-oss": "^6.17.1",
-    "breadc": "^0.4.1",
+    "breadc": "^0.4.2",
     "cli-progress": "^3.11.1",
     "debug": "^4.3.4",
     "fs-extra": "^10.1.0",
