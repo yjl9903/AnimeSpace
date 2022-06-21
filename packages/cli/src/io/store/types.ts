@@ -11,9 +11,11 @@ export { VideoInfo, LocalVideoInfo };
 
 export abstract class Store {
   private readonly context: GlobalContex;
+  private readonly type: string;
 
-  constructor(context: GlobalContex) {
+  constructor(context: GlobalContex, type: string) {
     this.context = context;
+    this.type = type;
   }
 
   protected abstract doUpload(payload: Payload): Promise<string | undefined>;
@@ -23,7 +25,7 @@ export abstract class Store {
   async deleteVideo(videoId: string) {
     const logs = await this.context.storeLog.list();
     const videoIdx = logs.findIndex((l) => l.videoId === videoId);
-    if (videoIdx !== -1) {
+    if (videoIdx !== -1 && logs[videoIdx].store === this.type) {
       await this.doDelete(videoId);
       logs.splice(videoIdx, 1);
       await this.context.storeLog.write(logs);
@@ -35,7 +37,7 @@ export abstract class Store {
   async searchLocalVideo(filename: string) {
     const name = path.basename(filename);
     const videos = (await this.context.storeLog.list()).filter(
-      (l) => path.basename(l.filepath) === name
+      (l) => path.basename(l.filepath) === name && l.store === this.type
     );
     if (videos.length === 0) {
       return undefined;
@@ -51,7 +53,11 @@ export abstract class Store {
     const hash = hashFile(payload.filepath);
 
     for (const log of await this.context.storeLog.list()) {
-      if (log.filepath === payload.filepath && log.hash === hash) {
+      if (
+        log.filepath === payload.filepath &&
+        log.hash === hash &&
+        log.store === this.type
+      ) {
         return log;
       }
     }

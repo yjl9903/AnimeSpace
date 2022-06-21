@@ -22,7 +22,7 @@ export class AliStore extends Store {
   private readonly vodClient: RPCClient;
 
   constructor(context: GlobalContex, config: AliStoreConfig) {
-    super(context);
+    super(context, 'ali');
 
     this.accessKeyId = config.accessKeyId;
     this.accessKeySecret = config.accessKeySecret;
