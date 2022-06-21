@@ -18,27 +18,27 @@ const debug = createDebug(name + ':cli');
 const cli = Breadc(name, { version, logger: { debug } });
 
 cli
-  .command('store info <filepath>', 'View video info on OSS')
-  .option('--id', 'Use videoId instead of filepath')
-  .action(async (filename, option) => {
+  .command('store get <id>', 'View video info on OSS')
+  .option('--file', 'Use videoId instead of filepath')
+  .action(async (id, option) => {
     const context = new GlobalContex();
     await context.init();
     const createStore = useStore('ali');
     const store = await createStore(context);
 
-    const info = option.id
-      ? await store.fetchVideoInfo(filename)
-      : await store.searchLocalVideo(filename);
+    const info = !option.file
+      ? await store.fetchVideoInfo(id)
+      : await store.searchLocalVideo(id);
 
     if (info) {
       printVideoInfo(info);
     } else {
-      console.log(`  ${red('✗ Fail')}`);
+      console.log(`  ${red(`✗ video "${id}" not found`)}`);
     }
   });
 
 cli
-  .command('store upload <filepath>', 'Upload video to OSS')
+  .command('store put <file>', 'Upload video to OSS')
   .option('--title [title]', 'Video title')
   .action(async (filename, option) => {
     const context = new GlobalContex();
@@ -67,6 +67,27 @@ cli
     } catch (error) {
       console.log();
       console.log(`  ${red('✗ Fail')}`);
+    }
+  });
+
+cli
+  .command('store del <id>', 'Delete video info on OSS')
+  .option('--file', 'Use videoId instead of filepath')
+  .action(async (id, option) => {
+    const context = new GlobalContex();
+    await context.init();
+    const createStore = useStore('ali');
+    const store = await createStore(context);
+
+    const info = !option.file
+      ? await store.fetchVideoInfo(id)
+      : await store.searchLocalVideo(id);
+
+    if (info) {
+      printVideoInfo(info);
+      await store.deleteVideo(info.videoId);
+    } else {
+      console.log(`  ${red(`✗ video "${id}" not found`)}`);
     }
   });
 

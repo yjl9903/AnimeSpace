@@ -22,6 +22,10 @@ export class LogContext<T = any> {
   async append(log: T): Promise<void> {
     const logs = await this.list();
     logs.push(log);
+    await this.write(logs);
+  }
+
+  async write(logs: T[]): Promise<void> {
     fs.writeFileSync(this.filepath, JSON.stringify(logs, null, 2), 'utf-8');
   }
 }

@@ -101,14 +101,19 @@ export class AliStore extends Store {
       return resp.VideoId;
     } catch (error) {
       debug(error);
-      await this.vodClient.request(
-        'DeleteVideo',
-        { VideoIds: resp.VideoId },
-        {}
-      );
+      await this.doDelete(resp.VideoId);
       return undefined;
     } finally {
       bar.stop();
+    }
+  }
+
+  async doDelete(videoId: string) {
+    try {
+      await this.vodClient.request('DeleteVideo', { VideoIds: videoId }, {});
+      return true;
+    } catch {
+      return false;
     }
   }
 

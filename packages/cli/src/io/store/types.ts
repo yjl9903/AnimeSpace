@@ -18,6 +18,18 @@ export abstract class Store {
 
   protected abstract doUpload(payload: Payload): Promise<string | undefined>;
 
+  protected abstract doDelete(videoId: string): Promise<boolean>;
+
+  async deleteVideo(videoId: string) {
+    const logs = await this.context.uploadLog.list();
+    const videoIdx = logs.findIndex((l) => l.videoId === videoId);
+    if (videoIdx !== -1) {
+      await this.doDelete(videoId);
+      logs.splice(videoIdx, 1);
+      await this.context.uploadLog.write(logs);
+    }
+  }
+
   abstract fetchVideoInfo(videoId: string): Promise<VideoInfo | undefined>;
 
   async searchLocalVideo(filename: string) {
