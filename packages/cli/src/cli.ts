@@ -20,13 +20,16 @@ const cli = Breadc(name, { version, logger: { debug } });
 cli
   .command('store info <filepath>', 'View video info on OSS')
   .option('--id', 'Use videoId instead of filepath')
-  .action(async (filename) => {
+  .action(async (filename, option) => {
     const context = new GlobalContex();
     await context.init();
     const createStore = useStore('ali');
     const store = await createStore(context);
 
-    const info = await store.fetchVideoInfo(filename);
+    const info = option.id
+      ? await store.fetchVideoInfo(filename)
+      : await store.searchLocalVideo(filename);
+
     if (info) {
       printVideoInfo(info);
     } else {

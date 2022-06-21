@@ -1,6 +1,8 @@
 import type { VideoInfo, LocalVideoInfo } from '../../types';
 import type { GlobalContex } from '../../context';
 
+import path from 'node:path';
+
 import { hashFile } from '../../utils';
 
 export type CreateStore = (config: GlobalContex) => Promise<Store>;
@@ -17,6 +19,21 @@ export abstract class Store {
   protected abstract doUpload(payload: Payload): Promise<string | undefined>;
 
   abstract fetchVideoInfo(videoId: string): Promise<VideoInfo | undefined>;
+
+  async searchLocalVideo(filename: string) {
+    const name = path.basename(filename);
+    const videos = (await this.context.uploadLog.list()).filter(
+      (l) => path.basename(l.filepath) === name
+    );
+    if (videos.length === 0) {
+      return undefined;
+    } else {
+      if (videos.length > 1) {
+        // Duplicate name
+      }
+      return videos[0];
+    }
+  }
 
   async upload(payload: Payload): Promise<VideoInfo | undefined> {
     const hash = hashFile(payload.filepath);
