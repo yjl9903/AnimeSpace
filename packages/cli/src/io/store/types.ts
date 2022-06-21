@@ -3,9 +3,18 @@ import type { GlobalContex } from '../../context';
 export type CreateStore = (config: GlobalContex) => Promise<Store>;
 
 export abstract class Store {
-  abstract upload(payload: Payload): Promise<boolean>;
+  protected abstract doUpload(payload: Payload): Promise<string | undefined>;
 
-  abstract fetchVideoInfo(): Promise<any>;
+  abstract fetchVideoInfo(videoId: string): Promise<any>;
+
+  async upload(payload: Payload): Promise<any> {
+    const videoId = await this.doUpload(payload);
+    if (videoId) {
+      return await this.fetchVideoInfo(videoId);
+    } else {
+      throw new Error('Fail to upload');
+    }
+  }
 }
 
 export interface Payload {

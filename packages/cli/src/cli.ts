@@ -17,6 +17,17 @@ const debug = createDebug(name + ':cli');
 const cli = Breadc(name, { version, logger: { debug } });
 
 cli
+  .command('store info <filename>', 'View video info on OSS')
+  .action(async (filename) => {
+    const context = new GlobalContex();
+    await context.init();
+    const createStore = useStore('ali');
+    const store = await createStore(context);
+
+    await store.fetchVideoInfo(filename);
+  });
+
+cli
   .command('store upload <filename>', 'Upload video to OSS')
   .option('--title [title]', 'Video title')
   .action(async (filename, option) => {
@@ -24,15 +35,20 @@ cli
     await context.init();
     const createStore = useStore('ali');
     const store = await createStore(context);
+
     const payload = {
       filepath: path.resolve(process.cwd(), filename),
       title: option.title ?? path.basename(filename)
     };
-    const ok = await store.upload(payload);
-    console.log(ok ? ` ${green('√ Success')}` : ` ${red('✗ Fail')}`);
+    try {
+      await store.upload(payload);
+      console.log(` ${green('√ Success')}`);
+    } catch (error) {
+      console.log(` ${red('✗ Fail')}`);
+    }
   });
 
-cli.command('config', 'Open config folder').action(async () => {
+cli.command('space', 'Open AnimePaste space directory').action(async () => {
   const context = new GlobalContex();
   await context.init();
   console.log(context.root);

@@ -51,7 +51,7 @@ export class AliStore extends Store {
     }
   }
 
-  async upload(payload: Payload): Promise<any> {
+  async doUpload(payload: Payload): Promise<string | undefined> {
     const resp = await this.createUplodaVideo(payload.title, payload.filepath);
     if (!resp) {
       throw new Error('Fail creating upload video');
@@ -95,17 +95,30 @@ export class AliStore extends Store {
         }
       );
       debug(ossRes);
-      return true;
+      return resp.VideoId;
     } catch (error) {
       debug(error);
-      return false;
+      return undefined;
     } finally {
       bar.stop();
     }
   }
 
-  fetchVideoInfo(): Promise<any> {
-    throw new Error('Method not implemented.');
+  async fetchVideoInfo(videoId: string): Promise<any> {
+    try {
+      const resp = await this.vodClient.request(
+        'GetVideoInfo',
+        {
+          VideoId: videoId
+        },
+        {}
+      );
+      debug(resp);
+      return resp;
+    } catch (error) {
+      debug(error);
+      return undefined;
+    }
   }
 }
 

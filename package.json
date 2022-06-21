@@ -5,7 +5,7 @@
     "build": "vite build",
     "build:cli": "pnpm -C packages/cli build",
     "dev": "vite",
-    "format": "prettier --write src/**/*.{ts,vue} --ignore-path .gitignore",
+    "format": "prettier --write src/**/*.{ts,vue} packages/**/*.ts --ignore-path .gitignore",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },

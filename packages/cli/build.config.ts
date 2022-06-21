@@ -1,14 +1,12 @@
 import path from 'path';
-import { defineBuildConfig } from 'unbuild'
+import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
-  entries: [
-    'src/index', 'src/cli'
-  ],
+  entries: ['src/index', 'src/cli'],
   declaration: true,
   clean: true,
   rollup: {
-    emitCJS: true,
+    emitCJS: true
   },
-  externals: [path.join(__dirname, './package.json')],
+  externals: [path.join(__dirname, './package.json')]
 });
