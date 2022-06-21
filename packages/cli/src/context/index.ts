@@ -31,7 +31,7 @@ export class GlobalContex {
   constructor() {
     this.root = path.join(homedir(), '.animepaste');
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
-    this.uploadLog = new LogContext(this, 'upload.json');
+    this.uploadLog = new LogContext(this, 'store.json');
   }
 
   async init() {
