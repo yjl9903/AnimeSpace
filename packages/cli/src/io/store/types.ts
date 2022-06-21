@@ -21,12 +21,12 @@ export abstract class Store {
   protected abstract doDelete(videoId: string): Promise<boolean>;
 
   async deleteVideo(videoId: string) {
-    const logs = await this.context.uploadLog.list();
+    const logs = await this.context.storeLog.list();
     const videoIdx = logs.findIndex((l) => l.videoId === videoId);
     if (videoIdx !== -1) {
       await this.doDelete(videoId);
       logs.splice(videoIdx, 1);
-      await this.context.uploadLog.write(logs);
+      await this.context.storeLog.write(logs);
     }
   }
 
@@ -34,7 +34,7 @@ export abstract class Store {
 
   async searchLocalVideo(filename: string) {
     const name = path.basename(filename);
-    const videos = (await this.context.uploadLog.list()).filter(
+    const videos = (await this.context.storeLog.list()).filter(
       (l) => path.basename(l.filepath) === name
     );
     if (videos.length === 0) {
@@ -50,7 +50,7 @@ export abstract class Store {
   async upload(payload: Payload): Promise<VideoInfo | undefined> {
     const hash = hashFile(payload.filepath);
 
-    for (const log of await this.context.uploadLog.list()) {
+    for (const log of await this.context.storeLog.list()) {
       if (log.filepath === payload.filepath && log.hash === hash) {
         return log;
       }
@@ -65,7 +65,7 @@ export abstract class Store {
         filepath: payload.filepath,
         hash
       };
-      await this.context.uploadLog.append(local);
+      await this.context.storeLog.append(local);
       return local;
     } else {
       throw new Error('Fail to upload');

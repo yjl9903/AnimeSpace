@@ -24,14 +24,14 @@ export class GlobalContex {
   readonly root: string;
   readonly config: string;
 
-  readonly uploadLog: LogContext<LocalVideoInfo>;
+  readonly storeLog: LogContext<LocalVideoInfo>;
 
   private configCache: any;
 
   constructor() {
     this.root = path.join(homedir(), '.animepaste');
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
-    this.uploadLog = new LogContext(this, 'store.json');
+    this.storeLog = new LogContext(this, 'store.json');
   }
 
   async init() {
