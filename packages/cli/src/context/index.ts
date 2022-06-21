@@ -3,6 +3,10 @@ import * as path from 'node:path';
 import { homedir } from 'node:os';
 import { load, dump } from 'js-yaml';
 
+import type { LocalVideoInfo } from '../types';
+
+import { LogContext } from './log';
+
 const DefaultGlobalConfig: GlobalConfig = {
   plan: [],
   store: {
@@ -20,17 +24,20 @@ export class GlobalContex {
   readonly root: string;
   readonly config: string;
 
+  readonly uploadLog: LogContext<LocalVideoInfo>;
+
   private configCache: any;
 
   constructor() {
     this.root = path.join(homedir(), '.animepaste');
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
+    this.uploadLog = new LogContext(this, 'upload.json');
   }
 
   async init() {
-    if (!(await fs.pathExists(this.root))) {
-      fs.mkdirp(this.root);
-    }
+    await fs.ensureDir(this.root);
+    await fs.ensureDir(path.join(this.root, 'anime'));
+    await fs.ensureDir(path.join(this.root, 'cache'));
     if (!(await fs.pathExists(this.config))) {
       fs.writeFile(
         this.config,
@@ -48,6 +55,18 @@ export class GlobalContex {
 
   async getStoreConfig<T = any>(key: string): Promise<T> {
     return (await this.loadConfig()).store[key];
+  }
+
+  /**
+   * Copy file from "src" to "root/dst/basename(src)"
+   *
+   * @param src
+   * @param dst
+   */
+  async copy(src: string, dst: 'cache' | 'anime') {
+    const filepath = path.join(this.root, dst, path.basename(src));
+    await fs.copy(src, filepath);
+    return filepath;
   }
 }
 

@@ -1,3 +1,7 @@
+import type { GlobalContex } from '../../context';
+
+import path from 'node:path';
+
 import OSS from 'ali-oss';
 import RPCClient from '@alicloud/pop-core';
 
@@ -6,8 +10,7 @@ import { lightGreen } from 'kolorist';
 import { SingleBar, Presets } from 'cli-progress';
 
 import { b64decode } from '../utils';
-import { CreateStore, Payload, Store } from './types';
-import path from 'node:path';
+import { CreateStore, Payload, Store, VideoInfo } from './types';
 
 const debug = createDebug('anime:ali');
 
@@ -18,8 +21,8 @@ export class AliStore extends Store {
 
   private readonly vodClient: RPCClient;
 
-  constructor(config: AliStoreConfig) {
-    super();
+  constructor(context: GlobalContex, config: AliStoreConfig) {
+    super(context);
 
     this.accessKeyId = config.accessKeyId;
     this.accessKeySecret = config.accessKeySecret;
@@ -75,10 +78,10 @@ export class AliStore extends Store {
       refreshSTSTokenInterval: 60 * 60 * 1000
     });
 
-    console.log(` Upload: ${lightGreen(path.basename(payload.filepath))}`);
+    console.log(`  Upload: ${lightGreen(path.basename(payload.filepath))}`);
     const bar = new SingleBar(
       {
-        format: ' {bar} {percentage}% | ETA: {eta}s'
+        format: '  {bar} {percentage}% | ETA: {eta}s'
       },
       Presets.shades_grey
     );
@@ -104,17 +107,35 @@ export class AliStore extends Store {
     }
   }
 
-  async fetchVideoInfo(videoId: string): Promise<any> {
+  async fetchVideoInfo(videoId: string): Promise<VideoInfo | undefined> {
     try {
-      const resp = await this.vodClient.request(
-        'GetVideoInfo',
-        {
-          VideoId: videoId
-        },
-        {}
-      );
-      debug(resp);
-      return resp;
+      const [resp, play] = await Promise.all([
+        this.vodClient.request(
+          'GetVideoInfo',
+          {
+            VideoId: videoId
+          },
+          {}
+        ) as Promise<any>,
+        this.vodClient.request(
+          'GetPlayInfo',
+          {
+            VideoId: videoId
+          },
+          {}
+        ) as Promise<any>
+      ]);
+      debug(resp, play);
+      return {
+        store: 'ali',
+        videoId,
+        title: resp.Video.Title,
+        cover: resp.Video.CoverURL,
+        creationTime: resp.Video.CreationTime,
+        playUrl: (play?.PlayInfoList?.PlayInfo ?? [])
+          .map((p: any) => p?.PlayURL)
+          .filter(Boolean)
+      };
     } catch (error) {
       debug(error);
       return undefined;
@@ -124,7 +145,7 @@ export class AliStore extends Store {
 
 export const createAliStore: CreateStore = async (ctx) => {
   const config = await ctx.getStoreConfig<AliStoreConfig>('ali');
-  return new AliStore(config);
+  return new AliStore(ctx, config);
 };
 
 export interface AliStoreConfig {
