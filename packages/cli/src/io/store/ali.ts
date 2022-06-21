@@ -101,6 +101,11 @@ export class AliStore extends Store {
       return resp.VideoId;
     } catch (error) {
       debug(error);
+      await this.vodClient.request(
+        'DeleteVideo',
+        { VideoIds: resp.VideoId },
+        {}
+      );
       return undefined;
     } finally {
       bar.stop();
