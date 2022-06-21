@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "vite build",
+    "build:cli": "pnpm -C packages/cli build",
     "dev": "vite",
     "format": "prettier --write src/**/*.{ts,vue} --ignore-path .gitignore",
     "preview": "vite preview",
