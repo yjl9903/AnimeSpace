@@ -5,6 +5,7 @@
     "build": "vite build",
     "build:cli": "pnpm -C packages/cli build",
     "dev": "vite",
+    "dev:worker": "wrangler pages dev ./dist",
     "format": "prettier --write src/**/*.{ts,vue} packages/**/*.ts --ignore-path .gitignore",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
@@ -13,6 +14,7 @@
     "vue": "^3.2.37"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^3.13.0",
     "@types/node": "^18.0.0",
     "@unocss/reset": "^0.39.3",
     "@vitejs/plugin-vue": "^2.3.3",
@@ -22,7 +24,8 @@
     "unplugin-icons": "^0.14.5",
     "vite": "^2.9.12",
     "vitest": "^0.15.2",
-    "vue-tsc": "^0.38.1"
+    "vue-tsc": "^0.38.1",
+    "wrangler": "^2.0.14"
   },
   "packageManager": "pnpm@7.3.0"
 }
