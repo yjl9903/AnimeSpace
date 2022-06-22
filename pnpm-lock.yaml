@@ -25,7 +25,7 @@ importers:
       vue: ^3.2.37
       vue-router: ^4.0.16
       vue-tsc: ^0.38.1
-      wrangler: ^2.0.14
+      wrangler: ^2.0.15
     dependencies:
       '@vueuse/head': 0.7.6_vue@3.2.37
       nprogress: 0.2.0
@@ -49,7 +49,7 @@ importers:
       vite-ssg: 0.20.1_fumkxrawdnnuc23i5oiq3t67ia
       vitest: 0.15.2
       vue-tsc: 0.38.1_typescript@4.7.4
-      wrangler: 2.0.14
+      wrangler: 2.0.15
 
   packages/cli:
     specifiers:
@@ -4113,7 +4113,7 @@ packages:
       destr: 1.1.1
       node-fetch-native: 0.1.3
       ufo: 0.8.4
-      undici: 5.2.0
+      undici: 5.5.1
     dev: true
 
   /once/1.4.0:
@@ -4865,7 +4865,7 @@ packages:
     dev: false
 
   /stack-trace/0.0.10:
-    resolution: {integrity: sha1-VHxws0fo0ytOEI6hoqFZ5f3eGcA=}
+    resolution: {integrity: sha512-KGzahc7puUKkzyMt+IqAep+TVNbKP+k2Lmwhub39m1AsTSkaDutx56aDCo+HLDzf/D26BIHTJWNiTG1KAJiQCg==}
     dev: true
 
   /statuses/1.5.0:
@@ -5183,11 +5183,6 @@ packages:
       '@antfu/utils': 0.5.2
       defu: 6.0.0
       jiti: 1.13.0
-    dev: true
-
-  /undici/5.2.0:
-    resolution: {integrity: sha512-XY6+NS3WH9b3TKOHeNz2CjR+qrVz/k4fO9g3etPpLozRvULoQmZ1+dk9JbIz40ehn27xzFk4jYVU2MU3Nle62A==}
-    engines: {node: '>=12.18'}
     dev: true
 
   /undici/5.5.1:
@@ -5770,8 +5765,8 @@ packages:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
     engines: {node: '>=0.10.0'}
 
-  /wrangler/2.0.14:
-    resolution: {integrity: sha512-uPfz2yJ13nbhEdSqdXBoXBANB60cwZ77KkHcP8AIUWHj2GJovQFvvfbBZwO1Ok8JWPhfpkICnIiGU6IBrT7p/w==}
+  /wrangler/2.0.15:
+    resolution: {integrity: sha512-iBigg/qR1U74wJSR81njVNG69h/tcAGxXoBS1iKeLu1WIhTR/jfBbZdXWcspgkFaex4J6roJnhbFNy7Ob7caUA==}
     engines: {node: '>=16.7.0'}
     hasBin: true
     dependencies:
