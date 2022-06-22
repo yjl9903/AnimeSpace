@@ -2,7 +2,7 @@
   "name": "animepaste",
   "private": true,
   "scripts": {
-    "build": "vite build",
+    "build": "vite-ssg build",
     "build:cli": "pnpm -C packages/cli build",
     "dev": "vite",
     "dev:worker": "wrangler pages dev ./dist",
@@ -11,11 +11,17 @@
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "@vueuse/head": "^0.7.6",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.0.14",
+    "plyr": "^3.7.2",
+    "vue": "^3.2.37",
+    "vue-router": "^4.0.16"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.13.0",
     "@types/node": "^18.0.0",
+    "@types/nprogress": "^0.2.0",
     "@unocss/reset": "^0.39.3",
     "@vitejs/plugin-vue": "^2.3.3",
     "prettier": "^2.7.1",
@@ -23,6 +29,9 @@
     "unocss": "^0.39.3",
     "unplugin-icons": "^0.14.5",
     "vite": "^2.9.12",
+    "vite-plugin-inspect": "^0.5.0",
+    "vite-plugin-pages": "^0.24.2",
+    "vite-ssg": "^0.20.1",
     "vitest": "^0.15.2",
     "vue-tsc": "^0.38.1",
     "wrangler": "^2.0.14"

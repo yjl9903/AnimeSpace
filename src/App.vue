@@ -1,3 +1,5 @@
 <script setup lang="ts"></script>
 
-<template>AnimePaste</template>
+<template>
+  <RouterView></RouterView>
+</template>

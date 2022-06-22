@@ -1,11 +1,55 @@
-import { createApp } from 'vue';
+import type { RouterScrollBehavior } from 'vue-router';
+
+import { ViteSSG } from 'vite-ssg';
+import { createPinia } from 'pinia';
+import routes from '~pages';
+
+import NProgress from 'nprogress';
 
 import 'uno.css';
-import '@unocss/reset/normalize.css';
-import '@unocss/reset/eric-meyer.css';
 import '@unocss/reset/tailwind.css';
 import './styles/main.css';
 
 import App from './App.vue';
 
-createApp(App).mount('#app');
+const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
+  if (to.meta.post) {
+    return {
+      el: 'main.post',
+      behavior: 'smooth'
+    };
+  } else if (savedPosition) {
+    return savedPosition;
+  } else {
+    return { top: 0 };
+  }
+};
+
+export const createApp = ViteSSG(
+  App,
+  { routes, scrollBehavior, base: import.meta.env.BASE_URL },
+  async ({ app, router, isClient, initialState }) => {
+    const pinia = createPinia();
+    app.use(pinia);
+
+    if (import.meta.env.SSR) {
+      initialState.pinia = pinia.state.value;
+    } else {
+      pinia.state.value = initialState?.pinia || {};
+    }
+
+    if (isClient) {
+      router.beforeEach(() => {
+        NProgress.start();
+      });
+      router.afterEach(() => {
+        NProgress.done();
+      });
+    }
+  }
+  // {
+  //   transformState(state) {
+  //     return import.meta.env.SSR ? devalue(state) : state;
+  //   }
+  // }
+);

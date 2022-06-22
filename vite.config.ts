@@ -12,6 +12,9 @@ import {
 } from 'unocss';
 import Icons from 'unplugin-icons/vite';
 
+import Pages from 'vite-plugin-pages';
+import Inspect from 'vite-plugin-inspect';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -27,6 +30,10 @@ export default defineConfig({
     }),
     Icons({
       autoInstall: true
-    })
+    }),
+    Pages({
+      dirs: 'src/pages'
+    }),
+    Inspect()
   ]
 });
