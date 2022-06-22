@@ -6,10 +6,8 @@ import OSS from 'ali-oss';
 import RPCClient from '@alicloud/pop-core';
 
 import { debug as createDebug } from 'debug';
-import { lightGreen } from 'kolorist';
-import { SingleBar, Presets } from 'cli-progress';
 
-import { b64decode } from '../utils';
+import { b64decode, createProgressBar } from '../utils';
 import { CreateStore, Payload, Store, VideoInfo } from './types';
 
 const debug = createDebug('anime:ali');
@@ -78,16 +76,10 @@ export class AliStore extends Store {
       refreshSTSTokenInterval: 60 * 60 * 1000
     });
 
-    console.log(`  Upload: ${lightGreen(path.basename(payload.filepath))}`);
-    const bar = new SingleBar(
-      {
-        format: '  {bar} {percentage}% | ETA: {eta}s'
-      },
-      Presets.shades_grey
-    );
+    const progressbar = createProgressBar({});
 
     try {
-      bar.start(1, 0);
+      const bar = progressbar.create(path.basename(payload.filepath), 1);
       const ossRes = await store.multipartUpload(
         resp.UploadAddress.FileName,
         payload.filepath,
@@ -104,7 +96,7 @@ export class AliStore extends Store {
       await this.doDelete(resp.VideoId);
       return undefined;
     } finally {
-      bar.stop();
+      progressbar.finish();
     }
   }
 

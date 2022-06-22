@@ -43,11 +43,13 @@
   "dependencies": {
     "@alicloud/pop-core": "^1.7.12",
     "ali-oss": "^6.17.1",
-    "breadc": "^0.4.2",
+    "breadc": "^0.4.3",
     "cli-progress": "^3.11.1",
     "debug": "^4.3.4",
     "fs-extra": "^10.1.0",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "kolorist": "^1.5.1",
+    "webtorrent": "^1.8.22"
   },
   "devDependencies": {
     "@types/ali-oss": "^6.16.4",
@@ -55,6 +57,7 @@
     "@types/debug": "^4.1.7",
     "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^4.0.5",
+    "@types/webtorrent": "^0.109.3",
     "unbuild": "^0.7.4"
   },
   "packageManager": "pnpm@7.3.0"

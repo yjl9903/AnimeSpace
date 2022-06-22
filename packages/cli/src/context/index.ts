@@ -23,6 +23,7 @@ export class GlobalContex {
 
   readonly root: string;
   readonly config: string;
+  readonly cacheRoot: string;
 
   readonly storeLog: LogContext<LocalVideoInfo>;
 
@@ -30,6 +31,7 @@ export class GlobalContex {
 
   constructor() {
     this.root = path.join(homedir(), '.animepaste');
+    this.cacheRoot = path.join(this.root, 'cache');
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
     this.storeLog = new LogContext(this, 'store.json');
   }

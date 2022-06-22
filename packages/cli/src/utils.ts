@@ -9,9 +9,13 @@ export function printVideoInfo(videoInfo: VideoInfo) {
   console.log(`  ${bold('VideoId')}     ${videoInfo.videoId}`);
   console.log(`  ${bold('Title')}       ${videoInfo.title}`);
   console.log(`  ${bold('Created at')}  ${videoInfo.creationTime}`);
-  console.log(`  ${bold('Play URL')}`);
-  for (const url of videoInfo.playUrl) {
-    console.log(`    ${url}`);
+  if (videoInfo.playUrl.length === 1) {
+    console.log(`  ${bold('Play URL')}    ${videoInfo.playUrl[0]}`);
+  } else {
+    console.log(`  ${bold('Play URL')}`);
+    for (const url of videoInfo.playUrl) {
+      console.log(`    ${url}`);
+    }
   }
 }
 

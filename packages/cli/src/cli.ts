@@ -7,15 +7,24 @@ import { debug as createDebug } from 'debug';
 
 import { version } from '../package.json';
 
-import { useStore } from './io';
 import { GlobalContex } from './context';
 import { printVideoInfo } from './utils';
+import { useStore, TorrentClient } from './io';
 
 const name = 'anime';
 
 const debug = createDebug(name + ':cli');
 
 const cli = Breadc(name, { version, logger: { debug } });
+
+cli
+  .command('download [...URIs]', 'Download magnetURIs')
+  .action(async (uris) => {
+    const client = new TorrentClient(process.cwd());
+    await client.download(uris);
+    await client.destroy();
+    console.log(`  ${green('√ Success')}`);
+  });
 
 cli
   .command('store put <file>', 'Upload video to OSS')
@@ -37,9 +46,6 @@ cli
     try {
       const info = await store.upload(payload);
       if (info) {
-        console.log();
-        console.log(`  ${green('√ Success')}`);
-        console.log();
         printVideoInfo(info);
       } else {
         throw new Error();
@@ -115,11 +121,12 @@ async function bootstrap() {
   };
 
   process.on('unhandledRejection', (error) => {
-    handle(error);
+    debug(error);
   });
 
   try {
     await cli.run(process.argv.slice(2));
+    process.exit(0);
   } catch (error: unknown) {
     handle(error);
     process.exit(1);
