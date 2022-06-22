@@ -1,0 +1,43 @@
+{
+  "vite/modulepreload-polyfill": [],
+  "node_modules/.pnpm/@vue+shared@3.2.37/node_modules/@vue/shared/dist/shared.esm-bundler.js": [],
+  "node_modules/.pnpm/@vue+reactivity@3.2.37/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js": [],
+  "node_modules/.pnpm/@vue+runtime-core@3.2.37/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js": [],
+  "node_modules/.pnpm/@vue+runtime-dom@3.2.37/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js": [],
+  "node_modules/.pnpm/vue-router@4.0.16_vue@3.2.37/node_modules/vue-router/dist/vue-router.esm-bundler.js": [],
+  "node_modules/.pnpm/@vueuse+head@0.7.6_vue@3.2.37/node_modules/@vueuse/head/dist/index.mjs": [],
+  "node_modules/.pnpm/vite-ssg@0.20.1_fumkxrawdnnuc23i5oiq3t67ia/node_modules/vite-ssg/dist/chunks/state.mjs": [],
+  "node_modules/.pnpm/vite-ssg@0.20.1_fumkxrawdnnuc23i5oiq3t67ia/node_modules/vite-ssg/dist/chunks/ClientOnly.mjs": [],
+  "node_modules/.pnpm/vite-ssg@0.20.1_fumkxrawdnnuc23i5oiq3t67ia/node_modules/vite-ssg/dist/index.mjs": [],
+  "node_modules/.pnpm/vue-demi@0.13.1_vue@3.2.37/node_modules/vue-demi/lib/index.mjs": [],
+  "node_modules/.pnpm/pinia@2.0.14_j6bzmzd4ujpabbp5objtwxyjp4/node_modules/pinia/dist/pinia.esm-browser.js": [],
+  "vite/preload-helper": [],
+  "../../../../../@vite-plugin-pages/generated-pages?id=~pages": [],
+  "\u0000commonjsHelpers.js": [],
+  "\u0000/home/runner/work/AnimePaste/AnimePaste/node_modules/.pnpm/nprogress@0.2.0/node_modules/nprogress/nprogress.js?commonjs-module": [],
+  "node_modules/.pnpm/nprogress@0.2.0/node_modules/nprogress/nprogress.js": [],
+  "../../../../../__uno.css": [],
+  "node_modules/.pnpm/@unocss+reset@0.39.3/node_modules/@unocss/reset/tailwind.css": [],
+  "src/styles/main.css": [],
+  "plugin-vue:export-helper": [],
+  "src/App.vue": [],
+  "src/main.ts": [],
+  "index.html": [],
+  "assets/app.f24d11e7.js-unocss-hash.css": [],
+  "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.min.mjs": [
+    "/assets/Index.872dfecd.js",
+    "/assets/Index.952982b2.css"
+  ],
+  "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.css": [
+    "/assets/Index.872dfecd.js",
+    "/assets/Index.952982b2.css"
+  ],
+  "src/components/Player.vue": [
+    "/assets/Index.872dfecd.js",
+    "/assets/Index.952982b2.css"
+  ],
+  "src/pages/Index.vue": [
+    "/assets/Index.872dfecd.js",
+    "/assets/Index.952982b2.css"
+  ]
+}
