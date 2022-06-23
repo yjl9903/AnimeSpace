@@ -3,10 +3,9 @@ import { dim, link } from 'kolorist';
 import type { Plan } from '../types';
 
 import { context } from '../context/';
-
-import { TorrentClient, useStore } from '../io';
 import { bangumiLink } from '../utils';
-import { daemonSearch, formatMagnetURL } from '../anime';
+import { TorrentClient, useStore } from '../io';
+import { Anime, Episode, daemonSearch, formatMagnetURL } from '../anime';
 
 import { info } from './utils';
 
@@ -84,7 +83,12 @@ export class Daemon {
         );
       }
 
-      const magnets = episodes.map((ep) => this.magnetCache.get(ep.magnetId)!);
+      const magnets = episodes.map((ep) => {
+        return {
+          magnetURI: this.magnetCache.get(ep.magnetId)!,
+          filename: formatEpisodeName(onair.format, anime, ep)
+        };
+      });
       const localRoot = await context.makeLocalAnimeRoot(anime.title);
       const torrent = new TorrentClient(localRoot);
       await torrent.download(magnets);
@@ -94,4 +98,16 @@ export class Daemon {
       const store = await createStore(context);
     }
   }
+}
+
+function formatEpisodeName(
+  format: string | undefined,
+  anime: Anime,
+  ep: Episode
+) {
+  if (!format) format = '[{fansub}] {title} - {ep}.mp4';
+  return format
+    .replace('{fansub}', ep.fansub)
+    .replace('{title}', anime.title)
+    .replace('{ep}', (ep.ep < 10 ? '0' : '') + ep.ep);
 }

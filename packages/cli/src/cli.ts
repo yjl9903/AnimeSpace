@@ -54,7 +54,7 @@ cli
   .action(async (uris) => {
     const { TorrentClient } = await import('./io');
     const client = new TorrentClient(process.cwd());
-    await client.download(uris);
+    await client.download(uris.map((u) => ({ magnetURI: u })));
     await client.destroy();
     console.log(`  ${green('√ Success')}`);
   });

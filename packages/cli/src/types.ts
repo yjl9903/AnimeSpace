@@ -55,4 +55,11 @@ export interface OnairPlan {
    * Fansub order
    */
   fansub: string[];
+
+  /**
+   * Template string for names
+   *
+   * @default '[{fansub}] {title} - {ep}.mp4'
+   */
+  format?: string;
 }

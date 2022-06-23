@@ -1,10 +1,15 @@
 import Webtorrent from 'webtorrent';
 import path from 'node:path';
 import { green } from 'kolorist';
-import { existsSync } from 'fs-extra';
+import { move, existsSync, statSync, removeSync } from 'fs-extra';
 
 import { Trackers } from './tracker';
 import { createProgressBar } from '../utils';
+
+interface DownloadTask {
+  magnetURI: string;
+  filename?: string;
+}
 
 export class TorrentClient {
   private readonly client: Webtorrent.Instance;
@@ -16,7 +21,7 @@ export class TorrentClient {
     this.client.setMaxListeners(25);
   }
 
-  async download(magnetURIs: string[]): Promise<void> {
+  async download(downloadTask: DownloadTask[]): Promise<void> {
     const formatSize = (size: number) =>
       (size / 1024 / 1024).toFixed(1) + ' MB';
     const multibar = createProgressBar<{ speed?: number }>({
@@ -29,20 +34,44 @@ export class TorrentClient {
       }
     });
 
-    const tasks = magnetURIs.map((magnetURI): Promise<void> => {
+    const tasks = downloadTask.map((downloadTask): Promise<void> => {
+      if (downloadTask.filename) {
+        const finalPath = path.join(this.folder, downloadTask.filename);
+        if (existsSync(finalPath)) {
+          return Promise.resolve();
+        }
+      }
+
       return new Promise((res, rej) => {
         this.client.add(
-          magnetURI,
+          downloadTask.magnetURI,
           {
             path: this.folder,
             announce: Trackers
           },
           (torrent) => {
-            // File exists
-            for (const file of torrent.files) {
-              if (existsSync(path.join(file.path))) {
-                res();
+            // Torrent should have only one file
+            if (torrent.files.length > 1) {
+              return;
+            }
+
+            // Torrent ---> File -- copy --> Final File
+            const file = torrent.files[0];
+            const finalPath = downloadTask.filename
+              ? path.join(this.folder, downloadTask.filename)
+              : file.path;
+            // Final File exists
+            if (existsSync(finalPath)) {
+              res();
+              return;
+            } else if (existsSync(file.path)) {
+              // Torrent file exist and ok, move it to final file
+              if (file.length > 0 && file.length === statSync(file.path).size) {
+                move(file.path, finalPath).then(() => res());
                 return;
+              } else {
+                // Unknown error, remove torrent file
+                removeSync(file.path);
               }
             }
 
@@ -57,7 +86,11 @@ export class TorrentClient {
             torrent.once('done', () => {
               bar.update(torrent.length);
               multibar.println(`  ${green('√')} ${torrent.name}`);
-              res();
+              if (finalPath !== file.path) {
+                move(file.path, finalPath).then(() => res());
+              } else {
+                res();
+              }
             });
 
             torrent.once('error', (err) => {
