@@ -170,7 +170,7 @@ declare module 'bangumi-data' {
     /**
      * 站点
      */
-    sites: [];
+    sites: Site[];
   }
 
   type SiteList =

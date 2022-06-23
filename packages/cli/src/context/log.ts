@@ -19,9 +19,9 @@ export class LogContext<T = any> {
     }
   }
 
-  async append(log: T): Promise<void> {
+  async append(...log: T[]): Promise<void> {
     const logs = await this.list();
-    logs.push(log);
+    logs.push(...log);
     await this.write(logs);
   }
 

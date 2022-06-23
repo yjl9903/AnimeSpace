@@ -7,10 +7,10 @@ import { debug as createDebug } from 'debug';
 
 import { version } from '../package.json';
 
-import type { AnimeType } from './types';
-import { GlobalContex } from './context';
-import { printVideoInfo } from './utils';
 import { search } from './anime';
+import { context } from './context';
+import type { AnimeType } from './types';
+import { printVideoInfo } from './utils';
 import { useStore, TorrentClient } from './io';
 
 const name = 'anime';
@@ -49,8 +49,6 @@ cli
   .command('store put <file>', 'Upload video to OSS')
   .option('--title [title]', 'Video title')
   .action(async (filename, option) => {
-    const context = new GlobalContex();
-    await context.init();
     const createStore = useStore('ali');
     const store = await createStore(context);
 
@@ -79,8 +77,6 @@ cli
   .command('store get <id>', 'View video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
   .action(async (id, option) => {
-    const context = new GlobalContex();
-    await context.init();
     const createStore = useStore('ali');
     const store = await createStore(context);
 
@@ -99,8 +95,6 @@ cli
   .command('store del <id>', 'Delete video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
   .action(async (id, option) => {
-    const context = new GlobalContex();
-    await context.init();
     const createStore = useStore('ali');
     const store = await createStore(context);
 
@@ -119,8 +113,6 @@ cli
   });
 
 cli.command('space', 'Open AnimePaste space directory').action(async () => {
-  const context = new GlobalContex();
-  await context.init();
   console.log(context.root);
   spawnSync(`code ${context.root}`, {
     shell: true,
@@ -144,6 +136,7 @@ async function bootstrap() {
   });
 
   try {
+    await context.init();
     await cli.run(process.argv.slice(2));
     process.exit(0);
   } catch (error: unknown) {

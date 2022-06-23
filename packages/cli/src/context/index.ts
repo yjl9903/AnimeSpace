@@ -4,6 +4,7 @@ import { homedir } from 'node:os';
 import { load, dump } from 'js-yaml';
 
 import type { LocalVideoInfo } from '../types';
+import type { MagnetInfo } from '../anime/resources';
 
 import { LogContext } from './log';
 
@@ -26,6 +27,7 @@ export class GlobalContex {
   readonly cacheRoot: string;
 
   readonly storeLog: LogContext<LocalVideoInfo>;
+  readonly magnetLog: LogContext<MagnetInfo>;
 
   private configCache: any;
 
@@ -33,7 +35,9 @@ export class GlobalContex {
     this.root = path.join(homedir(), '.animepaste');
     this.cacheRoot = path.join(this.root, 'cache');
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
+
     this.storeLog = new LogContext(this, 'store.json');
+    this.magnetLog = new LogContext(this, 'magnet.json');
   }
 
   async init() {
@@ -77,3 +81,5 @@ export interface GlobalConfig {
 
   store: {};
 }
+
+export const context = new GlobalContex();

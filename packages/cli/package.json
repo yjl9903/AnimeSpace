@@ -43,6 +43,7 @@
   "dependencies": {
     "@alicloud/pop-core": "^1.7.12",
     "ali-oss": "^6.17.1",
+    "axios": "^0.27.2",
     "bangumi-data": "^0.3.91",
     "breadc": "^0.4.4",
     "cli-progress": "^3.11.1",
@@ -51,6 +52,8 @@
     "fs-extra": "^10.1.0",
     "js-yaml": "^4.1.0",
     "kolorist": "^1.5.1",
+    "lbear": "^0.1.2",
+    "node-html-parser": "^5.3.3",
     "prompts": "^2.4.2",
     "webtorrent": "^1.8.23"
   },

@@ -1,13 +1,15 @@
+import { Anime } from './anime';
 import type { Item } from 'bangumi-data';
 
 import prompts from 'prompts';
+import { link, bold, dim, lightGreen } from 'kolorist';
 import { debug as createDebug } from 'debug';
 import { distance } from 'fastest-levenshtein';
 
 import type { AnimeType } from '../types';
 
-import { getBgmDate } from './utils';
-import { findResources } from './resources';
+import { findResources, formatMagnetURL } from './resources';
+import { getBgmDate, getBgmTitle, groupBy } from './utils';
 
 interface SearchOption {
   type: AnimeType;
@@ -19,7 +21,32 @@ const debug = createDebug('anime:search');
 
 export async function search(anime: string | undefined, option: SearchOption) {
   const bgms = await promptSearch(anime, option);
-  console.log(bgms);
+  for (const bgm of bgms) {
+    console.log();
+    console.log('  ' + lightGreen(getBgmTitle(bgm)));
+
+    const result = await findResources([
+      bgm.title,
+      ...Object.values(bgm.titleTranslate).flat()
+    ]);
+
+    const anime = Anime.bangumi(bgm);
+    anime.addSearchResult(result);
+    const map = groupBy(anime.episodes, (ep) => ep.fansub);
+    for (const [key, eps] of map) {
+      console.log();
+      console.log('    ' + bold(key));
+      eps.sort((a, b) => a.ep - b.ep);
+      for (const ep of eps) {
+        console.log(
+          `     ${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${link(
+            ep.magnetName,
+            formatMagnetURL(ep.magnetId)
+          )}`
+        );
+      }
+    }
+  }
 }
 
 async function promptSearch(anime: string | undefined, option: SearchOption) {
@@ -59,11 +86,11 @@ async function promptSearch(anime: string | undefined, option: SearchOption) {
       }
     ]);
     const { items } = await importBgmdata(option);
-    return await promptBgm(items);
+    return await promptBgm(items, false);
   }
 }
 
-async function promptBgm(bgms: Item[]): Promise<Item[]> {
+async function promptBgm(bgms: Item[], enableDate = true): Promise<Item[]> {
   const { value: bgm } = await prompts({
     type: 'multiselect',
     name: 'value',
@@ -71,16 +98,14 @@ async function promptBgm(bgms: Item[]): Promise<Item[]> {
     choices: bgms.map((bgm) => {
       const d = getBgmDate(bgm);
       return {
-        title:
-          (bgm.titleTranslate['zh-Hans']?.[0] ?? bgm.title) +
-          ` (${d.year}-${d.month})`,
+        title: getBgmTitle(bgm) + (enableDate ? ` (${d.year}-${d.month})` : ''),
         value: bgm
       };
     }),
     hint: '- Space to select, Return to submit',
     instructions: false
   });
-  return bgm;
+  return bgm ?? [];
 }
 
 export async function searchInBgmdata(
