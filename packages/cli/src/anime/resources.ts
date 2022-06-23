@@ -5,12 +5,12 @@ import { context } from '../context';
 
 export async function findResources(keywords: string[]) {
   const results: SearchResultItem[] = [];
-  for (const title of keywords) {
-    results.push(...(await doSearch([title])));
-  }
   const foundIds = new Set(
     (await context.magnetLog.list()).map(({ id }) => id)
   );
+  for (const title of keywords) {
+    results.push(...(await doSearch([title], foundIds)));
+  }
   await context.magnetLog.append(
     ...results
       .map((r) => ({ id: r.id, magnet: r.magnet }))
@@ -23,11 +23,15 @@ export async function findResources(keywords: string[]) {
   return results;
 }
 
-async function doSearch(keywords: string[]): Promise<SearchResultItem[]> {
+async function doSearch(
+  keywords: string[],
+  foundIds: Set<string> = new Set()
+): Promise<SearchResultItem[]> {
   const searchResult: SearchResultItem[] = [];
 
   for (let page = 1; ; page++) {
-    await sleep();
+    await sleep(500);
+
     try {
       const result = await axios.get(
         `https://share.dmhy.org/topics/list/page/${page}`,
@@ -44,7 +48,7 @@ async function doSearch(keywords: string[]): Promise<SearchResultItem[]> {
 
       const content: string = result.data;
       const root = parse(content);
-      const oldLength = searchResult.length;
+      let shouldBreak = true;
       for (const row of root.querySelectorAll('#topic_list tbody tr')) {
         const tds = row.querySelectorAll('td');
         const type = tds[1].innerText.trim();
@@ -71,6 +75,12 @@ async function doSearch(keywords: string[]): Promise<SearchResultItem[]> {
 
         if (!magnet || !time) continue;
 
+        if (foundIds.has(id)) {
+          shouldBreak = true;
+          break;
+        }
+
+        shouldBreak = false;
         searchResult.push({
           id,
           name,
@@ -79,7 +89,8 @@ async function doSearch(keywords: string[]): Promise<SearchResultItem[]> {
           creationTime: new Date(time).toISOString()
         });
       }
-      if (oldLength === searchResult.length) break;
+
+      if (shouldBreak) break;
     } catch (error) {
       break;
     }

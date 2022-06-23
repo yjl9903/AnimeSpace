@@ -23,8 +23,20 @@ export class Anime {
     return new Anime({ title: getBgmTitle(item), bgmId: getBgmId(item)! });
   }
 
+  static copy(anime: Anime) {
+    return new Anime({
+      title: anime.title,
+      bgmId: anime.bgmId,
+      episodes: anime.episodes
+    });
+  }
+
   addSearchResult(results: SearchResultItem[]) {
+    const foundIds = new Set(this.episodes.map((ep) => ep.magnetId));
+
     for (const result of results) {
+      if (foundIds.has(result.id)) continue;
+
       if (result.name.indexOf('MKV') !== -1) continue;
 
       const getEp = () => {

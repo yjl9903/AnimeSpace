@@ -1,4 +1,3 @@
-import { Anime } from './anime';
 import type { Item } from 'bangumi-data';
 
 import prompts from 'prompts';
@@ -7,9 +6,11 @@ import { debug as createDebug } from 'debug';
 import { distance } from 'fastest-levenshtein';
 
 import type { AnimeType } from '../types';
+import { context } from '../context';
 
+import { Anime } from './anime';
 import { findResources, formatMagnetURL } from './resources';
-import { getBgmDate, getBgmTitle, groupBy } from './utils';
+import { getBgmDate, getBgmTitle, getBgmId, groupBy } from './utils';
 
 interface SearchOption {
   type: AnimeType;
@@ -19,32 +20,40 @@ interface SearchOption {
 
 const debug = createDebug('anime:search');
 
-export async function search(anime: string | undefined, option: SearchOption) {
+export async function userSearch(
+  anime: string | undefined,
+  option: SearchOption
+) {
   const bgms = await promptSearch(anime, option);
   for (const bgm of bgms) {
+    const anime =
+      (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
+    const keywords = [bgm.title, ...Object.values(bgm.titleTranslate).flat()];
+    await search(anime, keywords);
+  }
+}
+
+export async function search(anime: Anime, keywords: string[]) {
+  console.log();
+  console.log('  ' + lightGreen(anime.title));
+
+  const result = await findResources(keywords);
+
+  anime.addSearchResult(result);
+  await context.updateAnime(anime);
+
+  const map = groupBy(anime.episodes, (ep) => ep.fansub);
+  for (const [key, eps] of map) {
     console.log();
-    console.log('  ' + lightGreen(getBgmTitle(bgm)));
-
-    const result = await findResources([
-      bgm.title,
-      ...Object.values(bgm.titleTranslate).flat()
-    ]);
-
-    const anime = Anime.bangumi(bgm);
-    anime.addSearchResult(result);
-    const map = groupBy(anime.episodes, (ep) => ep.fansub);
-    for (const [key, eps] of map) {
-      console.log();
-      console.log('    ' + bold(key));
-      eps.sort((a, b) => a.ep - b.ep);
-      for (const ep of eps) {
-        console.log(
-          `     ${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${link(
-            ep.magnetName,
-            formatMagnetURL(ep.magnetId)
-          )}`
-        );
-      }
+    console.log('    ' + bold(key));
+    eps.sort((a, b) => a.ep - b.ep);
+    for (const ep of eps) {
+      console.log(
+        `     ${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${link(
+          ep.magnetName,
+          formatMagnetURL(ep.magnetId)
+        )}`
+      );
     }
   }
 }

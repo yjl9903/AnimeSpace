@@ -7,7 +7,7 @@ import { debug as createDebug } from 'debug';
 
 import { version } from '../package.json';
 
-import { search } from './anime';
+import { userSearch } from './anime';
 import { context } from './context';
 import type { AnimeType } from './types';
 import { printVideoInfo } from './utils';
@@ -33,7 +33,7 @@ cli
   .option('--year [year]')
   .option('--month [month]')
   .action(async (anime, option) => {
-    await search(anime, option);
+    await userSearch(anime, option);
   });
 
 cli
