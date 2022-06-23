@@ -35,7 +35,15 @@ export async function userSearch(
 
 export async function search(anime: Anime, keywords: string[]) {
   console.log();
-  console.log('  ' + lightGreen(anime.title));
+  console.log(
+    '  ' +
+      lightGreen(anime.title) +
+      ' ' +
+      `(${link(
+        `Bangumi: ${anime.bgmId}`,
+        'https://bangumi.tv/subject/' + anime.bgmId
+      )})`
+  );
 
   const result = await findResources(keywords);
 
