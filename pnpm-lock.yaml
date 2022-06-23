@@ -67,7 +67,7 @@ importers:
       ali-oss: ^6.17.1
       axios: ^0.27.2
       bangumi-data: ^0.3.91
-      breadc: ^0.4.4
+      breadc: ^0.4.5
       cli-progress: ^3.11.1
       debug: ^4.3.4
       fastest-levenshtein: ^1.0.12
@@ -84,7 +84,7 @@ importers:
       ali-oss: 6.17.1
       axios: 0.27.2_debug@4.3.4
       bangumi-data: 0.3.91
-      breadc: 0.4.4
+      breadc: 0.4.5
       cli-progress: 3.11.1
       debug: 4.3.4
       fastest-levenshtein: 1.0.12
@@ -1387,8 +1387,8 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /breadc/0.4.4:
-    resolution: {integrity: sha512-usjmwnfYf1WfMAnOcStYljXckCD785SeVZ9Nl3VM9egPE/knsEhkSKtMtUmePcjDDexPzLH0+WeNc6VX+SwTZA==}
+  /breadc/0.4.5:
+    resolution: {integrity: sha512-wGHleTNH6PxNlHl01w/BE3ItPkEN2unoIAdpv4fYTEbbEk35U6+WvzkUjnbPWkh8FXS1tbKhCwhwGzDiPHYP8w==}
     dependencies:
       kolorist: 1.5.1
       minimist: 1.2.6

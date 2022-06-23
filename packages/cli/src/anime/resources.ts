@@ -46,9 +46,11 @@ async function doSearch(
         }
       );
 
+      let shouldBreak = true;
+
       const content: string = result.data;
       const root = parse(content);
-      let shouldBreak = true;
+
       for (const row of root.querySelectorAll('#topic_list tbody tr')) {
         const tds = row.querySelectorAll('td');
         const type = tds[1].innerText.trim();
@@ -75,7 +77,8 @@ async function doSearch(
 
         if (!magnet || !time) continue;
 
-        if (foundIds.has(id)) {
+        // Skip found magnets, if not in the force mode
+        if (!context.cliOption.force && foundIds.has(id)) {
           shouldBreak = true;
           break;
         }

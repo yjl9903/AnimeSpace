@@ -4,6 +4,7 @@ import { homedir } from 'node:os';
 import { load, dump } from 'js-yaml';
 
 import type { LocalVideoInfo } from '../types';
+import type { CliOption } from './../types';
 
 import { Anime, MagnetInfo } from '../anime';
 
@@ -26,6 +27,8 @@ const DefaultGlobalConfig: GlobalConfig = {
 export class GlobalContex {
   static ConfigFileName = 'config.yaml';
   static AnimeDdName = 'anime.json';
+
+  cliOption!: CliOption;
 
   readonly root: string;
   readonly anime: string;
@@ -51,7 +54,9 @@ export class GlobalContex {
     this.magnetLog = new LogContext(this, 'magnet.json');
   }
 
-  async init() {
+  async init(option: CliOption) {
+    this.cliOption = option;
+
     await fs.ensureDir(this.root);
     await fs.ensureDir(path.join(this.root, 'anime'));
     await fs.ensureDir(path.join(this.root, 'cache'));

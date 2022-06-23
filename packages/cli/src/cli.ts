@@ -17,7 +17,7 @@ const name = 'anime';
 
 const debug = createDebug(name + ':cli');
 
-const cli = Breadc(name, { version, logger: { debug } });
+const cli = Breadc(name, { version, logger: { debug } }).option('--force');
 
 cli
   .command('search [anime]', 'Search Bangumi resources')
@@ -136,7 +136,9 @@ async function bootstrap() {
   });
 
   try {
-    await context.init();
+    cli.on('pre', async (option) => {
+      await context.init(option);
+    });
     await cli.run(process.argv.slice(2));
     process.exit(0);
   } catch (error: unknown) {

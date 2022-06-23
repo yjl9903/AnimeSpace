@@ -1,4 +1,6 @@
-export interface CliOption {}
+export interface CliOption {
+  force: boolean;
+}
 
 export interface ResolvedOption {}
 
