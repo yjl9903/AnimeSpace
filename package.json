@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@vueuse/head": "^0.7.6",
+    "bangumi-data": "^0.3.91",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "plyr": "^3.7.2",

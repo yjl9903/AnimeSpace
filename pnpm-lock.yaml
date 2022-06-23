@@ -10,6 +10,7 @@ importers:
       '@unocss/reset': ^0.39.3
       '@vitejs/plugin-vue': ^2.3.3
       '@vueuse/head': ^0.7.6
+      bangumi-data: ^0.3.91
       nprogress: ^0.2.0
       pinia: ^2.0.14
       plyr: ^3.7.2
@@ -28,6 +29,7 @@ importers:
       wrangler: ^2.0.14
     dependencies:
       '@vueuse/head': 0.7.6_vue@3.2.37
+      bangumi-data: 0.3.91
       nprogress: 0.2.0
       pinia: 2.0.14_j6bzmzd4ujpabbp5objtwxyjp4
       plyr: 3.7.2
@@ -61,9 +63,11 @@ importers:
       '@types/js-yaml': ^4.0.5
       '@types/webtorrent': ^0.109.3
       ali-oss: ^6.17.1
+      bangumi-data: ^0.3.91
       breadc: ^0.4.3
       cli-progress: ^3.11.1
       debug: ^4.3.4
+      fastest-levenshtein: ^1.0.12
       fs-extra: ^10.1.0
       js-yaml: ^4.1.0
       kolorist: ^1.5.1
@@ -72,9 +76,11 @@ importers:
     dependencies:
       '@alicloud/pop-core': 1.7.12
       ali-oss: 6.17.1
+      bangumi-data: 0.3.91
       breadc: 0.4.3
       cli-progress: 3.11.1
       debug: 4.3.4
+      fastest-levenshtein: 1.0.12
       fs-extra: 10.1.0
       js-yaml: 4.1.0
       kolorist: 1.5.1
@@ -1202,6 +1208,10 @@ packages:
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+
+  /bangumi-data/0.3.91:
+    resolution: {integrity: sha512-wzzG+PaAzJJq4MUAidX6Wn4VNrdQ1nFJpvbLMtD1FRVvclmStPW9pYC0UayTcy95rxbOth/ZHU9FFJKwiG1IzA==}
+    dev: false
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
@@ -2890,6 +2900,10 @@ packages:
 
   /fast-levenshtein/2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
+
+  /fastest-levenshtein/1.0.12:
+    resolution: {integrity: sha512-On2N+BpYJ15xIC974QNVuYGMOlEVt4s0EOI3wwMqOmK1fdDY+FN/zltPV8vosq4ad4c/gJ1KHScUn/6AWIgiow==}
+    dev: false
 
   /fastq/1.13.0:
     resolution: {integrity: sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==}

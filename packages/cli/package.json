@@ -43,9 +43,11 @@
   "dependencies": {
     "@alicloud/pop-core": "^1.7.12",
     "ali-oss": "^6.17.1",
+    "bangumi-data": "^0.3.91",
     "breadc": "^0.4.3",
     "cli-progress": "^3.11.1",
     "debug": "^4.3.4",
+    "fastest-levenshtein": "^1.0.12",
     "fs-extra": "^10.1.0",
     "js-yaml": "^4.1.0",
     "kolorist": "^1.5.1",

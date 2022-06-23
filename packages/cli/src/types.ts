@@ -21,3 +21,5 @@ export interface LocalVideoInfo extends VideoInfo {
 
   hash: string;
 }
+
+export type AnimeType = 'tv' | 'web' | 'movie' | 'ova';

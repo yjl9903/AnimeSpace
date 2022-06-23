@@ -7,8 +7,10 @@ import { debug as createDebug } from 'debug';
 
 import { version } from '../package.json';
 
+import type { AnimeType } from './types';
 import { GlobalContex } from './context';
 import { printVideoInfo } from './utils';
+import { search } from './anime';
 import { useStore, TorrentClient } from './io';
 
 const name = 'anime';
@@ -16,6 +18,23 @@ const name = 'anime';
 const debug = createDebug(name + ':cli');
 
 const cli = Breadc(name, { version, logger: { debug } });
+
+cli
+  .command('search [anime]', 'Search Bangumi resources')
+  .option('--type [type]', {
+    construct(t) {
+      if (t && ['tv', 'web', 'movie', 'ova'].includes(t)) {
+        return t as AnimeType;
+      } else {
+        return 'tv';
+      }
+    }
+  })
+  .option('--year [year]')
+  .option('--month [month]')
+  .action(async (anime, option) => {
+    await search(anime, option);
+  });
 
 cli
   .command('download [...URIs]', 'Download magnetURIs')
