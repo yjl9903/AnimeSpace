@@ -19,6 +19,14 @@ export class Daemon {
 
     this.plan = await context.getCurrentPlan();
 
+    for (const onair of this.plan.onair) {
+      info(
+        'Onair    ' +
+          lightGreen(onair.name) +
+          ' ' +
+          `(${bangumiLink(onair.bgmId)})`
+      );
+    }
     await this.refreshEpisode();
     await this.downloadEpisode();
 
