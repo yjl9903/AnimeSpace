@@ -13,6 +13,7 @@ export class TorrentClient {
   constructor(folder: string) {
     this.client = new Webtorrent({});
     this.folder = folder;
+    this.client.setMaxListeners(25);
   }
 
   async download(magnetURIs: string[]): Promise<void> {

@@ -98,6 +98,12 @@ export class GlobalContex {
     return this._localRoot;
   }
 
+  async makeLocalAnimeRoot(title: string) {
+    const local = path.join(this.localRoot, title);
+    await fs.ensureDir(local);
+    return local;
+  }
+
   async loadConfig<T = any>(): Promise<T> {
     const content = await fs.readFile(this.config, 'utf-8');
     this.configCache = load(content);

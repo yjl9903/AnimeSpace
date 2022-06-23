@@ -7,11 +7,11 @@ import { distance } from 'fastest-levenshtein';
 
 import type { AnimeType } from '../types';
 import { context } from '../context';
-import { bangumiLink } from '../utils';
+import { bangumiLink, groupBy } from '../utils';
 
 import { Anime } from './anime';
 import { findResources, formatMagnetURL } from './resources';
-import { getBgmDate, getBgmTitle, getBgmId, groupBy } from './utils';
+import { getBgmDate, getBgmTitle, getBgmId } from './utils';
 
 interface SearchOption {
   type: AnimeType;

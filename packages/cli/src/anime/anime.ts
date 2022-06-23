@@ -97,7 +97,7 @@ export class Anime {
   }
 }
 
-interface Episode {
+export interface Episode {
   /**
    * 条目内的集数, 从 1 开始
    */

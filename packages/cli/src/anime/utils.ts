@@ -1,7 +1,5 @@
 import type { Item, Language } from 'bangumi-data';
 
-import { ImmutableMap, MutableMap } from 'lbear';
-
 export function getBgmDate(bgm: Item) {
   const d = new Date(bgm.begin);
   return {
@@ -22,16 +20,4 @@ export function getBgmId(bgm: Item) {
       return site.id;
     }
   }
-}
-
-export function groupBy<T>(
-  items: T[],
-  fn: (arg: T) => string
-): ImmutableMap<string, T[]> {
-  const map = MutableMap.empty<string, T[]>();
-  for (const item of items) {
-    const key = fn(item);
-    map.getOrPut(key, () => []).push(item);
-  }
-  return map.toImmutable();
 }

@@ -4,6 +4,7 @@ import fs from 'fs-extra';
 import crypto from 'node:crypto';
 
 import { bold, link } from 'kolorist';
+import { ImmutableMap, MutableMap } from 'lbear';
 
 export function printVideoInfo(videoInfo: VideoInfo) {
   console.log(`  ${bold('VideoId')}     ${videoInfo.videoId}`);
@@ -28,4 +29,16 @@ export function hashFile(filepath: string): string {
 
 export function bangumiLink(bgmId: string) {
   return link(`Bangumi: ${bgmId}`, 'https://bangumi.tv/subject/' + bgmId);
+}
+
+export function groupBy<T>(
+  items: T[],
+  fn: (arg: T) => string
+): ImmutableMap<string, T[]> {
+  const map = MutableMap.empty<string, T[]>();
+  for (const item of items) {
+    const key = fn(item);
+    map.getOrPut(key, () => []).push(item);
+  }
+  return map.toImmutable();
 }
