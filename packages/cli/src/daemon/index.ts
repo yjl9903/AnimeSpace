@@ -6,6 +6,8 @@ export async function startDaemon(option: {
 }): Promise<void> {
   const daemon = new Daemon();
 
+  await daemon.init();
+
   return new Promise((res) => {
     const stamp = setInterval(async () => {
       await daemon.update();

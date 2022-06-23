@@ -1,3 +1,5 @@
+export type AnimeType = 'tv' | 'web' | 'movie' | 'ova';
+
 export interface CliOption {
   force: boolean;
 }
@@ -24,4 +26,33 @@ export interface LocalVideoInfo extends VideoInfo {
   hash: string;
 }
 
-export type AnimeType = 'tv' | 'web' | 'movie' | 'ova';
+export interface Plan {
+  /**
+   * Plan name
+   */
+  name: string;
+
+  /**
+   * Plan time
+   */
+  time: string;
+
+  onair: OnairPlan[];
+}
+
+export interface OnairPlan {
+  /**
+   * Anime name
+   */
+  name: string;
+
+  /**
+   * Bangumi ID
+   */
+  bgmId: string;
+
+  /**
+   * Fansub order
+   */
+  fansub: string[];
+}

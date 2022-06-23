@@ -7,6 +7,7 @@ import { distance } from 'fastest-levenshtein';
 
 import type { AnimeType } from '../types';
 import { context } from '../context';
+import { bangumiLink } from '../utils';
 
 import { Anime } from './anime';
 import { findResources, formatMagnetURL } from './resources';
@@ -33,16 +34,22 @@ export async function userSearch(
   }
 }
 
+export async function daemonSearch(bgmId: string) {
+  const { items } = await importBgmdata();
+  for (const bgm of items) {
+    if (bgmId === getBgmId(bgm)) {
+      const anime =
+        (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
+      const keywords = [bgm.title, ...Object.values(bgm.titleTranslate).flat()];
+      await search(anime, keywords);
+    }
+  }
+}
+
 export async function search(anime: Anime, keywords: string[]) {
   console.log();
   console.log(
-    '  ' +
-      lightGreen(anime.title) +
-      ' ' +
-      `(${link(
-        `Bangumi: ${anime.bgmId}`,
-        'https://bangumi.tv/subject/' + anime.bgmId
-      )})`
+    '  ' + lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`
   );
 
   const result = await findResources(keywords);

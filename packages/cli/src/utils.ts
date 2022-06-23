@@ -3,7 +3,7 @@ import type { VideoInfo } from './types';
 import fs from 'fs-extra';
 import crypto from 'node:crypto';
 
-import { bold } from 'kolorist';
+import { bold, link } from 'kolorist';
 
 export function printVideoInfo(videoInfo: VideoInfo) {
   console.log(`  ${bold('VideoId')}     ${videoInfo.videoId}`);
@@ -24,4 +24,8 @@ export function hashFile(filepath: string): string {
   const hashSum = crypto.createHash('sha256');
   hashSum.update(fileBuffer);
   return hashSum.digest('hex');
+}
+
+export function bangumiLink(bgmId: string) {
+  return link(`Bangumi: ${bgmId}`, 'https://bangumi.tv/subject/' + bgmId);
 }

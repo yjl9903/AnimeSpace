@@ -3,15 +3,20 @@ import * as path from 'node:path';
 import { homedir } from 'node:os';
 import { load, dump } from 'js-yaml';
 
-import type { LocalVideoInfo } from '../types';
-import type { CliOption } from './../types';
+import type { LocalVideoInfo, CliOption, Plan } from '../types';
 
 import { Anime, MagnetInfo } from '../anime';
 
 import { LogContext } from './log';
 
+export interface GlobalConfig {
+  plan: string;
+
+  store: {};
+}
+
 const DefaultGlobalConfig: GlobalConfig = {
-  plan: [],
+  plan: './plans/test.yaml',
   store: {
     local: {
       path: './anime'
@@ -60,6 +65,8 @@ export class GlobalContex {
     await fs.ensureDir(this.root);
     await fs.ensureDir(path.join(this.root, 'anime'));
     await fs.ensureDir(path.join(this.root, 'cache'));
+    await fs.ensureDir(path.join(this.root, 'plans'));
+
     if (!(await fs.pathExists(this.config))) {
       fs.writeFile(
         this.config,
@@ -97,6 +104,16 @@ export class GlobalContex {
     return this.configCache;
   }
 
+  async getCurrentPlan(): Promise<Plan> {
+    const config = await this.loadConfig();
+    const planPath = path.join(this.root, config.plan);
+    if (!fs.existsSync(planPath)) {
+      throw new Error(`You should provide plan "${config.plan}"`);
+    }
+    const plan = load(fs.readFileSync(planPath, 'utf-8'));
+    return plan as any;
+  }
+
   async getStoreConfig<T = any>(key: string): Promise<T> {
     return (await this.loadConfig()).store[key];
   }
@@ -127,12 +144,6 @@ export class GlobalContex {
     await fs.copy(src, filepath);
     return filepath;
   }
-}
-
-export interface GlobalConfig {
-  plan: [];
-
-  store: {};
 }
 
 export const context = new GlobalContex();

@@ -141,7 +141,7 @@ cli.command('space', 'Open AnimePaste space directory').action(async () => {
 async function bootstrap() {
   const handle = (error: unknown) => {
     if (error instanceof Error) {
-      console.error(lightRed('Error: ') + error.message);
+      console.error(lightRed('  Error ') + error.message);
     } else {
       console.error(error);
     }
