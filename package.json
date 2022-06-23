@@ -35,7 +35,7 @@
     "vite-ssg": "^0.20.1",
     "vitest": "^0.15.2",
     "vue-tsc": "^0.38.1",
-    "wrangler": "^2.0.14"
+    "wrangler": "^2.0.15"
   },
   "packageManager": "pnpm@7.3.0"
 }
