@@ -1,4 +1,3 @@
-import fs from 'fs-extra';
 import { dim, link } from 'kolorist';
 
 import type { Plan } from '../types';
@@ -6,12 +5,10 @@ import type { Plan } from '../types';
 import { context } from '../context/';
 
 import { TorrentClient, useStore } from '../io';
-import { bangumiLink, groupBy } from '../utils';
-import { daemonSearch, Episode, formatMagnetURL } from '../anime';
+import { bangumiLink } from '../utils';
+import { daemonSearch, formatMagnetURL } from '../anime';
 
 import { info } from './utils';
-
-const LOCALE = 'zh-Hans';
 
 export class Daemon {
   private plan!: Plan;
@@ -74,30 +71,8 @@ export class Daemon {
           `Fail to get ${onair.name} (${bangumiLink(onair.bgmId)})`
         );
       }
-      const fansubs = groupBy(anime.episodes, (ep) => ep.fansub);
-      const episodes: Episode[] = [];
-      for (let epId = 1, found = true; found; epId++) {
-        found = false;
-        for (const fs of onair.fansub) {
-          const eps = fansubs
-            .getOrDefault(fs, [])
-            .filter((ep) => ep.ep === epId);
-          if (eps.length === 1) {
-            found = true;
-            episodes.push(eps[0]);
-          } else if (eps.length > 1) {
-            eps.sort((a, b) => {
-              if (a.quality !== b.quality) {
-                return b.quality - a.quality;
-              }
-              const gL = (a: Episode) => (a.language === LOCALE ? 1 : 0);
-              return gL(b) - gL(a);
-            });
-            found = true;
-            episodes.push(eps[0]);
-          }
-        }
-      }
+
+      const episodes = anime.genEpisodes(onair.fansub);
 
       info('Download: ' + anime.title + ' ' + `(${bangumiLink(onair.bgmId)})`);
       for (const ep of episodes) {

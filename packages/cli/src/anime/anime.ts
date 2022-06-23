@@ -3,6 +3,9 @@ import type { Item } from 'bangumi-data';
 import type { SearchResultItem } from './resources';
 
 import { getBgmTitle, getBgmId } from './utils';
+import { groupBy } from '../utils';
+
+const LOCALE = 'zh-Hans';
 
 export class Anime {
   readonly title: string = '';
@@ -94,6 +97,32 @@ export class Anime {
         this.episodes.push(ep);
       }
     }
+  }
+
+  genEpisodes(fansubOrder: string[]) {
+    const fansubs = groupBy(this.episodes, (ep) => ep.fansub);
+    const episodes: Episode[] = [];
+    for (let epId = 1, found = true; found; epId++) {
+      found = false;
+      for (const fs of fansubOrder) {
+        const eps = fansubs.getOrDefault(fs, []).filter((ep) => ep.ep === epId);
+        if (eps.length === 1) {
+          found = true;
+          episodes.push(eps[0]);
+        } else if (eps.length > 1) {
+          eps.sort((a, b) => {
+            if (a.quality !== b.quality) {
+              return b.quality - a.quality;
+            }
+            const gL = (a: Episode) => (a.language === LOCALE ? 1 : 0);
+            return gL(b) - gL(a);
+          });
+          found = true;
+          episodes.push(eps[0]);
+        }
+      }
+    }
+    return episodes;
   }
 }
 
