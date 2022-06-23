@@ -68,7 +68,7 @@ importers:
       js-yaml: ^4.1.0
       kolorist: ^1.5.1
       unbuild: ^0.7.4
-      webtorrent: ^1.8.22
+      webtorrent: ^1.8.23
     dependencies:
       '@alicloud/pop-core': 1.7.12
       ali-oss: 6.17.1
@@ -78,7 +78,7 @@ importers:
       fs-extra: 10.1.0
       js-yaml: 4.1.0
       kolorist: 1.5.1
-      webtorrent: 1.8.22
+      webtorrent: 1.8.23
     devDependencies:
       '@types/ali-oss': 6.16.4
       '@types/cli-progress': 3.11.0
@@ -5055,8 +5055,8 @@ packages:
     engines: {node: '>=0.6'}
     dev: false
 
-  /torrent-discovery/9.4.12:
-    resolution: {integrity: sha512-Des49BZggopAXc/rF8+MqDd4NGe9iwT4g7LGzithHUYocTax5wFFnVXkUh6N5U9sGZN4RZ1dr7bVIkD3xCfxIA==}
+  /torrent-discovery/9.4.13:
+    resolution: {integrity: sha512-HZD8nAxIejcGnzUyXRMhBnK0rYQCQ85vaaCzmzl2r3/vmj0M/b6JuO6yNhe1vyLOU3ZngzDYaHxCJjmAIa4wwg==}
     dependencies:
       bittorrent-dht: 10.0.4
       bittorrent-lsd: 1.1.1
@@ -5633,8 +5633,8 @@ packages:
     resolution: {integrity: sha512-5NUqC2JquIL2pBAAo/VfBP6KuGkHIZQXW/lNKupLPfhViwh8wNsu0BObtl09yuKZszeEUfbXz8xhrHvSG16Nqw==}
     dev: true
 
-  /webtorrent/1.8.22:
-    resolution: {integrity: sha512-gJv4RBpas5L5KyDvhq4HpHgnwdwKQtqBEkDAgqGzSVqq74DY5/9yz3Y+YdnddmlDh3WKlInOXRfIYRR9ZyaRXg==}
+  /webtorrent/1.8.23:
+    resolution: {integrity: sha512-7TjrBlrlUpcSQ6AKE09flgtCvgbYCyp4WSh9N4D2GPTlqD0RTaJHSMFCJdEgE2qauFuJ4rVdHhsOiHrPdju1Qg==}
     engines: {node: '>=12'}
     dependencies:
       '@webtorrent/http-node': 1.3.0
@@ -5676,7 +5676,7 @@ packages:
       stream-to-blob-url: 3.0.2
       stream-with-known-length-to-buffer: 1.0.4
       throughput: 1.0.1
-      torrent-discovery: 9.4.12
+      torrent-discovery: 9.4.13
       torrent-piece: 2.0.1
       unordered-array-remove: 1.0.2
       ut_metadata: 3.5.2
