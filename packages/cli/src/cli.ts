@@ -7,17 +7,29 @@ import { debug as createDebug } from 'debug';
 
 import { version } from '../package.json';
 
-import { userSearch } from './anime';
-import { context } from './context';
 import type { AnimeType } from './types';
+
+import { context } from './context';
 import { printVideoInfo } from './utils';
-import { useStore, TorrentClient } from './io';
 
 const name = 'anime';
 
 const debug = createDebug(name + ':cli');
 
 const cli = Breadc(name, { version, logger: { debug } }).option('--force');
+
+cli
+  .command('watch', 'Watch anime resources update')
+  .option('-i, --interval [duration]', 'Damon interval in minutes', {
+    construct(t) {
+      return t ? +t : 60;
+    }
+  })
+  .option('-o, --once', 'Just do an immediate update')
+  .action(async (option) => {
+    const { startDaemon } = await import('./daemon');
+    await startDaemon(option);
+  });
 
 cli
   .command('search [anime]', 'Search Bangumi resources')
@@ -30,15 +42,17 @@ cli
       }
     }
   })
-  .option('--year [year]')
-  .option('--month [month]')
+  .option('-y, --year [year]')
+  .option('-m, --month [month]')
   .action(async (anime, option) => {
+    const { userSearch } = await import('./anime');
     await userSearch(anime, option);
   });
 
 cli
   .command('download [...URIs]', 'Download magnetURIs')
   .action(async (uris) => {
+    const { TorrentClient } = await import('./io');
     const client = new TorrentClient(process.cwd());
     await client.download(uris);
     await client.destroy();
@@ -49,6 +63,7 @@ cli
   .command('store put <file>', 'Upload video to OSS')
   .option('--title [title]', 'Video title')
   .action(async (filename, option) => {
+    const { useStore } = await import('./io');
     const createStore = useStore('ali');
     const store = await createStore(context);
 
@@ -77,6 +92,7 @@ cli
   .command('store get <id>', 'View video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
   .action(async (id, option) => {
+    const { useStore } = await import('./io');
     const createStore = useStore('ali');
     const store = await createStore(context);
 
@@ -95,6 +111,7 @@ cli
   .command('store del <id>', 'Delete video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
   .action(async (id, option) => {
+    const { useStore } = await import('./io');
     const createStore = useStore('ali');
     const store = await createStore(context);
 
