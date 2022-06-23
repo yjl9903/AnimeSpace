@@ -1,4 +1,5 @@
-import { dim, link } from 'kolorist';
+import path from 'node:path';
+import { dim, link, lightGreen } from 'kolorist';
 
 import type { Plan } from '../types';
 
@@ -46,7 +47,10 @@ export class Daemon {
       if (anime) {
         info();
         info(
-          'Refresh : ' + anime.title + ' ' + `(${bangumiLink(onair.bgmId)})`
+          'Refresh  ' +
+            lightGreen(anime.title) +
+            ' ' +
+            `(${bangumiLink(onair.bgmId)})`
         );
       }
 
@@ -73,7 +77,12 @@ export class Daemon {
 
       const episodes = anime.genEpisodes(onair.fansub);
 
-      info('Download: ' + anime.title + ' ' + `(${bangumiLink(onair.bgmId)})`);
+      info(
+        'Download ' +
+          lightGreen(anime.title) +
+          ' ' +
+          `(${bangumiLink(onair.bgmId)})`
+      );
       for (const ep of episodes) {
         info(
           ` ${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${link(
@@ -93,9 +102,27 @@ export class Daemon {
       const torrent = new TorrentClient(localRoot);
       await torrent.download(magnets);
       await torrent.destroy();
+      info(
+        'Download ' +
+          lightGreen(anime.title) +
+          ' OK ' +
+          `(Total: ${magnets.length} episodes)`
+      );
 
       const createStore = useStore('ali');
       const store = await createStore(context);
+      for (const { filename } of magnets) {
+        await store.upload({
+          title: filename,
+          filepath: path.join(localRoot, filename)
+        });
+      }
+      info(
+        'Upload   ' +
+          lightGreen(anime.title) +
+          ' OK ' +
+          `(Total: ${magnets.length} episodes)`
+      );
     }
   }
 }
