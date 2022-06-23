@@ -51,6 +51,7 @@
     "fs-extra": "^10.1.0",
     "js-yaml": "^4.1.0",
     "kolorist": "^1.5.1",
+    "prompts": "^2.4.2",
     "webtorrent": "^1.8.23"
   },
   "devDependencies": {

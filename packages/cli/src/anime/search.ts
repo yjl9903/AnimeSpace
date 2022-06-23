@@ -1,9 +1,12 @@
 import type { Item } from 'bangumi-data';
+
+import prompts from 'prompts';
 import { debug as createDebug } from 'debug';
 import { distance } from 'fastest-levenshtein';
 
 import type { AnimeType } from '../types';
 
+import { getBgmDate } from './utils';
 import { findResources } from './resources';
 
 interface SearchOption {
@@ -15,17 +18,77 @@ interface SearchOption {
 const debug = createDebug('anime:search');
 
 export async function search(anime: string | undefined, option: SearchOption) {
+  const bgms = await promptSearch(anime, option);
+  console.log(bgms);
+}
+
+async function promptSearch(anime: string | undefined, option: SearchOption) {
   if (anime) {
-    const bgm = await searchInBgmdata(anime);
-    for (const item of bgm) {
-      console.log(item.title);
-    }
+    const bgms = await searchInBgmdata(anime, option);
+    return await promptBgm(bgms);
   } else {
+    const year = new Date().getFullYear();
+    await prompts([
+      {
+        type: option.year ? null : 'select',
+        name: 'year',
+        message: '年份?',
+        choices: new Array(5).fill(undefined).map((_v, i) => ({
+          title: String(year - i) + ' 年',
+          value: year - i
+        })),
+        initial: 0,
+        onState({ value }) {
+          option.year = value;
+        }
+      },
+      {
+        type: option.month ? null : 'select',
+        name: 'month',
+        message: '季度?',
+        choices: [
+          { title: '1 月', value: 1 },
+          { title: '4 月', value: 4 },
+          { title: '7 月', value: 7 },
+          { title: '10 月', value: 10 }
+        ],
+        initial: 0,
+        onState({ value }) {
+          option.month = value;
+        }
+      }
+    ]);
+    const { items } = await importBgmdata(option);
+    return await promptBgm(items);
   }
 }
 
-export async function searchInBgmdata(name: string, length = 5) {
-  const { items } = await importBgmdata();
+async function promptBgm(bgms: Item[]): Promise<Item[]> {
+  const { value: bgm } = await prompts({
+    type: 'multiselect',
+    name: 'value',
+    message: '动画?',
+    choices: bgms.map((bgm) => {
+      const d = getBgmDate(bgm);
+      return {
+        title:
+          (bgm.titleTranslate['zh-Hans']?.[0] ?? bgm.title) +
+          ` (${d.year}-${d.month})`,
+        value: bgm
+      };
+    }),
+    hint: '- Space to select, Return to submit',
+    instructions: false
+  });
+  return bgm;
+}
+
+export async function searchInBgmdata(
+  name: string,
+  option: SearchOption,
+  length = 5
+) {
+  const { items } = await importBgmdata(option);
 
   const include: Item[] = [];
   const similar: Array<{ item: Item; dis: number }> = [];
@@ -69,8 +132,16 @@ export async function searchInBgmdata(name: string, length = 5) {
   }
 }
 
-export async function importBgmdata() {
+export async function importBgmdata(option: SearchOption = { type: 'tv' }) {
   const { items, siteMeta } = await import('bangumi-data');
   debug('Load Bangumi-data OK');
-  return { items, siteMeta };
+  return {
+    items: items.filter((bgm) => {
+      const d = getBgmDate(bgm);
+      if (option.year && +option.year !== d.year) return false;
+      if (option.month && +option.month !== d.month) return false;
+      return bgm.type === option.type;
+    }),
+    siteMeta
+  };
 }
