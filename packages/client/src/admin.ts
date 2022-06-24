@@ -1,7 +1,7 @@
-export class AdminClient {
-  private readonly token: string;
+import { UserClient, UserOption } from './user';
 
-  constructor(token: string) {
-    this.token = token;
+export class AdminClient extends UserClient {
+  constructor(token: string, option: UserOption = {}) {
+    super(token, option);
   }
 }

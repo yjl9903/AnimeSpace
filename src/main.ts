@@ -13,12 +13,7 @@ import './styles/main.css';
 import App from './App.vue';
 
 const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
-  if (to.meta.post) {
-    return {
-      el: 'main.post',
-      behavior: 'smooth'
-    };
-  } else if (savedPosition) {
+  if (savedPosition) {
     return savedPosition;
   } else {
     return { top: 0 };
@@ -47,9 +42,4 @@ export const createApp = ViteSSG(
       });
     }
   }
-  // {
-  //   transformState(state) {
-  //     return import.meta.env.SSR ? devalue(state) : state;
-  //   }
-  // }
 );

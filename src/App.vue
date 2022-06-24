@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { useClient } from './composables/client';
+
 const route = useRoute();
 const isLogin = computed(() => route.name === 'Login');
+
+const { client } = useClient();
 </script>
 
 <template>
