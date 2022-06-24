@@ -1,28 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const route = useRoute();
+const isLogin = computed(() => route.name === 'Login');
+</script>
 
 <template>
   <NavBar></NavBar>
-  <div
-    h="256px"
-    w="full"
-    class="hero"
-    bg-op-40
-    flex="~"
-    items-center
-    justify-center
-    text="center base"
-  >
-    <div>
-      <h1 text-4xl>Anime Paste</h1>
-      <h2 font-light text-dark100 dark:text-light100 mt-2>
-        <span>你所热爱的是你的动画</span>
-      </h2>
-    </div>
-  </div>
-  <div px8 lt-md:px-4>
+  <Banner v-if="!isLogin"></Banner>
+  <div :class="isLogin || `pt8 px24 lt-md:px8`">
     <RouterView></RouterView>
   </div>
-  <Footer></Footer>
+  <Footer :class="isLogin && ['fixed', 'bottom-0', 'w-full']"></Footer>
 </template>
 
 <style>

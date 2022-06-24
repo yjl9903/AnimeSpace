@@ -1,18 +1,21 @@
 <script setup lang="ts">
-const route = useRoute();
-const src = route.query.src;
+const now = new Date();
+const weekday = now.getDay();
+const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 </script>
 
 <template>
-  <div flex="~" justify-center>
-    <Player v-if="src" :options="{}" mt="4" w="600px">
-      <video controls playsinline crossorigin="anonymous">
-        <source
-          size="1080"
-          :src="`https://video.xlorpaste.cn/sv/${src}/${src}.mp4`"
-          type="video/mp4"
-        />
-      </video>
-    </Player>
+  <div text-2xl mb4 font-bold>
+    <h2><span i-carbon-calendar></span> 番剧周历</h2>
+  </div>
+  <div border="1 base" rounded-2>
+    <div
+      v-for="offset in 7"
+      border="base"
+      :class="[offset < 7 && 'border-b-1']"
+      p4
+    >
+      <h3>{{ weekDayLocale[7 - offset] }}</h3>
+    </div>
   </div>
 </template>

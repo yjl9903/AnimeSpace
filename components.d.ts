@@ -5,6 +5,7 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Banner: typeof import('./src/components/Banner.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     NavBar: typeof import('./src/components/NavBar.vue')['default']
     Player: typeof import('./src/components/Player.vue')['default']

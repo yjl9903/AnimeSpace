@@ -23,7 +23,7 @@ export default defineConfig({
     presetWebFonts({
       fonts: {
         sans: 'Inter:100,200,400,700,800',
-        mono: 'IBM Plex Mono'
+        mono: 'Fira Code'
       }
     })
   ],

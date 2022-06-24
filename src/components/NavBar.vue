@@ -28,6 +28,7 @@ const toggleDark = useToggle(isDark);
       <router-link to="/list" text-base font-light>番剧</router-link>
     </div>
     <div flex-auto />
+    <router-link icon-btn i-carbon-recently-viewed text-base to="/history" />
     <a
       icon-btn
       i-carbon-logo-github
