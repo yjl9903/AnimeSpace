@@ -5,6 +5,7 @@ importers:
   .:
     specifiers:
       '@cloudflare/workers-types': ^3.13.0
+      '@iconify-json/carbon': ^1.1.5
       '@types/node': ^18.0.0
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.0.14
@@ -42,6 +43,7 @@ importers:
       vue-router: 4.0.16_vue@3.2.37
     devDependencies:
       '@cloudflare/workers-types': 3.13.0
+      '@iconify-json/carbon': 1.1.5
       '@types/node': 18.0.0
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.0.14
@@ -378,6 +380,12 @@ packages:
 
   /@iarna/toml/2.2.5:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
+    dev: true
+
+  /@iconify-json/carbon/1.1.5:
+    resolution: {integrity: sha512-ENl8CIEo+7JcRzpJ/58i+dDc3fkNOO7gyNGg4S4JN5cAiVpvltYTVO86Oei7rpl8bKypJ0vk3B0BbzzTw7DclA==}
+    dependencies:
+      '@iconify/types': 1.1.0
     dev: true
 
   /@iconify/types/1.1.0:
