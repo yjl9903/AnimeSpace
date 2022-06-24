@@ -1,8 +1,8 @@
 import type { KVStore } from './utils/store';
 
-type UserType = 'root' | 'admin' | 'user';
+export type UserType = 'root' | 'admin' | 'user';
 
-interface BaseUser {
+export interface BaseUser {
   /**
    * User access token
    */
@@ -25,23 +25,59 @@ interface BaseUser {
   comment?: string;
 }
 
-interface User extends BaseUser {
+export interface User extends BaseUser {
   type: 'user';
 }
 
-interface Admin extends BaseUser {
+export interface Admin extends BaseUser {
   type: 'root' | 'admin';
 }
 
-interface Access {
+export interface Access {
   ip: string;
   count: number;
   timestamp: number;
 }
 
+export interface OnairAnime {
+  name: string;
+
+  bgmId: string;
+
+  episodes: OnairEpisode[];
+
+  /**
+   * Upload by an admin or root user
+   */
+  uploadBy: string;
+}
+
+export interface OnairEpisode {
+  /**
+   * 条目内的集数, 从 1 开始
+   */
+  ep: number;
+
+  /**
+   * Video qulity
+   */
+  quality: 1080 | 720;
+
+  /**
+   * Airdate
+   */
+  creationTime: string;
+
+  /**
+   * Play url
+   */
+  playURL: string;
+}
+
 declare type APIFunction = PagesFunction<{
   ANIME: KVNamespace;
   UserStore: KVStore<User | Admin>;
+  AnimeStore: KVStore<Record<string, OnairAnime[]>>;
   user: User | Admin;
   DEV: string;
 }>;

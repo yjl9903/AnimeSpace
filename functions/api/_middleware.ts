@@ -6,7 +6,11 @@ import { KVStore } from '../utils/store';
 export const onRequest: APIFunction = async (ctx) => {
   const request = ctx.request;
   const auth = request.headers.get('Authorization');
+
+  // Setup KVStores
   ctx.env.UserStore = new KVStore(ctx.env.ANIME, 'user');
+  ctx.env.AnimeStore = new KVStore(ctx.env.ANIME, 'anime');
+
   if (auth) {
     const user = await ctx.env.UserStore.get(auth);
     if (user) {
