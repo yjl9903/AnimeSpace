@@ -1,6 +1,6 @@
 import type { Admin, APIFunction, User } from '../types';
 
-import { makeResponse } from '../utils';
+import { makeErrorResponse } from '../utils';
 import { KVStore } from '../utils/store';
 
 export const onRequest: APIFunction = async (ctx) => {
@@ -16,7 +16,7 @@ export const onRequest: APIFunction = async (ctx) => {
         ctx.env.user = user;
         return await ctx.next();
       } else {
-        return makeErrorResponse();
+        return makeUnauthResponse();
       }
     } else {
       // User not found, but in dev create a root user
@@ -31,10 +31,10 @@ export const onRequest: APIFunction = async (ctx) => {
         return await ctx.next();
       }
 
-      return makeErrorResponse();
+      return makeUnauthResponse();
     }
   } else {
-    return makeErrorResponse();
+    return makeUnauthResponse();
   }
 };
 
@@ -91,9 +91,6 @@ async function canAccess(user: User | Admin, req: Request) {
   }
 }
 
-function makeErrorResponse() {
-  return makeResponse(
-    { status: 'Error', message: 'Unauthorized' },
-    { status: 401 }
-  );
+function makeUnauthResponse() {
+  return makeErrorResponse('Unauthorized', { status: 401 });
 }
