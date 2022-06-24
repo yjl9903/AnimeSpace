@@ -2,7 +2,7 @@
   "name": "@animepaste/app",
   "private": true,
   "scripts": {
-    "build": "vite-ssg build",
+    "build": "pnpm build:client && vite-ssg build",
     "build:all": "pnpm build:client && pnpm build:cli && pnpm build",
     "build:cli": "pnpm -C packages/cli build",
     "build:client": "pnpm -C packages/client build",
