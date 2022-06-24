@@ -1,11 +1,10 @@
 import path from 'node:path';
+import { existsSync, readFileSync } from 'fs-extra';
 import { spawnSync } from 'node:child_process';
 
 import Breadc from 'breadc';
 import { lightRed, green, red } from 'kolorist';
 import { debug as createDebug } from 'debug';
-
-import { version } from '../package.json';
 
 import type { AnimeType } from './types';
 
@@ -16,7 +15,9 @@ const name = 'anime';
 
 const debug = createDebug(name + ':cli');
 
-const cli = Breadc(name, { version, logger: { debug } }).option('--force');
+const cli = Breadc(name, { version: getVersion(), logger: { debug } }).option(
+  '--force'
+);
 
 cli
   .command('watch', 'Watch anime resources update')
@@ -137,6 +138,17 @@ cli.command('space', 'Open AnimePaste space directory').action(async () => {
     windowsHide: true
   });
 });
+
+function getVersion(): string {
+  const pkg = path.join(__dirname, '../package.json');
+  if (existsSync(pkg)) {
+    return JSON.parse(readFileSync(pkg, 'utf-8')).version;
+  } else {
+    return JSON.parse(
+      readFileSync(path.join(__dirname, '../../package.json'), 'utf-8')
+    ).version;
+  }
+}
 
 async function bootstrap() {
   const handle = (error: unknown) => {
