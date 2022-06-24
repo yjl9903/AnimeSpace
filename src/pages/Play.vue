@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const route = useRoute();
-const src = route.query.src;
+const src = route.query.src as string;
 </script>
 
 <route>
