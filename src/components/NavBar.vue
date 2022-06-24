@@ -1,6 +1,13 @@
 <script setup lang="ts">
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
+
+const doc = ref<Document | null>(null);
+onMounted(() => {
+  doc.value = document;
+});
+const { arrivedState } = useScroll(doc);
+const { top } = toRefs(arrivedState);
 </script>
 
 <template>
@@ -13,6 +20,9 @@ const toggleDark = useToggle(isDark);
     px8
     h="$navbar-height"
     fixed
+    transition="all"
+    duration="200"
+    :class="[top || 'backdrop-filter']"
   >
     <h1 font-sans select-none cursor-pointer>
       <router-link to="/" class="text-base">Anime Paste</router-link>
@@ -25,7 +35,9 @@ const toggleDark = useToggle(isDark);
       lt-md:px2
       rounded-2
     >
-      <router-link to="/list" text-base font-light>番剧</router-link>
+      <router-link to="/list" text-base font-light class="!outline-none"
+        >番剧</router-link
+      >
     </div>
     <div flex-auto />
     <router-link icon-btn i-carbon-recently-viewed text-base to="/history" />
@@ -50,5 +62,9 @@ const toggleDark = useToggle(isDark);
 <style>
 :root {
   --navbar-height: 60px;
+}
+
+.backdrop-filter {
+  backdrop-filter: saturate(50%) blur(8px);
 }
 </style>

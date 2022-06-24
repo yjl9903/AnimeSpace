@@ -21,8 +21,6 @@ export const useClient = defineStore('client', () => {
       if (client) {
         try {
           const result = await client.fetchOnair();
-          console.log(toRaw(onair.value));
-          console.log(result);
           onair.value.splice(0);
           onair.value.push(...result);
         } catch {
