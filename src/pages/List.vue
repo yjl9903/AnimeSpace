@@ -17,7 +17,7 @@ const { onair } = useClient();
   <div>
     <div v-for="anime in onair" border="1 base" rounded-2 p4 mb4>
       <h3 mb4 font-bold>{{ anime.title }}</h3>
-      <div flex="~ gap4">
+      <div flex="~ gap4 wrap">
         <router-link
           v-for="ep in anime.episodes"
           :to="{ path: '/play', query: { src: ep.playURL } }"
