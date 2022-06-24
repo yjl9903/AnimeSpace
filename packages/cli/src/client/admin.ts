@@ -1,39 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-export interface OnairAnime {
-  name: string;
-
-  bgmId: string;
-
-  episodes: OnairEpisode[];
-}
-
-export interface OnairEpisode {
-  /**
-   * 条目内的集数, 从 1 开始
-   */
-  ep: number;
-
-  /**
-   * Video qulity
-   */
-  quality: 1080 | 720;
-
-  /**
-   * Airdate
-   */
-  creationTime: string;
-
-  /**
-   * Play url
-   */
-  playURL: string;
-}
-
-export interface UserOption {
-  token: string;
-  baseURL: string;
-}
+import type { OnairAnime, UserOption } from './types';
 
 export class AdminClient {
   private readonly token: string;
@@ -49,8 +16,13 @@ export class AdminClient {
     });
   }
 
+  async syncOnair(onair: OnairAnime[]): Promise<OnairAnime[]> {
+    const { data } = await this.api.post('/admin/anime', { onair });
+    return data.data.onair;
+  }
+
   async fetchOnair() {
-    const { data } = await this.api.get('/api/anime');
+    const { data } = await this.api.get('/anime');
     if (data.status !== 'Ok') throw new Error('Unknown error');
     return data.data.onair as OnairAnime[];
   }

@@ -1,4 +1,4 @@
-import type { Item } from 'bangumi-data';
+import type { Item, SiteMeta } from 'bangumi-data';
 
 import prompts from 'prompts';
 import { link, bold, dim, lightGreen } from 'kolorist';
@@ -181,11 +181,13 @@ export async function searchInBgmdata(
   }
 }
 
-export async function importBgmdata(option: SearchOption = { type: 'tv' }) {
-  const { items, siteMeta } = await import('bangumi-data');
+export async function importBgmdata(
+  option: SearchOption = { type: 'tv' }
+): Promise<{ items: Item[]; siteMeta: Record<string, SiteMeta> }> {
+  const { items, siteMeta } = require('bangumi-data');
   debug('Load Bangumi-data OK');
   return {
-    items: items.filter((bgm) => {
+    items: items.filter((bgm: Item) => {
       const d = getBgmDate(bgm);
       if (option.year && +option.year !== d.year) return false;
       if (option.month && +option.month !== d.month) return false;

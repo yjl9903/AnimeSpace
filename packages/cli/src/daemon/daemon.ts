@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { debug as createDebug } from 'debug';
 import { dim, link, lightGreen } from 'kolorist';
 
 import type { Plan } from '../types';
@@ -6,9 +7,12 @@ import type { Plan } from '../types';
 import { context } from '../context/';
 import { bangumiLink } from '../utils';
 import { TorrentClient, useStore } from '../io';
+import { OnairAnime, AdminClient } from '../client';
 import { Anime, Episode, daemonSearch, formatMagnetURL } from '../anime';
 
-import { info } from './utils';
+import { error, info } from './utils';
+
+const debug = createDebug('anime:daemon');
 
 export class Daemon {
   private plan!: Plan;
@@ -75,6 +79,8 @@ export class Daemon {
   }
 
   private async downloadEpisode() {
+    const syncOnair: OnairAnime[] = [];
+
     for (const onair of this.plan.onair) {
       const anime = await context.getAnime(onair.bgmId);
       if (!anime) {
@@ -119,11 +125,17 @@ export class Daemon {
 
       const createStore = useStore('ali');
       const store = await createStore(context);
+      const playURLs: string[] = [];
       for (const { filename } of magnets) {
-        await store.upload({
+        const resp = await store.upload({
           title: filename,
           filepath: path.join(localRoot, filename)
         });
+        if (resp && resp.playUrl.length > 0) {
+          playURLs.push(resp.playUrl[0]);
+        } else {
+          error(`Uploading ${filename} encounter some errors`);
+        }
       }
       info(
         'Upload   ' +
@@ -131,6 +143,36 @@ export class Daemon {
           ' OK ' +
           `(Total: ${magnets.length} episodes)`
       );
+
+      syncOnair.push({
+        title: anime.title,
+        bgmId: anime.bgmId,
+        episodes: episodes.map((ep, idx) => ({
+          ep: ep.ep,
+          quality: ep.quality,
+          creationTime: ep.creationTime,
+          playURL: playURLs[idx]
+        }))
+      });
+    }
+
+    const client = new AdminClient(await context.getServerConfig());
+    try {
+      const onair = await client.syncOnair(syncOnair);
+      for (const anime of onair) {
+        info(
+          'Sync     ' +
+            lightGreen(anime.title) +
+            ' OK ' +
+            `(Total: ${anime.episodes.length} episodes)`
+        );
+        for (const ep of anime.episodes) {
+          info(`${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${ep.playURL}`);
+        }
+      }
+    } catch (err) {
+      debug(err);
+      error(`Server baseURL or token may be wrong`);
     }
   }
 }

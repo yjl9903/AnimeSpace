@@ -27,3 +27,8 @@ export interface OnairEpisode {
    */
   playURL: string;
 }
+
+export interface UserOption {
+  token: string;
+  baseURL: string;
+}

@@ -39,8 +39,13 @@ export interface Access {
   timestamp: number;
 }
 
+/**
+ * Onair anime definition
+ *
+ * Notice: this definition also appear at packages/cli/src/client and src/composables/client
+ */
 export interface OnairAnime {
-  name: string;
+  title: string;
 
   bgmId: string;
 
