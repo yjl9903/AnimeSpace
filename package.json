@@ -5,7 +5,7 @@
     "build": "vite-ssg build",
     "build:cli": "pnpm -C packages/cli build",
     "dev": "vite",
-    "dev:worker": "wrangler pages dev ./dist",
+    "dev:worker": "wrangler pages dev ./dist --kv ANIME --binding DEV=true",
     "format": "prettier --write src/**/*.{ts,vue} packages/**/*.ts --ignore-path .gitignore",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
