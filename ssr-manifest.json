@@ -23,21 +23,21 @@
   "src/App.vue": [],
   "src/main.ts": [],
   "index.html": [],
-  "assets/app.f24d11e7.js-unocss-hash.css": [],
+  "assets/app.54666864.js-unocss-hash.css": [],
   "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.min.mjs": [
-    "/assets/Index.872dfecd.js",
+    "/assets/Index.8a0ca213.js",
     "/assets/Index.952982b2.css"
   ],
   "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.css": [
-    "/assets/Index.872dfecd.js",
+    "/assets/Index.8a0ca213.js",
     "/assets/Index.952982b2.css"
   ],
   "src/components/Player.vue": [
-    "/assets/Index.872dfecd.js",
+    "/assets/Index.8a0ca213.js",
     "/assets/Index.952982b2.css"
   ],
   "src/pages/Index.vue": [
-    "/assets/Index.872dfecd.js",
+    "/assets/Index.8a0ca213.js",
     "/assets/Index.952982b2.css"
   ]
 }
