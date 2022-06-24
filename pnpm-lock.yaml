@@ -4,7 +4,6 @@ importers:
 
   .:
     specifiers:
-      '@animepaste/client': workspace:*
       '@cloudflare/workers-types': ^3.13.0
       '@iconify-json/carbon': ^1.1.5
       '@types/node': ^18.0.0
@@ -36,7 +35,6 @@ importers:
       vue-tsc: ^0.38.1
       wrangler: ^2.0.15
     dependencies:
-      '@animepaste/client': link:packages/client
       '@vueuse/core': 8.7.5_vue@3.2.37
       '@vueuse/head': 0.7.6_vue@3.2.37
       bangumi-data: 0.3.91
