@@ -3,15 +3,21 @@ import { makeErrorResponse, makeResponse } from '../../utils';
 
 export const onRequestPost: APIFunction = async ({ env, request }) => {
   if (env.user.type === 'root') {
-    const { token = randomString(), type = 'user' } = await request.json<{
+    const {
+      token = randomString(),
+      type = 'user',
+      comment = ''
+    } = await request.json<{
       token?: string;
       type?: string;
+      comment?: string;
     }>();
     const user = {
       token,
       type: ['user', 'admin'].includes(type)
         ? (type as 'user' | 'admin')
-        : 'user'
+        : 'user',
+      comment
     };
     await env.UserStore.put(user.token, user);
     return makeResponse(user);

@@ -18,6 +18,11 @@ interface BaseUser {
    * Used for restricting multiple login
    */
   access?: Access[];
+
+  /**
+   * Comment
+   */
+  comment?: string;
 }
 
 interface User extends BaseUser {

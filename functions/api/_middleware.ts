@@ -23,7 +23,8 @@ export const onRequest: APIFunction = async (ctx) => {
       if (ctx.env.DEV === 'true') {
         const root = {
           token: auth,
-          type: 'root' as 'root'
+          type: 'root' as 'root',
+          comment: 'Created by DEV env'
         };
         await ctx.env.UserStore.put(root.token, root);
         ctx.env.user = root;
