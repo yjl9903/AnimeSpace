@@ -14,7 +14,7 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
     // Setup uploadBy token
     const setOnair = onair.map((o) => {
       return {
-        name: o.name,
+        title: o.title,
         bgmId: o.bgmId,
         uploadBy: env.user.token,
         episodes: o.episodes.map((ep) => ({
