@@ -13,6 +13,14 @@ const submit = () => {
 };
 </script>
 
+<route>
+{
+  meta: {
+    title: "登录"
+  }
+}
+</route>
+
 <template>
   <Banner fullscreen>
     <div relative border="~ rounded base" shadow font-200 text-base bg-base>

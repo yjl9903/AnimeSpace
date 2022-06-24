@@ -4,6 +4,14 @@ const weekday = now.getDay();
 const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 </script>
 
+<route>
+{
+  meta: {
+    title: "主页"
+  }
+}
+</route>
+
 <template>
   <div text-2xl mb4 font-bold>
     <h2><span i-carbon-calendar></span> 番剧周历</h2>

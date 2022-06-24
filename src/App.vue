@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import { useClient } from './composables/client';
+import { useHead } from '@vueuse/head';
 
 const route = useRoute();
 const isLogin = computed(() => route.name === 'Login');
 
-const { client } = useClient();
+useHead({
+  title: computed(() => {
+    const title = route.meta?.title;
+    return title ? `${title} - Anime Paste` : 'Anime Paste';
+  })
+});
 </script>
 
 <template>
