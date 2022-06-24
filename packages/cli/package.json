@@ -55,7 +55,7 @@
     "lbear": "^0.1.2",
     "node-html-parser": "^5.3.3",
     "prompts": "^2.4.2",
-    "webtorrent": "^1.8.23"
+    "webtorrent": "^1.8.24"
   },
   "devDependencies": {
     "@types/ali-oss": "^6.16.4",
