@@ -34,8 +34,12 @@ export const createApp = ViteSSG(
     }
 
     if (isClient) {
-      router.beforeEach(() => {
+      const { token } = useClient();
+      router.beforeEach((to) => {
         NProgress.start();
+        if (to.name !== 'Login' && token === '') {
+          return { name: 'Login' };
+        }
       });
       router.afterEach(() => {
         NProgress.done();

@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     Player: typeof import('./src/components/Player.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./src/components/Search.vue')['default']
   }
 }
 
