@@ -1,7 +1,10 @@
 import { defineStore } from 'pinia';
 import { useLocalStorage } from '@vueuse/core';
 
-import { UserClient, OnairAnime } from '../../packages/client/src';
+import type { OnairAnime, OnairEpisode } from './types'
+import { UserClient } from './user';
+
+export { UserClient, OnairAnime, OnairEpisode  }
 
 export const useClient = defineStore('client', () => {
   const token = useLocalStorage('animepaste:token', ref(''));

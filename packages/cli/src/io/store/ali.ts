@@ -147,6 +147,13 @@ export class AliStore extends Store {
 
 export const createAliStore: CreateStore = async (ctx) => {
   const config = await ctx.getStoreConfig<AliStoreConfig>('ali');
+  if (
+    !Boolean(config.accessKeyId) ||
+    !Boolean(config.accessKeySecret) ||
+    !Boolean(config.regionId)
+  ) {
+    throw new Error('Fail to load Ali OSS config');
+  }
   return new AliStore(ctx, config);
 };
 

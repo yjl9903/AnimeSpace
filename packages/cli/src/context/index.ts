@@ -12,11 +12,21 @@ import { LogContext } from './log';
 export interface GlobalConfig {
   plan: string;
 
+  server: {
+    baseURL: string;
+
+    token: string;
+  };
+
   store: {};
 }
 
 const DefaultGlobalConfig: GlobalConfig = {
   plan: './plans/test.yaml',
+  server: {
+    baseURL: 'https://anime.xlorpaste.cn/api/',
+    token: ''
+  },
   store: {
     local: {
       path: './anime'
@@ -70,7 +80,9 @@ export class GlobalContex {
     if (!(await fs.pathExists(this.config))) {
       fs.writeFile(
         this.config,
-        dump(DefaultGlobalConfig, { indent: 2 }).replace('store', '\nstore'),
+        dump(DefaultGlobalConfig, { indent: 2 })
+          .replace('server', '\nserver')
+          .replace('store', '\nstore'),
         'utf-8'
       );
     }
@@ -137,6 +149,7 @@ export class GlobalContex {
     const content = [...this.animeCache.values()];
     await fs.writeFile(this.anime, JSON.stringify(content, null, 2), 'utf-8');
   }
+
   // -----------
 
   /**

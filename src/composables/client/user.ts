@@ -23,7 +23,6 @@ export class UserClient {
   async fetchOnair() {
     const { data } = await this.api.get('/api/anime');
     if (data.status !== 'Ok') throw new Error('Unknown error');
-    const bgms = data.data.onair as OnairAnime[];
-    return bgms;
+    return data.data.onair as OnairAnime[];
   }
 }

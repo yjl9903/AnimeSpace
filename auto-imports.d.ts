@@ -9,6 +9,9 @@ declare global {
   const $shallowRef: typeof import('vue/macros')['$shallowRef']
   const $toRef: typeof import('vue/macros')['$toRef']
   const EffectScope: typeof import('vue')['EffectScope']
+  const OnairAnime: typeof import('./src/composables/client/index')['OnairAnime']
+  const OnairEpisode: typeof import('./src/composables/client/index')['OnairEpisode']
+  const UserClient: typeof import('./src/composables/client/index')['UserClient']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
@@ -115,7 +118,7 @@ declare global {
   const useBrowserLocation: typeof import('@vueuse/core')['useBrowserLocation']
   const useCached: typeof import('@vueuse/core')['useCached']
   const useClamp: typeof import('@vueuse/core')['useClamp']
-  const useClient: typeof import('./src/composables/client')['useClient']
+  const useClient: typeof import('./src/composables/client/index')['useClient']
   const useClipboard: typeof import('@vueuse/core')['useClipboard']
   const useColorMode: typeof import('@vueuse/core')['useColorMode']
   const useConfirmDialog: typeof import('@vueuse/core')['useConfirmDialog']
@@ -260,6 +263,9 @@ declare module 'vue' {
     readonly $shallowRef: UnwrapRef<typeof import('vue/macros')['$shallowRef']>
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly OnairAnime: UnwrapRef<typeof import('./src/composables/client/index')['OnairAnime']>
+    readonly OnairEpisode: UnwrapRef<typeof import('./src/composables/client/index')['OnairEpisode']>
+    readonly UserClient: UnwrapRef<typeof import('./src/composables/client/index')['UserClient']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -366,7 +372,7 @@ declare module 'vue' {
     readonly useBrowserLocation: UnwrapRef<typeof import('@vueuse/core')['useBrowserLocation']>
     readonly useCached: UnwrapRef<typeof import('@vueuse/core')['useCached']>
     readonly useClamp: UnwrapRef<typeof import('@vueuse/core')['useClamp']>
-    readonly useClient: UnwrapRef<typeof import('./src/composables/client')['useClient']>
+    readonly useClient: UnwrapRef<typeof import('./src/composables/client/index')['useClient']>
     readonly useClipboard: UnwrapRef<typeof import('@vueuse/core')['useClipboard']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>

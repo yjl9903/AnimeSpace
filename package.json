@@ -3,9 +3,8 @@
   "private": true,
   "scripts": {
     "build": "vite-ssg build",
-    "build:all": "pnpm build:client && pnpm build:cli && pnpm build",
+    "build:all": "pnpm build:cli && pnpm build",
     "build:cli": "pnpm -C packages/cli build",
-    "build:client": "pnpm -C packages/client build",
     "dev": "vite",
     "dev:worker": "wrangler pages dev ./dist --kv ANIME --binding DEV=true",
     "format": "prettier --write src/**/*.{ts,vue} packages/**/*.ts --ignore-path .gitignore",
