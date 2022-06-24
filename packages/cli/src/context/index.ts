@@ -132,6 +132,11 @@ export class GlobalContex {
     return plan as any;
   }
 
+  async getServerConfig(): Promise<GlobalConfig['server']> {
+    const config = await this.loadConfig<GlobalConfig>();
+    return config.server;
+  }
+
   async getStoreConfig<T = any>(key: string): Promise<T> {
     return (await this.loadConfig()).store[key];
   }
