@@ -7,7 +7,28 @@
     <title>Anime Paste</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" style="min-height: 100vh; width: 100%;"></div>
+    <style>
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ccc8;
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+      box-shadow: inset 0 0 5px rgba(0,0,0,.2)
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #aaaf
+    }
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+      box-shadow: inset 0 0 5px rgba(0,0,0,.2);
+      border-radius: 10px;
+      background: #fff3
+    }
+    </style>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
