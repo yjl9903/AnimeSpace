@@ -19,7 +19,9 @@
       </h2>
     </div>
   </div>
-  <RouterView></RouterView>
+  <div px8 lt-md:px-4>
+    <RouterView></RouterView>
+  </div>
   <Footer></Footer>
 </template>
 
