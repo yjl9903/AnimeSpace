@@ -1,5 +1,5 @@
 {
-  "name": "animepaste",
+  "name": "@animepaste/client",
   "version": "0.0.0",
   "description": "",
   "keywords": [],
@@ -41,30 +41,9 @@
     "preversion": "pnpm build"
   },
   "dependencies": {
-    "@alicloud/pop-core": "^1.7.12",
-    "@animepaste/client": "workspace:*",
-    "ali-oss": "^6.17.1",
-    "axios": "^0.27.2",
-    "bangumi-data": "^0.3.91",
-    "breadc": "^0.4.5",
-    "cli-progress": "^3.11.1",
-    "debug": "^4.3.4",
-    "fastest-levenshtein": "^1.0.12",
-    "fs-extra": "^10.1.0",
-    "js-yaml": "^4.1.0",
-    "kolorist": "^1.5.1",
-    "lbear": "^0.1.2",
-    "node-html-parser": "^5.3.3",
-    "prompts": "^2.4.2",
-    "webtorrent": "^1.8.24"
+    "axios": "^0.27.2"
   },
   "devDependencies": {
-    "@types/ali-oss": "^6.16.4",
-    "@types/cli-progress": "^3.11.0",
-    "@types/debug": "^4.1.7",
-    "@types/fs-extra": "^9.0.13",
-    "@types/js-yaml": "^4.0.5",
-    "@types/webtorrent": "^0.109.3",
     "unbuild": "^0.7.4"
   },
   "packageManager": "pnpm@7.3.0"

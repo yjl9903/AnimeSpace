@@ -1,9 +1,11 @@
 {
-  "name": "animepaste",
+  "name": "@animepaste/app",
   "private": true,
   "scripts": {
     "build": "vite-ssg build",
+    "build:all": "pnpm build:client && pnpm build:cli && pnpm build",
     "build:cli": "pnpm -C packages/cli build",
+    "build:client": "pnpm -C packages/client build",
     "dev": "vite",
     "dev:worker": "wrangler pages dev ./dist --kv ANIME --binding DEV=true",
     "format": "prettier --write src/**/*.{ts,vue} packages/**/*.ts --ignore-path .gitignore",
@@ -11,6 +13,7 @@
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },
   "dependencies": {
+    "@animepaste/client": "workspace:*",
     "@vueuse/core": "^8.7.5",
     "@vueuse/head": "^0.7.6",
     "bangumi-data": "^0.3.91",

@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@animepaste/client': workspace:*
       '@cloudflare/workers-types': ^3.13.0
       '@iconify-json/carbon': ^1.1.5
       '@types/node': ^18.0.0
@@ -35,6 +36,7 @@ importers:
       vue-tsc: ^0.38.1
       wrangler: ^2.0.15
     dependencies:
+      '@animepaste/client': link:packages/client
       '@vueuse/core': 8.7.5_vue@3.2.37
       '@vueuse/head': 0.7.6_vue@3.2.37
       bangumi-data: 0.3.91
@@ -70,6 +72,7 @@ importers:
   packages/cli:
     specifiers:
       '@alicloud/pop-core': ^1.7.12
+      '@animepaste/client': workspace:*
       '@types/ali-oss': ^6.16.4
       '@types/cli-progress': ^3.11.0
       '@types/debug': ^4.1.7
@@ -93,6 +96,7 @@ importers:
       webtorrent: ^1.8.24
     dependencies:
       '@alicloud/pop-core': 1.7.12
+      '@animepaste/client': link:../client
       ali-oss: 6.17.1
       axios: 0.27.2_debug@4.3.4
       bangumi-data: 0.3.91
@@ -114,6 +118,15 @@ importers:
       '@types/fs-extra': 9.0.13
       '@types/js-yaml': 4.0.5
       '@types/webtorrent': 0.109.3
+      unbuild: 0.7.4
+
+  packages/client:
+    specifiers:
+      axios: ^0.27.2
+      unbuild: ^0.7.4
+    dependencies:
+      axios: 0.27.2
+    devDependencies:
       unbuild: 0.7.4
 
 packages:
@@ -1271,6 +1284,15 @@ packages:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /axios/0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.1
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /axios/0.27.2_debug@4.3.4:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
@@ -3080,6 +3102,16 @@ packages:
       locate-path: 6.0.0
       path-exists: 4.0.0
     dev: true
+
+  /follow-redirects/1.15.1:
+    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
 
   /follow-redirects/1.15.1_debug@4.3.4:
     resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
