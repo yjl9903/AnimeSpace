@@ -14,6 +14,7 @@ importers:
       '@vueuse/core': ^8.7.5
       '@vueuse/head': ^0.7.6
       bangumi-data: ^0.3.91
+      date-fns: ^2.28.0
       nprogress: ^0.2.0
       pinia: ^2.0.14
       plyr: ^3.7.2
@@ -24,6 +25,7 @@ importers:
       unplugin-icons: ^0.14.5
       unplugin-vue-components: ^0.19.9
       vite: ^2.9.12
+      vite-plugin-info: ^0.0.1
       vite-plugin-inspect: ^0.5.0
       vite-plugin-pages: ^0.24.2
       vite-ssg: ^0.20.1
@@ -36,6 +38,7 @@ importers:
       '@vueuse/core': 8.7.5_vue@3.2.37
       '@vueuse/head': 0.7.6_vue@3.2.37
       bangumi-data: 0.3.91
+      date-fns: 2.28.0
       nprogress: 0.2.0
       pinia: 2.0.14_j6bzmzd4ujpabbp5objtwxyjp4
       plyr: 3.7.2
@@ -56,6 +59,7 @@ importers:
       unplugin-icons: 0.14.5_vite@2.9.12
       unplugin-vue-components: 0.19.9_vite@2.9.12+vue@3.2.37
       vite: 2.9.12
+      vite-plugin-info: 0.0.1_vite@2.9.12
       vite-plugin-inspect: 0.5.0_vite@2.9.12
       vite-plugin-pages: 0.24.2_vite@2.9.12
       vite-ssg: 0.20.1_fumkxrawdnnuc23i5oiq3t67ia
@@ -1831,6 +1835,11 @@ packages:
       whatwg-url: 11.0.0
     dev: true
 
+  /date-fns/2.28.0:
+    resolution: {integrity: sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==}
+    engines: {node: '>=0.11'}
+    dev: false
+
   /dateformat/2.2.0:
     resolution: {integrity: sha512-GODcnWq3YGoTnygPfi02ygEiRxqUxpJwuRHjdhJYuxpcZmDq4rjBiXYmbCCzStxo176ixfLT6i4NPwQooRySnw==}
     dev: false
@@ -3234,6 +3243,11 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /git-repo-info/2.1.1:
+    resolution: {integrity: sha512-8aCohiDo4jwjOwma4FmYFd3i97urZulL8XL24nIPxuE+GZnfsAyy/g2Shqx6OjUiFKUXZM+Yy+KHnOmmA3FVcg==}
+    engines: {node: '>= 4.0'}
+    dev: true
 
   /glob-parent/5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -5702,6 +5716,15 @@ packages:
       pump: 3.0.0
       range-slice-stream: 2.0.0
     dev: false
+
+  /vite-plugin-info/0.0.1_vite@2.9.12:
+    resolution: {integrity: sha512-7XqLSOkCHL6Ds6tVl6mqm6o5EJfU/upUVLKq6zc7AqQL7jwhHkO+widh+xN8v257j1KyW30an1TmX5HTl6B/7A==}
+    peerDependencies:
+      vite: ^2.9.12
+    dependencies:
+      git-repo-info: 2.1.1
+      vite: 2.9.12
+    dev: true
 
   /vite-plugin-inspect/0.5.0_vite@2.9.12:
     resolution: {integrity: sha512-eArca+5jrNx1hQL+5s79eT5Xq4VXjJcihJhK8GT/+W2GqefVxFO1WO78RnD0HPI+hKSdEFo+B4z2zeaE8DTvWQ==}

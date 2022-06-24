@@ -3,4 +3,5 @@
 <template>
   <NavBar></NavBar>
   <RouterView></RouterView>
+  <Footer></Footer>
 </template>

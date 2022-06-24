@@ -10,6 +10,7 @@ import Components from 'unplugin-vue-components/vite';
 
 import Pages from 'vite-plugin-pages';
 import Inspect from 'vite-plugin-inspect';
+import BuildInfo from 'vite-plugin-info';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -32,6 +33,9 @@ export default defineConfig({
     }),
     Pages({
       dirs: 'src/pages'
+    }),
+    BuildInfo({
+      github: 'XLorPaste/AnimePaste'
     }),
     Inspect()
   ]
