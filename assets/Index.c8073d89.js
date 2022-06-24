@@ -1,0 +1,1 @@
+import{d as t,u as n,o as a,c as o,t as s,f as r}from"./app.cf5ed532.js";const i=t({__name:"Index",setup(c){const e=n().params.anime;return(m,p)=>(a(),o("div",null,s(r(e)),1))}});export{i as default};

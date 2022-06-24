@@ -1,0 +1,1 @@
+import{_ as t}from"./plugin-vue_export-helper.21dcd24c.js";import{o,c as s,a as e,b as c}from"./app.cf5ed532.js";const a={},r={"text-2xl":"",mb4:"","font-bold":""},n=e("h2",null,[e("span",{"i-carbon-list":""}),c(" \u6240\u6709\u756A\u5267")],-1),_=[n];function i(d,l){return o(),s("div",r,_)}var p=t(a,[["render",i]]);export{p as default};

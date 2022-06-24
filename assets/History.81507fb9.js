@@ -1,0 +1,1 @@
+import{_ as t}from"./plugin-vue_export-helper.21dcd24c.js";import{o,c,a as e,b as r}from"./app.cf5ed532.js";const s={},a={"text-2xl":"",mb4:"","font-bold":""},n=e("h2",null,[e("span",{"i-carbon-recently-viewed":""}),r(" \u6D4F\u89C8\u5386\u53F2")],-1),_=[n];function d(i,l){return o(),c("div",a,_)}var p=t(s,[["render",d]]);export{p as default};

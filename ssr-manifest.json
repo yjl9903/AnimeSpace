@@ -55,33 +55,48 @@
   "node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/_lib/protectedTokens/index.js": [],
   "node_modules/.pnpm/date-fns@2.28.0/node_modules/date-fns/esm/format/index.js": [],
   "src/components/Footer.vue": [],
+  "src/components/Banner.vue": [],
   "node_modules/.pnpm/@vueuse+shared@8.7.5_vue@3.2.37/node_modules/@vueuse/shared/index.mjs": [],
   "node_modules/.pnpm/@vueuse+core@8.7.5_vue@3.2.37/node_modules/@vueuse/core/index.mjs": [],
   "src/components/NavBar.vue?vue&type=style&index=0&lang.css": [],
   "src/components/NavBar.vue": [],
   "src/App.vue?vue&type=style&index=0&lang.css": [],
-  "plugin-vue:export-helper": [],
   "src/App.vue": [],
   "src/main.ts": [],
   "index.html": [],
-  "assets/app.a64d8d0d.js-unocss-hash.css": [],
-  "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.min.mjs": [
-    "/assets/Index.34b6f9cf.js",
-    "/assets/Index.952982b2.css"
+  "assets/app.cf5ed532.js-unocss-hash.css": [],
+  "src/pages/History.vue": [
+    "/assets/History.81507fb9.js"
   ],
-  "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.css": [
-    "/assets/Index.34b6f9cf.js",
-    "/assets/Index.952982b2.css"
-  ],
-  "src/components/Player.vue": [
-    "/assets/Index.34b6f9cf.js",
-    "/assets/Index.952982b2.css"
+  "plugin-vue:export-helper": [
+    "/assets/plugin-vue_export-helper.21dcd24c.js"
   ],
   "src/pages/Index.vue": [
-    "/assets/Index.34b6f9cf.js",
-    "/assets/Index.952982b2.css"
+    "/assets/Index.60ef3ee9.js"
   ],
   "src/pages/List.vue": [
-    "/assets/List.eb0843b0.js"
+    "/assets/List.8993f593.js"
+  ],
+  "src/pages/Login.vue": [
+    "/assets/Login.08ab1a1c.js"
+  ],
+  "src/pages/anime/[anime]/Index.vue": [
+    "/assets/Index.c8073d89.js"
+  ],
+  "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.min.mjs": [
+    "/assets/Play.97e7a7d6.js",
+    "/assets/Play.1a51b48e.css"
+  ],
+  "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.css": [
+    "/assets/Play.97e7a7d6.js",
+    "/assets/Play.1a51b48e.css"
+  ],
+  "src/components/Player.vue": [
+    "/assets/Play.97e7a7d6.js",
+    "/assets/Play.1a51b48e.css"
+  ],
+  "src/pages/anime/[anime]/Play.vue": [
+    "/assets/Play.97e7a7d6.js",
+    "/assets/Play.1a51b48e.css"
   ]
 }
