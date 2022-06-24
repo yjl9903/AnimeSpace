@@ -13,7 +13,7 @@
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },
   "dependencies": {
-    "@animepaste/client": "workspace:*",
+    "@animepaste/client": "file:./packages/client",
     "@vueuse/core": "^8.7.5",
     "@vueuse/head": "^0.7.6",
     "bangumi-data": "^0.3.91",
