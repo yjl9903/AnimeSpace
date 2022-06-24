@@ -19,25 +19,28 @@
   "../../../../../__uno.css": [],
   "node_modules/.pnpm/@unocss+reset@0.39.3/node_modules/@unocss/reset/tailwind.css": [],
   "src/styles/main.css": [],
+  "node_modules/.pnpm/@vueuse+shared@8.7.5_vue@3.2.37/node_modules/@vueuse/shared/index.mjs": [],
+  "node_modules/.pnpm/@vueuse+core@8.7.5_vue@3.2.37/node_modules/@vueuse/core/index.mjs": [],
+  "src/components/NavBar.vue": [],
   "plugin-vue:export-helper": [],
   "src/App.vue": [],
   "src/main.ts": [],
   "index.html": [],
-  "assets/app.54666864.js-unocss-hash.css": [],
+  "assets/app.4716a0ee.js-unocss-hash.css": [],
   "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.min.mjs": [
-    "/assets/Index.8a0ca213.js",
+    "/assets/Index.d438aac8.js",
     "/assets/Index.952982b2.css"
   ],
   "node_modules/.pnpm/plyr@3.7.2/node_modules/plyr/dist/plyr.css": [
-    "/assets/Index.8a0ca213.js",
+    "/assets/Index.d438aac8.js",
     "/assets/Index.952982b2.css"
   ],
   "src/components/Player.vue": [
-    "/assets/Index.8a0ca213.js",
+    "/assets/Index.d438aac8.js",
     "/assets/Index.952982b2.css"
   ],
   "src/pages/Index.vue": [
-    "/assets/Index.8a0ca213.js",
+    "/assets/Index.d438aac8.js",
     "/assets/Index.952982b2.css"
   ]
 }
