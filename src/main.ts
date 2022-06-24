@@ -27,11 +27,11 @@ export const createApp = ViteSSG(
     const pinia = createPinia();
     app.use(pinia);
 
-    if (import.meta.env.SSR) {
-      initialState.pinia = pinia.state.value;
-    } else {
-      pinia.state.value = initialState?.pinia || {};
-    }
+    // if (import.meta.env.SSR) {
+    //   initialState.pinia = pinia.state.value;
+    // } else {
+    //   pinia.state.value = initialState?.pinia || {};
+    // }
 
     if (isClient) {
       router.beforeEach((to) => {
