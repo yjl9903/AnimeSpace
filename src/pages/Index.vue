@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import Player from '~/components/Player.vue';
-
 const route = useRoute();
 const src = route.query.src;
 </script>
