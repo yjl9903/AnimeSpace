@@ -13,7 +13,7 @@ const src = computed(() => {
 <template>
   <div v-if="subject">
     <h2 font-bold text-xl mb4 pb4 border="b-1 base">
-      <span>{{ subject.name_cn }} 第 {{ ep }} 话</span>
+      <span>{{ subject.name_cn }} - 第 {{ ep }} 话</span>
     </h2>
     <div flex="~ gap8" lt-md:flex-col justify-center>
       <Player
