@@ -2,6 +2,8 @@
 const now = new Date();
 const weekday = now.getDay();
 const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+
+const bangumi = useBangumi();
 </script>
 
 <route>
@@ -23,7 +25,15 @@ const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六
       :class="[offset < 7 && 'border-b-1']"
       p4
     >
-      <h3>{{ weekDayLocale[7 - offset] }}</h3>
+      <h3 mb4 flex="~" items-center>
+        <span font-bold text-lg>{{ weekDayLocale[7 - offset] }}</span>
+      </h3>
+      <div flex="~ wrap gap4">
+        <div v-for="bgm in bangumi.calendar[7 - offset]" w="120px">
+          <img :src="bgm.images.large" :alt="'picture for ' + bgm.name_cn" />
+          <span>{{ bgm.name_cn !== '' ? bgm.name_cn : bgm.name }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
