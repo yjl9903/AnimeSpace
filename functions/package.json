@@ -1,0 +1,7 @@
+{
+  "name": "@animepaste/functions",
+  "private": true,
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.13.0"
+  }
+}
