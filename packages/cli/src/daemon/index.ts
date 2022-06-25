@@ -10,8 +10,12 @@ export async function startDaemon(option: {
   await daemon.init();
 
   return new Promise((res) => {
+    let isRunning = false;
     const stamp = setInterval(async () => {
+      if (isRunning) return;
+      isRunning = true;
       await daemon.update();
+      isRunning = true;
 
       if (option.once) {
         clearInterval(stamp);
