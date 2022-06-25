@@ -30,7 +30,8 @@ const { top } = toRefs(arrivedState);
         >Anime Paste</router-link
       >
     </h1>
-    <div
+    <router-link
+      to="/list"
       text-lg
       hover="bg-op-50 bg-white dark:bg-gray/50"
       px4
@@ -38,10 +39,8 @@ const { top } = toRefs(arrivedState);
       lt-md:px2
       rounded-2
     >
-      <router-link to="/list" text-base font-light select-none
-        >番剧</router-link
-      >
-    </div>
+      <span text-base font-light select-none>番剧</span>
+    </router-link>
     <div flex-auto />
     <router-link icon-btn i-carbon-recently-viewed text-base to="/history" />
     <a
