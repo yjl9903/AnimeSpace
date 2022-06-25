@@ -49,6 +49,10 @@ export abstract class Store {
     }
   }
 
+  async listLocalVideos() {
+    return await this.context.storeLog.list();
+  }
+
   async upload(payload: Payload): Promise<VideoInfo | undefined> {
     const hash = hashFile(payload.filepath);
 

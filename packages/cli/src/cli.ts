@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from 'fs-extra';
 import { spawnSync } from 'node:child_process';
 
 import Breadc from 'breadc';
-import { lightRed, green, red } from 'kolorist';
+import { lightRed, green, red, link } from 'kolorist';
 import { debug as createDebug } from 'debug';
 
 import type { AnimeType } from './types';
@@ -69,6 +69,49 @@ cli
   });
 
 cli
+  .command('store ls [name]', 'List all uploaded video info')
+  .option('--one-line', 'Only show one line')
+  .action(async (name, option) => {
+    const { useStore } = await import('./io');
+    const createStore = useStore('ali');
+    const store = await createStore(context);
+    const logs: string[] = [];
+    for (const info of await store.listLocalVideos()) {
+      if (!name || info.title.indexOf(name) !== -1) {
+        if (option['one-line']) {
+          logs.push(info.videoId);
+        } else {
+          console.log(
+            `  ${info.title} (${link(info.videoId, info.playUrl[0])})`
+          );
+        }
+      }
+    }
+    if (option['one-line']) {
+      console.log(logs.join(' '));
+    }
+  });
+
+cli
+  .command('store get <id>', 'View video info on OSS')
+  .option('--file', 'Use videoId instead of filepath')
+  .action(async (id, option) => {
+    const { useStore } = await import('./io');
+    const createStore = useStore('ali');
+    const store = await createStore(context);
+
+    const info = !option.file
+      ? await store.fetchVideoInfo(id)
+      : await store.searchLocalVideo(id);
+
+    if (info) {
+      printVideoInfo(info);
+    } else {
+      console.log(`  ${red(`✗ video "${id}" not found`)}`);
+    }
+  });
+
+cli
   .command('store put <file>', 'Upload video to OSS')
   .option('--title [title]', 'Video title')
   .action(async (filename, option) => {
@@ -98,25 +141,6 @@ cli
   });
 
 cli
-  .command('store get <id>', 'View video info on OSS')
-  .option('--file', 'Use videoId instead of filepath')
-  .action(async (id, option) => {
-    const { useStore } = await import('./io');
-    const createStore = useStore('ali');
-    const store = await createStore(context);
-
-    const info = !option.file
-      ? await store.fetchVideoInfo(id)
-      : await store.searchLocalVideo(id);
-
-    if (info) {
-      printVideoInfo(info);
-    } else {
-      console.log(`  ${red(`✗ video "${id}" not found`)}`);
-    }
-  });
-
-cli
   .command('store del [...ids]', 'Delete video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
   .action(async (ids, option) => {
@@ -129,6 +153,7 @@ cli
         ? await store.fetchVideoInfo(id)
         : await store.searchLocalVideo(id);
 
+      console.log();
       if (info) {
         printVideoInfo(info);
         await store.deleteVideo(info.videoId);
