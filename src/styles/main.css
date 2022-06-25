@@ -31,6 +31,7 @@ html.dark {
 
 a {
   text-decoration: none;
+  outline: none !important;
   color: var(--c-brand);
 }
 

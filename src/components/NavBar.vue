@@ -11,21 +11,24 @@ const { top } = toRefs(arrivedState);
 </script>
 
 <template>
+  <div v-if="!top" lt-md="z-9 w-full h-$navbar-height fixed bg-white"></div>
   <nav
     text-xl
     z-10
     w-full
+    h="$navbar-height"
+    fixed
     flex="~ gap4 lt-md:gap2"
     items-center
     px8
-    h="$navbar-height"
-    fixed
     transition="all"
     duration="200"
-    :class="[top || 'backdrop-filter']"
+    :class="[top || 'backdrop-filter hero']"
   >
     <h1 font-sans select-none cursor-pointer>
-      <router-link to="/" class="text-base">Anime Paste</router-link>
+      <router-link to="/" class="text-base select-none"
+        >Anime Paste</router-link
+      >
     </h1>
     <div
       text-lg
@@ -35,7 +38,7 @@ const { top } = toRefs(arrivedState);
       lt-md:px2
       rounded-2
     >
-      <router-link to="/list" text-base font-light class="!outline-none"
+      <router-link to="/list" text-base font-light select-none
         >番剧</router-link
       >
     </div>
@@ -64,7 +67,15 @@ const { top } = toRefs(arrivedState);
   --navbar-height: 60px;
 }
 
-.backdrop-filter {
-  backdrop-filter: saturate(50%) blur(8px);
+@media (min-width: 768px) {
+  .backdrop-filter {
+    backdrop-filter: saturate(50%) blur(8px);
+  }
+}
+
+@media (max-width: 767.9px) {
+  .backdrop-filter {
+    @apply shadow bg-white bg-opacity-40;
+  }
 }
 </style>
