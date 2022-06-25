@@ -5,8 +5,9 @@ import { format } from 'date-fns';
 </script>
 
 <template>
-  <div mt8 class="text-center text-gray-500/50">
-    <div flex items="center" justify="center" text="sm" font="mono">
+  <div class="text-center text-gray-500/50">
+    <div mt8 border="b-1 base" mx24 lt-md:mx8></div>
+    <div mt4 flex items="center" justify="center" text="sm" font="mono">
       <a
         i-carbon-logo-github
         icon-btn
@@ -32,7 +33,7 @@ import { format } from 'date-fns';
         <span align-middle>{{ format(now, 'yyyy-MM-dd HH:mm') }}</span>
       </span>
     </div>
-    <div mb="4" text="sm" font="mono">
+    <div mb="8" text="sm" font="mono">
       <span
         >Powered by
         <a href="https://github.com/XLorPaste/AnimePaste" alt="Vite"
