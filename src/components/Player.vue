@@ -97,5 +97,6 @@ onUnmounted(() => {
 <style>
 .plyr {
   @apply h-full w-full;
+  --plyr-color-main: #00ccaa;
 }
 </style>
