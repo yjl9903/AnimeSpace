@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { OnairAnime } from '~/composables/client';
 
-const { active, anime } = toRefs(
-  defineProps<{ anime: OnairAnime; active?: number }>()
-);
+const props = defineProps<{ anime: OnairAnime; active?: number }>();
+const { active, anime } = toRefs(props);
 </script>
 
 <template>
