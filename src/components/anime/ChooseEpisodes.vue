@@ -13,7 +13,7 @@ const { active, anime } = toRefs(props);
         path: `/anime/${anime.bgmId}/play/${ep.ep}`
       }"
       inline-block
-      w-20
+      w-18
       text-center
       text-base
       text-sm

@@ -39,17 +39,17 @@ const filterBgm = (subject: OverviewSubject) => {
       <h3 mb4 flex="~" items-center>
         <span font-bold text-lg>{{ weekDayLocale[7 - offset] }}</span>
       </h3>
-      <div flex="~ wrap gap4">
+      <div flex="~ wrap gap4" lt-md:justify-around>
         <div
           v-for="bgm in bangumi.calendar[7 - offset].filter(filterBgm)"
-          w="160px"
+          w="160px  lt-md:120px"
           mb4
           class="anime-card"
         >
           <router-link
             tag="div"
             :to="'/anime/' + bgm.id"
-            w="160px"
+            w="full"
             h="200px"
             flex="~"
             items-center
@@ -59,8 +59,8 @@ const filterBgm = (subject: OverviewSubject) => {
               :src="bgm.images.large"
               :alt="'Picture for ' + bgm.name_cn"
               object-contain
-              max-w="160px"
-              max-h="200px"
+              max-w="full"
+              max-h="full"
               rounded-2
               hover="shadow shadow-light-900 shadow-lg"
               cursor="pointer"

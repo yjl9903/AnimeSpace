@@ -14,6 +14,7 @@ const { top } = toRefs(arrivedState);
   <div v-show="!top" lt-md="z-9 w-full h-$navbar-height fixed bg-white"></div>
   <nav
     text-xl
+    lt-md:text-lg
     z-10
     w-full
     h="$navbar-height"
@@ -36,7 +37,18 @@ const { top } = toRefs(arrivedState);
       hover="bg-op-50 bg-white dark:bg-gray/50"
       px4
       py2
-      lt-md:px2
+      lt-md:px1
+      rounded-2
+    >
+      <span text-base font-light select-none>放映</span>
+    </router-link>
+    <router-link
+      to="/list"
+      text-lg
+      hover="bg-op-50 bg-white dark:bg-gray/50"
+      px4
+      py2
+      lt-md:px1
       rounded-2
     >
       <span text-base font-light select-none>番剧</span>
