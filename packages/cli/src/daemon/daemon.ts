@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { debug as createDebug } from 'debug';
-import { dim, link, lightGreen } from 'kolorist';
+import { dim, link, lightGreen, options } from 'kolorist';
 
 import type { Plan, VideoInfo } from '../types';
 
@@ -17,6 +17,12 @@ const debug = createDebug('anime:daemon');
 export class Daemon {
   private plan!: Plan;
   private magnetCache!: Map<string, string>;
+
+  private readonly enable: boolean;
+
+  constructor(option: { update: boolean }) {
+    this.enable = !option.update;
+  }
 
   async init() {
     info('Start initing daemon');
@@ -113,6 +119,8 @@ export class Daemon {
         );
       }
 
+      if (!this.enable) return;
+
       const magnets = episodes.map((ep) => {
         return {
           magnetURI: this.magnetCache.get(ep.magnetId)!,
@@ -121,7 +129,17 @@ export class Daemon {
       });
       const localRoot = await context.makeLocalAnimeRoot(anime.title);
       const torrent = new TorrentClient(localRoot);
-      await torrent.download(magnets);
+      for (const items of magnets.reduce((resultArray, item, index) => {
+        const perChunk = 10;
+        const chunkIndex = Math.floor(index / perChunk);
+        if (!resultArray[chunkIndex]) {
+          resultArray[chunkIndex] = [];
+        }
+        resultArray[chunkIndex].push(item);
+        return resultArray;
+      }, [] as Array<{ magnetURI: string; filename: string }>[])) {
+        await torrent.download(items);
+      }
       await torrent.destroy();
       info(
         'Download ' +
@@ -171,26 +189,26 @@ export class Daemon {
           }
         }))
       });
-    }
 
-    info(`Syncing  ${syncOnair.length} onair animes`);
-    const client = new AdminClient(await context.getServerConfig());
-    try {
-      const onair = await client.syncOnair(syncOnair);
-      for (const anime of onair) {
-        info(
-          'Sync     ' +
-            lightGreen(anime.title) +
-            ' OK ' +
-            `(Total: ${anime.episodes.length} episodes)`
-        );
-        for (const ep of anime.episodes) {
-          info(`${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${ep.playURL}`);
+      info(`Syncing  ${syncOnair.length} onair animes`);
+      const client = new AdminClient(await context.getServerConfig());
+      try {
+        const onair = await client.syncOnair(syncOnair);
+        for (const anime of onair) {
+          info(
+            'Sync     ' +
+              lightGreen(anime.title) +
+              ' OK ' +
+              `(Total: ${anime.episodes.length} episodes)`
+          );
+          for (const ep of anime.episodes) {
+            info(`${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${ep.playURL}`);
+          }
         }
+      } catch (err) {
+        debug(err);
+        error(`Server baseURL or token may be wrong`);
       }
-    } catch (err) {
-      debug(err);
-      error(`Server baseURL or token may be wrong`);
     }
   }
 }

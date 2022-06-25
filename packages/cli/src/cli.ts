@@ -27,6 +27,7 @@ cli
     }
   })
   .option('-o, --once', 'Just do an immediate update')
+  .option('--update', 'Only update info')
   .action(async (option) => {
     const { startDaemon } = await import('./daemon');
     await startDaemon(option);

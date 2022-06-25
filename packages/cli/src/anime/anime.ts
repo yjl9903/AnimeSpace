@@ -125,6 +125,7 @@ export class Anime {
           found = true;
           episodes.push(eps[0]);
         }
+        if (found) break;
       }
     }
     return episodes;

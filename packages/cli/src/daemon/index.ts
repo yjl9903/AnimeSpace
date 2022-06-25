@@ -3,8 +3,9 @@ import { Daemon } from './daemon';
 export async function startDaemon(option: {
   once: boolean;
   interval: number;
+  update: boolean;
 }): Promise<void> {
-  const daemon = new Daemon();
+  const daemon = new Daemon(option);
 
   await daemon.init();
 
