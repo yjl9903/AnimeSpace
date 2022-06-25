@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import ScrollReveal from 'scrollreveal';
-
 const now = new Date();
 const weekday = now.getDay();
 const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
-onMounted(() => {
+onMounted(async () => {
+  const ScrollReveal = (await import('scrollreveal')).default;
   ScrollReveal().reveal('.anime-card');
 });
 
