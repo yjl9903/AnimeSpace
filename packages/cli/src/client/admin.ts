@@ -1,6 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
+import { debug as createDebug } from 'debug';
 
 import type { OnairAnime, UserOption } from './types';
+
+const debug = createDebug('anime:client');
 
 export class AdminClient {
   private static MAX_RETRY = 5;
@@ -24,10 +27,12 @@ export class AdminClient {
   ): Promise<OnairAnime[]> {
     try {
       const { data } = await this.api.post('/admin/anime', { onair });
+      if (data.status !== 'Ok') throw new Error('Unknown error');
       return data.data.onair;
     } catch (error) {
       const retry = (option?.retry ?? 0) + 1;
       if (retry > AdminClient.MAX_RETRY) {
+        debug(error);
         throw new Error('Fail syncing onair animes');
       } else {
         return this.syncOnair(onair, { retry });
