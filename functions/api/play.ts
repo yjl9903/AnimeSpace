@@ -8,9 +8,9 @@ export const onRequestGet: APIFunction = async ({ env }) => {
   const onair = Object.values(onairCache)
     .flat()
     .map((anime) => {
-      const newAnime: Omit<OnairAnime, 'uploadBy'> = anime;
-      delete newAnime['uploadBy'];
-      return newAnime;
+      // @ts-ignore
+      delete anime['uploadBy'];
+      return anime;
     });
   return makeResponse({ onair });
 };

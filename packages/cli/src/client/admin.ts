@@ -3,6 +3,8 @@ import axios, { AxiosInstance } from 'axios';
 import type { OnairAnime, UserOption } from './types';
 
 export class AdminClient {
+  private static MAX_RETRY = 5;
+
   private readonly token: string;
   private readonly api: AxiosInstance;
 
@@ -16,13 +18,25 @@ export class AdminClient {
     });
   }
 
-  async syncOnair(onair: OnairAnime[]): Promise<OnairAnime[]> {
-    const { data } = await this.api.post('/admin/anime', { onair });
-    return data.data.onair;
+  async syncOnair(
+    onair: OnairAnime[],
+    option: { retry?: number } = {}
+  ): Promise<OnairAnime[]> {
+    try {
+      const { data } = await this.api.post('/admin/anime', { onair });
+      return data.data.onair;
+    } catch (error) {
+      const retry = (option?.retry ?? 0) + 1;
+      if (retry > AdminClient.MAX_RETRY) {
+        throw new Error('Fail syncing onair animes');
+      } else {
+        return this.syncOnair(onair, { retry });
+      }
+    }
   }
 
   async fetchOnair() {
-    const { data } = await this.api.get('/anime');
+    const { data } = await this.api.get('/play');
     if (data.status !== 'Ok') throw new Error('Unknown error');
     return data.data.onair as OnairAnime[];
   }

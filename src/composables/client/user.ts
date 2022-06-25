@@ -21,7 +21,7 @@ export class UserClient {
   }
 
   async fetchOnair() {
-    const { data } = await this.api.get('/api/anime');
+    const { data } = await this.api.get('/api/play');
     if (data.status !== 'Ok') throw new Error('Unknown error');
     return data.data.onair as OnairAnime[];
   }
