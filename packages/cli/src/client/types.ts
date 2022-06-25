@@ -26,6 +26,14 @@ export interface OnairEpisode {
    * Play url
    */
   playURL: string;
+
+  /**
+   * Global storage config
+   */
+  storage: {
+    type: string;
+    videoId: string;
+  };
 }
 
 export interface UserOption {

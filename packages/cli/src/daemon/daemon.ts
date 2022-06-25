@@ -2,7 +2,7 @@ import path from 'node:path';
 import { debug as createDebug } from 'debug';
 import { dim, link, lightGreen } from 'kolorist';
 
-import type { Plan } from '../types';
+import type { Plan, VideoInfo } from '../types';
 
 import { context } from '../context/';
 import { bangumiLink } from '../utils';
@@ -131,14 +131,14 @@ export class Daemon {
       );
       const createStore = useStore('ali');
       const store = await createStore(context);
-      const playURLs: string[] = [];
+      const playURLs: VideoInfo[] = [];
       for (const { filename } of magnets) {
         const resp = await store.upload({
           title: filename,
           filepath: path.join(localRoot, filename)
         });
         if (resp && resp.playUrl.length > 0) {
-          playURLs.push(resp.playUrl[0]);
+          playURLs.push(resp);
         } else {
           error(`Uploading ${filename} encounter some errors`);
         }
@@ -157,7 +157,11 @@ export class Daemon {
           ep: ep.ep,
           quality: ep.quality,
           creationTime: ep.creationTime,
-          playURL: playURLs[idx]
+          playURL: playURLs[idx].playUrl[0],
+          storage: {
+            type: playURLs[idx].store,
+            videoId: playURLs[idx].videoId
+          }
         }))
       });
     }

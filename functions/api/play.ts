@@ -1,4 +1,4 @@
-import type { APIFunction, OnairAnime } from '../types';
+import type { APIFunction } from '../types';
 
 import { makeResponse } from '../utils';
 import { ONAIR_KEY } from '../utils/constant';
@@ -10,6 +10,10 @@ export const onRequestGet: APIFunction = async ({ env }) => {
     .map((anime) => {
       // @ts-ignore
       delete anime['uploadBy'];
+      anime.episodes.forEach((ep) => {
+        // @ts-ignore
+        delete ep['storage'];
+      });
       return anime;
     });
   return makeResponse({ onair });

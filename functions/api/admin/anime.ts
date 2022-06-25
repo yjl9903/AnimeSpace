@@ -21,7 +21,11 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
           ep: ep.ep,
           quality: ep.quality,
           creationTime: ep.creationTime,
-          playURL: ep.playURL
+          playURL: ep.playURL,
+          storage: {
+            type: ep.storage?.type ?? '',
+            videoId: ep.storage?.videoId ?? ''
+          }
         }))
       };
     });
