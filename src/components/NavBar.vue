@@ -11,7 +11,7 @@ const { top } = toRefs(arrivedState);
 </script>
 
 <template>
-  <div v-if="!top" lt-md="z-9 w-full h-$navbar-height fixed bg-white"></div>
+  <div v-show="!top" lt-md="z-9 w-full h-$navbar-height fixed bg-white"></div>
   <nav
     text-xl
     z-10
