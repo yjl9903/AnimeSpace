@@ -1,5 +1,11 @@
 <script setup lang="ts">
 const { onair } = useClient();
+
+const bangumi = useBangumi();
+
+const subjects = onair.map((onair) =>
+  computedAsync(() => bangumi.subject(onair.bgmId))
+);
 </script>
 
 <route>
@@ -12,29 +18,53 @@ const { onair } = useClient();
 
 <template>
   <div text-2xl mb4 font-bold>
-    <h2><span i-carbon-list></span> 正在播出</h2>
+    <h2><span i-carbon-earth-southeast-asia-filled></span> 正在播出</h2>
   </div>
   <div>
-    <div v-for="anime in onair" border="1 base" rounded-2 p4 mb4>
-      <h3 mb4 font-bold>{{ anime.title }}</h3>
-      <div flex="~ gap4 wrap">
-        <router-link
-          v-for="ep in anime.episodes"
-          :to="{ path: '/play', query: { src: ep.playURL } }"
-          inline-block
-          w-20
-          text-center
-          text-base
-          text-sm
-          bg-gray-100
-          op70
-          hover:op100
-          px2
-          py1
-          border="1 base rounded"
-        >
-          第 {{ ep.ep }} 话
+    <div
+      v-for="(anime, idx) in onair"
+      border="1 base"
+      rounded-2
+      p8
+      mb4
+      flex="~ gap4"
+      lt-md:flex-col
+      justify-between
+    >
+      <div v-if="subjects[idx].value">
+        <router-link :to="`/anime/` + anime.bgmId">
+          <img
+            :src="subjects[idx].value.images.large"
+            alt=""
+            w="240px"
+            rounded-2
+          />
         </router-link>
+      </div>
+      <div>
+        <h3 mb4 font-bold text-xl>
+          <router-link :to="'/anime/' + anime.bgmId">{{
+            anime.title
+          }}</router-link>
+        </h3>
+        <div flex="~ gap4 wrap">
+          <router-link
+            v-for="ep in anime.episodes"
+            :to="{ path: '/play', query: { src: ep.playURL } }"
+            inline-block
+            w-20
+            text-center
+            text-base
+            text-sm
+            op70
+            hover="bg-[#fff0ec] text-[#e50914]"
+            px2
+            py1
+            border="1 base rounded"
+          >
+            第 {{ ep.ep }} 话
+          </router-link>
+        </div>
       </div>
     </div>
   </div>

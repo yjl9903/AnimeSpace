@@ -83,7 +83,7 @@ export const useBangumi = defineStore('bangumi', () => {
     bgmIdMap,
     async subject(bgmId: string | number) {
       if (subjectMap.value.get(String(bgmId))) {
-        return subjectMap.value.get(String(bgmId));
+        return subjectMap.value.get(String(bgmId))!;
       }
       const { data } = await api.get<Subject>(`/v0/subjects/${bgmId}`);
       subjectMap.value.set(String(bgmId), data);

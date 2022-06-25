@@ -34,12 +34,12 @@ useHead({
       <span>{{ getBgmTitle(bgmData) }}</span>
     </h2>
     <div v-if="subject">
-      <div flex="~ gap8">
+      <div flex="~ gap8" lt-md:flex-col lt-md:items-center>
         <div>
           {{ subject.summary }}
         </div>
         <div flex-auto></div>
-        <img :src="subject.images.large" alt="" w="200px" />
+        <img :src="subject.images.large" alt="" w="240px" rounded-2 />
       </div>
     </div>
   </div>
