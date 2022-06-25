@@ -15,6 +15,8 @@ import { findResources, formatMagnetURL } from './resources';
 
 interface SearchOption {
   type: AnimeType;
+  raw?: boolean;
+  plan?: boolean;
   year?: string;
   month?: string;
 }
@@ -26,16 +28,26 @@ export async function userSearch(
   option: SearchOption
 ) {
   const bgms = await promptSearch(anime, option);
+  const animes: Anime[] = [];
   for (const bgm of bgms) {
     const anime =
       (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
     const keywords = [bgm.title, ...Object.values(bgm.titleTranslate).flat()];
-    await search(anime, keywords);
+    const res = await search(anime, keywords, option);
+    if (res) animes.push(res);
+  }
+  if (option.plan) {
+    outputPlan(animes);
   }
 }
 
-export async function daemonSearch(bgmId: string, optionKeywords?: string[]) {
+export async function daemonSearch(
+  bgmId: string,
+  optionKeywords?: string[],
+  option: SearchOption = { type: 'tv' }
+) {
   const { items } = await importBgmdata();
+  const animes: Anime[] = [];
   for (const bgm of items) {
     if (bgmId === getBgmId(bgm)) {
       const anime =
@@ -44,18 +56,34 @@ export async function daemonSearch(bgmId: string, optionKeywords?: string[]) {
         bgm.title,
         ...Object.values(bgm.titleTranslate).flat()
       ];
-      await search(anime, keywords);
+      const res = await search(anime, keywords, option);
+      if (res) animes.push(res);
     }
+  }
+  if (option.plan) {
+    outputPlan(animes);
   }
 }
 
-export async function search(anime: Anime, keywords: string[]) {
+export async function search(
+  anime: Anime,
+  keywords: string[],
+  option: SearchOption = { type: 'tv' }
+) {
   console.log();
   console.log(
     '  ' + lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`
   );
 
   const result = await findResources(keywords);
+
+  if (option.raw) {
+    result.sort((a, b) => a.name.localeCompare(b.name));
+    for (const item of result) {
+      console.log(`     ${link(item.name, formatMagnetURL(item.id))}`);
+    }
+    return;
+  }
 
   anime.addSearchResult(result);
   await context.updateAnime(anime);
@@ -72,6 +100,22 @@ export async function search(anime: Anime, keywords: string[]) {
           formatMagnetURL(ep.magnetId)
         )}`
       );
+    }
+  }
+
+  return anime;
+}
+
+function outputPlan(animes: Anime[]) {
+  console.log();
+  console.log(`  onair:`);
+  for (const anime of animes) {
+    console.log(`    - name: ${anime.title}`);
+    console.log(`      bgmId: '${anime.bgmId}'`);
+    console.log(`      fansub:`);
+    const map = groupBy(anime.episodes, (ep) => ep.fansub);
+    for (const [key] of map) {
+      console.log(`        - ${key}`);
     }
   }
 }

@@ -79,8 +79,7 @@ async function doSearch(
 
         // Skip found magnets, if not in the force mode
         if (!context.cliOption.force && foundIds.has(id)) {
-          shouldBreak = true;
-          break;
+          continue;
         }
 
         shouldBreak = false;

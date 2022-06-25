@@ -51,7 +51,7 @@ cli
   .action(async (anime, option) => {
     const { userSearch, daemonSearch } = await import('./anime');
     if (option.id && anime) {
-      await daemonSearch(option.id, anime.split(','));
+      await daemonSearch(option.id, anime.split(','), option);
     } else {
       await userSearch(anime, option);
     }
