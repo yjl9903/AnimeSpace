@@ -44,8 +44,8 @@ export class Anime {
 
       const getEp = () => {
         for (const RE of [
-          /\[(\d+)([vV]\d+)\]/,
-          /【(\d+)([vV]\d+)】/,
+          /\[(\d+)([vV]\d+)?\]/,
+          /【(\d+)([vV]\d+)?】/,
           /- (\d+) /,
           /第(\d+)話/,
           /第(\d+)话/,
