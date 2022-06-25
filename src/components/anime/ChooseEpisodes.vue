@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { OnairAnime } from '~/composables/client';
 
-defineProps<{ anime: OnairAnime }>();
+const { active, anime } = toRefs(
+  defineProps<{ anime: OnairAnime; active?: number }>()
+);
 </script>
 
 <template>
@@ -21,6 +23,7 @@ defineProps<{ anime: OnairAnime }>();
       px2
       py1
       border="1 base rounded"
+      :class="[ep.ep === active && 'bg-[#fff0ec] text-[#e50914]']"
     >
       第 {{ ep.ep }} 话
     </router-link>

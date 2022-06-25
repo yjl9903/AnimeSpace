@@ -13,7 +13,7 @@ const src = computed(() => {
 <template>
   <div v-if="subject">
     <h2 font-bold text-xl mb4 pb4 border="b-1 base">
-      <span>{{ subject.name_cn }}</span>
+      <span>{{ subject.name_cn }} 第 {{ ep }} 话</span>
     </h2>
     <div flex="~ gap8" lt-md:flex-col justify-center>
       <Player
@@ -33,7 +33,7 @@ const src = computed(() => {
       </Player>
       <div v-if="onair" mt4 md:max-w="30%">
         <h3 font-bold text-xl mb4>选集播放</h3>
-        <ChooseEpisodes :anime="onair"></ChooseEpisodes>
+        <ChooseEpisodes :anime="onair" :active="+ep"></ChooseEpisodes>
       </div>
     </div>
   </div>
