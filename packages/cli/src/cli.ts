@@ -9,7 +9,7 @@ import { debug as createDebug } from 'debug';
 import type { AnimeType } from './types';
 
 import { context } from './context';
-import { printVideoInfo } from './utils';
+import { padRight, printVideoInfo } from './utils';
 
 const name = 'anime';
 
@@ -65,20 +65,30 @@ cli
     const { useStore } = await import('./io');
     const createStore = useStore('ali');
     const store = await createStore(context);
+
+    const videos = await store.listLocalVideos();
+    videos.sort((a, b) => a.title.localeCompare(b.title));
+
     const logs: string[] = [];
-    for (const info of await store.listLocalVideos()) {
+    const ids: string[] = [];
+    for (const info of videos) {
       if (!name || info.title.indexOf(name) !== -1) {
         if (option['one-line']) {
           logs.push(info.videoId);
         } else {
-          console.log(
-            `  ${info.title} (${link(info.videoId, info.playUrl[0])})`
-          );
+          logs.push(`  ${info.title}`);
+          ids.push(`(${link(info.videoId, info.playUrl[0])})`);
         }
       }
     }
+
     if (option['one-line']) {
       console.log(logs.join(' '));
+    } else {
+      const padded = padRight(logs);
+      for (let i = 0; i < padded.length; i++) {
+        console.log(`${padded[i]}  ${ids[i]}`);
+      }
     }
   });
 
