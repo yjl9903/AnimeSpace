@@ -19,6 +19,7 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "plyr": "^3.7.2",
+    "scrollreveal": "^4.0.9",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16"
   },
@@ -27,6 +28,7 @@
     "@types/node": "^18.0.0",
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.0",
+    "@types/scrollreveal": "^0.0.8",
     "@unocss/reset": "^0.39.3",
     "@vitejs/plugin-vue": "^2.3.3",
     "prettier": "^2.7.1",

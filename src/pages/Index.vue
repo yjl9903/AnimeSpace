@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import ScrollReveal from 'scrollreveal';
+
 const now = new Date();
 const weekday = now.getDay();
 const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+
+onMounted(() => {
+  ScrollReveal().reveal('.anime-card');
+});
 
 const bangumi = useBangumi();
 
@@ -34,6 +40,8 @@ const filterNoCN = (subject: OverviewSubject) => subject.name_cn !== '';
         <div
           v-for="bgm in bangumi.calendar[7 - offset].filter(filterNoCN)"
           w="160px"
+          mb4
+          class="anime-card"
         >
           <div w="160px" h="200px" flex="~" items-center justify-start>
             <img
