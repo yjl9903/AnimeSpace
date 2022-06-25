@@ -50,6 +50,7 @@ const filterNoCN = (subject: OverviewSubject) => subject.name_cn !== '';
               max-w="160px"
               max-h="200px"
               rounded-2
+              hover="shadow shadow-light-900 shadow-lg"
               cursor="pointer"
             />
           </div>
