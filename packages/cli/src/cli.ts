@@ -43,11 +43,18 @@ cli
       }
     }
   })
+  .option('--id [bgmId]', 'Search keywords with Bangumi ID')
+  .option('--raw', 'Print raw magnets')
   .option('-y, --year [year]')
   .option('-m, --month [month]')
+  .option('-p, --plan', 'Output plan.yaml')
   .action(async (anime, option) => {
-    const { userSearch } = await import('./anime');
-    await userSearch(anime, option);
+    const { userSearch, daemonSearch } = await import('./anime');
+    if (option.id && anime) {
+      await daemonSearch(option.id, anime.split(','));
+    } else {
+      await userSearch(anime, option);
+    }
   });
 
 cli

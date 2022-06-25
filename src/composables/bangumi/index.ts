@@ -93,8 +93,12 @@ export const useBangumi = defineStore('bangumi', () => {
 });
 
 async function importAll(): Promise<Item[]> {
-  const resp = await axios.get(
-    'https://unpkg.com/bangumi-data@0/dist/data.json'
-  );
-  return resp.data.items;
+  try {
+    const resp = await axios.get(
+      'https://unpkg.com/bangumi-data@0/dist/data.json'
+    );
+    return resp.data.items;
+  } catch {
+    return importAll();
+  }
 }
