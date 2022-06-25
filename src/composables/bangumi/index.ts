@@ -67,8 +67,17 @@ export const useBangumi = defineStore('bangumi', () => {
       calendar.value.splice(0);
       for (const day of data) {
         calendar.value.push(day.items);
-        calendarLastUpdatime.value = new Date();
       }
+      for (let i = 0; i < 7; i++) {
+        if (
+          calendar.value[i].length !== data[i].items.length &&
+          calendar.value[i].some((v, id) => v.id !== data[i].items[id].id)
+        ) {
+          calendar.value[i].splice(0);
+          calendar.value[i].push(...data[i].items);
+        }
+      }
+      calendarLastUpdatime.value = new Date();
     });
   }
 
