@@ -15,7 +15,7 @@ const src = computed(() => {
     <h2 font-bold text-xl mb4 pb4 border="b-1 base">
       <span>{{ subject.name_cn }} - 第 {{ ep }} 话</span>
     </h2>
-    <div flex="~ gap8" lt-md:flex-col justify-center>
+    <div flex="~ gap8" lt-md:flex-col>
       <Player
         v-if="src"
         :src="src"
@@ -31,6 +31,7 @@ const src = computed(() => {
       >
         <video controls playsinline crossorigin="anonymous"></video>
       </Player>
+      <div flex-auto></div>
       <div v-if="onair" mt4 md:max-w="30%">
         <h3 font-bold text-xl mb4>选集播放</h3>
         <ChooseEpisodes :anime="onair" :active="+ep"></ChooseEpisodes>
