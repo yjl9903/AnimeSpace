@@ -5,13 +5,13 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Banner: typeof import('./src/components/Banner.vue')['default']
-    Footer: typeof import('./src/components/Footer.vue')['default']
-    NavBar: typeof import('./src/components/NavBar.vue')['default']
-    Player: typeof import('./src/components/Player.vue')['default']
+    Banner: typeof import('./components/Banner.vue')['default']
+    Footer: typeof import('./components/Footer.vue')['default']
+    NavBar: typeof import('./components/NavBar.vue')['default']
+    Player: typeof import('./components/Player.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Search: typeof import('./src/components/Search.vue')['default']
+    Search: typeof import('./components/Search.vue')['default']
   }
 }
 

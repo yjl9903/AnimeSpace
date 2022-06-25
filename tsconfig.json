@@ -18,14 +18,19 @@
       "vite-plugin-info/client",
       "vite-plugin-pages/client",
     ],
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ]
+    },
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "*.d.ts"
+    "packages/**/*.d.ts"
   ],
   "exclude": [
     "**/dist/**"

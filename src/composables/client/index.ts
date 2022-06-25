@@ -4,7 +4,8 @@ import { useLocalStorage } from '@vueuse/core';
 import type { OnairAnime, OnairEpisode } from './types';
 import { UserClient } from './user';
 
-export { UserClient, OnairAnime, OnairEpisode };
+export { UserClient };
+export type { OnairAnime, OnairEpisode };
 
 export const useClient = defineStore('client', () => {
   const token = ref(useLocalStorage('animepaste:token', ''));

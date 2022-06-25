@@ -1,7 +1,9 @@
 /// <reference types="vite/client" />
+/// <reference path="../packages/cli/src/anime/bangumi-data.d.ts" />
 
 import 'vue-router';
 import type { DefineComponent } from 'vue';
+import type { Item } from 'bangumi-data';
 
 declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>;
@@ -12,4 +14,8 @@ declare module 'vue-router' {
   interface RouteMeta {
     title?: string;
   }
+}
+
+declare module '~bangumi/data' {
+  export const bangumiItems: Item[];
 }

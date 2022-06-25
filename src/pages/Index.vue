@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { OverviewSubject } from '~/composables/bangumi/types';
+
 const now = new Date();
 const weekday = now.getDay();
 const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
@@ -10,7 +12,9 @@ onMounted(async () => {
 
 const bangumi = useBangumi();
 
-const filterNoCN = (subject: OverviewSubject) => subject.name_cn !== '';
+const filterBgm = (subject: OverviewSubject) => {
+  return bangumi.bgmIdMap.has(String(subject.id)) && subject.name_cn !== '';
+};
 </script>
 
 <route>
@@ -37,7 +41,7 @@ const filterNoCN = (subject: OverviewSubject) => subject.name_cn !== '';
       </h3>
       <div flex="~ wrap gap4">
         <div
-          v-for="bgm in bangumi.calendar[7 - offset].filter(filterNoCN)"
+          v-for="bgm in bangumi.calendar[7 - offset].filter(filterBgm)"
           w="160px"
           mb4
           class="anime-card"
