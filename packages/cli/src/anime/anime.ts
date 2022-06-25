@@ -115,7 +115,12 @@ export class Anime {
               return b.quality - a.quality;
             }
             const gL = (a: Episode) => (a.language === LOCALE ? 1 : 0);
-            return gL(b) - gL(a);
+            const dL = gL(b) - gL(a);
+            if (dL !== 0) return dL;
+            return (
+              new Date(b.creationTime).getTime() -
+              new Date(a.creationTime).getTime()
+            );
           });
           found = true;
           episodes.push(eps[0]);
