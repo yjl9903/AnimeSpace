@@ -36,10 +36,10 @@ export const createApp = ViteSSG(
     // }
 
     if (isClient) {
-      router.beforeEach((to) => {
+      router.beforeEach((to, from) => {
         NProgress.start();
         const { token } = useClient();
-        if (to.name !== 'Login' && token === '') {
+        if (to.name !== 'Login' && token === '' && !from.query.token) {
           return { name: 'Login' };
         }
       });
