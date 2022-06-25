@@ -29,7 +29,7 @@ const filterBgm = (subject: OverviewSubject) => {
   <div text-2xl mb4 font-bold>
     <h2><span i-carbon-calendar></span> 番剧周历</h2>
   </div>
-  <div border="1 base" rounded-2>
+  <div border="1 base" rounded-2 shadow-box>
     <div
       v-for="offset in 7"
       border="base"
