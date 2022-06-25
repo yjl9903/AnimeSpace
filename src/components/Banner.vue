@@ -16,7 +16,7 @@ defineProps<{ fullscreen?: boolean }>();
     <div>
       <h1 text-4xl>Anime Paste</h1>
       <h2 font-light text-dark100 dark:text-light100 my-2>
-        <span>你所热爱的是你的动画</span>
+        <span>你所热爱的就是你的动画</span>
       </h2>
       <slot></slot>
     </div>
