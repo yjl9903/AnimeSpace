@@ -8,8 +8,6 @@ export async function startDaemon(option: {
 }): Promise<void> {
   const daemon = new Daemon(option);
 
-  // First update will force refresh info
-  context.cliOption.force = true;
   await daemon.init();
   context.cliOption.force = false;
 
