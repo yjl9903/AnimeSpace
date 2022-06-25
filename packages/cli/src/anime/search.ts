@@ -1,17 +1,17 @@
 import type { Item, SiteMeta } from 'bangumi-data';
 
 import prompts from 'prompts';
-import { link, bold, dim, lightGreen } from 'kolorist';
 import { debug as createDebug } from 'debug';
 import { distance } from 'fastest-levenshtein';
+import { link, bold, dim, lightGreen } from 'kolorist';
 
 import type { AnimeType } from '../types';
 import { context } from '../context';
 import { bangumiLink, groupBy } from '../utils';
 
 import { Anime } from './anime';
-import { findResources, formatMagnetURL } from './resources';
 import { getBgmDate, getBgmTitle, getBgmId } from './utils';
+import { findResources, formatMagnetURL } from './resources';
 
 interface SearchOption {
   type: AnimeType;
@@ -34,13 +34,16 @@ export async function userSearch(
   }
 }
 
-export async function daemonSearch(bgmId: string) {
+export async function daemonSearch(bgmId: string, optionKeywords?: string[]) {
   const { items } = await importBgmdata();
   for (const bgm of items) {
     if (bgmId === getBgmId(bgm)) {
       const anime =
         (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
-      const keywords = [bgm.title, ...Object.values(bgm.titleTranslate).flat()];
+      const keywords = optionKeywords ?? [
+        bgm.title,
+        ...Object.values(bgm.titleTranslate).flat()
+      ];
       await search(anime, keywords);
     }
   }
@@ -86,7 +89,7 @@ async function promptSearch(anime: string | undefined, option: SearchOption) {
         message: '年份?',
         choices: new Array(5).fill(undefined).map((_v, i) => ({
           title: String(year - i) + ' 年',
-          value: year - i
+          value: String(year - i)
         })),
         initial: 0,
         onState({ value }) {
@@ -98,10 +101,10 @@ async function promptSearch(anime: string | undefined, option: SearchOption) {
         name: 'month',
         message: '季度?',
         choices: [
-          { title: '1 月', value: 1 },
-          { title: '4 月', value: 4 },
-          { title: '7 月', value: 7 },
-          { title: '10 月', value: 10 }
+          { title: '1 月', value: '1' },
+          { title: '4 月', value: '4' },
+          { title: '7 月', value: '7' },
+          { title: '10 月', value: '10' }
         ],
         initial: 0,
         onState({ value }) {
@@ -123,10 +126,11 @@ async function promptBgm(bgms: Item[], enableDate = true): Promise<Item[]> {
       const d = getBgmDate(bgm);
       return {
         title: getBgmTitle(bgm) + (enableDate ? ` (${d.year}-${d.month})` : ''),
-        value: bgm
+        value: bgm as unknown as any
       };
     }),
     hint: '- Space to select, Return to submit',
+    // @ts-ignore
     instructions: false
   });
   return bgm ?? [];

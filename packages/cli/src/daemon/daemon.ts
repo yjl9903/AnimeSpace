@@ -53,7 +53,14 @@ export class Daemon {
         onair.bgmId = String(onair.bgmId);
       }
 
-      await daemonSearch(onair.bgmId);
+      await daemonSearch(
+        onair.bgmId,
+        Array.isArray(onair.keywords)
+          ? onair.keywords
+          : typeof onair.keywords === 'string'
+          ? [onair.keywords]
+          : undefined
+      );
 
       const anime = await context.getAnime(onair.bgmId);
       if (anime) {
