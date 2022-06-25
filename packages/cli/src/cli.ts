@@ -117,24 +117,26 @@ cli
   });
 
 cli
-  .command('store del <id>', 'Delete video info on OSS')
+  .command('store del [...ids]', 'Delete video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
-  .action(async (id, option) => {
+  .action(async (ids, option) => {
     const { useStore } = await import('./io');
     const createStore = useStore('ali');
     const store = await createStore(context);
 
-    const info = !option.file
-      ? await store.fetchVideoInfo(id)
-      : await store.searchLocalVideo(id);
+    for (const id of ids) {
+      const info = !option.file
+        ? await store.fetchVideoInfo(id)
+        : await store.searchLocalVideo(id);
 
-    if (info) {
-      printVideoInfo(info);
-      await store.deleteVideo(info.videoId);
-      console.log();
-      console.log(`  ${green(`√ Delete "${info.videoId}" Ok`)}`);
-    } else {
-      console.log(`  ${red(`✗ Video "${id}" not found`)}`);
+      if (info) {
+        printVideoInfo(info);
+        await store.deleteVideo(info.videoId);
+        console.log();
+        console.log(`  ${green(`√ Delete "${info.videoId}" Ok`)}`);
+      } else {
+        console.log(`  ${red(`✗ Video "${id}" not found`)}`);
+      }
     }
   });
 

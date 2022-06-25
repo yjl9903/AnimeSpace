@@ -71,7 +71,7 @@ export class TorrentClient {
                 return;
               } else {
                 // Unknown error, remove torrent file
-                removeSync(file.path);
+                // removeSync(file.path);
               }
             }
 
