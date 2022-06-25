@@ -6,8 +6,11 @@ import { format } from 'date-fns';
 
 <template>
   <div class="text-center text-gray-500/50">
-    <div mt8 border="b-1 base" mx24 lt-md:mx8></div>
-    <div mt4 flex items="center" justify="center" text="sm" font="mono">
+    <div mt16 border="b-1 base" mx24 lt-md:mx8></div>
+    <div mt4 text="sm" font-light>
+      <span>「 喜欢的话就坚持吧 」</span>
+    </div>
+    <div mt2 flex items="center" justify="center" text="sm" font="mono">
       <a
         i-carbon-logo-github
         icon-btn
