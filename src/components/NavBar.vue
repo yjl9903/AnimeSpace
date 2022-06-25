@@ -78,13 +78,13 @@ const { top } = toRefs(arrivedState);
   --navbar-height: 60px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1279.9px) {
   .backdrop-filter {
     backdrop-filter: saturate(50%) blur(8px);
   }
 }
 
-@media (max-width: 767.9px) {
+@media (max-width: 1280px) {
   .backdrop-filter {
     @apply shadow bg-white bg-opacity-40;
   }
