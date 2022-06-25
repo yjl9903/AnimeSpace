@@ -3,7 +3,7 @@ import type { Item } from 'bangumi-data';
 // @ts-ignore
 import { bangumiItems } from '~bangumi/data';
 
-import type { OverviewSubject } from './types';
+import type { OverviewSubject, Subject } from './types';
 
 import axios from 'axios';
 import { defineStore } from 'pinia';
@@ -58,6 +58,9 @@ export const useBangumi = defineStore('bangumi', () => {
       []
     ] as OverviewSubject[][])
   );
+  const subjectMap = ref(
+    useLocalStorage('bangumi:subject', new Map<string, Subject>())
+  );
 
   if (differenceInHours(new Date(), calendarLastUpdatime.value) >= CacheHour) {
     api.get<Calender[]>('/calendar').then(({ data }) => {
@@ -77,7 +80,15 @@ export const useBangumi = defineStore('bangumi', () => {
   return {
     calendar,
     data,
-    bgmIdMap
+    bgmIdMap,
+    async subject(bgmId: string | number) {
+      if (subjectMap.value.get(String(bgmId))) {
+        return subjectMap.value.get(String(bgmId));
+      }
+      const { data } = await api.get<Subject>(`/v0/subjects/${bgmId}`);
+      subjectMap.value.set(String(bgmId), data);
+      return data;
+    }
   };
 });
 

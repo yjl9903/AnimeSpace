@@ -46,7 +46,15 @@ const filterBgm = (subject: OverviewSubject) => {
           mb4
           class="anime-card"
         >
-          <div w="160px" h="200px" flex="~" items-center justify-start>
+          <router-link
+            tag="div"
+            :to="'/anime/' + bgm.id"
+            w="160px"
+            h="200px"
+            flex="~"
+            items-center
+            justify-start
+          >
             <img
               :src="bgm.images.large"
               :alt="'Picture for ' + bgm.name_cn"
@@ -57,7 +65,7 @@ const filterBgm = (subject: OverviewSubject) => {
               hover="shadow shadow-light-900 shadow-lg"
               cursor="pointer"
             />
-          </div>
+          </router-link>
           <a
             :href="bgm.url"
             target="_blank"

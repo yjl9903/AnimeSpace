@@ -12,7 +12,7 @@ const { onair } = useClient();
 
 <template>
   <div text-2xl mb4 font-bold>
-    <h2><span i-carbon-list></span> 所有番剧</h2>
+    <h2><span i-carbon-list></span> 正在播出</h2>
   </div>
   <div>
     <div v-for="anime in onair" border="1 base" rounded-2 p4 mb4>
@@ -22,7 +22,10 @@ const { onair } = useClient();
           v-for="ep in anime.episodes"
           :to="{ path: '/play', query: { src: ep.playURL } }"
           inline-block
+          w-20
+          text-center
           text-base
+          text-sm
           bg-gray-100
           op70
           hover:op100
@@ -30,7 +33,7 @@ const { onair } = useClient();
           py1
           border="1 base rounded"
         >
-          {{ ep.ep }}
+          第 {{ ep.ep }} 话
         </router-link>
       </div>
     </div>

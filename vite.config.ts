@@ -47,6 +47,12 @@ export default defineConfig({
   ]
 });
 
+/**
+ * Only bundle first count piece of items
+ *
+ * @param count static import count
+ * @returns
+ */
 function BangumiDate(count = 100): Plugin {
   const ModuleId = '~bangumi/data';
   const StaticImportCount = count;
