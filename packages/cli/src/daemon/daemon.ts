@@ -123,6 +123,12 @@ export class Daemon {
           `(Total: ${magnets.length} episodes)`
       );
 
+      info(
+        'Upload   ' +
+          lightGreen(anime.title) +
+          ' ' +
+          `(${bangumiLink(onair.bgmId)})`
+      );
       const createStore = useStore('ali');
       const store = await createStore(context);
       const playURLs: string[] = [];
@@ -156,6 +162,7 @@ export class Daemon {
       });
     }
 
+    info(`Syncing  ${syncOnair.length} onair animes`);
     const client = new AdminClient(await context.getServerConfig());
     try {
       const onair = await client.syncOnair(syncOnair);
