@@ -9,7 +9,6 @@ export async function startDaemon(option: {
   const daemon = new Daemon(option);
 
   await daemon.init();
-  context.cliOption.force = false;
   if (option.once) {
     return;
   }
@@ -19,6 +18,7 @@ export async function startDaemon(option: {
     setInterval(async () => {
       if (isRunning) return;
       isRunning = true;
+      await context.init({ force: false });
       await daemon.update();
       isRunning = true;
     }, option.interval * 60 * 1000);

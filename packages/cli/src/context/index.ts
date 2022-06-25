@@ -104,6 +104,8 @@ export class GlobalContex {
         this.animeCache.set(anime.bgmId, Anime.copy(anime));
       }
     }
+
+    await this.loadConfig();
   }
 
   get localRoot() {
