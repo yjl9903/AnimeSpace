@@ -10,19 +10,17 @@ export async function startDaemon(option: {
 
   await daemon.init();
   context.cliOption.force = false;
+  if (option.once) {
+    return;
+  }
 
-  return new Promise((res) => {
+  return new Promise(() => {
     let isRunning = false;
-    const stamp = setInterval(async () => {
+    setInterval(async () => {
       if (isRunning) return;
       isRunning = true;
       await daemon.update();
       isRunning = true;
-
-      if (option.once) {
-        clearInterval(stamp);
-        res();
-      }
     }, option.interval * 60 * 1000);
   });
 }
