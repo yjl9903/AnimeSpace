@@ -1,13 +1,14 @@
-import type { GlobalContex } from '../../context';
-
 import path from 'node:path';
 
 import OSS from 'ali-oss';
 import RPCClient from '@alicloud/pop-core';
-
 import { debug as createDebug } from 'debug';
+import { lightRed, lightBlue } from 'kolorist';
+
+import type { GlobalContex } from '../../context';
 
 import { b64decode, createProgressBar } from '../utils';
+
 import { CreateStore, Payload, Store, VideoInfo } from './types';
 
 const debug = createDebug('anime:ali');
@@ -93,7 +94,9 @@ export class AliStore extends Store {
       return resp.VideoId;
     } catch (error) {
       debug(error);
+      console.error(lightRed('  Error ') + 'Upload error, please DO NOT exit!');
       await this.doDelete(resp.VideoId);
+      console.error(lightBlue('  Info  ') + 'Clear OK');
       return undefined;
     } finally {
       progressbar.finish();
