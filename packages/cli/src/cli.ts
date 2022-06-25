@@ -59,16 +59,6 @@ cli
   });
 
 cli
-  .command('download [...URIs]', 'Download magnetURIs')
-  .action(async (uris) => {
-    const { TorrentClient } = await import('./io');
-    const client = new TorrentClient(process.cwd());
-    await client.download(uris.map((u) => ({ magnetURI: u })));
-    await client.destroy();
-    console.log(`  ${green('√ Success')}`);
-  });
-
-cli
   .command('store ls [name]', 'List all uploaded video info')
   .option('--one-line', 'Only show one line')
   .action(async (name, option) => {
@@ -141,7 +131,7 @@ cli
   });
 
 cli
-  .command('store del [...ids]', 'Delete video info on OSS')
+  .command('store rm [...ids]', 'Remove video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
   .action(async (ids, option) => {
     const { useStore } = await import('./io');
@@ -157,7 +147,6 @@ cli
       if (info) {
         printVideoInfo(info);
         await store.deleteVideo(info.videoId);
-        console.log();
         console.log(`  ${green(`√ Delete "${info.videoId}" Ok`)}`);
       } else {
         console.log(`  ${red(`✗ Video "${id}" not found`)}`);
