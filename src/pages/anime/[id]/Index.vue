@@ -1,31 +1,9 @@
 <script setup lang="ts">
-import { useHead } from '@vueuse/head';
 import { getBgmTitle } from '~/composables/bangumi';
 
-const route = useRoute();
-const { id } = toRefs<{ id: string }>(reactive(route.params as any));
+import { useAnimeInfo } from './context';
 
-const bangumi = useBangumi();
-
-const bgmData = computed(() => {
-  return bangumi.bgmIdMap.get(id.value);
-});
-
-const subject = computedAsync(async () => {
-  return await bangumi.subject(id.value);
-});
-
-useHead({
-  title: computed(() => {
-    if (bgmData.value) {
-      return bgmData.value
-        ? `${getBgmTitle(bgmData.value)} - Anime Paste`
-        : 'Anime Paste';
-    } else {
-      return 'Anime Paste';
-    }
-  })
-});
+const { bgmData, subject, onair } = useAnimeInfo();
 </script>
 
 <template>
@@ -41,6 +19,10 @@ useHead({
         <div flex-auto></div>
         <img :src="subject.images.large" alt="" w="240px" rounded-2 />
       </div>
+    </div>
+    <div v-if="onair" mt4>
+      <h3 font-bold text-xl mb4>选集播放</h3>
+      <ChooseEpisodes :anime="onair"></ChooseEpisodes>
     </div>
   </div>
 </template>

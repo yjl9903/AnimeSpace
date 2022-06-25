@@ -16,6 +16,14 @@ export const useClient = defineStore('client', () => {
 
   const onair = ref(useLocalStorage('animepaste:onair', [] as OnairAnime[]));
 
+  const onairMap = computed(() => {
+    const map = new Map<string, OnairAnime>();
+    for (const anime of onair.value) {
+      map.set(anime.bgmId, anime);
+    }
+    return map;
+  });
+
   watch(
     client,
     async (client) => {
@@ -35,6 +43,7 @@ export const useClient = defineStore('client', () => {
   return {
     token,
     client,
-    onair
+    onair,
+    onairMap
   };
 });

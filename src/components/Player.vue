@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onUnmounted, ref, toRefs, watch } from 'vue';
 
-import Plyr from 'plyr';
+import Plyr, { SourceInfo, Options } from 'plyr';
 import 'plyr/dist/plyr.css';
 
-const props = defineProps<{ options: Plyr.Options }>();
-const { options } = toRefs(props);
+const props = defineProps<{ source: SourceInfo; options?: Options }>();
+const { source, options } = toRefs(props);
 
 const container = ref<HTMLElement>();
 const player = ref<Plyr | null>(null);
@@ -14,8 +14,15 @@ watch(container, (container) => {
   if (container) {
     const video = container.querySelector('video');
     if (video) {
-      player.value = new Plyr(video, options.value);
+      player.value = new Plyr(video, options?.value);
+      player.value.source = source.value;
     }
+  }
+});
+
+watch(source, (source) => {
+  if (player.value) {
+    player.value.source = source;
   }
 });
 

@@ -13,10 +13,18 @@ const src = route.query.src as string;
 
 <template>
   <div flex="~" justify-center>
-    <Player v-if="src" :options="{}" mt="4" max-w="full" h="80vh" aspect-video>
-      <video controls playsinline crossorigin="anonymous">
-        <source size="1080" :src="src" type="video/mp4" />
-      </video>
+    <Player
+      v-if="src"
+      :source="{
+        type: 'video',
+        sources: [{ src }]
+      }"
+      mt="4"
+      max-w="full"
+      h="80vh"
+      aspect-video
+    >
+      <video controls playsinline crossorigin="anonymous"></video>
     </Player>
   </div>
 </template>

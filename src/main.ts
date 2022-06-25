@@ -13,7 +13,9 @@ import './styles/main.css';
 import App from './App.vue';
 
 const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
-  if (savedPosition) {
+  if (to.path.startsWith('/anime/')) {
+    return false;
+  } else if (savedPosition) {
     return savedPosition;
   } else {
     return { top: 0 };

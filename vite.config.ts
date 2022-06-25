@@ -37,7 +37,8 @@ export default defineConfig({
       autoInstall: true
     }),
     Pages({
-      dirs: 'src/pages'
+      dirs: 'src/pages',
+      exclude: ['**/components/*.vue', '**/context.ts']
     }),
     BuildInfo({
       github: 'XLorPaste/AnimePaste'
