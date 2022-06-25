@@ -62,4 +62,9 @@ export interface OnairPlan {
    * @default '[{fansub}] {title} - {ep}.mp4'
    */
   format?: string;
+
+  /**
+   * Keywords for searching resources
+   */
+  keywords?: string[];
 }
