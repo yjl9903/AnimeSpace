@@ -45,10 +45,7 @@ export default defineConfig({
     }),
     Inspect(),
     BangumiDate(200)
-  ],
-  ssgOptions: {
-    dirStyle: 'nested'
-  }
+  ]
 });
 
 /**
