@@ -8,7 +8,13 @@ import { format } from 'date-fns';
   <div class="text-center text-gray-500/50">
     <div mt16 border="b-1 base" mx24 lt-md:mx8></div>
     <div mt4 text="sm" font-light>
-      <span>「 喜欢的话就坚持吧 」</span>
+      <a
+        href="https://space.bilibili.com/208259"
+        target="_blank"
+        text-gray-500
+        hover:text="$c-brand"
+        >「 喜欢的话就坚持吧 」</a
+      >
     </div>
     <div mt2 flex items="center" justify="center" text="sm" font="mono">
       <a
