@@ -158,15 +158,24 @@ export class Daemon {
       const store = await createStore(context);
       const playURLs: VideoInfo[] = [];
       for (const { filename } of magnets) {
-        const resp = await store.upload({
-          title: filename,
-          filepath: path.join(localRoot, filename)
-        });
-        if (resp && resp.playUrl.length > 0) {
-          playURLs.push(resp);
-        } else {
-          error(`Uploading ${filename} encounter some errors`);
-        }
+        const func = async (count = 0) => {
+          if (count > 3) return;
+          try {
+            const resp = await store.upload({
+              title: filename,
+              filepath: path.join(localRoot, filename)
+            });
+            if (resp && resp.playUrl.length > 0) {
+              playURLs.push(resp);
+            }
+          } catch (err) {
+            error(`Uploading ${filename} encounter some errors`);
+            const msg = (err as any).message;
+            if (msg) error(msg);
+            await func(count + 1);
+          }
+        };
+        await func();
       }
       info(
         'Upload   ' +
