@@ -37,7 +37,7 @@ export async function getVideoInfo(filepath: string) {
   }
 }
 
-export async function checkHEVC(filepath: string) {
+export async function checkVideo(filepath: string) {
   const info = await getVideoInfo(filepath);
-  return info.video?.Format === 'HEVC';
+  return info.general?.Format !== 'Matroska' && info.video?.Format === 'HEVC';
 }

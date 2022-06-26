@@ -5,6 +5,7 @@ import { dim, link, lightGreen, options } from 'kolorist';
 import type { Plan, VideoInfo } from '../types';
 
 import { context } from '../context/';
+import { checkVideo } from '../video';
 import { bangumiLink } from '../utils';
 import { TorrentClient, useStore } from '../io';
 import { OnairAnime, AdminClient } from '../client';
@@ -137,6 +138,13 @@ export class Daemon {
           ' OK ' +
           `(Total: ${magnets.length} episodes)`
       );
+
+      for (const { filename } of magnets) {
+        const ok = await checkVideo(filename);
+        if (!ok) {
+          error(`The format of ${filename} may be wrong`);
+        }
+      }
 
       info(
         'Upload   ' +
