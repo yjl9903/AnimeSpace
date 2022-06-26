@@ -31,7 +31,7 @@ const src = computed(() => {
         </Player>
       </div>
       <div flex-auto></div>
-      <div v-if="onair" mt4 max-w="lg:250px">
+      <div v-if="onair" mt4 max-w="xl:350px lg:250px">
         <h3 font-bold text-xl mb4>选集播放</h3>
         <ChooseEpisodes :anime="onair" :active="+ep"></ChooseEpisodes>
       </div>
