@@ -182,6 +182,10 @@ export class Daemon {
           `(Total: ${magnets.length} episodes)`
       );
 
+      if (episodes.length === 0) {
+        continue;
+      }
+
       syncOnair.push({
         title: anime.title,
         bgmId: anime.bgmId,
