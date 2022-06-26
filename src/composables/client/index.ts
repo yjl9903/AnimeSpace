@@ -9,12 +9,8 @@ export type { OnairAnime, OnairEpisode };
 
 export const useClient = defineStore('client', () => {
   const query = useUrlSearchParams('history');
-  const token = ref(
-    useLocalStorage(
-      'animepaste:token',
-      typeof query.token === 'string' ? query.token : ''
-    )
-  );
+  const initToken = typeof query.token === 'string' ? query.token : '';
+  const token = ref(useLocalStorage('animepaste:token', initToken));
 
   const client = computed(() =>
     Boolean(token.value) ? new UserClient(token.value) : undefined
