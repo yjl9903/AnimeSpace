@@ -44,38 +44,44 @@ const filterBgm = (subject: OverviewSubject) => {
         <h3 mb4 flex="~" items-center>
           <span font-bold text-lg>{{ weekDayLocale[7 - offset] }}</span>
         </h3>
-        <div flex="~ wrap gap4" lt-md:justify-around>
+        <div flex="~ wrap gap4" lt-md:justify-between>
           <div
             v-for="bgm in bangumi.calendar[7 - offset].filter(filterBgm)"
             :key="bgm.id"
-            w="160px  lt-md:120px"
-            mb4
+            w="140px lt-md:130px"
+            lt-md:mb4
             class="anime-card"
           >
-            <router-link
-              tag="div"
-              :to="'/anime/' + bgm.id"
-              w="full"
-              h="200px"
-              flex="~"
-              items-center
-              justify-start
-            >
-              <img
-                :src="bgm.images.large"
-                :alt="'Picture for ' + bgm.name_cn"
-                object-contain
-                max-w="full"
-                max-h="full"
-                rounded-2
-                hover="shadow shadow-light-900 shadow-lg"
-                cursor="pointer"
-              />
+            <router-link tag="div" :to="'/anime/' + bgm.id" w="full">
+              <picture
+                w="full"
+                flex="~"
+                items-center
+                justify-center
+                lt-md:justify-start
+                text-0
+              >
+                <source
+                  :srcset="bgm.images.medium"
+                  media="(max-width: 767.9px)"
+                  rounded-2
+                />
+                <img
+                  :src="bgm.images.large"
+                  :alt="'Picture for ' + bgm.name_cn"
+                  object-contain
+                  w="full"
+                  h="196px lt-md:180px"
+                  rounded-2
+                  hover="shadow shadow-light-900 shadow-lg bg-transparent"
+                  cursor="pointer"
+                />
+              </picture>
             </router-link>
             <a
               :href="bgm.url"
               target="_blank"
-              class="text-base hover:text-$c-brand text-sm"
+              class="text-base hover:text-$c-brand text-sm font-light"
               >{{ bgm.name_cn !== '' ? bgm.name_cn : bgm.name }}</a
             >
           </div>

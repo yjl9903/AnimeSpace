@@ -11,14 +11,14 @@ const subjects = onair.map((onair) =>
 <route>
 {
   meta: {
-    title: "所有番剧"
+    title: "正在播出"
   }
 }
 </route>
 
 <template>
   <div text-2xl mb4 font-bold>
-    <h2><span i-carbon-list></span> 所有番剧</h2>
+    <h2><span i-carbon-earth-southeast-asia-filled></span> 正在播出</h2>
   </div>
   <div>
     <div

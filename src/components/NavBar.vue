@@ -32,7 +32,7 @@ const { top } = toRefs(arrivedState);
       >
     </h1>
     <router-link
-      to="/list"
+      to="/onair"
       text-lg
       hover="bg-op-50 bg-white dark:bg-gray/50"
       px4
