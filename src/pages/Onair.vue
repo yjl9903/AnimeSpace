@@ -34,7 +34,7 @@ const subjects = onair.map((onair) =>
           :to="`/anime/` + anime.bgmId"
           inline-block
           w="md:200px lt-md:full"
-          max-w="md:200px"
+          max-w="md:200px lt-md:full"
         >
           <picture w="full" max-w="full">
             <source
