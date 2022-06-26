@@ -25,7 +25,7 @@ const formatDate = (d: string) => {
 
 <template>
   <div text-2xl font-bold>
-    <h2><span i-carbon-earth-southeast-asia-filled></span> 所有番剧</h2>
+    <h2><span i-carbon-list></span> 所有番剧</h2>
   </div>
   <div divide-y>
     <div
