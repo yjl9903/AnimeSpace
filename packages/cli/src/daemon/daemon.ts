@@ -140,7 +140,7 @@ export class Daemon {
       );
 
       for (const { filename } of magnets) {
-        const ok = await checkVideo(filename);
+        const ok = await checkVideo(path.join(localRoot, filename));
         if (!ok) {
           error(`The format of ${filename} may be wrong`);
         }
