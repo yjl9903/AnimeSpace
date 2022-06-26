@@ -1,12 +1,12 @@
 import path from 'node:path';
-import { existsSync, readFileSync } from 'fs-extra';
 import { spawnSync } from 'node:child_process';
+import { existsSync, readFileSync, remove } from 'fs-extra';
 
 import Breadc from 'breadc';
-import { lightRed, green, red, link } from 'kolorist';
 import { debug as createDebug } from 'debug';
+import { lightRed, green, red, link } from 'kolorist';
 
-import type { AnimeType } from './types';
+import type { AnimeType, LocalVideoInfo } from './types';
 
 import { context } from './context';
 import { padRight, printVideoInfo } from './utils';
@@ -143,6 +143,7 @@ cli
 cli
   .command('store rm [...ids]', 'Remove video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
+  .option('--rm-local', 'Remove local files')
   .action(async (ids, option) => {
     const { useStore } = await import('./io');
     const createStore = useStore('ali');
@@ -152,6 +153,10 @@ cli
       const info = !option.file
         ? await store.fetchVideoInfo(id)
         : await store.searchLocalVideo(id);
+      if (option['rm-local'] && info && 'filepath' in info) {
+        const local = info as LocalVideoInfo;
+        await remove(local.filepath);
+      }
 
       console.log();
       if (info) {

@@ -5,7 +5,7 @@ import RPCClient from '@alicloud/pop-core';
 import { debug as createDebug } from 'debug';
 import { lightRed, lightBlue } from 'kolorist';
 
-import type { GlobalContex } from '../../context';
+import { context } from '../../context';
 
 import { b64decode, createProgressBar } from '../utils';
 
@@ -20,8 +20,8 @@ export class AliStore extends Store {
 
   private readonly vodClient: RPCClient;
 
-  constructor(context: GlobalContex, config: AliStoreConfig) {
-    super(context, 'ali');
+  constructor(config: AliStoreConfig) {
+    super('ali');
 
     this.accessKeyId = config.accessKeyId;
     this.accessKeySecret = config.accessKeySecret;
@@ -112,7 +112,7 @@ export class AliStore extends Store {
     }
   }
 
-  async fetchVideoInfo(videoId: string): Promise<VideoInfo | undefined> {
+  async doFetchVideoInfo(videoId: string): Promise<VideoInfo | undefined> {
     try {
       const [resp, play] = await Promise.all([
         this.vodClient.request(
@@ -148,8 +148,8 @@ export class AliStore extends Store {
   }
 }
 
-export const createAliStore: CreateStore = async (ctx) => {
-  const config = await ctx.getStoreConfig<AliStoreConfig>('ali');
+export const createAliStore: CreateStore = async () => {
+  const config = await context.getStoreConfig<AliStoreConfig>('ali');
   if (
     !Boolean(config.accessKeyId) ||
     !Boolean(config.accessKeySecret) ||
@@ -157,7 +157,9 @@ export const createAliStore: CreateStore = async (ctx) => {
   ) {
     throw new Error('Fail to load Ali OSS config');
   }
-  return new AliStore(ctx, config);
+  const ali = new AliStore(config);
+  await ali.init();
+  return ali;
 };
 
 export interface AliStoreConfig {

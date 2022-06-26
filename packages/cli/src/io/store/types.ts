@@ -1,42 +1,51 @@
 import type { VideoInfo, LocalVideoInfo } from '../../types';
-import type { GlobalContex } from '../../context';
 
 import path from 'node:path';
 
 import { hashFile } from '../../utils';
+import { context, GlobalContex } from '../../context';
 
 export type CreateStore = (config: GlobalContex) => Promise<Store>;
 
 export { VideoInfo, LocalVideoInfo };
 
 export abstract class Store {
-  private readonly context: GlobalContex;
   private readonly type: string;
+  private readonly logs: LocalVideoInfo[] = [];
 
-  constructor(context: GlobalContex, type: string) {
-    this.context = context;
+  constructor(type: string) {
     this.type = type;
+  }
+
+  async init() {
+    this.logs.splice(0);
+    this.logs.push(...(await context.storeLog.list()));
   }
 
   protected abstract doUpload(payload: Payload): Promise<string | undefined>;
 
   protected abstract doDelete(videoId: string): Promise<boolean>;
 
-  async deleteVideo(videoId: string) {
-    const logs = await this.context.storeLog.list();
-    const videoIdx = logs.findIndex((l) => l.videoId === videoId);
-    if (videoIdx !== -1 && logs[videoIdx].store === this.type) {
-      await this.doDelete(videoId);
-      logs.splice(videoIdx, 1);
-      await this.context.storeLog.write(logs);
+  protected abstract doFetchVideoInfo(
+    videoId: string
+  ): Promise<VideoInfo | undefined>;
+
+  async fetchVideoInfo(
+    videoId: string
+  ): Promise<LocalVideoInfo | VideoInfo | undefined> {
+    const localVideo = this.logs.find((l) => l.videoId === videoId);
+    if (localVideo) {
+      return localVideo;
+    } else {
+      return this.doFetchVideoInfo(videoId);
     }
   }
 
-  abstract fetchVideoInfo(videoId: string): Promise<VideoInfo | undefined>;
-
-  async searchLocalVideo(filename: string) {
+  async searchLocalVideo(
+    filename: string
+  ): Promise<LocalVideoInfo | undefined> {
     const name = path.basename(filename);
-    const videos = (await this.context.storeLog.list()).filter(
+    const videos = this.logs.filter(
       (l) => path.basename(l.filepath) === name && l.store === this.type
     );
     if (videos.length === 0) {
@@ -50,13 +59,24 @@ export abstract class Store {
   }
 
   async listLocalVideos() {
-    return await this.context.storeLog.list();
+    return this.logs;
+  }
+
+  async deleteVideo(videoId: string) {
+    const logs = this.logs;
+    const videoIdx = logs.findIndex((l) => l.videoId === videoId);
+    if (videoIdx !== -1 && logs[videoIdx].store === this.type) {
+      await this.doDelete(videoId);
+      logs.splice(videoIdx, 1);
+      await context.storeLog.write(logs);
+    }
+    await this.init();
   }
 
   async upload(payload: Payload): Promise<VideoInfo | undefined> {
     const hash = hashFile(payload.filepath);
 
-    for (const log of await this.context.storeLog.list()) {
+    for (const log of this.logs) {
       if (
         log.filepath === payload.filepath &&
         log.hash === hash &&
@@ -68,14 +88,15 @@ export abstract class Store {
 
     const videoId = await this.doUpload(payload);
     if (videoId) {
-      const info = await this.fetchVideoInfo(videoId);
+      const info = await this.doFetchVideoInfo(videoId);
       if (!info) throw new Error('Fail to upload');
       const local: LocalVideoInfo = {
         ...info,
         filepath: payload.filepath,
         hash
       };
-      await this.context.storeLog.append(local);
+      await context.storeLog.append(local);
+      await this.init();
       return local;
     } else {
       throw new Error('Fail to upload');
