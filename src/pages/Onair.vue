@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ensureHTTPS } from '~/composables';
+
 const { onair } = useClient();
 
 const bangumi = useBangumi();
@@ -42,11 +44,11 @@ const formatDate = (d: string) => {
         >
           <picture w="full" max-w="full">
             <source
-              :srcset="subjects[idx].value.images.medium"
+              :srcset="ensureHTTPS(subjects[idx].value.images.medium)"
               media="(max-width: 767.9px)"
             />
             <img
-              :src="subjects[idx].value.images.large"
+              :src="ensureHTTPS(subjects[idx].value.images.large)"
               :alt="subjects[idx].value.name_cn"
               w="full"
               max-w="full"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { OverviewSubject } from '~/composables/bangumi/types';
+import { ensureHTTPS } from '~/composables';
 
 const now = new Date();
 const weekday = now.getDay();
@@ -90,12 +91,12 @@ const filterBgm = (subject: OverviewSubject) => {
                   relative
                 >
                   <source
-                    :srcset="bgm.images.medium"
+                    :srcset="ensureHTTPS(bgm.images.medium)"
                     media="(max-width: 767.9px)"
                     rounded-2
                   />
                   <img
-                    :src="bgm.images.large"
+                    :src="ensureHTTPS(bgm.images.large)"
                     :alt="'Picture for ' + bgm.name_cn"
                     object-fill
                     w="full"
@@ -124,6 +125,8 @@ const filterBgm = (subject: OverviewSubject) => {
           </div>
         </div>
       </div>
+
+      <!-- Weekday navbar -->
       <div
         style="position: sticky; top: 20vh"
         h="60vh"

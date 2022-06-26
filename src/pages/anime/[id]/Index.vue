@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ensureHTTPS } from '~/composables';
 import { getBgmTitle } from '~/composables/bangumi';
 
 import { useAnimeInfo } from './context';
@@ -17,7 +18,12 @@ const { bgmData, subject, onair } = useAnimeInfo();
           {{ subject.summary }}
         </div>
         <div flex-auto></div>
-        <img :src="subject.images.large" alt="" w="240px" rounded-2 />
+        <img
+          :src="ensureHTTPS(subject.images.large)"
+          alt=""
+          w="240px"
+          rounded-2
+        />
       </div>
     </div>
     <div v-if="onair" mt4>
