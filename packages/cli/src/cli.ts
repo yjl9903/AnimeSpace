@@ -169,6 +169,12 @@ cli
     }
   });
 
+cli.command('video info <file>', 'Check video info').action(async (file) => {
+  const { getVideoInfo } = await import('./video');
+  const info = await getVideoInfo(file);
+  console.log(JSON.stringify(info, null, 2));
+});
+
 cli.command('space', 'Open AnimePaste space directory').action(async () => {
   console.log(context.root);
   spawnSync(`code ${context.root}`, {
