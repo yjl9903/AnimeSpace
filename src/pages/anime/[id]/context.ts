@@ -18,11 +18,11 @@ export function useAnimeInfo() {
   const bangumi = useBangumi();
 
   const bgmData = computed(() => {
-    return bangumi.bgmIdMap.get(id.value);
+    return id.value ? bangumi.bgmIdMap.get(id.value) : undefined;
   });
 
   const subject = computedAsync(async () => {
-    return await bangumi.subject(id.value);
+    return id.value ? await bangumi.subject(id.value) : undefined;
   });
 
   const client = useClient();
