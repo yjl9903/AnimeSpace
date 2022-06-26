@@ -24,19 +24,16 @@ const subjects = onair.map((onair) =>
     <div
       v-for="(anime, idx) in onair"
       :key="anime.bgmId"
-      border="1 base"
-      rounded-2
-      p8
-      mb4
-      flex="~ gap4"
+      mb16
+      flex="~ md:gap8 initial"
       lt-md:flex-col
-      justify-between
+      rounded-2
     >
       <div v-if="subjects[idx].value" inline-block>
         <router-link
           :to="`/anime/` + anime.bgmId"
           inline-block
-          w="md:200px"
+          w="md:200px lt-md:full"
           max-w="md:200px"
         >
           <picture w="full" max-w="full">
@@ -56,7 +53,7 @@ const subjects = onair.map((onair) =>
         </router-link>
       </div>
       <div inline-block>
-        <h3 mb4 font-bold text-xl>
+        <h3 mb4 lt-md:mt2 font-bold text-xl>
           <router-link :to="'/anime/' + anime.bgmId">{{
             anime.title
           }}</router-link>
