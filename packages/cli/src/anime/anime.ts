@@ -1,9 +1,11 @@
 import type { Item } from 'bangumi-data';
 
+import { groupBy } from '../utils';
+import { context } from '../context';
+
 import type { SearchResultItem } from './resources';
 
 import { getBgmTitle, getBgmId } from './utils';
-import { groupBy } from '../utils';
 
 const LOCALE = 'zh-Hans';
 
@@ -35,6 +37,10 @@ export class Anime {
   }
 
   addSearchResult(results: SearchResultItem[]) {
+    if (context.cliOption.force) {
+      this.episodes.splice(0);
+    }
+
     const foundIds = new Set(this.episodes.map((ep) => ep.magnetId));
 
     for (const result of results) {
