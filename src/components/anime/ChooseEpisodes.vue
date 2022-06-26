@@ -9,6 +9,7 @@ const { active, anime } = toRefs(props);
   <div flex="~ gap4 wrap">
     <router-link
       v-for="ep in anime.episodes"
+      :key="ep.ep"
       :to="{
         path: `/anime/${anime.bgmId}/play/${ep.ep}`
       }"

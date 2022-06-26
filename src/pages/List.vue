@@ -23,6 +23,7 @@ const subjects = onair.map((onair) =>
   <div>
     <div
       v-for="(anime, idx) in onair"
+      :key="anime.bgmId"
       border="1 base"
       rounded-2
       p8

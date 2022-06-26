@@ -34,6 +34,7 @@ const filterBgm = (subject: OverviewSubject) => {
       v-for="offset in 7"
       border="base"
       :class="[offset < 7 && 'border-b-1']"
+      :key="offset"
       p4
     >
       <h3 mb4 flex="~" items-center>
@@ -42,6 +43,7 @@ const filterBgm = (subject: OverviewSubject) => {
       <div flex="~ wrap gap4" lt-md:justify-around>
         <div
           v-for="bgm in bangumi.calendar[7 - offset].filter(filterBgm)"
+          :key="bgm.id"
           w="160px  lt-md:120px"
           mb4
           class="anime-card"
