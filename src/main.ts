@@ -5,6 +5,7 @@ import { createPinia } from 'pinia';
 import routes from '~pages';
 
 import NProgress from 'nprogress';
+import Scrollto from 'vue-scrollto';
 
 import 'uno.css';
 import '@unocss/reset/tailwind.css';
@@ -28,6 +29,7 @@ export const createApp = ViteSSG(
   async ({ app, router, isClient, initialState }) => {
     const pinia = createPinia();
     app.use(pinia);
+    app.use(Scrollto);
 
     // if (import.meta.env.SSR) {
     //   initialState.pinia = pinia.state.value;

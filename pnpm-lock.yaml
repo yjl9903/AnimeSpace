@@ -33,6 +33,7 @@ importers:
       vitest: ^0.16.0
       vue: ^3.2.37
       vue-router: ^4.0.16
+      vue-scrollto: ^2.20.0
       vue-tsc: ^0.38.1
       wrangler: ^2.0.15
     dependencies:
@@ -46,6 +47,7 @@ importers:
       scrollreveal: 4.0.9
       vue: 3.2.37
       vue-router: 4.0.16_vue@3.2.37
+      vue-scrollto: 2.20.0
     devDependencies:
       '@iconify-json/carbon': 1.1.5
       '@types/node': 18.0.0
@@ -1313,6 +1315,10 @@ packages:
 
   /bep53-range/1.1.1:
     resolution: {integrity: sha512-ct6s33iiwRCUPp9KXnJ4QMWDgHIgaw36caK/5XEQ9L8dCzSQlJt1Vk6VmHh1VD4AlGCAI4C2zmtfItifBBPrhQ==}
+    dev: false
+
+  /bezier-easing/2.1.0:
+    resolution: {integrity: sha512-gbIqZ/eslnUFC1tjEvtz0sgx+xTK20wDnYMIA27VA04R7w6xxXQPZDbibjA9DTWZRA2CXtwHykkVzlCaAJAZig==}
     dev: false
 
   /bignumber.js/9.0.2:
@@ -5945,6 +5951,12 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.1.4
       vue: 3.2.37
+
+  /vue-scrollto/2.20.0:
+    resolution: {integrity: sha512-7i+AGKJTThZnMEkhIPgrZjyAX+fXV7/rGdg+CV283uZZwCxwiMXaBLTmIc5RTA4uwGnT+E6eJle3mXQfM2OD3A==}
+    dependencies:
+      bezier-easing: 2.1.0
+    dev: false
 
   /vue-tsc/0.38.1_typescript@4.7.4:
     resolution: {integrity: sha512-jwR4uwTkjsYhAW8o/BvnkeZsariNoi2Y53XSqWIbjtj7X9Laob+qwC2iVuQyRymYdqbbiqqX+CxfPWtwLACXfg==}

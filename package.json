@@ -21,7 +21,8 @@
     "plyr": "^3.7.2",
     "scrollreveal": "^4.0.9",
     "vue": "^3.2.37",
-    "vue-router": "^4.0.16"
+    "vue-router": "^4.0.16",
+    "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.5",

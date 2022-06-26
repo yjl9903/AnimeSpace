@@ -69,8 +69,8 @@ const formatDate = (d: string) => {
               text-green-500
               i-carbon-play-filled
               rounded-full
-              border="1 base"
               cursor-pointer
+              border="1 base"
             ></router-link>
           </div>
         </h3>
@@ -82,12 +82,12 @@ const formatDate = (d: string) => {
         <div md:hidden mt4>
           <router-link
             :to="`/anime/${anime.bgmId}/play`"
+            cursor-pointer
             text-2xl
             text-green-500
             i-carbon-play-filled
             rounded-full
             border="1 base"
-            cursor-pointer
           ></router-link>
         </div>
         <ChooseEpisodes lt-md:hidden mt4 :anime="anime"></ChooseEpisodes>

@@ -26,7 +26,7 @@ const { top } = toRefs(arrivedState);
     duration="200"
     :class="[top || 'backdrop-filter hero']"
   >
-    <h1 font-sans select-none cursor-pointer>
+    <h1 font-sans cursor-pointer select-none>
       <router-link to="/" class="text-base select-none"
         >Anime Paste</router-link
       >

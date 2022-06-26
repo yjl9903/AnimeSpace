@@ -43,6 +43,14 @@ export default defineConfig({
       info: '0 0 0 0.125em rgb(32 156 238 / 25%)',
       warning: '0 0 0 0.125em rgb(255 224 138 / 25%)',
       danger: '0 0 0 0.125em rgb(241 70 104 / 25%)'
+    },
+    breakpoints: {
+      xs: '320px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      xxl: '1536px'
     }
   }
 });
