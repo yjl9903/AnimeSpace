@@ -102,6 +102,7 @@ export const useBangumi = defineStore('bangumi', () => {
 });
 
 async function importAll(): Promise<Item[]> {
+  if (import.meta.env.SSR) return [];
   try {
     const resp = await axios.get(
       'https://unpkg.com/bangumi-data@0/dist/data.json'
