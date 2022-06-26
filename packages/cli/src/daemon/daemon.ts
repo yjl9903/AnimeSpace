@@ -194,14 +194,15 @@ export class Daemon {
       const client = new AdminClient(await context.getServerConfig());
       try {
         const onair = await client.syncOnair(syncOnair);
-        for (const anime of onair) {
+        for (const onairAnime of onair) {
+          if (onairAnime.title !== anime.title) continue;
           info(
             'Sync     ' +
               lightGreen(anime.title) +
               ' OK ' +
               `(Total: ${anime.episodes.length} episodes)`
           );
-          for (const ep of anime.episodes) {
+          for (const ep of onairAnime.episodes) {
             info(`${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${ep.playURL}`);
           }
         }
@@ -209,6 +210,26 @@ export class Daemon {
         debug(err);
         error(`Server baseURL or token may be wrong`);
       }
+    }
+
+    info(`Syncing  ${syncOnair.length} onair animes`);
+    const client = new AdminClient(await context.getServerConfig());
+    try {
+      const onair = await client.syncOnair(syncOnair);
+      for (const anime of onair) {
+        info(
+          'Sync     ' +
+            lightGreen(anime.title) +
+            ' OK ' +
+            `(Total: ${anime.episodes.length} episodes)`
+        );
+        for (const ep of anime.episodes) {
+          info(`${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${ep.playURL}`);
+        }
+      }
+    } catch (err) {
+      debug(err);
+      error(`Server baseURL or token may be wrong`);
     }
   }
 }
