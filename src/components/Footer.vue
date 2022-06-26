@@ -36,7 +36,7 @@ import { format } from 'date-fns';
         <span align-middle>{{ format(now, 'yyyy-MM-dd HH:mm') }}</span>
       </span>
     </div>
-    <div mb="8" text="sm" font="mono">
+    <div pb="8" text="sm" font="mono">
       <span
         >Powered by
         <a href="https://github.com/XLorPaste/AnimePaste" alt="Vite"
