@@ -69,7 +69,7 @@ const filterBgm = (subject: OverviewSubject) => {
                 <img
                   :src="bgm.images.large"
                   :alt="'Picture for ' + bgm.name_cn"
-                  object-contain
+                  object-fill
                   w="full"
                   h="196px lt-md:180px"
                   rounded-2
