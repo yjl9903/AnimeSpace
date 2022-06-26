@@ -36,10 +36,10 @@ watch(container, (container) => {
         'duration', // The full duration of the media
         isDesktop ? 'mute' : undefined, // Toggle mute
         isDesktop ? 'volume' : undefined, // Volume control
-        'settings', // Settings menu
+        isDesktop ? 'settings' : undefined, // Settings menu
         'pip', // Picture-in-picture (currently Safari only)
         'airplay', // Airplay (currently Safari only)
-        isDesktop ? 'download' : undefined, // Show a download button with a link to either the current source or a custom URL you specify in your options
+        'download', // Show a download button with a link to either the current source or a custom URL you specify in your options
         'fullscreen' // Toggle fullscreen
       ].filter(Boolean) as string[];
 
