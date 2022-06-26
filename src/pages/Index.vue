@@ -10,9 +10,28 @@ onMounted(async () => {
   ScrollReveal().reveal('.anime-card');
 });
 
+const client = useClient();
 const bangumi = useBangumi();
 
 const hiddenBgm = new Set([975]);
+
+const isOnair = (subject: OverviewSubject) => {
+  return client.onairMap.has(String(subject.id));
+};
+
+const toBgmData = (subject: OverviewSubject) => {
+  return bangumi.bgmIdMap.get(String(subject.id));
+};
+
+const sortBgm = (a: OverviewSubject, b: OverviewSubject) => {
+  const x = isOnair(a) ? 0 : 1;
+  const y = isOnair(b) ? 0 : 1;
+  if (x === y) {
+    return toBgmData(a)!.begin.localeCompare(toBgmData(b)!.begin);
+  } else {
+    return x - y;
+  }
+};
 
 const filterBgm = (subject: OverviewSubject) => {
   if (hiddenBgm.has(subject.id)) return false;
@@ -42,11 +61,13 @@ const filterBgm = (subject: OverviewSubject) => {
         p4
       >
         <h3 mb4 flex="~" items-center>
-          <span font-bold text-lg>{{ weekDayLocale[7 - offset] }}</span>
+          <span font-bold text-lg>{{ weekDayLocale[(13 - offset) % 7] }}</span>
         </h3>
         <div flex="~ wrap gap4" lt-md:justify-between>
           <div
-            v-for="bgm in bangumi.calendar[7 - offset].filter(filterBgm)"
+            v-for="bgm in bangumi.calendar[(13 - offset) % 7]
+              .filter(filterBgm)
+              .sort(sortBgm)"
             :key="bgm.id"
             w="140px lt-md:130px"
             lt-md:mb4
@@ -60,6 +81,7 @@ const filterBgm = (subject: OverviewSubject) => {
                 justify-center
                 lt-md:justify-start
                 text-0
+                relative
               >
                 <source
                   :srcset="bgm.images.medium"
@@ -73,9 +95,16 @@ const filterBgm = (subject: OverviewSubject) => {
                   w="full"
                   h="196px lt-md:180px"
                   rounded-2
-                  hover="shadow shadow-light-900 shadow-lg bg-transparent"
+                  hover="shadow shadow-light-900 dark:shadow-dark-900 shadow-lg bg-transparent"
                   cursor="pointer"
                 />
+                <Playing
+                  v-if="isOnair(bgm)"
+                  absolute
+                  top="-5"
+                  right="-2"
+                  color="bg-[#0ca]"
+                ></Playing>
               </picture>
             </router-link>
             <a
