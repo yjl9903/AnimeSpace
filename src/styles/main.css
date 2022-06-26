@@ -29,12 +29,6 @@ html.dark {
   color-scheme: dark;
 }
 
-a {
-  text-decoration: none;
-  outline: none !important;
-  color: var(--c-brand);
-}
-
 @media (min-width: 640px) {
   #nprogress {
     pointer-events: none;

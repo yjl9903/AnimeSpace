@@ -20,3 +20,12 @@ useHead({
   </div>
   <Footer :class="isLogin && ['fixed', 'bottom-0', 'w-full']"></Footer>
 </template>
+
+<style>
+a {
+  @apply opacity-90 hover:opacity-100;
+  text-decoration: none;
+  outline: none !important;
+  color: var(--c-brand);
+}
+</style>

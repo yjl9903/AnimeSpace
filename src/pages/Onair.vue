@@ -6,6 +6,11 @@ const bangumi = useBangumi();
 const subjects = onair.map((onair) =>
   computedAsync(() => bangumi.subject(onair.bgmId))
 );
+
+const formatDate = (d: string) => {
+  const match = /(\d+)-(\d+)-(\d+)/.exec(d)!;
+  return `${match[1]} 年 ${+match[2]} 月 ${+match[3]} 日`;
+};
 </script>
 
 <route>
@@ -17,24 +22,23 @@ const subjects = onair.map((onair) =>
 </route>
 
 <template>
-  <div text-2xl mb4 font-bold>
+  <div text-2xl font-bold>
     <h2><span i-carbon-earth-southeast-asia-filled></span> 正在播出</h2>
   </div>
-  <div>
+  <div divide-y>
     <div
       v-for="(anime, idx) in onair"
       :key="anime.bgmId"
-      mb16
-      flex="~ md:gap8 initial"
-      lt-md:flex-col
-      rounded-2
+      py8
+      flex="~ md:gap8 lt-md:gap4 initial"
+      border-base
     >
       <div v-if="subjects[idx].value" inline-block>
         <router-link
           :to="`/anime/` + anime.bgmId"
           inline-block
-          w="md:200px lt-md:full"
-          max-w="md:200px lt-md:full"
+          w="md:200px lt-md:100px"
+          max-w="md:200px lt-md:100px"
         >
           <picture w="full" max-w="full">
             <source
@@ -52,13 +56,41 @@ const subjects = onair.map((onair) =>
           </picture>
         </router-link>
       </div>
-      <div inline-block>
-        <h3 mb4 lt-md:mt2 font-bold text-xl>
+      <div inline-block flex="grow">
+        <h3 font-bold text-xl flex="~" items-center w-full>
           <router-link :to="'/anime/' + anime.bgmId">{{
             anime.title
           }}</router-link>
+          <div flex-auto></div>
+          <div ml2 lt-md:hidden>
+            <router-link
+              :to="`/anime/${anime.bgmId}/play`"
+              text-3xl
+              text-green-500
+              i-carbon-play-filled
+              rounded-full
+              border="1 base"
+              cursor-pointer
+            ></router-link>
+          </div>
         </h3>
-        <ChooseEpisodes :anime="anime"></ChooseEpisodes>
+        <div v-if="subjects[idx].value" mt4 text-sm text-gray-500:80>
+          <span>{{ subjects[idx].value.eps }} 话</span>
+          <span mx2 select-none>/</span>
+          <span>{{ formatDate(subjects[idx].value.date) }}</span>
+        </div>
+        <div md:hidden mt4>
+          <router-link
+            :to="`/anime/${anime.bgmId}/play`"
+            text-2xl
+            text-green-500
+            i-carbon-play-filled
+            rounded-full
+            border="1 base"
+            cursor-pointer
+          ></router-link>
+        </div>
+        <ChooseEpisodes lt-md:hidden mt4 :anime="anime"></ChooseEpisodes>
       </div>
     </div>
   </div>
