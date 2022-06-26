@@ -40,7 +40,10 @@ export class Anime {
     for (const result of results) {
       if (foundIds.has(result.id)) continue;
 
+      // Disable download MKV
       if (result.name.indexOf('MKV') !== -1) continue;
+      // Disable download HEVC
+      if (result.name.indexOf('HEVC') !== -1) continue;
 
       const getEp = () => {
         for (const RE of [
