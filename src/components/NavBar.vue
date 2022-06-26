@@ -38,6 +38,7 @@ const { top } = toRefs(arrivedState);
       px4
       py2
       lt-md:px1
+      lt-md:py1
       rounded-2
     >
       <span text-base font-light select-none>放映</span>
@@ -49,15 +50,23 @@ const { top } = toRefs(arrivedState);
       px4
       py2
       lt-md:px1
+      lt-md:py1
       rounded-2
     >
       <span text-base font-light select-none>番剧</span>
     </router-link>
     <div flex-auto />
-    <router-link icon-btn i-carbon-recently-viewed text-base to="/history" />
+    <router-link
+      icon-btn
+      i-carbon-recently-viewed
+      lt-md:text-sm
+      text-base
+      to="/history"
+    />
     <a
       icon-btn
       i-carbon-logo-github
+      lt-md:text-sm
       text-base
       href="https://github.com/XLorPaste/AnimePaste"
       target="_blank"
@@ -67,6 +76,7 @@ const { top } = toRefs(arrivedState);
       icon-btn
       i-carbon-sun
       dark:i-carbon-moon
+      lt-md:text-sm
       text-base
       @click="toggleDark()"
     />
