@@ -46,7 +46,7 @@
     "axios": "^0.27.2",
     "bangumi-data": "^0.3.91",
     "breadc": "^0.4.6",
-    "cli-progress": "^3.11.1",
+    "cli-progress": "^3.11.2",
     "debug": "^4.3.4",
     "fastest-levenshtein": "^1.0.12",
     "fs-extra": "^10.1.0",
