@@ -5,9 +5,6 @@ const now = new Date();
 const weekday = now.getDay();
 const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
-const route = useRoute();
-const isIndex = computed(() => route.path === '/');
-
 onMounted(async () => {
   const ScrollReveal = (await import('scrollreveal')).default;
   ScrollReveal().reveal('.anime-card');
@@ -29,10 +26,10 @@ const filterBgm = (subject: OverviewSubject) => {
 </route>
 
 <template>
-  <div v-if="isIndex" text-2xl mb4 font-bold>
+  <div text-2xl mb4 font-bold>
     <h2><span i-carbon-calendar></span> 番剧周历</h2>
   </div>
-  <div v-if="isIndex" border="1 base" rounded-2 shadow-box>
+  <div border="1 base" rounded-2 shadow-box>
     <div
       v-for="offset in 7"
       border="base"
