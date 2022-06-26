@@ -25,7 +25,7 @@
     "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.1.5",
+    "@iconify-json/carbon": "^1.1.6",
     "@types/node": "^18.0.0",
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.0",
