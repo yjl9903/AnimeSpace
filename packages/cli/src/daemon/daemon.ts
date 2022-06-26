@@ -129,17 +129,7 @@ export class Daemon {
       });
       const localRoot = await context.makeLocalAnimeRoot(anime.title);
       const torrent = new TorrentClient(localRoot);
-      for (const items of magnets.reduce((resultArray, item, index) => {
-        const perChunk = 13;
-        const chunkIndex = Math.floor(index / perChunk);
-        if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = [];
-        }
-        resultArray[chunkIndex].push(item);
-        return resultArray;
-      }, [] as Array<{ magnetURI: string; filename: string }>[])) {
-        await torrent.download(items);
-      }
+      await torrent.download(magnets);
       await torrent.destroy();
       info(
         'Download ' +
