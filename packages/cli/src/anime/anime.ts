@@ -1,5 +1,7 @@
 import type { Item } from 'bangumi-data';
 
+import { debug as createDebug } from 'debug';
+
 import { groupBy } from '../utils';
 import { context } from '../context';
 
@@ -8,6 +10,8 @@ import type { SearchResultItem } from './resources';
 import { getBgmTitle, getBgmId } from './utils';
 
 const LOCALE = 'zh-Hans';
+
+const debug = createDebug('anime:anime');
 
 export class Anime {
   readonly title: string = '';
@@ -104,6 +108,8 @@ export class Anime {
 
       if (ep.ep > 0) {
         this.episodes.push(ep);
+      } else {
+        debug(`Parse Error: ${result.name}`);
       }
     }
   }
