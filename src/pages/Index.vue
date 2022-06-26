@@ -12,7 +12,10 @@ onMounted(async () => {
 
 const bangumi = useBangumi();
 
+const hiddenBgm = new Set([975]);
+
 const filterBgm = (subject: OverviewSubject) => {
+  if (hiddenBgm.has(subject.id)) return false;
   return bangumi.bgmIdMap.has(String(subject.id)) && subject.name_cn !== '';
 };
 </script>
