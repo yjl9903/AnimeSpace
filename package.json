@@ -39,7 +39,7 @@
     "unplugin-icons": "^0.14.5",
     "unplugin-vue-components": "^0.20.1",
     "vite": "^2.9.13",
-    "vite-plugin-info": "^0.0.1",
+    "vite-plugin-info": "^0.1.0",
     "vite-plugin-inspect": "^0.5.0",
     "vite-plugin-pages": "^0.24.2",
     "vite-ssg": "^0.20.1",
