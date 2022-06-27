@@ -90,7 +90,7 @@ importers:
       axios: ^0.27.2
       bangumi-data: ^0.3.91
       breadc: ^0.4.6
-      cli-progress: ^3.11.1
+      cli-progress: ^3.11.2
       debug: ^4.3.4
       fastest-levenshtein: ^1.0.12
       fs-extra: ^10.1.0
@@ -108,7 +108,7 @@ importers:
       axios: 0.27.2_debug@4.3.4
       bangumi-data: 0.3.91
       breadc: 0.4.6
-      cli-progress: 3.11.1
+      cli-progress: 3.11.2
       debug: 4.3.4
       fastest-levenshtein: 1.0.12
       fs-extra: 10.1.0
@@ -1639,8 +1639,8 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /cli-progress/3.11.1:
-    resolution: {integrity: sha512-TTMA2LHrYaZeNMcgZGO10oYqj9hvd03pltNtVbu4ddeyDTHlYV7gWxsFiuvaQlgwMBFCv1TukcjiODWFlb16tQ==}
+  /cli-progress/3.11.2:
+    resolution: {integrity: sha512-lCPoS6ncgX4+rJu5bS3F/iCz17kZ9MPZ6dpuTtI0KXKABkhyXIdYB3Inby1OpaGti3YlI3EeEkM9AuWpelJrVA==}
     engines: {node: '>=4'}
     dependencies:
       string-width: 4.2.3
