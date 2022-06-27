@@ -23,7 +23,7 @@ importers:
       typescript: ^4.7.4
       unocss: ^0.41.1
       unplugin-auto-import: ^0.9.1
-      unplugin-icons: ^0.14.5
+      unplugin-icons: ^0.14.6
       unplugin-vue-components: ^0.20.1
       vite: ^2.9.13
       vite-plugin-info: ^0.1.0
@@ -60,7 +60,7 @@ importers:
       typescript: 4.7.4
       unocss: 0.41.1_vite@2.9.13
       unplugin-auto-import: 0.9.1_5smtrbmayeckluww3ebuwm6kim
-      unplugin-icons: 0.14.5_vite@2.9.13
+      unplugin-icons: 0.14.6_vite@2.9.13
       unplugin-vue-components: 0.20.1_vite@2.9.13+vue@3.2.37
       vite: 2.9.13
       vite-plugin-info: 0.1.0_vite@2.9.13
@@ -5386,8 +5386,8 @@ packages:
       - webpack
     dev: true
 
-  /unplugin-icons/0.14.5_vite@2.9.13:
-    resolution: {integrity: sha512-fxi/fuBZXtZu64L8iAPj+ecu/rnSvTbfR14RO44xIWdsI/Ohpzs9Gve7+nHIgD6JFrdtCfzGnXWBEVPbMGWX3A==}
+  /unplugin-icons/0.14.6_vite@2.9.13:
+    resolution: {integrity: sha512-8sxDiL4l+TV4zufZfrskgHZZSDFoGOCBgYsefRMM4inQ3Z6KhgMSuNyew7U7D/xG//rwxgD7bN+Dv+YAZEEfEw==}
     peerDependencies:
       '@svgr/core': '>=5.5.0'
       '@vue/compiler-sfc': ^3.0.2
