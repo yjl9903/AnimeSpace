@@ -48,6 +48,14 @@ export const createApp = ViteSSG(
       router.afterEach(() => {
         NProgress.done();
       });
+
+      // Register PWA
+      const { registerSW } = await import('virtual:pwa-register');
+
+      registerSW({
+        onNeedRefresh() {},
+        onOfflineReady() {}
+      });
     }
   }
 );

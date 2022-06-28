@@ -2,33 +2,47 @@
 <html lang="zh">
   <head>
     <meta charset="UTF-8" />
+    <meta name="description" content="Paste your favourite anime online" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#d3d1d1" />
     <title>Anime Paste</title>
   </head>
   <body>
-    <div id="app" style="min-height: 100%; width: 100%;"></div>
+    <div id="app" style="min-height: 100%; width: 100%"></div>
     <style>
-    html, body { height: 100%; }
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #ccc8;
-      border-radius: 4px;
-      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.2);
-      box-shadow: inset 0 0 5px rgba(0,0,0,.2)
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #aaaf
-    }
-    ::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,.2);
-      box-shadow: inset 0 0 5px rgba(0,0,0,.2);
-      border-radius: 10px;
-      background: #fff3
-    }
+      html,
+      body {
+        height: 100%;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ccc8;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #aaaf;
+      }
+      ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        background: #fff3;
+      }
     </style>
     <script type="module" src="/src/main.ts"></script>
   </body>

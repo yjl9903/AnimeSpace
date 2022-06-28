@@ -1,7 +1,7 @@
 import * as path from 'path';
 
-import { defineConfig, Plugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { defineConfig, Plugin } from 'vite';
 
 import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
@@ -9,8 +9,9 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 
 import Pages from 'vite-plugin-pages';
-import Inspect from 'vite-plugin-inspect';
 import BuildInfo from 'vite-plugin-info';
+import Inspect from 'vite-plugin-inspect';
+import { VitePWA } from 'vite-plugin-pwa';
 
 import { items as bgmItems } from 'bangumi-data';
 
@@ -44,6 +45,47 @@ export default defineConfig({
       github: 'XLorPaste/AnimePaste'
     }),
     Inspect(),
+    // https://github.com/antfu/vite-plugin-pwa
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: [
+        'favicon.svg',
+        'android-chrome-192x192.png',
+        'android-chrome-512x512.png',
+        'apple-touch-icon.png',
+        'favicon-16x16.png',
+        'favicon-32x32.png',
+        'mstile-70x70.png',
+        'mstile-144x144.png',
+        'mstile-150x150.png',
+        'mstile-310x150.png',
+        'mstile-310x310.png',
+        'safari-pinned-tab.svg'
+      ],
+      manifest: {
+        name: 'AnimePaste',
+        short_name: 'AnimePaste',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: '/android-chrome-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          },
+          {
+            src: '/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          }
+        ]
+      }
+    }),
     BangumiDate(200)
   ]
 });
