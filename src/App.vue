@@ -28,4 +28,11 @@ a {
   outline: none !important;
   color: var(--c-brand);
 }
+
+#app {
+  background: white;
+}
+html.dark #app {
+  background: #222;
+}
 </style>

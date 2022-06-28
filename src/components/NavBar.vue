@@ -11,7 +11,11 @@ const { top } = toRefs(arrivedState);
 </script>
 
 <template>
-  <div v-show="!top" lt-xl="z-9 w-full h-$navbar-height fixed bg-white"></div>
+  <div
+    v-show="!top"
+    class="nav-fallback"
+    lt-xl="z-9 w-full h-$navbar-height fixed top-0 bg-white"
+  ></div>
   <nav
     text-xl
     lt-md:text-lg
@@ -19,6 +23,7 @@ const { top } = toRefs(arrivedState);
     w-full
     h="$navbar-height"
     fixed
+    top-0
     flex="~ gap4 lt-md:gap2"
     items-center
     px8

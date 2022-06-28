@@ -8,6 +8,11 @@
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      media="(prefers-color-scheme: light)"
+      content="black-translucent"
+    />
     <meta name="theme-color" content="#ffffff" />
     <meta name="msapplication-TileColor" content="#d3d1d1" />
 
@@ -165,14 +170,16 @@
       crossorigin="anonymous"
       href="https://fonts.googleapis.com"
     />
-    <title>Anime Paste</title>
-  </head>
-  <body>
-    <div id="app" style="min-height: 100%; width: 100%"></div>
     <style>
       html,
       body {
         height: 100%;
+      }
+      body {
+        background: rgb(153,238,248);
+      }
+      html.dark body {
+        background: rgb(2,38,32);
       }
       ::-webkit-scrollbar {
         width: 8px;
@@ -194,6 +201,10 @@
         background: #fff3;
       }
     </style>
+    <title>Anime Paste</title>
+  </head>
+  <body>
+    <div id="app" style="min-height: 100%; width: 100%"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
