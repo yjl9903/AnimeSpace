@@ -5,8 +5,9 @@
     <meta name="description" content="Paste your favourite anime online" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
@@ -175,11 +176,17 @@
       body {
         height: 100%;
       }
-      body {
-        background: rgb(153,238,248);
+      .status-bar {
+        width: 100%;
+        height: env(safe-area-inset-top);
+        position: fixed;
+        background: rgb(153, 238, 248);
       }
-      html.dark body {
-        background: rgb(2,38,32);
+      html.dark .status-bar {
+        background: rgb(2, 38, 32);
+      }
+      #app {
+        padding-top: env(safe-area-inset-top);
       }
       ::-webkit-scrollbar {
         width: 8px;
@@ -204,6 +211,7 @@
     <title>Anime Paste</title>
   </head>
   <body>
+    <div class="status-bar"></div>
     <div id="app" style="min-height: 100%; width: 100%"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
