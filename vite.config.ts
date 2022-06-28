@@ -65,7 +65,10 @@ export default defineConfig({
       manifest: {
         name: 'AnimePaste',
         short_name: 'AnimePaste',
+        description: 'Paste your favourite anime online',
         theme_color: '#ffffff',
+        dir: 'ltr',
+        lang: 'zh-CN',
         icons: [
           {
             src: '/android-chrome-192x192.png',
