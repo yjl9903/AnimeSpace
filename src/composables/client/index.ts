@@ -32,8 +32,7 @@ export const useClient = defineStore('client', () => {
       if (client) {
         try {
           const result = await client.fetchOnair();
-          onair.value.splice(0);
-          onair.value.push(...result);
+          onair.value.splice(0, onair.value.length, ...result);
         } catch {
           token.value = '';
         }

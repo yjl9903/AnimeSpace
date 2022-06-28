@@ -73,8 +73,11 @@ export const useBangumi = defineStore('bangumi', () => {
           calendar.value[i].length !== data[i].items.length &&
           calendar.value[i].some((v, id) => v.id !== data[i].items[id].id)
         ) {
-          calendar.value[i].splice(0);
-          calendar.value[i].push(...data[i].items);
+          calendar.value[i].splice(
+            0,
+            calendar.value[i].length,
+            ...data[i].items
+          );
         }
       }
       calendarLastUpdatime.value = new Date();
@@ -82,8 +85,9 @@ export const useBangumi = defineStore('bangumi', () => {
   }
 
   importAll().then((items) => {
-    data.value.splice(0);
-    data.value.push(...items);
+    if (items.length > 0) {
+      data.value.splice(0, data.value.length, ...items);
+    }
   });
 
   return {
@@ -104,10 +108,8 @@ export const useBangumi = defineStore('bangumi', () => {
 async function importAll(): Promise<Item[]> {
   if (import.meta.env.SSR) return [];
   try {
-    const resp = await axios.get(
-      'https://unpkg.com/bangumi-data@0/dist/data.json'
-    );
-    return resp.data.items;
+    const { items } = await import('bangumi-data');
+    return items;
   } catch {
     return importAll();
   }
