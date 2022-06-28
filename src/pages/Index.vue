@@ -14,7 +14,7 @@ onMounted(async () => {
 const client = useClient();
 const bangumi = useBangumi();
 
-const hiddenBgm = new Set([975]);
+const hiddenBgm = new Set([899, 975]);
 
 const isOnair = (subject: OverviewSubject) => {
   return client.onairMap.has(String(subject.id));
