@@ -66,7 +66,9 @@ export default defineConfig({
         name: 'AnimePaste',
         short_name: 'AnimePaste',
         description: 'Paste your favourite anime online',
+        start_url: '/index.html',
         theme_color: '#ffffff',
+        background_color: '#ffffff',
         dir: 'ltr',
         lang: 'zh-CN',
         icons: [
