@@ -60,7 +60,8 @@ export default defineConfig({
         'mstile-150x150.png',
         'mstile-310x150.png',
         'mstile-310x310.png',
-        'safari-pinned-tab.svg'
+        'safari-pinned-tab.svg',
+        'splash/*.png'
       ],
       manifest: {
         name: 'AnimePaste',
