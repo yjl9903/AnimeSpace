@@ -117,6 +117,21 @@ export default defineConfig({
                 statuses: [0, 200]
               }
             }
+          },
+          // Cache bangumi pictures
+          {
+            urlPattern: /^https:\/\/lain\.bgm\.tv\/pic\/cover\/.*\.jpg$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'bangumi-pictures',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // <== 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
           }
         ]
       }
