@@ -66,6 +66,5 @@
     "@types/js-yaml": "^4.0.5",
     "@types/webtorrent": "^0.109.3",
     "unbuild": "^0.7.4"
-  },
-  "packageManager": "pnpm@7.3.0"
+  }
 }
