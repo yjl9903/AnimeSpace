@@ -14,7 +14,9 @@ import './styles/main.css';
 import App from './App.vue';
 
 const scrollBehavior: RouterScrollBehavior = (to, from, savedPosition) => {
-  if (to.path.startsWith('/anime/')) {
+  if (to.name === 'anime-id-Play-ep' && from.name !== 'anime-id-Play-ep') {
+    return { el: '#root-container' };
+  } else if (to.path.startsWith('/anime/')) {
     return false;
   } else if (savedPosition) {
     return savedPosition;
