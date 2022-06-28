@@ -28,4 +28,9 @@ a {
   outline: none !important;
   color: var(--c-brand);
 }
+
+.top-safe,
+[top-safe=''] {
+  top: env(safe-area-inset-top);
+}
 </style>

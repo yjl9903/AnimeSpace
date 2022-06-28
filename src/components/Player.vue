@@ -96,7 +96,9 @@ onUnmounted(() => {
     ref="container"
     v-show="isReady"
     :class="[
-      isFull ? 'fixed top-0 left-0 w-[100vw] h-[100vh] z-100' : 'w-full h-full'
+      isFull
+        ? 'fixed top-safe left-0 w-[100vw] h-[100vh] z-100'
+        : 'w-full h-full'
     ]"
   >
     <slot></slot>

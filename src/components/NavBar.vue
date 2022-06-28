@@ -14,7 +14,8 @@ const { top } = toRefs(arrivedState);
   <div
     v-show="!top"
     class="nav-fallback"
-    lt-xl="z-9 w-full h-$navbar-height fixed top-0 bg-white"
+    lt-xl="z-9 w-full h-$navbar-height fixed bg-white"
+    top-safe
   ></div>
   <nav
     text-xl
@@ -23,7 +24,7 @@ const { top } = toRefs(arrivedState);
     w-full
     h="$navbar-height"
     fixed
-    top-0
+    top-safe
     flex="~ gap4 lt-md:gap2"
     items-center
     px8
