@@ -3,6 +3,9 @@ import type { APIFunction } from '../types';
 import { makeResponse } from '../utils';
 import { ONAIR_KEY } from '../utils/constant';
 
+// Cache one hour
+const CacheDuration = 60 * 60;
+
 export const onRequestGet: APIFunction = async ({ env }) => {
   const onairCache = (await env.AnimeStore.get(ONAIR_KEY)) ?? {};
   const onair = Object.values(onairCache)
@@ -16,5 +19,8 @@ export const onRequestGet: APIFunction = async ({ env }) => {
       });
       return anime;
     });
-  return makeResponse({ onair });
+  return makeResponse(
+    { onair },
+    { headers: { 'Cache-Control': `max-age=${CacheDuration}` } }
+  );
 };
