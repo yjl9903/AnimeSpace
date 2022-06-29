@@ -6,7 +6,7 @@ const { active, anime } = toRefs(props);
 </script>
 
 <template>
-  <div flex="~ gap4 wrap">
+  <div v-if="anime.episodes.length > 0" flex="~ gap4 wrap">
     <router-link
       v-for="ep in anime.episodes"
       :key="ep.ep"

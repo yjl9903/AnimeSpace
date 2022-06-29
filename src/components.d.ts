@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
     ChooseEpisodes: typeof import('./components/anime/ChooseEpisodes.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
+    PlayBangumi: typeof import('./components/anime/PlayBangumi.vue')['default']
     Player: typeof import('./components/Player.vue')['default']
     Playing: typeof import('./components/Playing.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

@@ -65,15 +65,15 @@ const formatDate = (d: string) => {
           </router-link>
           <div flex-auto></div>
           <div ml2 lt-md:hidden>
-            <router-link
-              :to="`/anime/${anime.bgmId}/play`"
+            <PlayBangumi
+              :anime="anime"
               text-3xl
               text-green-500
               i-carbon-play-filled
               rounded-full
               cursor-pointer
               border="1 base"
-            ></router-link>
+            ></PlayBangumi>
           </div>
         </h3>
         <div v-if="subjects[idx].value" mt4 text-sm text-gray-500:80>
@@ -82,15 +82,15 @@ const formatDate = (d: string) => {
           <span>{{ formatDate(subjects[idx].value.date) }}</span>
         </div>
         <div md:hidden mt4>
-          <router-link
-            :to="`/anime/${anime.bgmId}/play`"
+          <PlayBangumi
+            :anime="anime"
             cursor-pointer
             text-2xl
             text-green-500
             i-carbon-play-filled
             rounded-full
             border="1 base"
-          ></router-link>
+          ></PlayBangumi>
         </div>
         <ChooseEpisodes lt-md:hidden mt4 :anime="anime"></ChooseEpisodes>
       </div>
