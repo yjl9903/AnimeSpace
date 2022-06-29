@@ -21,6 +21,6 @@ export const onRequestGet: APIFunction = async ({ env }) => {
     });
   return makeResponse(
     { onair },
-    { headers: { 'Cache-Control': `max-age=${CacheDuration}` } }
+    { headers: { 'Cache-Control': `public, max-age=${CacheDuration}` } }
   );
 };
