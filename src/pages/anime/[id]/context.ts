@@ -3,6 +3,7 @@ import { getBgmTitle } from '~/composables/bangumi';
 
 export function useAnimeInfo() {
   const route = useRoute();
+  const router = useRouter();
 
   const id = ref((route.params?.id ?? '') as string);
   const ep = ref((route.params?.ep ?? '') as string);
@@ -18,7 +19,17 @@ export function useAnimeInfo() {
   const bangumi = useBangumi();
 
   const bgmData = computed(() => {
-    return id.value ? bangumi.bgmIdMap.get(id.value) : undefined;
+    if (id.value) {
+      const data = bangumi.bgmIdMap.get(id.value);
+      if (data) {
+        return data;
+      } else {
+        router.replace({ name: 'Index' });
+        return undefined;
+      }
+    } else {
+      return undefined;
+    }
   });
 
   const subject = computedAsync(async () => {

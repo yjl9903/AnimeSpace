@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { useAnimeInfo } from '../context';
 
+const router = useRouter();
+
 const { subject, onair, ep } = useAnimeInfo();
 
 const src = computed(() => {
   if (onair.value && ep.value) {
-    return onair.value.episodes.find((item) => item.ep === +ep.value)?.playURL;
+    const findEp = onair.value.episodes.find((item) => item.ep === +ep.value);
+    if (!findEp) {
+      router.replace({ name: 'Index' });
+      return undefined;
+    } else {
+      return findEp.playURL;
+    }
   }
 });
 </script>
