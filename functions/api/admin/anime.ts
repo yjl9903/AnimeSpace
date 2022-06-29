@@ -16,6 +16,7 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
       return {
         title: o.title,
         bgmId: o.bgmId,
+        link: o.link,
         uploadBy: env.user.token,
         episodes: o.episodes.map((ep) => ({
           ep: ep.ep,

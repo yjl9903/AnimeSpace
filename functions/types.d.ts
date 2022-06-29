@@ -52,6 +52,11 @@ export interface OnairAnime {
   episodes: OnairEpisode[];
 
   /**
+   * Online link
+   */
+  link?: string;
+
+  /**
    * Upload by an admin or root user
    */
   uploadBy: string;

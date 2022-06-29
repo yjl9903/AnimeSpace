@@ -3,9 +3,21 @@ export interface OnairAnime {
 
   bgmId: string;
 
-  episodes: OnairEpisode[];
+  episodes: (OnairEpisode | OnlineEpisode)[];
 
   link?: string;
+}
+
+export interface OnlineEpisode {
+  /**
+   * 条目内的集数, 从 1 开始
+   */
+  ep: number;
+
+  /**
+   * Play url
+   */
+  playURL: string;
 }
 
 export interface OnairEpisode {
