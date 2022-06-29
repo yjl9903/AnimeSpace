@@ -54,7 +54,17 @@ export interface OnairPlan {
   /**
    * Fansub order
    */
-  fansub: string[];
+  fansub?: string[];
+
+  /**
+   * Specify online link
+   */
+  link?: string;
+
+  /**
+   * Specify the play url of some eps
+   */
+  ep?: Record<number, string>;
 
   /**
    * Template string for names

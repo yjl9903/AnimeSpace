@@ -103,6 +103,19 @@ export class Daemon {
         );
       }
 
+      if (!onair.fansub) {
+        if (onair.link) {
+          // Push online play bangumis
+          syncOnair.push({
+            title: onair.name,
+            bgmId: onair.bgmId,
+            episodes: [],
+            link: onair.link
+          });
+        }
+        continue;
+      }
+
       const episodes = anime.genEpisodes(onair.fansub);
 
       info(

@@ -4,6 +4,8 @@ export interface OnairAnime {
   bgmId: string;
 
   episodes: OnairEpisode[];
+
+  link?: string;
 }
 
 export interface OnairEpisode {
