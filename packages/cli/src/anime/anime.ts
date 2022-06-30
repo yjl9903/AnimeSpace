@@ -28,6 +28,13 @@ export class Anime {
     }
   }
 
+  static empty(title: string, bgmId: string) {
+    return new Anime({
+      title,
+      bgmId
+    });
+  }
+
   static bangumi(item: Item) {
     return new Anime({ title: getBgmTitle(item), bgmId: getBgmId(item)! });
   }

@@ -44,8 +44,9 @@ cli
       }
     }
   })
-  .option('--id [bgmId]', 'Search keywords with Bangumi ID')
   .option('--raw', 'Print raw magnets')
+  .option('--id [bgmId]', 'Search keywords with Bangumi ID')
+  .option('--title [title]', 'Bangumi title')
   .option('-y, --year [year]')
   .option('-m, --month [month]')
   .option('-p, --plan', 'Output plan.yaml')

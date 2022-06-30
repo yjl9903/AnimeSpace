@@ -19,6 +19,7 @@ interface SearchOption {
   plan?: boolean;
   year?: string;
   month?: string;
+  title?: string;
 }
 
 const debug = createDebug('anime:search');
@@ -48,8 +49,10 @@ export async function daemonSearch(
 ) {
   const { items } = await importBgmdata();
   const animes: Anime[] = [];
+  let found = false;
   for (const bgm of items) {
     if (bgmId === getBgmId(bgm)) {
+      found = true;
       const anime =
         (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
       const keywords = optionKeywords ?? [
@@ -58,8 +61,18 @@ export async function daemonSearch(
       ];
       const res = await search(anime, keywords, option);
       if (res) animes.push(res);
+      break;
     }
   }
+
+  // Fallback to manually specify
+  if (!found && option.title) {
+    const anime = Anime.empty(option.title, bgmId);
+    const keywords = [...(optionKeywords ?? []), option.title];
+    const res = await search(anime, keywords, option);
+    if (res) animes.push(res);
+  }
+
   if (option.plan) {
     outputPlan(animes);
   }
