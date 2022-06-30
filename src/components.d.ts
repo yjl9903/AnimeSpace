@@ -7,6 +7,8 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Banner: typeof import('./components/Banner.vue')['default']
     ChooseEpisodes: typeof import('./components/anime/ChooseEpisodes.vue')['default']
+    Episode: typeof import('./components/anime/Episode.vue')['default']
+    Episodes: typeof import('./components/anime/Episodes.vue')['default'];
     Footer: typeof import('./components/Footer.vue')['default']
     NavBar: typeof import('./components/NavBar.vue')['default']
     PlayBangumi: typeof import('./components/anime/PlayBangumi.vue')['default']

@@ -29,3 +29,13 @@ export interface OnairEpisode {
    */
   playURL: string;
 }
+
+export interface HistoryLog {
+  bgmId: string;
+
+  ep: number;
+
+  progress: number;
+
+  timestamp: string;
+}

@@ -4,9 +4,10 @@ import { useLocalStorage, useUrlSearchParams } from '@vueuse/core';
 
 import { PUBLIC } from '~build/meta';
 
-import type { OnairAnime, OnairEpisode } from './types';
+import type { HistoryLog, OnairAnime, OnairEpisode } from './types';
 
 import { UserClient } from './user';
+import { randomString } from './utils';
 
 export type { OnairAnime, OnairEpisode };
 
@@ -62,14 +63,65 @@ export const useClient = defineStore('client', () => {
   };
 });
 
-function rand(l: number, r: number): number {
-  return l + Math.round(Math.random() * (r - l));
-}
+export const useHistory = defineStore('history', () => {
+  const clientStore = useClient();
 
-const character_table = '0123456789abcdefghijklmnopqrstuvwxyz';
+  const history = ref(useLocalStorage('history:log', [] as HistoryLog[]));
+  const historyMap = ref(new Map<string, Map<number, HistoryLog>>());
 
-function randomString(length = 32): string {
-  return Array.apply(null, Array(length))
-    .map(() => character_table[rand(0, character_table.length - 1)])
-    .join('');
-}
+  const append = (
+    bgmId: string,
+    ep: number,
+    progress: number,
+    timestamp?: string,
+    noAppend?: boolean
+  ) => {
+    const map = historyMap.value;
+    if (!map.has(bgmId)) {
+      map.set(bgmId, new Map());
+    }
+    const submap = map.get(bgmId)!;
+    if (submap.has(ep)) {
+      const log = submap.get(ep)!;
+      log.progress = progress;
+      log.timestamp = timestamp ?? new Date().toISOString();
+      return false;
+    } else {
+      const log: HistoryLog = {
+        bgmId,
+        ep,
+        progress,
+        timestamp: timestamp ?? new Date().toISOString()
+      };
+      submap.set(ep, log);
+      if (!noAppend) {
+        history.value.push(log);
+      }
+      return true;
+    }
+  };
+
+  for (const item of history.value) {
+    append(item.bgmId, item.ep, item.progress, item.timestamp, true);
+  }
+
+  watch(
+    () => clientStore.client,
+    (client) => {
+      // merge server history logs
+    }
+  );
+
+  return {
+    rawHistory: history,
+    historyMap,
+    history: computed(() =>
+      history.value.sort((a, b) => {
+        return (
+          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        );
+      })
+    ),
+    append
+  };
+});

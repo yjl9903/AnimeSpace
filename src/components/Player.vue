@@ -4,6 +4,10 @@ import { onUnmounted, ref, toRefs, watch } from 'vue';
 import Plyr, { SourceInfo, Options } from 'plyr';
 import 'plyr/dist/plyr.css';
 
+const emit = defineEmits<{
+  (e: 'timeupdate', time: number): void;
+}>();
+
 const props = defineProps<{ source: SourceInfo; options?: Options }>();
 const { source, options } = toRefs(props);
 
@@ -19,6 +23,9 @@ const expandFullscreen = () => {
     const video = container.value.querySelector('video');
     if (video) {
       toggleFull();
+    }
+    if (player.value) {
+      player.value.fullscreen.exit();
     }
   }
 };
@@ -51,6 +58,11 @@ watch(container, (container) => {
       player.value.source = source.value;
       player.value.on('canplay', () => {
         isReady.value = true;
+      });
+      player.value.on('timeupdate', () => {
+        if (player.value) {
+          emit('timeupdate', Math.floor(player.value.currentTime));
+        }
       });
 
       if (isDesktop) {

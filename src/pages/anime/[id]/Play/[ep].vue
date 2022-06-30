@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { useHistory } from '~/composables/client';
+
 import { useAnimeInfo } from '../context';
 
 const router = useRouter();
 
-const { subject, onair, ep } = useAnimeInfo();
+const { subject, onair, id, ep } = useAnimeInfo();
 
 const src = computed(() => {
   if (onair.value && ep.value) {
@@ -16,6 +18,15 @@ const src = computed(() => {
     }
   }
 });
+
+const history = useHistory();
+const playTime = ref(0);
+
+useIntervalFn(() => {
+  if (playTime.value) {
+    history.append(id.value, +ep.value, playTime.value);
+  }
+}, 1000);
 </script>
 
 <template>
@@ -34,6 +45,7 @@ const src = computed(() => {
             sources: [{ src: src, type: 'video/mp4', size: 1080 }]
           }"
           class="w-[640px] h-[360px]"
+          @timeupdate="(t) => (playTime = t)"
         >
           <video controls playsinline crossorigin="anonymous"></video>
         </Player>
