@@ -2,10 +2,13 @@ import { defineStore } from 'pinia';
 import { useLocalStorage, useUrlSearchParams } from '@vueuse/core';
 
 import type { OnairAnime, OnairEpisode } from './types';
+
 import { UserClient } from './user';
+import { AxiosError } from 'axios';
+
+export type { OnairAnime, OnairEpisode };
 
 export { UserClient };
-export type { OnairAnime, OnairEpisode };
 
 export const useClient = defineStore('client', () => {
   const query = useUrlSearchParams('history');
@@ -33,8 +36,10 @@ export const useClient = defineStore('client', () => {
         try {
           const result = await client.fetchOnair();
           onair.value.splice(0, onair.value.length, ...result);
-        } catch {
-          token.value = '';
+        } catch (err) {
+          if (err instanceof AxiosError && err?.response?.status === 401) {
+            token.value = '';
+          }
         }
       }
     },
