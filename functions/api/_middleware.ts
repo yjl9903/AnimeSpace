@@ -1,3 +1,4 @@
+import { Visitor } from './../types.d';
 import type { Admin, APIFunction, User } from '../types';
 
 import { makeErrorResponse } from '../utils';
@@ -33,6 +34,16 @@ export const onRequest: APIFunction = async (ctx) => {
         await ctx.env.UserStore.put(root.token, root);
         ctx.env.user = root;
         return await ctx.next();
+      } else if (ctx.env.ENABLE_PUBLIC === 'true') {
+        const visitor = {
+          token: auth,
+          type: 'visitor' as 'visitor',
+          comment: 'Visitor'
+        };
+        await canAccess(visitor, ctx.request);
+        await ctx.env.UserStore.put(visitor.token, visitor);
+        ctx.env.user = visitor;
+        return await ctx.next();
       }
 
       return makeUnauthResponse();
@@ -52,7 +63,7 @@ const MAX_ACCESS = 3;
  */
 const MIN_SWITCH_DURATION = 1000 * 60 * 3;
 
-async function canAccess(user: User | Admin, req: Request) {
+async function canAccess(user: User | Admin | Visitor, req: Request) {
   if (user.type === 'admin' || user.type === 'root') {
     return true;
   } else {

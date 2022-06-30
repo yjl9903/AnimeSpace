@@ -44,7 +44,7 @@ export default defineConfig({
     BuildInfo({
       github: 'XLorPaste/AnimePaste',
       meta: {
-        PUBLIC: process.env.ENABLE_PUBLIC ?? false
+        PUBLIC: process.env.ENABLE_PUBLIC === 'true' ?? false
       }
     }),
     Inspect(),
