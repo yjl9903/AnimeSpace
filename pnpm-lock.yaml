@@ -27,7 +27,7 @@ importers:
       unplugin-vue-components: ^0.20.1
       vite: ^2.9.13
       vite-plugin-info: ^0.1.0
-      vite-plugin-inspect: ^0.5.0
+      vite-plugin-inspect: ^0.5.1
       vite-plugin-pages: ^0.24.3
       vite-plugin-pwa: ^0.12.0
       vite-ssg: ^0.20.1
@@ -65,7 +65,7 @@ importers:
       unplugin-vue-components: 0.20.1_vite@2.9.13+vue@3.2.37
       vite: 2.9.13
       vite-plugin-info: 0.1.0_vite@2.9.13
-      vite-plugin-inspect: 0.5.0_vite@2.9.13
+      vite-plugin-inspect: 0.5.1_vite@2.9.13
       vite-plugin-pages: 0.24.3_vite@2.9.13
       vite-plugin-pwa: 0.12.0_vite@2.9.13
       vite-ssg: 0.20.1_wg4s6db3v6lculphs24ozvdglm
@@ -7202,11 +7202,11 @@ packages:
       vite: 2.9.13
     dev: true
 
-  /vite-plugin-inspect/0.5.0_vite@2.9.13:
-    resolution: {integrity: sha512-eArca+5jrNx1hQL+5s79eT5Xq4VXjJcihJhK8GT/+W2GqefVxFO1WO78RnD0HPI+hKSdEFo+B4z2zeaE8DTvWQ==}
+  /vite-plugin-inspect/0.5.1_vite@2.9.13:
+    resolution: {integrity: sha512-cSVdNhVPAfH3OdVSV331/t/YWjg++HR/KiBkVST8pjLISna7O8gRwU8NN7KLrEBJqKKQqoRYLBb0RSdYurEyeg==}
     engines: {node: '>=14'}
     peerDependencies:
-      vite: ^2.9.0
+      vite: ^2.9.0 || ^3.0.0-0
     dependencies:
       '@rollup/pluginutils': 4.2.1
       debug: 4.3.4
