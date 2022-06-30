@@ -20,3 +20,7 @@ declare module 'vue-router' {
 declare module '~bangumi/data' {
   export const bangumiItems: Item[];
 }
+
+declare module '~build/meta' {
+  export const PUBLIC: boolean;
+}

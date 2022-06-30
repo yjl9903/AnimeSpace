@@ -42,7 +42,10 @@ export default defineConfig({
       exclude: ['**/components/*.vue', '**/context.ts']
     }),
     BuildInfo({
-      github: 'XLorPaste/AnimePaste'
+      github: 'XLorPaste/AnimePaste',
+      meta: {
+        PUBLIC: process.env.ENABLE_PUBLIC ?? false
+      }
     }),
     Inspect(),
     // https://github.com/antfu/vite-plugin-pwa

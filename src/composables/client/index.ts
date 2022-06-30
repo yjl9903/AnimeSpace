@@ -1,10 +1,12 @@
+import { AxiosError } from 'axios';
 import { defineStore } from 'pinia';
 import { useLocalStorage, useUrlSearchParams } from '@vueuse/core';
+
+import { PUBLIC } from '~build/meta';
 
 import type { OnairAnime, OnairEpisode } from './types';
 
 import { UserClient } from './user';
-import { AxiosError } from 'axios';
 
 export type { OnairAnime, OnairEpisode };
 
@@ -12,7 +14,13 @@ export { UserClient };
 
 export const useClient = defineStore('client', () => {
   const query = useUrlSearchParams('history');
-  const initToken = typeof query.token === 'string' ? query.token : '';
+  // query token -> '' (private mode) / random string (public mode)
+  const initToken =
+    typeof query.token === 'string'
+      ? query.token
+      : !PUBLIC
+      ? ''
+      : randomString();
   const token = ref(useLocalStorage('animepaste:token', initToken));
 
   const client = computed(() =>
@@ -53,3 +61,15 @@ export const useClient = defineStore('client', () => {
     onairMap
   };
 });
+
+function rand(l: number, r: number): number {
+  return l + Math.round(Math.random() * (r - l));
+}
+
+const character_table = '0123456789abcdefghijklmnopqrstuvwxyz';
+
+function randomString(length = 32): string {
+  return Array.apply(null, Array(length))
+    .map(() => character_table[rand(0, character_table.length - 1)])
+    .join('');
+}
