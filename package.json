@@ -7,7 +7,7 @@
     "build:cli": "pnpm -C packages/cli build",
     "dev": "vite",
     "dev:worker": "wrangler pages dev --kv ANIME --binding DEV=true -- vite",
-    "format": "prettier --write src/**/*.{ts,vue} packages/**/*.ts --ignore-path .gitignore",
+    "format": "prettier --write src/**/*.{ts,vue} packages/**/*.ts",
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },
