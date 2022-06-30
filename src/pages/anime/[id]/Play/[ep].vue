@@ -20,7 +20,16 @@ const src = computed(() => {
 });
 
 const history = useHistory();
-const playTime = ref(0);
+
+const start = ref(history.findHistory(id.value, +ep.value)?.progress ?? 0);
+watch(
+  () => [id.value, ep.value],
+  ([id, ep]) => {
+    start.value = history.findHistory(id, +ep)?.progress ?? 0;
+  }
+);
+
+const playTime = ref(start.value ?? 0);
 
 useIntervalFn(() => {
   if (playTime.value) {
@@ -38,12 +47,13 @@ useIntervalFn(() => {
       <div aspect="video" mt="4" w="full">
         <Player
           v-if="src"
-          :src="src"
           :options="{}"
           :source="{
+            title: `${subject.name_cn} - E${ep}`,
             type: 'video',
             sources: [{ src: src, type: 'video/mp4', size: 1080 }]
           }"
+          :start="start"
           class="w-[640px] h-[360px]"
           @timeupdate="(t) => (playTime = t)"
         >

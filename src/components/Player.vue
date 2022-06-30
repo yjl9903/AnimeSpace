@@ -8,8 +8,12 @@ const emit = defineEmits<{
   (e: 'timeupdate', time: number): void;
 }>();
 
-const props = defineProps<{ source: SourceInfo; options?: Options }>();
-const { source, options } = toRefs(props);
+const props = defineProps<{
+  source: SourceInfo;
+  options?: Options;
+  start?: number;
+}>();
+const { source, options, start } = toRefs(props);
 
 const container = ref<HTMLElement>();
 const isReady = ref(false);
@@ -56,6 +60,22 @@ watch(container, (container) => {
       };
       player.value = new Plyr(video, plyrOptions);
       player.value.source = source.value;
+
+      {
+        // Use source title to check whether source was changed
+        let lastTitle: string | undefined = undefined;
+        player.value.on('playing', (ev) => {
+          if (
+            lastTitle !== source.value.title &&
+            player.value &&
+            start?.value
+          ) {
+            player.value.currentTime = start.value;
+            lastTitle = source.value.title;
+          }
+        });
+      }
+
       player.value.on('canplay', () => {
         isReady.value = true;
       });

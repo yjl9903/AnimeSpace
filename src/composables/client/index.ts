@@ -69,13 +69,8 @@ export const useHistory = defineStore('history', () => {
   const history = ref(useLocalStorage('history:log', [] as HistoryLog[]));
   const historyMap = ref(new Map<string, Map<number, HistoryLog>>());
 
-  const append = (
-    bgmId: string,
-    ep: number,
-    progress: number,
-    timestamp?: string,
-    noAppend?: boolean
-  ) => {
+  const appendLog = (log: HistoryLog) => {
+    const { bgmId, ep, progress, timestamp } = log;
     const map = historyMap.value;
     if (!map.has(bgmId)) {
       map.set(bgmId, new Map());
@@ -84,25 +79,29 @@ export const useHistory = defineStore('history', () => {
     if (submap.has(ep)) {
       const log = submap.get(ep)!;
       log.progress = progress;
-      log.timestamp = timestamp ?? new Date().toISOString();
+      log.timestamp = timestamp;
       return false;
     } else {
-      const log: HistoryLog = {
-        bgmId,
-        ep,
-        progress,
-        timestamp: timestamp ?? new Date().toISOString()
-      };
       submap.set(ep, log);
-      if (!noAppend) {
-        history.value.push(log);
-      }
       return true;
     }
   };
 
+  const append = (bgmId: string, ep: number, progress: number) => {
+    const log = {
+      bgmId,
+      ep,
+      progress,
+      timestamp: new Date().toISOString()
+    };
+    const flag = appendLog(log);
+    if (flag) {
+      history.value.push(log);
+    }
+  };
+
   for (const item of history.value) {
-    append(item.bgmId, item.ep, item.progress, item.timestamp, true);
+    appendLog(item);
   }
 
   watch(
@@ -122,6 +121,9 @@ export const useHistory = defineStore('history', () => {
         );
       })
     ),
-    append
+    append,
+    findHistory(bgmId: string, ep: number) {
+      return historyMap.value.get(bgmId)?.get(ep);
+    }
   };
 });
