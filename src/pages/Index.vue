@@ -41,11 +41,10 @@ const latestBangumis = computedAsync(() => {
     client.onair
       .filter((onair) => {
         const latestUpdate = onair.episodes.reduce(
-          (mx, ep) => Math.max(mx, new Date(ep.creationTime).getTime()),
+          (mx, ep) => Math.max(mx, new Date(ep.creationTime ?? 0).getTime()),
           0
         );
-        console.log(onair.title, latestUpdate, new Date(latestUpdate));
-        return differenceInHours(new Date(), new Date(latestUpdate)) <= 48;
+        return differenceInHours(new Date(), new Date(latestUpdate)) <= 72;
       })
       .map((onair) => bangumi.subject(onair.bgmId))
   );
