@@ -29,8 +29,24 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
 
 export const onRequestDelete: APIFunction = async ({ env, request }) => {
   if (env.user.type === 'root') {
-    const { token } = await request.json<{ token: string }>();
-    await env.UserStore.remove(token);
+    const { command = 'delete', token } = await request.json<{
+      command?: 'delete' | 'visitor';
+      token?: string;
+    }>();
+    if (command === 'delete') {
+      if (token) {
+        await env.UserStore.remove(token);
+        return makeResponse({ token });
+      }
+    } else if (command === 'visitor') {
+      const tokens = await env.UserStore.list();
+      for (const token of tokens.filter((t) => t.type === 'visitor')) {
+        await env.UserStore.remove(token.token);
+      }
+      return makeResponse({
+        tokens: tokens.filter((t) => t.type === 'visitor').map((t) => t.token)
+      });
+    }
     return makeResponse({});
   } else {
     return makeErrorResponse('Unauthorized', { status: 401 });
