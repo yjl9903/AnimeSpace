@@ -25,7 +25,10 @@ const formatDate = (d: string) => {
 
 <template>
   <div text-2xl font-bold>
-    <h2><span i-carbon-earth-southeast-asia-filled></span> 正在播出</h2>
+    <h2>
+      <span i-carbon-earth-southeast-asia-filled class="text-[#0ca]"></span>
+      正在播出
+    </h2>
   </div>
   <div divide-y>
     <div
