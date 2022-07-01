@@ -41,7 +41,7 @@
     "vite": "^2.9.13",
     "vite-plugin-info": "^0.1.0",
     "vite-plugin-inspect": "^0.5.1",
-    "vite-plugin-pages": "^0.24.3",
+    "vite-plugin-pages": "^0.25.0",
     "vite-plugin-pwa": "^0.12.2",
     "vite-ssg": "^0.20.2",
     "vitest": "^0.16.0",
