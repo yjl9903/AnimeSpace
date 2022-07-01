@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { differenceInHours } from 'date-fns';
 import type { OverviewSubject } from '~/composables/bangumi/types';
-import { ensureHTTPS } from '~/composables';
+
+import IndexGrid from './components/IndexGrid.vue';
 
 const now = new Date();
 const weekday = now.getDay();
@@ -34,6 +36,21 @@ const sortBgm = (a: OverviewSubject, b: OverviewSubject) => {
   }
 };
 
+const latestBangumis = computedAsync(() => {
+  return Promise.all(
+    client.onair
+      .filter((onair) => {
+        const latestUpdate = onair.episodes.reduce(
+          (mx, ep) => Math.max(mx, new Date(ep.creationTime).getTime()),
+          0
+        );
+        console.log(onair.title, latestUpdate, new Date(latestUpdate));
+        return differenceInHours(new Date(), new Date(latestUpdate)) <= 48;
+      })
+      .map((onair) => bangumi.subject(onair.bgmId))
+  );
+});
+
 const filterBgm = (subject: OverviewSubject) => {
   if (hiddenBgm.has(subject.id)) return false;
   return bangumi.bgmIdMap.has(String(subject.id)) && subject.name_cn !== '';
@@ -50,8 +67,25 @@ const filterBgm = (subject: OverviewSubject) => {
 
 <template>
   <ClientOnly>
-    <div text-2xl mb4 font-bold ref="calendarEl">
-      <h2><span i-carbon-calendar></span> 番剧周历</h2>
+    <div v-if="latestBangumis && latestBangumis.length > 0" mb8>
+      <div text-2xl mb4 font-bold>
+        <h2><span i-carbon-fire text-red-400></span> 最近更新</h2>
+      </div>
+      <div
+        border="1 base"
+        rounded-2
+        shadow-box
+        bg-gray-100:30
+        md:mr14
+        flex-grow
+        p4
+      >
+        <IndexGrid :bangumis="latestBangumis" />
+      </div>
+    </div>
+
+    <div text-2xl mb4 font-bold>
+      <h2><span i-carbon-calendar text-blue-400></span> 番剧周历</h2>
     </div>
     <div flex="~ gap4">
       <div border="1 base" rounded-2 shadow-box bg-gray-100:30 md:mr4 flex-grow>
@@ -68,61 +102,13 @@ const filterBgm = (subject: OverviewSubject) => {
               weekDayLocale[(13 - offset) % 7]
             }}</span>
           </h3>
-          <div
-            grid="~ flow-row gap4 xl:cols-7 lg:cols-4 md:cols-3 lt-md:cols-2"
-          >
-            <div
-              v-for="bgm in bangumi.calendar[(13 - offset) % 7]
+          <IndexGrid
+            :bangumis="
+              bangumi.calendar[(13 - offset) % 7]
                 .filter(filterBgm)
-                .sort(sortBgm)"
-              :key="bgm.id"
-              w="140px lt-md:100px"
-              lt-md:mb4
-              class="anime-card"
-            >
-              <router-link tag="div" :to="'/anime/' + bgm.id" w="full">
-                <picture
-                  w="full"
-                  flex="~"
-                  items-center
-                  justify-center
-                  lt-md:justify-start
-                  text-0
-                  relative
-                >
-                  <source
-                    :srcset="ensureHTTPS(bgm.images.medium)"
-                    media="(max-width: 767.9px)"
-                    rounded-2
-                  />
-                  <img
-                    :src="ensureHTTPS(bgm.images.large)"
-                    :alt="'Picture for ' + bgm.name_cn"
-                    object-fill
-                    w="full"
-                    h="196px lt-md:140px"
-                    rounded-2
-                    hover="shadow shadow-light-900 dark:shadow-dark-900 shadow-lg bg-transparent"
-                    cursor="pointer"
-                  />
-                  <Playing
-                    v-if="isOnair(bgm)"
-                    absolute
-                    top="-5"
-                    right="-2"
-                    color="bg-[#0ca]"
-                  ></Playing>
-                </picture>
-              </router-link>
-              <a
-                :href="bgm.url"
-                target="_blank"
-                class="text-base hover:text-$c-brand text-sm font-light"
-                >{{ bgm.name_cn !== '' ? bgm.name_cn : bgm.name }}</a
-              >
-            </div>
-            <div flex-grow></div>
-          </div>
+                .sort(sortBgm)
+            "
+          />
         </div>
       </div>
 
