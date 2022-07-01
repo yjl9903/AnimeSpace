@@ -44,7 +44,7 @@
     "@alicloud/pop-core": "^1.7.12",
     "ali-oss": "^6.17.1",
     "axios": "^0.27.2",
-    "bangumi-data": "^0.3.91",
+    "bangumi-data": "^0.3.92",
     "breadc": "^0.4.6",
     "cli-progress": "^3.11.2",
     "debug": "^4.3.4",
