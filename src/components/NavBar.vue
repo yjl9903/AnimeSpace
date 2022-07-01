@@ -168,7 +168,7 @@ const formatProgress = (time: number) => {
         pt2
         z-20
       >
-        <div rounded-2 bg-base border="1 base" w-full h-full p4>
+        <div rounded-2 bg-base bg-op-100 border="1 base" w-full h-full p4>
           <div text-sm pb2 mb2 font-bold border="b-1 base">
             <h2><span i-carbon-settings></span> 设置</h2>
           </div>
