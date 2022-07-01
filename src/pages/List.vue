@@ -49,7 +49,7 @@ useIntersectionObserver(placeholder, ([{ isIntersecting }]) => {
   <div text-2xl font-bold>
     <h2><span i-carbon-list></span> 所有番剧</h2>
   </div>
-  <div px4 py8 relative>
+  <div px0 py8 relative>
     <IndexGrid :bangumis="bgms.slice(0, maxNum)"></IndexGrid>
     <div ref="placeholder"></div>
   </div>
