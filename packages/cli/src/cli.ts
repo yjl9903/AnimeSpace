@@ -206,7 +206,7 @@ async function bootstrap() {
     debug(error);
   };
 
-  process.setMaxListeners(25);
+  process.setMaxListeners(128);
   process.on('unhandledRejection', (error) => {
     debug(error);
   });
