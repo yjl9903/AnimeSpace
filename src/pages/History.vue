@@ -7,14 +7,16 @@ import { useHistory } from '~/composables/client';
 const history = useHistory();
 const bangumi = useBangumi();
 
-const map = ref(new Map<string, Subject>());
+const map: Record<string, Subject> = reactive({});
 watch(
-  () => history.history,
+  history.history,
   (history) => {
     for (const item of history) {
-      bangumi
-        .subject(item.bgmId)
-        .then((data) => map.value.set(item.bgmId, data));
+      if (!(item.bgmId in map)) {
+        bangumi
+          .subject(item.bgmId)
+          .then((data) => data && (map[item.bgmId] = data));
+      }
     }
   },
   { immediate: true }
@@ -43,9 +45,7 @@ watch(
       py2
     >
       <router-link :to="`/anime/${log.bgmId}/play/${log.ep}`">
-        <span v-if="map.get(log.bgmId)"
-          >{{ map.get(log.bgmId)?.name_cn }}
-        </span>
+        <span v-if="map[log.bgmId]">{{ map[log.bgmId]!.name_cn }} </span>
       </router-link>
       <Episode :bgm-id="log.bgmId" :ep="log.ep" p1></Episode>
       <span flex-auto></span>
