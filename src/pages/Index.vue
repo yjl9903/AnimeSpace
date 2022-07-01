@@ -134,6 +134,7 @@ const filterBgm = (subject: OverviewSubject) => {
         flex="~ col"
         justify-between
         w-10
+        py1
         mr="-4"
       >
         <div class="left-large-dot"></div>
