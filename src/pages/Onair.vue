@@ -47,12 +47,12 @@ const formatDate = (d: string) => {
         >
           <picture w="full" max-w="full">
             <source
-              :srcset="ensureHTTPS(subjects[idx].value.images.medium)"
+              :srcset="ensureHTTPS(subjects[idx].value!.images.medium)"
               media="(max-width: 767.9px)"
             />
             <img
-              :src="ensureHTTPS(subjects[idx].value.images.large)"
-              :alt="subjects[idx].value.name_cn"
+              :src="ensureHTTPS(subjects[idx].value!.images.large)"
+              :alt="subjects[idx].value!.name_cn"
               w="full"
               max-w="full"
               object-contain
@@ -80,9 +80,9 @@ const formatDate = (d: string) => {
           </div>
         </h3>
         <div v-if="subjects[idx].value" mt4 text-sm text-gray-500:80>
-          <span>{{ subjects[idx].value.eps }} 话</span>
+          <span>{{ subjects[idx].value!.eps }} 话</span>
           <span mx2 select-none>/</span>
-          <span>{{ formatDate(subjects[idx].value.date) }}</span>
+          <span>{{ formatDate(subjects[idx].value!.date) }}</span>
         </div>
         <div md:hidden mt4>
           <PlayBangumi

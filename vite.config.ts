@@ -131,7 +131,7 @@ export default defineConfig({
             options: {
               cacheName: 'bangumi-pictures',
               expiration: {
-                maxEntries: 100,
+                maxEntries: 256,
                 maxAgeSeconds: 60 * 60 * 24 * 30 // <== 30 days
               },
               cacheableResponse: {

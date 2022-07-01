@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { differenceInHours } from 'date-fns';
-import type { OverviewSubject } from '~/composables/bangumi/types';
+
+import type { OverviewSubject, Subject } from '~/composables/bangumi';
 
 import IndexGrid from './components/IndexGrid.vue';
 
@@ -47,6 +48,7 @@ const latestBangumis = computedAsync(() => {
         return differenceInHours(new Date(), new Date(latestUpdate)) <= 72;
       })
       .map((onair) => bangumi.subject(onair.bgmId))
+      .filter(Boolean) as Promise<Subject>[]
   );
 });
 

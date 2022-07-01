@@ -1,14 +1,15 @@
 import type { Item } from 'bangumi-data';
 
+import axios, { AxiosError } from 'axios';
+import { defineStore } from 'pinia';
+import { differenceInHours } from 'date-fns';
+
 // @ts-ignore
 import { bangumiItems } from '~bangumi/data';
 
 import type { OverviewSubject, Subject } from './types';
 
-import axios from 'axios';
-import { defineStore } from 'pinia';
-import { differenceInHours } from 'date-fns';
-import { getBgmId } from './utils';
+import { getBgmId, sleep } from './utils';
 
 export * from './types';
 export * from './utils';
@@ -90,18 +91,34 @@ export const useBangumi = defineStore('bangumi', () => {
     }
   });
 
+  const subject = async (
+    bgmId: string | number,
+    retry = 1
+  ): Promise<Subject | undefined> => {
+    if (subjectMap.value.get(String(bgmId))) {
+      return subjectMap.value.get(String(bgmId))!;
+    }
+    try {
+      const { data } = await api.get<Subject>(`/v0/subjects/${bgmId}`);
+      subjectMap.value.set(String(bgmId), data);
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        const { response } = err;
+        if (response?.status === 404) {
+          return undefined;
+        }
+      }
+      await sleep(retry);
+      return subject(bgmId, retry * 2);
+    }
+  };
+
   return {
     calendar,
     data,
     bgmIdMap,
-    async subject(bgmId: string | number) {
-      if (subjectMap.value.get(String(bgmId))) {
-        return subjectMap.value.get(String(bgmId))!;
-      }
-      const { data } = await api.get<Subject>(`/v0/subjects/${bgmId}`);
-      subjectMap.value.set(String(bgmId), data);
-      return data;
-    }
+    subject
   };
 });
 
@@ -109,7 +126,11 @@ async function importAll(): Promise<Item[]> {
   if (import.meta.env.SSR) return [];
   try {
     const { items } = await import('bangumi-data');
-    return items;
+    return items.sort((lhs, rhs) => {
+      const d1 = new Date(lhs.begin).getTime();
+      const d2 = new Date(rhs.begin).getTime();
+      return d2 - d1;
+    });
   } catch {
     return importAll();
   }
