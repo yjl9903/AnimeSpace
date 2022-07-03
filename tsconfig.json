@@ -30,7 +30,6 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "packages/**/*.d.ts"
   ],
   "exclude": [
     "**/dist/**"

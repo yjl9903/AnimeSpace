@@ -1,6 +1,6 @@
 import type { Item } from 'bangumi-data';
 
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { defineStore } from 'pinia';
 import { differenceInHours } from 'date-fns';
 
@@ -103,7 +103,7 @@ export const useBangumi = defineStore('bangumi', () => {
       subjectMap.value.set(String(bgmId), data);
       return data;
     } catch (err) {
-      if (err instanceof AxiosError) {
+      if (axios.isAxiosError(err)) {
         const { response } = err;
         if (response?.status === 404) {
           return undefined;

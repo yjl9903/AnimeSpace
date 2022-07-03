@@ -1,6 +1,5 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-pwa/client" />
-/// <reference path="../packages/cli/src/anime/bangumi-data.d.ts" />
 
 import 'vue-router';
 import type { DefineComponent } from 'vue';

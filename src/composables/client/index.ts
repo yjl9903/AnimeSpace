@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import axios from 'axios';
 import { defineStore } from 'pinia';
 import { useLocalStorage, useUrlSearchParams } from '@vueuse/core';
 
@@ -46,7 +46,7 @@ export const useClient = defineStore('client', () => {
           const result = await client.fetchOnair();
           onair.value.splice(0, onair.value.length, ...result);
         } catch (err) {
-          if (err instanceof AxiosError && err?.response?.status === 401) {
+          if (axios.isAxiosError(err) && err?.response?.status === 401) {
             token.value = '';
           }
         }

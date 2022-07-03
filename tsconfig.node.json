@@ -9,6 +9,5 @@
   },
   "include": [
     "vite.config.ts",
-    "./packages/cli/src/anime/bangumi-data.d.ts"
   ]
 }
