@@ -80,7 +80,14 @@ const formatDate = (d: string) => {
           </div>
         </h3>
         <div v-if="subjects[idx].value" mt4 text-sm text-gray-500:80>
-          <span>{{ subjects[idx].value!.eps }} 话</span>
+          <span
+            >{{
+              subjects[idx].value!.totalEpisodes ??
+              subjects[idx].value!.eps ??
+              '?'
+            }}
+            话</span
+          >
           <span mx2 select-none>/</span>
           <span>{{ formatDate(subjects[idx].value!.date) }}</span>
         </div>
