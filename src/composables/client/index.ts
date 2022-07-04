@@ -78,8 +78,10 @@ export const useHistory = defineStore('history', () => {
     const submap = map.get(bgmId)!;
     if (submap.has(ep)) {
       const log = submap.get(ep)!;
-      log.progress = progress;
-      log.timestamp = timestamp;
+      if (new Date(timestamp).getTime() >= new Date(log.timestamp).getTime()) {
+        log.progress = progress;
+        log.timestamp = timestamp;
+      }
       return false;
     } else {
       submap.set(ep, log);
