@@ -28,7 +28,7 @@ const expandFullscreen = () => {
     if (video) {
       toggleFull();
     }
-    if (player.value) {
+    if (player.value && player.value.fullscreen.active) {
       player.value.fullscreen.exit();
     }
   }
@@ -113,10 +113,14 @@ watch(container, (container) => {
 const doc = ref<Document>();
 onMounted(() => (doc.value = document));
 useEventListener(doc, 'keydown', (e: KeyboardEvent) => {
-  if (e.key === ' ') {
-    e.preventDefault();
-    if (player.value) {
+  if (player.value) {
+    if (e.key === ' ') {
+      e.preventDefault();
       player.value.togglePlay();
+    } else if (e.key === 'Escape') {
+      if (isFull.value) {
+        toggleFull();
+      }
     }
   }
 });
