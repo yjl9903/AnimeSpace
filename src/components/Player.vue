@@ -56,6 +56,10 @@ watch(container, (container) => {
 
       const plyrOptions: Options = {
         controls,
+        keyboard: {
+          focused: false,
+          global: true
+        },
         ...options?.value
       };
       player.value = new Plyr(video, plyrOptions);
@@ -64,7 +68,7 @@ watch(container, (container) => {
       {
         // Use source title to check whether source was changed
         let lastTitle: string | undefined = undefined;
-        player.value.on('playing', (ev) => {
+        player.value.on('playing', () => {
           if (
             lastTitle !== source.value.title &&
             player.value &&
@@ -102,6 +106,17 @@ watch(container, (container) => {
           console.warn('Register window fullscreen fail');
         }
       }
+    }
+  }
+});
+
+const doc = ref<Document>();
+onMounted(() => (doc.value = document));
+useEventListener(doc, 'keydown', (e: KeyboardEvent) => {
+  if (e.key === ' ') {
+    e.preventDefault();
+    if (player.value) {
+      player.value.togglePlay();
     }
   }
 });
