@@ -56,7 +56,7 @@
     "mediainfo.js": "^0.1.7",
     "node-html-parser": "^5.3.3",
     "prompts": "^2.4.2",
-    "webtorrent": "^1.8.24"
+    "webtorrent": "^1.8.26"
   },
   "devDependencies": {
     "@types/ali-oss": "^6.16.4",
