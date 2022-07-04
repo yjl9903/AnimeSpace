@@ -140,7 +140,7 @@ const formatProgress = (time: number) => {
                   hover="text-[#0ca]"
                   ><span block h4
                     >第 <span font-mono>{{ log.ep }}</span> 话</span
-                  ><span block h4>{{
+                  ><span block h4 font-mono>{{
                     formatProgress(log.progress)
                   }}</span></router-link
                 >
