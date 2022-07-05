@@ -10,6 +10,7 @@ export const onRequest: APIFunction = async (ctx) => {
 
   // Setup KVStores
   ctx.env.UserStore = new KVStore(ctx.env.ANIME, 'user');
+  ctx.env.UserSyncStore = new KVStore(ctx.env.ANIME, 'user-sync');
   ctx.env.AnimeStore = new KVStore(ctx.env.ANIME, 'anime');
 
   if (auth) {

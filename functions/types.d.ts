@@ -99,6 +99,7 @@ export interface OnairEpisode {
 declare type APIFunction = PagesFunction<{
   ANIME: KVNamespace;
   UserStore: KVStore<User | Admin | Visitor>;
+  UserSyncStore: KVStore<string>;
   AnimeStore: KVStore<Record<string, OnairAnime[]>>;
   user: User | Admin | Visitor;
   DEV: string;
