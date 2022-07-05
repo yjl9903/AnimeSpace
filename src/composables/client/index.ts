@@ -2,6 +2,7 @@ import axios from 'axios';
 import { defineStore } from 'pinia';
 import { useLocalStorage, useUrlSearchParams } from '@vueuse/core';
 
+// @ts-ignore
 import { PUBLIC } from '~build/meta';
 
 import type { HistoryLog, OnairAnime, OnairEpisode } from './types';
