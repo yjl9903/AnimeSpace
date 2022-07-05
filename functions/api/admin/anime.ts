@@ -7,6 +7,16 @@ interface Payload {
   onair: OnairAnime[];
 }
 
+export const onRequestGet: APIFunction = async ({ env }) => {
+  if (env.user.type === 'root' || env.user.type === 'admin') {
+    const oldOnair = (await env.AnimeStore.get(ONAIR_KEY)) ?? {};
+    const onair = oldOnair[env.user.token] ?? [];
+    return makeResponse({ onair });
+  } else {
+    return makeErrorResponse('Unauthorized', { status: 401 });
+  }
+};
+
 export const onRequestPost: APIFunction = async ({ env, request }) => {
   if (env.user.type === 'root' || env.user.type === 'admin') {
     const { onair } = await request.json<Payload>();
