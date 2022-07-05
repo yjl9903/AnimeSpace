@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import type { Item } from 'bangumi-data';
 import { getBgmId, Subject } from '~/composables/bangumi';
+
 import IndexGrid from './components/IndexGrid.vue';
 
 const bangumi = useBangumi();
 
 const pageSize = 20;
 const maxNum = ref(pageSize);
-const bgms = ref([] as Subject[]);
+const bgms = ref([] as (Subject | undefined)[]);
 
 watch(
-  () => [maxNum.value, bangumi.data] as [number, Item[]],
-  async ([maxNum, data]) => {
+  () => maxNum.value,
+  async (maxNum) => {
     let i = 0;
-    for (const item of data.slice(0, maxNum)) {
+    for (const item of bangumi.data.slice(0, maxNum)) {
       const id = getBgmId(item);
       if (!id) continue;
-      if (i < bgms.value.length && id === String(bgms.value[i].id)) {
+      if (i < bgms.value.length && id === String(bgms.value[i]?.id)) {
         i++;
         continue;
       }
       const sub = await bangumi.subject(id);
-      sub && bgms.value.push(sub);
+      bgms.value.push(sub);
     }
   },
   {
@@ -31,7 +31,7 @@ watch(
 
 const placeholder = ref<HTMLElement | null>(null);
 useIntersectionObserver(placeholder, ([{ isIntersecting }]) => {
-  if (isIntersecting) {
+  if (isIntersecting && bgms.value.length >= maxNum.value) {
     maxNum.value += pageSize;
   }
 });
@@ -50,7 +50,9 @@ useIntersectionObserver(placeholder, ([{ isIntersecting }]) => {
     <h2><span i-carbon-list></span> 所有番剧</h2>
   </div>
   <div px0 py8 relative>
-    <IndexGrid :bangumis="bgms.slice(0, maxNum)"></IndexGrid>
+    <IndexGrid
+      :bangumis="(bgms.slice(0, maxNum).filter(Boolean) as Subject[])"
+    ></IndexGrid>
     <div ref="placeholder"></div>
   </div>
 </template>
