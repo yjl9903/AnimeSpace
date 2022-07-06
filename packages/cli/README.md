@@ -1,6 +1,6 @@
 # Anime Paste CLI
 
-A command line application for managing [Anime Paste](https://github.com/XLorPaste/AnimePaste).
+Command line application for managing [Anime Paste](https://github.com/XLorPaste/AnimePaste).
 
 ## Features
 
@@ -30,6 +30,11 @@ Global config:
 # ~/.animepaste/config.yaml
 
 plan: ./plans/2022-4.yaml
+
+server:
+  baseURL: https://anime.xlorpaste.cn/api/
+  # baseURL: http://localhost:8788/api/
+  token:
 
 store:
   local: # Local anime store
