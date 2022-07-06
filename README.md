@@ -1,4 +1,4 @@
-# Anime Paste
+# :tv: Anime Paste
 
 <p align="center">「 你所热爱的就是你的动画 」</p>
 
