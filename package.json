@@ -8,7 +8,7 @@
     "format": "prettier --write packages/**/*.{ts,vue}"
   },
   "devDependencies": {
-    "@types/node": "^18.0.1",
+    "@types/node": "^18.0.3",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4",
     "vite": "^2.9.13",
