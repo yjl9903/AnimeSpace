@@ -1,6 +1,6 @@
 # Anime Paste
 
-<center>「 你所热爱的就是你的动画 」</center>
+<p align="center">「 你所热爱的就是你的动画 」</p>
 
 [![CI](https://github.com/XLorPaste/AnimePaste/actions/workflows/ci.yml/badge.svg)](https://github.com/XLorPaste/AnimePaste/actions/workflows/ci.yml)
 
@@ -51,7 +51,7 @@ Third, go to `Workers`, `KV` tab in the left navbar. Create a new KV namespace f
 
 Finally, go back to the Pages settings, and add a new binding called `anime` for functions production usage.
 
-<center>「 喜欢的话就坚持吧 」</center>
+<p align="center">「 喜欢的话就坚持吧 」</p>
 
 ## License
 
