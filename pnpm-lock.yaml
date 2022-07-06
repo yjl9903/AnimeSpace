@@ -4,6 +4,26 @@ importers:
 
   .:
     specifiers:
+      '@types/node': ^18.0.1
+      prettier: ^2.7.1
+      typescript: ^4.7.4
+      vite: ^2.9.13
+      wrangler: ^2.0.16
+    devDependencies:
+      '@types/node': 18.0.1
+      prettier: 2.7.1
+      typescript: 4.7.4
+      vite: 2.9.13
+      wrangler: 2.0.16
+
+  functions:
+    specifiers:
+      '@cloudflare/workers-types': ^3.14.0
+    devDependencies:
+      '@cloudflare/workers-types': 3.14.0
+
+  packages/app:
+    specifiers:
       '@iconify-json/carbon': ^1.1.6
       '@types/node': ^18.0.1
       '@types/nprogress': ^0.2.0
@@ -18,7 +38,6 @@ importers:
       nprogress: ^0.2.0
       pinia: ^2.0.14
       plyr: ^3.7.2
-      prettier: ^2.7.1
       scrollreveal: ^4.0.9
       typescript: ^4.7.4
       unocss: ^0.43.1
@@ -36,7 +55,6 @@ importers:
       vue-router: ^4.1.0
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.38.2
-      wrangler: ^2.0.16
     dependencies:
       '@vueuse/core': 8.7.5_vue@3.2.37
       '@vueuse/head': 0.7.6_vue@3.2.37
@@ -57,7 +75,6 @@ importers:
       '@types/scrollreveal': 0.0.8
       '@unocss/reset': 0.43.1
       '@vitejs/plugin-vue': 2.3.3_vite@2.9.13+vue@3.2.37
-      prettier: 2.7.1
       typescript: 4.7.4
       unocss: 0.43.1_vite@2.9.13
       unplugin-auto-import: 0.9.2_5smtrbmayeckluww3ebuwm6kim
@@ -71,13 +88,6 @@ importers:
       vite-ssg: 0.20.2_ap5jcge34nzaxm4xhv44gbybre
       vitest: 0.17.0
       vue-tsc: 0.38.2_typescript@4.7.4
-      wrangler: 2.0.16
-
-  functions:
-    specifiers:
-      '@cloudflare/workers-types': ^3.14.0
-    devDependencies:
-      '@cloudflare/workers-types': 3.14.0
 
   packages/cli:
     specifiers:
@@ -501,11 +511,11 @@ packages:
   /@babel/helper-validator-identifier/7.16.7:
     resolution: {integrity: sha512-hsEnFemeiW4D08A5gUAZxLBTXpZ39P+a+DGDsHw1yxqyQ/jzFEnxf5uTEGp+3bzAbNOxU1paTgYS4ECU/IgfDw==}
     engines: {node: '>=6.9.0'}
+    dev: true
 
   /@babel/helper-validator-identifier/7.18.6:
     resolution: {integrity: sha512-MmetCkz9ej86nJQV+sFCxoGGrUbU3q02kgLciwkrt9QqEB7cP39oKEY0PakknEO0Gu20SskMRi+AYZ3b1TpN9g==}
     engines: {node: '>=6.9.0'}
-    dev: true
 
   /@babel/helper-validator-option/7.18.6:
     resolution: {integrity: sha512-XO7gESt5ouv/LRJdrVjkShckw6STTaB7l9BrpBaAHDeF5YZT+01PCwmR0SJHnkW6i8OwW/EVWRShfi4j2x+KQw==}
@@ -559,6 +569,7 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.18.4
+    dev: true
 
   /@babel/parser/7.18.6:
     resolution: {integrity: sha512-uQVSa9jJUe/G/304lXspfWVpKpK4euFLgGiMQFOCpM/bgcAdeoHwi/OQz23O9GK2osz26ZiXRRV9aV+Yl1O8tw==}
@@ -566,7 +577,6 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.18.6
-    dev: true
 
   /@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression/7.18.6_@babel+core@7.18.5:
     resolution: {integrity: sha512-Dgxsyg54Fx1d4Nge8UnvTrED63vrwOdPmyvPzlNN/boaliRP54pm3pGzZD1SJUwrBA+Cs/xdG8kXX6Mn/RfISQ==}
@@ -1446,6 +1456,7 @@ packages:
     dependencies:
       '@babel/helper-validator-identifier': 7.16.7
       to-fast-properties: 2.0.0
+    dev: true
 
   /@babel/types/7.18.6:
     resolution: {integrity: sha512-NdBNzPDwed30fZdDQtVR7ZgaO4UKjuaQFH9VArS+HMnurlOY0JWN+4ROlu/iapMFwjRQU4pOG4StZfDmulEwGA==}
@@ -1453,7 +1464,6 @@ packages:
     dependencies:
       '@babel/helper-validator-identifier': 7.18.6
       to-fast-properties: 2.0.0
-    dev: true
 
   /@cloudflare/kv-asset-handler/0.2.0:
     resolution: {integrity: sha512-MVbXLbTcAotOPUj0pAMhVtJ+3/kFkwJqc5qNOleOZTv6QkZZABDMS21dSrSlVswEHwrpWC03e4fWytjqKvuE2A==}
@@ -2170,7 +2180,7 @@ packages:
   /@vue/compiler-core/3.2.37:
     resolution: {integrity: sha512-81KhEjo7YAOh0vQJoSmAD68wLfYqJvoiD4ulyedzF+OEk/bk6/hx3fTNVfuzugIIaTrOx4PGx6pAiBRe5e9Zmg==}
     dependencies:
-      '@babel/parser': 7.18.5
+      '@babel/parser': 7.18.6
       '@vue/shared': 3.2.37
       estree-walker: 2.0.2
       source-map: 0.6.1
@@ -2184,7 +2194,7 @@ packages:
   /@vue/compiler-sfc/3.2.37:
     resolution: {integrity: sha512-+7i/2+9LYlpqDv+KTtWhOZH+pa8/HnX/905MdVmAcI/mPQOBwkHHIzrsEsucyOIZQYMkXUiTkmZq5am/NyXKkg==}
     dependencies:
-      '@babel/parser': 7.18.5
+      '@babel/parser': 7.18.6
       '@vue/compiler-core': 3.2.37
       '@vue/compiler-dom': 3.2.37
       '@vue/compiler-ssr': 3.2.37
@@ -2207,7 +2217,7 @@ packages:
   /@vue/reactivity-transform/3.2.37:
     resolution: {integrity: sha512-IWopkKEb+8qpu/1eMKVeXrK0NLw9HicGviJzhJDEyfxTR9e1WtpnnbYkJWurX6WwoFP0sz10xQg8yL8lgskAZg==}
     dependencies:
-      '@babel/parser': 7.18.5
+      '@babel/parser': 7.18.6
       '@vue/compiler-core': 3.2.37
       '@vue/shared': 3.2.37
       estree-walker: 2.0.2
@@ -2992,6 +3002,7 @@ packages:
 
   /core-js/3.23.2:
     resolution: {integrity: sha512-ELJOWxNrJfOH/WK4VJ3Qd+fOqZuOuDNDJz0xG6Bt4mGg2eO/UT9CljCrbqDGovjLKUrGajEEBcoTOc0w+yBYeQ==}
+    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
     requiresBuild: true
     dev: false
 
@@ -5763,14 +5774,6 @@ packages:
       estree-walker: 0.6.1
     dev: true
 
-  /rollup/2.70.1:
-    resolution: {integrity: sha512-CRYsI5EuzLbXdxC6RnYhOuRdtz4bhejPMSWjsFLfVM/7w/85n2szZv6yExqUXsBdz5KT8eoubeyDUDjhLHEslA==}
-    engines: {node: '>=10.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /rollup/2.75.7:
     resolution: {integrity: sha512-VSE1iy0eaAYNCxEXaleThdFXqZJ42qDBatAwrfnPlENEZ8erQ+0LYX4JXOLPceWfZpV1VtZwZ3dFCuOZiSyFtQ==}
     engines: {node: '>=10.0.0'}
@@ -6485,7 +6488,7 @@ packages:
       pathe: 0.3.0
       scule: 0.2.1
       strip-literal: 0.4.0
-      unplugin: 0.7.0_vite@2.9.13
+      unplugin: 0.7.1_vite@2.9.13
     transitivePeerDependencies:
       - esbuild
       - rollup
@@ -6566,7 +6569,7 @@ packages:
       local-pkg: 0.4.1
       magic-string: 0.26.2
       unimport: 0.4.0_vite@2.9.13
-      unplugin: 0.7.0_vite@2.9.13
+      unplugin: 0.7.1_vite@2.9.13
     transitivePeerDependencies:
       - esbuild
       - rollup
@@ -6597,7 +6600,7 @@ packages:
       debug: 4.3.4
       kolorist: 1.5.1
       local-pkg: 0.4.1
-      unplugin: 0.7.0_vite@2.9.13
+      unplugin: 0.7.1_vite@2.9.13
     transitivePeerDependencies:
       - esbuild
       - rollup
@@ -6633,30 +6636,6 @@ packages:
       - supports-color
       - vite
       - webpack
-    dev: true
-
-  /unplugin/0.7.0_vite@2.9.13:
-    resolution: {integrity: sha512-OsiFrgybmqm5bGuaodvbLYhqUrvGuRHRMZDhddKEXTDbuQ1x+hR7M1WpQguXj03whVYjEYChhFo738cZH5RNig==}
-    peerDependencies:
-      esbuild: '>=0.13'
-      rollup: ^2.50.0
-      vite: ^2.3.0
-      webpack: 4 || 5
-    peerDependenciesMeta:
-      esbuild:
-        optional: true
-      rollup:
-        optional: true
-      vite:
-        optional: true
-      webpack:
-        optional: true
-    dependencies:
-      acorn: 8.7.1
-      chokidar: 3.5.3
-      vite: 2.9.13
-      webpack-sources: 3.2.3
-      webpack-virtual-modules: 0.4.3
     dev: true
 
   /unplugin/0.7.1_vite@2.9.13:
@@ -6945,7 +6924,7 @@ packages:
       esbuild: 0.14.47
       postcss: 8.4.13
       resolve: 1.22.1
-      rollup: 2.70.1
+      rollup: 2.75.7
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -7069,10 +7048,6 @@ packages:
   /webpack-sources/3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
-    dev: true
-
-  /webpack-virtual-modules/0.4.3:
-    resolution: {integrity: sha512-5NUqC2JquIL2pBAAo/VfBP6KuGkHIZQXW/lNKupLPfhViwh8wNsu0BObtl09yuKZszeEUfbXz8xhrHvSG16Nqw==}
     dev: true
 
   /webpack-virtual-modules/0.4.4:
