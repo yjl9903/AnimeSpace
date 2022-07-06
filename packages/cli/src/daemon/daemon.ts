@@ -244,8 +244,7 @@ export class Daemon {
         }
       }
     } catch (err) {
-      debug(err);
-      error(`Server baseURL or token may be wrong`);
+      error(`Fail connecting server (baseURL or token may be wrong)`);
     }
   }
 }

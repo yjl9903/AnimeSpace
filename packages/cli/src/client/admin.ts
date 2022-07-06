@@ -30,9 +30,9 @@ export class AdminClient {
       if (data.status !== 'Ok') throw new Error('Unknown error');
       return data.data.onair;
     } catch (error) {
+      debug(error);
       const retry = (option?.retry ?? 0) + 1;
       if (retry > AdminClient.MAX_RETRY) {
-        debug(error);
         throw new Error('Fail syncing onair animes');
       } else {
         return this.syncOnair(onair, { retry });
