@@ -24,7 +24,8 @@ pnpm build:cli
 Finally, link the cli binary globally.
 
 ```bash
-pnpm -C packages/cli link -g
+cd packages/cli
+pnpm link -g
 ```
 
 Test installation:
