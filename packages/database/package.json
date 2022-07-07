@@ -24,9 +24,6 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "bin": {
-    "anime": "./cli.mjs"
-  },
   "files": [
     "dist",
     "prisma",
@@ -35,6 +32,7 @@
   "scripts": {
     "build": "unbuild",
     "db:gen": "prisma generate",
+    "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "dev": "unbuild --stub",
     "test": "vitest",

@@ -170,6 +170,13 @@ cli
     }
   });
 
+cli.command('db ls', 'List database').action(async () => {
+  const { PrismaClient } = await import('@animepaste/database');
+  const client = new PrismaClient();
+  const result = await client.resource.findMany();
+  console.log(result);
+});
+
 cli.command('video info <file>', 'Check video info').action(async (file) => {
   const { getVideoInfo } = await import('./video');
   const info = await getVideoInfo(file);

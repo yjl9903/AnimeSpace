@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@alicloud/pop-core": "^1.7.12",
+    "@animepaste/database": "workspace:*",
     "ali-oss": "^6.17.1",
     "axios": "^0.27.2",
     "bangumi-data": "^0.3.94",
