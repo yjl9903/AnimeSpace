@@ -15,9 +15,10 @@ const name = 'anime';
 
 const debug = createDebug(name + ':cli');
 
-const cli = Breadc(name, { version: getVersion(), logger: { debug } }).option(
-  '--force'
-);
+const cli = Breadc(name, {
+  version: getVersion(),
+  logger: { debug }
+}).option('--force');
 
 cli
   .command('watch', 'Watch anime resources update')

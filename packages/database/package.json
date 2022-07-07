@@ -35,7 +35,6 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "dev": "unbuild --stub",
-    "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -45,8 +44,6 @@
   },
   "devDependencies": {
     "prisma": "^4.0.0",
-    "unbuild": "^0.7.4",
-    "vite": "^2.9.13",
-    "vitest": "^0.17.1"
+    "unbuild": "^0.7.4"
   }
 }

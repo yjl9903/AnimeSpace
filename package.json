@@ -6,7 +6,8 @@
     "build:app": "pnpm -C packages/app build",
     "build:cli": "pnpm -C packages/cli build",
     "dev": "wrangler pages dev --kv ANIME --binding DEV=true ENABLE_PUBLIC=true -- vite ./packages/app",
-    "format": "prettier --write packages/**/*.{ts,vue}"
+    "format": "prettier --write packages/**/*.{ts,vue}",
+    "test": "pnpm -r test -- --run"
   },
   "devDependencies": {
     "@types/node": "^18.0.3",

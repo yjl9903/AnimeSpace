@@ -29,6 +29,9 @@ jobs:
       - name: Build
         run: pnpm build:all
 
+      - name: Test
+        run: pnpm test
+
 #       - name: Deploy
 #         uses: peaceiris/actions-gh-pages@v3
 #         if: ${{ github.event_name == 'push' }}
