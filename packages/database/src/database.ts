@@ -78,11 +78,15 @@ export class Database {
     }
   }
 
-  async search(keyword: string | string[]) {
+  async search(keyword: string | string[], beginDate?: Date) {
     const keywords = typeof keyword === 'string' ? [keyword] : keyword;
     const result = await this.prisma.resource.findMany({
       where: {
-        OR: keywords.map((w) => ({ title: { contains: w } }))
+        OR: keywords.map((w) => ({ title: { contains: w } })),
+        type: '動畫',
+        createdAt: {
+          gt: beginDate
+        }
       }
     });
     return result;
