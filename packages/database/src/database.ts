@@ -94,6 +94,10 @@ export class Database {
     earlyStop = true,
     listener
   }: IndexOption = {}) {
+    debug(`Index to date: ${limit}`);
+    debug(`Index page from ${startPage} to ${endPage}`);
+    debug(`Early Stop ${earlyStop ? 'enabled' : 'disabled'}`);
+
     let timestamp: Date | undefined = undefined;
 
     for (let page = startPage ?? 1; !endPage || page <= endPage; page++) {
