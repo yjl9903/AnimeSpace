@@ -40,6 +40,7 @@ export class Daemon {
       }
     }
 
+    await this.refreshDatabase();
     await this.refreshEpisode();
     await this.downloadEpisode();
 
@@ -49,13 +50,14 @@ export class Daemon {
   async update() {
     info('Start updating anime ' + now());
 
+    await this.refreshDatabase();
     await this.refreshEpisode();
     await this.downloadEpisode();
 
     info('Update OK ' + now());
   }
 
-  private async refreshEpisode() {
+  private async refreshDatabase() {
     await context.database.index({
       limit: subMonths(
         new Date(Math.min(...this.plans.map((p) => p.date.getTime()))),
@@ -64,7 +66,9 @@ export class Daemon {
       earlyStop: !context.cliOption.force,
       listener: IndexListener
     });
+  }
 
+  private async refreshEpisode() {
     for (const plan of this.plans) {
       // Skip finished plan
       if (plan.state === 'finish') continue;
