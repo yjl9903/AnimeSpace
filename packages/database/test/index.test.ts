@@ -22,10 +22,10 @@ describe('Resource client', () => {
   const database = new Database({ url: testDB });
 
   it('should index', async () => {
-    await database.index({ page: 1 });
+    await database.index({ endPage: 1 });
     expect(await database.list()).toHaveLength(80);
 
-    await database.index({ page: 1 });
+    await database.index({ endPage: 1 });
     expect(await database.list()).toHaveLength(80);
   });
 
