@@ -47,22 +47,36 @@ cli
     }
   })
   .option('--raw', 'Print raw magnets')
-  .option('--id [bgmId]', 'Search keywords with Bangumi ID')
-  .option('--title [title]', 'Bangumi title')
   .option('--index', 'Index magnet database')
   .option('-y, --year [year]')
   .option('-m, --month [month]')
   .option('-p, --plan', 'Output plan.yaml')
   .action(async (anime, option) => {
-    const { userSearch, daemonSearch } = await import('./anime');
+    const { userSearch } = await import('./anime');
     if (option.index) {
       await context.database.index({ listener: IndexListener });
     }
-    if (option.id && anime) {
-      await daemonSearch(option.id, anime.split(','), option);
-    } else {
-      await userSearch(anime, option);
+    await userSearch(anime, option);
+  });
+
+cli
+  .command(
+    'fetch <id> <title> [...keywords]',
+    'Fetch resources using Bangumi ID'
+  )
+  .option('--raw', 'Print raw magnets')
+  .option('--index', 'Index magnet database')
+  .option('-p, --plan', 'Output plan.yaml')
+  .action(async (id, title, anime, option) => {
+    const { daemonSearch } = await import('./anime');
+    if (option.index) {
+      await context.database.index({ listener: IndexListener });
     }
+    await daemonSearch(id, [title, ...anime], {
+      ...option,
+      title,
+      type: 'tv' as 'tv'
+    });
   });
 
 cli
