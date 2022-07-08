@@ -8,6 +8,10 @@ Paste your favourite anime online.
 
 ## Use local admin CLI
 
+> **Prerequisite**
+>
+> Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
+
 First, clone this repo to your machine.
 
 ```bash
