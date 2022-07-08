@@ -31,16 +31,19 @@
   ],
   "scripts": {
     "build": "unbuild",
+    "db:deploy": "prisma migrate deploy",
     "db:gen": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy",
     "dev": "unbuild --stub",
-    "typecheck": "tsc --noEmit",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@prisma/client": "^4.0.0",
-    "axios": "^0.27.2",
+    "debug": "^4.3.4",
+    "got": "^12.1.0",
+    "hpagent": "^1.0.0",
     "node-html-parser": "^5.3.3"
   },
   "devDependencies": {
