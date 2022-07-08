@@ -4,4 +4,4 @@ export { PrismaClient };
 
 export * from './database';
 
-export * from './search';
+export * from './fetch';

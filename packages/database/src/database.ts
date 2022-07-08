@@ -3,7 +3,7 @@ import { subMonths, isBefore } from 'date-fns';
 import { PrismaClient, Prisma, Resource } from '@prisma/client';
 
 import { sleep } from './utils';
-import { fetchResource } from './search';
+import { fetchResource } from './fetch';
 
 const debug = createDebug('anime:database');
 
