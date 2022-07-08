@@ -19,7 +19,7 @@ const debug = createDebug(name + ':cli');
 const cli = Breadc(name, {
   version: getVersion(),
   logger: { debug }
-}).option('--force', 'Enable force mode and prefer not using cache');
+}).option('-f, --force', 'Enable force mode and prefer not using cache');
 
 cli
   .command('watch', 'Watch anime resources update')
