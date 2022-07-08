@@ -1,29 +1,23 @@
-import got from 'got';
+import axios from 'axios';
 import createDebug from 'debug';
 import { parse } from 'node-html-parser';
 import { Prisma } from '@prisma/client';
-import { HttpsProxyAgent } from 'hpagent';
 
 const debug = createDebug('anime:search');
-const proxy = process.env.HTTPS_PROXY ?? process.env.HTTP_PROXY;
-const agent = {
-  https: proxy ? new HttpsProxyAgent({ proxy }) : undefined
-};
 
 export async function fetchResource(
   page: number
 ): Promise<Prisma.ResourceCreateInput[]> {
   const searchResult: Prisma.ResourceCreateInput[] = [];
 
-  const content = await got
-    .get(`https://share.dmhy.org/topics/list/page/${page}`, {
-      agent,
-      retry: {
-        limit: 5
-      }
-    })
-    .text();
+  const result = await axios.get(
+    `https://share.dmhy.org/topics/list/page/${page}`,
+    {
+      proxy: getProxy()
+    }
+  );
 
+  const content: string = result.data;
   const root = parse(content);
 
   for (const row of root.querySelectorAll('#topic_list tbody tr')) {
@@ -31,7 +25,11 @@ export async function fetchResource(
     const type = tds[1].innerText.trim();
     const td2a = tds[2].querySelectorAll('a');
 
-    if (td2a.length < 2) continue;
+    if (td2a.length > 2 || td2a.length < 1) {
+      debug('Parse HTML Error');
+      debug(row.innerHTML);
+      continue;
+    }
 
     const parseId = (text: string) => {
       const split = text.split('/');
@@ -44,9 +42,10 @@ export async function fetchResource(
     };
 
     const time = tds[0].querySelector('span')?.innerText.trim();
-    const fansub = td2a[0]?.innerText.trim() ?? '';
-    const title = td2a[1]?.innerText.trim();
-    const link = parseId(td2a[1]?.getAttribute('href')!);
+    const fansub = td2a.length === 2 ? td2a[0]?.innerText.trim() : '';
+    const titleEl = td2a.length === 2 ? td2a[1] : td2a[0];
+    const title = titleEl?.innerText.trim();
+    const link = parseId(titleEl?.getAttribute('href')!);
     const magnet = tds[3].querySelector('a')?.getAttribute('href');
 
     if (!magnet || !time || !title) {
@@ -66,4 +65,27 @@ export async function fetchResource(
   }
 
   return searchResult;
+}
+
+function getProxy() {
+  const proxy =
+    process.env.https_proxy ??
+    process.env.HTTPS_PROXY ??
+    process.env.http_proxy ??
+    process.env.HTTP_PROXY;
+  if (proxy) {
+    const RE = /(\d+\.\d+\.\d+\.\d+):(\d+)/;
+    const match = RE.exec(proxy);
+    if (match) {
+      return {
+        protocol: 'http',
+        host: match[1],
+        port: +match[2]
+      };
+    } else {
+      return undefined;
+    }
+  } else {
+    return undefined;
+  }
 }
