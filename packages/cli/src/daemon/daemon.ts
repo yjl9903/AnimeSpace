@@ -71,13 +71,15 @@ export class Daemon {
 
   private async refreshEpisode() {
     for (const plan of this.plans) {
-      // Skip finished plan
-      if (plan.state === 'finish') continue;
-
       for (const onair of plan.onair) {
         // Ensure string id
         if (typeof onair.bgmId === 'number') {
           onair.bgmId = String(onair.bgmId);
+        }
+
+        // Skip finished plan
+        if (plan.state === 'finish' && (await context.getAnime(onair.bgmId))) {
+          continue;
         }
 
         await daemonSearch(
@@ -116,9 +118,8 @@ export class Daemon {
       for (const onair of plan.onair) {
         const anime = await context.getAnime(onair.bgmId);
         if (!anime) {
-          throw new Error(
-            `Fail to get ${onair.name} (${bangumiLink(onair.bgmId)})`
-          );
+          error(`Fail to get ${onair.name} (${bangumiLink(onair.bgmId)})`);
+          continue;
         }
 
         if (!onair.fansub) {
