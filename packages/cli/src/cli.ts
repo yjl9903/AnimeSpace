@@ -222,7 +222,7 @@ cli.command('video info <file>', 'Check video info').action(async (file) => {
 
 cli.command('space', 'Open AnimePaste space directory').action(async () => {
   console.log(context.root);
-  spawnSync(`code ${context.root}`, {
+  spawnSync(`code "${context.root}"`, {
     shell: true,
     stdio: ['pipe', 'pipe', 'pipe'],
     windowsHide: true
