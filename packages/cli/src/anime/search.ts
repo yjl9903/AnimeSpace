@@ -124,6 +124,7 @@ export async function search(
 }
 
 function outputPlan(animes: Anime[]) {
+  console.log();
   console.log(`  name: ${format(new Date(), 'yyyy-MM-dd 新番放送计划')}`);
   console.log();
   console.log(`  date: `);
