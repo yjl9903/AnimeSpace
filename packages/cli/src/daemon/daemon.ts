@@ -58,6 +58,7 @@ export class Daemon {
   }
 
   private async refreshDatabase() {
+    console.log();
     await context.database.index({
       limit: subMonths(
         new Date(Math.min(...this.plans.map((p) => p.date.getTime()))),
