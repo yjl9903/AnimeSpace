@@ -30,8 +30,9 @@ describe('Resource client', () => {
   });
 
   it('should search', async () => {
-    const title1 = (await database.list())[0].title;
-    const title2 = (await database.list())[1].title;
+    const list = await database.list();
+    const title1 = list.find((m) => m.type === '動畫')!.title;
+    const title2 = list.reverse().find((m) => m.type === '動畫')!.title;
     expect(await database.search(title1)).toHaveLength(1);
     expect(await database.search(title2)).toHaveLength(1);
     expect(await database.search([title1, title2])).toHaveLength(2);
