@@ -17,11 +17,19 @@ export class Anime {
 
   readonly bgmId: string = '';
 
+  readonly date: Date = new Date();
+
   readonly episodes: Episode[] = [];
 
-  constructor(option: { title: string; bgmId: string; episodes?: Episode[] }) {
+  constructor(option: {
+    title: string;
+    bgmId: string;
+    date: Date;
+    episodes?: Episode[];
+  }) {
     this.title = option.title;
     this.bgmId = option.bgmId;
+    this.date = option.date;
     if (option.episodes) {
       this.episodes = option.episodes;
     }
@@ -30,18 +38,24 @@ export class Anime {
   static empty(title: string, bgmId: string) {
     return new Anime({
       title,
-      bgmId
+      bgmId,
+      date: new Date()
     });
   }
 
   static bangumi(item: Item) {
-    return new Anime({ title: getBgmTitle(item), bgmId: getBgmId(item)! });
+    return new Anime({
+      title: getBgmTitle(item),
+      date: new Date(item.begin),
+      bgmId: getBgmId(item)!
+    });
   }
 
   static copy(anime: Anime) {
     return new Anime({
       title: anime.title,
       bgmId: anime.bgmId,
+      date: new Date(anime.date),
       episodes: anime.episodes
     });
   }

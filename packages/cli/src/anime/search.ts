@@ -1,7 +1,7 @@
 import type { Item, SiteMeta } from 'bangumi-data';
 
 import prompts from 'prompts';
-import { subMonths } from 'date-fns';
+import { format, subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
 import { distance } from 'fastest-levenshtein';
 import { link, bold, dim, lightGreen } from 'kolorist';
@@ -124,6 +124,9 @@ export async function search(
 }
 
 function outputPlan(animes: Anime[]) {
+  console.log(`  name: ${format(new Date(), 'yyyy-MM-dd 新番放送计划')}`);
+  console.log();
+  console.log(`  date: `);
   console.log();
   console.log(`  onair:`);
   for (const anime of animes) {
