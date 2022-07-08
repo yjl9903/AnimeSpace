@@ -33,10 +33,18 @@ export interface Plan {
   name: string;
 
   /**
-   * Plan time
+   * Plan date
    */
-  time: string;
+  date: Date;
 
+  /**
+   * Plan is onair or finish
+   */
+  state: 'onair' | 'finish';
+
+  /**
+   * Onair list
+   */
   onair: OnairPlan[];
 }
 

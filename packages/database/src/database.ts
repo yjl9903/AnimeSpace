@@ -1,3 +1,7 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import createDebug from 'debug';
 import { subMonths, isBefore } from 'date-fns';
 import { PrismaClient, Prisma, Resource } from '@prisma/client';
@@ -17,36 +21,58 @@ export interface IndexOption {
    *
    * @default 'subMonths(new Date(), 6)'
    */
-  limit?: Date;
+  limit?: Date | undefined;
 
   /**
    * Fetch page limit
    *
    * @default 'undefined'
    */
-  page?: number;
+  page?: number | undefined;
 
   /**
    * Break when page found
    *
    * @default 'true'
    */
-  earlyStop?: boolean;
+  earlyStop?: boolean | undefined;
 
   /**
    * Handle progress event
    */
-  listener?: (state: { page: number; ok?: number }) => void;
+  listener?: (state: {
+    page: number;
+    url: string;
+    timestamp?: Date;
+    ok?: number;
+  }) => void;
 }
 
 export class Database {
+  private static DefaultFilepath = path.join(
+    fileURLToPath(import.meta.url),
+    '../../prisma/anime.db'
+  );
+
+  private readonly filepath: string;
   private readonly prisma = new PrismaClient();
 
-  constructor(option: DatabaseOption) {
+  private _timestamp!: Date;
+
+  constructor(option: DatabaseOption = {}) {
     if (option.url) {
+      this.filepath = option.url;
       this.prisma = new PrismaClient({
-        datasources: { db: { url: option.url } }
+        datasources: { db: { url: 'file:' + option.url } }
       });
+    } else {
+      this.filepath = Database.DefaultFilepath;
+    }
+  }
+
+  async init() {
+    if (!fs.existsSync(this.filepath)) {
+      await fs.promises.copyFile(Database.DefaultFilepath, this.filepath);
     }
   }
 
@@ -56,21 +82,33 @@ export class Database {
     earlyStop = true,
     listener
   }: IndexOption = {}) {
+    let timestamp: Date | undefined = undefined;
+
     for (let page = 1; !pageLimit || page <= pageLimit; page++) {
-      listener && listener({ page });
+      const url = `https://share.dmhy.org/topics/list/page/${page}`;
+
+      listener && listener({ page, url });
+
       const payloads = await fetchResource(page);
+
       let stop = false;
       let inserted = 0;
+
       for (const p of payloads) {
         const createdAt = new Date(p.createdAt);
+        timestamp = createdAt;
         if (isBefore(createdAt, limit)) {
           stop = true;
           break;
         }
         const ok = await this.createResource(p);
-        if (ok) inserted++;
+        if (ok) {
+          inserted++;
+        }
       }
-      listener && listener({ page, ok: inserted });
+
+      listener && listener({ page, url, timestamp, ok: inserted });
+
       if (stop || (earlyStop && !inserted)) {
         break;
       }
@@ -78,14 +116,22 @@ export class Database {
     }
   }
 
-  async search(keyword: string | string[], beginDate?: Date) {
+  async search(keyword: string | string[], indexOption: IndexOption = {}) {
+    if (indexOption.limit) {
+      const oldest = await this.timestamp();
+      if (isBefore(indexOption.limit, oldest)) {
+        indexOption.earlyStop = false;
+        await this.index(indexOption);
+      }
+    }
+
     const keywords = typeof keyword === 'string' ? [keyword] : keyword;
     const result = await this.prisma.resource.findMany({
       where: {
         OR: keywords.map((w) => ({ title: { contains: w } })),
         type: '動畫',
         createdAt: {
-          gt: beginDate
+          gt: indexOption.limit
         }
       }
     });
@@ -94,7 +140,9 @@ export class Database {
 
   async createResource(payload: Prisma.ResourceCreateInput) {
     try {
-      return await this.prisma.resource.create({ data: payload });
+      const resp = await this.prisma.resource.create({ data: payload });
+      await this.timestamp(new Date(payload.createdAt));
+      return resp;
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
@@ -107,6 +155,16 @@ export class Database {
     }
   }
 
+  async findByLink(link: string) {
+    return (
+      (await this.prisma.resource.findUnique({
+        where: {
+          link
+        }
+      })) ?? undefined
+    );
+  }
+
   async createResources(
     payloads: Prisma.ResourceCreateInput[]
   ): Promise<Resource[]> {
@@ -115,11 +173,34 @@ export class Database {
     ).filter(Boolean) as Resource[];
   }
 
+  async timestamp(newValue?: Date) {
+    if (!this._timestamp) {
+      const t = await this.prisma.resource.aggregate({
+        _min: {
+          createdAt: true
+        }
+      });
+      this._timestamp = t._min.createdAt ?? new Date();
+      debug('Init oldest timestamp: ' + this._timestamp.toLocaleDateString());
+    }
+    if (newValue) {
+      return isBefore(newValue, this._timestamp)
+        ? (this._timestamp = newValue)
+        : this._timestamp;
+    } else {
+      return this._timestamp;
+    }
+  }
+
   async list() {
     return await this.prisma.resource.findMany();
   }
 
   async destroy() {
     await this.prisma.$disconnect();
+  }
+
+  formatMagnetLink(magnetLink: string) {
+    return `https://share.dmhy.org/topics/view/${magnetLink}.html`;
   }
 }

@@ -1,11 +1,10 @@
-import type { Item } from 'bangumi-data';
-
 import { debug as createDebug } from 'debug';
+
+import type { Item } from 'bangumi-data';
+import type { Resource } from '@animepaste/database';
 
 import { groupBy } from '../utils';
 import { context } from '../context';
-
-import type { SearchResultItem } from './resources';
 
 import { getBgmTitle, getBgmId } from './utils';
 
@@ -47,7 +46,7 @@ export class Anime {
     });
   }
 
-  addSearchResult(results: SearchResultItem[]) {
+  addSearchResult(results: Resource[]) {
     if (context.cliOption.force) {
       this.episodes.splice(0);
     }
@@ -55,12 +54,12 @@ export class Anime {
     const foundIds = new Set(this.episodes.map((ep) => ep.magnetId));
 
     for (const result of results) {
-      if (foundIds.has(result.id)) continue;
+      if (foundIds.has(result.link)) continue;
 
       // Disable download MKV
-      if (result.name.indexOf('MKV') !== -1) continue;
+      if (result.title.indexOf('MKV') !== -1) continue;
       // Disable download HEVC
-      if (result.name.indexOf('HEVC') !== -1) continue;
+      if (result.title.indexOf('HEVC') !== -1) continue;
 
       const getEp = () => {
         for (const RE of [
@@ -71,7 +70,7 @@ export class Anime {
           /第(\d+)话/,
           /第(\d+)集/
         ]) {
-          const match = RE.exec(result.name);
+          const match = RE.exec(result.title);
           if (match) {
             return +match[1];
           }
@@ -81,10 +80,10 @@ export class Anime {
 
       const getQulity = (): 1080 | 720 => {
         if (
-          result.name.indexOf('720P') !== -1 ||
-          result.name.indexOf('720p') !== -1 ||
-          result.name.indexOf('1280X720') !== -1 ||
-          result.name.indexOf('1280x720') !== -1
+          result.title.indexOf('720P') !== -1 ||
+          result.title.indexOf('720p') !== -1 ||
+          result.title.indexOf('1280X720') !== -1 ||
+          result.title.indexOf('1280x720') !== -1
         ) {
           return 720;
         } else {
@@ -93,9 +92,9 @@ export class Anime {
       };
 
       const getLang = () => {
-        if (result.name.indexOf('简') !== -1) {
+        if (result.title.indexOf('简') !== -1) {
           return 'zh-Hans';
-        } else if (result.name.indexOf('繁') !== -1) {
+        } else if (result.title.indexOf('繁') !== -1) {
           return 'zh-Hant';
         } else {
           return 'zh-Hans';
@@ -106,17 +105,17 @@ export class Anime {
         ep: getEp(),
         quality: getQulity(),
         language: getLang(),
-        creationTime: result.creationTime,
+        creationTime: result.createdAt.toISOString(),
         fansub: result.fansub,
-        magnetId: result.id,
-        magnetName: result.name,
+        magnetId: result.link,
+        magnetName: result.title,
         bgmId: this.bgmId
       };
 
       if (ep.ep > 0) {
         this.episodes.push(ep);
       } else {
-        debug(`Parse Error: ${result.name}`);
+        debug(`Parse Error: ${result.title}`);
       }
     }
   }

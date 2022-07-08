@@ -19,7 +19,7 @@ afterAll(async () => {
 });
 
 describe('Resource client', () => {
-  const database = new Database({ url: 'file:' + testDB });
+  const database = new Database({ url: testDB });
 
   it('should index', async () => {
     await database.index({ page: 1 });

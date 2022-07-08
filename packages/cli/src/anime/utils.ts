@@ -21,3 +21,7 @@ export function getBgmId(bgm: Item) {
     }
   }
 }
+
+export function formatEP(ep: number, fill = '0') {
+  return `${ep < 10 ? fill : ''}${ep}`;
+}

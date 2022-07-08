@@ -9,6 +9,7 @@ import { lightRed, green, red, link } from 'kolorist';
 import type { AnimeType, LocalVideoInfo } from './types';
 
 import { context } from './context';
+import { IndexListener } from './logger';
 import { padRight, printVideoInfo } from './utils';
 
 const name = 'anime';
@@ -48,11 +49,15 @@ cli
   .option('--raw', 'Print raw magnets')
   .option('--id [bgmId]', 'Search keywords with Bangumi ID')
   .option('--title [title]', 'Bangumi title')
+  .option('--index', 'Index magnet database')
   .option('-y, --year [year]')
   .option('-m, --month [month]')
   .option('-p, --plan', 'Output plan.yaml')
   .action(async (anime, option) => {
     const { userSearch, daemonSearch } = await import('./anime');
+    if (option.index) {
+      await context.database.index({ listener: IndexListener });
+    }
     if (option.id && anime) {
       await daemonSearch(option.id, anime.split(','), option);
     } else {
@@ -171,12 +176,22 @@ cli
     }
   });
 
-cli.command('db ls', 'List database').action(async () => {
-  const { PrismaClient } = await import('@animepaste/database');
-  const client = new PrismaClient();
-  const result = await client.resource.findMany();
-  console.log(result);
-});
+cli
+  .command('magnet index', 'Index magnet database')
+  .option('--limit [date]', 'Stop at this date')
+  .option('--page [page]', 'Start indexing at this page', {
+    construct(t) {
+      return t ? +t : 1;
+    }
+  })
+  .action(async (option) => {
+    await context.database.index({
+      limit: option.limit ? new Date(option.limit) : undefined,
+      page: option.page,
+      earlyStop: !option.force,
+      listener: IndexListener
+    });
+  });
 
 cli.command('video info <file>', 'Check video info').action(async (file) => {
   const { getVideoInfo } = await import('./video');

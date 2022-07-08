@@ -1,16 +1,20 @@
 import * as fs from 'fs-extra';
 import * as path from 'node:path';
 import { homedir } from 'node:os';
+
+import { subMonths } from 'date-fns';
 import { load, dump } from 'js-yaml';
+
+import { Database } from '@animepaste/database';
 
 import type { LocalVideoInfo, CliOption, Plan } from '../types';
 
-import { Anime, MagnetInfo } from '../anime';
+import { Anime } from '../anime';
 
 import { LogContext } from './log';
 
 export interface GlobalConfig {
-  plan: string;
+  plan: string | string[];
 
   server: {
     baseURL: string;
@@ -22,7 +26,7 @@ export interface GlobalConfig {
 }
 
 const DefaultGlobalConfig: GlobalConfig = {
-  plan: './plans/test.yaml',
+  plan: ['./plans/test.yaml'],
   server: {
     baseURL: 'https://anime.xlorpaste.cn/api/',
     token: ''
@@ -49,9 +53,10 @@ export class GlobalContex {
   readonly anime: string;
   readonly config: string;
   readonly cacheRoot: string;
+  readonly databaseFilepath: string;
 
   readonly storeLog: LogContext<LocalVideoInfo>;
-  readonly magnetLog: LogContext<MagnetInfo>;
+  readonly database: Database;
 
   private _localRoot: string;
   private configCache: any;
@@ -61,12 +66,13 @@ export class GlobalContex {
     this.root = path.join(homedir(), '.animepaste');
     this.cacheRoot = path.join(this.root, 'cache');
     this._localRoot = path.join(this.root, 'anime');
+    this.databaseFilepath = path.join(this.root, 'magnet.db');
 
     this.anime = path.join(this.root, GlobalContex.AnimeDdName);
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
 
     this.storeLog = new LogContext(this, 'store.json');
-    this.magnetLog = new LogContext(this, 'magnet.json');
+    this.database = new Database({ url: this.databaseFilepath });
   }
 
   async init(option: CliOption) {
@@ -105,6 +111,7 @@ export class GlobalContex {
       }
     }
 
+    await this.database.init();
     await this.loadConfig();
   }
 
@@ -124,14 +131,29 @@ export class GlobalContex {
     return this.configCache;
   }
 
-  async getCurrentPlan(): Promise<Plan> {
-    const config = await this.loadConfig();
-    const planPath = path.join(this.root, config.plan);
-    if (!fs.existsSync(planPath)) {
-      throw new Error(`You should provide plan "${config.plan}"`);
+  async getPlans(): Promise<Plan[]> {
+    const config = await this.loadConfig<GlobalConfig>();
+    const planPath = Array.isArray(config.plan) ? config.plan : [config.plan];
+    const planBody: Plan[] = [];
+    for (const plan of planPath) {
+      const planPath = path.join(this.root, plan);
+      if (!fs.existsSync(planPath)) {
+        throw new Error(`You should provide plan "${plan}"`);
+      }
+      const body = load(fs.readFileSync(planPath, 'utf-8')) as Plan;
+      // Setup date (default: 6 months ago)
+      if (!Boolean(body.date)) {
+        body.date = subMonths(new Date(), 6);
+      } else {
+        body.date = new Date(body.date);
+      }
+      // Setup state (default: onair)
+      if (!Boolean(body.state)) {
+        body.state = 'onair';
+      }
+      planBody.push(body);
     }
-    const plan = load(fs.readFileSync(planPath, 'utf-8'));
-    return plan as any;
+    return planBody;
   }
 
   async getServerConfig(): Promise<GlobalConfig['server']> {
@@ -144,6 +166,7 @@ export class GlobalContex {
   }
 
   // -----------
+
   /**
    * Anime
    */

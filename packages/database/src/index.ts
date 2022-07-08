@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-export { PrismaClient };
+export { Prisma, PrismaClient, Resource } from '@prisma/client';
 
 export * from './database';
 

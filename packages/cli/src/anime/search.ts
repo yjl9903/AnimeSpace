@@ -3,15 +3,17 @@ import type { Item, SiteMeta } from 'bangumi-data';
 import prompts from 'prompts';
 import { debug as createDebug } from 'debug';
 import { distance } from 'fastest-levenshtein';
+import { subMonths } from 'date-fns';
 import { link, bold, dim, lightGreen } from 'kolorist';
 
 import type { AnimeType } from '../types';
+
 import { context } from '../context';
+import { IndexListener, info } from '../logger';
 import { bangumiLink, groupBy } from '../utils';
 
 import { Anime } from './anime';
-import { getBgmDate, getBgmTitle, getBgmId } from './utils';
-import { findResources, formatMagnetURL } from './resources';
+import { getBgmDate, getBgmTitle, getBgmId, formatEP } from './utils';
 
 interface SearchOption {
   type: AnimeType;
@@ -20,6 +22,9 @@ interface SearchOption {
   year?: string;
   month?: string;
   title?: string;
+
+  // Filter outdated resources with same name
+  beginDate?: Date;
 }
 
 const debug = createDebug('anime:search');
@@ -34,6 +39,7 @@ export async function userSearch(
     const anime =
       (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
     const keywords = [bgm.title, ...Object.values(bgm.titleTranslate).flat()];
+    option.beginDate = subMonths(new Date(bgm.begin), 1);
     const res = await search(anime, keywords, option);
     if (res) animes.push(res);
   }
@@ -59,6 +65,7 @@ export async function daemonSearch(
         bgm.title,
         ...Object.values(bgm.titleTranslate).flat()
       ];
+      option.beginDate = subMonths(new Date(bgm.begin), 1);
       const res = await search(anime, keywords, option);
       if (res) animes.push(res);
       break;
@@ -83,17 +90,20 @@ export async function search(
   keywords: string[],
   option: SearchOption = { type: 'tv' }
 ) {
-  console.log();
-  console.log(
-    '  ' + lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`
-  );
+  info();
+  info(lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`);
 
-  const result = await findResources(keywords);
+  const result = await context.database.search(keywords, {
+    limit: option.beginDate,
+    listener: IndexListener
+  });
 
   if (option.raw) {
-    result.sort((a, b) => a.name.localeCompare(b.name));
+    result.sort((a, b) => a.title.localeCompare(b.title));
     for (const item of result) {
-      console.log(`     ${link(item.name, formatMagnetURL(item.id))}`);
+      info(
+        `   ${link(item.title, context.database.formatMagnetLink(item.link))}`
+      );
     }
     return;
   }
@@ -103,14 +113,13 @@ export async function search(
 
   const map = groupBy(anime.episodes, (ep) => ep.fansub);
   for (const [key, eps] of map) {
-    console.log();
-    console.log('    ' + bold(key));
+    info('  ' + bold(key));
     eps.sort((a, b) => a.ep - b.ep);
     for (const ep of eps) {
-      console.log(
-        `     ${ep.ep < 10 ? ' ' : ''}${dim(ep.ep)} ${link(
+      info(
+        `   ${dim(formatEP(ep.ep))} ${link(
           ep.magnetName,
-          formatMagnetURL(ep.magnetId)
+          context.database.formatMagnetLink(ep.magnetId)
         )}`
       );
     }

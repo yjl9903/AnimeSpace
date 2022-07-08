@@ -17,7 +17,7 @@ Command line application for managing [Anime Paste](https://github.com/XLorPaste
   ├── anime/         # Anime store
   ├── cache/         # Videos cache
   ├── config.yaml    # AnimePaste config file
-  ├── magnet.json    # Cache found magnets
+  ├── magnet.db      # Cache found magnets (SQLite)
   ├── anime.json     # Cache found animes
   └── store.json     # Cache OSS upload logs
 ```
@@ -52,7 +52,7 @@ Plan config:
 
 name: '2022 年 4 月新番'
 
-time: 2022-4
+date: '2022-04-01 00:00'
 
 onair:
   - name: 相合之物
