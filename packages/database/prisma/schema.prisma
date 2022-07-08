@@ -8,11 +8,11 @@ generator client {
 }
 
 model Resource {
-  id        Int      @id @default(autoincrement())
-  link      String
+  id        Int       @id @default(autoincrement())
+  link      String    @unique
   type      String
-  title     String   
+  title     String    @unique
   fansub    String
   magnet    String
-  createdAt DateTime
+  createdAt DateTime 
 }
