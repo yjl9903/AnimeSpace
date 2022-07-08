@@ -201,7 +201,7 @@ cli
   .action(async (option) => {
     await context.database.index({
       limit: option.limit ? new Date(option.limit) : undefined,
-      page: option.page,
+      startPage: option.page,
       earlyStop: !option.force,
       listener: IndexListener
     });

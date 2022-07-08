@@ -28,11 +28,18 @@ export interface IndexOption {
   limit?: Date | undefined;
 
   /**
+   * Fetch page start
+   *
+   * @default '1'
+   */
+  startPage?: number | undefined;
+
+  /**
    * Fetch page limit
    *
    * @default 'undefined'
    */
-  page?: number | undefined;
+  endPage?: number | undefined;
 
   /**
    * Break when page found
@@ -82,13 +89,14 @@ export class Database {
 
   async index({
     limit = subMonths(new Date(), 6),
-    page: pageLimit,
+    startPage,
+    endPage,
     earlyStop = true,
     listener
   }: IndexOption = {}) {
     let timestamp: Date | undefined = undefined;
 
-    for (let page = 1; !pageLimit || page <= pageLimit; page++) {
+    for (let page = startPage ?? 1; !endPage || page <= endPage; page++) {
       const url = `https://share.dmhy.org/topics/list/page/${page}`;
 
       listener && listener({ page, url });
