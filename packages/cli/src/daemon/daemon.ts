@@ -61,7 +61,7 @@ export class Daemon {
     await context.database.index({
       limit: subMonths(
         new Date(Math.min(...this.plans.map((p) => p.date.getTime()))),
-        6
+        3
       ),
       earlyStop: !context.cliOption.force,
       listener: IndexListener

@@ -150,6 +150,8 @@ importers:
     specifiers:
       '@prisma/client': ^4.0.0
       axios: ^0.27.2
+      cnchar: ^3.2.2
+      cnchar-trad: ^3.2.2
       date-fns: ^2.28.0
       debug: ^4.3.4
       node-html-parser: ^5.3.3
@@ -158,6 +160,8 @@ importers:
     dependencies:
       '@prisma/client': 4.0.0_prisma@4.0.0
       axios: 0.27.2_debug@4.3.4
+      cnchar: 3.2.2
+      cnchar-trad: 3.2.2
       date-fns: 2.28.0
       debug: 4.3.4
       node-html-parser: 5.3.3
@@ -2808,6 +2812,22 @@ packages:
   /clone/2.1.2:
     resolution: {integrity: sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==}
     engines: {node: '>=0.8'}
+    dev: false
+
+  /cnchar-trad/3.2.2:
+    resolution: {integrity: sha512-C0hVDJ0yz+Cow+k2Ia6TQKt9F7DSmztlHpnF+o7VWjWuJR38buYmWEg3T501PAbZpBKCYtCiY/4lT6tHIeIFeg==}
+    dependencies:
+      cnchar-types: 3.2.2
+    dev: false
+
+  /cnchar-types/3.2.2:
+    resolution: {integrity: sha512-25h6rT/c7r3CUC5VRp/roSGgAb2XRwUqHlJVZ1fRIXcOY+g+qoCnUsUIuLvsyV5hX7ReD+/9fraScL41Vowljg==}
+    dev: false
+
+  /cnchar/3.2.2:
+    resolution: {integrity: sha512-Ywqw40EP9jkIvSgwdDKqnwWj32ArRR3o2nKZ0NfaMCe4f8BIF1eD1NwtoCLm82SxqJuCnlHPoDHfPtmERd0V6A==}
+    dependencies:
+      cnchar-types: 3.2.2
     dev: false
 
   /color-convert/1.9.3:

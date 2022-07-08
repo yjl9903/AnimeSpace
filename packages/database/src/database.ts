@@ -3,11 +3,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import createDebug from 'debug';
+import cnchar from 'cnchar';
+import trad from 'cnchar-trad';
 import { subMonths, isBefore } from 'date-fns';
 import { PrismaClient, Prisma, Resource } from '@prisma/client';
 
 import { sleep } from './utils';
 import { fetchResource } from './fetch';
+
+cnchar.use(trad);
 
 const debug = createDebug('anime:database');
 
@@ -126,9 +130,13 @@ export class Database {
     }
 
     const keywords = typeof keyword === 'string' ? [keyword] : keyword;
+    debug(keywords.map((k) => cnchar.convert.simpleToTrad(k)).join('\n'));
     const result = await this.prisma.resource.findMany({
       where: {
-        OR: keywords.map((w) => ({ title: { contains: w } })),
+        OR: [
+          ...keywords,
+          ...keywords.map((k) => cnchar.convert.simpleToTrad(k))
+        ].map((w) => ({ title: { contains: w } })),
         type: '動畫',
         createdAt: {
           gt: indexOption.limit

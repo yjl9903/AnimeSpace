@@ -93,6 +93,11 @@ export async function search(
   info();
   info(lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`);
 
+  debug(`Search "${anime.title}"`);
+  for (const keyword of keywords) {
+    debug('- ' + keyword);
+  }
+
   const result = await context.database.search(keywords, {
     limit: option.beginDate,
     listener: IndexListener
@@ -124,10 +129,12 @@ export async function search(
 }
 
 function outputPlan(animes: Anime[]) {
+  const date = new Date(Math.min(...animes.map((a) => a.date.getTime())));
+
   console.log();
   console.log(`  name: ${format(new Date(), 'yyyy-MM-dd 新番放送计划')}`);
   console.log();
-  console.log(`  date: `);
+  console.log(`  date: ${format(date, 'yyyy-MM-dd HH:mm')}`);
   console.log();
   console.log(`  onair:`);
   for (const anime of animes) {
@@ -138,6 +145,7 @@ function outputPlan(animes: Anime[]) {
     for (const [key] of map) {
       console.log(`        - ${key}`);
     }
+    console.log();
   }
 }
 
