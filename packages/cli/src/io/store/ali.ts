@@ -1,11 +1,12 @@
 import path from 'node:path';
 
 import OSS from 'ali-oss';
+import onDeath from 'death';
 import RPCClient from '@alicloud/pop-core';
 import { debug as createDebug } from 'debug';
-import { lightRed, lightBlue } from 'kolorist';
 
 import { context } from '../../context';
+import { error, info } from '../../logger';
 
 import { b64decode, createProgressBar } from '../utils';
 
@@ -54,11 +55,14 @@ export class AliStore extends Store {
   }
 
   async doUpload(payload: Payload): Promise<string | undefined> {
+    debug(payload);
+
     const resp = await this.createUplodaVideo(payload.title, payload.filepath);
     if (!resp) {
       throw new Error('Fail creating upload video');
+    } else {
+      debug(resp);
     }
-    debug(resp);
 
     const store = new OSS({
       endpoint: resp.UploadAddress.Endpoint,
@@ -81,6 +85,12 @@ export class AliStore extends Store {
 
     try {
       const bar = progressbar.create(path.basename(payload.filepath), 1);
+      const cancel = onDeath(async () => {
+        error('Process is terminated');
+        await this.doDelete(resp.VideoId);
+        info('Clear OK');
+      });
+
       const ossRes = await store.multipartUpload(
         resp.UploadAddress.FileName,
         payload.filepath,
@@ -90,13 +100,17 @@ export class AliStore extends Store {
           }
         }
       );
+      cancel();
       debug(ossRes);
+
       return resp.VideoId;
-    } catch (error) {
-      debug(error);
-      console.error(lightRed('  Error ') + 'Upload error, please DO NOT exit!');
+    } catch (err) {
+      debug(err);
+
+      error('Upload error, please DO NOT exit!');
       await this.doDelete(resp.VideoId);
-      console.error(lightBlue('  Info  ') + 'Clear OK');
+      info('Clear OK');
+
       return undefined;
     } finally {
       progressbar.finish();
