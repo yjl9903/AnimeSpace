@@ -30,7 +30,7 @@
     "*.mjs"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "prisma generate && unbuild",
     "db:gen": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "dev": "unbuild --stub",
