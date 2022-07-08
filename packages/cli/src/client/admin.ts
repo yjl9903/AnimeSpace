@@ -19,8 +19,7 @@ export class AdminClient {
       baseURL: option.baseURL,
       headers: {
         Authorization: this.token
-      },
-      proxy: proxy()
+      }
     });
   }
 
@@ -29,7 +28,11 @@ export class AdminClient {
     option: { retry?: number } = {}
   ): Promise<OnairAnime[]> {
     try {
-      const { data } = await this.api.post('/admin/anime', { onair });
+      const { data } = await this.api.post(
+        '/admin/anime',
+        { onair },
+        option.retry ? {} : { proxy: proxy() }
+      );
       if (data.status !== 'Ok') throw new Error('Unknown error');
       return data.data.onair;
     } catch (error) {
