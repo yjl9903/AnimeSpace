@@ -19,18 +19,28 @@ afterAll(async () => {
 });
 
 describe('Resource client', () => {
-  it('should search', async () => {
-    const database = new Database({ url: 'file:' + testDB });
+  const database = new Database({ url: 'file:' + testDB });
+
+  it('should index', async () => {
     await database.index({ page: 1 });
     expect(await database.list()).toHaveLength(80);
 
     await database.index({ page: 1 });
     expect(await database.list()).toHaveLength(80);
   });
+
+  it('should search', async () => {
+    const title1 = (await database.list())[0].title;
+    const title2 = (await database.list())[1].title;
+    expect(await database.search(title1)).toHaveLength(1);
+    expect(await database.search(title2)).toHaveLength(1);
+    expect(await database.search([title1, title2])).toHaveLength(2);
+    expect(await database.search('1a2s3d4f5g6h7j8k9l')).toHaveLength(0);
+  });
 });
 
 describe('Parser', () => {
-  it('should remove prefix', () => {
+  it('should parse', () => {
     const parser = new Parser();
 
     expect(

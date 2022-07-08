@@ -70,6 +70,16 @@ export class Database {
     }
   }
 
+  async search(keyword: string | string[]) {
+    const keywords = typeof keyword === 'string' ? [keyword] : keyword;
+    const result = await this.prisma.resource.findMany({
+      where: {
+        OR: keywords.map((w) => ({ title: { contains: w } }))
+      }
+    });
+    return result;
+  }
+
   async createResource(payload: Prisma.ResourceCreateInput) {
     try {
       return await this.prisma.resource.create({ data: payload });
