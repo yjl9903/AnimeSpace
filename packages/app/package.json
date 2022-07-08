@@ -10,7 +10,7 @@
   "dependencies": {
     "@vueuse/core": "^8.9.1",
     "@vueuse/head": "^0.7.6",
-    "bangumi-data": "^0.3.94",
+    "bangumi-data": "^0.3.95",
     "date-fns": "^2.28.0",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
@@ -33,7 +33,7 @@
     "unplugin-auto-import": "^0.9.2",
     "unplugin-icons": "^0.14.7",
     "unplugin-vue-components": "^0.21.1",
-    "vite": "^2.9.13",
+    "vite": "^2.9.14",
     "vite-plugin-info": "^0.1.0",
     "vite-plugin-inspect": "^0.5.1",
     "vite-plugin-pages": "^0.25.0",

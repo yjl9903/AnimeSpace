@@ -45,7 +45,7 @@
     "@animepaste/database": "workspace:*",
     "ali-oss": "^6.17.1",
     "axios": "^0.27.2",
-    "bangumi-data": "^0.3.94",
+    "bangumi-data": "^0.3.95",
     "breadc": "^0.4.6",
     "cli-progress": "^3.11.2",
     "debug": "^4.3.4",
