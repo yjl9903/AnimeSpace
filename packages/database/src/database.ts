@@ -32,6 +32,11 @@ export interface IndexOption {
    * @default 'true'
    */
   earlyStop?: boolean;
+
+  /**
+   * Handle progress event
+   */
+  listener?: (state: { page: number; ok?: number }) => void;
 }
 
 export class Database {
@@ -48,12 +53,14 @@ export class Database {
   async index({
     limit = subMonths(new Date(), 6),
     page: pageLimit,
-    earlyStop = true
+    earlyStop = true,
+    listener
   }: IndexOption = {}) {
     for (let page = 1; !pageLimit || page <= pageLimit; page++) {
+      listener && listener({ page });
       const payloads = await fetchResource(page);
       let stop = false;
-      let inserted = false;
+      let inserted = 0;
       for (const p of payloads) {
         const createdAt = new Date(p.createdAt);
         if (isBefore(createdAt, limit)) {
@@ -61,8 +68,9 @@ export class Database {
           break;
         }
         const ok = await this.createResource(p);
-        if (ok) inserted = true;
+        if (ok) inserted++;
       }
+      listener && listener({ page, ok: inserted });
       if (stop || (earlyStop && !inserted)) {
         break;
       }
