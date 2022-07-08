@@ -1,8 +1,11 @@
+import createDebug from 'debug';
 import { subMonths, isBefore } from 'date-fns';
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient, Prisma, Resource } from '@prisma/client';
 
 import { sleep } from './utils';
 import { fetchResource } from './search';
+
+const debug = createDebug('anime:database');
 
 export interface DatabaseOption {
   url?: string;
@@ -50,15 +53,17 @@ export class Database {
     for (let page = 1; !pageLimit || page <= pageLimit; page++) {
       const payloads = await fetchResource(page);
       let stop = false;
+      let inserted = false;
       for (const p of payloads) {
         const createdAt = new Date(p.createdAt);
         if (isBefore(createdAt, limit)) {
           stop = true;
           break;
         }
-        await this.createResource(p);
+        const ok = await this.createResource(p);
+        if (ok) inserted = true;
       }
-      if (stop) {
+      if (stop || (earlyStop && !inserted)) {
         break;
       }
       await sleep();
@@ -66,11 +71,26 @@ export class Database {
   }
 
   async createResource(payload: Prisma.ResourceCreateInput) {
-    return await this.prisma.resource.create({ data: payload });
+    try {
+      return await this.prisma.resource.create({ data: payload });
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
+          debug(
+            `There is a unique constraint violation when inserting resource`
+          );
+          debug(`Title: ${payload.title}`);
+        }
+      }
+    }
   }
 
-  async createResources(payloads: Prisma.ResourceCreateInput[]) {
-    return Promise.all(payloads.map((p) => this.createResource(p)));
+  async createResources(
+    payloads: Prisma.ResourceCreateInput[]
+  ): Promise<Resource[]> {
+    return (
+      await Promise.all(payloads.map((p) => this.createResource(p)))
+    ).filter(Boolean) as Resource[];
   }
 
   async list() {

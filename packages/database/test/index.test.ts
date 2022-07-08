@@ -23,8 +23,9 @@ describe('Resource client', () => {
   it('should search', async () => {
     const database = new Database({ url: 'file:' + testDB });
     await database.index({ page: 1 });
-    const list = await database.list();
-    // console.log(list.map((x) => x.title).join('\n'));
-    expect(list).toHaveLength(80);
+    expect(await database.list()).toHaveLength(80);
+
+    await database.index({ page: 1 });
+    expect(await database.list()).toHaveLength(80);
   });
 });
