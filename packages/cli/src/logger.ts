@@ -1,7 +1,9 @@
 import { format } from 'date-fns';
 import { lightBlue, lightRed, link } from 'kolorist';
 
-import type { IndexOption } from '@animepaste/database';
+import type { IndexOption, Resource } from '@animepaste/database';
+
+import { context } from './context';
 
 export function info(message?: string, ...args: any[]) {
   if (message !== undefined) {
@@ -29,3 +31,15 @@ export const IndexListener: IndexOption['listener'] = ({
     info(`Collect ${ok} magnets on ${pageLink} ${time}`);
   }
 };
+
+export function printMagnets(magnets: Resource[], prefix = '  ') {
+  magnets.sort((a, b) => a.title.localeCompare(b.title));
+  for (const item of magnets) {
+    info(
+      `${prefix}${link(
+        item.title,
+        context.database.formatMagnetLink(item.link)
+      )}`
+    );
+  }
+}

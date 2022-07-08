@@ -9,8 +9,8 @@ import { lightRed, green, red, link } from 'kolorist';
 import type { AnimeType, LocalVideoInfo } from './types';
 
 import { context } from './context';
-import { IndexListener } from './logger';
 import { padRight, printVideoInfo } from './utils';
+import { IndexListener, printMagnets } from './logger';
 
 const name = 'anime';
 
@@ -191,6 +191,13 @@ cli
       earlyStop: !option.force,
       listener: IndexListener
     });
+  });
+
+cli
+  .command('magnet ls <keyword>', 'Search magnet database')
+  .action(async (keyword) => {
+    const list = await context.database.search(keyword);
+    printMagnets(list, '');
   });
 
 cli.command('video info <file>', 'Check video info').action(async (file) => {

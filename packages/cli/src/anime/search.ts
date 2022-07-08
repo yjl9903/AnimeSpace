@@ -1,16 +1,16 @@
 import type { Item, SiteMeta } from 'bangumi-data';
 
 import prompts from 'prompts';
+import { subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
 import { distance } from 'fastest-levenshtein';
-import { subMonths } from 'date-fns';
 import { link, bold, dim, lightGreen } from 'kolorist';
 
 import type { AnimeType } from '../types';
 
 import { context } from '../context';
-import { IndexListener, info } from '../logger';
 import { bangumiLink, groupBy } from '../utils';
+import { IndexListener, info, printMagnets } from '../logger';
 
 import { Anime } from './anime';
 import { getBgmDate, getBgmTitle, getBgmId, formatEP } from './utils';
@@ -99,12 +99,7 @@ export async function search(
   });
 
   if (option.raw) {
-    result.sort((a, b) => a.title.localeCompare(b.title));
-    for (const item of result) {
-      info(
-        `   ${link(item.title, context.database.formatMagnetLink(item.link))}`
-      );
-    }
+    printMagnets(result);
     return;
   }
 
@@ -148,36 +143,43 @@ async function promptSearch(anime: string | undefined, option: SearchOption) {
     return await promptBgm(bgms);
   } else {
     const year = new Date().getFullYear();
-    await prompts([
-      {
-        type: option.year ? null : 'select',
-        name: 'year',
-        message: '年份?',
-        choices: new Array(5).fill(undefined).map((_v, i) => ({
-          title: String(year - i) + ' 年',
-          value: String(year - i)
-        })),
-        initial: 0,
-        onState({ value }) {
-          option.year = value;
+    await prompts(
+      [
+        {
+          type: option.year ? null : 'select',
+          name: 'year',
+          message: '年份?',
+          choices: new Array(5).fill(undefined).map((_v, i) => ({
+            title: String(year - i) + ' 年',
+            value: String(year - i)
+          })),
+          initial: 0,
+          onState({ value }) {
+            option.year = value;
+          }
+        },
+        {
+          type: option.month ? null : 'select',
+          name: 'month',
+          message: '季度?',
+          choices: [
+            { title: '1 月', value: '1' },
+            { title: '4 月', value: '4' },
+            { title: '7 月', value: '7' },
+            { title: '10 月', value: '10' }
+          ],
+          initial: 0,
+          onState({ value }) {
+            option.month = value;
+          }
         }
-      },
+      ],
       {
-        type: option.month ? null : 'select',
-        name: 'month',
-        message: '季度?',
-        choices: [
-          { title: '1 月', value: '1' },
-          { title: '4 月', value: '4' },
-          { title: '7 月', value: '7' },
-          { title: '10 月', value: '10' }
-        ],
-        initial: 0,
-        onState({ value }) {
-          option.month = value;
+        onCancel: () => {
+          throw new Error('Operation cancelled');
         }
       }
-    ]);
+    );
     const { items } = await importBgmdata(option);
     return await promptBgm(items, false);
   }
