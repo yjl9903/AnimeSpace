@@ -1,6 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 import { debug as createDebug } from 'debug';
 
+import { proxy } from '@animepaste/database';
+
 import type { OnairAnime, UserOption } from './types';
 
 const debug = createDebug('anime:client');
@@ -17,7 +19,8 @@ export class AdminClient {
       baseURL: option.baseURL,
       headers: {
         Authorization: this.token
-      }
+      },
+      proxy: proxy()
     });
   }
 

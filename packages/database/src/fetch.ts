@@ -13,7 +13,7 @@ export async function fetchResource(
   const result = await axios.get(
     `https://share.dmhy.org/topics/list/page/${page}`,
     {
-      proxy: getProxy()
+      proxy: proxy()
     }
   );
 
@@ -67,7 +67,7 @@ export async function fetchResource(
   return searchResult;
 }
 
-function getProxy() {
+export function proxy() {
   const proxy =
     process.env.https_proxy ??
     process.env.HTTPS_PROXY ??
