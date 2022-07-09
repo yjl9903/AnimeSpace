@@ -181,7 +181,8 @@ export class Daemon {
           );
         }
 
-        if (!this.enable) return;
+        // If not enable donwload and upload, continue
+        if (!this.enable) continue;
 
         const magnets = await Promise.all(
           episodes.map(async (ep) => {
