@@ -20,6 +20,11 @@ export class Daemon {
   private store!: Store;
   private client!: AdminClient;
 
+  /**
+   * Enable donwload and upload
+   *
+   * @default 'true'
+   */
   private readonly enable: boolean;
 
   constructor(option: { update: boolean }) {
@@ -138,13 +143,26 @@ export class Daemon {
             ? resolveEP(onair.link)
             : new Map<number, string>();
 
-        const epMagnet = onair.magnet
+        const givenMagnet = onair.magnet
           ? resolveEP(onair.magnet)
           : new Map<number, string>();
+        const epMagnet = (
+          await Promise.all(
+            [...givenMagnet.entries()].map(async ([ep, magnet]) => {
+              const m = await context.magnetStore.findById(magnet);
+              if (!!m) {
+                const parsedEP = anime.parseEpisode(m);
+                parsedEP && (parsedEP.ep = ep);
+                return parsedEP;
+              }
+            })
+          )
+        ).filter(Boolean) as Episode[];
 
         const episodes = anime
           .genEpisodes(onair.fansub)
-          .filter((ep) => !epMagnet.has(ep.ep))
+          .filter((ep) => !givenMagnet.has(ep.ep))
+          .concat(epMagnet)
           .filter((ep) => !epLink.has(ep.ep));
 
         info(

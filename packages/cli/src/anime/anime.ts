@@ -70,68 +70,74 @@ export class Anime {
     for (const result of results) {
       if (foundIds.has(result.id)) continue;
 
-      // Disable download MKV
-      if (result.title.indexOf('MKV') !== -1) continue;
-      // Disable download HEVC
-      if (result.title.indexOf('HEVC') !== -1) continue;
+      const ep = this.parseEpisode(result);
 
-      const getEp = () => {
-        for (const RE of [
-          /\[(\d+)([vV]\d+)?\]/,
-          /【(\d+)([vV]\d+)?】/,
-          /- (\d+) /,
-          /第(\d+)話/,
-          /第(\d+)话/,
-          /第(\d+)集/
-        ]) {
-          const match = RE.exec(result.title);
-          if (match) {
-            return +match[1];
-          }
-        }
-        return 0;
-      };
-
-      const getQulity = (): 1080 | 720 => {
-        if (
-          result.title.indexOf('720P') !== -1 ||
-          result.title.indexOf('720p') !== -1 ||
-          result.title.indexOf('1280X720') !== -1 ||
-          result.title.indexOf('1280x720') !== -1
-        ) {
-          return 720;
-        } else {
-          return 1080;
-        }
-      };
-
-      const getLang = () => {
-        if (result.title.indexOf('简') !== -1) {
-          return 'zh-Hans';
-        } else if (result.title.indexOf('繁') !== -1) {
-          return 'zh-Hant';
-        } else {
-          return 'zh-Hans';
-        }
-      };
-
-      const ep: Episode = {
-        ep: getEp(),
-        quality: getQulity(),
-        language: getLang(),
-        creationTime: result.createdAt.toISOString(),
-        fansub: result.fansub,
-        magnetId: result.id,
-        magnetName: result.title,
-        bgmId: this.bgmId
-      };
-
-      if (ep.ep > 0) {
+      if (ep && ep.ep > 0) {
         this.episodes.push(ep);
       } else {
         debug(`Parse Error: ${result.title}`);
       }
     }
+  }
+
+  parseEpisode(result: Resource) {
+    // Disable download MKV
+    if (result.title.indexOf('MKV') !== -1) return undefined;
+    // Disable download HEVC
+    if (result.title.indexOf('HEVC') !== -1) return undefined;
+
+    const getEp = () => {
+      for (const RE of [
+        /\[(\d+)([vV]\d+)?\]/,
+        /【(\d+)([vV]\d+)?】/,
+        /- (\d+) /,
+        /第(\d+)話/,
+        /第(\d+)话/,
+        /第(\d+)集/
+      ]) {
+        const match = RE.exec(result.title);
+        if (match) {
+          return +match[1];
+        }
+      }
+      return 0;
+    };
+
+    const getQulity = (): 1080 | 720 => {
+      if (
+        result.title.indexOf('720P') !== -1 ||
+        result.title.indexOf('720p') !== -1 ||
+        result.title.indexOf('1280X720') !== -1 ||
+        result.title.indexOf('1280x720') !== -1
+      ) {
+        return 720;
+      } else {
+        return 1080;
+      }
+    };
+
+    const getLang = () => {
+      if (result.title.indexOf('简') !== -1) {
+        return 'zh-Hans';
+      } else if (result.title.indexOf('繁') !== -1) {
+        return 'zh-Hant';
+      } else {
+        return 'zh-Hans';
+      }
+    };
+
+    const ep: Episode = {
+      ep: getEp(),
+      quality: getQulity(),
+      language: getLang(),
+      creationTime: result.createdAt.toISOString(),
+      fansub: result.fansub,
+      magnetId: result.id,
+      magnetName: result.title,
+      bgmId: this.bgmId
+    };
+
+    return ep;
   }
 
   genEpisodes(fansubOrder: string[] = []) {
