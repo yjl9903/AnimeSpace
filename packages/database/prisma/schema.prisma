@@ -8,11 +8,27 @@ generator client {
 }
 
 model Resource {
-  id        Int       @id @default(autoincrement())
-  link      String    @unique
+  id        String   @id
   type      String
-  title     String    @unique
+  title     String   @unique
   fansub    String
   magnet    String
-  createdAt DateTime 
+  createdAt DateTime
+  Video     Video[]
+}
+
+model Video {
+  id        String
+  platform  String
+  title     String
+  createdAt DateTime
+  cover     String?
+  playUrls  String
+
+  magnet    Resource? @relation(fields: [magnetId], references: [id])
+  magnetId  String?
+  directory String?
+  hash      String?
+
+  @@id([id, platform])
 }

@@ -45,7 +45,7 @@ export async function fetchResource(
     const fansub = td2a.length === 2 ? td2a[0]?.innerText.trim() : '';
     const titleEl = td2a.length === 2 ? td2a[1] : td2a[0];
     const title = titleEl?.innerText.trim();
-    const link = parseId(titleEl?.getAttribute('href')!);
+    const id = parseId(titleEl?.getAttribute('href')!);
     const magnet = tds[3].querySelector('a')?.getAttribute('href');
 
     if (!magnet || !time || !title) {
@@ -56,7 +56,7 @@ export async function fetchResource(
 
     searchResult.push({
       type,
-      link,
+      id,
       title,
       fansub,
       magnet,

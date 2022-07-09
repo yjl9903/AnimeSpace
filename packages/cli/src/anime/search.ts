@@ -125,7 +125,7 @@ export async function search(
       info(
         `   ${dim(formatEP(ep.ep))} ${link(
           ep.magnetName,
-          context.magnetStore.formatMagnetLink(ep.magnetId)
+          context.magnetStore.idToLink(ep.magnetId)
         )}`
       );
     }
