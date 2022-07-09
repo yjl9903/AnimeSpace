@@ -7,7 +7,8 @@ import { load, dump } from 'js-yaml';
 
 import { Database } from '@animepaste/database';
 
-import type { LocalVideoInfo, CliOption, Plan } from '../types';
+import type { VideoInfo } from '../io';
+import type { CliOption, Plan } from '../types';
 
 import { Anime } from '../anime';
 
@@ -55,7 +56,7 @@ export class GlobalContex {
   readonly cacheRoot: string;
   readonly databaseFilepath: string;
 
-  readonly storeLog: LogContext<LocalVideoInfo>;
+  readonly storeLog: LogContext<VideoInfo>;
   readonly database: Database;
 
   private _localRoot: string;

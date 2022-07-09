@@ -3,15 +3,15 @@ import { format, subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
 import { dim, link, lightGreen } from 'kolorist';
 
-import type { Plan, VideoInfo } from '../types';
+import type { Plan } from '../types';
+import type { VideoInfo } from '../io';
 
 import { context } from '../context/';
 import { checkVideo } from '../video';
-import { bangumiLink } from '../utils';
 import { TorrentClient, useStore } from '../io';
 import { error, info, IndexListener } from '../logger';
-import { Anime, Episode, daemonSearch, formatEP } from '../anime';
 import { OnairAnime, OnairEpisode, AdminClient } from '../client';
+import { Anime, Episode, daemonSearch, bangumiLink, formatEP } from '../anime';
 
 const debug = createDebug('anime:daemon');
 
@@ -191,17 +191,13 @@ export class Daemon {
             ' ' +
             `(${bangumiLink(onair.bgmId)})`
         );
-        const createStore = useStore('ali');
-        const store = await createStore(context);
+        const store = await useStore('ali')();
         const playURLs: VideoInfo[] = [];
         for (const { filename } of magnets) {
           const func = async (count = 0) => {
             if (count > 3) return;
             try {
-              const resp = await store.upload({
-                title: filename,
-                filepath: path.join(localRoot, filename)
-              });
+              const resp = await store.upload(path.join(localRoot, filename));
               if (resp && resp.playUrl.length > 0) {
                 playURLs.push(resp);
               }

@@ -6,7 +6,7 @@ import Breadc from 'breadc';
 import { debug as createDebug } from 'debug';
 import { lightRed, green, red, link } from 'kolorist';
 
-import type { AnimeType, LocalVideoInfo } from './types';
+import type { AnimeType } from './types';
 
 import { context } from './context';
 import { padRight, printVideoInfo } from './utils';
@@ -84,8 +84,7 @@ cli
   .option('--one-line', 'Only show one line')
   .action(async (name, option) => {
     const { useStore } = await import('./io');
-    const createStore = useStore('ali');
-    const store = await createStore(context);
+    const store = await useStore('ali')();
 
     const videos = await store.listLocalVideos();
     videos.sort((a, b) => a.title.localeCompare(b.title));
@@ -118,8 +117,7 @@ cli
   .option('--file', 'Use videoId instead of filepath')
   .action(async (id, option) => {
     const { useStore } = await import('./io');
-    const createStore = useStore('ali');
-    const store = await createStore(context);
+    const store = await useStore('ali')();
 
     const info = !option.file
       ? await store.fetchVideoInfo(id)
@@ -134,22 +132,17 @@ cli
 
 cli
   .command('store put <file>', 'Upload video to OSS')
-  .option('--title [title]', 'Video title')
-  .action(async (filename, option) => {
+  .action(async (filename) => {
     const { useStore } = await import('./io');
-    const createStore = useStore('ali');
-    const store = await createStore(context);
+    const store = await useStore('ali')();
 
     const newFile = await context.copy(
       path.resolve(process.cwd(), filename),
       'cache'
     );
-    const payload = {
-      filepath: newFile,
-      title: option.title ?? path.basename(newFile)
-    };
+
     try {
-      const info = await store.upload(payload);
+      const info = await store.upload(newFile);
       if (info) {
         printVideoInfo(info);
       } else {
@@ -161,34 +154,33 @@ cli
     }
   });
 
-cli
-  .command('store rm [...ids]', 'Remove video info on OSS')
-  .option('--file', 'Use videoId instead of filepath')
-  .option('--rm-local', 'Remove local files')
-  .action(async (ids, option) => {
-    const { useStore } = await import('./io');
-    const createStore = useStore('ali');
-    const store = await createStore(context);
+// cli
+//   .command('store rm [...ids]', 'Remove video info on OSS')
+//   .option('--file', 'Use videoId instead of filepath')
+//   .option('--rm-local', 'Remove local files')
+//   .action(async (ids, option) => {
+//     const { useStore } = await import('./io');
+//     const store = await useStore('ali')();
 
-    for (const id of ids) {
-      const info = !option.file
-        ? await store.fetchVideoInfo(id)
-        : await store.searchLocalVideo(id);
-      if (option['rm-local'] && info && 'filepath' in info) {
-        const local = info as LocalVideoInfo;
-        await remove(local.filepath);
-      }
+//     for (const id of ids) {
+//       const info = !option.file
+//         ? await store.fetchVideoInfo(id)
+//         : await store.searchLocalVideo(id);
+//       if (option['rm-local'] && info && 'filepath' in info) {
+//         const local = info as LocalVideoInfo;
+//         await remove(local.filepath);
+//       }
 
-      console.log();
-      if (info) {
-        printVideoInfo(info);
-        await store.deleteVideo(info.videoId);
-        console.log(`  ${green(`√ Delete "${info.videoId}" Ok`)}`);
-      } else {
-        console.log(`  ${red(`✗ Video "${id}" not found`)}`);
-      }
-    }
-  });
+//       console.log();
+//       if (info) {
+//         printVideoInfo(info);
+//         await store.deleteVideo(info.videoId);
+//         console.log(`  ${green(`√ Delete "${info.videoId}" Ok`)}`);
+//       } else {
+//         console.log(`  ${red(`✗ Video "${id}" not found`)}`);
+//       }
+//     }
+//   });
 
 cli
   .command('magnet index', 'Index magnet database')

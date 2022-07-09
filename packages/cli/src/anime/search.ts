@@ -9,11 +9,17 @@ import { link, bold, dim, lightGreen } from 'kolorist';
 import type { AnimeType } from '../types';
 
 import { context } from '../context';
-import { bangumiLink, groupBy } from '../utils';
+import { groupBy } from '../utils';
 import { IndexListener, info, printMagnets } from '../logger';
 
 import { Anime } from './anime';
-import { getBgmDate, getBgmTitle, getBgmId, formatEP } from './utils';
+import {
+  getBgmDate,
+  getBgmTitle,
+  getBgmId,
+  bangumiLink,
+  formatEP
+} from './utils';
 
 interface SearchOption {
   type: AnimeType;

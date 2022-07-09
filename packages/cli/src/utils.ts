@@ -1,9 +1,9 @@
-import type { VideoInfo } from './types';
+import type { VideoInfo } from './io';
 
 import fs from 'fs-extra';
 import crypto from 'node:crypto';
 
-import { bold, link } from 'kolorist';
+import { bold } from 'kolorist';
 import { ImmutableMap, MutableMap } from 'lbear';
 
 export function printVideoInfo(videoInfo: VideoInfo) {
@@ -20,15 +20,11 @@ export function printVideoInfo(videoInfo: VideoInfo) {
   }
 }
 
-export function hashFile(filepath: string): string {
-  const fileBuffer = fs.readFileSync(filepath);
+export async function hashFile(filepath: string): Promise<string> {
+  const fileBuffer = await fs.readFile(filepath);
   const hashSum = crypto.createHash('sha256');
   hashSum.update(fileBuffer);
   return hashSum.digest('hex');
-}
-
-export function bangumiLink(bgmId: string) {
-  return link(`Bangumi: ${bgmId}`, 'https://bangumi.tv/subject/' + bgmId);
 }
 
 export function groupBy<T>(

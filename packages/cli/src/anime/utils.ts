@@ -1,5 +1,7 @@
 import type { Item, Language } from 'bangumi-data';
 
+import { link } from 'kolorist';
+
 export function getBgmDate(bgm: Item) {
   const d = new Date(bgm.begin);
   return {
@@ -20,6 +22,10 @@ export function getBgmId(bgm: Item) {
       return site.id;
     }
   }
+}
+
+export function bangumiLink(bgmId: string) {
+  return link(`Bangumi: ${bgmId}`, 'https://bangumi.tv/subject/' + bgmId);
 }
 
 export function formatEP(ep: number, fill = '0') {
