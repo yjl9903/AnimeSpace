@@ -3,20 +3,22 @@ import { format, subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
 import { dim, link, lightGreen } from 'kolorist';
 
-import type { Plan } from '../types';
-import type { VideoInfo } from '../io';
+import type { Plan, EpisodeList } from '../types';
+import type { Store, VideoInfo } from '../io';
 
-import { context } from '../context/';
+import { context } from '../context';
 import { checkVideo } from '../video';
 import { TorrentClient, useStore } from '../io';
+import { OnairEpisode, AdminClient } from '../client';
 import { error, info, IndexListener } from '../logger';
-import { OnairAnime, OnairEpisode, AdminClient } from '../client';
 import { Anime, Episode, daemonSearch, bangumiLink, formatEP } from '../anime';
 
 const debug = createDebug('anime:daemon');
 
 export class Daemon {
   private plans!: Plan[];
+  private store!: Store;
+  private client!: AdminClient;
 
   private readonly enable: boolean;
 
@@ -27,19 +29,7 @@ export class Daemon {
   async init() {
     info('Start initing daemon ' + now());
 
-    this.plans = await context.getPlans();
-
-    for (const plan of this.plans) {
-      for (const onair of plan.onair) {
-        info(
-          'Onair    ' +
-            lightGreen(onair.title) +
-            ' ' +
-            `(${bangumiLink(onair.bgmId)})`
-        );
-      }
-    }
-
+    await this.refreshPlan();
     await this.refreshDatabase();
     await this.refreshEpisode();
     await this.downloadEpisode();
@@ -50,11 +40,26 @@ export class Daemon {
   async update() {
     info('Start updating anime ' + now());
 
+    await this.refreshPlan();
     await this.refreshDatabase();
     await this.refreshEpisode();
     await this.downloadEpisode();
 
     info('Update OK ' + now());
+  }
+
+  private async refreshPlan() {
+    this.plans = await context.getPlans();
+    for (const plan of this.plans) {
+      for (const onair of plan.onair) {
+        info(
+          'Onair    ' +
+            lightGreen(onair.title) +
+            ' ' +
+            `(${bangumiLink(onair.bgmId)})`
+        );
+      }
+    }
   }
 
   private async refreshDatabase() {
@@ -72,26 +77,21 @@ export class Daemon {
   private async refreshEpisode() {
     for (const plan of this.plans) {
       for (const onair of plan.onair) {
-        // Ensure string id
-        if (typeof onair.bgmId === 'number') {
-          onair.bgmId = String(onair.bgmId);
-        }
-
         // Skip finished plan
         if (plan.state === 'finish' && (await context.getAnime(onair.bgmId))) {
           continue;
         }
 
-        await daemonSearch(
-          onair.bgmId,
-          Array.isArray(onair.keywords)
-            ? onair.keywords
-            : typeof onair.keywords === 'string'
-            ? [onair.keywords]
-            : undefined
-        );
+        const keywords = Array.isArray(onair.keywords)
+          ? onair.keywords
+          : typeof onair.keywords === 'string'
+          ? [onair.keywords]
+          : undefined;
+
+        await daemonSearch(onair.bgmId, keywords);
 
         const anime = await context.getAnime(onair.bgmId);
+
         if (anime) {
           info();
           info(
@@ -100,9 +100,7 @@ export class Daemon {
               ' ' +
               `(${bangumiLink(onair.bgmId)})`
           );
-        }
-
-        if (!(await context.getAnime(onair.bgmId))) {
+        } else {
           throw new Error(
             `Fail to init ${onair.title} (${bangumiLink(onair.bgmId)})`
           );
@@ -112,7 +110,9 @@ export class Daemon {
   }
 
   private async downloadEpisode() {
-    const syncOnair: OnairAnime[] = [];
+    this.store = await useStore('ali')();
+    this.client = new AdminClient(await context.getServerConfig());
+    await this.client.fetchOnair();
 
     for (const plan of this.plans) {
       for (const onair of plan.onair) {
@@ -122,22 +122,30 @@ export class Daemon {
           continue;
         }
 
-        if (!onair.fansub) {
-          if (onair.link) {
-            // Push online play bangumis
-            syncOnair.push({
-              title: onair.title,
-              bgmId: onair.bgmId,
-              episodes: [],
-              link: onair.link
-            });
-          }
+        if (onair.link && typeof onair.link === 'string') {
+          // Push online play bangumis
+          this.client.updateOnair({
+            title: onair.title,
+            bgmId: onair.bgmId,
+            episodes: [],
+            link: onair.link
+          });
           continue;
         }
 
+        const epLink =
+          onair.link && typeof onair.link !== 'string'
+            ? resolveEP(onair.link)
+            : new Map<number, string>();
+
+        const epMagnet = onair.magnet
+          ? resolveEP(onair.magnet)
+          : new Map<number, string>();
+
         const episodes = anime
           .genEpisodes(onair.fansub)
-          .filter((ep) => !(String(ep.ep) in (onair.ep ?? {})));
+          .filter((ep) => !epMagnet.has(ep.ep))
+          .filter((ep) => !epLink.has(ep.ep));
 
         info(
           'Download ' +
@@ -147,10 +155,11 @@ export class Daemon {
         );
         for (const ep of episodes) {
           info(
-            ` ${dim(formatEP(ep.ep))} ${link(
-              ep.magnetName,
-              context.magnetStore.idToLink(ep.magnetId)
-            )}`
+            ` ${dim(formatEP(ep.ep))} ${
+              ep.magnetName
+                ? link(ep.magnetName, context.magnetStore.idToLink(ep.magnetId))
+                : context.magnetStore.idToLink(ep.magnetId)
+            }`
           );
         }
 
@@ -191,24 +200,17 @@ export class Daemon {
             ' ' +
             `(${bangumiLink(onair.bgmId)})`
         );
-        const store = await useStore('ali')();
+
         const playURLs: VideoInfo[] = [];
         for (const { filename } of magnets) {
-          const func = async (count = 0) => {
-            if (count > 3) return;
-            try {
-              const resp = await store.upload(path.join(localRoot, filename));
-              if (resp && resp.playUrl.length > 0) {
-                playURLs.push(resp);
-              }
-            } catch (err) {
-              error(`Uploading ${filename} encounter some errors`);
-              const msg = (err as any).message;
-              if (msg) error(msg);
-              await func(count + 1);
-            }
-          };
-          await func();
+          const resp = await this.store.upload(path.join(localRoot, filename), {
+            retry: 3
+          });
+          if (resp && resp.playUrl.length > 0) {
+            playURLs.push(resp);
+          } else {
+            error(`Fail uploading ${filename}`);
+          }
         }
         info(
           'Upload   ' +
@@ -228,29 +230,31 @@ export class Daemon {
           }
         }));
 
-        syncOnair.push({
+        this.client.updateOnair({
           title: anime.title,
           bgmId: anime.bgmId,
           episodes: [
             ...syncEpisodes,
-            ...Object.entries(onair.ep ?? {}).map(([ep, playURL]) => ({
+            ...[...epLink.entries()].map(([ep, playURL]) => ({
               ep: +ep,
               playURL
             }))
           ].sort((a, b) => a.ep - b.ep)
         });
 
-        await this.syncPlaylist(syncOnair, anime.bgmId);
+        await this.syncPlaylist(anime.bgmId);
       }
     }
-    await this.syncPlaylist(syncOnair);
+
+    await this.syncPlaylist();
   }
 
-  private async syncPlaylist(syncOnair: OnairAnime[], curId = '') {
-    info(`Syncing  ${syncOnair.length} onair animes`);
-    const client = new AdminClient(await context.getServerConfig());
+  private async syncPlaylist(curId = '') {
+    if (curId === '') {
+      info(`Syncing  ${this.client.onair.length} onair animes`);
+    }
     try {
-      const onair = await client.syncOnair(syncOnair);
+      const onair = await this.client.syncOnair();
       for (const anime of onair) {
         if (anime.bgmId !== curId) continue;
         info(
@@ -263,7 +267,7 @@ export class Daemon {
           info(` ${dim(formatEP(ep.ep))} ${ep.playURL}`);
         }
       }
-    } catch (err) {
+    } catch {
       error(`Fail connecting server (baseURL or token may be wrong)`);
     }
   }
@@ -279,6 +283,18 @@ function formatEpisodeName(
     .replace('{fansub}', ep.fansub)
     .replace('{title}', anime.title)
     .replace('{ep}', formatEP(ep.ep, '0'));
+}
+
+function resolveEP(eps: EpisodeList) {
+  if (Array.isArray(eps)) {
+    return new Map(eps.map((t, idx) => [idx, t]));
+  } else {
+    const map = new Map<number, string>();
+    for (const [idx, ep] of Object.entries(eps)) {
+      map.set(+idx, ep);
+    }
+    return map;
+  }
 }
 
 function now() {

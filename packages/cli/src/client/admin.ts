@@ -13,6 +13,9 @@ export class AdminClient {
   private readonly token: string;
   private readonly api: AxiosInstance;
 
+  readonly onair: OnairAnime[] = [];
+  readonly newOnair: OnairAnime[] = [];
+
   constructor(option: UserOption) {
     this.token = option.token;
     this.api = axios.create({
@@ -23,32 +26,49 @@ export class AdminClient {
     });
   }
 
-  async syncOnair(
-    onair: OnairAnime[],
-    option: { retry?: number } = {}
-  ): Promise<OnairAnime[]> {
-    try {
-      const { data } = await this.api.post(
-        '/admin/anime',
-        { onair },
-        option.retry ? {} : { proxy: proxy() }
-      );
-      if (data.status !== 'Ok') throw new Error('Unknown error');
-      return data.data.onair;
-    } catch (error) {
-      debug(error);
-      const retry = (option?.retry ?? 0) + 1;
-      if (retry > AdminClient.MAX_RETRY) {
-        throw new Error('Fail syncing onair animes');
-      } else {
-        return this.syncOnair(onair, { retry });
+  async fetchOnair() {
+    for (let retry = 0; retry < AdminClient.MAX_RETRY; retry++) {
+      try {
+        const { data } = await this.api.get(
+          '/admin/anime',
+          retry ? {} : { proxy: proxy() }
+        );
+        if (data.status !== 'Ok') throw new Error('Unknown error');
+        const onair = data.data.onair as OnairAnime[];
+        this.onair.splice(0, this.onair.length, ...onair);
+        this.newOnair.splice(0, this.newOnair.length);
+        return onair;
+      } catch (error) {
+        debug(error);
       }
     }
+    throw new Error('Fail syncing onair animes');
   }
 
-  async fetchOnair() {
-    const { data } = await this.api.get('/play');
-    if (data.status !== 'Ok') throw new Error('Unknown error');
-    return data.data.onair as OnairAnime[];
+  async syncOnair(): Promise<OnairAnime[]> {
+    for (let retry = 0; retry < AdminClient.MAX_RETRY; retry++) {
+      try {
+        const { data } = await this.api.post(
+          '/admin/anime',
+          { onair: this.newOnair },
+          retry ? {} : { proxy: proxy() }
+        );
+        if (data.status !== 'Ok') throw new Error('Unknown error');
+        return data.data.onair;
+      } catch (error) {
+        debug(error);
+      }
+    }
+    throw new Error('Fail syncing onair animes');
+  }
+
+  updateOnair(onair: OnairAnime) {
+    const idx = this.onair.findIndex((o) => o.bgmId === onair.bgmId);
+    if (idx === -1) {
+      this.newOnair.push(onair);
+    } else {
+      this.onair[idx] = onair;
+      this.newOnair.push(onair);
+    }
   }
 }

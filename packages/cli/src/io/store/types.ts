@@ -20,13 +20,17 @@ export abstract class Store {
     this.logs.push(...(await context.storeLog.list()));
   }
 
-  protected abstract doUpload(filePath: string): Promise<string | undefined>;
+  protected abstract doFetchVideoInfo(
+    videoId: string,
+    option?: StoreOption
+  ): Promise<VideoInfo | undefined>;
+
+  protected abstract doUpload(
+    filePath: string,
+    option?: StoreOption
+  ): Promise<string | undefined>;
 
   protected abstract doDelete(videoId: string): Promise<boolean>;
-
-  protected abstract doFetchVideoInfo(
-    videoId: string
-  ): Promise<VideoInfo | undefined>;
 
   async fetchVideoInfo(videoId: string): Promise<VideoInfo | undefined> {
     const localVideo = this.logs.find((l) => l.videoId === videoId);
@@ -67,7 +71,10 @@ export abstract class Store {
     await this.init();
   }
 
-  async upload(filepath: string): Promise<VideoInfo | undefined> {
+  async upload(
+    filepath: string,
+    option: StoreOption = {}
+  ): Promise<VideoInfo | undefined> {
     const title = path.basename(filepath);
     const hash = await hashFile(filepath);
 
@@ -81,9 +88,9 @@ export abstract class Store {
       }
     }
 
-    const videoId = await this.doUpload(filepath);
+    const videoId = await this.doUpload(filepath, option);
     if (videoId) {
-      const info = await this.doFetchVideoInfo(videoId);
+      const info = await this.doFetchVideoInfo(videoId, option);
       if (!info) throw new Error('Fail to upload');
       info.source.directory = path.dirname(filepath);
       info.source.hash = hash;
@@ -94,4 +101,8 @@ export abstract class Store {
       throw new Error('Fail to upload');
     }
   }
+}
+
+export interface StoreOption {
+  retry?: number;
 }

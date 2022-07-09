@@ -154,6 +154,16 @@ export class GlobalContex {
       if (!Boolean(body.state)) {
         body.state = 'onair';
       }
+      // Setup store platform (default: ali)
+      if (!Boolean(body.store)) {
+        body.store = 'ali';
+      }
+      // Fix bgmId string type
+      for (const bgm of body.onair) {
+        if (typeof bgm.bgmId === 'number') {
+          bgm.bgmId = String(bgm.bgmId);
+        }
+      }
       planBody.push(body);
     }
     return planBody;
