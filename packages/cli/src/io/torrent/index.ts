@@ -1,6 +1,6 @@
 import Webtorrent from 'webtorrent';
 import path from 'node:path';
-import { green } from 'kolorist';
+import { green, lightBlue } from 'kolorist';
 import { move, existsSync } from 'fs-extra';
 
 import { Trackers } from './tracker';
@@ -76,7 +76,9 @@ export class TorrentClient {
 
             torrent.once('done', () => {
               bar.update(torrent.length);
-              multibar.println(`  ${green('√')} ${torrent.name}`);
+              multibar.println(
+                `  ${lightBlue('Info')} ${green('√')} ${torrent.name}`
+              );
               if (finalPath !== file.path) {
                 move(file.path, finalPath).then(() => res());
               } else {
