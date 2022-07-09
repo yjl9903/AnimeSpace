@@ -25,7 +25,7 @@ cli
   .command('watch', 'Watch anime resources update')
   .option('-i, --interval [duration]', 'Damon interval in minutes', {
     construct(t) {
-      return t ? +t : 60;
+      return t ? +t : 10;
     }
   })
   .option('-o, --once', 'Just do an immediate update')
