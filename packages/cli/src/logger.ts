@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { lightBlue, lightRed, link } from 'kolorist';
+import { lightBlue, lightRed, link, lightGreen } from 'kolorist';
 
 import type { IndexOption, Resource } from '@animepaste/database';
 
@@ -23,12 +23,12 @@ export const IndexListener: IndexOption['listener'] = ({
   timestamp,
   ok
 }) => {
-  const pageLink = link(`page ${page}`, url);
+  const pageLink = lightBlue(link(`P${page}`, url));
   const time = timestamp ? `(${format(timestamp, 'yyyy-MM-dd HH:mm')})` : '';
   if (ok === undefined) {
-    info(`Fetching ${pageLink} ${time}`);
+    info(`Fetching ${pageLink}  ${time}`);
   } else {
-    info(`Collect ${ok} magnets on ${pageLink} ${time}`);
+    info(`There are ${lightGreen(`${ok} magnets`)} collected`);
   }
 };
 

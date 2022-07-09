@@ -76,7 +76,7 @@ export class MagnetStore extends AbstractDatabase {
     for (let page = startPage ?? 1; !endPage || page <= endPage; page++) {
       const url = `https://share.dmhy.org/topics/list/page/${page}`;
 
-      listener && listener({ page, url });
+      listener && listener({ page, url, timestamp });
 
       const payloads = await fetchResource(page);
 
