@@ -188,7 +188,7 @@ export class Daemon {
         const magnets = await Promise.all(
           episodes.map(async (ep) => {
             return {
-              // magnetURI: this.magnetCache.get(ep.magnetId)!,
+              magnetId: ep.magnetId,
               magnetURI: (await context.magnetStore.findById(ep.magnetId))!
                 .magnet,
               filename: formatEpisodeName(onair.format, anime, ep)
@@ -222,8 +222,9 @@ export class Daemon {
         );
 
         const playURLs: VideoInfo[] = [];
-        for (const { filename } of magnets) {
+        for (const { filename, magnetId } of magnets) {
           const resp = await this.store.upload(path.join(localRoot, filename), {
+            magnetId,
             retry: 3
           });
           if (resp && resp.playUrl.length > 0) {

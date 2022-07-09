@@ -14,14 +14,7 @@ export abstract class Store {
     this.platform = platform;
   }
 
-  async init() {
-    try {
-      for (const log of await context.storeLog.list()) {
-        // Used for migrating
-        await context.videoStore.createVideo(log);
-      }
-    } catch {}
-  }
+  async init() {}
 
   protected abstract doFetchVideoInfo(
     videoId: string,
@@ -100,10 +93,9 @@ export abstract class Store {
     if (videoId) {
       const info = await this.doFetchVideoInfo(videoId, option);
       if (!info) throw new Error('Fail to upload');
+      info.source.magnetId = option.magnetId;
       info.source.directory = context.encodePath(path.dirname(filepath));
       info.source.hash = hash;
-      await context.storeLog.append(info);
-      await this.init();
       return info;
     } else {
       throw new Error('Fail to upload');
@@ -112,5 +104,13 @@ export abstract class Store {
 }
 
 export interface StoreOption {
+  /**
+   * MagnetId
+   */
+  magnetId?: string;
+
+  /**
+   * Max retry number
+   */
   retry?: number;
 }

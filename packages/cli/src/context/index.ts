@@ -12,8 +12,6 @@ import type { VideoInfo, VideoStorePlatform } from '../io';
 
 import { Anime } from '../anime';
 
-import { LogContext } from './log';
-
 export interface GlobalConfig {
   plan: string | string[];
 
@@ -56,9 +54,8 @@ export class GlobalContex {
   readonly config: string;
   readonly databaseFilepath: string;
 
-  readonly storeLog: LogContext<VideoInfo>;
-  readonly magnetStore: MagnetStore;
   readonly videoStore: VideoStore<VideoStorePlatform>;
+  readonly magnetStore: MagnetStore;
 
   private _cacheRoot: string;
   private _localRoot: string;
@@ -73,8 +70,6 @@ export class GlobalContex {
 
     this.anime = path.join(this.root, GlobalContex.AnimeDdName);
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
-
-    this.storeLog = new LogContext(this, 'store.json');
 
     this.databaseFilepath = path.join(this.root, 'store.db');
     this.videoStore = new VideoStore({ url: this.databaseFilepath });
