@@ -17,9 +17,8 @@ Command line application for managing [Anime Paste](https://github.com/XLorPaste
   ├── anime/         # Anime store
   ├── cache/         # Videos cache
   ├── config.yaml    # AnimePaste config file
-  ├── magnet.db      # Cache found magnets (SQLite)
-  ├── anime.json     # Cache found animes
-  └── store.json     # Cache OSS upload logs
+  ├── store.db       # Cache found magnets and uploaded videos (SQLite)
+  └── anime.json     # Cache found animes
 ```
 
 ### Config
@@ -29,7 +28,8 @@ Global config:
 ```yaml
 # ~/.animepaste/config.yaml
 
-plan: ./plans/2022-4.yaml
+plan:
+  - ./plans/2022-4.yaml
 
 server:
   baseURL: https://anime.xlorpaste.cn/api/
@@ -39,6 +39,7 @@ server:
 store:
   local: # Local anime store
     path: ./anime
+    cache: ./cache
   ali:   # Ali OSS config
     accessKeyId: ''
     accessKeySecret: ''
