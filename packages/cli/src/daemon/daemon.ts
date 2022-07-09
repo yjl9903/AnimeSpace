@@ -45,6 +45,7 @@ export class Daemon {
   async update() {
     info('Start updating anime ' + now());
 
+    await context.init({ force: false });
     await this.refreshPlan();
     await this.refreshDatabase();
     await this.refreshEpisode();
