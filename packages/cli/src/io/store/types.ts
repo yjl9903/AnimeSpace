@@ -9,15 +9,18 @@ export type CreateStore = () => Promise<Store>;
 
 export abstract class Store {
   private readonly platform: string;
-  private readonly logs: VideoInfo[] = [];
 
   constructor(platform: string) {
     this.platform = platform;
   }
 
   async init() {
-    this.logs.splice(0);
-    this.logs.push(...(await context.storeLog.list()));
+    try {
+      for (const log of await context.storeLog.list()) {
+        // Used for migrating
+        await context.videoStore.createVideo(log);
+      }
+    } catch {}
   }
 
   protected abstract doFetchVideoInfo(
@@ -33,7 +36,10 @@ export abstract class Store {
   protected abstract doDelete(videoId: string): Promise<boolean>;
 
   async fetchVideoInfo(videoId: string): Promise<VideoInfo | undefined> {
-    const localVideo = this.logs.find((l) => l.videoId === videoId);
+    const localVideo = await context.videoStore.findVideo(
+      this.platform,
+      videoId
+    );
     if (localVideo) {
       return localVideo;
     } else {
@@ -43,7 +49,7 @@ export abstract class Store {
 
   async searchLocalVideo(filename: string): Promise<VideoInfo | undefined> {
     const title = path.basename(filename);
-    const videos = this.logs.filter(
+    const videos = (await context.videoStore.list()).filter(
       (l) => l.title === title && l.platform === this.platform
     );
     if (videos.length === 0) {
@@ -57,18 +63,18 @@ export abstract class Store {
   }
 
   async listLocalVideos() {
-    return this.logs;
+    return await context.videoStore.list();
   }
 
   async deleteVideo(videoId: string) {
-    const logs = this.logs;
-    const videoIdx = logs.findIndex((l) => l.videoId === videoId);
-    if (videoIdx !== -1 && logs[videoIdx].platform === this.platform) {
+    const localVideo = await context.videoStore.findVideo(
+      this.platform,
+      videoId
+    );
+    if (localVideo) {
       await this.doDelete(videoId);
-      logs.splice(videoIdx, 1);
-      await context.storeLog.write(logs);
+      await context.videoStore.deleteVideo(this.platform, videoId);
     }
-    await this.init();
   }
 
   async upload(
@@ -80,7 +86,7 @@ export abstract class Store {
     const title = path.basename(filepath);
     const hash = await hashFile(filepath);
 
-    for (const log of this.logs) {
+    for (const log of await context.videoStore.list()) {
       if (
         log.platform === this.platform &&
         log.title === title &&
