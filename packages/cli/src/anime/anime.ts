@@ -134,7 +134,7 @@ export class Anime {
     }
   }
 
-  genEpisodes(fansubOrder: string[]) {
+  genEpisodes(fansubOrder: string[] = []) {
     const fansubs = groupBy(this.episodes, (ep) => ep.fansub);
     const episodes: Episode[] = [];
     for (let epId = 1, found = true; found; epId++) {
@@ -197,6 +197,7 @@ export interface Episode {
    * Link to magnet
    */
   magnetId: string;
+
   magnetName: string;
 
   /**

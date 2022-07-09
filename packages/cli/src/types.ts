@@ -1,3 +1,5 @@
+import { VideoStorePlatform } from './io';
+
 export type AnimeType = 'tv' | 'web' | 'movie' | 'ova';
 
 export interface CliOption {
@@ -19,14 +21,25 @@ export interface Plan {
 
   /**
    * Plan is onair or finish
+   *
+   * @default 'onair'
    */
   state: 'onair' | 'finish';
+
+  /**
+   * Store platform
+   *
+   * @default 'ali'
+   */
+  store: VideoStorePlatform;
 
   /**
    * Onair list
    */
   onair: OnairPlan[];
 }
+
+export type EpisodeList = Record<number, string> | string[];
 
 export interface OnairPlan {
   /**
@@ -45,14 +58,23 @@ export interface OnairPlan {
   fansub?: string[];
 
   /**
-   * Specify online link
+   * Specify play link
+   *
+   * Type string for other platform
+   *
+   * Type record for play urls
    */
-  link?: string;
+  link?: string | EpisodeList;
 
   /**
-   * Specify the play url of some eps
+   * Specify the magnet id of some episode
    */
-  ep?: Record<number, string>;
+  magnet?: EpisodeList;
+
+  /**
+   * Specify OSS source of some episode
+   */
+  source?: EpisodeList;
 
   /**
    * Template string for names

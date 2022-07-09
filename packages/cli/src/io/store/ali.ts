@@ -12,7 +12,7 @@ import type { VideoInfo } from '../types';
 
 import { b64decode, createProgressBar } from '../utils';
 
-import { CreateStore, Store } from './types';
+import { CreateStore, Store, StoreOption } from './types';
 
 const debug = createDebug('anime:ali');
 
@@ -56,7 +56,10 @@ export class AliStore extends Store {
     }
   }
 
-  async doUpload(filepath: string): Promise<string | undefined> {
+  async doUpload(
+    filepath: string,
+    option: StoreOption = {}
+  ): Promise<string | undefined> {
     debug(`Upload: ${filepath}`);
 
     const resp = await this.createUplodaVideo(
@@ -116,7 +119,12 @@ export class AliStore extends Store {
       await this.doDelete(resp.VideoId);
       info('Clear OK');
 
-      return undefined;
+      if (option.retry === undefined || option.retry === 0) {
+        return undefined;
+      } else {
+        option.retry -= 1;
+        return this.doUpload(filepath, option);
+      }
     } finally {
       progressbar.finish();
     }
