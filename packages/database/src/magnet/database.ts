@@ -148,11 +148,11 @@ export class MagnetStore extends AbstractDatabase {
     }
   }
 
-  async findByLink(link: string) {
+  async findById(id: string) {
     return (
       (await this.prisma.resource.findUnique({
         where: {
-          link
+          id
         }
       })) ?? undefined
     );
@@ -193,7 +193,7 @@ export class MagnetStore extends AbstractDatabase {
     await this.prisma.$disconnect();
   }
 
-  formatMagnetLink(magnetLink: string) {
-    return `https://share.dmhy.org/topics/view/${magnetLink}.html`;
+  idToLink(magnetId: string) {
+    return `https://share.dmhy.org/topics/view/${magnetId}.html`;
   }
 }

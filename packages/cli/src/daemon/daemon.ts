@@ -149,7 +149,7 @@ export class Daemon {
           info(
             ` ${dim(formatEP(ep.ep))} ${link(
               ep.magnetName,
-              context.magnetStore.formatMagnetLink(ep.magnetId)
+              context.magnetStore.idToLink(ep.magnetId)
             )}`
           );
         }
@@ -160,7 +160,7 @@ export class Daemon {
           episodes.map(async (ep) => {
             return {
               // magnetURI: this.magnetCache.get(ep.magnetId)!,
-              magnetURI: (await context.magnetStore.findByLink(ep.magnetId))!
+              magnetURI: (await context.magnetStore.findById(ep.magnetId))!
                 .magnet,
               filename: formatEpisodeName(onair.format, anime, ep)
             };

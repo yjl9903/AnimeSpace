@@ -68,7 +68,7 @@ export class Anime {
     const foundIds = new Set(this.episodes.map((ep) => ep.magnetId));
 
     for (const result of results) {
-      if (foundIds.has(result.link)) continue;
+      if (foundIds.has(result.id)) continue;
 
       // Disable download MKV
       if (result.title.indexOf('MKV') !== -1) continue;
@@ -121,7 +121,7 @@ export class Anime {
         language: getLang(),
         creationTime: result.createdAt.toISOString(),
         fansub: result.fansub,
-        magnetId: result.link,
+        magnetId: result.id,
         magnetName: result.title,
         bgmId: this.bgmId
       };

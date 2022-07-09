@@ -35,11 +35,6 @@ export const IndexListener: IndexOption['listener'] = ({
 export function printMagnets(magnets: Resource[], prefix = '  ') {
   magnets.sort((a, b) => a.title.localeCompare(b.title));
   for (const item of magnets) {
-    info(
-      `${prefix}${link(
-        item.title,
-        context.magnetStore.formatMagnetLink(item.link)
-      )}`
-    );
+    info(`${prefix}${link(item.title, context.magnetStore.idToLink(item.id))}`);
   }
 }
