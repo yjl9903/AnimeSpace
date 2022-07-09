@@ -136,13 +136,8 @@ cli
     const { useStore, printVideoInfo } = await import('./io');
     const store = await useStore('ali')();
 
-    const newFile = await context.copy(
-      path.resolve(process.cwd(), filename),
-      'cache'
-    );
-
     try {
-      const info = await store.upload(newFile);
+      const info = await store.upload(path.resolve(filename));
       if (info) {
         printVideoInfo(info);
       } else {
@@ -150,7 +145,7 @@ cli
       }
     } catch (error) {
       console.log();
-      console.log(`  ${red('✗ Fail')}`);
+      console.log(`  ${red('✗ Fail')} uploading ${filename}`);
     }
   });
 

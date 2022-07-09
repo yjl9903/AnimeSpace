@@ -34,7 +34,8 @@ const DefaultGlobalConfig: GlobalConfig = {
   },
   store: {
     local: {
-      path: './anime'
+      path: './anime',
+      cache: './cache'
     },
     ali: {
       accessKeyId: '',
@@ -53,29 +54,39 @@ export class GlobalContex {
   readonly root: string;
   readonly anime: string;
   readonly config: string;
-  readonly cacheRoot: string;
   readonly databaseFilepath: string;
 
   readonly storeLog: LogContext<VideoInfo>;
   readonly magnetStore: MagnetStore;
   readonly videoStore: VideoStore;
 
+  private _cacheRoot: string;
   private _localRoot: string;
+
   private configCache: any;
   private animeCache: Map<string, Anime> = new Map();
 
   constructor() {
     this.root = path.join(homedir(), '.animepaste');
-    this.cacheRoot = path.join(this.root, 'cache');
+    this._cacheRoot = path.join(this.root, 'cache');
     this._localRoot = path.join(this.root, 'anime');
 
     this.anime = path.join(this.root, GlobalContex.AnimeDdName);
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
 
     this.storeLog = new LogContext(this, 'store.json');
+
     this.databaseFilepath = path.join(this.root, 'store.db');
     this.videoStore = new VideoStore({ url: this.databaseFilepath });
     this.magnetStore = new MagnetStore({ url: this.databaseFilepath });
+  }
+
+  get localRoot() {
+    return this._localRoot;
+  }
+
+  get cacheRoot() {
+    return this._cacheRoot;
   }
 
   async init(option: CliOption) {
@@ -96,12 +107,26 @@ export class GlobalContex {
       );
     }
 
-    const local = await this.getStoreConfig<{ path: string }>('local');
-    if (local?.path) {
-      this._localRoot = path.resolve(this.root, local.path);
-    }
-    if (!fs.existsSync(this._localRoot)) {
-      throw new Error(`Local stroage root "${this._localRoot}" does not exist`);
+    // Setup cache and anime root
+    {
+      type LocalConfig = { path?: string; cache?: string };
+      const local = await this.getStoreConfig<LocalConfig>('local');
+      if (local?.path) {
+        this._localRoot = path.resolve(this.root, local.path);
+      }
+      if (!fs.existsSync(this._localRoot)) {
+        throw new Error(
+          `Local stroage root "${this._localRoot}" does not exist`
+        );
+      }
+      if (local?.cache) {
+        this._cacheRoot = path.resolve(this.root, local.cache);
+      }
+      if (!fs.existsSync(this._cacheRoot)) {
+        throw new Error(
+          `Local stroage root "${this._cacheRoot}" does not exist`
+        );
+      }
     }
 
     if (fs.existsSync(this.anime)) {
@@ -116,10 +141,6 @@ export class GlobalContex {
 
     await this.magnetStore.ensure();
     await this.loadConfig();
-  }
-
-  get localRoot() {
-    return this._localRoot;
   }
 
   async makeLocalAnimeRoot(title: string) {
@@ -196,16 +217,41 @@ export class GlobalContex {
   // -----------
 
   /**
-   * Copy file from "src" to "root/dst/basename(src)"
+   * Copy file from "src" to cache root
    *
    * @param src
-   * @param dst
    */
-  async copy(src: string, dst: 'cache' | 'anime') {
-    const filepath = path.join(this.root, dst, path.basename(src));
+  async copyToCache(src: string) {
+    if (contains(this.localRoot, src) || contains(this.cacheRoot, src)) {
+      return src;
+    }
+    const filepath = path.join(this.cacheRoot, path.basename(src));
     await fs.copy(src, filepath);
     return filepath;
+  }
+
+  encodePath(src: string) {
+    if (contains(this.localRoot, src)) {
+      return 'local:' + path.relative(this.localRoot, src);
+    } else {
+      return 'cache:' + path.relative(this.cacheRoot, src);
+    }
+  }
+
+  decodePath(src: string) {
+    if (src.startsWith('local:')) {
+      return path.join(this.localRoot, src.substring(6));
+    } else if (src.startsWith('cache:')) {
+      return path.join(this.cacheRoot, src.substring(6));
+    } else {
+      return src;
+    }
   }
 }
 
 export const context = new GlobalContex();
+
+function contains(parent: string, dir: string) {
+  const relative = path.relative(parent, dir);
+  return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+}

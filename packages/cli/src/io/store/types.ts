@@ -44,7 +44,7 @@ export abstract class Store {
   async searchLocalVideo(filename: string): Promise<VideoInfo | undefined> {
     const title = path.basename(filename);
     const videos = this.logs.filter(
-      (l) => path.basename(l.title) === title && l.platform === this.platform
+      (l) => l.title === title && l.platform === this.platform
     );
     if (videos.length === 0) {
       return undefined;
@@ -75,6 +75,8 @@ export abstract class Store {
     filepath: string,
     option: StoreOption = {}
   ): Promise<VideoInfo | undefined> {
+    filepath = await context.copyToCache(filepath);
+
     const title = path.basename(filepath);
     const hash = await hashFile(filepath);
 
@@ -92,7 +94,7 @@ export abstract class Store {
     if (videoId) {
       const info = await this.doFetchVideoInfo(videoId, option);
       if (!info) throw new Error('Fail to upload');
-      info.source.directory = path.dirname(filepath);
+      info.source.directory = context.encodePath(path.dirname(filepath));
       info.source.hash = hash;
       await context.storeLog.append(info);
       await this.init();
