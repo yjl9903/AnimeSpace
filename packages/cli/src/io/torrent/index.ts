@@ -1,7 +1,7 @@
 import Webtorrent from 'webtorrent';
 import path from 'node:path';
 import { green } from 'kolorist';
-import { move, existsSync, statSync, removeSync } from 'fs-extra';
+import { move, existsSync } from 'fs-extra';
 
 import { Trackers } from './tracker';
 import { createProgressBar } from '../utils';
@@ -64,15 +64,6 @@ export class TorrentClient {
             if (existsSync(finalPath)) {
               res();
               return;
-            } else if (existsSync(file.path)) {
-              // Torrent file exist and ok, move it to final file
-              if (file.length > 0 && file.length === statSync(file.path).size) {
-                move(file.path, finalPath).then(() => res());
-                return;
-              } else {
-                // Unknown error, remove torrent file
-                // removeSync(file.path);
-              }
             }
 
             const bar = multibar.create(torrent.name, torrent.length);
