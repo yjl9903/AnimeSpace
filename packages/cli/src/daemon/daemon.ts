@@ -33,7 +33,7 @@ export class Daemon {
       for (const onair of plan.onair) {
         info(
           'Onair    ' +
-            lightGreen(onair.name) +
+            lightGreen(onair.title) +
             ' ' +
             `(${bangumiLink(onair.bgmId)})`
         );
@@ -104,7 +104,7 @@ export class Daemon {
 
         if (!(await context.getAnime(onair.bgmId))) {
           throw new Error(
-            `Fail to init ${onair.name} (${bangumiLink(onair.bgmId)})`
+            `Fail to init ${onair.title} (${bangumiLink(onair.bgmId)})`
           );
         }
       }
@@ -118,7 +118,7 @@ export class Daemon {
       for (const onair of plan.onair) {
         const anime = await context.getAnime(onair.bgmId);
         if (!anime) {
-          error(`Fail to get ${onair.name} (${bangumiLink(onair.bgmId)})`);
+          error(`Fail to get ${onair.title} (${bangumiLink(onair.bgmId)})`);
           continue;
         }
 
@@ -126,7 +126,7 @@ export class Daemon {
           if (onair.link) {
             // Push online play bangumis
             syncOnair.push({
-              title: onair.name,
+              title: onair.title,
               bgmId: onair.bgmId,
               episodes: [],
               link: onair.link

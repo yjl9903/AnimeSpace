@@ -52,7 +52,7 @@ export interface OnairPlan {
   /**
    * Anime name
    */
-  name: string;
+  title: string;
 
   /**
    * Bangumi ID
