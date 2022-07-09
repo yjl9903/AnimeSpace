@@ -8,9 +8,11 @@ import { debug as createDebug } from 'debug';
 import { context } from '../../context';
 import { error, info } from '../../logger';
 
+import type { VideoInfo } from '../types';
+
 import { b64decode, createProgressBar } from '../utils';
 
-import { CreateStore, Payload, Store, VideoInfo } from './types';
+import { CreateStore, Store } from './types';
 
 const debug = createDebug('anime:ali');
 
@@ -54,10 +56,13 @@ export class AliStore extends Store {
     }
   }
 
-  async doUpload(payload: Payload): Promise<string | undefined> {
-    debug(payload);
+  async doUpload(filepath: string): Promise<string | undefined> {
+    debug(`Upload: ${filepath}`);
 
-    const resp = await this.createUplodaVideo(payload.title, payload.filepath);
+    const resp = await this.createUplodaVideo(
+      path.basename(filepath),
+      filepath
+    );
     if (!resp) {
       throw new Error('Fail creating upload video');
     } else {
@@ -84,7 +89,7 @@ export class AliStore extends Store {
     const progressbar = createProgressBar({});
 
     try {
-      const bar = progressbar.create(path.basename(payload.filepath), 1);
+      const bar = progressbar.create(path.basename(filepath), 1);
       const cancel = onDeath(async () => {
         error('Process is terminated');
         await this.doDelete(resp.VideoId);
@@ -93,9 +98,9 @@ export class AliStore extends Store {
 
       const ossRes = await store.multipartUpload(
         resp.UploadAddress.FileName,
-        payload.filepath,
+        filepath,
         {
-          progress(p: number) {
+          progress(p: number, _c: Checkpoint) {
             bar.update(p);
           }
         }
@@ -153,7 +158,8 @@ export class AliStore extends Store {
         creationTime: resp.Video.CreationTime,
         playUrl: (play?.PlayInfoList?.PlayInfo ?? [])
           .map((p: any) => p?.PlayURL)
-          .filter(Boolean)
+          .filter(Boolean),
+        source: {}
       };
     } catch (error) {
       debug(error);
@@ -182,7 +188,7 @@ export interface AliStoreConfig {
   regionId: string;
 }
 
-interface UploadResponse {
+export interface UploadResponse {
   VideoId: string;
   RequestId: string;
   UploadAddress: {
@@ -200,7 +206,7 @@ interface UploadResponse {
   };
 }
 
-interface Checkpoint {
+export interface Checkpoint {
   file: string;
   name: string;
   fileSize: number;
