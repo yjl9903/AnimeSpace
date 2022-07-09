@@ -1,7 +1,5 @@
-export { Prisma, PrismaClient, Resource } from '@prisma/client';
+export { Resource } from '@prisma/client';
 
-export * from './database';
+export * from './magnet';
 
 export * from './parser';
-
-export * from './fetch';

@@ -5,7 +5,7 @@ import { homedir } from 'node:os';
 import { subMonths } from 'date-fns';
 import { load, dump } from 'js-yaml';
 
-import { Database } from '@animepaste/database';
+import { MagnetStore } from '@animepaste/database';
 
 import type { VideoInfo } from '../io';
 import type { CliOption, Plan } from '../types';
@@ -57,7 +57,7 @@ export class GlobalContex {
   readonly databaseFilepath: string;
 
   readonly storeLog: LogContext<VideoInfo>;
-  readonly database: Database;
+  readonly magnetStore: MagnetStore;
 
   private _localRoot: string;
   private configCache: any;
@@ -73,7 +73,7 @@ export class GlobalContex {
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
 
     this.storeLog = new LogContext(this, 'store.json');
-    this.database = new Database({ url: this.databaseFilepath });
+    this.magnetStore = new MagnetStore({ url: this.databaseFilepath });
   }
 
   async init(option: CliOption) {
@@ -112,7 +112,7 @@ export class GlobalContex {
       }
     }
 
-    await this.database.init();
+    await this.magnetStore.ensure();
     await this.loadConfig();
   }
 

@@ -4,7 +4,7 @@ import { copy, remove } from 'fs-extra';
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 
-import { Database, Parser } from '../src';
+import { MagnetStore, Parser } from '../src';
 
 const dir = path.join(fileURLToPath(import.meta.url), '../..');
 const sourceDB = path.join(dir, './prisma/anime.db');
@@ -18,8 +18,8 @@ afterAll(async () => {
   await remove(testDB);
 });
 
-describe('Resource client', () => {
-  const database = new Database({ url: testDB });
+describe('Magnet Store', () => {
+  const database = new MagnetStore({ url: testDB });
 
   it('should index', async () => {
     await database.index({ endPage: 1 });
