@@ -174,10 +174,14 @@ export class GlobalContex {
       if (!Boolean(body.store)) {
         body.store = 'ali';
       }
-      // Fix bgmId string type
       for (const bgm of body.onair) {
+        // Fix bgmId string type
         if (typeof bgm.bgmId === 'number') {
           bgm.bgmId = String(bgm.bgmId);
+        }
+        // Fix empty fansub
+        if (!('fansub' in bgm)) {
+          bgm.fansub = [];
         }
       }
       planBody.push(body);

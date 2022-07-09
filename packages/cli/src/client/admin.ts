@@ -50,7 +50,9 @@ export class AdminClient {
       try {
         const { data } = await this.api.post(
           '/admin/anime',
-          { onair: this.newOnair },
+          {
+            onair: uniqBy<OnairAnime>((o) => o.bgmId)(this.newOnair, this.onair)
+          },
           retry ? {} : { proxy: proxy() }
         );
         if (data.status !== 'Ok') throw new Error('Unknown error');
@@ -71,4 +73,21 @@ export class AdminClient {
       this.newOnair.push(onair);
     }
   }
+}
+
+function uniqBy<T>(fn: (item: T) => string): (...args: T[][]) => T[] {
+  return (...arrs) => {
+    const set = new Set<string>();
+    const ans: T[] = [];
+    for (const arr of arrs) {
+      for (const item of arr) {
+        const key = fn(item);
+        if (!set.has(key)) {
+          set.add(key);
+          ans.push(item);
+        }
+      }
+    }
+    return ans;
+  };
 }

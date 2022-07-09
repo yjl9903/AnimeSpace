@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { format, subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
-import { dim, link, lightGreen } from 'kolorist';
+import { dim, link, lightGreen, bold, lightCyan } from 'kolorist';
 
 import type { Plan, EpisodeList } from '../types';
 import type { Store, VideoInfo } from '../io';
@@ -14,6 +14,10 @@ import { error, info, IndexListener } from '../logger';
 import { Anime, Episode, daemonSearch, bangumiLink, formatEP } from '../anime';
 
 const debug = createDebug('anime:daemon');
+
+const titleColor = bold;
+const startColor = lightCyan;
+const okColor = lightGreen;
 
 export class Daemon {
   private plans!: Plan[];
@@ -39,7 +43,8 @@ export class Daemon {
     await this.refreshEpisode();
     await this.downloadEpisode();
 
-    info('Init daemon OK ' + now());
+    info();
+    info(okColor('Init daemon OK ') + now());
   }
 
   async update() {
@@ -51,7 +56,8 @@ export class Daemon {
     await this.refreshEpisode();
     await this.downloadEpisode();
 
-    info('Update OK ' + now());
+    info();
+    info(okColor('Update OK ') + now());
   }
 
   private async refreshPlan() {
@@ -60,8 +66,8 @@ export class Daemon {
       for (const onair of plan.onair) {
         info(
           'Onair    ' +
-            lightGreen(onair.title) +
-            ' ' +
+            titleColor(onair.title) +
+            '    ' +
             `(${bangumiLink(onair.bgmId)})`
         );
       }
@@ -101,9 +107,9 @@ export class Daemon {
         if (anime) {
           info();
           info(
-            'Refresh  ' +
-              lightGreen(anime.title) +
-              ' ' +
+            okColor('Refresh  ') +
+              titleColor(anime.title) +
+              okColor(' OK ') +
               `(${bangumiLink(onair.bgmId)})`
           );
         } else {
@@ -139,6 +145,8 @@ export class Daemon {
           continue;
         }
 
+        info();
+
         const epLink =
           onair.link && typeof onair.link !== 'string'
             ? resolveEP(onair.link)
@@ -161,15 +169,15 @@ export class Daemon {
         ).filter(Boolean) as Episode[];
 
         const episodes = anime
-          .genEpisodes(onair.fansub)
+          .genEpisodes(onair.fansub ?? [])
           .filter((ep) => !givenMagnet.has(ep.ep))
           .concat(epMagnet)
           .filter((ep) => !epLink.has(ep.ep));
 
         info(
-          'Download ' +
-            lightGreen(anime.title) +
-            ' ' +
+          startColor('Download ') +
+            titleColor(anime.title) +
+            '    ' +
             `(${bangumiLink(onair.bgmId)})`
         );
         for (const ep of episodes) {
@@ -201,9 +209,9 @@ export class Daemon {
         await torrent.download(magnets);
         await torrent.destroy();
         info(
-          'Download ' +
-            lightGreen(anime.title) +
-            ' OK ' +
+          okColor('Download ') +
+            titleColor(anime.title) +
+            okColor(' OK ') +
             `(Total: ${magnets.length} episodes)`
         );
 
@@ -215,9 +223,9 @@ export class Daemon {
         }
 
         info(
-          'Upload   ' +
-            lightGreen(anime.title) +
-            ' ' +
+          startColor('Upload   ') +
+            titleColor(anime.title) +
+            '    ' +
             `(${bangumiLink(onair.bgmId)})`
         );
 
@@ -234,9 +242,9 @@ export class Daemon {
           }
         }
         info(
-          'Upload   ' +
-            lightGreen(anime.title) +
-            ' OK ' +
+          okColor('Upload   ') +
+            titleColor(anime.title) +
+            okColor(' OK ') +
             `(Total: ${magnets.length} episodes)`
         );
 
@@ -263,25 +271,35 @@ export class Daemon {
           ].sort((a, b) => a.ep - b.ep)
         });
 
-        await this.syncPlaylist(anime.bgmId);
+        await this.syncPlaylist(anime.title, anime.bgmId);
       }
     }
 
     await this.syncPlaylist();
   }
 
-  private async syncPlaylist(curId = '') {
+  private async syncPlaylist(title = '', curId = '') {
     if (curId === '') {
-      info(`Syncing  ${this.client.onair.length} onair animes`);
+      info(
+        `${startColor('Sync')}     ${this.client.onair.length} onair animes`
+      );
+    }
+    if (title !== '') {
+      info(
+        `${startColor('Sync')}     ` +
+          titleColor(title) +
+          '    ' +
+          `(${bangumiLink(curId)})`
+      );
     }
     try {
       const onair = await this.client.syncOnair();
       for (const anime of onair) {
         if (anime.bgmId !== curId) continue;
         info(
-          'Sync     ' +
-            lightGreen(anime.title) +
-            ' OK ' +
+          okColor('Sync     ') +
+            titleColor(anime.title) +
+            okColor(' OK ') +
             `(Total: ${anime.episodes.length} episodes)`
         );
         for (const ep of anime.episodes) {
