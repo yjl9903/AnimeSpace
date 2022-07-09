@@ -32,7 +32,7 @@ const DefaultGlobalConfig: GlobalConfig = {
   },
   store: {
     local: {
-      path: './anime',
+      anime: './anime',
       cache: './cache'
     },
     ali: {
@@ -104,10 +104,10 @@ export class GlobalContex {
 
     // Setup cache and anime root
     {
-      type LocalConfig = { path?: string; cache?: string };
+      type LocalConfig = { anime?: string; cache?: string };
       const local = await this.getStoreConfig<LocalConfig>('local');
-      if (local?.path) {
-        this._localRoot = path.resolve(this.root, local.path);
+      if (local?.anime) {
+        this._localRoot = path.resolve(this.root, local.anime);
       }
       if (!fs.existsSync(this._localRoot)) {
         throw new Error(
