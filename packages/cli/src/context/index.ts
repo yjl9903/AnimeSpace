@@ -7,8 +7,8 @@ import { load, dump } from 'js-yaml';
 
 import { MagnetStore, VideoStore } from '@animepaste/database';
 
-import type { VideoInfo } from '../io';
 import type { CliOption, Plan } from '../types';
+import type { VideoInfo, VideoStorePlatform } from '../io';
 
 import { Anime } from '../anime';
 
@@ -58,7 +58,7 @@ export class GlobalContex {
 
   readonly storeLog: LogContext<VideoInfo>;
   readonly magnetStore: MagnetStore;
-  readonly videoStore: VideoStore;
+  readonly videoStore: VideoStore<VideoStorePlatform>;
 
   private _cacheRoot: string;
   private _localRoot: string;
