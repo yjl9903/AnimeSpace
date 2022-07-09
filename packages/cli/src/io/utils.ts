@@ -1,12 +1,28 @@
 import { bold } from 'kolorist';
 import { Format, MultiBar, Presets, SingleBar } from 'cli-progress';
 
+import type { VideoInfo } from './types';
+
 export function b64encode(text: string) {
   return Buffer.from(text, 'utf-8').toString('base64');
 }
 
 export function b64decode(text: string): string {
   return Buffer.from(text, 'base64').toString();
+}
+
+export function printVideoInfo(videoInfo: VideoInfo) {
+  console.log(`  ${bold('VideoId')}     ${videoInfo.videoId}`);
+  console.log(`  ${bold('Title')}       ${videoInfo.title}`);
+  console.log(`  ${bold('Created at')}  ${videoInfo.createdAt}`);
+  if (videoInfo.playUrl.length === 1) {
+    console.log(`  ${bold('Play URL')}    ${videoInfo.playUrl[0]}`);
+  } else {
+    console.log(`  ${bold('Play URL')}`);
+    for (const url of videoInfo.playUrl) {
+      console.log(`    ${url}`);
+    }
+  }
 }
 
 export function createSingleProgress() {

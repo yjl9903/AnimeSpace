@@ -1,15 +1,15 @@
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync, remove } from 'fs-extra';
+import { existsSync, readFileSync } from 'fs-extra';
 
 import Breadc from 'breadc';
 import { debug as createDebug } from 'debug';
-import { lightRed, green, red, link } from 'kolorist';
+import { lightRed, red, link } from 'kolorist';
 
 import type { AnimeType } from './types';
 
 import { context } from './context';
-import { padRight, printVideoInfo } from './utils';
+import { padRight } from './utils';
 import { IndexListener, printMagnets } from './logger';
 
 const name = 'anime';
@@ -116,7 +116,7 @@ cli
   .command('store get <id>', 'View video info on OSS')
   .option('--file', 'Use videoId instead of filepath')
   .action(async (id, option) => {
-    const { useStore } = await import('./io');
+    const { useStore, printVideoInfo } = await import('./io');
     const store = await useStore('ali')();
 
     const info = !option.file
@@ -133,7 +133,7 @@ cli
 cli
   .command('store put <file>', 'Upload video to OSS')
   .action(async (filename) => {
-    const { useStore } = await import('./io');
+    const { useStore, printVideoInfo } = await import('./io');
     const store = await useStore('ali')();
 
     const newFile = await context.copy(

@@ -223,7 +223,7 @@ export class Daemon {
           creationTime: ep.creationTime,
           playURL: playURLs[idx].playUrl[0],
           storage: {
-            type: playURLs[idx].store,
+            type: playURLs[idx].platform,
             videoId: playURLs[idx].videoId
           }
         }));

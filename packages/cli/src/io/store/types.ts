@@ -8,11 +8,11 @@ import { context } from '../../context';
 export type CreateStore = () => Promise<Store>;
 
 export abstract class Store {
-  private readonly type: string;
+  private readonly platform: string;
   private readonly logs: VideoInfo[] = [];
 
-  constructor(type: string) {
-    this.type = type;
+  constructor(platform: string) {
+    this.platform = platform;
   }
 
   async init() {
@@ -40,7 +40,7 @@ export abstract class Store {
   async searchLocalVideo(filename: string): Promise<VideoInfo | undefined> {
     const title = path.basename(filename);
     const videos = this.logs.filter(
-      (l) => path.basename(l.title) === title && l.store === this.type
+      (l) => path.basename(l.title) === title && l.platform === this.platform
     );
     if (videos.length === 0) {
       return undefined;
@@ -59,7 +59,7 @@ export abstract class Store {
   async deleteVideo(videoId: string) {
     const logs = this.logs;
     const videoIdx = logs.findIndex((l) => l.videoId === videoId);
-    if (videoIdx !== -1 && logs[videoIdx].store === this.type) {
+    if (videoIdx !== -1 && logs[videoIdx].platform === this.platform) {
       await this.doDelete(videoId);
       logs.splice(videoIdx, 1);
       await context.storeLog.write(logs);
@@ -73,7 +73,7 @@ export abstract class Store {
 
     for (const log of this.logs) {
       if (
-        log.store === this.type &&
+        log.platform === this.platform &&
         log.title === title &&
         (!log.source.hash || log.source.hash === hash)
       ) {
