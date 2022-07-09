@@ -8,7 +8,7 @@ import { load, dump } from 'js-yaml';
 import { MagnetStore, VideoStore } from '@animepaste/database';
 
 import type { CliOption, Plan } from '../types';
-import type { VideoInfo, VideoStorePlatform } from '../io';
+import type { VideoStorePlatform } from '../io';
 
 import { Anime } from '../anime';
 
