@@ -1,4 +1,4 @@
-export type VideoStore = 'ali';
+export type VideoStorePlatform = 'ali';
 
 export interface VideoInfo {
   /**
@@ -6,7 +6,7 @@ export interface VideoInfo {
    *
    * @default 'ali'
    */
-  store: VideoStore;
+  platform: VideoStorePlatform;
 
   /**
    * Video ID
@@ -21,7 +21,7 @@ export interface VideoInfo {
   /**
    * Creation time
    */
-  creationTime: string;
+  createdAt: string;
 
   /**
    * Cover image

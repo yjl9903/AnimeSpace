@@ -151,11 +151,11 @@ export class AliStore extends Store {
       ]);
       debug(resp, play);
       return {
-        store: 'ali',
+        platform: 'ali',
         videoId,
         title: resp.Video.Title,
         cover: resp.Video.CoverURL,
-        creationTime: resp.Video.CreationTime,
+        createdAt: resp.Video.CreationTime,
         playUrl: (play?.PlayInfoList?.PlayInfo ?? [])
           .map((p: any) => p?.PlayURL)
           .filter(Boolean),

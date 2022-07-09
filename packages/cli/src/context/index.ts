@@ -5,7 +5,7 @@ import { homedir } from 'node:os';
 import { subMonths } from 'date-fns';
 import { load, dump } from 'js-yaml';
 
-import { MagnetStore } from '@animepaste/database';
+import { MagnetStore, VideoStore } from '@animepaste/database';
 
 import type { VideoInfo } from '../io';
 import type { CliOption, Plan } from '../types';
@@ -58,6 +58,7 @@ export class GlobalContex {
 
   readonly storeLog: LogContext<VideoInfo>;
   readonly magnetStore: MagnetStore;
+  readonly videoStore: VideoStore;
 
   private _localRoot: string;
   private configCache: any;
@@ -67,12 +68,13 @@ export class GlobalContex {
     this.root = path.join(homedir(), '.animepaste');
     this.cacheRoot = path.join(this.root, 'cache');
     this._localRoot = path.join(this.root, 'anime');
-    this.databaseFilepath = path.join(this.root, 'magnet.db');
 
     this.anime = path.join(this.root, GlobalContex.AnimeDdName);
     this.config = path.join(this.root, GlobalContex.ConfigFileName);
 
     this.storeLog = new LogContext(this, 'store.json');
+    this.databaseFilepath = path.join(this.root, 'store.db');
+    this.videoStore = new VideoStore({ url: this.databaseFilepath });
     this.magnetStore = new MagnetStore({ url: this.databaseFilepath });
   }
 
