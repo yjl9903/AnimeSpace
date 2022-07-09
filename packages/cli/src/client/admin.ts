@@ -13,6 +13,7 @@ export class AdminClient {
   private readonly token: string;
   private readonly api: AxiosInstance;
 
+  readonly onairIds: Set<string> | undefined;
   readonly onair: OnairAnime[] = [];
   readonly newOnair: OnairAnime[] = [];
 
@@ -24,6 +25,7 @@ export class AdminClient {
         Authorization: this.token
       }
     });
+    this.onairIds = option.onairIds;
   }
 
   async fetchOnair() {
@@ -51,7 +53,9 @@ export class AdminClient {
         const { data } = await this.api.post(
           '/admin/anime',
           {
-            onair: uniqBy<OnairAnime>((o) => o.bgmId)(this.newOnair, this.onair)
+            onair: uniqBy<OnairAnime>((o) =>
+              !this.onairIds || this.onairIds.has(o.bgmId) ? o.bgmId : undefined
+            )(this.newOnair, this.onair)
           },
           retry ? {} : { proxy: proxy() }
         );
@@ -75,14 +79,16 @@ export class AdminClient {
   }
 }
 
-function uniqBy<T>(fn: (item: T) => string): (...args: T[][]) => T[] {
+function uniqBy<T>(
+  fn: (item: T) => string | undefined
+): (...args: T[][]) => T[] {
   return (...arrs) => {
     const set = new Set<string>();
     const ans: T[] = [];
     for (const arr of arrs) {
       for (const item of arr) {
         const key = fn(item);
-        if (!set.has(key)) {
+        if (key && !set.has(key)) {
           set.add(key);
           ans.push(item);
         }

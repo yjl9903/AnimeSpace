@@ -52,5 +52,8 @@ export interface OnairEpisode {
 
 export interface UserOption {
   token: string;
+
   baseURL: string;
+
+  onairIds?: Set<string>;
 }

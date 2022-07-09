@@ -124,7 +124,10 @@ export class Daemon {
 
   private async downloadEpisode() {
     this.store = await useStore('ali')();
-    this.client = new AdminClient(await context.getServerConfig());
+    this.client = new AdminClient({
+      ...(await context.getServerConfig()),
+      onairIds: new Set(this.plans.flatMap((p) => p.onair.map((o) => o.bgmId)))
+    });
     await this.client.fetchOnair();
 
     for (const plan of this.plans) {
