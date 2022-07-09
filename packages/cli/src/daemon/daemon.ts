@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { format, subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
 import { dim, link, lightGreen, bold, lightCyan } from 'kolorist';
@@ -215,28 +216,28 @@ export class Daemon {
             `(Total: ${magnets.length} episodes)`
         );
 
+        // Format check (avoid HEVC / MKV)
         for (const { filename } of magnets) {
-          const ok = await checkVideo(path.join(localRoot, filename));
-          if (!ok) {
+          if (!(await checkVideo(path.join(localRoot, filename)))) {
             error(`The format of ${filename} may be wrong`);
           }
         }
 
+        // Start uploading
         info(
           startColor('Upload   ') +
             titleColor(anime.title) +
             '    ' +
             `(${bangumiLink(onair.bgmId)})`
         );
-
-        const playURLs: VideoInfo[] = [];
+        const videoInfos: VideoInfo[] = [];
         for (const { filename, magnetId } of magnets) {
           const resp = await this.store.upload(path.join(localRoot, filename), {
             magnetId,
             retry: 3
           });
           if (resp && resp.playUrl.length > 0) {
-            playURLs.push(resp);
+            videoInfos.push(resp);
           } else {
             error(`Fail uploading ${filename}`);
           }
@@ -247,15 +248,32 @@ export class Daemon {
             okColor(' OK ') +
             `(Total: ${magnets.length} episodes)`
         );
+        for (let idx = 0; idx < episodes.length; idx++) {
+          const ep = episodes[idx];
+          const vInfo = videoInfos[idx];
+          const title = vInfo.source.directory
+            ? link(
+                vInfo.title,
+                pathToFileURL(
+                  path.posix.join(
+                    context.decodePath(vInfo.source.directory),
+                    vInfo.title
+                  )
+                ).href
+              )
+            : vInfo.title;
+          info(` ${dim(formatEP(ep.ep))} ${title}`);
+        }
+        // Upload OK
 
         const syncEpisodes: OnairEpisode[] = episodes.map((ep, idx) => ({
           ep: ep.ep,
           quality: ep.quality,
           creationTime: ep.creationTime,
-          playURL: playURLs[idx].playUrl[0],
+          playURL: videoInfos[idx].playUrl[0],
           storage: {
-            type: playURLs[idx].platform,
-            videoId: playURLs[idx].videoId
+            type: videoInfos[idx].platform,
+            videoId: videoInfos[idx].videoId
           }
         }));
 

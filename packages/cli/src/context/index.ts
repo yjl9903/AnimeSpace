@@ -231,24 +231,28 @@ export class GlobalContex {
 
   encodePath(src: string) {
     if (contains(this.localRoot, src)) {
-      return 'local:' + path.relative(this.localRoot, src);
+      return 'local:' + normalizePath(path.relative(this.localRoot, src));
     } else {
-      return 'cache:' + path.relative(this.cacheRoot, src);
+      return 'cache:' + normalizePath(path.relative(this.cacheRoot, src));
     }
   }
 
   decodePath(src: string) {
     if (src.startsWith('local:')) {
-      return path.join(this.localRoot, src.substring(6));
+      return normalizePath(path.join(this.localRoot, src.substring(6)));
     } else if (src.startsWith('cache:')) {
-      return path.join(this.cacheRoot, src.substring(6));
+      return normalizePath(path.join(this.cacheRoot, src.substring(6)));
     } else {
-      return src;
+      return normalizePath(src);
     }
   }
 }
 
 export const context = new GlobalContex();
+
+function normalizePath(filename: string) {
+  return filename.split(path.win32.sep).join(path.posix.sep);
+}
 
 function contains(parent: string, dir: string) {
   const relative = path.relative(parent, dir);
