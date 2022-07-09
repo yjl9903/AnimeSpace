@@ -38,7 +38,7 @@ export function printMagnets(magnets: Resource[], prefix = '  ') {
     info(
       `${prefix}${link(
         item.title,
-        context.database.formatMagnetLink(item.link)
+        context.magnetStore.formatMagnetLink(item.link)
       )}`
     );
   }

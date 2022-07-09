@@ -59,7 +59,7 @@ export class Daemon {
 
   private async refreshDatabase() {
     console.log();
-    await context.database.index({
+    await context.magnetStore.index({
       limit: subMonths(
         new Date(Math.min(...this.plans.map((p) => p.date.getTime()))),
         3
@@ -149,7 +149,7 @@ export class Daemon {
           info(
             ` ${dim(formatEP(ep.ep))} ${link(
               ep.magnetName,
-              context.database.formatMagnetLink(ep.magnetId)
+              context.magnetStore.formatMagnetLink(ep.magnetId)
             )}`
           );
         }
@@ -160,7 +160,7 @@ export class Daemon {
           episodes.map(async (ep) => {
             return {
               // magnetURI: this.magnetCache.get(ep.magnetId)!,
-              magnetURI: (await context.database.findByLink(ep.magnetId))!
+              magnetURI: (await context.magnetStore.findByLink(ep.magnetId))!
                 .magnet,
               filename: formatEpisodeName(onair.format, anime, ep)
             };

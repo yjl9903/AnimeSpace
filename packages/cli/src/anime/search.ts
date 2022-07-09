@@ -104,7 +104,7 @@ export async function search(
     debug('- ' + keyword);
   }
 
-  const result = await context.database.search(keywords, {
+  const result = await context.magnetStore.search(keywords, {
     limit: option.beginDate,
     listener: IndexListener
   });
@@ -125,7 +125,7 @@ export async function search(
       info(
         `   ${dim(formatEP(ep.ep))} ${link(
           ep.magnetName,
-          context.database.formatMagnetLink(ep.magnetId)
+          context.magnetStore.formatMagnetLink(ep.magnetId)
         )}`
       );
     }

@@ -54,7 +54,7 @@ cli
   .action(async (anime, option) => {
     const { userSearch } = await import('./anime');
     if (option.index) {
-      await context.database.index({ listener: IndexListener });
+      await context.magnetStore.index({ listener: IndexListener });
     }
     await userSearch(anime, option);
   });
@@ -70,7 +70,7 @@ cli
   .action(async (id, title, anime, option) => {
     const { daemonSearch } = await import('./anime');
     if (option.index) {
-      await context.database.index({ listener: IndexListener });
+      await context.magnetStore.index({ listener: IndexListener });
     }
     await daemonSearch(id, [title, ...anime], {
       ...option,
@@ -191,7 +191,7 @@ cli
     }
   })
   .action(async (option) => {
-    await context.database.index({
+    await context.magnetStore.index({
       limit: option.limit ? new Date(option.limit) : undefined,
       startPage: option.page,
       earlyStop: !option.force,
@@ -202,7 +202,7 @@ cli
 cli
   .command('magnet ls <keyword>', 'Search magnet database')
   .action(async (keyword) => {
-    const list = await context.database.search(keyword);
+    const list = await context.magnetStore.search(keyword);
     printMagnets(list, '');
   });
 
