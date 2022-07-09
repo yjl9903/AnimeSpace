@@ -1,15 +1,16 @@
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'fs-extra';
+import { existsSync, readFileSync, remove } from 'fs-extra';
 
 import Breadc from 'breadc';
 import { debug as createDebug } from 'debug';
-import { lightRed, red, link } from 'kolorist';
+import { lightRed, red, link, green } from 'kolorist';
 
 import type { AnimeType } from './types';
 
 import { context } from './context';
 import { padRight } from './utils';
+import { printVideoInfo } from './io';
 import { IndexListener, printMagnets } from './logger';
 
 const name = 'anime';
@@ -149,33 +150,34 @@ cli
     }
   });
 
-// cli
-//   .command('store rm [...ids]', 'Remove video info on OSS')
-//   .option('--file', 'Use videoId instead of filepath')
-//   .option('--rm-local', 'Remove local files')
-//   .action(async (ids, option) => {
-//     const { useStore } = await import('./io');
-//     const store = await useStore('ali')();
+cli
+  .command('store rm [...ids]', 'Remove video info on OSS')
+  .option('--file', 'Use filepath instead of videoId')
+  .option('--rm-local', 'Remove local files')
+  .action(async (ids, option) => {
+    const { useStore } = await import('./io');
+    const store = await useStore('ali')();
 
-//     for (const id of ids) {
-//       const info = !option.file
-//         ? await store.fetchVideoInfo(id)
-//         : await store.searchLocalVideo(id);
-//       if (option['rm-local'] && info && 'filepath' in info) {
-//         const local = info as LocalVideoInfo;
-//         await remove(local.filepath);
-//       }
+    for (const id of ids) {
+      const info = !option.file
+        ? await store.fetchVideoInfo(id)
+        : await store.searchLocalVideo(id);
 
-//       console.log();
-//       if (info) {
-//         printVideoInfo(info);
-//         await store.deleteVideo(info.videoId);
-//         console.log(`  ${green(`√ Delete "${info.videoId}" Ok`)}`);
-//       } else {
-//         console.log(`  ${red(`✗ Video "${id}" not found`)}`);
-//       }
-//     }
-//   });
+      if (option['rm-local'] && info?.source.directory) {
+        const filepath = context.decodePath(info?.source.directory);
+        await remove(filepath);
+      }
+
+      console.log();
+      if (info) {
+        printVideoInfo(info);
+        await store.deleteVideo(info.videoId);
+        console.log(`  ${green(`√ Delete "${info.videoId}" Ok`)}`);
+      } else {
+        console.log(`  ${red(`✗ Video "${id}" not found`)}`);
+      }
+    }
+  });
 
 cli
   .command('magnet index', 'Index magnet database')
