@@ -94,6 +94,10 @@ export class Daemon {
         if (plan.state === 'finish' && (await context.getAnime(onair.bgmId))) {
           continue;
         }
+        // Continue outside onair anime
+        if (onair.link && typeof onair.link === 'string') {
+          continue;
+        }
 
         const keywords = Array.isArray(onair.keywords)
           ? onair.keywords
@@ -132,20 +136,20 @@ export class Daemon {
 
     for (const plan of this.plans) {
       for (const onair of plan.onair) {
-        const anime = await context.getAnime(onair.bgmId);
-        if (!anime) {
-          error(`Fail to get ${onair.title} (${bangumiLink(onair.bgmId)})`);
-          continue;
-        }
-
+        // Sync online play bangumis
         if (onair.link && typeof onair.link === 'string') {
-          // Push online play bangumis
           this.client.updateOnair({
             title: onair.title,
             bgmId: onair.bgmId,
             episodes: [],
             link: onair.link
           });
+          continue;
+        }
+
+        const anime = await context.getAnime(onair.bgmId);
+        if (!anime) {
+          error(`Fail to get ${onair.title} (${bangumiLink(onair.bgmId)})`);
           continue;
         }
 
