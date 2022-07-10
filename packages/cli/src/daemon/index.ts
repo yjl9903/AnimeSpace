@@ -20,7 +20,7 @@ export async function startDaemon(option: {
       isRunning = true;
       await context.init({ force: false });
       await daemon.update();
-      isRunning = true;
+      isRunning = false;
     }, option.interval * 60 * 1000);
   });
 }
