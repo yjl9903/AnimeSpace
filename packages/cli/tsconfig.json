@@ -9,6 +9,9 @@
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "@animepaste/database": ["../database/src/index.ts"],
+    }
   }
 }
