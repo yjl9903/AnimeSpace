@@ -50,7 +50,7 @@ importers:
       vite-plugin-info: ^0.1.0
       vite-plugin-inspect: ^0.5.1
       vite-plugin-pages: ^0.25.0
-      vite-plugin-pwa: ^0.12.2
+      vite-plugin-pwa: ^0.12.3
       vite-ssg: ^0.20.2
       vitest: ^0.18.0
       vue: ^3.2.37
@@ -86,7 +86,7 @@ importers:
       vite-plugin-info: 0.1.0_vite@2.9.14
       vite-plugin-inspect: 0.5.1_vite@2.9.14
       vite-plugin-pages: 0.25.0_vite@2.9.14
-      vite-plugin-pwa: 0.12.2_vite@2.9.14
+      vite-plugin-pwa: 0.12.3_vite@2.9.14
       vite-ssg: 0.20.2_aqm4hwmwjs4uxurbtenkxfgpo4
       vitest: 0.18.0
       vue-tsc: 0.38.3_typescript@4.7.4
@@ -6787,8 +6787,8 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-pwa/0.12.2_vite@2.9.14:
-    resolution: {integrity: sha512-XK2oi1YZkoc1J8fyerNYxyh/yfb+INdrdOW/mOOD5DBLq7jVPxHQuncIhqiREbGOMlY/xMe9CSE7QZ9xIAEf7A==}
+  /vite-plugin-pwa/0.12.3_vite@2.9.14:
+    resolution: {integrity: sha512-gmYdIVXpmBuNjzbJFPZFzxWYrX4lHqwMAlOtjmXBbxApiHjx9QPXKQPJjSpeTeosLKvVbNcKSAAhfxMda0QVNQ==}
     peerDependencies:
       vite: ^2.0.0 || ^3.0.0-0
     dependencies:
