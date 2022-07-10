@@ -151,22 +151,27 @@ export class MagnetStore extends AbstractDatabase {
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
-          debug(
-            `There is a unique constraint violation when inserting resource`
-          );
+          // debug(
+          //   `There is a unique constraint violation when inserting resource`
+          // );
           debug(`Title: ${payload.title}`);
 
           // Update keywords
           if (payload.keywords) {
             debug(JSON.parse(payload.keywords));
-            await this.prisma.resource.update({
-              where: {
-                id: payload.id
-              },
-              data: {
-                keywords: payload.keywords
-              }
-            });
+            try {
+              await this.prisma.resource.update({
+                where: {
+                  id: payload.id
+                },
+                data: {
+                  keywords: payload.keywords
+                }
+              });
+            } catch (error) {
+              // May be caused by magnet with the same title
+              debug(error);
+            }
           }
         }
       }
