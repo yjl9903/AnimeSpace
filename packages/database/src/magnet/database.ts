@@ -53,7 +53,7 @@ export interface IndexOption {
 export class MagnetStore extends AbstractDatabase {
   private _timestamp!: Date;
 
-  private readonly parser: MagnetParser = new MagnetParser();
+  readonly parser: MagnetParser = new MagnetParser();
 
   constructor(option: DatabaseOption = {}) {
     super(option);

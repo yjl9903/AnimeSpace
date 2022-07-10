@@ -7,17 +7,15 @@ export interface ParsedMagnet {
   tags: string[];
 }
 
+const P1080 = ['1080P', '1080p', '1920x1080', '1920X1080'];
+const P720 = ['720P', '720p', '1280x720', '1280X720'];
+const HEVC = ['HEVC-10bit', 'HEVC', 'MKV'];
+
 export class MagnetParser {
   private readonly TAGS = [
     // Image Resolution
-    '1080P',
-    '1080p',
-    '720P',
-    '720p',
-    '1920x1080',
-    '1920X1080',
-    '1280x720',
-    '1280X720',
+    ...P1080,
+    ...P720,
     // Web DL
     'WEB-DL',
     'WebRip',
@@ -30,9 +28,7 @@ export class MagnetParser {
     'ViuTV',
     'B-Global',
     // Video encode,
-    'HEVC-10bit',
-    'HEVC',
-    'MKV',
+    ...HEVC,
     'MP4',
     'BIG5_MP4',
     'BIG5',
@@ -41,8 +37,8 @@ export class MagnetParser {
     'AVC',
     'AAC',
     // Language
-    'CHT',
     'CHS',
+    'CHT',
     '简繁内嵌字幕',
     '简繁内嵌',
     '简繁内封字幕',
@@ -101,6 +97,32 @@ export class MagnetParser {
     const { title, alias } = this.parse(originTitle);
     const titles = [title, ...alias];
     return JSON.stringify(titles.map(this.normalize));
+  }
+
+  hevc(magnet: ParsedMagnet) {
+    return magnet.tags.some((t) => HEVC.includes(t));
+  }
+
+  quality(magnet: ParsedMagnet) {
+    for (const tag of magnet.tags) {
+      if (P1080.includes(tag)) {
+        return 1080;
+      } else if (P720.includes(tag)) {
+        return 720;
+      }
+    }
+    return 1080;
+  }
+
+  language(magnet: ParsedMagnet) {
+    for (const tag of magnet.tags) {
+      if (tag.indexOf('简') !== -1) {
+        return 'zh-Hans';
+      } else if (tag.indexOf('繁') !== -1) {
+        return 'zh-Hant';
+      }
+    }
+    return 'zh-Hans';
   }
 
   private removeBracket(title: string) {

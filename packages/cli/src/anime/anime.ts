@@ -86,50 +86,13 @@ export class Anime {
     // Disable download HEVC
     if (result.title.indexOf('HEVC') !== -1) return undefined;
 
-    const getEp = () => {
-      for (const RE of [
-        /\[(\d+)([vV]\d+)?\]/,
-        /【(\d+)([vV]\d+)?】/,
-        /- (\d+) /,
-        /第(\d+)話/,
-        /第(\d+)话/,
-        /第(\d+)集/
-      ]) {
-        const match = RE.exec(result.title);
-        if (match) {
-          return +match[1];
-        }
-      }
-      return 0;
-    };
-
-    const getQulity = (): 1080 | 720 => {
-      if (
-        result.title.indexOf('720P') !== -1 ||
-        result.title.indexOf('720p') !== -1 ||
-        result.title.indexOf('1280X720') !== -1 ||
-        result.title.indexOf('1280x720') !== -1
-      ) {
-        return 720;
-      } else {
-        return 1080;
-      }
-    };
-
-    const getLang = () => {
-      if (result.title.indexOf('简') !== -1) {
-        return 'zh-Hans';
-      } else if (result.title.indexOf('繁') !== -1) {
-        return 'zh-Hant';
-      } else {
-        return 'zh-Hans';
-      }
-    };
+    const parsed = context.magnetStore.parser.parse(result.title);
+    debug(result.title + ' => ' + JSON.stringify(parsed, null, 2));
 
     const ep: Episode = {
-      ep: getEp(),
-      quality: getQulity(),
-      language: getLang(),
+      ep: parsed.ep ?? 0,
+      quality: context.magnetStore.parser.quality(parsed),
+      language: context.magnetStore.parser.language(parsed),
       creationTime: result.createdAt.toISOString(),
       fansub: result.fansub,
       magnetId: result.id,
