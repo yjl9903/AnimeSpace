@@ -121,8 +121,8 @@ export class MagnetParser {
   parse(title: string): ParsedMagnet {
     title = title.trim();
     title = this.removePrefix(title);
-    const { title: newTitle1, tags } = this.extractTags(title);
-    const { title: newTitle2, ep } = this.extractEP(newTitle1);
+    const { title: newTitle1, ep } = this.extractEP(title);
+    const { title: newTitle2, tags } = this.extractTags(newTitle1);
     title = this.removeBracket(newTitle2.trim());
     const [newTitle3, ...alias] = this.extractAlias(title);
     return { title: newTitle3, ep, tags, alias };
