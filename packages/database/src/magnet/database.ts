@@ -110,6 +110,7 @@ export class MagnetStore extends AbstractDatabase {
       const oldest = await this.timestamp();
       if (isBefore(indexOption.limit, oldest)) {
         indexOption.earlyStop = false;
+        // Avoid the oldest date in database not being exist
         indexOption.limit = subDays(indexOption.limit, 1);
         await this.index(indexOption);
       }

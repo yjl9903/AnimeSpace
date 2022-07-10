@@ -44,7 +44,7 @@ export class AdminClient {
         debug(error);
       }
     }
-    throw new Error('Fail syncing onair animes');
+    throw new Error('Fail fetching onair animes');
   }
 
   async syncOnair(): Promise<OnairAnime[]> {

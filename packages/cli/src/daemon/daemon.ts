@@ -80,7 +80,7 @@ export class Daemon {
     await context.magnetStore.index({
       limit: subMonths(
         new Date(Math.min(...this.plans.map((p) => p.date.getTime()))),
-        3
+        1
       ),
       earlyStop: !context.cliOption.force,
       listener: IndexListener
@@ -347,7 +347,7 @@ function formatEpisodeName(
 
 function resolveEP(eps: EpisodeList) {
   if (Array.isArray(eps)) {
-    return new Map(eps.map((t, idx) => [idx, t]));
+    return new Map(eps.map((t, idx) => [idx + 1, t]));
   } else {
     const map = new Map<number, string>();
     for (const [idx, ep] of Object.entries(eps)) {

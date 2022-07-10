@@ -38,7 +38,7 @@ const DefaultGlobalConfig: GlobalConfig = {
     ali: {
       accessKeyId: '',
       accessKeySecret: '',
-      endpoint: ''
+      regionId: ''
     }
   }
 };
