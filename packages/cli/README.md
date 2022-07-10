@@ -38,7 +38,7 @@ server:
 
 store:
   local: # Local anime store
-    path: ./anime
+    anime: ./anime
     cache: ./cache
   ali:   # Ali OSS config
     accessKeyId: ''
