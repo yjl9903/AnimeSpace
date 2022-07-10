@@ -4,7 +4,7 @@ import { copy, remove } from 'fs-extra';
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 
-import { MagnetStore, Parser } from '../src';
+import { MagnetStore, MagnetParser } from '../src';
 
 const dir = path.join(fileURLToPath(import.meta.url), '../..');
 const sourceDB = path.join(dir, './prisma/anime.db');
@@ -42,7 +42,7 @@ describe('Magnet Store', () => {
 
 describe('Parser', () => {
   it('should parse', () => {
-    const parser = new Parser();
+    const parser = new MagnetParser();
 
     expect(
       parser.parse('【DMHY】【黑色五葉草/Black_Clover】[161][繁體][720P][MP4]')
