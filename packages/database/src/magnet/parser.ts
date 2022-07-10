@@ -9,19 +9,27 @@ export interface ParsedMagnet {
 
 const P1080 = ['1080P', '1080p', '1920x1080', '1920X1080'];
 const P720 = ['720P', '720p', '1280x720', '1280X720'];
+const P2160 = ['3840x2160', '3840X2160'];
 const HEVC = ['HEVC-10bit', 'HEVC', 'MKV'];
 
 export class MagnetParser {
   private readonly TAGS = [
     // Image Resolution
+    ...P2160,
     ...P1080,
     ...P720,
+    '1920x816',
+    'x264',
+    '60fps',
     // Web DL
+    'TVrip',
     'WEB-DL',
+    'WEBrip',
     'WebRip',
     'WEB-RIP',
     'BDRip',
     'BD-RIP',
+    'DVDRIP',
     'Baha',
     'Bilibili',
     'bilibili',
@@ -30,37 +38,82 @@ export class MagnetParser {
     // Video encode,
     ...HEVC,
     'MP4',
+    'BIG5-MP4',
     'BIG5_MP4',
     'BIG5',
+    'GB-MP4',
     'GB_MP4',
+    'GB-JP',
+    'GB_JP',
+    'GB',
+    'EAC3',
     // Audio encode
+    'AVC 8bit',
     'AVC',
     'AAC',
+    'ASS',
+    'SRT',
     // Language
     'CHS',
     'CHT',
+    '简繁日内封字幕',
+    '简繁日内封',
+    '简繁日双语',
+    '简日双语字幕',
     '简繁内嵌字幕',
     '简繁内嵌',
     '简繁内封字幕',
     '简繁内封',
+    '簡繁內封',
+    '简体内嵌',
+    '繁体内嵌',
+    '繁體內嵌',
     '简繁字幕',
+    '简繁外挂字幕',
+    '简繁外挂',
+    '简繁内挂',
     '简日双语',
+    '简日字幕',
+    '繁體外掛',
     '繁日雙語',
+    '繁日字幕',
     '簡繁日外掛',
     '内封字幕',
     '简体',
+    '简中',
     '繁體',
-    '内嵌'
+    '繁中',
+    '英文',
+    '内嵌',
+    '内封'
   ];
 
   private readonly REMOVE = [
+    /\[\d+\.\d+\.\d+\]/,
+    /\[[vV]\d+\]/,
     // 招募
-    /\[招募[^\]]*\]/,
+    /\[[^\[]*(招募|急招|招人)[^\]]*\]/,
+    /（[^（]*(招募|急招|招人)[^）]*）/,
+    /【[^【]*(招募|急招|招人)[^】]*】/,
     // Other
-    '★01月新番★',
-    '★04月新番★',
-    '★07月新番★',
-    '★10月新番★'
+    'Donghua',
+    /★0?1月新番★?/,
+    /★0?4月新番★?/,
+    /★0?7月新番★?/,
+    /★10月新番★?/,
+    '[0?1月新番]',
+    '【0?1月新番】',
+    '[0?4月新番]',
+    '【0?4月新番】',
+    '[0?7月新番]',
+    '【0?7月新番】',
+    '[10月新番]',
+    '【10月新番】',
+    '(先行版本)',
+    '(正式版本)',
+    '（僅限港澳台地區）',
+    /\((检索|檢索)[^\)]*\)/,
+    /（(检索|檢索)[^\)]*）/
   ];
 
   constructor() {}
@@ -164,9 +217,9 @@ export class MagnetParser {
       title = title.replace(tag, '');
     }
     title = title
-      .replace(/\[[\s_\-+&]+\]/g, '')
-      .replace(/【[\s_\-+&]+】/g, '')
-      .replace(/\([\s_\-+&]+\)/g, '')
+      .replace(/\[[\s_\-+&@]+\]/g, '')
+      .replace(/【[\s_\-+&@]+】/g, '')
+      .replace(/\([\s_\-+&@]+\)/g, '')
       .trim();
     return { title, tags };
   }
