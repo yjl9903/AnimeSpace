@@ -1,5 +1,14 @@
-export class Parser {
-  static TAGS = [
+import { tradToSimple } from '../utils';
+
+export interface ParsedMagnet {
+  title: string;
+  ep: number | undefined;
+  alias: string[];
+  tags: string[];
+}
+
+export class MagnetParser {
+  private readonly TAGS = [
     // Image Resolution
     '1080P',
     '1080p',
@@ -48,7 +57,7 @@ export class Parser {
     '内嵌'
   ];
 
-  static REMOVE = [
+  private readonly REMOVE = [
     // 招募
     /\[招募[^\]]*\]/,
     // Other
@@ -60,7 +69,7 @@ export class Parser {
 
   constructor() {}
 
-  parse(title: string) {
+  parse(title: string): ParsedMagnet {
     title = title.trim();
     title = this.removePrefix(title);
     const { title: newTitle1, tags } = this.extractTags(title);
@@ -68,6 +77,30 @@ export class Parser {
     title = this.removeBracket(newTitle2.trim());
     const [newTitle3, ...alias] = this.extractAlias(title);
     return { title: newTitle3, ep, tags, alias };
+  }
+
+  normalize(title: string) {
+    title = tradToSimple(title);
+    title = title.replace(/[“”‘’【】（）《》\s]/g, '');
+    for (const [src, dst] of [
+      ['！', '!'],
+      ['¥', '$'],
+      ['，', ','],
+      ['。', '.'],
+      ['；', ';'],
+      ['：', ':'],
+      ['？', '?'],
+      ['～', '~']
+    ]) {
+      title = title.replace(src, dst);
+    }
+    return title;
+  }
+
+  normalizeMagnetTitle(originTitle: string) {
+    const { title, alias } = this.parse(originTitle);
+    const titles = [title, ...alias];
+    return JSON.stringify(titles.map(this.normalize));
   }
 
   private removeBracket(title: string) {
@@ -93,7 +126,7 @@ export class Parser {
 
   private extractTags(title: string) {
     const tags = [];
-    for (const tag of Parser.TAGS) {
+    for (const tag of this.TAGS) {
       const RE1 = new RegExp(`\\[${tag}\\]`);
       const RE2 = new RegExp(`【${tag}】`);
       const RE3 = new RegExp(`\\(${tag}\\)`);
@@ -105,7 +138,7 @@ export class Parser {
         }
       }
     }
-    for (const tag of Parser.REMOVE) {
+    for (const tag of this.REMOVE) {
       title = title.replace(tag, '');
     }
     title = title

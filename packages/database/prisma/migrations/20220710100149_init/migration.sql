@@ -5,7 +5,8 @@ CREATE TABLE "Resource" (
     "title" TEXT NOT NULL,
     "fansub" TEXT NOT NULL,
     "magnet" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL
+    "createdAt" DATETIME NOT NULL,
+    "keywords" TEXT NOT NULL DEFAULT ''
 );
 
 -- CreateTable

@@ -1,15 +1,12 @@
-import cnchar from 'cnchar';
-import trad from 'cnchar-trad';
 import createDebug from 'debug';
 import { Prisma, Resource } from '@prisma/client';
 import { subMonths, isBefore, subDays } from 'date-fns';
 
-import { sleep } from '../utils';
+import { simpleToTrad, sleep } from '../utils';
 import { AbstractDatabase, DatabaseOption } from '../database';
 
+import { MagnetParser } from './parser';
 import { fetchResource } from './fetch';
-
-cnchar.use(trad);
 
 const debug = createDebug('anime:database');
 
@@ -55,6 +52,8 @@ export interface IndexOption {
 
 export class MagnetStore extends AbstractDatabase {
   private _timestamp!: Date;
+
+  private readonly parser: MagnetParser = new MagnetParser();
 
   constructor(option: DatabaseOption = {}) {
     super(option);
@@ -117,13 +116,20 @@ export class MagnetStore extends AbstractDatabase {
     }
 
     const keywords = typeof keyword === 'string' ? [keyword] : keyword;
-    debug(keywords.map((k) => cnchar.convert.simpleToTrad(k)).join('\n'));
+    const titleWhere = [
+      ...keywords,
+      ...keywords.map((k) => simpleToTrad(k))
+    ].map((w) => ({
+      title: { contains: w }
+    }));
+    const keywordsWhere = keywords
+      .map(this.parser.normalize)
+      .map((w) => ({ keywords: { contains: w } }));
+    debug(keywords.map(this.parser.normalize).join('\n'));
+
     const result = await this.prisma.resource.findMany({
       where: {
-        OR: [
-          ...keywords,
-          ...keywords.map((k) => cnchar.convert.simpleToTrad(k))
-        ].map((w) => ({ title: { contains: w } })),
+        OR: [...keywordsWhere, ...titleWhere],
         type: '動畫',
         createdAt: {
           gt: indexOption.limit
@@ -134,6 +140,8 @@ export class MagnetStore extends AbstractDatabase {
   }
 
   async createResource(payload: Prisma.ResourceCreateInput) {
+    payload.keywords = this.parser.normalizeMagnetTitle(payload.title);
+
     try {
       const resp = await this.prisma.resource.create({ data: payload });
       await this.timestamp(new Date(payload.createdAt));
@@ -145,9 +153,28 @@ export class MagnetStore extends AbstractDatabase {
             `There is a unique constraint violation when inserting resource`
           );
           debug(`Title: ${payload.title}`);
+
+          // Update keywords
+          debug(JSON.parse(payload.keywords));
+          await this.prisma.resource.update({
+            where: {
+              id: payload.id
+            },
+            data: {
+              keywords: payload.keywords
+            }
+          });
         }
       }
     }
+  }
+
+  async createResources(
+    payloads: Prisma.ResourceCreateInput[]
+  ): Promise<Resource[]> {
+    return (
+      await Promise.all(payloads.map((p) => this.createResource(p)))
+    ).filter(Boolean) as Resource[];
   }
 
   async findById(id: string) {
@@ -158,14 +185,6 @@ export class MagnetStore extends AbstractDatabase {
         }
       })) ?? undefined
     );
-  }
-
-  async createResources(
-    payloads: Prisma.ResourceCreateInput[]
-  ): Promise<Resource[]> {
-    return (
-      await Promise.all(payloads.map((p) => this.createResource(p)))
-    ).filter(Boolean) as Resource[];
   }
 
   async timestamp(newValue?: Date) {
