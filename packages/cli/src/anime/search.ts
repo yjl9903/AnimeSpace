@@ -142,9 +142,11 @@ function outputPlan(animes: Anime[]) {
   console.log();
   console.log(`  date: ${format(date, 'yyyy-MM-dd HH:mm')}`);
   console.log();
+  console.log(`  state: onair`);
+  console.log();
   console.log(`  onair:`);
   for (const anime of animes) {
-    console.log(`    - name: ${anime.title}`);
+    console.log(`    - title: ${anime.title}`);
     console.log(`      bgmId: '${anime.bgmId}'`);
     console.log(`      fansub:`);
     const map = groupBy(anime.episodes, (ep) => ep.fansub);
