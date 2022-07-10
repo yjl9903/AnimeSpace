@@ -20,9 +20,9 @@ importers:
 
   functions:
     specifiers:
-      '@cloudflare/workers-types': ^3.14.0
+      '@cloudflare/workers-types': ^3.14.1
     devDependencies:
-      '@cloudflare/workers-types': 3.14.0
+      '@cloudflare/workers-types': 3.14.1
 
   packages/app:
     specifiers:
@@ -1361,8 +1361,8 @@ packages:
       mime: 3.0.0
     dev: true
 
-  /@cloudflare/workers-types/3.14.0:
-    resolution: {integrity: sha512-F6lZuzu/vNl9AxOq1U3x2UCi68bcE1O59cKGQ5ntRh3lGQfd3vers6NUag02T7P+qFCHaAp78QN6fRmq12Y3iA==}
+  /@cloudflare/workers-types/3.14.1:
+    resolution: {integrity: sha512-B1/plF62pt+H2IJHvApK8fdOJAVsvojvacuac8x8s+JIyqbropMyqNqHTKLm3YD8ZFLGwYeFTudU+PQ7vGvBdA==}
     dev: true
 
   /@esbuild-plugins/node-globals-polyfill/0.1.1_esbuild@0.14.47:
