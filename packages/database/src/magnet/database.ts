@@ -140,7 +140,9 @@ export class MagnetStore extends AbstractDatabase {
   }
 
   async createResource(payload: Prisma.ResourceCreateInput) {
-    payload.keywords = this.parser.normalizeMagnetTitle(payload.title);
+    if (payload.type === '動畫') {
+      payload.keywords = this.parser.normalizeMagnetTitle(payload.title);
+    }
 
     try {
       const resp = await this.prisma.resource.create({ data: payload });
@@ -155,15 +157,17 @@ export class MagnetStore extends AbstractDatabase {
           debug(`Title: ${payload.title}`);
 
           // Update keywords
-          debug(JSON.parse(payload.keywords));
-          await this.prisma.resource.update({
-            where: {
-              id: payload.id
-            },
-            data: {
-              keywords: payload.keywords
-            }
-          });
+          if (payload.keywords) {
+            debug(JSON.parse(payload.keywords));
+            await this.prisma.resource.update({
+              where: {
+                id: payload.id
+              },
+              data: {
+                keywords: payload.keywords
+              }
+            });
+          }
         }
       }
     }
