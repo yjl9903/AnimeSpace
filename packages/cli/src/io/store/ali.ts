@@ -94,6 +94,7 @@ export class AliStore extends Store {
     try {
       const bar = progressbar.create(path.basename(filepath), 1);
       const cancel = onDeath(async () => {
+        option.retry = undefined;
         error('Process is terminated');
         await this.doDelete(resp.VideoId);
         info('Clear OK');

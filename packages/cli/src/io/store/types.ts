@@ -96,6 +96,7 @@ export abstract class Store {
       info.source.magnetId = option.magnetId;
       info.source.directory = context.encodePath(path.dirname(filepath));
       info.source.hash = hash;
+      await context.videoStore.createVideo(info);
       return info;
     } else {
       throw new Error('Fail to upload');
