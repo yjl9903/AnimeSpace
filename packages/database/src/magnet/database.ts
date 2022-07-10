@@ -1,8 +1,8 @@
-import createDebug from 'debug';
 import cnchar from 'cnchar';
 import trad from 'cnchar-trad';
-import { subMonths, isBefore } from 'date-fns';
+import createDebug from 'debug';
 import { Prisma, Resource } from '@prisma/client';
+import { subMonths, isBefore, subDays } from 'date-fns';
 
 import { sleep } from '../utils';
 import { AbstractDatabase, DatabaseOption } from '../database';
@@ -110,6 +110,7 @@ export class MagnetStore extends AbstractDatabase {
       const oldest = await this.timestamp();
       if (isBefore(indexOption.limit, oldest)) {
         indexOption.earlyStop = false;
+        indexOption.limit = subDays(indexOption.limit, 1);
         await this.index(indexOption);
       }
     }
