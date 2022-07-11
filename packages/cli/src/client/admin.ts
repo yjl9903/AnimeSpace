@@ -61,6 +61,7 @@ export class AdminClient {
       }
     }
 
+    debug(`Sync ${onair.length} bangumis`);
     for (let retry = 0; retry < AdminClient.MAX_RETRY; retry++) {
       try {
         const { data } = await this.api.post(
