@@ -13,6 +13,11 @@ export class AdminClient {
   private readonly token: string;
   private readonly api: AxiosInstance;
 
+  /**
+   * Mark whether onair  anime is changed
+   */
+  private dirty: boolean = false;
+
   readonly onairIds: Set<string> | undefined;
   readonly onair: OnairAnime[] = [];
   readonly newOnair: OnairAnime[] = [];
@@ -36,6 +41,7 @@ export class AdminClient {
           retry ? {} : { proxy: proxy() }
         );
         if (data.status !== 'Ok') throw new Error('Unknown error');
+        this.dirty = false;
         const onair = data.data.onair as OnairAnime[];
         this.onair.splice(0, this.onair.length, ...onair);
         this.newOnair.splice(0, this.newOnair.length);
@@ -51,14 +57,9 @@ export class AdminClient {
     const onair = uniqBy<OnairAnime>((o) =>
       !this.onairIds || this.onairIds.has(o.bgmId) ? o.bgmId : undefined
     )(this.newOnair, this.onair);
-    if (this.onair.length === onair.length) {
-      const trans = (o: OnairAnime) =>
-        `${o.bgmId}:${JSON.stringify(o.episodes.map((ep) => ep.playURL))}`;
-      const newIds = onair.map(trans).sort();
-      const oldIds = this.onair.map(trans).sort();
-      if (newIds.every((t, idx) => t === oldIds[idx])) {
-        return this.onair;
-      }
+
+    if (!this.dirty) {
+      return onair;
     }
 
     debug(`Sync ${onair.length} bangumis`);
@@ -72,6 +73,7 @@ export class AdminClient {
           retry ? {} : { proxy: proxy() }
         );
         if (data.status !== 'Ok') throw new Error('Unknown error');
+        this.dirty = false;
         return data.data.onair;
       } catch (error) {
         debug(error);
@@ -83,9 +85,16 @@ export class AdminClient {
   updateOnair(onair: OnairAnime) {
     const idx = this.onair.findIndex((o) => o.bgmId === onair.bgmId);
     if (idx === -1) {
+      this.dirty = true;
       this.newOnair.push(onair);
     } else {
-      this.onair[idx] = onair;
+      if (
+        JSON.stringify(this.onair[idx].episodes) !==
+        JSON.stringify(onair.episodes)
+      ) {
+        this.dirty = true;
+        this.onair[idx] = onair;
+      }
       this.newOnair.push(onair);
     }
   }
