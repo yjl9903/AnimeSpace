@@ -54,7 +54,7 @@ importers:
       vite-ssg: ^0.20.2
       vitest: ^0.18.0
       vue: ^3.2.37
-      vue-router: ^4.1.1
+      vue-router: ^4.1.2
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.38.4
     dependencies:
@@ -67,7 +67,7 @@ importers:
       plyr: 3.7.2
       scrollreveal: 4.0.9
       vue: 3.2.37
-      vue-router: 4.1.1_vue@3.2.37
+      vue-router: 4.1.2_vue@3.2.37
       vue-scrollto: 2.20.0
     devDependencies:
       '@iconify-json/carbon': 1.1.6
@@ -87,7 +87,7 @@ importers:
       vite-plugin-inspect: 0.5.1_vite@2.9.14
       vite-plugin-pages: 0.25.0_vite@2.9.14
       vite-plugin-pwa: 0.12.3_vite@2.9.14
-      vite-ssg: 0.20.2_aqm4hwmwjs4uxurbtenkxfgpo4
+      vite-ssg: 0.20.2_gzp4g6ojpfo4spm3t4qmi2yojq
       vitest: 0.18.0
       vue-tsc: 0.38.4_typescript@4.7.4
 
@@ -6804,7 +6804,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-ssg/0.20.2_aqm4hwmwjs4uxurbtenkxfgpo4:
+  /vite-ssg/0.20.2_gzp4g6ojpfo4spm3t4qmi2yojq:
     resolution: {integrity: sha512-XtBgJEDrN9cL6pgzXvThrTS7Pm5zwZZnBt50EmL/O+QbdhD/ZjCbcp4GmIrWFBWjVBFcgfwgPccmWv3DAF6s/w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -6828,7 +6828,7 @@ packages:
       prettier: 2.7.1
       vite: 2.9.14
       vue: 3.2.37
-      vue-router: 4.1.1_vue@3.2.37
+      vue-router: 4.1.2_vue@3.2.37
       yargs: 17.5.1
     transitivePeerDependencies:
       - bufferutil
@@ -6922,8 +6922,8 @@ packages:
     dependencies:
       vue: 3.2.37
 
-  /vue-router/4.1.1_vue@3.2.37:
-    resolution: {integrity: sha512-Wp1mEf2xCwT0ez7o9JvgpfBp9JGnVb+dPERzXDbugTatzJAJ60VWOhJKifQty85k+jOreoFHER4r5fu062PhPw==}
+  /vue-router/4.1.2_vue@3.2.37:
+    resolution: {integrity: sha512-5BP1qXFncVRwgV/XnqzsKApdMjQPqWIpoUBdL1ynz8HyLxIX/UDAx7Ql2BjmA5CXT/p61JfZvkpiFWFpaqcfag==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
