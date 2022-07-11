@@ -306,7 +306,7 @@ export class Daemon {
   private async syncPlaylist(title = '', curId = '') {
     if (curId === '') {
       info(
-        `${startColor('Sync')}     ${this.client.onair.length} onair animes`
+        `${startColor('Sync')}     ${this.client.newOnair.length} onair animes`
       );
     }
     if (title !== '') {
@@ -322,7 +322,7 @@ export class Daemon {
       if (curId === '') {
         info(
           `${okColor('Sync')}     ${
-            this.client.onair.length
+            this.client.newOnair.length
           } onair animes ${okColor('OK')}`
         );
       }
