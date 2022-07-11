@@ -48,14 +48,25 @@ export class AdminClient {
   }
 
   async syncOnair(): Promise<OnairAnime[]> {
+    const onair = uniqBy<OnairAnime>((o) =>
+      !this.onairIds || this.onairIds.has(o.bgmId) ? o.bgmId : undefined
+    )(this.newOnair, this.onair);
+    if (this.onair.length === onair.length) {
+      const trans = (o: OnairAnime) =>
+        `${o.bgmId}:${JSON.stringify(o.episodes.map((ep) => ep.playURL))}`;
+      const newIds = onair.map(trans).sort();
+      const oldIds = this.onair.map(trans).sort();
+      if (newIds.every((t, idx) => t === oldIds[idx])) {
+        return this.onair;
+      }
+    }
+
     for (let retry = 0; retry < AdminClient.MAX_RETRY; retry++) {
       try {
         const { data } = await this.api.post(
           '/admin/anime',
           {
-            onair: uniqBy<OnairAnime>((o) =>
-              !this.onairIds || this.onairIds.has(o.bgmId) ? o.bgmId : undefined
-            )(this.newOnair, this.onair)
+            onair
           },
           retry ? {} : { proxy: proxy() }
         );
