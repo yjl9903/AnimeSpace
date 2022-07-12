@@ -17,5 +17,5 @@
     "vitest": "^0.18.0",
     "wrangler": "^2.0.17"
   },
-  "packageManager": "pnpm@7.5.0"
+  "packageManager": "pnpm@7.5.1"
 }
