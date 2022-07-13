@@ -5,34 +5,35 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": [
-      "esnext",
-      "dom"
+      "ESNext",
+      "DOM"
     ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "esnext",
-    "types": [
-      "vite-plugin-info/client",
-      "vite-plugin-pages/client",
-    ],
-    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "paths": {
       "~/*": [
         "./src/*"
       ]
     },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ESNext",
+    "types": [
+      "vite-plugin-info/client",
+      "vite-plugin-pages/client"
+    ],
+    "useDefineForClassFields": true
   },
+  "exclude": [
+    "**/dist/**"
+  ],
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-  ],
-  "exclude": [
-    "**/dist/**"
+    "src/**/*.vue"
   ],
   "references": [
     {

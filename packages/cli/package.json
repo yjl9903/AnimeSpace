@@ -1,8 +1,13 @@
 {
   "name": "animepaste",
   "version": "0.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "Paste your favourite anime online",
+  "keywords": [
+    "anime",
+    "AnimePaste",
+    "XLorPaste",
+    "cli"
+  ],
   "homepage": "https://github.com/XLorPaste/AnimePaste#readme",
   "bugs": {
     "url": "https://github.com/XLorPaste/AnimePaste/issues"
@@ -70,5 +75,8 @@
     "@types/js-yaml": "^4.0.5",
     "@types/webtorrent": "^0.109.3",
     "unbuild": "^0.7.4"
+  },
+  "engines": {
+    "node": ">=v16.14.0"
   }
 }

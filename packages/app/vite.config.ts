@@ -1,4 +1,5 @@
-import * as path from 'path';
+import * as path from 'node:path';
+import { createRequire } from 'node:module';
 
 import vue from '@vitejs/plugin-vue';
 import { defineConfig, Plugin } from 'vite';
@@ -13,7 +14,10 @@ import BuildInfo from 'vite-plugin-info';
 import Inspect from 'vite-plugin-inspect';
 import { VitePWA } from 'vite-plugin-pwa';
 
-import { items as bgmItems } from 'bangumi-data';
+// For node v16, ESM does not support import json module
+// It fallbacks to node require
+const require = createRequire(import.meta.url);
+const { items: bgmItems } = require('bangumi-data');
 
 // https://vitejs.dev/config/
 export default defineConfig({
