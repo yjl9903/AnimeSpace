@@ -52,12 +52,11 @@ export const createApp = ViteSSG(
       });
 
       // Register PWA
-      const { registerSW } = await import('virtual:pwa-register');
-
-      registerSW({
-        onNeedRefresh() {},
-        onOfflineReady() {}
-      });
+      // const { registerSW } = await import('virtual:pwa-register');
+      // registerSW({
+      //   onNeedRefresh() {},
+      //   onOfflineReady() {}
+      // });
     }
   }
 );
