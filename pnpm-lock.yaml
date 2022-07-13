@@ -9,14 +9,14 @@ importers:
       typescript: ^4.7.4
       vite: ^2.9.14
       vitest: ^0.18.0
-      wrangler: ^2.0.18
+      wrangler: ^2.0.19
     devDependencies:
       '@types/node': 18.0.3
       prettier: 2.7.1
       typescript: 4.7.4
       vite: 2.9.14
       vitest: 0.18.0
-      wrangler: 2.0.18
+      wrangler: 2.0.19
 
   functions:
     specifiers:
@@ -7273,8 +7273,8 @@ packages:
       workbox-core: 6.5.3
     dev: true
 
-  /wrangler/2.0.18:
-    resolution: {integrity: sha512-BkKoYBjGLKbng9SEsDLjcEH8X0cDuI5mWG9ih6pGO5t7xnvlzcny3r/XhgpCE8UWv+uYM6kd3CqO5JhQf38ZeA==}
+  /wrangler/2.0.19:
+    resolution: {integrity: sha512-ltZtxLSzuvY0xeEvN6nH9epfi0sUn9iy3dUl9P9y/nQIygWp+rIFpzsRGMx8DWykimUyEelMGonYLTawTjv1PQ==}
     engines: {node: '>=16.7.0'}
     hasBin: true
     dependencies:
@@ -7287,7 +7287,6 @@ packages:
       nanoid: 3.3.4
       path-to-regexp: 6.2.1
       selfsigned: 2.0.1
-      semiver: 1.1.0
       xxhash-wasm: 1.0.1
     optionalDependencies:
       fsevents: 2.3.2
