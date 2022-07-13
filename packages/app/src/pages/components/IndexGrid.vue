@@ -9,6 +9,11 @@ const client = useClient();
 const isOnair = (subject: OverviewSubject | Subject) => {
   return client.onairMap.has(String(subject.id));
 };
+
+onMounted(async () => {
+  const ScrollReveal = (await import('scrollreveal')).default;
+  ScrollReveal().reveal('.anime-card');
+});
 </script>
 
 <template>

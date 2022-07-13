@@ -6,7 +6,7 @@ import IndexGrid from './components/IndexGrid.vue';
 const bangumi = useBangumi();
 
 const pageSize = 20;
-const maxNum = ref(pageSize);
+const maxNum = useSessionStorage('page-list:maxNum', pageSize);
 const bgms = ref([] as (Subject | undefined)[]);
 
 watch(
@@ -32,7 +32,7 @@ watch(
 const placeholder = ref<HTMLElement | null>(null);
 useIntersectionObserver(placeholder, ([{ isIntersecting }]) => {
   if (isIntersecting && bgms.value.length >= maxNum.value) {
-    maxNum.value += pageSize;
+    maxNum.value = maxNum.value + pageSize;
   }
 });
 </script>
