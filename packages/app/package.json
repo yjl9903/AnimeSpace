@@ -9,7 +9,7 @@
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },
   "dependencies": {
-    "@vueuse/core": "^8.9.2",
+    "@vueuse/core": "^8.9.3",
     "@vueuse/head": "^0.7.6",
     "bangumi-data": "^0.3.96",
     "date-fns": "^2.28.0",
@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.6",
-    "@types/node": "^18.0.3",
+    "@types/node": "^18.0.4",
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.0",
     "@types/scrollreveal": "^0.0.8",
