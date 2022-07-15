@@ -217,15 +217,26 @@ export class Daemon {
     // If not enable donwload and upload, continue
     if (!this.enable) return;
 
-    const magnets = await Promise.all(
-      episodes.map(async (ep) => {
-        return {
-          magnetId: ep.magnetId,
-          magnetURI: (await context.magnetStore.findById(ep.magnetId))!.magnet,
-          filename: formatEpisodeName(onair.format, anime, ep)
-        };
-      })
-    );
+    const magnets = (
+      await Promise.all(
+        episodes.map(async (ep) => {
+          const magnet = await context.magnetStore.findById(ep.magnetId);
+          if (!magnet) {
+            error(
+              `Can not find magnet (ID: ${link(
+                ep.magnetId,
+                context.magnetStore.idToLink(ep.magnetId)
+              )})`
+            );
+          }
+          return {
+            magnetId: ep.magnetId,
+            magnetURI: magnet?.magnet ?? '',
+            filename: formatEpisodeName(onair.format, anime, ep)
+          };
+        })
+      )
+    ).filter((m) => Boolean(m.magnetURI));
 
     const localRoot = await context.makeLocalAnimeRoot(anime.title);
     const torrent = new TorrentClient(localRoot);
