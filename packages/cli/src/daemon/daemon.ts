@@ -150,7 +150,7 @@ export class Daemon {
           plan.state === 'finish' &&
           this.client.onair.find((o) => o.bgmId === onair.bgmId)
         ) {
-          context;
+          continue;
         }
 
         const anime = await context.getAnime(onair.bgmId);
@@ -236,7 +236,7 @@ export class Daemon {
             ep.storage.source
           ) {
             const source = ep.storage.source;
-            if (!source.magnetId || source.magnetId === magnet.magnetId) {
+            if (source.magnetId === magnet.magnetId) {
               return ep;
             }
           }
