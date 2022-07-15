@@ -389,9 +389,7 @@ export class Daemon {
       const onair = await this.client.syncOnair();
       if (curId === '') {
         info(
-          `${okColor('Sync')}     ${
-            this.client.newOnair.length
-          } onair animes ${okColor('OK')}`
+          `${okColor('Sync')}     ${onair.length} onair animes ${okColor('OK')}`
         );
       }
       for (const anime of onair) {
