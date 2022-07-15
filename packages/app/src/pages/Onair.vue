@@ -63,7 +63,9 @@ const formatDate = (d: string) => {
       </div>
       <div inline-block flex="grow">
         <h3 font-bold text-xl flex="~" items-center w-full>
-          <router-link :to="'/anime/' + anime.bgmId"
+          <router-link
+            :to="'/anime/' + anime.bgmId"
+            class="text-$light-1 hover:text-$c-brand"
             >{{ anime.title }}<Playing ml1></Playing>
           </router-link>
           <div flex-auto></div>

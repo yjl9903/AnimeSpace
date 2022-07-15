@@ -25,8 +25,10 @@ defineProps<{ rating: number }>();
       <span v-else-if="rating >= 8" i-ic-round-star-half></span>
       <span v-else i-ic-round-star-border></span>
     </div>
-    <div absolute right-0>
-      <span text-4xl>{{ rating }}</span>
+    <div absolute right-0 text-4xl select-none>
+      <span>{{ rating.toFixed(0) }}</span>
+      <span>.</span>
+      <span>{{ Math.round(rating * 10) % 10 }}</span>
     </div>
   </div>
 </template>

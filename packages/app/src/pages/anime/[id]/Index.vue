@@ -27,6 +27,7 @@ const maxEps = computed(() => {
           class="text-$light-1 hover:text-$c-brand"
           >{{ getBgmTitle(bgmData) }}</router-link
         >
+        <Playing v-if="onair" ml1></Playing>
       </div>
       <div flex-auto></div>
       <RatingStar
