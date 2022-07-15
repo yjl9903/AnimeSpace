@@ -232,7 +232,8 @@ export class Daemon {
             'storage' in ep &&
             ep.storage &&
             ep.storage.type &&
-            ep.storage.videoId
+            ep.storage.videoId &&
+            ep.storage.source
           ) {
             const source = ep.storage.source;
             if (!source.magnetId || source.magnetId === magnet.magnetId) {
