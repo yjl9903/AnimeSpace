@@ -46,7 +46,7 @@ useIntervalFn(() => {
         class="text-$light-1 hover:text-$c-brand"
         >{{ subject.name_cn }}</router-link
       >
-      <span> 第 {{ ep }} 话</span>
+      <Playing ml1></Playing>
     </h2>
     <div flex="~ gap4 xl:gap8 lt-lg:col" w="lt-lg:full">
       <div aspect="video" mt="4" w="full">
