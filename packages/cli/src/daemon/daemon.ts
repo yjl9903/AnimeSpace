@@ -295,7 +295,8 @@ export class Daemon {
       playURL: videoInfos[idx].playUrl[0],
       storage: {
         type: videoInfos[idx].platform,
-        videoId: videoInfos[idx].videoId
+        videoId: videoInfos[idx].videoId,
+        source: videoInfos[idx].source
       }
     }));
 

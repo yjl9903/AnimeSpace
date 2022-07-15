@@ -93,6 +93,7 @@ export interface OnairEpisode {
   storage: {
     type: string;
     videoId: string;
+    source: {};
   };
 }
 

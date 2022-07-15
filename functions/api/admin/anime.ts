@@ -35,7 +35,8 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
           playURL: ep.playURL,
           storage: {
             type: ep.storage?.type ?? '',
-            videoId: ep.storage?.videoId ?? ''
+            videoId: ep.storage?.videoId ?? '',
+            source: ep.storage?.source ?? {}
           }
         }))
       };

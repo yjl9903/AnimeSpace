@@ -1,3 +1,5 @@
+import type { VideoSource } from '@animepaste/database';
+
 export interface OnairAnime {
   title: string;
 
@@ -47,6 +49,7 @@ export interface OnairEpisode {
   storage: {
     type: string;
     videoId: string;
+    source: VideoSource;
   };
 }
 
