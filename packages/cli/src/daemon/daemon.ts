@@ -4,14 +4,14 @@ import { format, subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
 import { dim, link, lightGreen, bold, lightCyan } from 'kolorist';
 
-import type { Plan, EpisodeList } from '../types';
 import type { Store, VideoInfo } from '../io';
+import type { Plan, OnairPlan, EpisodeList } from '../types';
 
 import { context } from '../context';
 import { checkVideo } from '../video';
 import { TorrentClient, useStore } from '../io';
-import { OnairEpisode, AdminClient } from '../client';
 import { error, info, IndexListener } from '../logger';
+import { OnairEpisode, AdminClient } from '../client';
 import { Anime, Episode, daemonSearch, bangumiLink, formatEP } from '../anime';
 
 const debug = createDebug('anime:daemon');
@@ -42,7 +42,7 @@ export class Daemon {
     await this.refreshPlan();
     await this.refreshDatabase();
     await this.refreshEpisode();
-    await this.downloadEpisode();
+    await this.refreshStore();
 
     info();
     info(okColor('Init daemon OK ') + now());
@@ -55,7 +55,7 @@ export class Daemon {
     await this.refreshPlan();
     await this.refreshDatabase();
     await this.refreshEpisode();
-    await this.downloadEpisode();
+    await this.refreshStore();
 
     info();
     info(okColor('Update OK ') + now());
@@ -126,7 +126,7 @@ export class Daemon {
     }
   }
 
-  private async downloadEpisode() {
+  private async refreshStore() {
     this.store = await useStore('ali')();
     this.client = new AdminClient({
       ...(await context.getServerConfig()),
@@ -146,6 +146,13 @@ export class Daemon {
           });
           continue;
         }
+        // Skip finish plan and anime is onairing
+        if (
+          plan.state === 'finish' &&
+          this.client.onair.find((o) => o.bgmId === onair.bgmId)
+        ) {
+          context;
+        }
 
         const anime = await context.getAnime(onair.bgmId);
         if (!anime) {
@@ -155,152 +162,154 @@ export class Daemon {
 
         info();
 
-        const epLink =
-          onair.link && typeof onair.link !== 'string'
-            ? resolveEP(onair.link)
-            : new Map<number, string>();
-
-        const givenMagnet = onair.magnet
-          ? resolveEP(onair.magnet)
-          : new Map<number, string>();
-        const epMagnet = (
-          await Promise.all(
-            [...givenMagnet.entries()].map(async ([ep, magnet]) => {
-              const m = await context.magnetStore.findById(magnet);
-              if (!!m) {
-                const parsedEP = anime.parseEpisode(m);
-                parsedEP && (parsedEP.ep = ep);
-                return parsedEP;
-              }
-            })
-          )
-        ).filter(Boolean) as Episode[];
-
-        const episodes = anime
-          .genEpisodes(onair.fansub ?? [])
-          .filter((ep) => !givenMagnet.has(ep.ep))
-          .concat(epMagnet)
-          .filter((ep) => !epLink.has(ep.ep));
-
-        info(
-          startColor('Download ') +
-            titleColor(anime.title) +
-            '    ' +
-            `(${bangumiLink(onair.bgmId)})`
-        );
-        for (const ep of episodes) {
-          info(
-            ` ${dim(formatEP(ep.ep))} ${
-              ep.magnetName
-                ? link(ep.magnetName, context.magnetStore.idToLink(ep.magnetId))
-                : context.magnetStore.idToLink(ep.magnetId)
-            }`
-          );
-        }
-
-        // If not enable donwload and upload, continue
-        if (!this.enable) continue;
-
-        const magnets = await Promise.all(
-          episodes.map(async (ep) => {
-            return {
-              magnetId: ep.magnetId,
-              magnetURI: (await context.magnetStore.findById(ep.magnetId))!
-                .magnet,
-              filename: formatEpisodeName(onair.format, anime, ep)
-            };
-          })
-        );
-
-        const localRoot = await context.makeLocalAnimeRoot(anime.title);
-        const torrent = new TorrentClient(localRoot);
-        await torrent.download(magnets);
-        await torrent.destroy();
-        info(
-          okColor('Download ') +
-            titleColor(anime.title) +
-            okColor(' OK ') +
-            `(Total: ${magnets.length} episodes)`
-        );
-
-        // Format check (avoid HEVC / MKV)
-        for (const { filename } of magnets) {
-          if (!(await checkVideo(path.join(localRoot, filename)))) {
-            error(`The format of ${filename} may be wrong`);
-          }
-        }
-
-        // Start uploading
-        info(
-          startColor('Upload   ') +
-            titleColor(anime.title) +
-            '    ' +
-            `(${bangumiLink(onair.bgmId)})`
-        );
-        const videoInfos: VideoInfo[] = [];
-        for (const { filename, magnetId } of magnets) {
-          const resp = await this.store.upload(path.join(localRoot, filename), {
-            magnetId,
-            retry: 3
-          });
-          if (resp && resp.playUrl.length > 0) {
-            videoInfos.push(resp);
-          } else {
-            error(`Fail uploading ${filename}`);
-          }
-        }
-        info(
-          okColor('Upload   ') +
-            titleColor(anime.title) +
-            okColor(' OK ') +
-            `(Total: ${magnets.length} episodes)`
-        );
-        for (let idx = 0; idx < episodes.length; idx++) {
-          const ep = episodes[idx];
-          const vInfo = videoInfos[idx];
-          const title = vInfo.source.directory
-            ? link(
-                vInfo.title,
-                pathToFileURL(
-                  path.posix.join(
-                    context.decodePath(vInfo.source.directory),
-                    vInfo.title
-                  )
-                ).href
-              )
-            : vInfo.title;
-          info(` ${dim(formatEP(ep.ep))} ${title}`);
-        }
-        // Upload OK
-
-        const syncEpisodes: OnairEpisode[] = episodes.map((ep, idx) => ({
-          ep: ep.ep,
-          quality: ep.quality,
-          creationTime: ep.creationTime,
-          playURL: videoInfos[idx].playUrl[0],
-          storage: {
-            type: videoInfos[idx].platform,
-            videoId: videoInfos[idx].videoId
-          }
-        }));
-
-        this.client.updateOnair({
-          title: anime.title,
-          bgmId: anime.bgmId,
-          episodes: [
-            ...syncEpisodes,
-            ...[...epLink.entries()].map(([ep, playURL]) => ({
-              ep: +ep,
-              playURL
-            }))
-          ].sort((a, b) => a.ep - b.ep)
-        });
-
+        await this.refreshAnime(anime, onair);
         await this.syncPlaylist(anime.title, anime.bgmId);
       }
     }
 
     await this.syncPlaylist();
+  }
+
+  private async refreshAnime(anime: Anime, onair: OnairPlan) {
+    const epLink =
+      onair.link && typeof onair.link !== 'string'
+        ? resolveEP(onair.link)
+        : new Map<number, string>();
+
+    const givenMagnet = onair.magnet
+      ? resolveEP(onair.magnet)
+      : new Map<number, string>();
+    const epMagnet = (
+      await Promise.all(
+        [...givenMagnet.entries()].map(async ([ep, magnet]) => {
+          const m = await context.magnetStore.findById(magnet);
+          if (!!m) {
+            const parsedEP = anime.parseEpisode(m);
+            parsedEP && (parsedEP.ep = ep);
+            return parsedEP;
+          }
+        })
+      )
+    ).filter(Boolean) as Episode[];
+
+    const episodes = anime
+      .genEpisodes(onair.fansub ?? [])
+      .filter((ep) => !givenMagnet.has(ep.ep))
+      .concat(epMagnet)
+      .filter((ep) => !epLink.has(ep.ep));
+
+    info(
+      startColor('Download ') +
+        titleColor(anime.title) +
+        '    ' +
+        `(${bangumiLink(onair.bgmId)})`
+    );
+    for (const ep of episodes) {
+      info(
+        ` ${dim(formatEP(ep.ep))} ${
+          ep.magnetName
+            ? link(ep.magnetName, context.magnetStore.idToLink(ep.magnetId))
+            : context.magnetStore.idToLink(ep.magnetId)
+        }`
+      );
+    }
+
+    // If not enable donwload and upload, continue
+    if (!this.enable) return;
+
+    const magnets = await Promise.all(
+      episodes.map(async (ep) => {
+        return {
+          magnetId: ep.magnetId,
+          magnetURI: (await context.magnetStore.findById(ep.magnetId))!.magnet,
+          filename: formatEpisodeName(onair.format, anime, ep)
+        };
+      })
+    );
+
+    const localRoot = await context.makeLocalAnimeRoot(anime.title);
+    const torrent = new TorrentClient(localRoot);
+    await torrent.download(magnets);
+    await torrent.destroy();
+    info(
+      okColor('Download ') +
+        titleColor(anime.title) +
+        okColor(' OK ') +
+        `(Total: ${magnets.length} episodes)`
+    );
+
+    // Format check (avoid HEVC / MKV)
+    for (const { filename } of magnets) {
+      if (!(await checkVideo(path.join(localRoot, filename)))) {
+        error(`The format of ${filename} may be wrong`);
+      }
+    }
+
+    // Start uploading
+    info(
+      startColor('Upload   ') +
+        titleColor(anime.title) +
+        '    ' +
+        `(${bangumiLink(onair.bgmId)})`
+    );
+    const videoInfos: VideoInfo[] = [];
+    for (const { filename, magnetId } of magnets) {
+      const resp = await this.store.upload(path.join(localRoot, filename), {
+        magnetId,
+        retry: 3
+      });
+      if (resp && resp.playUrl.length > 0) {
+        videoInfos.push(resp);
+      } else {
+        error(`Fail uploading ${filename}`);
+      }
+    }
+    info(
+      okColor('Upload   ') +
+        titleColor(anime.title) +
+        okColor(' OK ') +
+        `(Total: ${magnets.length} episodes)`
+    );
+    for (let idx = 0; idx < episodes.length; idx++) {
+      const ep = episodes[idx];
+      const vInfo = videoInfos[idx];
+      const title = vInfo.source.directory
+        ? link(
+            vInfo.title,
+            pathToFileURL(
+              path.posix.join(
+                context.decodePath(vInfo.source.directory),
+                vInfo.title
+              )
+            ).href
+          )
+        : vInfo.title;
+      info(` ${dim(formatEP(ep.ep))} ${title}`);
+    }
+    // Upload OK
+
+    const syncEpisodes: OnairEpisode[] = episodes.map((ep, idx) => ({
+      ep: ep.ep,
+      quality: ep.quality,
+      creationTime: ep.creationTime,
+      playURL: videoInfos[idx].playUrl[0],
+      storage: {
+        type: videoInfos[idx].platform,
+        videoId: videoInfos[idx].videoId
+      }
+    }));
+
+    this.client.updateOnair({
+      title: anime.title,
+      bgmId: anime.bgmId,
+      episodes: [
+        ...syncEpisodes,
+        ...[...epLink.entries()].map(([ep, playURL]) => ({
+          ep: +ep,
+          playURL
+        }))
+      ].sort((a, b) => a.ep - b.ep)
+    });
   }
 
   private async syncPlaylist(title = '', curId = '') {
