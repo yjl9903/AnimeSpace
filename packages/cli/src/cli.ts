@@ -172,9 +172,9 @@ cli
       if (info) {
         printVideoInfo(info);
         await store.deleteVideo(info.videoId);
-        console.log(`  ${green(`√ Delete "${info.videoId}" Ok`)}`);
+        console.log(`  ${green(`√ Delete    ${info.videoId} Ok`)}`);
       } else {
-        console.log(`  ${red(`✗ Video "${id}" not found`)}`);
+        console.log(`  ${red(`✗ Video     ${id} is not found`)}`);
       }
     }
   });
