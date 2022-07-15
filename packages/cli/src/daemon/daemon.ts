@@ -270,12 +270,6 @@ export class Daemon {
         const torrent = new TorrentClient(localRoot);
         await torrent.download(shouldDownloadMagnet);
         await torrent.destroy();
-        info(
-          okColor('Download ') +
-            titleColor(anime.title) +
-            okColor(' OK ') +
-            `(Total: ${magnets.length} episodes)`
-        );
 
         // Format check (avoid HEVC / MKV)
         for (const { filename } of shouldDownloadMagnet) {
@@ -284,6 +278,12 @@ export class Daemon {
           }
         }
       }
+      info(
+        okColor('Download ') +
+          titleColor(anime.title) +
+          okColor(' OK ') +
+          `(Total: ${magnets.length} episodes)`
+      );
     }
     // Download OK
 
