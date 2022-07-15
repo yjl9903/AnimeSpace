@@ -226,19 +226,24 @@ export class Daemon {
     };
 
     const serverOnair = this.client.onair.find((o) => o.bgmId === onair.bgmId);
-    const isMagnetOK = (magnet: InlineMagnet) => {
+    const getServerMagnet = (magnet: InlineMagnet) => {
       if (serverOnair) {
         for (const ep of serverOnair.episodes) {
-          if ('storage' in ep && ep.storage) {
+          if (
+            'storage' in ep &&
+            ep.storage &&
+            ep.storage.type &&
+            ep.storage.videoId
+          ) {
             const source = ep.storage.source;
             if (!source.magnetId || source.magnetId === magnet.magnetId) {
-              return true;
+              return ep;
             }
           }
         }
-        return false;
+        return undefined;
       } else {
-        return false;
+        return undefined;
       }
     };
 
@@ -265,7 +270,7 @@ export class Daemon {
 
     // Start downloading
     {
-      const shouldDownloadMagnet = magnets.filter(isMagnetOK);
+      const shouldDownloadMagnet = magnets.filter(getServerMagnet);
       if (shouldDownloadMagnet.length > 0) {
         const torrent = new TorrentClient(localRoot);
         await torrent.download(shouldDownloadMagnet);
@@ -290,22 +295,37 @@ export class Daemon {
     // Start uploading
     const videoInfos: VideoInfo[] = [];
     {
-      const shouldUploadMagnet = magnets.filter(isMagnetOK);
       info(
         startColor('Upload   ') +
           titleColor(anime.title) +
           '    ' +
           `(${bangumiLink(onair.bgmId)})`
       );
-      for (const { filename, magnetId } of magnets) {
-        const resp = await this.store.upload(path.join(localRoot, filename), {
-          magnetId,
-          retry: 3
-        });
-        if (resp && resp.playUrl.length > 0) {
-          videoInfos.push(resp);
-        } else {
-          error(`Fail uploading ${filename}`);
+      for (const magnet of magnets) {
+        const serverMagnet = getServerMagnet(magnet);
+        if (serverMagnet) {
+          const foundVideo = await context.videoStore.findVideo(
+            serverMagnet.storage.type!,
+            serverMagnet.storage.videoId!
+          );
+          if (foundVideo) {
+            videoInfos.push(foundVideo);
+            continue;
+          }
+        }
+
+        // Do upload
+        {
+          const { filename, magnetId } = magnet;
+          const resp = await this.store.upload(path.join(localRoot, filename), {
+            magnetId,
+            retry: 3
+          });
+          if (resp && resp.playUrl.length > 0) {
+            videoInfos.push(resp);
+          } else {
+            error(`Fail uploading ${filename}`);
+          }
         }
       }
       info(
