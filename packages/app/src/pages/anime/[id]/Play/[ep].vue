@@ -29,10 +29,10 @@ watch(
   }
 );
 
-const playTime = ref(start.value ?? 0);
+const playTime = ref(start.value ?? -1);
 
 useIntervalFn(() => {
-  if (playTime.value) {
+  if (playTime.value >= 0) {
     history.append(id.value, +ep.value, playTime.value);
   }
 }, 1000);

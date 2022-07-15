@@ -69,13 +69,13 @@ watch(container, (container) => {
         // Use source title to check whether source was changed
         let lastTitle: string | undefined = undefined;
         player.value.on('playing', () => {
-          if (
-            lastTitle !== source.value.title &&
-            player.value &&
-            start?.value
-          ) {
-            player.value.currentTime = start.value;
-            lastTitle = source.value.title;
+          if (lastTitle !== source.value.title && player.value) {
+            if (start && start.value) {
+              player.value.currentTime = start.value;
+              lastTitle = source.value.title;
+            } else {
+              emit('timeupdate', Math.floor(player.value.currentTime));
+            }
           }
         });
       }
