@@ -84,7 +84,7 @@ const formatDate = (d: string) => {
         <div v-if="subjects[idx].value" mt4 text-sm text-gray-500:80>
           <span
             >{{
-              subjects[idx].value!.totalEpisodes ??
+              subjects[idx].value!.total_episodes ??
               subjects[idx].value!.eps ??
               '?'
             }}

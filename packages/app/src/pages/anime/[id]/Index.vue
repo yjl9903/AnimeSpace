@@ -52,7 +52,7 @@ const maxEps = computed(() => {
               >{{ format(new Date(subject.date), 'yyyy 年 M 月 d 日开播') }}
             </span>
             <span>/</span>
-            <span>共 {{ subject.eps }} 话</span>
+            <span>共 {{ subject.total_episodes ?? subject.eps }} 话</span>
             <span v-if="maxEps">/</span>
             <span v-if="maxEps">更新至第 {{ maxEps }} 话</span>
           </div>

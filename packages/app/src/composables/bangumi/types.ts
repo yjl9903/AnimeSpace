@@ -110,7 +110,7 @@ export interface Subject {
   infobox: InfoBox;
   volumes: number;
   eps: number;
-  totalEpisodes: number;
+  total_episodes: number;
   rating: Rating;
   collection: Collection;
   tags: Tag[];
