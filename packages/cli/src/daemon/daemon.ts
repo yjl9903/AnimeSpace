@@ -217,7 +217,32 @@ export class Daemon {
     // If not enable donwload and upload, continue
     if (!this.enable) return;
 
-    const magnets = (
+    const localRoot = await context.makeLocalAnimeRoot(anime.title);
+
+    type InlineMagnet = {
+      magnetId: string;
+      magnetURI: string;
+      filename: string;
+    };
+
+    const serverOnair = this.client.onair.find((o) => o.bgmId === onair.bgmId);
+    const isMagnetOK = (magnet: InlineMagnet) => {
+      if (serverOnair) {
+        for (const ep of serverOnair.episodes) {
+          if ('storage' in ep && ep.storage) {
+            const source = ep.storage.source;
+            if (!source.magnetId || source.magnetId === magnet.magnetId) {
+              return true;
+            }
+          }
+        }
+        return false;
+      } else {
+        return false;
+      }
+    };
+
+    const magnets: InlineMagnet[] = (
       await Promise.all(
         episodes.map(async (ep) => {
           const magnet = await context.magnetStore.findById(ep.magnetId);
@@ -238,64 +263,73 @@ export class Daemon {
       )
     ).filter((m) => Boolean(m.magnetURI));
 
-    const localRoot = await context.makeLocalAnimeRoot(anime.title);
-    const torrent = new TorrentClient(localRoot);
-    await torrent.download(magnets);
-    await torrent.destroy();
-    info(
-      okColor('Download ') +
-        titleColor(anime.title) +
-        okColor(' OK ') +
-        `(Total: ${magnets.length} episodes)`
-    );
+    // Start downloading
+    {
+      const shouldDownloadMagnet = magnets.filter(isMagnetOK);
+      if (shouldDownloadMagnet.length > 0) {
+        const torrent = new TorrentClient(localRoot);
+        await torrent.download(shouldDownloadMagnet);
+        await torrent.destroy();
+        info(
+          okColor('Download ') +
+            titleColor(anime.title) +
+            okColor(' OK ') +
+            `(Total: ${magnets.length} episodes)`
+        );
 
-    // Format check (avoid HEVC / MKV)
-    for (const { filename } of magnets) {
-      if (!(await checkVideo(path.join(localRoot, filename)))) {
-        error(`The format of ${filename} may be wrong`);
+        // Format check (avoid HEVC / MKV)
+        for (const { filename } of shouldDownloadMagnet) {
+          if (!(await checkVideo(path.join(localRoot, filename)))) {
+            error(`The format of ${filename} may be wrong`);
+          }
+        }
       }
     }
+    // Download OK
 
     // Start uploading
-    info(
-      startColor('Upload   ') +
-        titleColor(anime.title) +
-        '    ' +
-        `(${bangumiLink(onair.bgmId)})`
-    );
     const videoInfos: VideoInfo[] = [];
-    for (const { filename, magnetId } of magnets) {
-      const resp = await this.store.upload(path.join(localRoot, filename), {
-        magnetId,
-        retry: 3
-      });
-      if (resp && resp.playUrl.length > 0) {
-        videoInfos.push(resp);
-      } else {
-        error(`Fail uploading ${filename}`);
+    {
+      const shouldUploadMagnet = magnets.filter(isMagnetOK);
+      info(
+        startColor('Upload   ') +
+          titleColor(anime.title) +
+          '    ' +
+          `(${bangumiLink(onair.bgmId)})`
+      );
+      for (const { filename, magnetId } of magnets) {
+        const resp = await this.store.upload(path.join(localRoot, filename), {
+          magnetId,
+          retry: 3
+        });
+        if (resp && resp.playUrl.length > 0) {
+          videoInfos.push(resp);
+        } else {
+          error(`Fail uploading ${filename}`);
+        }
       }
-    }
-    info(
-      okColor('Upload   ') +
-        titleColor(anime.title) +
-        okColor(' OK ') +
-        `(Total: ${magnets.length} episodes)`
-    );
-    for (let idx = 0; idx < episodes.length; idx++) {
-      const ep = episodes[idx];
-      const vInfo = videoInfos[idx];
-      const title = vInfo.source.directory
-        ? link(
-            vInfo.title,
-            pathToFileURL(
-              path.posix.join(
-                context.decodePath(vInfo.source.directory),
-                vInfo.title
-              )
-            ).href
-          )
-        : vInfo.title;
-      info(` ${dim(formatEP(ep.ep))} ${title}`);
+      info(
+        okColor('Upload   ') +
+          titleColor(anime.title) +
+          okColor(' OK ') +
+          `(Total: ${magnets.length} episodes)`
+      );
+      for (let idx = 0; idx < episodes.length; idx++) {
+        const ep = episodes[idx];
+        const vInfo = videoInfos[idx];
+        const title = vInfo.source.directory
+          ? link(
+              vInfo.title,
+              pathToFileURL(
+                path.posix.join(
+                  context.decodePath(vInfo.source.directory),
+                  vInfo.title
+                )
+              ).href
+            )
+          : vInfo.title;
+        info(` ${dim(formatEP(ep.ep))} ${title}`);
+      }
     }
     // Upload OK
 
