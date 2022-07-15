@@ -2,7 +2,7 @@
 import { format } from 'date-fns';
 
 import { ensureHTTPS } from '~/composables';
-import { getBgmTitle } from '~/composables/bangumi';
+import { getBgmTitle, getBgmId } from '~/composables/bangumi';
 
 import { useAnimeInfo } from './context';
 import RatingStar from './components/RatingStar.vue';
@@ -22,7 +22,11 @@ const maxEps = computed(() => {
   <div v-if="bgmData">
     <h2 font-bold text-3xl mb4 pb4 flex="~">
       <div>
-        <span>{{ getBgmTitle(bgmData) }}</span>
+        <router-link
+          :to="`/anime/${getBgmId(bgmData)}`"
+          class="text-$light-1 hover:text-$c-brand"
+          >{{ getBgmTitle(bgmData) }}</router-link
+        >
       </div>
       <div flex-auto></div>
       <RatingStar
@@ -58,7 +62,18 @@ const maxEps = computed(() => {
       </div>
     </div>
     <div v-if="onair && onair.episodes.length > 0" mt12 shadow-box rounded-2 p8>
-      <h3 font-bold text-xl pb4 mb4 border="b-1 base">选集播放</h3>
+      <h3
+        font-bold
+        text-xl
+        pb4
+        mb4
+        border="b-1 base"
+        flex="~ gap1"
+        items-center
+      >
+        <span i-carbon-play-filled class="text-[#0ca]"></span
+        ><span>选集播放</span>
+      </h3>
       <ChooseEpisodes :anime="onair"></ChooseEpisodes>
     </div>
   </div>

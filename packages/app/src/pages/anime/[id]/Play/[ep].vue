@@ -23,7 +23,7 @@ const history = useHistory();
 
 const start = ref(history.findHistory(id.value, +ep.value)?.progress ?? 0);
 watch(
-  () => [id.value, ep.value],
+  () => [id.value, ep.value] as [string, string],
   ([id, ep]) => {
     start.value = history.findHistory(id, +ep)?.progress ?? 0;
   }
@@ -41,7 +41,12 @@ useIntervalFn(() => {
 <template>
   <div v-if="subject">
     <h2 id="play-ep-title" font-bold text-xl mb4 pb4 border="b-1 base">
-      <span>{{ subject.name_cn }} - 第 {{ ep }} 话</span>
+      <router-link
+        :to="`/anime/${id}`"
+        class="text-$light-1 hover:text-$c-brand"
+        >{{ subject.name_cn }}</router-link
+      >
+      <span> 第 {{ ep }} 话</span>
     </h2>
     <div flex="~ gap4 xl:gap8 lt-lg:col" w="lt-lg:full">
       <div aspect="video" mt="4" w="full">
@@ -61,8 +66,19 @@ useIntervalFn(() => {
         </Player>
       </div>
       <div flex-auto></div>
-      <div v-if="onair" mt4 max-w="xl:350px lg:250px" min-w="250px">
-        <h3 font-bold text-xl mb4>选集播放</h3>
+      <div v-if="onair" mt4 w="xl:400px lg:280px" shadow-box rounded-2 p4>
+        <h3
+          font-bold
+          text-xl
+          mb4
+          pb4
+          border="b-1 base"
+          flex="~ gap1"
+          items-center
+        >
+          <span i-carbon-play-filled class="text-[#0ca]"></span
+          ><span>选集播放</span>
+        </h3>
         <ChooseEpisodes :anime="onair" :active="+ep"></ChooseEpisodes>
       </div>
     </div>
