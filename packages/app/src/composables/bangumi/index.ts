@@ -101,7 +101,8 @@ export const useBangumi = defineStore('bangumi', () => {
       // Cache subject for 7 days
       if (
         subject.timestamp &&
-        differenceInDays(new Date(), subject.timestamp) <= BangumiCacheDay
+        differenceInDays(new Date(), new Date(subject.timestamp)) <=
+          BangumiCacheDay
       ) {
         return subject;
       }
