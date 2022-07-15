@@ -270,7 +270,7 @@ export class Daemon {
 
     // Start downloading
     {
-      const shouldDownloadMagnet = magnets.filter(getServerMagnet);
+      const shouldDownloadMagnet = magnets.filter((m) => !getServerMagnet(m));
       if (shouldDownloadMagnet.length > 0) {
         const torrent = new TorrentClient(localRoot);
         await torrent.download(shouldDownloadMagnet);
