@@ -30,10 +30,11 @@ const formatDate = (d: string) => {
       正在播出
     </h2>
   </div>
-  <div divide-y py8>
+  <div divide-y>
     <div
       v-for="(anime, idx) in onair"
       :key="anime.bgmId"
+      py8
       flex="~ md:gap8 lt-md:gap4 initial"
       border-base
     >
@@ -104,7 +105,7 @@ const formatDate = (d: string) => {
         <ChooseEpisodes lt-md:hidden mt4 :anime="anime"></ChooseEpisodes>
       </div>
     </div>
-    <div v-if="onair.length === 0">
+    <div v-if="onair.length === 0" py8>
       <p text-center text-base font-light>没有番剧正在播出...</p>
     </div>
   </div>

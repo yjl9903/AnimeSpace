@@ -10,6 +10,15 @@ const isOnair = (subject: OverviewSubject | Subject) => {
   return client.onairMap.has(String(subject.id));
 };
 
+const getOnairMaxEps = (subject: OverviewSubject | Subject) => {
+  const bgm = client.onairMap.get(String(subject.id));
+  if (bgm) {
+    return bgm.episodes.length > 0
+      ? Math.max(...bgm.episodes.map((ep) => ep.ep))
+      : 0;
+  }
+};
+
 onMounted(async () => {
   const ScrollReveal = (await import('scrollreveal')).default;
   ScrollReveal().reveal('.anime-card');
@@ -62,8 +71,11 @@ onMounted(async () => {
       <router-link
         :to="`/anime/${bgm.id}`"
         target="_blank"
-        class="text-base hover:text-$c-brand text-sm font-light"
+        class="text-base hover:text-$c-brand text-sm"
         >{{ bgm.name_cn !== '' ? bgm.name_cn : bgm.name }}</router-link
+      >
+      <span v-if="isOnair(bgm) && getOnairMaxEps(bgm)" block text-xs font-light
+        >更新到第 {{ getOnairMaxEps(bgm) }} 话</span
       >
     </div>
     <div flex-grow></div>
