@@ -314,22 +314,6 @@ export class Daemon {
           okColor(' OK ') +
           `(Total: ${magnets.length} episodes)`
       );
-      for (let idx = 0; idx < episodes.length; idx++) {
-        const ep = episodes[idx];
-        const vInfo = videoInfos[idx];
-        const title = vInfo.source.directory
-          ? link(
-              vInfo.title,
-              pathToFileURL(
-                path.posix.join(
-                  context.decodePath(vInfo.source.directory),
-                  vInfo.title
-                )
-              ).href
-            )
-          : vInfo.title;
-        info(` ${dim(formatEP(ep.ep))} ${title}`);
-      }
     }
     // Upload OK
 
