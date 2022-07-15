@@ -33,6 +33,7 @@ const maxEps = computed(() => {
       <RatingStar
         v-if="subject?.rating.score !== undefined"
         min-w="180px"
+        :bgm-id="subject.id"
         :rating="subject?.rating.score"
       ></RatingStar>
     </h2>
@@ -42,6 +43,7 @@ const maxEps = computed(() => {
           :src="ensureHTTPS(subject.images.large)"
           :alt="`Image of ${subject.name_cn}`"
           w="240px"
+          min-h="16px"
           rounded-2
           lt-lg="mt8"
         />
