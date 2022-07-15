@@ -40,7 +40,7 @@ useIntervalFn(() => {
 
 <template>
   <div v-if="subject">
-    <h2 id="play-ep-title" font-bold text-xl mb4 pb4 border="b-1 base">
+    <h2 id="play-ep-title" font-bold text-3xl mb4 pb4 border="b-1 base">
       <router-link
         :to="`/anime/${id}`"
         class="text-$light-1 hover:text-$c-brand"
