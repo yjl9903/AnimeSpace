@@ -114,4 +114,7 @@ export interface Subject {
   rating: Rating;
   collection: Collection;
   tags: Tag[];
+
+  // Used for refreshing
+  timestamp?: Date;
 }

@@ -2,7 +2,7 @@ import type { Item } from 'bangumi-data';
 
 import axios from 'axios';
 import { defineStore } from 'pinia';
-import { differenceInHours } from 'date-fns';
+import { differenceInDays, differenceInHours } from 'date-fns';
 
 // @ts-ignore
 import { bangumiItems } from '~bangumi/data';
@@ -25,6 +25,7 @@ interface Calender {
 }
 
 const CacheHour = 0;
+const BangumiCacheDay = 7;
 
 export const useBangumi = defineStore('bangumi', () => {
   const api = axios.create({
@@ -96,10 +97,19 @@ export const useBangumi = defineStore('bangumi', () => {
     retry = 1
   ): Promise<Subject | undefined> => {
     if (subjectMap.value.get(String(bgmId))) {
-      return subjectMap.value.get(String(bgmId))!;
+      const subject = subjectMap.value.get(String(bgmId))!;
+      // Cache subject for 7 days
+      if (
+        subject.timestamp &&
+        differenceInDays(new Date(), subject.timestamp) <= BangumiCacheDay
+      ) {
+        return subject;
+      }
     }
+
     try {
       const { data } = await api.get<Subject>(`/v0/subjects/${bgmId}`);
+      data.timestamp = new Date();
       subjectMap.value.set(String(bgmId), data);
       return data;
     } catch (err) {
