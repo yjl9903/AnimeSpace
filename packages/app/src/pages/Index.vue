@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Ref } from 'vue';
+
 import { differenceInHours } from 'date-fns';
 
 import type { OverviewSubject, Subject } from '~/composables/bangumi';
@@ -8,6 +10,31 @@ import IndexGrid from './components/IndexGrid.vue';
 const now = new Date();
 const weekday = now.getDay();
 const weekDayLocale = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+
+const weekdayRefs: Ref<HTMLElement | undefined>[] = [
+  ref(undefined),
+  ref(undefined),
+  ref(undefined),
+  ref(undefined),
+  ref(undefined),
+  ref(undefined),
+  ref(undefined)
+];
+const { y: scrollY } = useWindowScroll();
+const { height } = useWindowSize();
+const isActive = ref(0);
+watch(scrollY, () => {
+  for (let i = 0; i < weekdayRefs.length; i++) {
+    const day = weekdayRefs[i];
+    if (day.value) {
+      const rect = day.value.getBoundingClientRect();
+      if (0 <= rect.top && rect.top < height.value) {
+        isActive.value = i;
+        break;
+      }
+    }
+  }
+});
 
 const client = useClient();
 const bangumi = useBangumi();
@@ -87,6 +114,7 @@ const filterBgm = (subject: OverviewSubject) => {
       <div border="1 base" rounded-2 shadow-box bg-gray-100:30 md:mr4 flex-grow>
         <div
           v-for="offset in 7"
+          :ref="(el) => (weekdayRefs[offset - 1].value = el as HTMLElement)"
           :key="offset"
           :id="`calendar-${offset}`"
           border="base"
@@ -123,6 +151,7 @@ const filterBgm = (subject: OverviewSubject) => {
         <div
           v-scroll-to="{ el: `#calendar-${offset}`, offset: -60 }"
           v-for="offset in 7"
+          :class="isActive === offset - 1 && 'weekday-active'"
           hover="bg-op-40 bg-gray-200 dark:bg-gray/50"
           cursor-pointer
           ml1
@@ -143,6 +172,10 @@ const filterBgm = (subject: OverviewSubject) => {
 </template>
 
 <style>
+.weekday-active {
+  @apply bg-op-10 bg-[#00a1d6] dark:bg-gray/50;
+}
+
 .left-small-dot,
 .left-large-dot {
   @apply pl-4 relative;
