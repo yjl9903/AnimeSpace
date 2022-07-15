@@ -27,6 +27,8 @@ importers:
   packages/app:
     specifiers:
       '@iconify-json/carbon': ^1.1.6
+      '@iconify-json/ic': ^1.1.7
+      '@iconify-json/mdi': ^1.1.28
       '@types/node': ^18.0.4
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.0
@@ -71,6 +73,8 @@ importers:
       vue-scrollto: 2.20.0
     devDependencies:
       '@iconify-json/carbon': 1.1.6
+      '@iconify-json/ic': 1.1.7
+      '@iconify-json/mdi': 1.1.28
       '@types/node': 18.0.4
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.0
@@ -1389,6 +1393,18 @@ packages:
 
   /@iconify-json/carbon/1.1.6:
     resolution: {integrity: sha512-3a/D7qzqBO6hsDmp6/k2eFfJzL1sw1yCQOq2yr86el2CzgMmQdKYROOyCCDNBxGn+dkkc/Rx1/8OEciakAJcFg==}
+    dependencies:
+      '@iconify/types': 1.1.0
+    dev: true
+
+  /@iconify-json/ic/1.1.7:
+    resolution: {integrity: sha512-CYwkhja02SZoevezNHSqM7d1lpsRJxKt9fzvn3MpRxI8s2v3LNmhGiD/bTq3uFgqQMRPp+OnD+OOjHrMo7ah1g==}
+    dependencies:
+      '@iconify/types': 1.1.0
+    dev: true
+
+  /@iconify-json/mdi/1.1.28:
+    resolution: {integrity: sha512-qf8wG15XruGdQOGVA1wmbqrvzM8PRgvFUolOwk+8i6goQcvxh6nNsp1jBGCB4Xnfwds8GaihPWdxjmgGhCNEOQ==}
     dependencies:
       '@iconify/types': 1.1.0
     dev: true

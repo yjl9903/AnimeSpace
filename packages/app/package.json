@@ -23,6 +23,8 @@
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.6",
+    "@iconify-json/ic": "^1.1.7",
+    "@iconify-json/mdi": "^1.1.28",
     "@types/node": "^18.0.4",
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.0",

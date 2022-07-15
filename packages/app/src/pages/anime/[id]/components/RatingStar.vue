@@ -1,0 +1,32 @@
+<script setup lang="ts">
+defineProps<{ rating: number }>();
+</script>
+
+<template>
+  <div class="text-[#F3AB46] relative">
+    <div>
+      <span v-if="rating >= 1" i-ic-round-star></span>
+      <span v-else-if="rating >= 0" i-ic-round-star-half></span>
+      <span v-else i-ic-round-star-border></span>
+
+      <span v-if="rating >= 3" i-ic-round-star></span>
+      <span v-else-if="rating >= 2" i-ic-round-star-half></span>
+      <span v-else i-ic-round-star-border></span>
+
+      <span v-if="rating >= 5" i-ic-round-star></span>
+      <span v-else-if="rating >= 4" i-ic-round-star-half></span>
+      <span v-else i-ic-round-star-border></span>
+
+      <span v-if="rating >= 7" i-ic-round-star></span>
+      <span v-else-if="rating >= 6" i-ic-round-star-half></span>
+      <span v-else i-ic-round-star-border></span>
+
+      <span v-if="rating >= 9" i-ic-round-star></span>
+      <span v-else-if="rating >= 8" i-ic-round-star-half></span>
+      <span v-else i-ic-round-star-border></span>
+    </div>
+    <div absolute right-0>
+      <span text-4xl>{{ rating }}</span>
+    </div>
+  </div>
+</template>
