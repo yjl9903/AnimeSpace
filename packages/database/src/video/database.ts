@@ -24,6 +24,28 @@ export class VideoStore<T extends string = string> extends AbstractDatabase {
     });
   }
 
+  async updateVideo(payload: VideoInfo<T>) {
+    return await this.prisma.video.update({
+      where: {
+        id_platform: {
+          id: payload.videoId,
+          platform: payload.platform
+        }
+      },
+      data: {
+        id: payload.videoId,
+        platform: payload.platform,
+        title: payload.title,
+        createdAt: payload.createdAt,
+        cover: payload.cover,
+        playUrls: JSON.stringify(payload.playUrl),
+        magnetId: payload.source.magnetId,
+        directory: payload.source.directory,
+        hash: payload.source.hash
+      }
+    });
+  }
+
   async findVideo(
     platform: string,
     id: string

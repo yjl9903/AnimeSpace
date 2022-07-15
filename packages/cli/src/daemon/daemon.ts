@@ -304,6 +304,8 @@ export class Daemon {
       for (const magnet of magnets) {
         const serverMagnet = getServerMagnet(magnet);
         if (serverMagnet) {
+          debug(`${magnet.filename} has been uploaded`);
+          debug(serverMagnet);
           const foundVideo = await context.videoStore.findVideo(
             serverMagnet.storage.type!,
             serverMagnet.storage.videoId!
@@ -312,6 +314,8 @@ export class Daemon {
             videoInfos.push(foundVideo);
             continue;
           }
+        } else {
+          debug(`Can not find ${magnet.filename}, and try upload`);
         }
 
         // Do upload
@@ -322,6 +326,11 @@ export class Daemon {
             retry: 3
           });
           if (resp && resp.playUrl.length > 0) {
+            // Fix missing magnetId
+            if (!resp.source.magnetId) {
+              resp.source.magnetId = magnetId;
+              await context.videoStore.updateVideo(resp);
+            }
             videoInfos.push(resp);
           } else {
             error(`Fail uploading ${filename}`);
