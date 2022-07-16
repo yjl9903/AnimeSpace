@@ -49,7 +49,7 @@ watch(
       </router-link>
       <Episode :bgm-id="log.bgmId" :ep="log.ep" p1></Episode>
       <span flex-auto></span>
-      <span text-gray-500:80>{{
+      <span text-gray-500:80 font-mono>{{
         format(new Date(log.timestamp), 'M-dd hh:mm')
       }}</span>
     </div>
