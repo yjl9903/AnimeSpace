@@ -82,16 +82,17 @@ const formatDate = (d: string) => {
           </div>
         </h3>
         <div v-if="subjects[idx].value" mt4 text-sm text-gray-500:80>
+          <span>{{ formatDate(subjects[idx].value!.date) }}</span>
+          <span mx2 select-none>/</span>
           <span
-            >{{
+            >共
+            {{
               subjects[idx].value!.total_episodes ??
               subjects[idx].value!.eps ??
               '?'
             }}
             话</span
           >
-          <span mx2 select-none>/</span>
-          <span>{{ formatDate(subjects[idx].value!.date) }}</span>
         </div>
         <div md:hidden mt4>
           <PlayBangumi
