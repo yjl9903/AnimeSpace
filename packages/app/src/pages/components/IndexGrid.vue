@@ -74,7 +74,13 @@ onMounted(async () => {
         class="text-base hover:text-$c-brand text-sm"
         >{{ bgm.name_cn !== '' ? bgm.name_cn : bgm.name }}</router-link
       >
-      <span v-if="isOnair(bgm) && getOnairMaxEps(bgm)" block text-xs font-light
+      <span
+        v-if="isOnair(bgm) && getOnairMaxEps(bgm)"
+        block
+        text-xs
+        font-light
+        text-gray-500:80
+        dark:text-gray-400
         >更新到第 {{ getOnairMaxEps(bgm) }} 话</span
       >
     </div>
