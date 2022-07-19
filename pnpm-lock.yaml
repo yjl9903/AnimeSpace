@@ -33,7 +33,7 @@ importers:
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.0
       '@types/scrollreveal': ^0.0.8
-      '@unocss/reset': ^0.44.3
+      '@unocss/reset': ^0.44.4
       '@vitejs/plugin-vue': ^3.0.0
       '@vueuse/core': ^8.9.3
       '@vueuse/head': ^0.7.6
@@ -79,7 +79,7 @@ importers:
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.0
       '@types/scrollreveal': 0.0.8
-      '@unocss/reset': 0.44.3
+      '@unocss/reset': 0.44.4
       '@vitejs/plugin-vue': 3.0.0_vite@3.0.0+vue@3.2.37
       typescript: 4.7.4
       unocss: 0.44.3_vite@3.0.0
@@ -2040,6 +2040,10 @@ packages:
 
   /@unocss/reset/0.44.3:
     resolution: {integrity: sha512-QXy46EP9UvM4emAtHYG/tBAnkUut9qXMDAPIaUq10fxTRYU5el3F6C61660Ybj+sBeIOUqpO2lYv2KKf3lQowA==}
+    dev: true
+
+  /@unocss/reset/0.44.4:
+    resolution: {integrity: sha512-Dbd7Xccj8dSxzK2terjQr8Bvtqvv8gZATXZb6BQlCAqfZ7m7AzLgRSvBqQxps/SAUSdcuAMlcLhdR/3XQyFiGw==}
     dev: true
 
   /@unocss/scope/0.44.3:
