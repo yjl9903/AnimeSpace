@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "prisma": "^4.0.0",
-    "unbuild": "^0.7.4"
+    "unbuild": "^0.7.6"
   },
   "engines": {
     "node": ">=v16.16.0"
