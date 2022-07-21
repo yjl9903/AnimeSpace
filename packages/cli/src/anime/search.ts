@@ -9,7 +9,7 @@ import { link, bold, dim, lightGreen } from 'kolorist';
 import type { AnimeType } from '../types';
 
 import { context } from '../context';
-import { groupBy } from '../utils';
+import { filterDef, groupBy } from '../utils';
 import { IndexListener, info, printMagnets } from '../logger';
 
 import { Anime } from './anime';
@@ -18,7 +18,8 @@ import {
   getBgmTitle,
   getBgmId,
   bangumiLink,
-  formatEP
+  formatEP,
+  getBgmDmhy
 } from './utils';
 
 interface SearchOption {
@@ -35,6 +36,14 @@ interface SearchOption {
 
 const debug = createDebug('anime:search');
 
+function getDefaultKeywords(bgm: Item) {
+  return filterDef([
+    bgm.title,
+    ...Object.values(bgm.titleTranslate).flat(),
+    getBgmDmhy(bgm)
+  ]);
+}
+
 export async function userSearch(
   anime: string | undefined,
   option: SearchOption
@@ -44,7 +53,7 @@ export async function userSearch(
   for (const bgm of bgms) {
     const anime =
       (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
-    const keywords = [bgm.title, ...Object.values(bgm.titleTranslate).flat()];
+    const keywords = getDefaultKeywords(bgm);
     option.beginDate = subMonths(new Date(bgm.begin), 1);
     const res = await search(anime, keywords, option);
     if (res) animes.push(res);
@@ -67,10 +76,7 @@ export async function daemonSearch(
       found = true;
       const anime =
         (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
-      const keywords = optionKeywords ?? [
-        bgm.title,
-        ...Object.values(bgm.titleTranslate).flat()
-      ];
+      const keywords = optionKeywords ?? getDefaultKeywords(bgm);
       option.beginDate = subMonths(new Date(bgm.begin), 1);
       const res = await search(anime, keywords, option);
       if (res) animes.push(res);
@@ -235,7 +241,8 @@ export async function searchInBgmdata(
   const similar: Array<{ item: Item; dis: number }> = [];
 
   for (const item of items) {
-    const titles = [item.title, ...Object.values(item.titleTranslate).flat()];
+    const titles = getDefaultKeywords(item);
+
     let included = false;
     let dis = Number.MAX_SAFE_INTEGER;
     for (const title of titles) {

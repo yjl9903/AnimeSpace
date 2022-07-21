@@ -24,6 +24,14 @@ export function getBgmId(bgm: Item) {
   }
 }
 
+export function getBgmDmhy(bgm: Item) {
+  for (const site of bgm.sites) {
+    if (site.site === 'dmhy') {
+      return site.id;
+    }
+  }
+}
+
 export function bangumiLink(bgmId: string) {
   return link(`Bangumi: ${bgmId}`, 'https://bangumi.tv/subject/' + bgmId);
 }

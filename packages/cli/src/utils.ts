@@ -10,6 +10,10 @@ export async function hashFile(filepath: string): Promise<string> {
   return hashSum.digest('hex');
 }
 
+export function filterDef<T>(items: (T | undefined | null)[]): T[] {
+  return items.filter(Boolean) as T[];
+}
+
 export function groupBy<T>(
   items: T[],
   fn: (arg: T) => string
