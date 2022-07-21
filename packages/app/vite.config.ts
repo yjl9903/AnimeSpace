@@ -28,14 +28,14 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    Components({
-      dts: './src/components.d.ts'
-    }),
     AutoImport({
       imports: ['vue', 'vue/macros', '@vueuse/core', 'vue-router'],
-      dirs: ['./src/composables'],
+      dirs: ['./src/composables/'],
       vueTemplate: true,
       dts: './src/auto-imports.d.ts'
+    }),
+    Components({
+      dts: './src/components.d.ts'
     }),
     Unocss(),
     Icons({
