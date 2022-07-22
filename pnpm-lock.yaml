@@ -35,7 +35,7 @@ importers:
       '@types/scrollreveal': ^0.0.8
       '@unocss/reset': ^0.44.5
       '@vitejs/plugin-vue': ^3.0.1
-      '@vueuse/core': ^8.9.4
+      '@vueuse/core': ^9.0.0-beta.1
       '@vueuse/head': ^0.7.6
       bangumi-data: ^0.3.96
       date-fns: ^2.28.0
@@ -60,7 +60,7 @@ importers:
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.38.9
     dependencies:
-      '@vueuse/core': 8.9.4_vue@3.2.37
+      '@vueuse/core': 9.0.0-beta.1_vue@3.2.37
       '@vueuse/head': 0.7.6_vue@3.2.37
       bangumi-data: 0.3.96
       date-fns: 2.28.0
@@ -83,7 +83,7 @@ importers:
       '@vitejs/plugin-vue': 3.0.1_vite@3.0.2+vue@3.2.37
       typescript: 4.7.4
       unocss: 0.44.5_vite@3.0.2
-      unplugin-auto-import: 0.10.0_h424so5tb623alsee2e3aarhfi
+      unplugin-auto-import: 0.10.0_2g25u6pa5qnwa4iz5qg5ms4peu
       unplugin-icons: 0.14.7_vite@3.0.2
       unplugin-vue-components: 0.21.1_vite@3.0.2+vue@3.2.37
       vite: 3.0.2
@@ -2206,22 +2206,16 @@ packages:
   /@vue/shared/3.2.37:
     resolution: {integrity: sha512-4rSJemR2NQIo9Klm1vabqWjD8rs/ZaJSzMxkMNeJS6lHiUjjUeYFbooN19NgFjztubEKh3WlZUeOLVdbbUWHsw==}
 
-  /@vueuse/core/8.9.4_vue@3.2.37:
-    resolution: {integrity: sha512-B/Mdj9TK1peFyWaPof+Zf/mP9XuGAngaJZBwPaXBvU3aCTZlx3ltlrFFFyMV4iGBwsjSCeUCgZrtkEj9dS2Y3Q==}
-    peerDependencies:
-      '@vue/composition-api': ^1.1.0
-      vue: ^2.6.0 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      vue:
-        optional: true
+  /@vueuse/core/9.0.0-beta.1_vue@3.2.37:
+    resolution: {integrity: sha512-1EvdAzK6YCeWPxvdvlqwyNfLYUuasXv6UjgK/PElEE1WBw1QJwAF03EBCSD9ZKepSYVh+V30DJAywhjPdz8KxQ==}
     dependencies:
       '@types/web-bluetooth': 0.0.14
-      '@vueuse/metadata': 8.9.4
-      '@vueuse/shared': 8.9.4_vue@3.2.37
-      vue: 3.2.37
+      '@vueuse/metadata': 9.0.0-beta.1
+      '@vueuse/shared': 9.0.0-beta.1_vue@3.2.37
       vue-demi: 0.13.1_vue@3.2.37
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
 
   /@vueuse/head/0.7.6_vue@3.2.37:
     resolution: {integrity: sha512-cOWqCkT3WiF5oEpw+VVEWUJd9RLD5rc7DmnFp3cePsejp+t7686uKD9Z9ZU7Twb7R/BI8iexKTmXo9D/F3v6UA==}
@@ -2230,22 +2224,16 @@ packages:
     dependencies:
       vue: 3.2.37
 
-  /@vueuse/metadata/8.9.4:
-    resolution: {integrity: sha512-IwSfzH80bnJMzqhaapqJl9JRIiyQU0zsRGEgnxN6jhq7992cPUJIRfV+JHRIZXjYqbwt07E1gTEp0R0zPJ1aqw==}
+  /@vueuse/metadata/9.0.0-beta.1:
+    resolution: {integrity: sha512-AQhS6xgHfw5R7WuZ+EUkAOD9y9xFdwEVku7EkbgQqjW6sjE13zS/eYpdCih5AkAMQ1ZJYHaFRnWOxeikbIZBmA==}
 
-  /@vueuse/shared/8.9.4_vue@3.2.37:
-    resolution: {integrity: sha512-wt+T30c4K6dGRMVqPddexEVLa28YwxW5OFIPmzUHICjphfAuBFTTdDoyqREZNDOFJZ44ARH1WWQNCUK8koJ+Ag==}
-    peerDependencies:
-      '@vue/composition-api': ^1.1.0
-      vue: ^2.6.0 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      vue:
-        optional: true
+  /@vueuse/shared/9.0.0-beta.1_vue@3.2.37:
+    resolution: {integrity: sha512-iTTOBhNPj9/IGxbjepjz7Q8lM6rP9MdHi633jlcX3/R5QWBNZPZmuk7pKYWde7bNVHi94BaGj2N8h1hUiKEWHw==}
     dependencies:
-      vue: 3.2.37
       vue-demi: 0.13.1_vue@3.2.37
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
 
   /@webtorrent/http-node/1.3.0:
     resolution: {integrity: sha512-GWZQKroPES4z91Ijx6zsOsb7+USOxjy66s8AoTWg0HiBBdfnbtf9aeh3Uav0MgYn4BL8Q7tVSUpd0gGpngKGEQ==}
@@ -6758,7 +6746,7 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
-  /unplugin-auto-import/0.10.0_h424so5tb623alsee2e3aarhfi:
+  /unplugin-auto-import/0.10.0_2g25u6pa5qnwa4iz5qg5ms4peu:
     resolution: {integrity: sha512-XvGa/38TlHQnyNvKX+PgyM7og1DR+q3DPNp0RkifCQ2t8JCFUEixfRj9yDlfzNnLuEppFxqBZaUxNYjrstCUBA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -6769,7 +6757,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.5.2
       '@rollup/pluginutils': 4.2.1
-      '@vueuse/core': 8.9.4_vue@3.2.37
+      '@vueuse/core': 9.0.0-beta.1_vue@3.2.37
       local-pkg: 0.4.2
       magic-string: 0.26.2
       unimport: 0.6.1_vite@3.0.2
