@@ -82,6 +82,7 @@ cli
 
 cli
   .command('store ls [name]', 'List all uploaded video info')
+  .alias('store list')
   .option('--one-line', 'Only show one line')
   .action(async (name, option) => {
     const { useStore } = await import('./io');
@@ -152,6 +153,7 @@ cli
 
 cli
   .command('store rm [...ids]', 'Remove video info on OSS')
+  .alias('store remove')
   .option('--file', 'Use filepath instead of videoId')
   .option('--rm-local', 'Remove local files')
   .action(async (ids, option) => {
@@ -198,6 +200,7 @@ cli
 
 cli
   .command('magnet ls <keyword>', 'Search magnet database')
+  .alias('magnet list')
   .action(async (keyword) => {
     const list = await context.magnetStore.search(keyword);
     printMagnets(list, '');
