@@ -31,7 +31,7 @@ watch(
   }
 );
 
-const startTime = start.value ?? -1;
+let startTime = start.value ?? -1;
 const playTime = ref(startTime);
 
 useIntervalFn(() => {
@@ -42,6 +42,7 @@ useIntervalFn(() => {
 
 useIntervalFn(async () => {
   if (startTime !== playTime.value) {
+    startTime = playTime.value;
     await history.syncHistory();
   }
 }, 60 * 1000);
