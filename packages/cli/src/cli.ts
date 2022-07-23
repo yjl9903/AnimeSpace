@@ -213,8 +213,8 @@ cli.command('video info <file>', 'Check video info').action(async (file) => {
 
 cli
   .command('user create', 'Create a new token')
-  .option('--comment [comment]')
-  .option('--type [type]')
+  .option('--comment [comment]', 'Comment of the new token')
+  .option('--type [type]', 'One of admin or user')
   .action(async (option) => {
     const { AdminClient } = await import('./client');
     const client = await AdminClient.create();
@@ -257,7 +257,7 @@ cli
 cli
   .command('user remove [token]', 'Remove user tokens')
   .alias('user rm')
-  .option('--visitor')
+  .option('--visitor', 'Clear all the visitor tokens')
   .action(async (token, option) => {
     const { AdminClient } = await import('./client');
     const client = await AdminClient.create();
