@@ -151,8 +151,8 @@ cli
   });
 
 cli
-  .command('store rm [...ids]', 'Remove video info on OSS')
-  .alias('store remove')
+  .command('store remove [...ids]', 'Remove video info on OSS')
+  .alias('store rm')
   .option('--file', 'Use filepath instead of videoId')
   .option('--rm-local', 'Remove local files')
   .action(async (ids, option) => {
