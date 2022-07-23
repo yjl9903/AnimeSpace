@@ -2,8 +2,9 @@ import path from 'node:path';
 
 import type { VideoInfo } from '../types';
 
-import { hashFile } from '../../utils';
 import { context } from '../../context';
+
+import { hashFile } from '../utils';
 
 export type CreateStore = () => Promise<Store>;
 

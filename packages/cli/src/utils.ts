@@ -1,14 +1,4 @@
-import fs from 'fs-extra';
-import crypto from 'node:crypto';
-
 import { ImmutableMap, MutableMap } from 'lbear';
-
-export async function hashFile(filepath: string): Promise<string> {
-  const fileBuffer = await fs.readFile(filepath);
-  const hashSum = crypto.createHash('sha256');
-  hashSum.update(fileBuffer);
-  return hashSum.digest('hex');
-}
 
 export function filterDef<T>(items: (T | undefined | null)[]): T[] {
   return items.filter(Boolean) as T[];

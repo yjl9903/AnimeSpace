@@ -1,3 +1,6 @@
+import fs from 'fs-extra';
+import crypto from 'node:crypto';
+
 import { bold } from 'kolorist';
 import { Format, MultiBar, Presets, SingleBar } from 'cli-progress';
 
@@ -9,6 +12,13 @@ export function b64encode(text: string) {
 
 export function b64decode(text: string): string {
   return Buffer.from(text, 'base64').toString();
+}
+
+export async function hashFile(filepath: string): Promise<string> {
+  const fileBuffer = await fs.readFile(filepath);
+  const hashSum = crypto.createHash('sha256');
+  hashSum.update(fileBuffer);
+  return hashSum.digest('hex');
 }
 
 export function printVideoInfo(videoInfo: VideoInfo) {
