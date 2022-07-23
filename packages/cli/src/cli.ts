@@ -80,8 +80,8 @@ cli
   });
 
 cli
-  .command('store ls [name]', 'List all uploaded video info')
-  .alias('store list')
+  .command('store list [name]', 'List all uploaded video info')
+  .alias('store ls')
   .option('--one-line', 'Only show one line')
   .action(async (name, option) => {
     const { useStore } = await import('./io');
@@ -198,8 +198,8 @@ cli
   });
 
 cli
-  .command('magnet ls <keyword>', 'Search magnet database')
-  .alias('magnet list')
+  .command('magnet list <keyword>', 'Search magnet database')
+  .alias('magnet ls')
   .action(async (keyword) => {
     const list = await context.magnetStore.search(keyword);
     printMagnets(list, '');
