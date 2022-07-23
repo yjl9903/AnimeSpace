@@ -130,6 +130,20 @@ export class AdminClient {
     }
   }
 
+  async listToken() {
+    try {
+      const {
+        data: { data }
+      } = await this.api.get<Response<{ tokens: Required<TokenPayload>[] }>>(
+        '/admin/token'
+      );
+      return data.tokens;
+    } catch (error) {
+      debug(error);
+      return [];
+    }
+  }
+
   async removeToken(token: string) {
     try {
       await this.api.delete('/admin/token', {

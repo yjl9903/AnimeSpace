@@ -237,7 +237,19 @@ cli
 cli
   .command('user list', 'List user tokens')
   .alias('user ls')
-  .action(async () => {});
+  .action(async () => {
+    const { AdminClient } = await import('./client');
+    const client = await AdminClient.create();
+    const tokens = await client.listToken();
+    if (tokens.length > 0) {
+      console.log(`  ${green(`√ There are ${tokens.length} tokens`)}`);
+      for (const token of tokens) {
+        const comment =
+          token.comment.length > 0 ? `(Comment: ${token.comment})` : '';
+        console.log(`  ${dim('•')} ${token.type} : ${token.token} ${comment}`);
+      }
+    }
+  });
 
 cli
   .command('user remove [token]', 'Remove user tokens')
@@ -251,7 +263,6 @@ cli
       if (tokens !== undefined) {
         console.log(`  ${green(`√ Remove ${tokens.length} visitor tokens`)}`);
         if (tokens.length > 0) {
-          console.log();
           for (const token of tokens) {
             console.log(`  ${dim('•')} ${token}`);
           }

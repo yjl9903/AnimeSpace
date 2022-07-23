@@ -29,7 +29,21 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
 
 export const onRequestGet: APIFunction = async ({ env }) => {
   if (env.user.type === 'root') {
-    const tokens = await env.UserStore.keys();
+    const tokens = (await env.UserStore.list())
+      .map((token) => ({
+        token: token.token,
+        type: token.type,
+        comment: token.comment
+      }))
+      .sort((lhs, rhs) => {
+        const id = (t: string) => {
+          if (t === 'root') return 0;
+          if (t === 'admin') return 1;
+          if (t === 'user') return 2;
+          return 3;
+        };
+        return id(lhs.type) - id(rhs.type);
+      });
     return makeResponse({ tokens });
   } else {
     return makeErrorResponse('Unauthorized', { status: 401 });
