@@ -4,14 +4,13 @@ import { existsSync, readFileSync, remove } from 'fs-extra';
 
 import Breadc from 'breadc';
 import { debug as createDebug } from 'debug';
-import { lightRed, red, link, green } from 'kolorist';
+import { lightRed, red, link, green, dim } from 'kolorist';
 
 import type { AnimeType } from './types';
 
 import { context } from './context';
-import { padRight } from './utils';
 import { printVideoInfo } from './io';
-import { IndexListener, printMagnets } from './logger';
+import { IndexListener, printMagnets, padRight } from './logger';
 
 const name = 'anime';
 
@@ -211,6 +210,50 @@ cli.command('video info <file>', 'Check video info').action(async (file) => {
   const info = await getVideoInfo(file);
   console.log(JSON.stringify(info, null, 2));
 });
+
+cli
+  .command('user create')
+  .option('--comment [comment]')
+  .option('--type [type]')
+  .action(async () => {
+    const { AdminClient } = await import('./client');
+    const client = await AdminClient.create();
+  });
+
+cli
+  .command('user list')
+  .alias('user ls')
+  .action(async () => {});
+
+cli
+  .command('user remove [token]')
+  .alias('user rm')
+  .option('--visitor')
+  .action(async (token, option) => {
+    const { AdminClient } = await import('./client');
+    const client = await AdminClient.create();
+    if (option.visitor) {
+      const tokens = await client.removeVisitors();
+      if (tokens !== undefined) {
+        console.log(`  ${green(`√ Remove ${tokens.length} visitor tokens`)}`);
+        if (tokens.length > 0) {
+          console.log();
+          for (const token of tokens) {
+            console.log(`  ${dim('•')} ${token}`);
+          }
+        }
+      } else {
+        console.log(`  ${red(`✗ Remove visitor tokens fail`)}`);
+      }
+    } else if (token) {
+      const ok = await client.removeToken(token);
+      if (ok) {
+        console.log(`  ${green(`√ Remove ${token}`)}`);
+      } else {
+        console.log(`  ${red(`✗ Remove ${token} fail`)}`);
+      }
+    }
+  });
 
 cli.command('space', 'Open AnimePaste space directory').action(async () => {
   console.log(context.root);

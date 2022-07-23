@@ -3,6 +3,8 @@ import { debug as createDebug } from 'debug';
 
 import { proxy } from '@animepaste/database';
 
+import { context } from '../context';
+
 import type { OnairAnime, UserOption } from './types';
 
 const debug = createDebug('anime:client');
@@ -31,6 +33,14 @@ export class AdminClient {
       }
     });
     this.onairIds = option.onairIds;
+  }
+
+  static async create(onairIds?: Set<string>) {
+    const option: UserOption = await context.getServerConfig();
+    if (onairIds) {
+      option.onairIds = onairIds;
+    }
+    return new AdminClient(option);
   }
 
   async fetchOnair() {
@@ -98,6 +108,65 @@ export class AdminClient {
       this.newOnair.push(onair);
     }
   }
+
+  // --- User ---
+  async createToken(payload: TokenPayload) {
+    const comment = payload.comment ?? '';
+    const type = payload.type ?? 'user';
+    try {
+      const {
+        data: { data }
+      } = await this.api.post<Response<TokenPayload>>('/admin/token', {
+        comment,
+        type
+      });
+      return data;
+    } catch (error) {
+      debug(error);
+      return undefined;
+    }
+  }
+
+  async removeToken(token: string) {
+    try {
+      await this.api.delete('/admin/token', {
+        data: { command: 'delete', token }
+      });
+      return true;
+    } catch (error) {
+      debug(error);
+      return false;
+    }
+  }
+
+  async removeVisitors() {
+    try {
+      const {
+        data: { data }
+      } = await this.api.delete<Response<{ tokens: string[] }>>(
+        '/admin/token',
+        {
+          data: { command: 'visitor' }
+        }
+      );
+      return data.tokens;
+    } catch (error) {
+      debug(error);
+      return undefined;
+    }
+  }
+}
+
+interface Response<T> {
+  data: T;
+}
+
+interface TokenPayload {
+  token?: string;
+
+  type?: 'user' | 'admin';
+
+  comment?: string;
 }
 
 function uniqBy<T>(

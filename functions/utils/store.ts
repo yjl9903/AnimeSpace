@@ -14,16 +14,31 @@ export class KVStore<V> {
     }
   }
 
+  async keys(): Promise<string[]> {
+    return (await this.store.list({ prefix: this.prefix })).keys.map(
+      (k) => k.name
+    );
+  }
+
   async list(): Promise<V[]> {
-    const result = await this.store.list({ prefix: this.prefix });
+    const keys = await this.keys();
     const arr: V[] = [];
-    for (const { name } of result.keys) {
-      const value = await this.store.get(name);
+    for (const key of keys) {
+      const value = await this.store.get(key);
       if (!!value) {
         arr.push(JSON.parse(value));
       }
     }
-    return arr;
+    return Promise.all(
+      keys
+        .map(async (key) => {
+          const value = await this.store.get(key);
+          if (!!value) {
+            return JSON.parse(value);
+          }
+        })
+        .filter(Boolean)
+    );
   }
 
   async has(key: string): Promise<boolean> {
