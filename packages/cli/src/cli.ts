@@ -4,7 +4,7 @@ import { existsSync, readFileSync, remove } from 'fs-extra';
 
 import Breadc from 'breadc';
 import { debug as createDebug } from 'debug';
-import { lightRed, red, link, green, dim, bold } from 'kolorist';
+import { lightRed, red, link, green, dim, lightBlue } from 'kolorist';
 
 import type { AnimeType } from './types';
 
@@ -244,9 +244,12 @@ cli
     if (tokens.length > 0) {
       console.log(`  ${green(`√ There are ${tokens.length} tokens`)}`);
       for (const token of tokens) {
-        const comment =
-          token.comment.length > 0 ? `(Comment: ${token.comment})` : '';
-        console.log(`  ${dim('•')} ${token.type} : ${token.token} ${comment}`);
+        const comment = !!token.comment
+          ? dim(`(Comment: ${token.comment})`)
+          : '';
+        console.log(
+          `  ${dim('•')} ${lightBlue(token.type)} ${token.token} ${comment}`
+        );
       }
     }
   });
