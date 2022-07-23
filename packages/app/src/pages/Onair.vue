@@ -107,7 +107,23 @@ const formatDate = (d: string) => {
             border="1 base"
           ></PlayBangumi>
         </div>
-        <ChooseEpisodes lt-md:hidden mt4 :anime="anime"></ChooseEpisodes>
+        <div lt-md:hidden mt4 text-sm leading-6>
+          {{ subjects[idx].value?.summary }}
+        </div>
+        <div
+          v-if="anime.episodes.length > 0"
+          lt-md:hidden
+          mt8
+          border="1 base"
+          p4
+          rounded-2
+          shadow-box
+        >
+          <h3 font-bold pb2 mb3 border="b-1 base" flex="~" items-center>
+            <span i-carbon-play-filled mr1 class="text-[#0ca]"></span>播放列表
+          </h3>
+          <ChooseEpisodes :anime="anime"></ChooseEpisodes>
+        </div>
       </div>
     </div>
     <div v-if="onair.length === 0" py8>

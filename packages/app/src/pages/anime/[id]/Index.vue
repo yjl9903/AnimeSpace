@@ -75,7 +75,7 @@ const maxEps = computed(() => {
         items-center
       >
         <span i-carbon-play-filled class="text-[#0ca]"></span
-        ><span>选集播放</span>
+        ><span>播放列表</span>
       </h3>
       <ChooseEpisodes :anime="onair"></ChooseEpisodes>
     </div>
