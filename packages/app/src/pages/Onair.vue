@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { format } from 'date-fns';
+import { zhCN } from 'date-fns/locale';
+
 import { ensureHTTPS } from '~/composables';
 
 const { onair } = useClient();
@@ -85,6 +88,14 @@ const formatDate = (d: string) => {
         </h3>
         <div v-if="subjects[idx].value" mt4 text-sm text-gray-500:80>
           <span>{{ formatDate(subjects[idx].value!.date) }}</span>
+          <span mx2 select-none>/</span>
+          <span
+            >{{
+              format(new Date(subjects[idx].value!.date), 'EEEE', {
+                locale: zhCN
+              })
+            }}
+          </span>
           <span mx2 select-none>/</span>
           <span
             >共

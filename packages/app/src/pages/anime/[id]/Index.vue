@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { format } from 'date-fns';
+import { zhCN } from 'date-fns/locale';
 
-import { getBgmId } from '~/composables/bangumi';
+import { getBgmId, InfoBox } from '~/composables/bangumi';
 import { ensureHTTPS } from '~/composables';
 
 import { useAnimeInfo } from './context';
@@ -16,6 +17,19 @@ const maxEps = computed(() => {
       : 0;
   }
 });
+
+const shouldeFilterInfo = new Set([
+  '中文名',
+  '别名',
+  '话数',
+  '放送开始',
+  '放送星期',
+  '播放电视台',
+  '其他电视台',
+  '播放结束',
+  'Copyright'
+]);
+const filterInfo = (info: InfoBox) => !shouldeFilterInfo.has(info.key);
 </script>
 
 <template>
@@ -54,6 +68,10 @@ const maxEps = computed(() => {
               >{{ format(new Date(subject.date), 'yyyy 年 M 月 d 日开播') }}
             </span>
             <span select-none>/</span>
+            <span
+              >{{ format(new Date(subject.date), 'EEEE', { locale: zhCN }) }}
+            </span>
+            <span select-none>/</span>
             <span>共 {{ subject.total_episodes ?? subject.eps }} 话</span>
             <span v-if="maxEps" select-none>/</span>
             <span v-if="maxEps">更新至第 {{ maxEps }} 话</span>
@@ -64,6 +82,11 @@ const maxEps = computed(() => {
         </div>
       </div>
     </div>
+    <!-- <div v-if="subject" mt12>
+      <div v-for="info in subject.infobox.filter(filterInfo)">
+        <span>{{ info.key }} : {{ info.value }}</span>
+      </div>
+    </div> -->
     <div v-if="onair && onair.episodes.length > 0" mt12 shadow-box rounded-2 p8>
       <h3
         font-bold

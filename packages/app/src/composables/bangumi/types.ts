@@ -1,4 +1,4 @@
-type InfoBox = Array<{
+export type InfoBox = {
   key: string;
   value:
     | string
@@ -6,7 +6,7 @@ type InfoBox = Array<{
         k?: string;
         v: string;
       }>;
-}>;
+};
 
 interface Images {
   large: string;
@@ -61,7 +61,7 @@ export interface CharacterDetail {
   };
   summary: string;
   locked: boolean;
-  infobox: InfoBox;
+  infobox: InfoBox[];
   gender: string;
   blooType: number;
   birthYear: number;
@@ -107,7 +107,7 @@ export interface Subject {
   date: string; // YYYY-MM-DD format
   platform: string;
   images: Images;
-  infobox: InfoBox;
+  infobox: InfoBox[];
   volumes: number;
   eps: number;
   total_episodes: number;
