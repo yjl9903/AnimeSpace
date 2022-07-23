@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { format } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
 
 import { ensureHTTPS } from '~/composables';
 
@@ -90,11 +89,7 @@ const formatDate = (d: string) => {
           <span>{{ formatDate(subjects[idx].value!.date) }}</span>
           <span mx2 select-none>/</span>
           <span
-            >{{
-              format(new Date(subjects[idx].value!.date), 'EEEE', {
-                locale: zhCN
-              })
-            }}
+            >{{ format(new Date(subjects[idx].value!.date), 'EEEE') }}
           </span>
           <span mx2 select-none>/</span>
           <span

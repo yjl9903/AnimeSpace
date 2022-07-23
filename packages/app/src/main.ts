@@ -6,6 +6,7 @@ import routes from '~pages';
 
 import NProgress from 'nprogress';
 import Scrollto from 'vue-scrollto';
+import { setDefaultOptions } from 'date-fns';
 
 import 'uno.css';
 import '@unocss/reset/tailwind.css';
@@ -38,6 +39,9 @@ export const createApp = ViteSSG(
     // } else {
     //   pinia.state.value = initialState?.pinia || {};
     // }
+
+    const zhCN = (await import('date-fns/locale/zh-CN/index')).default;
+    setDefaultOptions({ locale: zhCN });
 
     if (isClient) {
       router.beforeEach((to) => {

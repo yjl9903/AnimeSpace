@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { format } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
 
 import { getBgmId, InfoBox } from '~/composables/bangumi';
 import { ensureHTTPS } from '~/composables';
@@ -68,9 +67,7 @@ const filterInfo = (info: InfoBox) => !shouldeFilterInfo.has(info.key);
               >{{ format(new Date(subject.date), 'yyyy 年 M 月 d 日开播') }}
             </span>
             <span select-none>/</span>
-            <span
-              >{{ format(new Date(subject.date), 'EEEE', { locale: zhCN }) }}
-            </span>
+            <span>{{ format(new Date(subject.date), 'EEEE') }} </span>
             <span select-none>/</span>
             <span>共 {{ subject.total_episodes ?? subject.eps }} 话</span>
             <span v-if="maxEps" select-none>/</span>
