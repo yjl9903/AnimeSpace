@@ -44,12 +44,17 @@ export function useAnimeInfo() {
     }
   });
 
+  const title = ref(bgmData.value ? getBgmTitle(bgmData.value) : '');
+  watch(subject, (subject) => {
+    if (subject && subject.name_cn) {
+      title.value = subject.name_cn;
+    }
+  });
+
   useHead({
     title: computed(() => {
       if (bgmData.value) {
-        return bgmData.value
-          ? `${getBgmTitle(bgmData.value)} - Anime Paste`
-          : 'Anime Paste';
+        return bgmData.value ? `${title.value} - Anime Paste` : 'Anime Paste';
       } else {
         return 'Anime Paste';
       }
@@ -59,6 +64,7 @@ export function useAnimeInfo() {
   return {
     id,
     ep,
+    title,
     bgmData,
     subject,
     onair

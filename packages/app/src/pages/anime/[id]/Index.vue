@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { format } from 'date-fns';
 
+import { getBgmId } from '~/composables/bangumi';
 import { ensureHTTPS } from '~/composables';
-import { getBgmTitle, getBgmId } from '~/composables/bangumi';
 
 import { useAnimeInfo } from './context';
 import RatingStar from './components/RatingStar.vue';
 
-const { bgmData, subject, onair } = useAnimeInfo();
+const { title, bgmData, subject, onair } = useAnimeInfo();
 
 const maxEps = computed(() => {
   if (onair.value) {
@@ -20,12 +20,12 @@ const maxEps = computed(() => {
 
 <template>
   <div v-if="bgmData">
-    <h2 font-bold text-3xl mb4 pb4 flex="~">
+    <h2 font-bold text-3xl mb4 pb4 flex="~ lt-md:col">
       <div>
         <router-link
           :to="`/anime/${getBgmId(bgmData)}`"
           class="text-$light-1 hover:text-$c-brand"
-          >{{ getBgmTitle(bgmData) }}</router-link
+          >{{ title }}</router-link
         >
         <Playing v-if="onair" ml1></Playing>
       </div>

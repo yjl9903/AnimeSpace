@@ -4,7 +4,7 @@ defineProps<{ bgmId: string | number; rating: number }>();
 
 <template>
   <div class="text-[#F3AB46] relative">
-    <div>
+    <div class="text-right">
       <span v-if="rating >= 1" i-ic-round-star></span>
       <span v-else-if="rating >= 0" i-ic-round-star-half></span>
       <span v-else i-ic-round-star-border></span>

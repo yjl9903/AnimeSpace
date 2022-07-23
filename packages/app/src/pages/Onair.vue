@@ -66,7 +66,9 @@ const formatDate = (d: string) => {
           <router-link
             :to="'/anime/' + anime.bgmId"
             class="text-$light-1 hover:text-$c-brand"
-            >{{ anime.title }}<Playing ml1></Playing>
+            >{{
+              subjects[idx].value ? subjects[idx].value?.name_cn : anime.title
+            }}<Playing ml1></Playing>
           </router-link>
           <div flex-auto></div>
           <div ml2 lt-md:hidden>
