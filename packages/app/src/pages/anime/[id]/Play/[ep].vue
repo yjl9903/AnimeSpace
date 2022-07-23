@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onBeforeRouteLeave } from 'vue-router';
+
 import { useHistory } from '~/composables/client';
 
 import { useAnimeInfo } from '../context';
@@ -29,13 +31,26 @@ watch(
   }
 );
 
-const playTime = ref(start.value ?? -1);
+const startTime = start.value ?? -1;
+const playTime = ref(startTime);
 
 useIntervalFn(() => {
   if (playTime.value >= 0) {
     history.append(id.value, +ep.value, playTime.value);
   }
 }, 1000);
+
+useIntervalFn(async () => {
+  if (startTime !== playTime.value) {
+    await history.syncHistory();
+  }
+}, 60 * 1000);
+
+onBeforeRouteLeave(async () => {
+  if (startTime !== playTime.value) {
+    await history.syncHistory();
+  }
+});
 </script>
 
 <template>

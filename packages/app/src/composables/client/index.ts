@@ -109,10 +109,40 @@ export const useHistory = defineStore('history', () => {
 
   watch(
     () => clientStore.client,
-    (client) => {
+    async (client) => {
       // merge server history logs
+      if (client) {
+        const remoteHistory = JSON.parse(
+          await client.fetchUserSync()
+        ) as HistoryLog[];
+        if (remoteHistory) {
+          for (const log of remoteHistory) {
+            const flag = appendLog(log);
+            if (flag) {
+              history.value.push(log);
+            }
+          }
+        }
+      }
+    },
+    {
+      immediate: true
     }
   );
+
+  const syncHistory = async () => {
+    const client = clientStore.client;
+    if (client) {
+      const raw = resolveUnref(history)
+        .sort(
+          (lhs, rhs) =>
+            new Date(rhs.timestamp).getTime() -
+            new Date(lhs.timestamp).getTime()
+        )
+        .slice(0, 1000);
+      await client.userSync(raw);
+    }
+  };
 
   return {
     rawHistory: history,
@@ -124,6 +154,7 @@ export const useHistory = defineStore('history', () => {
         );
       })
     ),
+    syncHistory,
     append,
     findHistory(bgmId: string, ep: number) {
       return historyMap.value.get(bgmId)?.get(ep);

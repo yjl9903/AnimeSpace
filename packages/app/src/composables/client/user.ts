@@ -25,4 +25,15 @@ export class UserClient {
     if (data.status !== 'Ok') throw new Error('Unknown error');
     return data.data.onair as OnairAnime[];
   }
+
+  async userSync(content: object) {
+    await this.api.post('/api/user/sync', content);
+  }
+
+  async fetchUserSync() {
+    const { data } = await this.api.get<{ data: { content: string } }>(
+      '/api/user/sync'
+    );
+    return data.data.content;
+  }
 }
