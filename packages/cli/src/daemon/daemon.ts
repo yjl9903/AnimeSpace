@@ -1,26 +1,23 @@
 import path from 'node:path';
+import { dim, link } from 'kolorist';
 import { format, subMonths } from 'date-fns';
-import { debug as createDebug } from 'debug';
-import { dim, link, lightGreen, bold, lightCyan } from 'kolorist';
 
 import type { Store, VideoInfo } from '../io';
-import type { Plan, OnairPlan, EpisodeList } from '../types';
+import type { RawPlan, OnairPlan, EpisodeList } from '../types';
 
 import { context } from '../context';
 import { checkVideo } from '../video';
 import { TorrentClient, useStore } from '../io';
-import { error, info, IndexListener } from '../logger';
 import { OnairEpisode, AdminClient } from '../client';
+import { error, info, IndexListener } from '../logger';
 import { Anime, Episode, daemonSearch, bangumiLink, formatEP } from '../anime';
 
-const debug = createDebug('anime:daemon');
-
-const titleColor = bold;
-const startColor = lightCyan;
-const okColor = lightGreen;
+import { Plan } from './plan';
+import { debug, titleColor, startColor, okColor } from './constant';
 
 export class Daemon {
-  private plans!: Plan[];
+  private plan!: Plan;
+  private plans!: RawPlan[];
   private store!: Store;
   private client!: AdminClient;
 
@@ -62,16 +59,8 @@ export class Daemon {
 
   private async refreshPlan() {
     this.plans = await context.getPlans();
-    for (const plan of this.plans) {
-      for (const onair of plan.onair) {
-        info(
-          'Onair    ' +
-            titleColor(onair.title) +
-            '    ' +
-            `(${bangumiLink(onair.bgmId)})`
-        );
-      }
-    }
+    this.plan = new Plan(this.plans);
+    this.plan.printOnair();
   }
 
   private async refreshDatabase() {

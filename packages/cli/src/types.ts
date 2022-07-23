@@ -8,7 +8,7 @@ export interface CliOption {
 
 export interface ResolvedOption {}
 
-export interface Plan {
+export interface RawPlan {
   /**
    * Plan name
    */

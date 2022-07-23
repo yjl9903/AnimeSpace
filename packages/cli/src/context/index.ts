@@ -7,7 +7,7 @@ import { load, dump } from 'js-yaml';
 
 import { MagnetStore, VideoStore } from '@animepaste/database';
 
-import type { CliOption, Plan } from '../types';
+import type { CliOption, RawPlan } from '../types';
 import type { VideoStorePlatform } from '../io';
 
 import { Anime } from '../anime';
@@ -150,16 +150,16 @@ export class GlobalContex {
     return this.configCache;
   }
 
-  async getPlans(): Promise<Plan[]> {
+  async getPlans(): Promise<RawPlan[]> {
     const config = await this.loadConfig<GlobalConfig>();
     const planPath = Array.isArray(config.plan) ? config.plan : [config.plan];
-    const planBody: Plan[] = [];
+    const planBody: RawPlan[] = [];
     for (const plan of planPath) {
       const planPath = path.join(this.root, plan);
       if (!fs.existsSync(planPath)) {
         throw new Error(`You should provide plan "${plan}"`);
       }
-      const body = load(fs.readFileSync(planPath, 'utf-8')) as Plan;
+      const body = load(fs.readFileSync(planPath, 'utf-8')) as RawPlan;
       // Setup date (default: 6 months ago)
       if (!Boolean(body.date)) {
         body.date = subMonths(new Date(), 6);

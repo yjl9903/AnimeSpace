@@ -36,6 +36,20 @@ cli
   });
 
 cli
+  .command('plan')
+  .option('--type [type]', 'One of local or server')
+  .action(async (option) => {
+    const { Plan } = await import('./daemon');
+    const plan = await Plan.create();
+    const type = option.type ?? 'local';
+    if (type === 'local') {
+      plan.printOnair();
+    } else if (type === 'server') {
+      plan.printOnair();
+    }
+  });
+
+cli
   .command('search [anime]', 'Search Bangumi resources')
   .option('--type [type]', {
     construct(t) {

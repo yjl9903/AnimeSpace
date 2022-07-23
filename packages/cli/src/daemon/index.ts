@@ -1,6 +1,8 @@
 import { Daemon } from './daemon';
 import { context } from '../context';
 
+export * from './plan';
+
 export async function startDaemon(option: {
   once: boolean;
   interval: number;
