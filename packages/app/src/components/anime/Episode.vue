@@ -24,13 +24,13 @@ const isWatched = computed(() => history.findHistory(bgmId.value, ep.value));
     text-base
     text-sm
     op70
-    hover="bg-[#fff0ec] text-[#e50914]"
+    hover="bg-[#fff0ec] text-[#e50914] border-base"
     px2
     py1
     border="1 base rounded"
     :class="[
       ep === active
-        ? 'bg-[#fff0ec] text-[#e50914]'
+        ? 'bg-[#fff0ec] text-[#e50914] border-base'
         : isWatched
         ? 'bg-[#0ca] bg-op-30 border-[#0ca] border-op50'
         : ''
