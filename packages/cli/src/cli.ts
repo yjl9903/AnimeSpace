@@ -4,7 +4,7 @@ import { existsSync, readFileSync, remove } from 'fs-extra';
 
 import Breadc from 'breadc';
 import { debug as createDebug } from 'debug';
-import { lightRed, red, link, green, dim } from 'kolorist';
+import { lightRed, red, link, green, dim, bold } from 'kolorist';
 
 import type { AnimeType } from './types';
 
@@ -212,21 +212,35 @@ cli.command('video info <file>', 'Check video info').action(async (file) => {
 });
 
 cli
-  .command('user create')
+  .command('user create', 'Create a new token')
   .option('--comment [comment]')
   .option('--type [type]')
-  .action(async () => {
+  .action(async (option) => {
     const { AdminClient } = await import('./client');
     const client = await AdminClient.create();
+    const token = await client.createToken({
+      comment: option.comment,
+      type: option.type === 'admin' ? 'admin' : 'user'
+    });
+    if (token) {
+      console.log(`  ${green(`√ Create token OK`)}`);
+      console.log(`    ${dim('Token')}   ${token.token}`);
+      console.log(`    ${dim('Type')}    ${token.type}`);
+      console.log(
+        `    ${dim('Comment')} ${token.comment ? token.comment : '(Empty)'}`
+      );
+    } else {
+      console.log(`  ${red(`✗ Create token fail`)}`);
+    }
   });
 
 cli
-  .command('user list')
+  .command('user list', 'List user tokens')
   .alias('user ls')
   .action(async () => {});
 
 cli
-  .command('user remove [token]')
+  .command('user remove [token]', 'Remove user tokens')
   .alias('user rm')
   .option('--visitor')
   .action(async (token, option) => {

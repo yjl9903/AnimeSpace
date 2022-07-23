@@ -116,10 +116,13 @@ export class AdminClient {
     try {
       const {
         data: { data }
-      } = await this.api.post<Response<TokenPayload>>('/admin/token', {
-        comment,
-        type
-      });
+      } = await this.api.post<Response<Required<TokenPayload>>>(
+        '/admin/token',
+        {
+          comment,
+          type
+        }
+      );
       return data;
     } catch (error) {
       debug(error);
