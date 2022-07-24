@@ -318,7 +318,7 @@ function getVersion(): string {
   }
 }
 
-async function bootstrap() {
+export async function bootstrap() {
   const handle = (error: unknown) => {
     if (error instanceof Error) {
       console.error(lightRed('  Error ') + error.message);
