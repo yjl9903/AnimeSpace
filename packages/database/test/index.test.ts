@@ -38,6 +38,10 @@ describe('Magnet Store', () => {
     expect(await database.search([title1, title2])).toHaveLength(2);
     expect(await database.search('1a2s3d4f5g6h7j8k9l')).toHaveLength(0);
   });
+
+  afterAll(async () => {
+    await database.destroy();
+  });
 });
 
 describe('Parser', () => {
