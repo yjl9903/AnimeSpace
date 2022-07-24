@@ -5,7 +5,7 @@ importers:
   .:
     specifiers:
       '@types/node': ^18.0.6
-      optc: ^0.3.3
+      optc: ^0.3.4
       prettier: ^2.7.1
       typescript: ^4.7.4
       vite: ^3.0.2
@@ -13,7 +13,7 @@ importers:
       wrangler: ^2.0.22
     devDependencies:
       '@types/node': 18.0.6
-      optc: 0.3.3_vite@3.0.2
+      optc: 0.3.4_vite@3.0.2
       prettier: 2.7.1
       typescript: 4.7.4
       vite: 3.0.2
@@ -5874,8 +5874,8 @@ packages:
       mimic-fn: 2.1.0
     dev: true
 
-  /optc/0.3.3_vite@3.0.2:
-    resolution: {integrity: sha512-9a99Yj10uC/9i/xjG9W/EJjmHXSfS9TqGHBxmQ/UuVtL1Ql8PEynF1IsisxD9/i1Xhy9UBXFx1C15ra1pfC13g==}
+  /optc/0.3.4_vite@3.0.2:
+    resolution: {integrity: sha512-dFPiycAO4A3MbKWu5MkE+o5uR5gOwCFHn2UzNuhvFXRvk7Zi1OCp6qgW3ZXfslC58GsnazT4FRiAckMcrKAZ6Q==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     dependencies:
