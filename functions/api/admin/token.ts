@@ -33,7 +33,8 @@ export const onRequestGet: APIFunction = async ({ env }) => {
       .map((token) => ({
         token: token.token,
         type: token.type,
-        comment: token.comment
+        comment: token.comment,
+        access: token.access ?? []
       }))
       .sort((lhs, rhs) => {
         const id = (t: string) => {
