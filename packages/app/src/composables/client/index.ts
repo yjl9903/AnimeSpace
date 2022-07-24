@@ -12,8 +12,6 @@ import { randomString } from './utils';
 
 export type { OnairAnime, OnairEpisode };
 
-export { UserClient };
-
 export const useClient = defineStore('client', () => {
   const query = useUrlSearchParams('history');
   // query token -> '' (private mode) / random string (public mode)
