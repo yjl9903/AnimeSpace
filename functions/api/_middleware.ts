@@ -74,13 +74,13 @@ async function canAccess(user: User | Admin | Visitor, req: Request) {
     const existLog = user.access.find((l) => l.ip === ip);
     if (existLog) {
       existLog.count++;
-      existLog.timestamp = now(req.cf?.timezone).getTime();
+      existLog.timestamp = now().getTime();
       return true;
     } else {
       const access = {
         ip,
         count: 1,
-        timestamp: now(req.cf?.timezone).getTime()
+        timestamp: now().getTime()
       };
 
       if (user.access.length < MAX_ACCESS) {
