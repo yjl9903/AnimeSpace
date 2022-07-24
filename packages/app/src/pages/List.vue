@@ -27,7 +27,7 @@ const pushMore = async () => {
 
 pushMore();
 
-useInfiniteScroll(document, pushMore, { distance: 200 });
+useInfiniteScroll(useDocument(), pushMore, { distance: 200 });
 </script>
 
 <route>

@@ -110,9 +110,7 @@ watch(container, (container) => {
   }
 });
 
-const doc = ref<Document>();
-onMounted(() => (doc.value = document));
-useEventListener(doc, 'keydown', (e: KeyboardEvent) => {
+useEventListener(useDocument(), 'keydown', (e: KeyboardEvent) => {
   if (player.value) {
     if (e.key === ' ') {
       e.preventDefault();

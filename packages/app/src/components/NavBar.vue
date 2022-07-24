@@ -7,11 +7,7 @@ import { useHistory } from '~/composables/client';
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 
-const doc = ref<Document | null>(null);
-onMounted(() => {
-  doc.value = document;
-});
-const { arrivedState } = useScroll(doc);
+const { arrivedState } = useScroll(useDocument());
 const { top } = toRefs(arrivedState);
 
 const history = useHistory();
