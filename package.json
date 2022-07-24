@@ -7,6 +7,7 @@
     "build:app": "pnpm -C packages/app build",
     "build:cli": "pnpm -C packages/database build && pnpm -C packages/cli build",
     "build:docs": "pnpm -C docs build",
+    "build:site": "optc scripts/build.ts",
     "dev": "wrangler pages dev --kv ANIME --binding DEV=true ENABLE_PUBLIC=true -- vite ./packages/app",
     "dev:docs": "pnpm -C docs dev",
     "format": "prettier --write packages/**/*.{ts,vue}",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.0.6",
+    "optc": "^0.3.3",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.2",

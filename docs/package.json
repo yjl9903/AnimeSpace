@@ -1,7 +1,6 @@
 {
   "name": "@animepaste/docs",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "vitepress build",
     "dev": "vitepress --open",

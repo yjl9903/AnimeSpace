@@ -4,6 +4,11 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'Anime Paste',
   description: 'Paste your favourite anime online.',
+  base: '/docs/',
+  head: [
+    ['meta', { name: 'theme-color', content: '#ffffff' }],
+    ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]
+  ],
   themeConfig: {
     logo: '/favicon.svg',
     editLink: {
