@@ -134,9 +134,9 @@ export class AdminClient {
     try {
       const {
         data: { data }
-      } = await this.api.get<Response<{ tokens: Required<TokenPayload>[] }>>(
-        '/admin/token'
-      );
+      } = await this.api.get<
+        Response<{ tokens: Required<TokenPayload & { access: Access[] }>[] }>
+      >('/admin/token');
       return data.tokens;
     } catch (error) {
       debug(error);
@@ -181,9 +181,15 @@ interface Response<T> {
 interface TokenPayload {
   token?: string;
 
-  type?: 'user' | 'admin';
+  type?: 'user' | 'admin' | 'visitor';
 
   comment?: string;
+}
+
+interface Access {
+  ip: string;
+  count: number;
+  timestamp: number;
 }
 
 function uniqBy<T>(

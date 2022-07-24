@@ -259,9 +259,12 @@ cli
     if (tokens.length > 0) {
       console.log(`  ${green(`√ There are ${tokens.length} tokens`)}`);
       for (const token of tokens) {
-        const comment = !!token.comment
-          ? dim(`(Comment: ${token.comment})`)
-          : '';
+        const comment =
+          token.type === 'visitor' && token.access?.length
+            ? dim(`(IP: ${token.access[0].ip})`)
+            : !!token.comment
+            ? dim(`(Comment: ${token.comment})`)
+            : '';
         console.log(
           `  ${dim('•')} ${lightBlue(token.type)} ${token.token} ${comment}`
         );
