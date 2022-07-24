@@ -84,6 +84,5 @@ onMounted(async () => {
         >更新至第 {{ getOnairMaxEps(bgm) }} 话</span
       >
     </div>
-    <div flex-grow></div>
   </div>
 </template>
