@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Anime Paste',
-  description: 'Paste your favourite anime online.',
+  description: '你所热爱的就是你的动画',
   head: [
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]
@@ -13,6 +13,10 @@ export default defineConfig({
     editLink: {
       pattern: 'https://github.com/XLorPaste/AnimePaste/tree/main/docs/:path',
       text: '反馈修改建议'
+    },
+    footer: {
+      message: 'Released under the AGPL-3.0 License.',
+      copyright: 'Copyright © 2021-PRESENT XLor'
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/XLorPaste/AnimePaste' }

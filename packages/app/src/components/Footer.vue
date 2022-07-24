@@ -42,10 +42,14 @@ import { format } from 'date-fns';
         <span align-middle>{{ format(now, 'yyyy-MM-dd HH:mm') }}</span>
       </span>
     </div>
-    <div pb="8" text="sm" font="mono">
+    <div pb="8" flex items="center" justify="center" text="sm" font="mono">
+      <span i-ic-round-electric-bolt class="text-gray-500/50"></span>
       <span
         >Powered by
-        <a href="https://github.com/XLorPaste/AnimePaste" alt="Vite"
+        <a
+          href="https://anime.docs.xlorpaste.cn/"
+          alt="Anime Paste Document"
+          target="_blank"
           >Anime Paste</a
         ></span
       >
