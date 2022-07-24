@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/XLorPaste/AnimePaste.git"
   },
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "author": "XLor",
   "sideEffects": false,
   "exports": {
