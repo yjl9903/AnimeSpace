@@ -1,0 +1,42 @@
+name: Deploy docs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:    
+      - main
+    paths:
+      - docs/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build:docs
+
+      - name: Setup ossutil
+        uses: manyuanrong/setup-ossutil@v2.0
+        with:
+          endpoint: ${{ secrets.ACCESS_ENDPOINT }}
+          access-key-id: ${{ secrets.ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.ACCESS_KEY_SECRET }}
+
+      - name: Deploy To OSS
+        run: |
+          ossutil rm oss://${{ secrets.BUCKET_NAME }}/ -rf
+          ossutil cp ./docs/.vitepress/dist oss://${{ secrets.BUCKET_NAME }}/ -rf
