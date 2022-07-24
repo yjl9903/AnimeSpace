@@ -13,11 +13,11 @@ export default async function (option: CliOption) {
   await fs.mkdir('./dist');
 
   await $`pnpm build:app`;
-  await fs.copy('./docs/.vitepress/dist', './dist/docs');
+  await fs.copy('./packages/app/dist', './dist');
 
   if (option.docs) {
     await $`pnpm build:docs`;
     await fs.mkdir('./dist/docs');
-    await fs.copy('./packages/app/dist', './dist');
+    await fs.copy('./docs/.vitepress/dist', './dist/docs');
   }
 }
