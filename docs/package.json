@@ -1,0 +1,28 @@
+{
+  "name": "@animepaste/docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vitepress build",
+    "dev": "vitepress --open",
+    "serve": "vitepress serve"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.0.0-beta.2",
+    "vue": "^3.2.37"
+  },
+  "devDependencies": {
+    "@iconify-json/carbon": "^1.1.6",
+    "@types/node": "^18.0.6",
+    "@unocss/reset": "^0.44.7",
+    "@vitejs/plugin-vue": "^3.0.1",
+    "fast-glob": "^3.2.11",
+    "https-localhost": "^4.7.1",
+    "unocss": "^0.44.7",
+    "unplugin-vue-components": "^0.21.1",
+    "vite": "^3.0.2",
+    "vite-plugin-pwa": "^0.12.3",
+    "vitepress": "^1.0.0-alpha.4",
+    "workbox-window": "^6.5.3"
+  }
+}

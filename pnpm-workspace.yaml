@@ -1,3 +1,4 @@
 packages:
   - packages/*
   - functions
+  - docs

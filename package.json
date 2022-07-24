@@ -6,7 +6,9 @@
     "build:all": "pnpm -r build",
     "build:app": "pnpm -C packages/app build",
     "build:cli": "pnpm -C packages/database build && pnpm -C packages/cli build",
+    "build:docs": "pnpm -C docs build",
     "dev": "wrangler pages dev --kv ANIME --binding DEV=true ENABLE_PUBLIC=true -- vite ./packages/app",
+    "dev:docs": "pnpm -C docs dev",
     "format": "prettier --write packages/**/*.{ts,vue}",
     "test": "pnpm -r test -- --run"
   },
