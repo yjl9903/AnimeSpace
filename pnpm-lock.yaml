@@ -119,7 +119,7 @@ importers:
       js-yaml: ^4.1.0
       kolorist: ^1.5.1
       lbear: ^0.1.2
-      mediainfo.js: ^0.1.7
+      mediainfo.js: ^0.1.8
       node-html-parser: ^5.3.3
       prompts: ^2.4.2
       unbuild: ^0.7.6
@@ -140,7 +140,7 @@ importers:
       js-yaml: 4.1.0
       kolorist: 1.5.1
       lbear: 0.1.2
-      mediainfo.js: 0.1.7
+      mediainfo.js: 0.1.8
       node-html-parser: 5.3.3
       prompts: 2.4.2
       webtorrent: 1.8.26
@@ -4989,8 +4989,8 @@ packages:
     resolution: {integrity: sha512-kwqO0I0jtWr25KcfLm9pia8vLZ8qoAKhWZuZMbneJq3jjBD3gl5nZs8l8Tu3ZBlBAHVQtDur9rdDGyvtfVraHQ==}
     dev: true
 
-  /mediainfo.js/0.1.7:
-    resolution: {integrity: sha512-6aiR66tz9TjQV/cL3zDrg+ITdURC2oAcIHVunsH/gwAh72sTkOd5MXZOJgA7UmlCg+nsS6WYGRXzZlBQtlw9IA==}
+  /mediainfo.js/0.1.8:
+    resolution: {integrity: sha512-j68v2X+SC93X8F1nWKYqCDvGs2VtwPgvvXQsyJIAYP0zMM6WVa8lDfixyi2tthaB51uhC9/RTb9t5P1KJZeKpQ==}
     hasBin: true
     dependencies:
       yargs: 17.5.1

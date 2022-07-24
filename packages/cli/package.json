@@ -61,7 +61,7 @@
     "js-yaml": "^4.1.0",
     "kolorist": "^1.5.1",
     "lbear": "^0.1.2",
-    "mediainfo.js": "^0.1.7",
+    "mediainfo.js": "^0.1.8",
     "node-html-parser": "^5.3.3",
     "prompts": "^2.4.2",
     "webtorrent": "^1.8.26"
