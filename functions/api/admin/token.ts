@@ -66,7 +66,10 @@ export const onRequestDelete: APIFunction = async ({ env, request }) => {
       const tokens = await env.UserStore.list();
       const visitors = tokens.filter((t) => t.type === 'visitor');
       for (const token of visitors) {
-        await env.UserStore.remove(token.token);
+        await Promise.all([
+          env.UserSyncStore.remove(token.token),
+          env.UserStore.remove(token.token)
+        ]);
       }
       return makeResponse({
         tokens: visitors.map((t) => t.token)
