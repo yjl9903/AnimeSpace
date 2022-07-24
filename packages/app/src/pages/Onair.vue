@@ -113,7 +113,7 @@ const formatDate = (d: string) => {
             border="1 base"
           ></PlayBangumi>
         </div>
-        <div lt-md:hidden mt4 text-sm leading-6>
+        <div lt-xl:hidden mt4 text-sm leading-6>
           {{ subjects[idx].value?.summary }}
         </div>
         <div
