@@ -6,8 +6,22 @@
 
 Paste your favourite anime online.
 
-+ 📖 [Documentation](https://anime.docs.xlorpaste.cn/)
 + 📺 [Online Demo](https://anime.xlorpaste.cn/)
++ 📖 [Documentation](https://anime.docs.xlorpaste.cn/)
+
+## Features
+
++ :gear: **Automatically**
++ :cloud: **Serverless**
++ :lock: **Secure**
+
+## Installation and Deploy
+
+> **Prerequisite**
+>
+> Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
+
+See [指南 | Anime Paste](https://anime.docs.xlorpaste.cn/guide/).
 
 ## License
 
