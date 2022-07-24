@@ -11,3 +11,8 @@ export function makeErrorResponse(message: string, init: ResponseInit = {}) {
     ...init
   });
 }
+
+export function now(timezone: string | undefined) {
+  console.log(timezone);
+  return new Date(new Date().toLocaleString('en-US', { timeZone: timezone }));
+}

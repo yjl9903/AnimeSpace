@@ -1,8 +1,8 @@
 import { Visitor } from './../types.d';
 import type { Admin, APIFunction, User } from '../types';
 
-import { makeErrorResponse } from '../utils';
 import { KVStore } from '../utils/store';
+import { makeErrorResponse, now } from '../utils';
 
 export const onRequest: APIFunction = async (ctx) => {
   const request = ctx.request;
@@ -74,13 +74,13 @@ async function canAccess(user: User | Admin | Visitor, req: Request) {
     const existLog = user.access.find((l) => l.ip === ip);
     if (existLog) {
       existLog.count++;
-      existLog.timestamp = new Date().getTime();
+      existLog.timestamp = now(req.cf?.timezone).getTime();
       return true;
     } else {
       const access = {
         ip,
         count: 1,
-        timestamp: new Date().getTime()
+        timestamp: now(req.cf?.timezone).getTime()
       };
 
       if (user.access.length < MAX_ACCESS) {
