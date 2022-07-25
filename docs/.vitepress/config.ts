@@ -8,6 +8,7 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]
   ],
+  lastUpdated: true,
   themeConfig: {
     logo: '/favicon.svg',
     editLink: {
@@ -21,6 +22,11 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/XLorPaste/AnimePaste' }
     ],
+    algolia: {
+      appId: 'FGCMJD7ZM9',
+      apiKey: 'dad73f46ec1ba55810109fb2fa7a472b',
+      indexName: 'docs'
+    },
     nav: [
       { text: '指南', link: '/guide/' },
       { text: '配置', link: '/config/' },
