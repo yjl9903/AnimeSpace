@@ -91,14 +91,15 @@ export class AliStore extends Store {
 
     const progressbar = createProgressBar({});
 
+    const cancel = onDeath(async () => {
+      option.retry = undefined;
+      error('Process is terminated');
+      await this.doDelete(resp.VideoId);
+      info('Clear OK');
+    });
+
     try {
       const bar = progressbar.create(path.basename(filepath), 1);
-      const cancel = onDeath(async () => {
-        option.retry = undefined;
-        error('Process is terminated');
-        await this.doDelete(resp.VideoId);
-        info('Clear OK');
-      });
 
       const ossRes = await store.multipartUpload(
         resp.UploadAddress.FileName,
@@ -109,7 +110,6 @@ export class AliStore extends Store {
           }
         }
       );
-      cancel();
       debug(ossRes);
 
       return resp.VideoId;
@@ -127,6 +127,7 @@ export class AliStore extends Store {
         return this.doUpload(filepath, option);
       }
     } finally {
+      cancel();
       progressbar.finish();
     }
   }
