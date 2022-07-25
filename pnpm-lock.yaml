@@ -22,7 +22,7 @@ importers:
 
   docs:
     specifiers:
-      '@iconify-json/carbon': ^1.1.6
+      '@iconify-json/carbon': ^1.1.7
       '@types/node': ^18.0.6
       '@unocss/reset': ^0.44.7
       '@vitejs/plugin-vue': ^3.0.1
@@ -40,7 +40,7 @@ importers:
       '@vueuse/core': 9.0.0-beta.2_vue@3.2.37
       vue: 3.2.37
     devDependencies:
-      '@iconify-json/carbon': 1.1.6
+      '@iconify-json/carbon': 1.1.7
       '@types/node': 18.0.6
       '@unocss/reset': 0.44.7
       '@vitejs/plugin-vue': 3.0.1_vite@3.0.2+vue@3.2.37
@@ -61,7 +61,7 @@ importers:
 
   packages/app:
     specifiers:
-      '@iconify-json/carbon': ^1.1.6
+      '@iconify-json/carbon': ^1.1.7
       '@iconify-json/ic': ^1.1.7
       '@iconify-json/mdi': ^1.1.29
       '@types/node': ^18.0.6
@@ -107,7 +107,7 @@ importers:
       vue-router: 4.1.2_vue@3.2.37
       vue-scrollto: 2.20.0
     devDependencies:
-      '@iconify-json/carbon': 1.1.6
+      '@iconify-json/carbon': 1.1.7
       '@iconify-json/ic': 1.1.7
       '@iconify-json/mdi': 1.1.29
       '@types/node': 18.0.6
@@ -1567,8 +1567,8 @@ packages:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: true
 
-  /@iconify-json/carbon/1.1.6:
-    resolution: {integrity: sha512-3a/D7qzqBO6hsDmp6/k2eFfJzL1sw1yCQOq2yr86el2CzgMmQdKYROOyCCDNBxGn+dkkc/Rx1/8OEciakAJcFg==}
+  /@iconify-json/carbon/1.1.7:
+    resolution: {integrity: sha512-QULSpNWKaX4auIbjITDynfALdJYvOOy/xZb+aLOqCgvpBcmbz5tbqvow4r25FWtVsi4FHVpNQ8vyJZXsD1Hlxg==}
     dependencies:
       '@iconify/types': 1.1.0
     dev: true

@@ -22,7 +22,7 @@
     "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.1.6",
+    "@iconify-json/carbon": "^1.1.7",
     "@iconify-json/ic": "^1.1.7",
     "@iconify-json/mdi": "^1.1.29",
     "@types/node": "^18.0.6",
