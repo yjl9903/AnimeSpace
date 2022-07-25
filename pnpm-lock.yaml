@@ -9,7 +9,7 @@ importers:
       prettier: ^2.7.1
       typescript: ^4.7.4
       vite: ^3.0.3
-      vitest: ^0.19.0
+      vitest: ^0.19.1
       wrangler: ^2.0.23
     devDependencies:
       '@types/node': 18.0.6
@@ -17,7 +17,7 @@ importers:
       prettier: 2.7.1
       typescript: 4.7.4
       vite: 3.0.3
-      vitest: 0.19.0
+      vitest: 0.19.1
       wrangler: 2.0.23
 
   docs:
@@ -89,7 +89,7 @@ importers:
       vite-plugin-pages: ^0.25.0
       vite-plugin-pwa: ^0.12.3
       vite-ssg: ^0.20.2
-      vitest: ^0.19.0
+      vitest: ^0.19.1
       vue: ^3.2.37
       vue-router: ^4.1.2
       vue-scrollto: ^2.20.0
@@ -127,7 +127,7 @@ importers:
       vite-plugin-pages: 0.25.0_vite@3.0.3
       vite-plugin-pwa: 0.12.3_vite@3.0.3
       vite-ssg: 0.20.2_5onws7hesycbwgtzrojfkcdmqm
-      vitest: 0.19.0
+      vitest: 0.19.1
       vue-tsc: 0.39.0_typescript@4.7.4
 
   packages/cli:
@@ -7868,8 +7868,8 @@ packages:
       - stylus
     dev: true
 
-  /vitest/0.19.0:
-    resolution: {integrity: sha512-nU80Gm95tMchigHpAMukxv1LoWbBGgknX/1MqrXCOoJoJL7/wfq4h2aow61o2jwf5szQrahoNqBqaGb+fYdYrQ==}
+  /vitest/0.19.1:
+    resolution: {integrity: sha512-E/ZXpFMUahn731wzhMBNzWRp4mGgiZFT0xdHa32cbNO0CSaHpE9hTfteEU247Gi2Dula8uXo5vvrNB6dtszmQA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
