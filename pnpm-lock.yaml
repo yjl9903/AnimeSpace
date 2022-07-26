@@ -26,7 +26,7 @@ importers:
       '@types/node': ^18.0.6
       '@unocss/reset': ^0.44.7
       '@vitejs/plugin-vue': ^3.0.1
-      '@vueuse/core': ^9.0.0-beta.2
+      '@vueuse/core': ^9.0.0
       fast-glob: ^3.2.11
       https-localhost: ^4.7.1
       unocss: ^0.44.7
@@ -37,7 +37,7 @@ importers:
       vue: ^3.2.37
       workbox-window: ^6.5.3
     dependencies:
-      '@vueuse/core': 9.0.0-beta.2_vue@3.2.37
+      '@vueuse/core': 9.0.0_vue@3.2.37
       vue: 3.2.37
     devDependencies:
       '@iconify-json/carbon': 1.1.7
@@ -70,7 +70,7 @@ importers:
       '@types/scrollreveal': ^0.0.8
       '@unocss/reset': ^0.44.7
       '@vitejs/plugin-vue': ^3.0.1
-      '@vueuse/core': ^9.0.0-beta.2
+      '@vueuse/core': ^9.0.0
       '@vueuse/head': ^0.7.7
       bangumi-data: ^0.3.96
       date-fns: ^2.29.1
@@ -95,7 +95,7 @@ importers:
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.39.0
     dependencies:
-      '@vueuse/core': 9.0.0-beta.2_vue@3.2.37
+      '@vueuse/core': 9.0.0_vue@3.2.37
       '@vueuse/head': 0.7.7_vue@3.2.37
       bangumi-data: 0.3.96
       date-fns: 2.29.1
@@ -118,7 +118,7 @@ importers:
       '@vitejs/plugin-vue': 3.0.1_vite@3.0.3+vue@3.2.37
       typescript: 4.7.4
       unocss: 0.44.7_vite@3.0.3
-      unplugin-auto-import: 0.10.1_rqswhzzcvstesd7eief3w2ncsu
+      unplugin-auto-import: 0.10.1_ya3b5ohu7u6blcmxzl5ar2qa2a
       unplugin-icons: 0.14.7_vite@3.0.3
       unplugin-vue-components: 0.21.1_vite@3.0.3+vue@3.2.37
       vite: 3.0.3
@@ -2433,12 +2433,12 @@ packages:
       vue-demi: 0.13.1_vue@3.2.37
     dev: true
 
-  /@vueuse/core/9.0.0-beta.2_vue@3.2.37:
-    resolution: {integrity: sha512-q7EVFe0Po5ad3ZWjLePIhDmARc2cDCIpjQgVAaa998JyOErS3Wr+z2t8Rf+FOEzuTel0ByfunlvTYJJlGlx8rw==}
+  /@vueuse/core/9.0.0_vue@3.2.37:
+    resolution: {integrity: sha512-hMMc2ajuVknkL7Z39JdP9gFFND2OgnDTSS5mmuinWGAE1Vxy1AwDvTHm3+juyk+GzJjYRAktnBIPy7Fq53iOnw==}
     dependencies:
       '@types/web-bluetooth': 0.0.15
-      '@vueuse/metadata': 9.0.0-beta.2
-      '@vueuse/shared': 9.0.0-beta.2_vue@3.2.37
+      '@vueuse/metadata': 9.0.0
+      '@vueuse/shared': 9.0.0_vue@3.2.37
       vue-demi: 0.13.1_vue@3.2.37
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -2455,8 +2455,8 @@ packages:
     resolution: {integrity: sha512-IwSfzH80bnJMzqhaapqJl9JRIiyQU0zsRGEgnxN6jhq7992cPUJIRfV+JHRIZXjYqbwt07E1gTEp0R0zPJ1aqw==}
     dev: true
 
-  /@vueuse/metadata/9.0.0-beta.2:
-    resolution: {integrity: sha512-qLamGnLJGSYmyYS+3UtRIBYMml5KhsfIIMrx72LGUV4d+KQGFRlhUQ9eXGDC8KoOJbWGONxUcJy+n36/x8lYVg==}
+  /@vueuse/metadata/9.0.0:
+    resolution: {integrity: sha512-79YVIsAP1bbWm5GdQuG7jDVF/9uuExzhkO0Sd4/TLuSfzH2uZOrHvGwy+ZNJHjbyRn3uf56rKINWLJdBuTLSqQ==}
 
   /@vueuse/shared/8.9.4_vue@3.2.37:
     resolution: {integrity: sha512-wt+T30c4K6dGRMVqPddexEVLa28YwxW5OFIPmzUHICjphfAuBFTTdDoyqREZNDOFJZ44ARH1WWQNCUK8koJ+Ag==}
@@ -2473,8 +2473,8 @@ packages:
       vue-demi: 0.13.1_vue@3.2.37
     dev: true
 
-  /@vueuse/shared/9.0.0-beta.2_vue@3.2.37:
-    resolution: {integrity: sha512-Jz0T9b8cfvlkTuk1ojIINLNzdn0/paGfSnx7YWdjYvtpvN8x0siMK5UQt+d24tUFdzNzMbIj4nJOqpx4Pko7dQ==}
+  /@vueuse/shared/9.0.0_vue@3.2.37:
+    resolution: {integrity: sha512-WRCyr/wIz5e/2gR/+qFucbCUcGMyJKkQZAzlECl3e71ebQQ9X/w3aBWT9FbnogJX+DNZ/t3Pj+TqPbC7TH1Yog==}
     dependencies:
       vue-demi: 0.13.1_vue@3.2.37
     transitivePeerDependencies:
@@ -7408,7 +7408,7 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
-  /unplugin-auto-import/0.10.1_rqswhzzcvstesd7eief3w2ncsu:
+  /unplugin-auto-import/0.10.1_ya3b5ohu7u6blcmxzl5ar2qa2a:
     resolution: {integrity: sha512-aBvlCOvkgZRceYDEIEpduD86XYCS1wV4atNeUtAZsNK7FSKRb0Nu073SYYAeU46IitK3GPeGd5BETtqz6It5Ng==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -7419,7 +7419,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.5.2
       '@rollup/pluginutils': 4.2.1
-      '@vueuse/core': 9.0.0-beta.2_vue@3.2.37
+      '@vueuse/core': 9.0.0_vue@3.2.37
       local-pkg: 0.4.2
       magic-string: 0.26.2
       unimport: 0.6.3_vite@3.0.3
