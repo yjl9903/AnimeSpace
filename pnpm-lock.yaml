@@ -30,7 +30,7 @@ importers:
       fast-glob: ^3.2.11
       https-localhost: ^4.7.1
       unocss: ^0.44.7
-      unplugin-vue-components: ^0.21.1
+      unplugin-vue-components: ^0.21.2
       vite: ^3.0.3
       vite-plugin-pwa: ^0.12.3
       vitepress: ^1.0.0-alpha.4
@@ -47,7 +47,7 @@ importers:
       fast-glob: 3.2.11
       https-localhost: 4.7.1
       unocss: 0.44.7_vite@3.0.3
-      unplugin-vue-components: 0.21.1_vite@3.0.3+vue@3.2.37
+      unplugin-vue-components: 0.21.2_vite@3.0.3+vue@3.2.37
       vite: 3.0.3
       vite-plugin-pwa: 0.12.3_vite@3.0.3
       vitepress: 1.0.0-alpha.4
@@ -82,7 +82,7 @@ importers:
       unocss: ^0.44.7
       unplugin-auto-import: 0.10.1
       unplugin-icons: ^0.14.7
-      unplugin-vue-components: ^0.21.1
+      unplugin-vue-components: ^0.21.2
       vite: ^3.0.3
       vite-plugin-info: ^0.2.0
       vite-plugin-inspect: ^0.6.0
@@ -120,7 +120,7 @@ importers:
       unocss: 0.44.7_vite@3.0.3
       unplugin-auto-import: 0.10.1_rqswhzzcvstesd7eief3w2ncsu
       unplugin-icons: 0.14.7_vite@3.0.3
-      unplugin-vue-components: 0.21.1_vite@3.0.3+vue@3.2.37
+      unplugin-vue-components: 0.21.2_vite@3.0.3+vue@3.2.37
       vite: 3.0.3
       vite-plugin-info: 0.2.0_vite@3.0.3
       vite-plugin-inspect: 0.6.0_vite@3.0.3
@@ -7463,8 +7463,8 @@ packages:
       - webpack
     dev: true
 
-  /unplugin-vue-components/0.21.1_vite@3.0.3+vue@3.2.37:
-    resolution: {integrity: sha512-8MhIT323q1EUu7rz6NfQeiHqDrZKtygy6s9jzcQAuuZUM2T38SHlPT5YJjBOZmM0Bau6YuNTKfBBX4iHzeusaQ==}
+  /unplugin-vue-components/0.21.2_vite@3.0.3+vue@3.2.37:
+    resolution: {integrity: sha512-HBU+EuesDj/HRs7EtYH7gBACljVhqLylltrCLModRmCToIIrrNvMh54aylUt4AD4qiwylgOx4Vgb9sBlrIcRDw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -7478,11 +7478,11 @@ packages:
       chokidar: 3.5.3
       debug: 4.3.4
       fast-glob: 3.2.11
-      local-pkg: 0.4.1
+      local-pkg: 0.4.2
       magic-string: 0.26.2
       minimatch: 5.1.0
       resolve: 1.22.1
-      unplugin: 0.7.1_vite@3.0.3
+      unplugin: 0.7.2_vite@3.0.3
       vue: 3.2.37
     transitivePeerDependencies:
       - esbuild
