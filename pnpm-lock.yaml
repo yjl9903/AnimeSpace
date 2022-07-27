@@ -84,7 +84,7 @@ importers:
       unplugin-icons: ^0.14.7
       unplugin-vue-components: ^0.21.2
       vite: ^3.0.3
-      vite-plugin-info: ^0.2.0
+      vite-plugin-info: ^0.3.0
       vite-plugin-inspect: ^0.6.0
       vite-plugin-pages: ^0.25.0
       vite-plugin-pwa: ^0.12.3
@@ -122,7 +122,7 @@ importers:
       unplugin-icons: 0.14.7_vite@3.0.3
       unplugin-vue-components: 0.21.2_vite@3.0.3+vue@3.2.37
       vite: 3.0.3
-      vite-plugin-info: 0.2.0_vite@3.0.3
+      vite-plugin-info: 0.3.0_vite@3.0.3
       vite-plugin-inspect: 0.6.0_vite@3.0.3
       vite-plugin-pages: 0.25.0_vite@3.0.3
       vite-plugin-pwa: 0.12.3_vite@3.0.3
@@ -7695,8 +7695,8 @@ packages:
       range-slice-stream: 2.0.0
     dev: false
 
-  /vite-plugin-info/0.2.0_vite@3.0.3:
-    resolution: {integrity: sha512-eGZ+nXVclxO9PQlvI1unFvTF4Vfn0WiTsvnEE+q/ojnwk8RIwSjzjHlhg+3WgUaUK3d1xAW9BnLdtG4nR7GblA==}
+  /vite-plugin-info/0.3.0_vite@3.0.3:
+    resolution: {integrity: sha512-k32TSx+Q6KPubnzVSf8v46w4Abxj0gyB1Pro5wVUPhgEXqyWizxSCzsPSZ7PWI4Ivft+xj4XTaRT9Ym326lSwQ==}
     peerDependencies:
       vite: ^2.9.13 || ^3.0.0
     dependencies:
