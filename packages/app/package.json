@@ -37,7 +37,7 @@
     "unplugin-icons": "^0.14.7",
     "unplugin-vue-components": "^0.21.2",
     "vite": "^3.0.3",
-    "vite-plugin-info": "^0.2.0",
+    "vite-plugin-info": "^0.3.0",
     "vite-plugin-inspect": "^0.6.0",
     "vite-plugin-pages": "^0.25.0",
     "vite-plugin-pwa": "^0.12.3",
