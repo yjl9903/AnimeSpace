@@ -22,7 +22,7 @@
     "vite": "^3.0.3",
     "vite-plugin-pwa": "^0.12.3",
     "vitepress": "^1.0.0-alpha.4",
-    "workbox-window": "^6.5.3"
+    "workbox-window": "^6.5.4"
   },
   "version": "0.0.1"
 }
