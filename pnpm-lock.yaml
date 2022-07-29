@@ -24,7 +24,7 @@ importers:
     specifiers:
       '@iconify-json/carbon': ^1.1.7
       '@types/node': ^18.0.6
-      '@unocss/reset': ^0.44.7
+      '@unocss/reset': ^0.45.1
       '@vitejs/plugin-vue': ^3.0.1
       '@vueuse/core': ^9.0.0
       fast-glob: ^3.2.11
@@ -42,7 +42,7 @@ importers:
     devDependencies:
       '@iconify-json/carbon': 1.1.7
       '@types/node': 18.0.6
-      '@unocss/reset': 0.44.7
+      '@unocss/reset': 0.45.1
       '@vitejs/plugin-vue': 3.0.1_vite@3.0.4+vue@3.2.37
       fast-glob: 3.2.11
       https-localhost: 4.7.1
@@ -68,7 +68,7 @@ importers:
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.0
       '@types/scrollreveal': ^0.0.8
-      '@unocss/reset': ^0.44.7
+      '@unocss/reset': ^0.45.1
       '@vitejs/plugin-vue': ^3.0.1
       '@vueuse/core': ^9.0.0
       '@vueuse/head': ^0.7.7
@@ -114,7 +114,7 @@ importers:
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.0
       '@types/scrollreveal': 0.0.8
-      '@unocss/reset': 0.44.7
+      '@unocss/reset': 0.45.1
       '@vitejs/plugin-vue': 3.0.1_vite@3.0.4+vue@3.2.37
       typescript: 4.7.4
       unocss: 0.44.7_vite@3.0.4
@@ -2220,6 +2220,10 @@ packages:
 
   /@unocss/reset/0.44.7:
     resolution: {integrity: sha512-izmqZafDMClT1vQEGpPzfKWvyft8xkA33xC0r0iOWEiDd94+wlC+7ohSnsafyl0iwEuwPp/ONzDft5ouHrOWLA==}
+    dev: true
+
+  /@unocss/reset/0.45.1:
+    resolution: {integrity: sha512-Dmz0/x2ION2noD4/t6Tjgwwp0R7lRP5QIkc3EuumYFXjdivU0gDRhNfcdM3yZUOsZRDreMkfiZoVKlypbNxD/g==}
     dev: true
 
   /@unocss/scope/0.44.7:
