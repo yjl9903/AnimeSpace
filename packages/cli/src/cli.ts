@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, remove } from 'fs-extra';
 
 import Breadc from 'breadc';
@@ -301,14 +301,25 @@ cli
     }
   });
 
-cli.command('space', 'Open AnimePaste space directory').action(async () => {
-  console.log(context.root);
-  spawnSync(`code "${context.root}"`, {
-    shell: true,
-    stdio: ['pipe', 'pipe', 'pipe'],
-    windowsHide: true
+cli
+  .command('space', 'Open AnimePaste space directory')
+  .action(async (option) => {
+    const cmd = option['--'];
+    if (cmd.length > 0) {
+      execSync(cmd.join(' '), {
+        cwd: context.root,
+        env: process.env,
+        stdio: ['inherit', 'inherit', 'inherit']
+      });
+    } else {
+      console.log(context.root);
+      execSync(`code "${context.root}"`, {
+        env: process.env,
+        stdio: ['pipe', 'pipe', 'pipe'],
+        windowsHide: true
+      });
+    }
   });
-});
 
 function getVersion(): string {
   const pkg = path.join(__dirname, '../package.json');
