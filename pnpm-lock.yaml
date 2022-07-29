@@ -62,7 +62,7 @@ importers:
   packages/app:
     specifiers:
       '@iconify-json/carbon': ^1.1.7
-      '@iconify-json/ic': ^1.1.7
+      '@iconify-json/ic': ^1.1.8
       '@iconify-json/mdi': ^1.1.29
       '@types/node': ^18.0.6
       '@types/nprogress': ^0.2.0
@@ -108,7 +108,7 @@ importers:
       vue-scrollto: 2.20.0
     devDependencies:
       '@iconify-json/carbon': 1.1.7
-      '@iconify-json/ic': 1.1.7
+      '@iconify-json/ic': 1.1.8
       '@iconify-json/mdi': 1.1.29
       '@types/node': 18.0.6
       '@types/nprogress': 0.2.0
@@ -1573,8 +1573,8 @@ packages:
       '@iconify/types': 1.1.0
     dev: true
 
-  /@iconify-json/ic/1.1.7:
-    resolution: {integrity: sha512-CYwkhja02SZoevezNHSqM7d1lpsRJxKt9fzvn3MpRxI8s2v3LNmhGiD/bTq3uFgqQMRPp+OnD+OOjHrMo7ah1g==}
+  /@iconify-json/ic/1.1.8:
+    resolution: {integrity: sha512-z7wF/a4wldA+6LVShp8rDCTd3zK/IovKCIdHuiTe5xgxzi9GdnexmZCZbMFol5JqgE1cFDveygTE9wtpfGq3tw==}
     dependencies:
       '@iconify/types': 1.1.0
     dev: true
