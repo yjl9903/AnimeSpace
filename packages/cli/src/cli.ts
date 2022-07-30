@@ -197,6 +197,7 @@ cli
 
 cli
   .command('magnet index', 'Index magnet database')
+  .alias('index')
   .option('--limit [date]', 'Stop at this date')
   .option('--page [page]', 'Start indexing at this page', {
     construct(t) {
