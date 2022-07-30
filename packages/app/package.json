@@ -9,7 +9,7 @@
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },
   "dependencies": {
-    "@vueuse/core": "^9.0.0",
+    "@vueuse/core": "^9.0.2",
     "@vueuse/head": "^0.7.7",
     "bangumi-data": "^0.3.96",
     "date-fns": "^2.29.1",
