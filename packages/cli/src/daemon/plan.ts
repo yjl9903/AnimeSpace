@@ -1,6 +1,6 @@
 import type { RawPlan } from '../types';
 
-import { info } from '../logger';
+import { logger } from '../logger';
 import { context } from '../context';
 import { bangumiLink } from '../anime';
 
@@ -21,7 +21,7 @@ export class Plan {
   printOnair() {
     for (const plan of this.plans) {
       for (const onair of plan.onair) {
-        info(
+        logger.info(
           'Onair    ' +
             titleColor(onair.title) +
             '    ' +

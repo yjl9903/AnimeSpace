@@ -10,7 +10,7 @@ import type { AnimeType } from '../types';
 
 import { context } from '../context';
 import { filterDef, groupBy } from '../utils';
-import { IndexListener, info, printMagnets } from '../logger';
+import { logger, IndexListener, printMagnets } from '../logger';
 
 import { Anime } from './anime';
 import {
@@ -58,7 +58,7 @@ export async function userSearch(
     const res = await search(anime, keywords, option);
     if (res) animes.push(res);
   }
-  if (option.plan) {
+  if (option.plan && animes.length > 0) {
     outputPlan(animes);
   }
 }
@@ -102,8 +102,8 @@ export async function search(
   keywords: string[],
   option: SearchOption = { type: 'tv' }
 ) {
-  info();
-  info(lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`);
+  logger.empty();
+  logger.info(lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`);
 
   debug(`Search "${anime.title}"`);
   for (const keyword of keywords) {
@@ -125,11 +125,11 @@ export async function search(
 
   const map = groupBy(anime.episodes, (ep) => ep.fansub);
   for (const [key, eps] of map) {
-    info('  ' + bold(key));
+    logger.tab.info(bold(key));
     eps.sort((a, b) => a.ep - b.ep);
     for (const ep of eps) {
-      info(
-        `   ${dim(formatEP(ep.ep))} ${link(
+      logger.tab.tab.info(
+        `${dim(formatEP(ep.ep))} ${link(
           ep.magnetName,
           context.magnetStore.idToLink(ep.magnetId)
         )}`
@@ -143,23 +143,25 @@ export async function search(
 function outputPlan(animes: Anime[]) {
   const date = new Date(Math.min(...animes.map((a) => a.date.getTime())));
 
-  console.log();
-  console.log(`  name: ${format(new Date(), 'yyyy-MM-dd 新番放送计划')}`);
-  console.log();
-  console.log(`  date: ${format(date, 'yyyy-MM-dd HH:mm')}`);
-  console.log();
-  console.log(`  state: onair`);
-  console.log();
-  console.log(`  onair:`);
+  logger.empty();
+  logger.println(`--- ${format(new Date(), 'yyyy-MM-dd 新番放送计划')} ---`);
+  logger.empty();
+  logger.println(`name: ${format(new Date(), 'yyyy-MM-dd 新番放送计划')}`);
+  logger.empty();
+  logger.println(`date: ${format(date, 'yyyy-MM-dd HH:mm')}`);
+  logger.empty();
+  logger.println(`state: onair`);
+  logger.empty();
+  logger.println(`onair:`);
   for (const anime of animes) {
-    console.log(`    - title: ${anime.title}`);
-    console.log(`      bgmId: '${anime.bgmId}'`);
-    console.log(`      fansub:`);
+    logger.tab.println(`- title: ${anime.title}`);
+    logger.tab.println(`  bgmId: '${anime.bgmId}'`);
+    logger.tab.println(`  fansub:`);
     const map = groupBy(anime.episodes, (ep) => ep.fansub);
     for (const [key] of map) {
-      console.log(`        - ${key}`);
+      logger.tab.tab.println(`  - ${key}`);
     }
-    console.log();
+    logger.empty();
   }
 }
 

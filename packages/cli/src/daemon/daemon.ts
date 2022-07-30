@@ -9,7 +9,7 @@ import { context } from '../context';
 import { checkVideo } from '../video';
 import { TorrentClient, useStore } from '../io';
 import { OnairEpisode, AdminClient } from '../client';
-import { error, info, IndexListener } from '../logger';
+import { logger, IndexListener } from '../logger';
 import { Anime, Episode, daemonSearch, bangumiLink, formatEP } from '../anime';
 
 import { Plan } from './plan';
@@ -33,19 +33,19 @@ export class Daemon {
   }
 
   async init() {
-    info('Start initing daemon ' + now());
+    logger.info('Start initing daemon ' + now());
 
     await this.refreshPlan();
     await this.refreshDatabase();
     await this.refreshEpisode();
     await this.refreshStore();
 
-    info();
-    info(okColor('Init daemon OK ') + now());
+    logger.empty();
+    logger.info(okColor('Init daemon OK ') + now());
   }
 
   async update() {
-    info('Start updating anime ' + now());
+    logger.info('Start updating anime ' + now());
 
     await context.init({ force: false });
     await this.refreshPlan();
@@ -53,8 +53,8 @@ export class Daemon {
     await this.refreshEpisode();
     await this.refreshStore();
 
-    info();
-    info(okColor('Update OK ') + now());
+    logger.empty();
+    logger.info(okColor('Update OK ') + now());
   }
 
   private async refreshPlan() {
@@ -64,7 +64,7 @@ export class Daemon {
   }
 
   private async refreshDatabase() {
-    console.log();
+    logger.empty();
     await context.magnetStore.index({
       limit: subMonths(
         new Date(Math.min(...this.plans.map((p) => p.date.getTime()))),
@@ -98,8 +98,8 @@ export class Daemon {
         const anime = await context.getAnime(onair.bgmId);
 
         if (anime) {
-          info();
-          info(
+          logger.empty();
+          logger.info(
             okColor('Refresh  ') +
               titleColor(anime.title) +
               okColor(' OK ') +
@@ -144,11 +144,13 @@ export class Daemon {
 
         const anime = await context.getAnime(onair.bgmId);
         if (!anime) {
-          error(`Fail to get ${onair.title} (${bangumiLink(onair.bgmId)})`);
+          logger.error(
+            `Fail to get ${onair.title} (${bangumiLink(onair.bgmId)})`
+          );
           continue;
         }
 
-        info();
+        logger.empty();
 
         await this.refreshAnime(anime, onair);
         await this.syncPlaylist(anime.title, anime.bgmId);
@@ -186,15 +188,15 @@ export class Daemon {
       .concat(epMagnet)
       .filter((ep) => !epLink.has(ep.ep));
 
-    info(
+    logger.info(
       startColor('Download ') +
         titleColor(anime.title) +
         '    ' +
         `(${bangumiLink(onair.bgmId)})`
     );
     for (const ep of episodes) {
-      info(
-        ` ${dim(formatEP(ep.ep))} ${
+      logger.tab.info(
+        `${dim(formatEP(ep.ep))} ${
           ep.magnetName
             ? link(ep.magnetName, context.magnetStore.idToLink(ep.magnetId))
             : context.magnetStore.idToLink(ep.magnetId)
@@ -241,7 +243,7 @@ export class Daemon {
         episodes.map(async (ep) => {
           const magnet = await context.magnetStore.findById(ep.magnetId);
           if (!magnet) {
-            error(
+            logger.error(
               `Can not find magnet (ID: ${link(
                 ep.magnetId,
                 context.magnetStore.idToLink(ep.magnetId)
@@ -268,11 +270,11 @@ export class Daemon {
         // Format check (avoid HEVC / MKV)
         for (const { filename } of shouldDownloadMagnet) {
           if (!(await checkVideo(path.join(localRoot, filename)))) {
-            error(`The format of ${filename} may be wrong`);
+            logger.error(`The format of ${filename} may be wrong`);
           }
         }
       }
-      info(
+      logger.info(
         okColor('Download ') +
           titleColor(anime.title) +
           okColor(' OK ') +
@@ -284,7 +286,7 @@ export class Daemon {
     // Start uploading
     const videoInfos: VideoInfo[] = [];
     {
-      info(
+      logger.info(
         startColor('Upload   ') +
           titleColor(anime.title) +
           '    ' +
@@ -322,11 +324,11 @@ export class Daemon {
             }
             videoInfos.push(resp);
           } else {
-            error(`Fail uploading ${filename}`);
+            logger.error(`Fail uploading ${filename}`);
           }
         }
       }
-      info(
+      logger.info(
         okColor('Upload   ') +
           titleColor(anime.title) +
           okColor(' OK ') +
@@ -362,12 +364,12 @@ export class Daemon {
 
   private async syncPlaylist(title = '', curId = '') {
     if (curId === '') {
-      info(
+      logger.info(
         `${startColor('Sync')}     ${this.client.newOnair.length} onair animes`
       );
     }
     if (title !== '') {
-      info(
+      logger.info(
         `${startColor('Sync')}     ` +
           titleColor(title) +
           '    ' +
@@ -377,24 +379,24 @@ export class Daemon {
     try {
       const onair = await this.client.syncOnair();
       if (curId === '') {
-        info(
+        logger.info(
           `${okColor('Sync')}     ${onair.length} onair animes ${okColor('OK')}`
         );
       }
       for (const anime of onair) {
         if (anime.bgmId !== curId) continue;
-        info(
+        logger.info(
           okColor('Sync     ') +
             titleColor(anime.title) +
             okColor(' OK ') +
             `(Total: ${anime.episodes.length} episodes)`
         );
         for (const ep of anime.episodes) {
-          info(` ${dim(formatEP(ep.ep))} ${ep.playURL}`);
+          logger.tab.info(`${dim(formatEP(ep.ep))} ${ep.playURL}`);
         }
       }
     } catch {
-      error(`Fail connecting server (baseURL or token may be wrong)`);
+      logger.error(`Fail connecting server (baseURL or token may be wrong)`);
     }
   }
 }

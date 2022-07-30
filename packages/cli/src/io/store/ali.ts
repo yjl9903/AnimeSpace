@@ -5,8 +5,8 @@ import onDeath from 'death';
 import RPCClient from '@alicloud/pop-core';
 import { debug as createDebug } from 'debug';
 
+import { logger } from '../../logger';
 import { context } from '../../context';
-import { error, info } from '../../logger';
 
 import type { VideoInfo } from '../types';
 
@@ -93,9 +93,9 @@ export class AliStore extends Store {
 
     const cancel = onDeath(async () => {
       option.retry = undefined;
-      error('Process is terminated');
+      logger.error('Process is terminated');
       await this.doDelete(resp.VideoId);
-      info('Clear OK');
+      logger.info('Clear OK');
     });
 
     try {
@@ -116,9 +116,9 @@ export class AliStore extends Store {
     } catch (err) {
       debug(err);
 
-      error('Upload error, please DO NOT exit!');
+      logger.error('Upload error, please DO NOT exit!');
       await this.doDelete(resp.VideoId);
-      info('Clear OK');
+      logger.info('Clear OK');
 
       if (option.retry === undefined || option.retry === 0) {
         return undefined;

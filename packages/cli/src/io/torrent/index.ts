@@ -1,10 +1,14 @@
-import Webtorrent from 'webtorrent';
 import path from 'node:path';
+
+import createDebug from 'debug';
+import Webtorrent from 'webtorrent';
 import { green, lightBlue } from 'kolorist';
 import { move, existsSync } from 'fs-extra';
 
 import { Trackers } from './tracker';
 import { createProgressBar } from '../utils';
+
+const debug = createDebug('anime:torrent');
 
 interface DownloadTask {
   magnetURI: string;
@@ -101,7 +105,7 @@ export class TorrentClient {
     try {
       await Promise.all(tasks);
     } catch (error) {
-      // console.log(error);
+      debug(error);
     }
 
     multibar.finish();

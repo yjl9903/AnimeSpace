@@ -2,7 +2,10 @@ import fs from 'fs-extra';
 import crypto from 'node:crypto';
 
 import { bold } from 'kolorist';
+import { format } from 'date-fns';
 import { Format, MultiBar, Presets, SingleBar } from 'cli-progress';
+
+import { logger } from '../logger';
 
 import type { VideoInfo } from './types';
 
@@ -22,15 +25,21 @@ export async function hashFile(filepath: string): Promise<string> {
 }
 
 export function printVideoInfo(videoInfo: VideoInfo) {
-  console.log(`  ${bold('VideoId')}     ${videoInfo.videoId}`);
-  console.log(`  ${bold('Title')}       ${videoInfo.title}`);
-  console.log(`  ${bold('Created at')}  ${videoInfo.createdAt}`);
+  logger.println(`${bold('Platform')}    ${videoInfo.platform}`);
+  logger.println(`${bold('VideoId')}     ${videoInfo.videoId}`);
+  logger.println(`${bold('Title')}       ${videoInfo.title}`);
+  logger.println(
+    `${bold('Created at')}  ${format(
+      new Date(videoInfo.createdAt),
+      'yyyy-MM-dd HH:mm:ss'
+    )}`
+  );
   if (videoInfo.playUrl.length === 1) {
-    console.log(`  ${bold('Play URL')}    ${videoInfo.playUrl[0]}`);
+    logger.println(`${bold('Play URL')}    ${videoInfo.playUrl[0]}`);
   } else {
-    console.log(`  ${bold('Play URL')}`);
+    logger.println(`${bold('Play URL')}`);
     for (const url of videoInfo.playUrl) {
-      console.log(`    ${url}`);
+      logger.tab.println(`${url}`);
     }
   }
 }
@@ -95,7 +104,7 @@ export function createProgressBar<T extends object>(
   multibar.on('stop', () => {
     // @ts-ignore
     for (const line of multibar.loggingBuffer) {
-      console.log(line.substring(0, line.length - 1));
+      logger.println(line.substring(0, line.length - 1));
     }
   });
 
