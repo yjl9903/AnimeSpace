@@ -218,8 +218,13 @@ cli
   .command('magnet list <keyword>', 'Search magnet database')
   .alias('magnet ls')
   .action(async (keyword) => {
-    const list = await context.magnetStore.search(keyword);
-    printMagnets(list, '');
+    const magnets = await context.magnetStore.search(keyword);
+    magnets.sort((a, b) => a.title.localeCompare(b.title));
+    for (const item of magnets) {
+      logger.println(
+        `${DOT} ${link(item.title, context.magnetStore.idToLink(item.id))}`
+      );
+    }
   });
 
 cli.command('video info <file>', 'Check video info').action(async (file) => {
