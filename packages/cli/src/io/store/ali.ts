@@ -12,7 +12,7 @@ import type { VideoInfo } from '../types';
 
 import { b64decode, createProgressBar } from '../utils';
 
-import { CreateStore, Store, StoreOption } from './types';
+import { CreateStore, Store, StoreOption } from './base';
 
 const debug = createDebug('anime:ali');
 

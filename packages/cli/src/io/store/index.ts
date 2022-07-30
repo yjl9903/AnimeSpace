@@ -1,8 +1,8 @@
-import type { CreateStore } from './types';
+import type { CreateStore } from './base';
 
 import { createAliStore } from './ali';
 
-export * from './types';
+export * from './base';
 
 export * from './ali';
 
