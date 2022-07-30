@@ -1,3 +1,4 @@
+import { logger } from './logger/index';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, remove } from 'fs-extra';
@@ -10,7 +11,7 @@ import type { AnimeType } from './types';
 
 import { context } from './context';
 import { printVideoInfo } from './io';
-import { IndexListener, printMagnets, padRight } from './logger';
+import { IndexListener, printMagnets, padRight, DOT } from './logger';
 
 const name = 'anime';
 
@@ -112,18 +113,18 @@ cli
         if (option['one-line']) {
           logs.push(info.videoId);
         } else {
-          logs.push(`  ${info.title}`);
+          logs.push(`${info.title}`);
           ids.push(`(${link(info.videoId, info.playUrl[0])})`);
         }
       }
     }
 
     if (option['one-line']) {
-      console.log(logs.join(' '));
+      logger.println(logs.join(' '));
     } else {
       const padded = padRight(logs);
       for (let i = 0; i < padded.length; i++) {
-        console.log(`${padded[i]}  ${ids[i]}`);
+        logger.println(`${DOT} ${padded[i]}  ${ids[i]}`);
       }
     }
   });
@@ -267,7 +268,7 @@ cli
             ? dim(`(Comment: ${token.comment})`)
             : '';
         console.log(
-          `  ${dim('•')} ${lightBlue(token.type)} ${token.token} ${comment}`
+          `  ${DOT} ${lightBlue(token.type)} ${token.token} ${comment}`
         );
       }
     }
@@ -286,7 +287,7 @@ cli
         console.log(`  ${green(`✓ Remove ${tokens.length} visitor tokens`)}`);
         if (tokens.length > 0) {
           for (const token of tokens) {
-            console.log(`  ${dim('•')} ${token}`);
+            console.log(`  ${DOT} ${token}`);
           }
         }
       } else {
