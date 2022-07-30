@@ -1,9 +1,7 @@
-import path from 'node:path';
+import * as path from 'node:path';
 import { execSync } from 'node:child_process';
-import { existsSync, readFileSync, remove } from 'fs-extra';
+import { remove } from 'fs-extra';
 
-import Breadc from 'breadc';
-import { debug as createDebug } from 'debug';
 import { red, link, green, dim, lightBlue } from 'kolorist';
 
 import type { AnimeType } from '../types';
@@ -12,15 +10,11 @@ import { context } from '../context';
 import { printVideoInfo } from '../io';
 import { logger, IndexListener, padRight, DOT } from '../logger';
 
-const debug = createDebug('anime:cli');
+import { app } from './app';
 
-export const cli = Breadc('anime', {
-  version: getVersion(),
-  description: 'Paste your favourite anime online.',
-  logger: { debug }
-}).option('-f, --force', 'Enable force mode and prefer not using cache');
+export { app };
 
-cli
+app
   .command('watch', 'Watch anime resources update')
   .option('-i, --interval [duration]', 'Damon interval in minutes', {
     construct(t) {
@@ -34,7 +28,7 @@ cli
     await startDaemon(option);
   });
 
-cli
+app
   .command('plan')
   .option('--type [type]', 'One of local or server')
   .action(async (option) => {
@@ -48,7 +42,7 @@ cli
     }
   });
 
-cli
+app
   .command('search [anime]', 'Search Bangumi resources')
   .option('--type [type]', {
     construct(t) {
@@ -72,7 +66,7 @@ cli
     await userSearch(anime, option);
   });
 
-cli
+app
   .command(
     'fetch <id> <title> [...keywords]',
     'Fetch resources using Bangumi ID'
@@ -92,7 +86,7 @@ cli
     });
   });
 
-cli
+app
   .command('store list [name]', 'List all uploaded video info')
   .alias('store ls')
   .option('--one-line', 'Only show one line')
@@ -126,7 +120,7 @@ cli
     }
   });
 
-cli.command('store info <id>', 'Print video info on OSS').action(async (id) => {
+app.command('store info <id>', 'Print video info on OSS').action(async (id) => {
   const { useStore, printVideoInfo } = await import('../io');
   const store = await useStore('ali')();
 
@@ -139,7 +133,7 @@ cli.command('store info <id>', 'Print video info on OSS').action(async (id) => {
   }
 });
 
-cli
+app
   .command('store put <file>', 'Upload video to OSS')
   .action(async (filename) => {
     const { useStore, printVideoInfo } = await import('../io');
@@ -158,7 +152,7 @@ cli
     }
   });
 
-cli
+app
   .command('store remove [...ids]', 'Remove video info on OSS')
   .alias('store rm')
   .option('--local', 'Remove local videos')
@@ -186,7 +180,7 @@ cli
     }
   });
 
-cli
+app
   .command('magnet index', 'Index magnet database')
   .alias('index')
   .option('--limit [date]', 'Stop at this date')
@@ -204,7 +198,7 @@ cli
     });
   });
 
-cli
+app
   .command('magnet list <keyword>', 'Search magnet database')
   .alias('magnet ls')
   .action(async (keyword) => {
@@ -217,13 +211,13 @@ cli
     }
   });
 
-cli.command('video info <file>', 'Check video info').action(async (file) => {
+app.command('video info <file>', 'Check video info').action(async (file) => {
   const { getVideoInfo } = await import('../video');
   const info = await getVideoInfo(file);
   console.log(JSON.stringify(info, null, 2));
 });
 
-cli
+app
   .command('user create', 'Create a new token')
   .option('--comment [comment]', 'Comment of the new token')
   .option('--type [type]', 'One of admin or user')
@@ -246,7 +240,7 @@ cli
     }
   });
 
-cli
+app
   .command('user list', 'List user tokens')
   .alias('user ls')
   .action(async () => {
@@ -269,7 +263,7 @@ cli
     }
   });
 
-cli
+app
   .command('user remove [token]', 'Remove user tokens')
   .alias('user rm')
   .option('--visitor', 'Clear all the visitor tokens')
@@ -298,7 +292,7 @@ cli
     }
   });
 
-cli
+app
   .command('space', 'Open AnimePaste space directory and run script on it')
   .action(async (option) => {
     const cmd = option['--'];
@@ -317,14 +311,3 @@ cli
       });
     }
   });
-
-function getVersion(): string {
-  const pkg = path.join(__dirname, '../package.json');
-  if (existsSync(pkg)) {
-    return JSON.parse(readFileSync(pkg, 'utf-8')).version;
-  } else {
-    return JSON.parse(
-      readFileSync(path.join(__dirname, '../../package.json'), 'utf-8')
-    ).version;
-  }
-}

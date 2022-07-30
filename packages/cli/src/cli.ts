@@ -1,7 +1,7 @@
 import createDebug from 'debug';
 import { lightRed } from 'kolorist';
 
-import { cli } from './commands';
+import { app } from './commands';
 import { context } from './context';
 
 const debug = createDebug('anime:cli');
@@ -22,10 +22,10 @@ export async function bootstrap() {
   });
 
   try {
-    cli.on('pre', async (option) => {
+    app.on('pre', async (option) => {
       await context.init(option);
     });
-    await cli.run(process.argv.slice(2));
+    await app.run(process.argv.slice(2));
     process.exit(0);
   } catch (error: unknown) {
     handle(error);

@@ -144,7 +144,7 @@ importers:
       ali-oss: ^6.17.1
       axios: ^0.27.2
       bangumi-data: ^0.3.96
-      breadc: ^0.6.0
+      breadc: ^0.6.2
       cli-progress: ^3.11.2
       date-fns: ^2.29.1
       death: ^1.1.0
@@ -165,7 +165,7 @@ importers:
       ali-oss: 6.17.1
       axios: 0.27.2_debug@4.3.4
       bangumi-data: 0.3.96
-      breadc: 0.6.0
+      breadc: 0.6.2
       cli-progress: 3.11.2
       date-fns: 2.29.1
       death: 1.1.0
@@ -2935,8 +2935,8 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /breadc/0.6.0:
-    resolution: {integrity: sha512-6NWXHrVPB+iHFac0x7+EYNB7BqUWRHDycDmmzr28edeIYTY/4Qz0VEDfMCv5676kiqXeHB5azcMZPGhSegUt3w==}
+  /breadc/0.6.2:
+    resolution: {integrity: sha512-qeOykarE0uBBj/Yk5kiFGvdktevVn3bG1qU1uNKxfqQmLrh1MYgd3NkX0Hb01ttWrNCJTVImXftbDlfMKBsfwA==}
     dependencies:
       kolorist: 1.5.1
       minimist: 1.2.6
