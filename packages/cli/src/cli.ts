@@ -143,7 +143,7 @@ cli
     if (info) {
       printVideoInfo(info);
     } else {
-      console.log(`  ${red(`✗ video "${id}" not found`)}`);
+      logger.println(`${red(`✗ video "${id}" not found`)}`);
     }
   });
 
@@ -161,8 +161,8 @@ cli
         throw new Error();
       }
     } catch (error) {
-      console.log();
-      console.log(`  ${red('✗ Fail')} uploading ${filename}`);
+      logger.empty();
+      logger.println(`${red('✗ Fail')} uploading ${filename}`);
     }
   });
 
@@ -185,13 +185,13 @@ cli
         await remove(filepath);
       }
 
-      console.log();
+      logger.empty();
       if (info) {
         printVideoInfo(info);
         await store.deleteVideo(info.videoId);
-        console.log(`  ${green(`✓ Delete    ${info.videoId} Ok`)}`);
+        logger.println(`${green(`✓ Delete    ${info.videoId} Ok`)}`);
       } else {
-        console.log(`  ${red(`✗ Video     ${id} is not found`)}`);
+        logger.println(`${red(`✗ Video     ${id} is not found`)}`);
       }
     }
   });
@@ -240,14 +240,14 @@ cli
       type: option.type === 'admin' ? 'admin' : 'user'
     });
     if (token) {
-      console.log(`  ${green(`✓ Create token OK`)}`);
-      console.log(`    ${dim('Token')}   ${token.token}`);
-      console.log(`    ${dim('Type')}    ${token.type}`);
-      console.log(
-        `    ${dim('Comment')} ${token.comment ? token.comment : '(Empty)'}`
+      logger.println(`${green(`✓ Create token OK`)}`);
+      logger.tab.println(`${dim('Token')}   ${token.token}`);
+      logger.tab.println(`${dim('Type')}    ${token.type}`);
+      logger.tab.println(
+        `${dim('Comment')} ${token.comment ? token.comment : '(Empty)'}`
       );
     } else {
-      console.log(`  ${red(`✗ Create token fail`)}`);
+      logger.println(`${red(`✗ Create token fail`)}`);
     }
   });
 
@@ -259,7 +259,7 @@ cli
     const client = await AdminClient.create();
     const tokens = await client.listToken();
     if (tokens.length > 0) {
-      console.log(`  ${green(`✓ There are ${tokens.length} tokens`)}`);
+      logger.println(`${green(`✓ There are ${tokens.length} tokens`)}`);
       for (const token of tokens) {
         const comment =
           token.type === 'visitor' && token.access?.length
@@ -267,8 +267,8 @@ cli
             : !!token.comment
             ? dim(`(Comment: ${token.comment})`)
             : '';
-        console.log(
-          `  ${DOT} ${lightBlue(token.type)} ${token.token} ${comment}`
+        logger.println(
+          `${DOT} ${lightBlue(token.type)} ${token.token} ${comment}`
         );
       }
     }
@@ -284,21 +284,21 @@ cli
     if (option.visitor) {
       const tokens = await client.removeVisitors();
       if (tokens !== undefined) {
-        console.log(`  ${green(`✓ Remove ${tokens.length} visitor tokens`)}`);
+        logger.println(`${green(`✓ Remove ${tokens.length} visitor tokens`)}`);
         if (tokens.length > 0) {
           for (const token of tokens) {
-            console.log(`  ${DOT} ${token}`);
+            logger.println(`${DOT} ${token}`);
           }
         }
       } else {
-        console.log(`  ${red(`✗ Remove visitor tokens fail`)}`);
+        logger.println(`${red(`✗ Remove visitor tokens fail`)}`);
       }
     } else if (token) {
       const ok = await client.removeToken(token);
       if (ok) {
-        console.log(`  ${green(`✓ Remove ${token}`)}`);
+        logger.println(`${green(`✓ Remove ${token}`)}`);
       } else {
-        console.log(`  ${red(`✗ Remove ${token} fail`)}`);
+        logger.println(`${red(`✗ Remove ${token} fail`)}`);
       }
     }
   });
