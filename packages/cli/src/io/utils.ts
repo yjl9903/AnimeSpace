@@ -104,7 +104,8 @@ export function createProgressBar<T extends object>(
   multibar.on('stop', () => {
     // @ts-ignore
     for (const line of multibar.loggingBuffer) {
-      logger.println(line.substring(0, line.length - 1));
+      // Remove the last end of line symbol
+      console.log(line.substring(0, line.length - 1));
     }
   });
 

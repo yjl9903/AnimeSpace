@@ -1,11 +1,12 @@
 import path from 'node:path';
+import { move, existsSync } from 'fs-extra';
 
 import createDebug from 'debug';
 import Webtorrent from 'webtorrent';
 import { green, lightBlue } from 'kolorist';
-import { move, existsSync } from 'fs-extra';
 
 import { Trackers } from './tracker';
+
 import { createProgressBar } from '../utils';
 
 const debug = createDebug('anime:torrent');
