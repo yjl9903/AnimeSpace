@@ -26,7 +26,7 @@ importers:
       '@types/node': ^18.0.6
       '@unocss/reset': ^0.45.1
       '@vitejs/plugin-vue': ^3.0.1
-      '@vueuse/core': ^9.0.0
+      '@vueuse/core': ^9.0.2
       fast-glob: ^3.2.11
       https-localhost: ^4.7.1
       unocss: ^0.45.1
@@ -37,7 +37,7 @@ importers:
       vue: ^3.2.37
       workbox-window: ^6.5.4
     dependencies:
-      '@vueuse/core': 9.0.0_vue@3.2.37
+      '@vueuse/core': 9.0.2_vue@3.2.37
       vue: 3.2.37
     devDependencies:
       '@iconify-json/carbon': 1.1.7
@@ -70,7 +70,7 @@ importers:
       '@types/scrollreveal': ^0.0.8
       '@unocss/reset': ^0.45.1
       '@vitejs/plugin-vue': ^3.0.1
-      '@vueuse/core': ^9.0.0
+      '@vueuse/core': ^9.0.2
       '@vueuse/head': ^0.7.7
       bangumi-data: ^0.3.96
       date-fns: ^2.29.1
@@ -95,7 +95,7 @@ importers:
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.39.2
     dependencies:
-      '@vueuse/core': 9.0.0_vue@3.2.37
+      '@vueuse/core': 9.0.2_vue@3.2.37
       '@vueuse/head': 0.7.7_vue@3.2.37
       bangumi-data: 0.3.96
       date-fns: 2.29.1
@@ -118,7 +118,7 @@ importers:
       '@vitejs/plugin-vue': 3.0.1_vite@3.0.4+vue@3.2.37
       typescript: 4.7.4
       unocss: 0.45.1_vite@3.0.4
-      unplugin-auto-import: 0.10.3_v37kjkvb3j3nwuyxpflyrhwvey
+      unplugin-auto-import: 0.10.3_tx7zv2ie4cs2dwhmfsvx6hgtim
       unplugin-icons: 0.14.8_vite@3.0.4
       unplugin-vue-components: 0.21.2_vite@3.0.4+vue@3.2.37
       vite: 3.0.4
@@ -2431,12 +2431,12 @@ packages:
       vue-demi: 0.13.1_vue@3.2.37
     dev: true
 
-  /@vueuse/core/9.0.0_vue@3.2.37:
-    resolution: {integrity: sha512-hMMc2ajuVknkL7Z39JdP9gFFND2OgnDTSS5mmuinWGAE1Vxy1AwDvTHm3+juyk+GzJjYRAktnBIPy7Fq53iOnw==}
+  /@vueuse/core/9.0.2_vue@3.2.37:
+    resolution: {integrity: sha512-kOIqaQPSs7OSByWg1ulEKRUJbsq3FmbJiUr0RhEKpt3O1Uhl4DrDj85DUbQBABVYgPvSaY6AE/fP3/FOcRIOoQ==}
     dependencies:
       '@types/web-bluetooth': 0.0.15
-      '@vueuse/metadata': 9.0.0
-      '@vueuse/shared': 9.0.0_vue@3.2.37
+      '@vueuse/metadata': 9.0.2
+      '@vueuse/shared': 9.0.2_vue@3.2.37
       vue-demi: 0.13.1_vue@3.2.37
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -2453,8 +2453,8 @@ packages:
     resolution: {integrity: sha512-IwSfzH80bnJMzqhaapqJl9JRIiyQU0zsRGEgnxN6jhq7992cPUJIRfV+JHRIZXjYqbwt07E1gTEp0R0zPJ1aqw==}
     dev: true
 
-  /@vueuse/metadata/9.0.0:
-    resolution: {integrity: sha512-79YVIsAP1bbWm5GdQuG7jDVF/9uuExzhkO0Sd4/TLuSfzH2uZOrHvGwy+ZNJHjbyRn3uf56rKINWLJdBuTLSqQ==}
+  /@vueuse/metadata/9.0.2:
+    resolution: {integrity: sha512-TRh+TNUYXiodatSAxd0xZc7sh4RfktVVgNFIN7TCQXKyancbCAcWfHvKfgdlX8LcqSBxKoHVa90n0XdUbboTkw==}
 
   /@vueuse/shared/8.9.4_vue@3.2.37:
     resolution: {integrity: sha512-wt+T30c4K6dGRMVqPddexEVLa28YwxW5OFIPmzUHICjphfAuBFTTdDoyqREZNDOFJZ44ARH1WWQNCUK8koJ+Ag==}
@@ -2471,8 +2471,8 @@ packages:
       vue-demi: 0.13.1_vue@3.2.37
     dev: true
 
-  /@vueuse/shared/9.0.0_vue@3.2.37:
-    resolution: {integrity: sha512-WRCyr/wIz5e/2gR/+qFucbCUcGMyJKkQZAzlECl3e71ebQQ9X/w3aBWT9FbnogJX+DNZ/t3Pj+TqPbC7TH1Yog==}
+  /@vueuse/shared/9.0.2_vue@3.2.37:
+    resolution: {integrity: sha512-KwBDefK2ljLESpt0ffe2w8EGUCb3IaMfTzeytB/uHHjHOGOEIHLHHyn8W2C48uGQEvoe5iwaW4Bfp8cRUM6IFA==}
     dependencies:
       vue-demi: 0.13.1_vue@3.2.37
     transitivePeerDependencies:
@@ -7417,7 +7417,7 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
-  /unplugin-auto-import/0.10.3_v37kjkvb3j3nwuyxpflyrhwvey:
+  /unplugin-auto-import/0.10.3_tx7zv2ie4cs2dwhmfsvx6hgtim:
     resolution: {integrity: sha512-tODQr7ZBnsBZ9lKaz2mqszKVi/4ALuLtS4gc1xwpcsBav5TCAl0HFSMuai1qL4AkYEwD2HPqK04LocCyK+D0KQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -7428,7 +7428,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.5.2
       '@rollup/pluginutils': 4.2.1
-      '@vueuse/core': 9.0.0_vue@3.2.37
+      '@vueuse/core': 9.0.2_vue@3.2.37
       local-pkg: 0.4.2
       magic-string: 0.26.2
       unimport: 0.6.4_vite@3.0.4
