@@ -11,7 +11,7 @@ import type { AnimeType } from './types';
 
 import { context } from './context';
 import { printVideoInfo } from './io';
-import { IndexListener, printMagnets, padRight, DOT } from './logger';
+import { IndexListener, padRight, DOT } from './logger';
 
 const name = 'anime';
 
