@@ -41,19 +41,11 @@ export abstract class Store {
     }
   }
 
-  async searchLocalVideo(filename: string): Promise<VideoInfo | undefined> {
+  async searchLocalVideo(filename: string): Promise<VideoInfo[]> {
     const title = path.basename(filename);
-    const videos = (await context.videoStore.list()).filter(
+    return (await context.videoStore.list()).filter(
       (l) => l.title === title && l.platform === this.platform
     );
-    if (videos.length === 0) {
-      return undefined;
-    } else {
-      if (videos.length > 1) {
-        // Duplicate name
-      }
-      return videos[0];
-    }
   }
 
   async listLocalVideos() {

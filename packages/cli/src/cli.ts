@@ -129,23 +129,18 @@ cli
     }
   });
 
-cli
-  .command('store get <id>', 'View video info on OSS')
-  .option('--file', 'Use videoId instead of filepath')
-  .action(async (id, option) => {
-    const { useStore, printVideoInfo } = await import('./io');
-    const store = await useStore('ali')();
+cli.command('store info <id>', 'Print video info on OSS').action(async (id) => {
+  const { useStore, printVideoInfo } = await import('./io');
+  const store = await useStore('ali')();
 
-    const info = !option.file
-      ? await store.fetchVideoInfo(id)
-      : await store.searchLocalVideo(id);
+  const info = await store.fetchVideoInfo(id);
 
-    if (info) {
-      printVideoInfo(info);
-    } else {
-      logger.println(`${red(`✗ video "${id}" not found`)}`);
-    }
-  });
+  if (info) {
+    printVideoInfo(info);
+  } else {
+    logger.println(`${red(`✗ video "${id}" not found`)}`);
+  }
+});
 
 cli
   .command('store put <file>', 'Upload video to OSS')
@@ -169,29 +164,27 @@ cli
 cli
   .command('store remove [...ids]', 'Remove video info on OSS')
   .alias('store rm')
-  .option('--file', 'Use filepath instead of videoId')
-  .option('--rm-local', 'Remove local files')
+  .option('--local', 'Remove local videos')
   .action(async (ids, option) => {
     const { useStore } = await import('./io');
     const store = await useStore('ali')();
 
     for (const id of ids) {
-      const info = !option.file
-        ? await store.fetchVideoInfo(id)
-        : await store.searchLocalVideo(id);
-
-      if (option['rm-local'] && info?.source.directory) {
-        const filepath = context.decodePath(info?.source.directory);
-        await remove(filepath);
-      }
+      const info = await store.fetchVideoInfo(id);
 
       logger.empty();
       if (info) {
         printVideoInfo(info);
         await store.deleteVideo(info.videoId);
-        logger.println(`${green(`✓ Delete    ${info.videoId} Ok`)}`);
+        logger.println(`${green(`✓ Delete    ${info.videoId}`)}`);
       } else {
         logger.println(`${red(`✗ Video     ${id} is not found`)}`);
+      }
+
+      if (option.local && info?.source.directory) {
+        const filepath = context.decodePath(info?.source.directory, info.title);
+        await remove(filepath);
+        logger.println(`${green(`✓ Delete    ${filepath}`)}`);
       }
     }
   });

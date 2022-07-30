@@ -237,11 +237,16 @@ export class GlobalContex {
     }
   }
 
-  decodePath(src: string) {
+  decodePath(src: string, filename?: string) {
+    const filenames = filename ? [filename] : [];
     if (src.startsWith('local:')) {
-      return normalizePath(path.join(this.localRoot, src.substring(6)));
+      return normalizePath(
+        path.join(this.localRoot, src.substring(6), ...filenames)
+      );
     } else if (src.startsWith('cache:')) {
-      return normalizePath(path.join(this.cacheRoot, src.substring(6)));
+      return normalizePath(
+        path.join(this.cacheRoot, src.substring(6), ...filenames)
+      );
     } else {
       return normalizePath(src);
     }
