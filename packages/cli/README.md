@@ -1,6 +1,15 @@
 # Anime Paste CLI
 
+<p align="center">「 你所热爱的就是你的动画 」</p>
+
+[![version](https://img.shields.io/npm/v/animepaste?color=rgb%2850%2C203%2C86%29&label=AnimePaste)](https://www.npmjs.com/package/animepaste)
+
+Paste your favourite anime online.
+
 Command line application for managing [Anime Paste](https://github.com/XLorPaste/AnimePaste).
+
++ 📺 [Online Demo](https://anime.xlorpaste.cn/)
++ 📖 [Documentation](https://anime.docs.xlorpaste.cn/)
 
 ## Features
 
