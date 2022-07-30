@@ -188,7 +188,7 @@ cli
       if (info) {
         printVideoInfo(info);
         await store.deleteVideo(info.videoId);
-        console.log(`  ${green(`√ Delete    ${info.videoId} Ok`)}`);
+        console.log(`  ${green(`✓ Delete    ${info.videoId} Ok`)}`);
       } else {
         console.log(`  ${red(`✗ Video     ${id} is not found`)}`);
       }
@@ -238,7 +238,7 @@ cli
       type: option.type === 'admin' ? 'admin' : 'user'
     });
     if (token) {
-      console.log(`  ${green(`√ Create token OK`)}`);
+      console.log(`  ${green(`✓ Create token OK`)}`);
       console.log(`    ${dim('Token')}   ${token.token}`);
       console.log(`    ${dim('Type')}    ${token.type}`);
       console.log(
@@ -257,7 +257,7 @@ cli
     const client = await AdminClient.create();
     const tokens = await client.listToken();
     if (tokens.length > 0) {
-      console.log(`  ${green(`√ There are ${tokens.length} tokens`)}`);
+      console.log(`  ${green(`✓ There are ${tokens.length} tokens`)}`);
       for (const token of tokens) {
         const comment =
           token.type === 'visitor' && token.access?.length
@@ -282,7 +282,7 @@ cli
     if (option.visitor) {
       const tokens = await client.removeVisitors();
       if (tokens !== undefined) {
-        console.log(`  ${green(`√ Remove ${tokens.length} visitor tokens`)}`);
+        console.log(`  ${green(`✓ Remove ${tokens.length} visitor tokens`)}`);
         if (tokens.length > 0) {
           for (const token of tokens) {
             console.log(`  ${dim('•')} ${token}`);
@@ -294,7 +294,7 @@ cli
     } else if (token) {
       const ok = await client.removeToken(token);
       if (ok) {
-        console.log(`  ${green(`√ Remove ${token}`)}`);
+        console.log(`  ${green(`✓ Remove ${token}`)}`);
       } else {
         console.log(`  ${red(`✗ Remove ${token} fail`)}`);
       }
@@ -302,7 +302,7 @@ cli
   });
 
 cli
-  .command('space', 'Open AnimePaste space directory')
+  .command('space', 'Open AnimePaste space directory and run script on it')
   .action(async (option) => {
     const cmd = option['--'];
     if (cmd.length > 0) {

@@ -77,7 +77,7 @@ export class TorrentClient {
             torrent.once('done', () => {
               bar.update(torrent.length);
               multibar.println(
-                `  ${lightBlue('Info')} ${green('√')} ${torrent.name}`
+                `  ${lightBlue('Info')} ${green('✓')} ${torrent.name}`
               );
               if (finalPath !== file.path) {
                 move(file.path, finalPath).then(() => res());
