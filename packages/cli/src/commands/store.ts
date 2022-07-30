@@ -104,7 +104,7 @@ app
   });
 
 app.command('video info <file>', 'Check video info').action(async (file) => {
-  const { getVideoInfo } = await import('../video');
+  const { getVideoInfo } = await import('../io/video');
   const info = await getVideoInfo(file);
   console.log(JSON.stringify(info, null, 2));
 });

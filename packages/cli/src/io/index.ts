@@ -5,3 +5,5 @@ export * from './utils';
 export * from './store';
 
 export * from './torrent';
+
+export * from './video';

@@ -7,5 +7,3 @@ export * from './context';
 export * from './daemon';
 
 export * from './io';
-
-export * from './video';
