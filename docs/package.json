@@ -1,5 +1,6 @@
 {
   "name": "@animepaste/docs",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "build": "vitepress build",
@@ -23,6 +24,5 @@
     "vite-plugin-pwa": "^0.12.3",
     "vitepress": "^1.0.0-alpha.4",
     "workbox-window": "^6.5.4"
-  },
-  "version": "0.0.1"
+  }
 }
