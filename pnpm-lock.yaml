@@ -72,7 +72,7 @@ importers:
       '@vitejs/plugin-vue': ^3.0.1
       '@vueuse/core': ^9.0.2
       '@vueuse/head': ^0.7.8
-      bangumi-data: ^0.3.96
+      bangumi-data: ^0.3.97
       date-fns: ^2.29.1
       nprogress: ^0.2.0
       pinia: ^2.0.17
@@ -97,7 +97,7 @@ importers:
     dependencies:
       '@vueuse/core': 9.0.2_vue@3.2.37
       '@vueuse/head': 0.7.8_vue@3.2.37
-      bangumi-data: 0.3.96
+      bangumi-data: 0.3.97
       date-fns: 2.29.1
       nprogress: 0.2.0
       pinia: 2.0.17_j6bzmzd4ujpabbp5objtwxyjp4
@@ -143,7 +143,7 @@ importers:
       '@types/webtorrent': ^0.109.3
       ali-oss: ^6.17.1
       axios: ^0.27.2
-      bangumi-data: ^0.3.96
+      bangumi-data: ^0.3.97
       breadc: ^0.6.2
       cli-progress: ^3.11.2
       date-fns: ^2.29.1
@@ -164,7 +164,7 @@ importers:
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
       axios: 0.27.2_debug@4.3.4
-      bangumi-data: 0.3.96
+      bangumi-data: 0.3.97
       breadc: 0.6.2
       cli-progress: 3.11.2
       date-fns: 2.29.1
@@ -2747,8 +2747,8 @@ packages:
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  /bangumi-data/0.3.96:
-    resolution: {integrity: sha512-aBXJ23pP+AcqUfAjL+KC0C8Mf5cfzXmW6mT5xPReUwKHtRAVhJnmgK4A4YFAszpQ/nbTZ0uMkls6RRJ7Lw0GDw==}
+  /bangumi-data/0.3.97:
+    resolution: {integrity: sha512-yEG3Y/14ACUQbJTrIXAgxhRvUz63rV8ilxvgVvhIQzWuR3YDPzD81YfwSVa65LuUDWTgqGqIUGYLBKLxwEOmqw==}
     dev: false
 
   /base64-js/1.5.1:

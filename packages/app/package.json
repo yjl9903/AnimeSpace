@@ -11,7 +11,7 @@
   "dependencies": {
     "@vueuse/core": "^9.0.2",
     "@vueuse/head": "^0.7.8",
-    "bangumi-data": "^0.3.96",
+    "bangumi-data": "^0.3.97",
     "date-fns": "^2.29.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.17",
