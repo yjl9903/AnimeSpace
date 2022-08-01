@@ -1,13 +1,8 @@
 {
-  "name": "@animepaste/database",
+  "name": "@animepaste/bangumi",
   "version": "0.0.1",
-  "description": "Local SQLite database used for Anime Paste CLI",
-  "keywords": [
-    "anime",
-    "AnimePaste",
-    "XLorPaste",
-    "cli"
-  ],
+  "description": "",
+  "keywords": [],
   "homepage": "https://github.com/XLorPaste/AnimePaste#readme",
   "bugs": {
     "url": "https://github.com/XLorPaste/AnimePaste/issues"
@@ -30,30 +25,18 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "prisma",
-    "*.mjs"
+    "dist"
   ],
   "scripts": {
-    "build": "prisma generate && unbuild",
-    "db:gen": "prisma generate",
-    "db:migrate": "prisma migrate dev",
+    "build": "unbuild",
     "dev": "unbuild --stub",
-    "postinstall": "prisma generate",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^4.1.1",
-    "axios": "^0.27.2",
-    "cnchar": "^3.2.2",
-    "cnchar-trad": "^3.2.2",
-    "date-fns": "^2.29.1",
-    "debug": "^4.3.4",
-    "node-html-parser": "^5.3.3"
+    "axios": "^0.27.2"
   },
   "devDependencies": {
-    "prisma": "^4.1.1",
     "unbuild": "^0.7.6"
   },
   "engines": {
