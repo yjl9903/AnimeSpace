@@ -55,6 +55,14 @@
     "bangumi-data": "^0.3.97",
     "unbuild": "^0.7.6"
   },
+  "peerDependencies": {
+    "bangumi-data": "^0.3.97"
+  },
+  "peerDependenciesMeta": {
+    "bangumi-data": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">=v16.16.0"
   }
