@@ -133,10 +133,12 @@ importers:
   packages/bangumi:
     specifiers:
       axios: ^0.27.2
+      bangumi-data: ^0.3.97
       unbuild: ^0.7.6
     dependencies:
       axios: 0.27.2
     devDependencies:
+      bangumi-data: 0.3.97
       unbuild: 0.7.6
 
   packages/cli:
@@ -2702,7 +2704,7 @@ packages:
   /axios/0.27.2:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
     dependencies:
-      follow-redirects: 1.15.1
+      follow-redirects: 1.15.1_debug@4.3.4
       form-data: 4.0.0
     transitivePeerDependencies:
       - debug
@@ -2767,7 +2769,6 @@ packages:
 
   /bangumi-data/0.3.97:
     resolution: {integrity: sha512-yEG3Y/14ACUQbJTrIXAgxhRvUz63rV8ilxvgVvhIQzWuR3YDPzD81YfwSVa65LuUDWTgqGqIUGYLBKLxwEOmqw==}
-    dev: false
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
@@ -4405,16 +4406,6 @@ packages:
       locate-path: 6.0.0
       path-exists: 4.0.0
     dev: true
-
-  /follow-redirects/1.15.1:
-    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dev: false
 
   /follow-redirects/1.15.1_debug@4.3.4:
     resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}

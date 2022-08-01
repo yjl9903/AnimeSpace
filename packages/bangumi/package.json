@@ -2,7 +2,12 @@
   "name": "@animepaste/bangumi",
   "version": "0.0.1",
   "description": "",
-  "keywords": [],
+  "keywords": [
+    "anime",
+    "AnimePaste",
+    "XLorPaste",
+    "cli"
+  ],
   "homepage": "https://github.com/XLorPaste/AnimePaste#readme",
   "bugs": {
     "url": "https://github.com/XLorPaste/AnimePaste/issues"
@@ -11,14 +16,24 @@
     "type": "git",
     "url": "git+https://github.com/XLorPaste/AnimePaste.git"
   },
-  "license": "AGPL-3.0",
+  "license": "MIT",
   "author": "XLor",
   "sideEffects": false,
   "exports": {
-    ".": {
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+    "./client": {
+      "require": "./dist/client.cjs",
+      "import": "./dist/client.mjs",
+      "types": "./dist/client.d.ts"
+    },
+    "./transform": {
+      "require": "./dist/transform.cjs",
+      "import": "./dist/transform.mjs",
+      "types": "./dist/transform.d.ts"
+    },
+    "./utils": {
+      "require": "./dist/utils.cjs",
+      "import": "./dist/utils.mjs",
+      "types": "./dist/utils.d.ts"
     }
   },
   "main": "./dist/index.cjs",
@@ -37,6 +52,7 @@
     "axios": "^0.27.2"
   },
   "devDependencies": {
+    "bangumi-data": "^0.3.97",
     "unbuild": "^0.7.6"
   },
   "engines": {
