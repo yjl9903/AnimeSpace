@@ -5,7 +5,7 @@ importers:
   .:
     specifiers:
       '@types/node': ^18.6.3
-      optc: ^0.3.4
+      optc: ^0.3.6
       prettier: ^2.7.1
       typescript: ^4.7.4
       vite: ^3.0.4
@@ -13,7 +13,7 @@ importers:
       wrangler: ^2.0.24
     devDependencies:
       '@types/node': 18.6.3
-      optc: 0.3.4_vite@3.0.4
+      optc: 0.3.6_vite@3.0.4
       prettier: 2.7.1
       typescript: 4.7.4
       vite: 3.0.4
@@ -5440,22 +5440,6 @@ packages:
       - supports-color
     dev: false
 
-  /magic-regexp/0.3.0_vite@3.0.4:
-    resolution: {integrity: sha512-CMOpsaVP1jBrsK+HO4h4LmzdDRfCa1UGzaoF2i7UKw+kOlU6ErayeADWx0YbZflTdJo0t6u1PZfBdilHeKMfgw==}
-    dependencies:
-      estree-walker: 3.0.1
-      jiti: 1.14.0
-      magic-string: 0.26.2
-      mlly: 0.5.5
-      ufo: 0.8.5
-      unplugin: 0.7.2_vite@3.0.4
-    transitivePeerDependencies:
-      - esbuild
-      - rollup
-      - vite
-      - webpack
-    dev: true
-
   /magic-regexp/0.4.0:
     resolution: {integrity: sha512-cZfSZrV3GBGRhV+T6sUQCyhyu2VCu9NO/B70XzuCSZj/X5butfVMwM1K2Lh8IfIXSOHO1IRJuj9wxPe3/mV60A==}
     dependencies:
@@ -5465,6 +5449,22 @@ packages:
       mlly: 0.5.5
       ufo: 0.8.5
       unplugin: 0.7.2
+    transitivePeerDependencies:
+      - esbuild
+      - rollup
+      - vite
+      - webpack
+    dev: true
+
+  /magic-regexp/0.4.0_vite@3.0.4:
+    resolution: {integrity: sha512-cZfSZrV3GBGRhV+T6sUQCyhyu2VCu9NO/B70XzuCSZj/X5butfVMwM1K2Lh8IfIXSOHO1IRJuj9wxPe3/mV60A==}
+    dependencies:
+      estree-walker: 3.0.1
+      jiti: 1.14.0
+      magic-string: 0.26.2
+      mlly: 0.5.5
+      ufo: 0.8.5
+      unplugin: 0.7.2_vite@3.0.4
     transitivePeerDependencies:
       - esbuild
       - rollup
@@ -5911,27 +5911,6 @@ packages:
       mimic-fn: 2.1.0
     dev: true
 
-  /optc/0.3.4_vite@3.0.4:
-    resolution: {integrity: sha512-dFPiycAO4A3MbKWu5MkE+o5uR5gOwCFHn2UzNuhvFXRvk7Zi1OCp6qgW3ZXfslC58GsnazT4FRiAckMcrKAZ6Q==}
-    engines: {node: '>=16.0.0'}
-    hasBin: true
-    dependencies:
-      axios: 0.27.2_debug@4.3.4
-      cac: 6.7.12
-      debug: 4.3.4
-      fs-extra: 10.1.0
-      globby: 13.1.2
-      jiti: 1.14.0
-      kolorist: 1.5.1
-      magic-regexp: 0.3.0_vite@3.0.4
-    transitivePeerDependencies:
-      - esbuild
-      - rollup
-      - supports-color
-      - vite
-      - webpack
-    dev: true
-
   /optc/0.3.6:
     resolution: {integrity: sha512-8NQzx8c0/Sqowtwy/I6iK14kBittOBFWB9+DNvUoTUOn5C+NrJpgNuLyogd/fgRDBrxrrx+LRa8fvM8/aGafDQ==}
     engines: {node: '>=16.0.0'}
@@ -5945,6 +5924,27 @@ packages:
       jiti: 1.14.0
       kolorist: 1.5.1
       magic-regexp: 0.4.0
+    transitivePeerDependencies:
+      - esbuild
+      - rollup
+      - supports-color
+      - vite
+      - webpack
+    dev: true
+
+  /optc/0.3.6_vite@3.0.4:
+    resolution: {integrity: sha512-8NQzx8c0/Sqowtwy/I6iK14kBittOBFWB9+DNvUoTUOn5C+NrJpgNuLyogd/fgRDBrxrrx+LRa8fvM8/aGafDQ==}
+    engines: {node: '>=16.0.0'}
+    hasBin: true
+    dependencies:
+      axios: 0.27.2_debug@4.3.4
+      cac: 6.7.12
+      debug: 4.3.4
+      fs-extra: 10.1.0
+      globby: 13.1.2
+      jiti: 1.14.0
+      kolorist: 1.5.1
+      magic-regexp: 0.4.0_vite@3.0.4
     transitivePeerDependencies:
       - esbuild
       - rollup
