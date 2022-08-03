@@ -31,7 +31,7 @@ export interface BangumiExtension {
    * movie: 无意义;
    * ova: 则为最终话发售时间（未确定则置空）.
    */
-  end: string;
+  end?: string;
 
   comment?: string;
 }

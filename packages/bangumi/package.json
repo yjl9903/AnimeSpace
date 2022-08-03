@@ -39,20 +39,30 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "bangumi": "./cli.mjs"
+  },
   "files": [
+    "data",
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "unbuild && pnpm build:data",
+    "build:data": "optc scripts/build.ts",
     "dev": "unbuild --stub",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "preversion": "pnpm build"
   },
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "breadc": "^0.6.3",
+    "debug": "^4.3.4"
   },
   "devDependencies": {
     "bangumi-data": "^0.3.97",
+    "date-fns": "^2.29.1",
+    "optc": "^0.3.6",
     "unbuild": "^0.7.6"
   },
   "peerDependencies": {
