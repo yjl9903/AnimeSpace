@@ -160,7 +160,7 @@ importers:
       date-fns: ^2.29.1
       death: ^1.1.0
       debug: ^4.3.4
-      fastest-levenshtein: ^1.0.14
+      fastest-levenshtein: ^1.0.16
       fs-extra: ^10.1.0
       js-yaml: ^4.1.0
       kolorist: ^1.5.1
@@ -181,7 +181,7 @@ importers:
       date-fns: 2.29.1
       death: 1.1.0
       debug: 4.3.4
-      fastest-levenshtein: 1.0.14
+      fastest-levenshtein: 1.0.16
       fs-extra: 10.1.0
       js-yaml: 4.1.0
       kolorist: 1.5.1
@@ -4355,8 +4355,8 @@ packages:
     resolution: {integrity: sha512-MLpTZQUy+9Zv8fsYMslQya+MCx3n7Rl2v7nReYABMRSuc312uMXOpuHcARQgflqUDzUNT2U2eshSPbJW7Eb2FA==}
     dev: false
 
-  /fastest-levenshtein/1.0.14:
-    resolution: {integrity: sha512-tFfWHjnuUfKE186Tfgr+jtaFc0mZTApEgKDOeyN+FwOqRkO/zK/3h1AiRd8u8CY53owL3CUmGr/oI9p/RdyLTA==}
+  /fastest-levenshtein/1.0.16:
+    resolution: {integrity: sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==}
     engines: {node: '>= 4.9.1'}
     dev: false
 

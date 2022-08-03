@@ -56,7 +56,7 @@
     "date-fns": "^2.29.1",
     "death": "^1.1.0",
     "debug": "^4.3.4",
-    "fastest-levenshtein": "^1.0.14",
+    "fastest-levenshtein": "^1.0.16",
     "fs-extra": "^10.1.0",
     "js-yaml": "^4.1.0",
     "kolorist": "^1.5.1",
