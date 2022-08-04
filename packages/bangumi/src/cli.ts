@@ -6,7 +6,7 @@ import Breadc from 'breadc';
 
 import { version } from '../package.json';
 
-import type { BangumiExtension, BangumiType } from './core/types';
+import type { ExtendBangumi, BangumiType } from './core/types';
 
 const bangumi = Breadc('bangumi', { version });
 
@@ -24,7 +24,7 @@ bangumi
       begin: option.begin,
       end: option.end,
       type: option.type?.split(',') as BangumiType[],
-      fields: option.fields?.split(',') as Array<keyof BangumiExtension>,
+      fields: option.fields?.split(',') as Array<keyof ExtendBangumi>,
       compress: option.compress
     });
 

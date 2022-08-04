@@ -1,7 +1,7 @@
 {
   "name": "@animepaste/bangumi",
   "version": "0.0.1",
-  "description": "",
+  "description": "Bangumi List",
   "keywords": [
     "anime",
     "AnimePaste",
@@ -20,6 +20,16 @@
   "author": "XLor",
   "sideEffects": false,
   "exports": {
+    ".": {
+      "require": "./data/data.json",
+      "import": "./data/data.json",
+      "types": "./types.d.ts"
+    },
+    "./recent": {
+      "require": "./data/recent-data.json",
+      "import": "./data/recent-data.json",
+      "types": "./types.d.ts"
+    },
     "./client": {
       "require": "./dist/client.cjs",
       "import": "./dist/client.mjs",
@@ -36,15 +46,16 @@
       "types": "./dist/utils.d.ts"
     }
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "main": "./data/data.json",
+  "module": "./data/data.json",
+  "types": "./types.d.ts",
   "bin": {
     "bangumi": "./cli.mjs"
   },
   "files": [
     "data",
-    "dist"
+    "dist",
+    "*.d.ts"
   ],
   "scripts": {
     "build": "unbuild && pnpm build:data",

@@ -4,7 +4,7 @@ import type { Item } from 'bangumi-data';
 
 import createDebug from 'debug';
 
-import type { Bangumi, BangumiType, BangumiExtension } from '../types';
+import type { BaseBangumi, BangumiType, ExtendBangumi } from '../types';
 
 import { getBgmId, getBgmTitle } from '../utils';
 
@@ -19,7 +19,7 @@ export interface TransformOption {
 
   compress?: boolean;
 
-  fields?: Array<keyof BangumiExtension>;
+  fields?: Array<keyof ExtendBangumi>;
 }
 
 export async function transform(option: TransformOption = {}) {
@@ -37,7 +37,7 @@ export async function transform(option: TransformOption = {}) {
       ? [option.type]
       : ['tv'];
 
-  const bangumis: Bangumi[] = [];
+  const bangumis: BaseBangumi[] = [];
   for (const item of data.items) {
     const date = new Date(item.begin);
     if (begin.getTime() <= date.getTime() && date.getTime() <= end.getTime()) {
@@ -48,7 +48,7 @@ export async function transform(option: TransformOption = {}) {
           continue;
         }
 
-        const bangumi: Bangumi & Partial<BangumiExtension> = {
+        const bangumi: BaseBangumi & Partial<ExtendBangumi> = {
           bgmId,
           title: item.title,
           type: item.type

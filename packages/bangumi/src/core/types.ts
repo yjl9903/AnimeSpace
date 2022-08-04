@@ -2,7 +2,7 @@ import type { Language } from 'bangumi-data';
 
 export type BangumiType = 'tv' | 'web' | 'movie' | 'ova';
 
-export interface Bangumi {
+export interface BaseBangumi {
   bgmId: string;
 
   title: string;
@@ -10,7 +10,7 @@ export interface Bangumi {
   type: BangumiType;
 }
 
-export interface BangumiExtension {
+export interface ExtendBangumi {
   titleCN: string;
 
   titleTranslate: Record<Language, string[]>;

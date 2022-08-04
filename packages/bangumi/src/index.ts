@@ -1,1 +1,1 @@
-export const data: string[] = [];
+export * from './core/types';
