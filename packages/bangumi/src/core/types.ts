@@ -1,5 +1,7 @@
 import type { Language } from 'bangumi-data';
 
+import type { Images, InfoBox, Rating, Tag } from './client';
+
 export type BangumiType = 'tv' | 'web' | 'movie' | 'ova';
 
 export interface BaseBangumi {
@@ -36,8 +38,39 @@ export interface ExtendBangumi {
   comment?: string;
 }
 
+export interface BangumiSubject {
+  summary: string;
+
+  images: Images;
+
+  eps: number;
+
+  rating: Rating;
+
+  subject?: {
+    infobox: InfoBox[];
+
+    tags: Tag[];
+  };
+}
+
+export interface ExtendBangumiSubject {
+  bgm: BangumiSubject;
+}
+
 export interface RawExportData {
   compress: boolean;
 
   bangumis: Array<BaseBangumi & Partial<ExtendBangumi>>;
+}
+
+export interface Calendar {
+  weekday: {
+    en: string;
+    cn: string;
+    ja: string;
+    id: number;
+  };
+
+  bangumis: Array<BaseBangumi & ExtendBangumiSubject>;
 }

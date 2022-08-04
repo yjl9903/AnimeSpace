@@ -1,4 +1,4 @@
-interface InfoBox {
+export interface InfoBox {
   key: string;
 
   value:
@@ -9,7 +9,7 @@ interface InfoBox {
       }>;
 }
 
-interface Images {
+export interface Images {
   large: string;
   common: string;
   medium: string;
@@ -30,14 +30,14 @@ interface Count {
   '10': number;
 }
 
-interface Rating {
+export interface Rating {
   rank: number;
   total: number;
   count: Count;
   score: number;
 }
 
-interface Collection {
+export interface Collection {
   wish: number;
   collect: number;
   doing: number;
@@ -45,7 +45,7 @@ interface Collection {
   dropped: number;
 }
 
-interface Tag {
+export interface Tag {
   name: string;
   count: number;
 }
@@ -117,7 +117,7 @@ export interface Subject {
   tags: Tag[];
 }
 
-export interface Calender {
+export interface RawCalendar {
   weekday: {
     en: string;
     cn: string;
