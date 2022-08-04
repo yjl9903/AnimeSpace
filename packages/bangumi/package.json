@@ -21,15 +21,16 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "require": "./data/data.json",
-      "import": "./data/data.json",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
       "types": "./types.d.ts"
     },
     "./recent": {
-      "require": "./data/recent-data.json",
-      "import": "./data/recent-data.json",
+      "require": "./dist/recent.cjs",
+      "import": "./dist/recent.mjs",
       "types": "./types.d.ts"
     },
+    "./data/*": "./data/*",
     "./client": {
       "require": "./dist/client.cjs",
       "import": "./dist/client.mjs",
@@ -46,8 +47,8 @@
       "types": "./dist/utils.d.ts"
     }
   },
-  "main": "./data/data.json",
-  "module": "./data/data.json",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "types": "./types.d.ts",
   "bin": {
     "bangumi": "./cli.mjs"

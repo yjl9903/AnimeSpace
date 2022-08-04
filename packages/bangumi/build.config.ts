@@ -4,6 +4,7 @@ export default defineBuildConfig({
   entries: [
     'src/cli',
     'src/index',
+    'src/recent',
     'src/client',
     'src/transform',
     'src/utils',
