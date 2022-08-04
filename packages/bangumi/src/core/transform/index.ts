@@ -6,7 +6,7 @@ import createDebug from 'debug';
 
 import type { BaseBangumi, BangumiType, ExtendBangumi } from '../types';
 
-import { getBgmId, getBgmTitle } from '../utils';
+import { compress, getBgmId, getBgmTitle } from '../utils';
 
 const debug = createDebug('bangumi:transform');
 
@@ -93,12 +93,12 @@ export async function transform(option: TransformOption = {}) {
     }
   }
 
-  const compress = option.compress ?? true;
+  const shouldCompress = option.compress ?? true;
 
-  return {
-    compress,
+  return compress({
+    compress: shouldCompress,
     bangumis
-  };
+  });
 }
 
 async function importBangumiData(): Promise<{ items: Item[] } | undefined> {
@@ -107,7 +107,7 @@ async function importBangumiData(): Promise<{ items: Item[] } | undefined> {
     const data = require('bangumi-data');
     return 'default' in data ? data.default : data;
   } catch (err) {
-    console.log(err);
+    debug(err);
     return undefined;
   }
 }

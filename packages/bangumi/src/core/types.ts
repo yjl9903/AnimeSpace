@@ -35,3 +35,9 @@ export interface ExtendBangumi {
 
   comment?: string;
 }
+
+export interface RawExportData {
+  compress: boolean;
+
+  bangumis: Array<BaseBangumi & Partial<ExtendBangumi>>;
+}

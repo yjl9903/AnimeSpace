@@ -1,5 +1,7 @@
 import type { Item, Language } from 'bangumi-data';
 
+export * from './compress';
+
 export function getBgmId(bgm: Item) {
   for (const site of bgm.sites) {
     if (site.site === 'bangumi') {
