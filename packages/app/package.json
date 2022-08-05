@@ -32,7 +32,7 @@
     "@unocss/reset": "^0.45.5",
     "@vitejs/plugin-vue": "^3.0.1",
     "typescript": "^4.7.4",
-    "unocss": "^0.45.4",
+    "unocss": "^0.45.5",
     "unplugin-auto-import": "0.11.0",
     "unplugin-icons": "^0.14.8",
     "unplugin-vue-components": "^0.22.0",
