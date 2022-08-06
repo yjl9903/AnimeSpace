@@ -1,10 +1,8 @@
 import type { RawPlan } from '../types';
 
-import { logger } from '../logger';
 import { context } from '../context';
 import { bangumiLink } from '../anime';
-
-import { titleColor } from './constant';
+import { logger, titleColor } from '../logger';
 
 export class Plan {
   private readonly plans: RawPlan[];

@@ -4,13 +4,19 @@ import prompts from 'prompts';
 import { distance } from 'fastest-levenshtein';
 import { format, subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
-import { link, bold, dim, lightGreen } from 'kolorist';
+import { link, bold, dim } from 'kolorist';
 
 import type { CustomBangumi, AnimeType } from '../types';
 
 import { context } from '../context';
 import { filterDef, groupBy, formatEP } from '../utils';
-import { logger, IndexListener, printMagnets } from '../logger';
+import {
+  logger,
+  IndexListener,
+  printMagnets,
+  okColor,
+  titleColor
+} from '../logger';
 
 import { Anime } from './anime';
 import { bangumiLink } from './utils';
@@ -94,7 +100,13 @@ export async function search(
   option: SearchOption = { type: 'tv' }
 ) {
   logger.empty();
-  logger.info(lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`);
+  // logger.info(lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`);
+  logger.info(
+    okColor('Refresh  ') +
+      titleColor(anime.title) +
+      '    ' +
+      `(${bangumiLink(anime.bgmId)})`
+  );
 
   debug(`Search "${anime.title}"`);
   for (const keyword of keywords) {

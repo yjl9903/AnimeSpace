@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { dim, link } from 'kolorist';
+import { bold, dim, link } from 'kolorist';
 import { format, subMonths } from 'date-fns';
 
 import type { Store, VideoInfo } from '../io';
@@ -7,13 +7,19 @@ import type { RawPlan, OnairPlan, EpisodeList } from '../types';
 
 import { context } from '../context';
 import { formatEP } from '../utils';
-import { logger, IndexListener } from '../logger';
+import {
+  logger,
+  IndexListener,
+  titleColor,
+  startColor,
+  okColor
+} from '../logger';
 import { OnairEpisode, AdminClient } from '../client';
 import { TorrentClient, useStore, checkVideo } from '../io';
 import { Anime, Episode, daemonSearch, bangumiLink } from '../anime';
 
 import { Plan } from './plan';
-import { debug, titleColor, startColor, okColor } from './constant';
+import { debug } from './constant';
 
 export class Daemon {
   private plan!: Plan;
@@ -76,6 +82,8 @@ export class Daemon {
   }
 
   private async refreshEpisode() {
+    let count = 0;
+
     for (const plan of this.plans) {
       for (const onair of plan.onair) {
         // Skip finished plan
@@ -98,13 +106,13 @@ export class Daemon {
         const anime = await context.getAnime(onair.bgmId);
 
         if (anime) {
-          logger.empty();
           logger.info(
             okColor('Refresh  ') +
               titleColor(anime.title) +
               okColor(' OK ') +
               `(${bangumiLink(onair.bgmId)})`
           );
+          count++;
         } else {
           throw new Error(
             `Fail to init ${onair.title} (${bangumiLink(onair.bgmId)})`
@@ -112,6 +120,10 @@ export class Daemon {
         }
       }
     }
+
+    logger.info(
+      `${okColor('Refresh  ')}${count} onair animes ${okColor('OK')}`
+    );
   }
 
   private async refreshStore() {
@@ -365,7 +377,9 @@ export class Daemon {
   private async syncPlaylist(title = '', curId = '') {
     if (curId === '') {
       logger.info(
-        `${startColor('Sync')}     ${this.client.newOnair.length} onair animes`
+        `${startColor('Sync')}     ${bold(
+          this.client.newOnair.length
+        )}  local onair animes`
       );
     }
     if (title !== '') {
@@ -380,19 +394,22 @@ export class Daemon {
       const onair = await this.client.syncOnair();
       if (curId === '') {
         logger.info(
-          `${okColor('Sync')}     ${onair.length} onair animes ${okColor('OK')}`
+          `${okColor('Sync')}     ${bold(
+            onair.length
+          )} remote onair animes ${okColor('OK')}`
         );
-      }
-      for (const anime of onair) {
-        if (anime.bgmId !== curId) continue;
-        logger.info(
-          okColor('Sync     ') +
-            titleColor(anime.title) +
-            okColor(' OK ') +
-            `(Total: ${anime.episodes.length} episodes)`
-        );
-        for (const ep of anime.episodes) {
-          logger.tab.info(`${dim(formatEP(ep.ep))} ${ep.playURL}`);
+      } else {
+        for (const anime of onair) {
+          if (anime.bgmId !== curId) continue;
+          logger.info(
+            okColor('Sync     ') +
+              titleColor(anime.title) +
+              okColor(' OK ') +
+              `(Total: ${bold(anime.episodes.length)} episodes)`
+          );
+          for (const ep of anime.episodes) {
+            logger.tab.info(`${dim(formatEP(ep.ep))} ${ep.playURL}`);
+          }
         }
       }
     } catch {
