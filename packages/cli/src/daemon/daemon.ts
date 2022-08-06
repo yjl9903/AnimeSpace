@@ -6,10 +6,11 @@ import type { Store, VideoInfo } from '../io';
 import type { RawPlan, OnairPlan, EpisodeList } from '../types';
 
 import { context } from '../context';
+import { formatEP } from '../utils';
 import { logger, IndexListener } from '../logger';
 import { OnairEpisode, AdminClient } from '../client';
 import { TorrentClient, useStore, checkVideo } from '../io';
-import { Anime, Episode, daemonSearch, bangumiLink, formatEP } from '../anime';
+import { Anime, Episode, daemonSearch, bangumiLink } from '../anime';
 
 import { Plan } from './plan';
 import { debug, titleColor, startColor, okColor } from './constant';

@@ -1,4 +1,9 @@
-import { VideoStorePlatform } from './io';
+import type { BaseBangumi, ExtendBangumi } from '@animepaste/bangumi';
+
+import type { VideoStorePlatform } from './io';
+
+export type CustomBangumi = BaseBangumi &
+  Pick<ExtendBangumi, 'titleCN' | 'titleTranslate' | 'begin'>;
 
 export type AnimeType = 'tv' | 'web' | 'movie' | 'ova';
 

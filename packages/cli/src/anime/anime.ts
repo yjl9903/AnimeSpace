@@ -1,7 +1,8 @@
 import { debug as createDebug } from 'debug';
 
-import type { Item } from 'bangumi-data';
 import type { Resource } from '@animepaste/database';
+
+import type { CustomBangumi } from '../types';
 
 import { groupBy } from '../utils';
 import { context } from '../context';
@@ -43,11 +44,11 @@ export class Anime {
     });
   }
 
-  static bangumi(item: Item) {
+  static bangumi(item: CustomBangumi) {
     return new Anime({
-      title: getBgmTitle(item),
+      title: item.titleCN,
       date: new Date(item.begin),
-      bgmId: getBgmId(item)!
+      bgmId: item.bgmId
     });
   }
 

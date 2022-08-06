@@ -1,26 +1,19 @@
-import type { Item, SiteMeta } from 'bangumi-data';
+import { createRequire } from 'node:module';
 
 import prompts from 'prompts';
+import { distance } from 'fastest-levenshtein';
 import { format, subMonths } from 'date-fns';
 import { debug as createDebug } from 'debug';
-import { distance } from 'fastest-levenshtein';
 import { link, bold, dim, lightGreen } from 'kolorist';
 
-import type { AnimeType } from '../types';
+import type { CustomBangumi, AnimeType } from '../types';
 
 import { context } from '../context';
-import { filterDef, groupBy } from '../utils';
+import { filterDef, groupBy, formatEP } from '../utils';
 import { logger, IndexListener, printMagnets } from '../logger';
 
 import { Anime } from './anime';
-import {
-  getBgmDate,
-  getBgmTitle,
-  getBgmId,
-  bangumiLink,
-  formatEP,
-  getBgmDmhy
-} from './utils';
+import { bangumiLink } from './utils';
 
 interface SearchOption {
   type: AnimeType;
@@ -36,11 +29,11 @@ interface SearchOption {
 
 const debug = createDebug('anime:search');
 
-function getDefaultKeywords(bgm: Item) {
+function getDefaultKeywords(bgm: CustomBangumi) {
   return filterDef([
     bgm.title,
-    ...Object.values(bgm.titleTranslate).flat(),
-    getBgmDmhy(bgm)
+    ...Object.values(bgm.titleTranslate).flat()
+    // getBgmDmhy(bgm)
   ]);
 }
 
@@ -51,8 +44,7 @@ export async function userSearch(
   const bgms = await promptSearch(anime, option);
   const animes: Anime[] = [];
   for (const bgm of bgms) {
-    const anime =
-      (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
+    const anime = (await context.getAnime(bgm.bgmId)) ?? Anime.bangumi(bgm);
     const keywords = getDefaultKeywords(bgm);
     option.beginDate = subMonths(new Date(bgm.begin), 1);
     const res = await search(anime, keywords, option);
@@ -68,14 +60,13 @@ export async function daemonSearch(
   optionKeywords?: string[],
   option: SearchOption = { type: 'tv' }
 ) {
-  const { items } = await importBgmdata();
+  const items = await importBgmdata();
   const animes: Anime[] = [];
   let found = false;
   for (const bgm of items) {
-    if (bgmId === getBgmId(bgm)) {
+    if (bgmId === bgm.bgmId) {
       found = true;
-      const anime =
-        (await context.getAnime(getBgmId(bgm)!)) ?? Anime.bangumi(bgm);
+      const anime = (await context.getAnime(bgm.bgmId)) ?? Anime.bangumi(bgm);
       const keywords = optionKeywords ?? getDefaultKeywords(bgm);
       option.beginDate = subMonths(new Date(bgm.begin), 1);
       const res = await search(anime, keywords, option);
@@ -208,12 +199,15 @@ async function promptSearch(anime: string | undefined, option: SearchOption) {
         }
       }
     );
-    const { items } = await importBgmdata(option);
+    const items = await importBgmdata(option);
     return await promptBgm(items, false);
   }
 }
 
-async function promptBgm(bgms: Item[], enableDate = true): Promise<Item[]> {
+async function promptBgm(
+  bgms: CustomBangumi[],
+  enableDate = true
+): Promise<CustomBangumi[]> {
   const { value: bgm } = await prompts({
     type: 'multiselect',
     name: 'value',
@@ -221,7 +215,7 @@ async function promptBgm(bgms: Item[], enableDate = true): Promise<Item[]> {
     choices: bgms.map((bgm) => {
       const d = getBgmDate(bgm);
       return {
-        title: getBgmTitle(bgm) + (enableDate ? ` (${d.year}-${d.month})` : ''),
+        title: bgm.titleCN + (enableDate ? ` (${d.year}-${d.month})` : ''),
         value: bgm as unknown as any
       };
     }),
@@ -237,10 +231,10 @@ export async function searchInBgmdata(
   option: SearchOption,
   length = 5
 ) {
-  const { items } = await importBgmdata(option);
+  const items = await importBgmdata(option);
 
-  const include: Item[] = [];
-  const similar: Array<{ item: Item; dis: number }> = [];
+  const include: CustomBangumi[] = [];
+  const similar: Array<{ item: CustomBangumi; dis: number }> = [];
 
   for (const item of items) {
     const titles = getDefaultKeywords(item);
@@ -284,16 +278,24 @@ export async function searchInBgmdata(
 
 export async function importBgmdata(
   option: SearchOption = { type: 'tv' }
-): Promise<{ items: Item[]; siteMeta: Record<string, SiteMeta> }> {
-  const { items, siteMeta } = require('bangumi-data');
-  debug('Load Bangumi-data OK');
+): Promise<CustomBangumi[]> {
+  const require = createRequire(import.meta.url);
+  const { bangumis } = require('@animepaste/bangumi');
+  debug('Load Bangumi data OK');
+  return bangumis.filter((bgm: CustomBangumi) => {
+    const d = getBgmDate(bgm);
+    if (option.year && +option.year !== d.year) return false;
+    if (option.month && +option.month !== d.month) return false;
+    return bgm.type === option.type;
+  });
+}
+
+function getBgmDate(bgm: CustomBangumi) {
+  const d = new Date(bgm.begin);
   return {
-    items: items.filter((bgm: Item) => {
-      const d = getBgmDate(bgm);
-      if (option.year && +option.year !== d.year) return false;
-      if (option.month && +option.month !== d.month) return false;
-      return bgm.type === option.type;
-    }),
-    siteMeta
+    year: d.getFullYear(),
+    month: d.getMonth() + 1,
+    date: d.getDate(),
+    weekday: d.getDay()
   };
 }

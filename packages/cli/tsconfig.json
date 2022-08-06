@@ -11,6 +11,8 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
+      "@animepaste/bangumi": ["../bangumi/src/index.ts"],
+      "@animepaste/bangumi/*": ["../bangumi/src/*"],
       "@animepaste/database": ["../database/src/index.ts"],
     }
   }
