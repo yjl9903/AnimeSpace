@@ -1,7 +1,6 @@
 {
-  "extends": [
-    "config:base"
-  ],
+  "baseBranches": ["next"],
+  "extends": ["config:base"],
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies", "packageManager"],
