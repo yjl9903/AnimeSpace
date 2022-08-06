@@ -5,5 +5,5 @@
 export default async function () {
   const fields = ['titleCN', 'titleTranslate', 'begin'].join(',');
 
-  await $`bangumi data --fields ${fields}`;
+  await $`bangumi cli-data --fields ${fields}`;
 }

@@ -10,3 +10,5 @@ export type DefaultBangumi = BaseBangumi &
 const data = load('data.json');
 
 export const bangumis = data.bangumis;
+
+export { load };

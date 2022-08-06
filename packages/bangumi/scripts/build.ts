@@ -6,7 +6,6 @@ import { subYears } from 'date-fns';
 
 export default async function () {
   await fs.ensureDir('./data');
-  await fs.emptyDir('./data');
 
   const fields = ['titleCN', 'begin'].join(',');
 

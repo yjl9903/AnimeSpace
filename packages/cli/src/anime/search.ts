@@ -280,7 +280,8 @@ export async function importBgmdata(
   option: SearchOption = { type: 'tv' }
 ): Promise<CustomBangumi[]> {
   const require = createRequire(import.meta.url);
-  const { bangumis } = require('@animepaste/bangumi');
+  const { load } = require('@animepaste/bangumi');
+  const bangumis: CustomBangumi[] = load('cli-data.json').bangumis;
   debug('Load Bangumi data OK');
   return bangumis.filter((bgm: CustomBangumi) => {
     const d = getBgmDate(bgm);
