@@ -6,7 +6,7 @@ import createDebug from 'debug';
 
 import type { BaseBangumi, BangumiType, ExtendBangumi } from '../types';
 
-import { compress, getBgmId, getBgmTitle } from '../utils';
+import { compress, getBgmDmhy, getBgmId, getBgmTitle } from '../utils';
 
 const debug = createDebug('bangumi:transform');
 
@@ -81,6 +81,10 @@ export async function transform(option: TransformOption = {}) {
             }
             case 'comment': {
               bangumi.comment = item.comment;
+              break;
+            }
+            case 'dmhy': {
+              bangumi.dmhy = getBgmDmhy(item);
               break;
             }
             default: {

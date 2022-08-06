@@ -18,6 +18,7 @@ const shortcut: Array<
   ['begin', 'b'],
   ['end', 'e'],
   ['comment', 'm'],
+  ['dmhy', 'd'],
   ['bgm', 'g']
 ];
 

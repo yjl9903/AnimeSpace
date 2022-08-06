@@ -32,8 +32,8 @@ const debug = createDebug('anime:search');
 function getDefaultKeywords(bgm: CustomBangumi) {
   return filterDef([
     bgm.title,
-    ...Object.values(bgm.titleTranslate).flat()
-    // getBgmDmhy(bgm)
+    ...Object.values(bgm.titleTranslate).flat(),
+    bgm.dmhy
   ]);
 }
 

@@ -3,7 +3,7 @@ import type { BaseBangumi, ExtendBangumi } from '@animepaste/bangumi';
 import type { VideoStorePlatform } from './io';
 
 export type CustomBangumi = BaseBangumi &
-  Pick<ExtendBangumi, 'titleCN' | 'titleTranslate' | 'begin'>;
+  Pick<ExtendBangumi, 'titleCN' | 'titleTranslate' | 'begin' | 'dmhy'>;
 
 export type AnimeType = 'tv' | 'web' | 'movie' | 'ova';
 

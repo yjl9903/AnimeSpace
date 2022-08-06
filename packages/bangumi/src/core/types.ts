@@ -36,6 +36,8 @@ export interface ExtendBangumi {
   end?: string;
 
   comment?: string;
+
+  dmhy?: string;
 }
 
 export interface ExtendBangumiSubject {

@@ -7,8 +7,6 @@ import type { CustomBangumi } from '../types';
 import { groupBy } from '../utils';
 import { context } from '../context';
 
-import { getBgmTitle, getBgmId } from './utils';
-
 const LOCALE = 'zh-Hans';
 
 const debug = createDebug('anime:anime');
