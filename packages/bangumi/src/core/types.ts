@@ -38,6 +38,10 @@ export interface ExtendBangumi {
   comment?: string;
 }
 
+export interface ExtendBangumiSubject {
+  bgm: BangumiSubject;
+}
+
 export interface BangumiSubject {
   summary: string;
 
@@ -52,10 +56,6 @@ export interface BangumiSubject {
 
     tags: Tag[];
   };
-}
-
-export interface ExtendBangumiSubject {
-  bgm: BangumiSubject;
 }
 
 export interface RawExportData {

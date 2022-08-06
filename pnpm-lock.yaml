@@ -154,6 +154,7 @@ importers:
   packages/cli:
     specifiers:
       '@alicloud/pop-core': ^1.7.12
+      '@animepaste/bangumi': workspace:*
       '@animepaste/database': workspace:*
       '@types/ali-oss': ^6.16.4
       '@types/cli-progress': ^3.11.0
@@ -182,6 +183,7 @@ importers:
       webtorrent: ^1.8.26
     dependencies:
       '@alicloud/pop-core': 1.7.12
+      '@animepaste/bangumi': link:../bangumi
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
       axios: 0.27.2_debug@4.3.4
