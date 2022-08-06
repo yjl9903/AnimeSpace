@@ -188,7 +188,6 @@ importers:
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
       axios: 0.27.2_debug@4.3.4
-      bangumi-data: 0.3.97
       breadc: 0.6.3
       cli-progress: 3.11.2
       date-fns: 2.29.1
@@ -211,6 +210,7 @@ importers:
       '@types/fs-extra': 9.0.13
       '@types/js-yaml': 4.0.5
       '@types/webtorrent': 0.109.3
+      bangumi-data: 0.3.97
       optc: 0.3.6
       unbuild: 0.7.6
 
