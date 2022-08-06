@@ -9,7 +9,7 @@
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },
   "dependencies": {
-    "@vueuse/core": "^9.0.2",
+    "@vueuse/core": "^9.1.0",
     "@vueuse/head": "^0.7.9",
     "bangumi-data": "^0.3.97",
     "date-fns": "^2.29.1",
@@ -25,7 +25,7 @@
     "@iconify-json/carbon": "^1.1.7",
     "@iconify-json/ic": "^1.1.8",
     "@iconify-json/mdi": "^1.1.29",
-    "@types/node": "^18.6.3",
+    "@types/node": "^18.6.4",
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.0",
     "@types/scrollreveal": "^0.0.8",
@@ -33,7 +33,7 @@
     "@vitejs/plugin-vue": "^3.0.1",
     "typescript": "^4.7.4",
     "unocss": "^0.45.5",
-    "unplugin-auto-import": "0.11.0",
+    "unplugin-auto-import": "0.11.1",
     "unplugin-icons": "^0.14.8",
     "unplugin-vue-components": "^0.22.0",
     "vite": "^3.0.4",
@@ -43,7 +43,7 @@
     "vite-plugin-pwa": "^0.12.3",
     "vite-ssg": "^0.20.2",
     "vitest": "^0.21.0",
-    "vue-tsc": "^0.39.4"
+    "vue-tsc": "^0.39.5"
   },
   "engines": {
     "node": ">=v16.16.0"
