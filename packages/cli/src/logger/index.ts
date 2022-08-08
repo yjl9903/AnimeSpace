@@ -15,12 +15,17 @@ interface Logger {
   warn: (message: string, ...args: string[]) => void;
   error: (message: string, ...args: string[]) => void;
   empty: () => void;
+
+  enable: () => void;
+  disable: () => void;
 }
 
 interface LoggerOption {
   prefix: string;
   tabwidth: number;
 }
+
+let enable = true;
 
 export const logger = factory({ prefix: '  ' });
 
@@ -30,16 +35,24 @@ function factory(option: Partial<LoggerOption> = {}) {
   const tab = ' '.repeat(tabwidth * 2);
 
   const println: Logger['println'] = (message, ...args) => {
-    console.log(prefix + tab + message, ...args);
+    if (enable) {
+      console.log(prefix + tab + message, ...args);
+    }
   };
   const info: Logger['info'] = (message, ...args) => {
-    console.log(prefix + lightBlue('Info') + ' ' + tab + message, ...args);
+    if (enable) {
+      console.log(prefix + lightBlue('Info') + ' ' + tab + message, ...args);
+    }
   };
   const warn: Logger['warn'] = (message, ...args) => {
-    console.log(prefix + lightYellow('Warn') + ' ' + tab + message, ...args);
+    if (enable) {
+      console.log(prefix + lightYellow('Warn') + ' ' + tab + message, ...args);
+    }
   };
   const error: Logger['error'] = (message, ...args) => {
-    console.log(prefix + lightRed('Error') + ' ' + tab + message, ...args);
+    if (enable) {
+      console.log(prefix + lightRed('Error') + ' ' + tab + message, ...args);
+    }
   };
 
   const instance = new Proxy(
@@ -49,7 +62,15 @@ function factory(option: Partial<LoggerOption> = {}) {
       warn,
       error,
       empty() {
-        console.log();
+        if (enable) {
+          console.log();
+        }
+      },
+      enable() {
+        enable = true;
+      },
+      disable() {
+        enable = false;
       }
     } as Logger,
     {
