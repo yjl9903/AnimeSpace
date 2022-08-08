@@ -31,10 +31,10 @@
       "types": "./types.d.ts"
     },
     "./data/*": "./data/*",
-    "./client": {
-      "require": "./dist/client.cjs",
-      "import": "./dist/client.mjs",
-      "types": "./dist/client.d.ts"
+    "./bgm": {
+      "require": "./dist/bgm.cjs",
+      "import": "./dist/bgm.mjs",
+      "types": "./dist/bgm.d.ts"
     },
     "./transform": {
       "require": "./dist/transform.cjs",
@@ -45,6 +45,14 @@
       "require": "./dist/utils.cjs",
       "import": "./dist/utils.mjs",
       "types": "./dist/utils.d.ts"
+    },
+    "./vite": {
+      "require": "./dist/vite.cjs",
+      "import": "./dist/vite.mjs",
+      "types": "./dist/vite.d.ts"
+    },
+    "./client": {
+      "types": "./client.d.ts"
     }
   },
   "main": "./dist/index.cjs",

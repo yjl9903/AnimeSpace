@@ -1,6 +1,6 @@
 import type { Language } from 'bangumi-data';
 
-import type { Images, InfoBox, Rating, Tag } from './client';
+import type { Images, InfoBox, Rating, Tag } from './bgm';
 
 export type BangumiType = 'tv' | 'web' | 'movie' | 'ova';
 

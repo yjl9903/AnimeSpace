@@ -5,7 +5,7 @@ export default defineBuildConfig({
     'src/cli',
     'src/index',
     'src/recent',
-    'src/client',
+    'src/bgm',
     'src/transform',
     'src/utils',
     'src/vite'

@@ -14,6 +14,8 @@ import BuildInfo from 'vite-plugin-info';
 import Inspect from 'vite-plugin-inspect';
 import { VitePWA } from 'vite-plugin-pwa';
 
+import Bangumi from '@animepaste/bangumi/vite';
+
 // For node v16, ESM does not support import json module
 // It fallbacks to node require
 const require = createRequire(import.meta.url);
@@ -147,6 +149,7 @@ export default defineConfig({
         ]
       }
     }),
+    // Bangumi(),
     BangumiDate(200)
   ]
 });

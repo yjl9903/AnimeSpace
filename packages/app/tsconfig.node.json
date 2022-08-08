@@ -3,9 +3,20 @@
     "allowSyntheticDefaultImports": true,
     "composite": true,
     "module": "ESNext",
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "rootDir": "../",
+    "types": [
+      "@animepaste/bangumi/client"
+    ],
+    "paths": {
+      "@animepaste/bangumi": ["../bangumi/src/index.ts"],
+      "@animepaste/bangumi/client": ["../bangumi/client.d.ts"],
+      "@animepaste/bangumi/*": ["../bangumi/src/*"]
+    }
   },
   "include": [
-    "vite.config.ts"
+    "vite.config.ts",
+    "../bangumi/*.d.ts",
+    "../bangumi/src/*.ts"
   ]
 }

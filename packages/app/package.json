@@ -1,5 +1,6 @@
 {
   "name": "@animepaste/app",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,9 +10,9 @@
     "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
   },
   "dependencies": {
+    "@animepaste/bangumi": "workspace:*",
     "@vueuse/core": "^9.1.0",
     "@vueuse/head": "^0.7.9",
-    "bangumi-data": "^0.3.97",
     "date-fns": "^2.29.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.17",
@@ -31,6 +32,7 @@
     "@types/scrollreveal": "^0.0.8",
     "@unocss/reset": "^0.45.5",
     "@vitejs/plugin-vue": "^3.0.1",
+    "bangumi-data": "^0.3.97",
     "typescript": "^4.7.4",
     "unocss": "^0.45.5",
     "unplugin-auto-import": "0.11.1",
@@ -47,6 +49,5 @@
   },
   "engines": {
     "node": ">=v16.16.0"
-  },
-  "version": "0.0.1"
+  }
 }

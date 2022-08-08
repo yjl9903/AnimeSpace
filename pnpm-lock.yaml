@@ -61,6 +61,7 @@ importers:
 
   packages/app:
     specifiers:
+      '@animepaste/bangumi': workspace:*
       '@iconify-json/carbon': ^1.1.7
       '@iconify-json/ic': ^1.1.8
       '@iconify-json/mdi': ^1.1.29
@@ -95,9 +96,9 @@ importers:
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.39.5
     dependencies:
+      '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.1.0_vue@3.2.37
       '@vueuse/head': 0.7.9_vue@3.2.37
-      bangumi-data: 0.3.97
       date-fns: 2.29.1
       nprogress: 0.2.0
       pinia: 2.0.17_j6bzmzd4ujpabbp5objtwxyjp4
@@ -116,6 +117,7 @@ importers:
       '@types/scrollreveal': 0.0.8
       '@unocss/reset': 0.45.5
       '@vitejs/plugin-vue': 3.0.1_vite@3.0.4+vue@3.2.37
+      bangumi-data: 0.3.97
       typescript: 4.7.4
       unocss: 0.45.5_vite@3.0.4
       unplugin-auto-import: 0.11.1_25lmdjqd6sh2wqsrigufd6bkkm
@@ -2774,6 +2776,7 @@ packages:
 
   /bangumi-data/0.3.97:
     resolution: {integrity: sha512-yEG3Y/14ACUQbJTrIXAgxhRvUz63rV8ilxvgVvhIQzWuR3YDPzD81YfwSVa65LuUDWTgqGqIUGYLBKLxwEOmqw==}
+    dev: true
 
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}

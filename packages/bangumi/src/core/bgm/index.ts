@@ -8,7 +8,7 @@ export * from './types';
 
 export const baseURL = 'https://api.bgm.tv';
 
-export class Client {
+export class BgmClient {
   private readonly api = axios.create({
     baseURL,
     timeout: 10 * 1000
