@@ -11,9 +11,10 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "paths": {
-      "~/*": [
-        "./src/*"
-      ]
+      "~/*": ["./src/*"],
+      "@animepaste/bangumi": ["../bangumi/types.d.ts"],
+      "@animepaste/bangumi/*": ["../bangumi/dist/*"],
+      "@animepaste/bangumi/client": ["../bangumi/client.d.ts"]
     },
     "resolveJsonModule": true,
     "skipLibCheck": true,
@@ -36,7 +37,9 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "../bangumi/src/**/*.ts",
+    "../bangumi/dist/**/*.d.ts",
   ],
   "references": [
     {

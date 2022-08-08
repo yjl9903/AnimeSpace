@@ -7,6 +7,7 @@ import type { TransformOption } from './transform';
 
 import { load } from './load';
 import { transform } from './transform';
+import { decompress } from './utils';
 
 const debug = createDebug('animepaste:bangumi');
 
@@ -28,7 +29,7 @@ export function createBangumiPlugin(...options: PluginOption[]): Plugin {
     options.map((option) => {
       try {
         return transform(option).then((data) => {
-          map.set(option.id, data);
+          map.set(option.id, decompress(data));
         });
       } catch (error) {
         debug(error);

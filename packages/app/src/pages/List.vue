@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { getBgmId, Subject } from '~/composables/bangumi';
+import type { SubjectBangumi } from '~/composables/types';
 
 import IndexGrid from './components/IndexGrid.vue';
 
 const bangumi = useBangumi();
 
 const pageSize = 20;
-const bgms = ref([] as (Subject | undefined)[]);
+
+const bgms = ref([] as (SubjectBangumi | undefined)[]);
 
 const grid = ref<HTMLElement | null>(null);
 
@@ -14,7 +15,7 @@ const pushMore = async () => {
   const start = bgms.value.length;
   const current = [];
   for (const item of bangumi.data.slice(start, start + pageSize)) {
-    const id = getBgmId(item);
+    const id = item.bgmId;
     if (!id) {
       current.push(undefined);
     } else {
@@ -45,7 +46,7 @@ useInfiniteScroll(useDocument(), pushMore, { distance: 200 });
   <div px0 py8 relative>
     <IndexGrid
       ref="grid"
-      :bangumis="(bgms.filter(Boolean) as Subject[])"
+      :bangumis="(bgms.filter(Boolean) as SubjectBangumi[])"
     ></IndexGrid>
   </div>
 </template>

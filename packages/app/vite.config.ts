@@ -16,6 +16,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 import Bangumi from '@animepaste/bangumi/vite';
 
+import { getMonth, setDate, setMonth, subDays, subYears } from 'date-fns';
+
 // For node v16, ESM does not support import json module
 // It fallbacks to node require
 const require = createRequire(import.meta.url);
@@ -149,10 +151,34 @@ export default defineConfig({
         ]
       }
     }),
-    // Bangumi(),
-    BangumiDate(200)
+    Bangumi(
+      {
+        id: 'recent',
+        fields: ['titleCN', 'begin', 'officialSite'],
+        begin: getRecent()
+      },
+      {
+        id: 'all',
+        fields: ['titleCN', 'begin', 'officialSite']
+      }
+    )
+    // BangumiDate(200)
   ]
 });
+
+function getRecent() {
+  const date = new Date();
+  const month = getMonth(date);
+  if (month <= 3) {
+    return subDays(setDate(setMonth(subYears(date, 1), 9), 1), 15);
+  } else if (month <= 6) {
+    return subDays(setDate(setMonth(date, 0), 1), 15);
+  } else if (month <= 9) {
+    return subDays(setDate(setMonth(date, 3), 1), 15);
+  } else {
+    return subDays(setDate(setMonth(date, 6), 1), 15);
+  }
+}
 
 /**
  * Only bundle first count piece of items

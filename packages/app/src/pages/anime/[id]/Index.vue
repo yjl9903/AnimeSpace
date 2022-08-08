@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { format } from 'date-fns';
 
-import { getBgmId, InfoBox } from '~/composables/bangumi';
 import { ensureHTTPS } from '~/composables';
 
 import { useAnimeInfo } from './context';
@@ -28,7 +27,7 @@ const shouldeFilterInfo = new Set([
   '播放结束',
   'Copyright'
 ]);
-const filterInfo = (info: InfoBox) => !shouldeFilterInfo.has(info.key);
+// const filterInfo = (info: InfoBox) => !shouldeFilterInfo.has(info.key);
 </script>
 
 <template>
@@ -36,7 +35,7 @@ const filterInfo = (info: InfoBox) => !shouldeFilterInfo.has(info.key);
     <h2 font-bold text-3xl mb4 pb4 flex="~ lt-md:col">
       <div>
         <router-link
-          :to="`/anime/${getBgmId(bgmData)}`"
+          :to="`/anime/${bgmData.bgmId}`"
           class="text-$light-1 hover:text-$c-brand"
           >{{ title }}</router-link
         >
@@ -44,17 +43,17 @@ const filterInfo = (info: InfoBox) => !shouldeFilterInfo.has(info.key);
       </div>
       <div flex-auto></div>
       <RatingStar
-        v-if="subject?.rating.score !== undefined"
+        v-if="subject?.bgm.rating.score !== undefined"
         min-w="180px"
-        :bgm-id="subject.id"
-        :rating="subject?.rating.score"
+        :bgm-id="subject.bgmId"
+        :rating="subject?.bgm.rating.score"
       ></RatingStar>
     </h2>
     <div v-if="subject">
       <div flex="~ gap4" lt-lg="flex-col items-center gap4">
         <img
-          :src="ensureHTTPS(subject.images.large)"
-          :alt="`Image of ${subject.name_cn}`"
+          :src="ensureHTTPS(subject.bgm.images.large)"
+          :alt="`Image of ${subject.titleCN}`"
           w="240px"
           min-h="16px"
           rounded-2
@@ -64,17 +63,17 @@ const filterInfo = (info: InfoBox) => !shouldeFilterInfo.has(info.key);
         <div>
           <div flex="~ gap2" lg="mt4 mb8" lt-lg="mb4" text-sm font-light>
             <span
-              >{{ format(new Date(subject.date), 'yyyy 年 M 月 d 日开播') }}
+              >{{ format(new Date(subject.begin), 'yyyy 年 M 月 d 日开播') }}
             </span>
             <span select-none>/</span>
-            <span>{{ format(new Date(subject.date), 'EEEE') }} </span>
+            <span>{{ format(new Date(subject.begin), 'EEEE') }} </span>
             <span select-none>/</span>
-            <span>共 {{ subject.total_episodes ?? subject.eps }} 话</span>
+            <span>共 {{ subject.bgm.eps ?? '?' }} 话</span>
             <span v-if="maxEps" select-none>/</span>
             <span v-if="maxEps">更新至第 {{ maxEps }} 话</span>
           </div>
           <div leading-8>
-            {{ subject.summary }}
+            {{ subject.bgm.summary }}
           </div>
         </div>
       </div>

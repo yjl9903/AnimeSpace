@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { onUnmounted, ref, toRefs, watch } from 'vue';
-
 import Plyr, { SourceInfo, Options } from 'plyr';
 import 'plyr/dist/plyr.css';
 

@@ -60,7 +60,7 @@ onBeforeRouteLeave(async () => {
       <router-link
         :to="`/anime/${id}`"
         class="text-$light-1 hover:text-$c-brand"
-        >{{ subject.name_cn }}</router-link
+        >{{ subject.titleCN }}</router-link
       >
       <Playing ml1></Playing>
     </h2>
@@ -70,7 +70,7 @@ onBeforeRouteLeave(async () => {
           v-if="src"
           :options="{}"
           :source="{
-            title: `${subject.name_cn} - E${ep}`,
+            title: `${subject.titleCN} - E${ep}`,
             type: 'video',
             sources: [{ src: src, type: 'video/mp4', size: 1080 }]
           }"

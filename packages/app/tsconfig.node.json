@@ -5,14 +5,11 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "rootDir": "../",
-    "types": [
-      "@animepaste/bangumi/client"
-    ],
     "paths": {
       "@animepaste/bangumi": ["../bangumi/src/index.ts"],
-      "@animepaste/bangumi/client": ["../bangumi/client.d.ts"],
-      "@animepaste/bangumi/*": ["../bangumi/src/*"]
-    }
+      "@animepaste/bangumi/*": ["../bangumi/src/*"],
+      "@animepaste/bangumi/client": ["../bangumi/client.d.ts"]
+    },
   },
   "include": [
     "vite.config.ts",

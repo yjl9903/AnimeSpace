@@ -28,6 +28,12 @@ export async function transform(option: TransformOption = {}) {
     throw new Error('Fail importing bangumi-data');
   }
 
+  data.items = data.items.sort((lhs, rhs) => {
+    const d1 = new Date(lhs.begin).getTime();
+    const d2 = new Date(rhs.begin).getTime();
+    return d1 - d2;
+  });
+
   const begin = new Date(option.begin ?? 0);
   const end = option.end ? new Date(option.end) : new Date();
   const types =

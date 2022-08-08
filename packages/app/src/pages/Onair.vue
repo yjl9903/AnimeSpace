@@ -49,12 +49,12 @@ const formatDate = (d: string) => {
         >
           <picture w="full" max-w="full">
             <source
-              :srcset="ensureHTTPS(subjects[idx].value!.images.medium)"
+              :srcset="ensureHTTPS(subjects[idx].value!.bgm.images.medium)"
               media="(max-width: 767.9px)"
             />
             <img
-              :src="ensureHTTPS(subjects[idx].value!.images.large)"
-              :alt="subjects[idx].value!.name_cn"
+              :src="ensureHTTPS(subjects[idx].value!.bgm.images.large)"
+              :alt="subjects[idx].value!.titleCN"
               w="full"
               max-w="full"
               object-contain
@@ -69,7 +69,7 @@ const formatDate = (d: string) => {
             :to="'/anime/' + anime.bgmId"
             class="text-$light-1 hover:text-$c-brand"
             >{{
-              subjects[idx].value ? subjects[idx].value?.name_cn : anime.title
+              subjects[idx].value ? subjects[idx].value?.titleCN : anime.title
             }}<Playing ml1></Playing>
           </router-link>
           <div flex-auto></div>
@@ -86,19 +86,15 @@ const formatDate = (d: string) => {
           </div>
         </h3>
         <div v-if="subjects[idx].value" mt4 text-sm text-gray-500:80>
-          <span>{{ formatDate(subjects[idx].value!.date) }}</span>
+          <span>{{ formatDate(subjects[idx].value!.begin) }}</span>
           <span mx2 select-none>/</span>
           <span
-            >{{ format(new Date(subjects[idx].value!.date), 'EEEE') }}
+            >{{ format(new Date(subjects[idx].value!.begin), 'EEEE') }}
           </span>
           <span mx2 select-none>/</span>
           <span
             >共
-            {{
-              subjects[idx].value!.total_episodes ??
-              subjects[idx].value!.eps ??
-              '?'
-            }}
+            {{ subjects[idx].value!.bgm.eps ?? '?' }}
             话</span
           >
         </div>
@@ -114,7 +110,7 @@ const formatDate = (d: string) => {
           ></PlayBangumi>
         </div>
         <div lt-xl:hidden mt4 text-sm leading-6>
-          {{ subjects[idx].value?.summary }}
+          {{ subjects[idx].value?.bgm.summary }}
         </div>
         <div
           v-if="anime.episodes.length > 0"

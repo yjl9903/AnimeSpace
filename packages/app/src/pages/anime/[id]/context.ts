@@ -1,5 +1,4 @@
 import { useHead } from '@vueuse/head';
-import { getBgmTitle } from '~/composables/bangumi';
 
 export function useAnimeInfo() {
   const route = useRoute();
@@ -20,7 +19,7 @@ export function useAnimeInfo() {
 
   const bgmData = computed(() => {
     if (id.value) {
-      const data = bangumi.bgmIdMap.get(id.value);
+      const data = bangumi.bgmMap.get(id.value);
       if (data) {
         return data;
       } else {
@@ -44,10 +43,12 @@ export function useAnimeInfo() {
     }
   });
 
-  const title = ref(bgmData.value ? getBgmTitle(bgmData.value) : '');
+  const title = ref(
+    bgmData.value ? bgmData.value.titleCN ?? bgmData.value.title : ''
+  );
   watch(subject, (subject) => {
-    if (subject && subject.name_cn) {
-      title.value = subject.name_cn;
+    if (subject && subject.titleCN) {
+      title.value = subject.titleCN;
     }
   });
 

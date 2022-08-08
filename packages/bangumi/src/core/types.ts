@@ -66,7 +66,9 @@ export interface RawExportData {
   bangumis: Array<BaseBangumi & Partial<ExtendBangumi>>;
 }
 
-export interface Calendar {
+export interface Calendar<
+  T extends BaseBangumi = BaseBangumi & Pick<ExtendBangumi, 'titleCN' | 'begin'>
+> {
   weekday: {
     en: string;
     cn: string;
@@ -74,5 +76,5 @@ export interface Calendar {
     id: number;
   };
 
-  bangumis: Array<BaseBangumi & ExtendBangumiSubject>;
+  bangumis: Array<T & ExtendBangumiSubject>;
 }

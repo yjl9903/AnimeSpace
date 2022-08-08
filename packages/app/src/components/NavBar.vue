@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { format } from 'date-fns';
-
-import type { Subject } from '~/composables/bangumi';
 import { useHistory } from '~/composables/client';
 
 const isDark = useDark();
@@ -12,21 +9,6 @@ const { top } = toRefs(arrivedState);
 
 const history = useHistory();
 const bangumi = useBangumi();
-
-const map: Record<string, Subject> = reactive({});
-watch(
-  history.history,
-  (history) => {
-    for (const item of history) {
-      if (!(item.bgmId in map)) {
-        bangumi
-          .subject(item.bgmId)
-          .then((data) => data && (map[item.bgmId] = data));
-      }
-    }
-  },
-  { immediate: true }
-);
 
 const formatProgress = (time: number) => {
   const m = Math.floor(time / 60);
@@ -123,8 +105,8 @@ const formatProgress = (time: number) => {
               ml2
             >
               <router-link :to="`/anime/${log.bgmId}/play/${log.ep}`">
-                <span v-if="map[log.bgmId]"
-                  >{{ map[log.bgmId]!.name_cn }}
+                <span v-if="bangumi.bgmMap.has(log.bgmId)"
+                  >{{ bangumi.bgmMap.get(log.bgmId)!.titleCN }}
                 </span>
               </router-link>
               <div flex-auto></div>

@@ -3,9 +3,8 @@ import type { Ref } from 'vue';
 
 import { differenceInHours } from 'date-fns';
 
-import type { OverviewSubject, Subject } from '~/composables/bangumi';
-
 import IndexGrid from './components/IndexGrid.vue';
+import { Bangumi, SubjectBangumi } from '~/composables/types';
 
 const now = new Date();
 const weekday = now.getDay();
@@ -39,21 +38,18 @@ watch(scrollY, () => {
 const client = useClient();
 const bangumi = useBangumi();
 
-const hiddenBgm = new Set([899, 975]);
+// TODO: config from user
+const hiddenBgm = new Set(['899', '975']);
 
-const isOnair = (subject: OverviewSubject) => {
-  return client.onairMap.has(String(subject.id));
+const isOnair = (bgm: Bangumi) => {
+  return client.onairMap.has(bgm.bgmId);
 };
 
-const toBgmData = (subject: OverviewSubject) => {
-  return bangumi.bgmIdMap.get(String(subject.id));
-};
-
-const sortBgm = (a: OverviewSubject, b: OverviewSubject) => {
+const sortBgm = (a: Bangumi, b: Bangumi) => {
   const x = isOnair(a) ? 0 : 1;
   const y = isOnair(b) ? 0 : 1;
   if (x === y) {
-    return toBgmData(a)!.begin.localeCompare(toBgmData(b)!.begin);
+    return a.begin.localeCompare(b.begin);
   } else {
     return x - y;
   }
@@ -70,13 +66,13 @@ const latestBangumis = computedAsync(() => {
         return differenceInHours(new Date(), new Date(latestUpdate)) <= 72;
       })
       .map((onair) => bangumi.subject(onair.bgmId))
-      .filter(Boolean) as Promise<Subject>[]
+      .filter(Boolean) as Promise<SubjectBangumi>[]
   );
 });
 
-const filterBgm = (subject: OverviewSubject) => {
-  if (hiddenBgm.has(subject.id)) return false;
-  return bangumi.bgmIdMap.has(String(subject.id)) && subject.name_cn !== '';
+const filterBgm = (bgm: Bangumi) => {
+  if (hiddenBgm.has(bgm.bgmId)) return false;
+  return bangumi.bgmMap.has(bgm.bgmId) && bgm.titleCN !== '';
 };
 </script>
 

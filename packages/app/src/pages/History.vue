@@ -1,26 +1,10 @@
 <script setup lang="ts">
 import { format } from 'date-fns';
 
-import type { Subject } from '~/composables/bangumi';
 import { useHistory } from '~/composables/client';
 
 const history = useHistory();
 const bangumi = useBangumi();
-
-const map: Record<string, Subject> = reactive({});
-watch(
-  history.history,
-  (history) => {
-    for (const item of history) {
-      if (!(item.bgmId in map)) {
-        bangumi
-          .subject(item.bgmId)
-          .then((data) => data && (map[item.bgmId] = data));
-      }
-    }
-  },
-  { immediate: true }
-);
 </script>
 
 <route>
@@ -45,7 +29,9 @@ watch(
       py2
     >
       <router-link :to="`/anime/${log.bgmId}/play/${log.ep}`">
-        <span v-if="map[log.bgmId]">{{ map[log.bgmId]!.name_cn }} </span>
+        <span v-if="bangumi.useBgm(log.bgmId).value"
+          >{{ bangumi.useBgm(log.bgmId).value!.titleCN }}
+        </span>
       </router-link>
       <Episode :bgm-id="log.bgmId" :ep="log.ep" p1></Episode>
       <span flex-auto></span>

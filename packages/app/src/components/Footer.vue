@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import { format } from 'date-fns';
+
 import now from '~build/time';
 import { github, abbreviatedSha } from '~build/info';
-import { format } from 'date-fns';
 </script>
 
 <template>

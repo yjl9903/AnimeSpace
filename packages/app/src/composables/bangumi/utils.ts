@@ -21,9 +21,3 @@ export function getBgmId(bgm: Item) {
     }
   }
 }
-
-export function sleep(second = 1): Promise<void> {
-  return new Promise((res) => {
-    setTimeout(() => res(), second * 1000);
-  });
-}

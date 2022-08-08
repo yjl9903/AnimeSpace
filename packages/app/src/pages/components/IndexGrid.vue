@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import type { OverviewSubject, Subject } from '~/composables/bangumi/types';
-import { ensureHTTPS } from '~/composables';
+import type { SubjectBangumi } from '~/composables/types';
 
-defineProps<{ bangumis: (OverviewSubject | Subject)[] }>();
+const props = defineProps<{ bangumis: SubjectBangumi[] }>();
+
+const { bangumis } = toRefs(props);
 
 const client = useClient();
 
-const isOnair = (subject: OverviewSubject | Subject) => {
-  return client.onairMap.has(String(subject.id));
+const isOnair = (bgm: SubjectBangumi) => {
+  return client.onairMap.has(bgm.bgmId);
 };
 
-const getOnairMaxEps = (subject: OverviewSubject | Subject) => {
-  const bgm = client.onairMap.get(String(subject.id));
-  if (bgm) {
-    return bgm.episodes.length > 0
-      ? Math.max(...bgm.episodes.map((ep) => ep.ep))
+const getOnairMaxEps = (bgm: SubjectBangumi) => {
+  const onair = client.onairMap.get(bgm.bgmId);
+  if (onair) {
+    return onair.episodes.length > 0
+      ? Math.max(...onair.episodes.map((ep) => ep.ep))
       : 0;
   }
 };
@@ -29,12 +30,12 @@ onMounted(async () => {
   <div grid="~ flow-row gap4 xl:cols-7 lg:cols-4 md:cols-3 lt-md:cols-2">
     <div
       v-for="bgm in bangumis"
-      :key="bgm.id"
+      :key="bgm.bgmId"
       w="140px lt-md:100px"
       lt-md:mb4
       class="anime-card"
     >
-      <router-link tag="div" :to="'/anime/' + bgm.id" w="full">
+      <router-link tag="div" :to="'/anime/' + bgm.bgmId" w="full">
         <picture
           w="full"
           flex="~"
@@ -45,13 +46,13 @@ onMounted(async () => {
           relative
         >
           <source
-            :srcset="ensureHTTPS(bgm.images.medium)"
+            :srcset="ensureHTTPS(bgm.bgm.images.medium)"
             media="(max-width: 767.9px)"
             rounded-2
           />
           <img
-            :src="ensureHTTPS(bgm.images.large)"
-            :alt="'Picture for ' + bgm.name_cn"
+            :src="ensureHTTPS(bgm.bgm.images.large)"
+            :alt="'Picture for ' + bgm.titleCN"
             object-fill
             w="full"
             h="196px lt-md:140px"
@@ -69,10 +70,10 @@ onMounted(async () => {
         </picture>
       </router-link>
       <router-link
-        :to="`/anime/${bgm.id}`"
+        :to="`/anime/${bgm.bgmId}`"
         target="_blank"
         class="text-base hover:text-$c-brand text-sm"
-        >{{ bgm.name_cn !== '' ? bgm.name_cn : bgm.name }}</router-link
+        >{{ bgm.titleCN !== '' ? bgm.titleCN : bgm.title }}</router-link
       >
       <span
         v-if="isOnair(bgm) && getOnairMaxEps(bgm)"
