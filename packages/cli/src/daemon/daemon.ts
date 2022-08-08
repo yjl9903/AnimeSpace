@@ -101,7 +101,10 @@ export class Daemon {
           ? [onair.keywords]
           : undefined;
 
-        await daemonSearch(onair.bgmId, keywords);
+        await daemonSearch(onair.bgmId, keywords, {
+          type: 'tv',
+          title: onair.title
+        });
 
         const anime = await context.getAnime(onair.bgmId);
 
