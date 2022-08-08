@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import NProgress from 'nprogress';
+
 import type { SubjectBangumi } from '~/composables/types';
 
 import IndexGrid from './components/IndexGrid.vue';
@@ -12,6 +14,7 @@ const bgms = ref([] as (SubjectBangumi | undefined)[]);
 const grid = ref<HTMLElement | null>(null);
 
 const pushMore = async () => {
+  NProgress.start();
   const start = bgms.value.length;
   const current = [];
   for (const item of bangumi.data.slice(start, start + pageSize)) {
@@ -24,6 +27,7 @@ const pushMore = async () => {
     }
   }
   bgms.value.push(...current);
+  NProgress.done();
 };
 
 pushMore();

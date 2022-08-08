@@ -85,6 +85,7 @@ export class BgmClient<T extends BaseBangumi> {
     return {
       bgmId: id,
       type: 'tv',
+      begin: subject.date,
       ...(typeof bgm === 'string' ? undefined : bgm),
       title: subject.name,
       titleCN: subject.name_cn,
