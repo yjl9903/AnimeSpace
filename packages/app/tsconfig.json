@@ -24,7 +24,8 @@
       "vite/client",
       "vite-plugin-pwa/client",
       "vite-plugin-info/client",
-      "vite-plugin-pages/client"
+      "vite-plugin-pages/client",
+      "@animepaste/bangumi/client"
     ],
     "useDefineForClassFields": true
   },

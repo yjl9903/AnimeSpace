@@ -1,8 +1,41 @@
 import type { Plugin } from 'vite';
 
-import { load } from './load';
+import createDebug from 'debug';
 
-export function createBangumiPlugin(): Plugin {
+import type { RawExportData } from './types';
+import type { TransformOption } from './transform';
+
+import { load } from './load';
+import { transform } from './transform';
+
+const debug = createDebug('animepaste:bangumi');
+
+export interface PluginOption extends TransformOption {
+  id: string;
+}
+
+export function createBangumiPlugin(...options: PluginOption[]): Plugin {
+  for (const option of options) {
+    if (!option.id.endsWith('.json')) {
+      option.id += '.json';
+    }
+  }
+
+  const map: Map<string, RawExportData | undefined> = new Map(
+    options.map((op) => [op.id, undefined])
+  );
+  const task = Promise.all(
+    options.map((option) => {
+      try {
+        return transform(option).then((data) => {
+          map.set(option.id, data);
+        });
+      } catch (error) {
+        debug(error);
+      }
+    })
+  );
+
   return {
     name: 'animepaste:bangumi',
     resolveId(id) {
@@ -14,12 +47,27 @@ export function createBangumiPlugin(): Plugin {
         return id;
       }
     },
-    load(id) {
+    async load(id) {
       const PREFIX = '\0~bangumi/';
       if (id.startsWith(PREFIX)) {
         id = id.slice(PREFIX.length);
-        const data = load(id);
-        return JSON.stringify(data);
+        if (map.has(id)) {
+          if (!!map.get(id)) {
+            return JSON.stringify(map.get(id));
+          } else {
+            await task;
+            if (!!map.get(id)) {
+              return JSON.stringify(map.get(id));
+            }
+          }
+        }
+        try {
+          const data = load(id);
+          return JSON.stringify(data);
+        } catch (error) {
+          this.error((error as any)?.message);
+          debug(error);
+        }
       }
     }
   };
