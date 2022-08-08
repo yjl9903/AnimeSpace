@@ -177,7 +177,7 @@ function BangumiDate(count = 100): Plugin {
           return d2 - d1;
         });
         const staticImport = [
-          `export const bangumiItems = [`,
+          `export const bangumis = [`,
           ...bgmItems
             .slice(0, StaticImportCount)
             .map((b) => JSON.stringify(b) + ','),

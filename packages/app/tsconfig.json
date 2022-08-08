@@ -21,6 +21,8 @@
     "strict": true,
     "target": "ESNext",
     "types": [
+      "vite/client",
+      "vite-plugin-pwa/client",
       "vite-plugin-info/client",
       "vite-plugin-pages/client"
     ],

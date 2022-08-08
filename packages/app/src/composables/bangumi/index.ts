@@ -4,8 +4,7 @@ import axios from 'axios';
 import { defineStore } from 'pinia';
 import { differenceInDays, differenceInHours } from 'date-fns';
 
-// @ts-ignore
-import { bangumiItems } from '~bangumi/data';
+import { bangumis } from '~bangumi/data';
 
 import type { OverviewSubject, Subject } from './types';
 
@@ -37,7 +36,7 @@ export const useBangumi = defineStore('bangumi', () => {
     new Date(0)
   );
 
-  const data = ref<Item[]>(bangumiItems);
+  const data = ref(bangumis);
   const bgmIdMap = computed(() => {
     const map = new Map<string, Item>();
     for (const bgm of data.value) {
