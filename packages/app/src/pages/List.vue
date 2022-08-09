@@ -5,6 +5,11 @@ import type { SubjectBangumi } from '~/composables/types';
 
 import IndexGrid from './components/IndexGrid.vue';
 
+onMounted(async () => {
+  const ScrollReveal = (await import('scrollreveal')).default;
+  ScrollReveal().reveal('.anime-card');
+});
+
 const bangumi = useBangumi();
 
 const pageSize = 20;

@@ -35,6 +35,11 @@ watch(scrollY, () => {
   }
 });
 
+onMounted(async () => {
+  const ScrollReveal = (await import('scrollreveal')).default;
+  ScrollReveal().reveal('.anime-card');
+});
+
 const client = useClient();
 const bangumi = useBangumi();
 
@@ -74,6 +79,10 @@ const filterBgm = (bgm: Bangumi) => {
   if (hiddenBgm.has(bgm.bgmId)) return false;
   return bangumi.bgmMap.has(bgm.bgmId) && bgm.titleCN !== '';
 };
+
+const calendar = computed(() =>
+  bangumi.calendar.map((c) => c.filter(filterBgm).sort(sortBgm))
+);
 </script>
 
 <route>
@@ -122,13 +131,7 @@ const filterBgm = (bgm: Bangumi) => {
               weekDayLocale[(13 - offset) % 7]
             }}</span>
           </h3>
-          <IndexGrid
-            :bangumis="
-              bangumi.calendar[(13 - offset) % 7]
-                .filter(filterBgm)
-                .sort(sortBgm)
-            "
-          />
+          <IndexGrid :bangumis="calendar[(13 - offset) % 7]" />
         </div>
       </div>
 

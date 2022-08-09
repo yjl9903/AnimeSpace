@@ -19,11 +19,6 @@ const getOnairMaxEps = (bgm: SubjectBangumi) => {
       : 0;
   }
 };
-
-onMounted(async () => {
-  const ScrollReveal = (await import('scrollreveal')).default;
-  ScrollReveal().reveal('.anime-card');
-});
 </script>
 
 <template>

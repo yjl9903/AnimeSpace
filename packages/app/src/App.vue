@@ -16,7 +16,11 @@ useHead({
   <NavBar></NavBar>
   <Banner v-if="!isLogin"></Banner>
   <div id="root-container" :class="isLogin || `pt8 px24 lt-md:px8`">
-    <RouterView></RouterView>
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
   </div>
   <Footer :class="isLogin && ['fixed', 'bottom-0', 'w-full']"></Footer>
 </template>
