@@ -18,7 +18,10 @@ useHead({
   <div id="root-container" :class="isLogin || `pt8 px24 lt-md:px8`">
     <router-view v-slot="{ Component }">
       <keep-alive>
-        <component :is="Component" />
+        <component
+          :is="Component"
+          :key="route.meta.usePathKey ? route.path : undefined"
+        />
       </keep-alive>
     </router-view>
   </div>

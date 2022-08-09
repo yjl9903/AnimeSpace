@@ -17,22 +17,10 @@ export function useAnimeInfo() {
 
   const bangumi = useBangumi();
 
-  const bgmData = computed(() => {
-    if (id.value) {
-      const data = bangumi.bgmMap.get(id.value);
-      if (data) {
-        return data;
-      } else {
-        router.replace({ name: 'Index' });
-        return undefined;
-      }
-    } else {
-      return undefined;
+  const bgm = bangumi.useBgm(id.value, {
+    error() {
+      router.replace({ name: 'Index' });
     }
-  });
-
-  const subject = computedAsync(async () => {
-    return id.value ? await bangumi.subject(id.value) : undefined;
   });
 
   const client = useClient();
@@ -43,19 +31,12 @@ export function useAnimeInfo() {
     }
   });
 
-  const title = ref(
-    bgmData.value ? bgmData.value.titleCN ?? bgmData.value.title : ''
-  );
-  watch(subject, (subject) => {
-    if (subject && subject.titleCN) {
-      title.value = subject.titleCN;
-    }
-  });
+  const title = computed(() => bgm.value?.titleCN ?? bgm.value?.title ?? '');
 
   useHead({
     title: computed(() => {
-      if (bgmData.value) {
-        return bgmData.value ? `${title.value} - Anime Paste` : 'Anime Paste';
+      if (title.value) {
+        return title.value ? `${title.value} - Anime Paste` : 'Anime Paste';
       } else {
         return 'Anime Paste';
       }
@@ -65,9 +46,8 @@ export function useAnimeInfo() {
   return {
     id,
     ep,
+    bgm,
     title,
-    bgmData,
-    subject,
     onair
   };
 }

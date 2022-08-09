@@ -7,7 +7,7 @@ import { useAnimeInfo } from '../context';
 
 const router = useRouter();
 
-const { subject, onair, id, ep } = useAnimeInfo();
+const { bgm, onair, id, ep, title } = useAnimeInfo();
 
 const src = computed(() => {
   if (onair.value && ep.value) {
@@ -54,13 +54,22 @@ onBeforeRouteLeave(async () => {
 });
 </script>
 
+<route>
+{
+  name: "AnimePlayEP",
+  meta: {
+    usePathKey: true
+  }
+}
+</route>
+
 <template>
-  <div v-if="subject">
+  <div v-if="bgm">
     <h2 id="play-ep-title" font-bold text-3xl mb4 pb4 border="b-1 base">
       <router-link
         :to="`/anime/${id}`"
         class="text-$light-1 hover:text-$c-brand"
-        >{{ subject.titleCN }}</router-link
+        >{{ title }}</router-link
       >
       <Playing ml1></Playing>
     </h2>
@@ -70,7 +79,7 @@ onBeforeRouteLeave(async () => {
           v-if="src"
           :options="{}"
           :source="{
-            title: `${subject.titleCN} - E${ep}`,
+            title: `${title} - E${ep}`,
             type: 'video',
             sources: [{ src: src, type: 'video/mp4', size: 1080 }]
           }"

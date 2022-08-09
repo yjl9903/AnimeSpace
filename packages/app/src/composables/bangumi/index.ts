@@ -147,7 +147,7 @@ export const useBangumi = defineStore('bangumi', () => {
     bgmMap,
     subjectMap,
     subject,
-    useBgm(bgmId: string | number) {
+    useBgm(bgmId: string | number, option: { error?: () => void } = {}) {
       bgmId = String(bgmId);
       const sub = getSubjectCache(bgmId);
       const bgm = ref(sub ?? bgmMap.value.get(bgmId));
@@ -155,6 +155,8 @@ export const useBangumi = defineStore('bangumi', () => {
         subject(bgmId).then((newBgm) => {
           if (newBgm) {
             bgm.value = newBgm;
+          } else if (!bgm.value) {
+            option.error?.();
           }
         });
       }

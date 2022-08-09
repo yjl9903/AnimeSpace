@@ -9,5 +9,10 @@ declare module '*.vue' {
 declare module 'vue-router' {
   interface RouteMeta {
     title?: string;
+
+    /**
+     * Used to identify dynamic route components
+     */
+    usePathKey?: boolean;
   }
 }
