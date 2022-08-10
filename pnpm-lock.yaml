@@ -216,17 +216,17 @@ importers:
 
   packages/database:
     specifiers:
-      '@prisma/client': ^4.2.0
+      '@prisma/client': ^4.2.1
       axios: ^0.27.2
       cnchar: ^3.2.2
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.1
       debug: ^4.3.4
       node-html-parser: ^5.4.1
-      prisma: ^4.2.0
+      prisma: ^4.2.1
       unbuild: ^0.7.6
     dependencies:
-      '@prisma/client': 4.2.0_prisma@4.2.0
+      '@prisma/client': 4.2.1_prisma@4.2.1
       axios: 0.27.2_debug@4.3.4
       cnchar: 3.2.2
       cnchar-trad: 3.2.2
@@ -234,7 +234,7 @@ importers:
       debug: 4.3.4
       node-html-parser: 5.4.1
     devDependencies:
-      prisma: 4.2.0
+      prisma: 4.2.1
       unbuild: 0.7.6
 
 packages:
@@ -1850,8 +1850,8 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@prisma/client/4.2.0_prisma@4.2.0:
-    resolution: {integrity: sha512-Q/X8fi1UBufCrkdLk188sC/roiGxEm1V3qU4uEP5SyleO5n2A+FyC62S7+4I0hu57CU3c7Ls3YjqPiZyTHVGOw==}
+  /@prisma/client/4.2.1_prisma@4.2.1:
+    resolution: {integrity: sha512-PZBkY60+k5oix+e6IUfl3ub8TbRLNsPLdfWrdy2eh80WcHTaT+/UfvXf/B7gXedH7FRtbPFHZXk1hZenJiJZFQ==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
@@ -1861,15 +1861,15 @@ packages:
         optional: true
     dependencies:
       '@prisma/engines-version': 4.2.0-33.2920a97877e12e055c1333079b8d19cee7f33826
-      prisma: 4.2.0
+      prisma: 4.2.1
     dev: false
 
   /@prisma/engines-version/4.2.0-33.2920a97877e12e055c1333079b8d19cee7f33826:
     resolution: {integrity: sha512-tktkqdiwqE4QhmE088boPt+FwPj1Jub/zk+5F6sEfcRHzO5yz9jyMD5HFVtiwxZPLx/8Xg9ElnuTi8E5lWVQFQ==}
     dev: false
 
-  /@prisma/engines/4.2.0:
-    resolution: {integrity: sha512-tefRwCVDwLqk0WrBLErYR26uKKxzLSlKvRyADFiQn/fizJhqk9nxMXH8F6SE4w6r/szUQTzIJ4vheJKQ4dYKpw==}
+  /@prisma/engines/4.2.1:
+    resolution: {integrity: sha512-0KqBwREUOjBiHwITsQzw2DWfLHjntvbqzGRawj4sBMnIiL5CXwyDUKeHOwXzKMtNr1rEjxEsypM14g0CzLRK3g==}
     requiresBuild: true
 
   /@rollup/plugin-alias/3.1.9_rollup@2.77.0:
@@ -6253,13 +6253,13 @@ packages:
     engines: {node: ^14.13.1 || >=16.0.0}
     dev: true
 
-  /prisma/4.2.0:
-    resolution: {integrity: sha512-EswC2+mFi2oKQ/IDVkokDxwAsuiuYH4gKGkNNMAQ+86f3qwOo4tiVubCRxrQp5d61F+Yf+30f8Sv0zwWMnj0XQ==}
+  /prisma/4.2.1:
+    resolution: {integrity: sha512-HuYqnTDgH8atjPGtYmY0Ql9XrrJnfW7daG1PtAJRW0E6gJxc50lY3vrIDn0yjMR3TvRlypjTcspQX8DT+xD4Sg==}
     engines: {node: '>=14.17'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 4.2.0
+      '@prisma/engines': 4.2.1
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
