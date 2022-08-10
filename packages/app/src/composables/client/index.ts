@@ -68,7 +68,8 @@ export const useHistory = defineStore('history', () => {
   const history = ref(useLocalStorage('history:log', [] as HistoryLog[]));
   {
     const newHistory = history.value.filter(
-      (log) => !clientStore.onair.find((o) => o.bgmId === log.bgmId)
+      (log) =>
+        !!log.bgmId && !!clientStore.onair.find((o) => o.bgmId === log.bgmId)
     );
     if (newHistory.length !== history.value.length) {
       history.value = newHistory;
