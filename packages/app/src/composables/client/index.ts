@@ -70,6 +70,11 @@ export const useHistory = defineStore('history', () => {
 
   const appendLog = (log: HistoryLog) => {
     const { bgmId, ep, progress, timestamp } = log;
+
+    if (!bgmId || !clientStore.onair.find((o) => o.bgmId === bgmId)) {
+      return false;
+    }
+
     const map = historyMap.value;
     if (!map.has(bgmId)) {
       map.set(bgmId, new Map());
@@ -99,8 +104,7 @@ export const useHistory = defineStore('history', () => {
       progress,
       timestamp: new Date().toISOString()
     };
-    const flag = appendLog(log);
-    if (flag) {
+    if (appendLog(log)) {
       history.value.push(log);
     }
   };
