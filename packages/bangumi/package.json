@@ -67,7 +67,7 @@
     "*.d.ts"
   ],
   "scripts": {
-    "before:release": "pnpm build",
+    "before:npm": "pnpm build",
     "build": "unbuild && pnpm build:data",
     "build:data": "optc scripts/build.ts",
     "dev": "unbuild --stub",
