@@ -34,7 +34,7 @@ describe('Magnet Store', () => {
     const title1 = list.find((m) => m.type === '動畫')!.title;
     const title2 = list.reverse().find((m) => m.type === '動畫')!.title;
     expect((await database.search(title1)).length).toBeGreaterThanOrEqual(1);
-    expect((await database.search(title2)).length).toBeGreaterThanOrEqual(2);
+    expect((await database.search(title2)).length).toBeGreaterThanOrEqual(1);
     expect(
       (await database.search([title1, title2])).length
     ).toBeGreaterThanOrEqual(2);
