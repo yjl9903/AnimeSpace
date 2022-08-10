@@ -63,7 +63,7 @@
     "kolorist": "^1.5.1",
     "lbear": "^0.1.2",
     "mediainfo.js": "^0.1.8",
-    "node-html-parser": "^5.3.3",
+    "node-html-parser": "^5.4.1",
     "prompts": "^2.4.2",
     "webtorrent": "^1.8.26"
   },

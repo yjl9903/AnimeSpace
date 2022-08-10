@@ -179,7 +179,7 @@ importers:
       kolorist: ^1.5.1
       lbear: ^0.1.2
       mediainfo.js: ^0.1.8
-      node-html-parser: ^5.3.3
+      node-html-parser: ^5.4.1
       optc: ^0.3.6
       prompts: ^2.4.2
       unbuild: ^0.7.6
@@ -201,7 +201,7 @@ importers:
       kolorist: 1.5.1
       lbear: 0.1.2
       mediainfo.js: 0.1.8
-      node-html-parser: 5.3.3
+      node-html-parser: 5.4.1
       prompts: 2.4.2
       webtorrent: 1.8.26
     devDependencies:
@@ -224,7 +224,7 @@ importers:
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.1
       debug: ^4.3.4
-      node-html-parser: ^5.3.3
+      node-html-parser: ^5.4.1
       prisma: ^4.1.1
       unbuild: ^0.7.6
     dependencies:
@@ -234,7 +234,7 @@ importers:
       cnchar-trad: 3.2.2
       date-fns: 2.29.1
       debug: 4.3.4
-      node-html-parser: 5.3.3
+      node-html-parser: 5.4.1
     devDependencies:
       prisma: 4.1.1
       unbuild: 0.7.6
@@ -5824,8 +5824,8 @@ packages:
     hasBin: true
     dev: false
 
-  /node-html-parser/5.3.3:
-    resolution: {integrity: sha512-ncg1033CaX9UexbyA7e1N0aAoAYRDiV8jkTvzEnfd1GDvzFdrsXLzR4p4ik8mwLgnaKP/jyUFWDy9q3jvRT2Jw==}
+  /node-html-parser/5.4.1:
+    resolution: {integrity: sha512-xy/O2wOEBJsIRLs4avwa1lVY7tIpXXOoHHUJLa0GvnoPPqMG1hgBVl1tNI3GHOwRktTVZy+Y6rjghk4B9/NLyg==}
     dependencies:
       css-select: 4.3.0
       he: 1.2.0
