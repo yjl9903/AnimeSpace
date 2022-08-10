@@ -1,6 +1,6 @@
 {
   "name": "@animepaste/bangumi",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Bangumi List",
   "keywords": [
     "anime",
@@ -70,7 +70,7 @@
     "build": "unbuild && pnpm build:data",
     "build:data": "optc scripts/build.ts",
     "dev": "unbuild --stub",
-    "release": "release-it",
+    "release": "release-it && pnpm --access public publish",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "preversion": "pnpm build"
@@ -106,6 +106,9 @@
     "git": {
       "commitMessage": "chore(bangumi): release v${version}",
       "tag": false
+    },
+    "npm": {
+      "publish": false
     }
   }
 }
