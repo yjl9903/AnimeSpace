@@ -14,6 +14,7 @@ dist-ssr
 *.local
 .vite-ssg-temp
 .mf
+wrangler-local-state
 
 # Editor directories and files
 .vscode/*
