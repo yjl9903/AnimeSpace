@@ -66,6 +66,14 @@ export const useHistory = defineStore('history', () => {
   const clientStore = useClient();
 
   const history = ref(useLocalStorage('history:log', [] as HistoryLog[]));
+  {
+    const newHistory = history.value.filter(
+      (log) => !clientStore.onair.find((o) => o.bgmId === log.bgmId)
+    );
+    if (newHistory.length !== history.value.length) {
+      history.value = newHistory;
+    }
+  }
   const historyMap = ref(new Map<string, Map<number, HistoryLog>>());
 
   const appendLog = (log: HistoryLog) => {
