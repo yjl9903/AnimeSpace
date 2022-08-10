@@ -70,6 +70,7 @@
     "build": "unbuild && pnpm build:data",
     "build:data": "optc scripts/build.ts",
     "dev": "unbuild --stub",
+    "release": "release-it",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "preversion": "pnpm build"
@@ -88,7 +89,7 @@
   },
   "peerDependencies": {
     "bangumi-data": "^0.3.97",
-    "vite": "^3.0.4"
+    "vite": "^2.9.14 || ^3.0.4"
   },
   "peerDependenciesMeta": {
     "bangumi-data": {
@@ -100,5 +101,11 @@
   },
   "engines": {
     "node": ">=v16.16.0"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore(bangumi): release v${version}",
+      "tag": false
+    }
   }
 }
