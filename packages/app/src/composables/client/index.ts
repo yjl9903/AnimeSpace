@@ -69,7 +69,9 @@ export const useHistory = defineStore('history', () => {
   {
     const newHistory = history.value.filter(
       (log) =>
-        !!log.bgmId && !!clientStore.onair.find((o) => o.bgmId === log.bgmId)
+        !!log.bgmId &&
+        typeof log.ep === 'number' &&
+        !!clientStore.onair.find((o) => o.bgmId === log.bgmId)
     );
     if (newHistory.length !== history.value.length) {
       history.value = newHistory;
@@ -80,7 +82,11 @@ export const useHistory = defineStore('history', () => {
   const appendLog = (log: HistoryLog) => {
     const { bgmId, ep, progress, timestamp } = log;
 
-    if (!bgmId || !clientStore.onair.find((o) => o.bgmId === bgmId)) {
+    if (
+      !bgmId ||
+      typeof ep !== 'number' ||
+      !clientStore.onair.find((o) => o.bgmId === bgmId)
+    ) {
       return false;
     }
 
