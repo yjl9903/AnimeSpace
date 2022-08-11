@@ -73,7 +73,7 @@ const shouldeFilterInfo = new Set([
           <div
             flex="~ gap2"
             lg="mt4 mb8"
-            lt-lg="mb4 text-xs"
+            lt-lg="mb4 text-xs flex-gap1"
             text-sm
             font-light
           >
