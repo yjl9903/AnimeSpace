@@ -105,9 +105,7 @@ const formatProgress = (time: number) => {
               ml2
             >
               <router-link :to="`/anime/${log.bgmId}/play/${log.ep}`">
-                <span v-if="bangumi.bgmMap.has(log.bgmId)"
-                  >{{ bangumi.bgmMap.get(log.bgmId)!.titleCN }}
-                </span>
+                <span>{{ bangumi.useBgm(log.bgmId).value?.titleCN }} </span>
               </router-link>
               <div flex-auto></div>
               <span p1 text-2 min-w="48px">
