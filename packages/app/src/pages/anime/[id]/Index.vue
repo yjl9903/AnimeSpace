@@ -70,7 +70,13 @@ const shouldeFilterInfo = new Set([
         />
         <div flex-auto max-w="16px"></div>
         <div>
-          <div flex="~ gap2" lg="mt4 mb8" lt-lg="mb4" text-sm font-light>
+          <div
+            flex="~ gap2"
+            lg="mt4 mb8"
+            lt-lg="mb4 text-xs"
+            text-sm
+            font-light
+          >
             <span
               >{{ format(new Date(bgm.begin), 'yyyy 年 M 月 d 日开播') }}
             </span>
