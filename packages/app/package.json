@@ -30,7 +30,7 @@
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.0",
     "@types/scrollreveal": "^0.0.8",
-    "@unocss/reset": "^0.45.5",
+    "@unocss/reset": "^0.45.6",
     "@vitejs/plugin-vue": "^3.0.1",
     "bangumi-data": "^0.3.97",
     "typescript": "^4.7.4",
