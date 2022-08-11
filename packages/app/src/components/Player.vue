@@ -32,11 +32,38 @@ const expandFullscreen = () => {
   }
 };
 
-watch(container, (container) => {
+const addFullscreenBtn = () => {
+  const isDesktop = window.outerWidth > 1280;
+  if (isDesktop) {
+    const fullscreen = document.querySelector(
+      '.plyr__controls [data-plyr="fullscreen"]'
+    );
+    if (fullscreen) {
+      const btn: HTMLElement =
+        document.querySelector('button.__fullscreen__') ??
+        document.createElement('button');
+      btn.setAttribute(
+        'class',
+        '__fullscreen__ plyr__controls__item plyr__control'
+      );
+      btn.setAttribute('type', 'button');
+      btn.addEventListener('click', () => {
+        expandFullscreen();
+      });
+      fullscreen.parentElement!.insertBefore(btn, fullscreen);
+      portTarget.value = btn;
+    } else {
+      console.warn('Register window fullscreen fail');
+    }
+  }
+};
+
+watch(container, (container, _container, _onCleanup) => {
   if (container) {
     const video = container.querySelector('video');
     if (video) {
       const isDesktop = window.outerWidth > 1280;
+
       const controls: string[] = [
         'play-large', // The large play button in the center
         'play', // Play/pause playback
@@ -87,23 +114,7 @@ watch(container, (container) => {
         }
       });
 
-      if (isDesktop) {
-        const fullscreen = document.querySelector(
-          '.plyr__controls [data-plyr="fullscreen"]'
-        );
-        if (fullscreen) {
-          const btn = document.createElement('button');
-          btn.setAttribute('class', 'plyr__controls__item plyr__control');
-          btn.setAttribute('type', 'button');
-          btn.addEventListener('click', () => {
-            expandFullscreen();
-          });
-          fullscreen.parentElement!.insertBefore(btn, fullscreen);
-          portTarget.value = btn;
-        } else {
-          console.warn('Register window fullscreen fail');
-        }
-      }
+      addFullscreenBtn();
     }
   }
 });
@@ -127,9 +138,18 @@ watch(source, (source) => {
   }
 });
 
+onActivated(() => {
+  if (container.value && player.value) {
+    addFullscreenBtn();
+  }
+});
+
 onUnmounted(() => {
   try {
-    if (player.value) player.value.destroy();
+    if (player.value) {
+      player.value.destroy();
+      player.value = null;
+    }
   } catch (err) {
     if (import.meta.env.DEV) {
       console.log(err);
@@ -151,7 +171,7 @@ onUnmounted(() => {
     <slot></slot>
   </div>
   <teleport v-if="portTarget" :to="portTarget">
-    <span i-carbon-fit-to-width font-bold style="scale: 1.5"></span>
+    <span i-carbon-fit-to-width font-bold style="scale: 1.1"></span>
   </teleport>
 </template>
 
