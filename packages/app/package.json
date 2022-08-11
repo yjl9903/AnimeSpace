@@ -45,7 +45,7 @@
     "vite-plugin-pwa": "^0.12.3",
     "vite-ssg": "^0.20.2",
     "vitest": "^0.21.1",
-    "vue-tsc": "^0.40.0"
+    "vue-tsc": "^0.40.1"
   },
   "engines": {
     "node": ">=v16.16.0"
