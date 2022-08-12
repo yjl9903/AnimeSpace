@@ -23,7 +23,6 @@ import { debug } from './constant';
 
 export class Daemon {
   private plan!: Plan;
-  private plans!: RawPlan[];
   private store!: Store;
   private client!: AdminClient;
 
@@ -65,8 +64,7 @@ export class Daemon {
   }
 
   private async refreshPlan() {
-    this.plans = await context.getPlans();
-    this.plan = new Plan(this.plans);
+    this.plan = await Plan.create();
     logger.empty();
     this.plan.printOnair();
   }
@@ -75,7 +73,7 @@ export class Daemon {
     logger.empty();
     await context.magnetStore.index({
       limit: subMonths(
-        new Date(Math.min(...this.plans.map((p) => p.date.getTime()))),
+        new Date(Math.min(...[...this.plan].map((p) => p.date.getTime()))),
         1
       ),
       earlyStop: !context.cliOption.force,
@@ -86,7 +84,7 @@ export class Daemon {
   private async refreshEpisode() {
     let count = 0;
 
-    for (const plan of this.plans) {
+    for (const plan of this.plan) {
       for (const onair of plan.onair) {
         // Skip finished plan
         if (plan.state === 'finish' && (await context.getAnime(onair.bgmId))) {
@@ -135,11 +133,13 @@ export class Daemon {
     this.store = await useStore('ali')();
     this.client = new AdminClient({
       ...(await context.getServerConfig()),
-      onairIds: new Set(this.plans.flatMap((p) => p.onair.map((o) => o.bgmId)))
+      onairIds: new Set(
+        [...this.plan].flatMap((p) => p.onair.map((o) => o.bgmId))
+      )
     });
     await this.client.fetchOnair();
 
-    for (const plan of this.plans) {
+    for (const plan of this.plan) {
       for (const onair of plan.onair) {
         // Sync online play bangumis
         if (onair.link && typeof onair.link === 'string') {

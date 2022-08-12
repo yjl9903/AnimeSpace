@@ -23,6 +23,10 @@ export class Plan {
     });
   }
 
+  [Symbol.iterator]() {
+    return this.plans.values();
+  }
+
   printOnair() {
     const titles: string[] = [];
     const bgms: string[] = [];
