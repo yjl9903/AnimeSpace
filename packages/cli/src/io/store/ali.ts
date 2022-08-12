@@ -89,7 +89,23 @@ export class AliStore extends Store {
       refreshSTSTokenInterval: 60 * 60 * 1000
     });
 
-    const progressbar = createProgressBar({});
+    const formatSize = (size: number) =>
+      (size / 1024 / 1024).toFixed(1) + ' MB';
+    const multibar = createProgressBar<{
+      value: number;
+      total: number;
+      speed?: number;
+    }>({
+      suffix(_value, _total, payload) {
+        const progress = `${formatSize(payload.value)} / ${formatSize(
+          payload.total
+        )}`;
+        const speed = payload.speed
+          ? ' | Speed: ' + formatSize(payload.speed) + '/s'
+          : '';
+        return progress + speed;
+      }
+    });
 
     const cancel = onDeath(async () => {
       option.retry = undefined;
@@ -99,14 +115,17 @@ export class AliStore extends Store {
     });
 
     try {
-      const bar = progressbar.create(path.basename(filepath), 1);
+      const bar = multibar.create(path.basename(filepath), 1);
 
       const ossRes = await store.multipartUpload(
         resp.UploadAddress.FileName,
         filepath,
         {
-          progress(p: number, _c: Checkpoint) {
-            bar.update(p);
+          progress(p: number, c: Checkpoint) {
+            bar.update(p, {
+              value: Number((c.fileSize * p).toFixed(0)),
+              total: c.fileSize
+            });
           }
         }
       );
@@ -128,7 +147,7 @@ export class AliStore extends Store {
       }
     } finally {
       cancel();
-      progressbar.finish();
+      multibar.finish();
     }
   }
 
@@ -222,8 +241,8 @@ export interface Checkpoint {
   fileSize: number;
   partSize: number;
   uploadId: string;
-  doneParts: {
+  doneParts: Array<{
     number: number;
     etag: string;
-  };
+  }>;
 }

@@ -52,15 +52,11 @@ export function createProgressBar<T extends object>(
           percentage: formatValue(percentage, _options, 'percentage'),
           total: params.total,
           value: params.value
-
           // eta: formatValue(params.eta, _options, 'eta'),
-          // eta_formatted: formatTime(params.eta, _options, 5),
-
           // duration: formatValue(elapsedTime, _options, 'duration'),
-          // duration_formatted: formatTime(elapsedTime, _options, 1)
         };
 
-        const suffix = option.suffix
+        const suffix: string = option.suffix
           ? ' | ' + option.suffix(params.value, params.total, payload)
           : '';
 

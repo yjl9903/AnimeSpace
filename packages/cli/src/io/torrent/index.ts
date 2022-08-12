@@ -33,9 +33,9 @@ export class TorrentClient {
       suffix(value, total, payload) {
         const progress = `${formatSize(value)} / ${formatSize(total)}`;
         const speed = payload.speed
-          ? 'Speed: ' + formatSize(payload.speed) + '/s'
+          ? ' | Speed: ' + formatSize(payload.speed) + '/s'
           : '';
-        return progress + ' | ' + speed;
+        return progress + speed;
       }
     });
 
