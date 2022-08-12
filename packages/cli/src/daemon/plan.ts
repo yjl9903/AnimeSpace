@@ -27,6 +27,10 @@ export class Plan {
     return this.plans.values();
   }
 
+  onairs() {
+    return [...this.plans].flatMap((p) => p.onair);
+  }
+
   printOnair() {
     const titles: string[] = [];
     const bgms: string[] = [];

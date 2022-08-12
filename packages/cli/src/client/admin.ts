@@ -3,6 +3,7 @@ import { debug as createDebug } from 'debug';
 
 import { proxy } from '@animepaste/database';
 
+import { Plan } from '../daemon';
 import { context } from '../context';
 
 import type { OnairAnime, UserOption } from './types';
@@ -41,6 +42,11 @@ export class AdminClient {
       option.onairIds = onairIds;
     }
     return new AdminClient(option);
+  }
+
+  static async init() {
+    const plan = await Plan.create();
+    return await AdminClient.create(new Set(plan.onairs().map((o) => o.bgmId)));
   }
 
   async fetchOnair() {

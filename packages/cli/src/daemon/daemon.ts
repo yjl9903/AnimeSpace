@@ -131,12 +131,9 @@ export class Daemon {
 
   private async refreshStore() {
     this.store = await useStore('ali')();
-    this.client = new AdminClient({
-      ...(await context.getServerConfig()),
-      onairIds: new Set(
-        [...this.plan].flatMap((p) => p.onair.map((o) => o.bgmId))
-      )
-    });
+    this.client = await AdminClient.create(
+      new Set(new Set(this.plan.onairs().map((o) => o.bgmId)))
+    );
     await this.client.fetchOnair();
 
     for (const plan of this.plan) {
