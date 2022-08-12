@@ -1,10 +1,21 @@
 import * as path from 'node:path';
 import { remove } from 'fs-extra';
 
-import { green, link, red } from 'kolorist';
+import prompts from 'prompts';
+import { format } from 'date-fns';
+import {
+  bold,
+  green,
+  lightRed,
+  link,
+  red,
+  lightGreen,
+  lightBlue
+} from 'kolorist';
+
+import type { VideoInfo } from '../io';
 
 import { context } from '../context';
-import { printVideoInfo } from '../io';
 import { DOT, logger, padRight } from '../logger';
 
 import { app } from './app';
@@ -44,7 +55,7 @@ app
   });
 
 app.command('store info <id>', 'Print video info on OSS').action(async (id) => {
-  const { useStore, printVideoInfo } = await import('../io');
+  const { useStore } = await import('../io');
   const store = await useStore('ali')();
 
   const info = await store.fetchVideoInfo(id);
@@ -59,7 +70,7 @@ app.command('store info <id>', 'Print video info on OSS').action(async (id) => {
 app
   .command('store put <file>', 'Upload video to OSS')
   .action(async (filename) => {
-    const { useStore, printVideoInfo } = await import('../io');
+    const { useStore } = await import('../io');
     const store = await useStore('ali')();
 
     try {
@@ -83,9 +94,7 @@ app
     const { useStore } = await import('../io');
     const store = await useStore('ali')();
 
-    for (const id of ids) {
-      const info = await store.fetchVideoInfo(id);
-
+    const removeVideo = async (id: string, info: VideoInfo | undefined) => {
       logger.empty();
       if (info) {
         printVideoInfo(info);
@@ -100,6 +109,58 @@ app
         await remove(filepath);
         logger.println(`${green(`✓ Delete    ${filepath}`)}`);
       }
+    };
+
+    if (ids.length > 0) {
+      for (const id of ids) {
+        const info = await store.fetchVideoInfo(id);
+        await removeVideo(id, info);
+      }
+    } else {
+      logger.println(lightBlue('  Init admin client'));
+
+      const { AdminClient } = await import('../client');
+      const client = await AdminClient.init();
+      const onairs = client.onair.flatMap((o) => o.episodes);
+      const videoIds = new Set<string>();
+      for (const onair of onairs) {
+        if ('storage' in onair) {
+          if (onair.storage.type === store.platform) {
+            videoIds.add(onair.storage.videoId);
+          }
+        }
+      }
+      const videos = (await store.listLocalVideos()).filter(
+        (v) => !videoIds.has(v.videoId)
+      );
+
+      if (videos.length > 0) {
+        logger.println(
+          lightRed(`✓ There are ${bold(videos.length)} videos to be removed`)
+        );
+        printVideoInfoList(videos);
+
+        const { yes } = await prompts(
+          {
+            type: 'confirm',
+            name: 'yes',
+            message: `Are you sure to remove these ${videos.length} videos`,
+            initial: true
+          },
+          {
+            onCancel: () => {
+              throw new Error('Operation cancelled');
+            }
+          }
+        );
+        if (yes) {
+          for (const video of videos) {
+            await removeVideo(video.videoId, video);
+          }
+        }
+      } else {
+        logger.println(lightGreen(`✓ There are no videos to be removed`));
+      }
     }
   });
 
@@ -108,3 +169,37 @@ app.command('video info <file>', 'Check video info').action(async (file) => {
   const info = await getVideoInfo(file);
   console.log(JSON.stringify(info, null, 2));
 });
+
+function printVideoInfoList(videos: VideoInfo[]) {
+  const titles: string[] = [];
+  const ids: string[] = [];
+  for (const info of videos) {
+    titles.push(`${info.title}`);
+    ids.push(`(${link(info.videoId, info.playUrl[0])})`);
+  }
+
+  const padded = padRight(titles);
+  for (let i = 0; i < padded.length; i++) {
+    logger.println(`${DOT} ${padded[i]}  ${ids[i]}`);
+  }
+}
+
+function printVideoInfo(videoInfo: VideoInfo) {
+  logger.println(`${bold('Platform')}    ${videoInfo.platform}`);
+  logger.println(`${bold('VideoId')}     ${videoInfo.videoId}`);
+  logger.println(`${bold('Title')}       ${videoInfo.title}`);
+  logger.println(
+    `${bold('Created at')}  ${format(
+      new Date(videoInfo.createdAt),
+      'yyyy-MM-dd HH:mm:ss'
+    )}`
+  );
+  if (videoInfo.playUrl.length === 1) {
+    logger.println(`${bold('Play URL')}    ${videoInfo.playUrl[0]}`);
+  } else {
+    logger.println(`${bold('Play URL')}`);
+    for (const url of videoInfo.playUrl) {
+      logger.tab.println(`${url}`);
+    }
+  }
+}

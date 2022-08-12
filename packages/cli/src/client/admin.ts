@@ -46,7 +46,11 @@ export class AdminClient {
 
   static async init() {
     const plan = await Plan.create();
-    return await AdminClient.create(new Set(plan.onairs().map((o) => o.bgmId)));
+    const client = await AdminClient.create(
+      new Set(plan.onairs().map((o) => o.bgmId))
+    );
+    await client.fetchOnair();
+    return client;
   }
 
   async fetchOnair() {
@@ -96,6 +100,11 @@ export class AdminClient {
       }
     }
     throw new Error('Fail syncing onair animes');
+  }
+
+  removeOnair(bgmId: string) {
+    this.onairIds?.delete(bgmId);
+    this.dirty = true;
   }
 
   updateOnair(onair: OnairAnime) {

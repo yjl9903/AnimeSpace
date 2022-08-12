@@ -9,7 +9,7 @@ import { hashFile } from '../utils';
 export type CreateStore = () => Promise<Store>;
 
 export abstract class Store {
-  private readonly platform: string;
+  readonly platform: string;
 
   constructor(platform: string) {
     this.platform = platform;
@@ -49,7 +49,9 @@ export abstract class Store {
   }
 
   async listLocalVideos() {
-    return await context.videoStore.list();
+    return (await context.videoStore.list()).filter(
+      (l) => l.platform === this.platform
+    );
   }
 
   async deleteVideo(videoId: string) {

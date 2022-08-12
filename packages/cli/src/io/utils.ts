@@ -2,12 +2,7 @@ import fs from 'fs-extra';
 import crypto from 'node:crypto';
 
 import { bold } from 'kolorist';
-import { format } from 'date-fns';
 import { Format, MultiBar, Presets, SingleBar } from 'cli-progress';
-
-import { logger } from '../logger';
-
-import type { VideoInfo } from './types';
 
 export function b64encode(text: string) {
   return Buffer.from(text, 'utf-8').toString('base64');
@@ -22,26 +17,6 @@ export async function hashFile(filepath: string): Promise<string> {
   const hashSum = crypto.createHash('sha256');
   hashSum.update(fileBuffer);
   return hashSum.digest('hex');
-}
-
-export function printVideoInfo(videoInfo: VideoInfo) {
-  logger.println(`${bold('Platform')}    ${videoInfo.platform}`);
-  logger.println(`${bold('VideoId')}     ${videoInfo.videoId}`);
-  logger.println(`${bold('Title')}       ${videoInfo.title}`);
-  logger.println(
-    `${bold('Created at')}  ${format(
-      new Date(videoInfo.createdAt),
-      'yyyy-MM-dd HH:mm:ss'
-    )}`
-  );
-  if (videoInfo.playUrl.length === 1) {
-    logger.println(`${bold('Play URL')}    ${videoInfo.playUrl[0]}`);
-  } else {
-    logger.println(`${bold('Play URL')}`);
-    for (const url of videoInfo.playUrl) {
-      logger.tab.println(`${url}`);
-    }
-  }
 }
 
 export function createSingleProgress() {
