@@ -1,4 +1,4 @@
-import { lightBlue, link } from 'kolorist';
+import { link } from 'kolorist';
 
 import type { RawPlan } from '../types';
 
@@ -45,7 +45,7 @@ export class Plan {
       if (context.isDaemon) {
         logger.info(`Onair ${title} ${bgmLink}`);
       } else {
-        logger.println(`${DOT} ${lightBlue('Onair')} ${title} ${bgmLink}`);
+        logger.println(`${DOT} ${title} ${bgmLink}`);
       }
     }
   }
