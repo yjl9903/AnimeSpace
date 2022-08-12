@@ -65,7 +65,8 @@ export class GlobalContex {
   private animeCache: Map<string, Anime> = new Map();
 
   constructor() {
-    this.root = path.join(homedir(), '.animepaste');
+    this.root =
+      process.env.ANIMEPASTE_ROOT ?? path.join(homedir(), '.animepaste');
     this._cacheRoot = path.join(this.root, 'cache');
     this._localRoot = path.join(this.root, 'anime');
 
