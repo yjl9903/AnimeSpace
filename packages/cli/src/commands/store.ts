@@ -23,35 +23,24 @@ import { app } from './app';
 app
   .command('store list [name]', 'List all uploaded video info')
   .alias('store ls')
-  .option('--one-line', 'Only show one line')
-  .action(async (name, option) => {
+  .action(async (name) => {
     const { useStore } = await import('../io');
     const store = await useStore('ali')();
 
     const videos = await store.listLocalVideos();
     videos.sort((a, b) => a.title.localeCompare(b.title));
 
-    const logs: string[] = [];
-    const ids: string[] = [];
-    for (const info of videos) {
-      if (!name || info.title.indexOf(name) !== -1) {
-        if (option['one-line']) {
-          logs.push(info.videoId);
-        } else {
-          logs.push(`${info.title}`);
-          ids.push(`(${link(info.videoId, info.playUrl[0])})`);
-        }
-      }
-    }
-
-    if (option['one-line']) {
-      logger.println(logs.join(' '));
-    } else {
-      const padded = padRight(logs);
-      for (let i = 0; i < padded.length; i++) {
-        logger.println(`${DOT} ${padded[i]}  ${ids[i]}`);
-      }
-    }
+    const filtered = videos.filter(
+      (v) => !name || v.title.indexOf(name) !== -1
+    );
+    logger.println(
+      lightGreen(
+        `There are ${bold(filtered.length)} videos uploaded at ${
+          store.platform
+        }`
+      )
+    );
+    printVideoInfoList(filtered);
   });
 
 app.command('store info <id>', 'Print video info on OSS').action(async (id) => {
