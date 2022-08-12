@@ -27,7 +27,7 @@ export interface GlobalConfig {
 const DefaultGlobalConfig: GlobalConfig = {
   plan: ['./plans/test.yaml'],
   server: {
-    baseURL: 'https://anime.xlorpaste.cn/api/',
+    baseURL: '',
     token: ''
   },
   store: {
@@ -231,7 +231,7 @@ export class GlobalContex {
   }
 
   formatOnlineURL(bgmId: string) {
-    return 
+    return;
   }
 
   encodePath(src: string) {

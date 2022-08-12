@@ -47,7 +47,7 @@ export class AdminClient {
     for (let retry = 0; retry < AdminClient.MAX_RETRY; retry++) {
       try {
         const { data } = await this.api.get(
-          '/admin/anime',
+          '/api/admin/anime',
           retry ? {} : { proxy: proxy() }
         );
         if (data.status !== 'Ok') throw new Error('Unknown error');
@@ -76,7 +76,7 @@ export class AdminClient {
     for (let retry = 0; retry < AdminClient.MAX_RETRY; retry++) {
       try {
         const { data } = await this.api.post(
-          '/admin/anime',
+          '/api/admin/anime',
           {
             onair
           },
@@ -117,7 +117,7 @@ export class AdminClient {
       const {
         data: { data }
       } = await this.api.post<Response<Required<TokenPayload>>>(
-        '/admin/token',
+        '/api/admin/token',
         {
           comment,
           type
@@ -136,7 +136,7 @@ export class AdminClient {
         data: { data }
       } = await this.api.get<
         Response<{ tokens: Required<TokenPayload & { access: Access[] }>[] }>
-      >('/admin/token');
+      >('/api/admin/token');
       return data.tokens;
     } catch (error) {
       debug(error);
@@ -146,7 +146,7 @@ export class AdminClient {
 
   async removeToken(token: string) {
     try {
-      await this.api.delete('/admin/token', {
+      await this.api.delete('/api/admin/token', {
         data: { command: 'delete', token }
       });
       return true;
@@ -161,7 +161,7 @@ export class AdminClient {
       const {
         data: { data }
       } = await this.api.delete<Response<{ tokens: string[] }>>(
-        '/admin/token',
+        '/api/admin/token',
         {
           data: { command: 'visitor' }
         }
