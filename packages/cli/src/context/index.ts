@@ -230,8 +230,8 @@ export class GlobalContex {
     return filepath;
   }
 
-  formatOnlineURL(bgmId: string) {
-    return;
+  formatOnlineURL(baseURL: string, bgmId: string) {
+    return `${baseURL}${baseURL.endsWith('/') ? '' : '/'}anime/${bgmId}`;
   }
 
   encodePath(src: string) {
