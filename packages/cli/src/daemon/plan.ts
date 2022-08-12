@@ -1,8 +1,10 @@
+import { lightBlue } from 'kolorist';
+
 import type { RawPlan } from '../types';
 
 import { context } from '../context';
 import { bangumiLink } from '../anime';
-import { logger, titleColor } from '../logger';
+import { DOT, logger, padRight, titleColor } from '../logger';
 
 export class Plan {
   private readonly plans: RawPlan[];
@@ -17,14 +19,20 @@ export class Plan {
   }
 
   printOnair() {
+    const titles: string[] = [];
+    const bgms: string[] = [];
     for (const plan of this.plans) {
       for (const onair of plan.onair) {
-        logger.info(
-          'Onair    ' +
-            titleColor(onair.title) +
-            '    ' +
-            `(${bangumiLink(onair.bgmId)})`
-        );
+        titles.push(titleColor(onair.title));
+        bgms.push(`(${bangumiLink(onair.bgmId)})`);
+      }
+    }
+    const padded = padRight(titles);
+    for (let i = 0; i < padded.length; i++) {
+      if (context.isDaemon) {
+        logger.info(`Onair ${padded[i]} ${bgms[i]}`);
+      } else {
+        logger.println(`${DOT} ${lightBlue('Onair')} ${padded[i]} ${bgms[i]}`);
       }
     }
   }

@@ -25,7 +25,9 @@ interface LoggerOption {
   tabwidth: number;
 }
 
-let enable = true;
+const GlobalConfig = {
+  enable: true
+};
 
 export const logger = factory({ prefix: '  ' });
 
@@ -35,22 +37,22 @@ function factory(option: Partial<LoggerOption> = {}) {
   const tab = ' '.repeat(tabwidth * 2);
 
   const println: Logger['println'] = (message, ...args) => {
-    if (enable) {
+    if (GlobalConfig.enable) {
       console.log(prefix + tab + message, ...args);
     }
   };
   const info: Logger['info'] = (message, ...args) => {
-    if (enable) {
+    if (GlobalConfig.enable) {
       console.log(prefix + lightBlue('Info') + ' ' + tab + message, ...args);
     }
   };
   const warn: Logger['warn'] = (message, ...args) => {
-    if (enable) {
+    if (GlobalConfig.enable) {
       console.log(prefix + lightYellow('Warn') + ' ' + tab + message, ...args);
     }
   };
   const error: Logger['error'] = (message, ...args) => {
-    if (enable) {
+    if (GlobalConfig.enable) {
       console.log(prefix + lightRed('Error') + ' ' + tab + message, ...args);
     }
   };
@@ -62,15 +64,15 @@ function factory(option: Partial<LoggerOption> = {}) {
       warn,
       error,
       empty() {
-        if (enable) {
+        if (GlobalConfig.enable) {
           console.log();
         }
       },
       enable() {
-        enable = true;
+        GlobalConfig.enable = true;
       },
       disable() {
-        enable = false;
+        GlobalConfig.enable = false;
       }
     } as Logger,
     {
@@ -121,7 +123,7 @@ export function printMagnets(magnets: Resource[], prefix = '  ') {
 }
 
 function calcLength(text: string) {
-  const RE = /[\u4e00-\u9fa5]/;
+  const RE = /[\u4e00-\u9fa5\uff00-\uffff]/;
   let sum = 0;
   for (const c of text) {
     sum += RE.test(c) ? 2 : 1;

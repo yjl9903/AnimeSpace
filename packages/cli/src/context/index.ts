@@ -48,6 +48,7 @@ export class GlobalContex {
   static AnimeDdName = 'anime.json';
 
   cliOption!: CliOption;
+  isDaemon: boolean = false;
 
   readonly root: string;
   readonly anime: string;
@@ -227,6 +228,10 @@ export class GlobalContex {
     const filepath = path.join(this.cacheRoot, path.basename(src));
     await fs.copy(src, filepath);
     return filepath;
+  }
+
+  formatOnlineURL(bgmId: string) {
+    return 
   }
 
   encodePath(src: string) {

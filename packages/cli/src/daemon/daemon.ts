@@ -36,6 +36,7 @@ export class Daemon {
 
   constructor(option: { update: boolean }) {
     this.enable = !option.update;
+    context.isDaemon = true;
   }
 
   async init() {
@@ -66,6 +67,7 @@ export class Daemon {
   private async refreshPlan() {
     this.plans = await context.getPlans();
     this.plan = new Plan(this.plans);
+    logger.empty();
     this.plan.printOnair();
   }
 
