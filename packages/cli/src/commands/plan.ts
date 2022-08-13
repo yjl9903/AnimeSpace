@@ -32,7 +32,7 @@ app.command('plan onair', 'Preview onair plan').action(async () => {
 });
 
 app
-  .command('plan download <name>', 'Sync the OSS videos to local filesystem')
+  .command('plan download <name>', 'Download remote videos from OSS')
   .alias('plan down')
   .option('--id', 'Use bgmId instead of name')
   .action(async (name, option) => {
