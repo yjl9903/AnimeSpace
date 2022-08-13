@@ -13,7 +13,7 @@ Paste your favourite anime online.
 
 + :gear: **Automatically**
 + :cloud: **Serverless**
-+ :lock: **Secure**
++ :house: **Offline application**
 
 ## Installation and Deploy
 
@@ -22,6 +22,12 @@ Paste your favourite anime online.
 > Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
 
 See [指南 | Anime Paste](https://anime.docs.xlorpaste.cn/guide/).
+
+## Credits
+
++ [動漫花園](https://share.dmhy.org/) and all the fansubs
++ [Bangumi 番组计划](https://bangumi.tv/) provides a platform for sharing anything about ACG
++ [Bangumi Data](https://github.com/bangumi-data/bangumi-data) collects the infomation of animes
 
 ## License
 
