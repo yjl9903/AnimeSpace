@@ -1,9 +1,15 @@
+import * as path from 'node:path';
+
+import { dim, link } from 'kolorist';
+
 import type { AnimeType } from '../types';
 
 import { context } from '../context';
-import { IndexListener } from '../logger';
+import { formatEpisodeName, formatEP, filterDef } from '../utils';
+import { logger, IndexListener, okColor, titleColor } from '../logger';
 
 import { app } from './app';
+import { promptConfirm } from './utils';
 
 app
   .command('watch', 'Watch anime resources update')
@@ -19,17 +25,97 @@ app
     await startDaemon(option);
   });
 
+app.command('plan onair', 'Preview onair plan').action(async () => {
+  const { Plan } = await import('../daemon');
+  const plan = await Plan.create();
+  plan.printOnair();
+});
+
 app
-  .command('plan', 'Preview onair plan')
-  .option('--type [type]', 'One of local or server')
-  .action(async (option) => {
+  .command('plan download <name>', 'Sync the OSS videos to local filesystem')
+  .alias('plan down')
+  .option('--id', 'Use bgmId instead of name')
+  .action(async (name, option) => {
+    const { download } = await import('../io');
     const { Plan } = await import('../daemon');
-    const plan = await Plan.create();
-    const type = option.type ?? 'local';
-    if (type === 'local') {
-      plan.printOnair();
-    } else if (type === 'server') {
-      plan.printOnair();
+    const { bangumiLink } = await import('../anime');
+    const { AdminClient } = await import('../client');
+
+    if (/^\d+$/.test(name)) {
+      option.id = true;
+    }
+
+    const client = await AdminClient.init();
+    const plans = await Plan.create();
+
+    const findFn = (o: { bgmId: string; title: string }) => {
+      if (option.id) {
+        return o.bgmId === name;
+      } else {
+        return o.title.indexOf(name) !== -1;
+      }
+    };
+    const plan = plans.onairs().find(findFn);
+    const onair = client.onair.find(findFn);
+
+    if (onair && plan) {
+      const anime = await context.getAnime(plan.bgmId);
+
+      if (anime) {
+        const localRoot = await context.makeLocalAnimeRoot(onair.title);
+        const tasks = filterDef(
+          onair.episodes.map((onairEp) => {
+            if ('storage' in onairEp) {
+              const ep = anime.episodes.find(
+                (ep) => ep.magnetId === onairEp.storage.source.magnetId
+              );
+              if (ep) {
+                return {
+                  filepath: path.join(
+                    localRoot,
+                    formatEpisodeName(plan?.format, anime, ep)
+                  ),
+                  url: onairEp.playURL,
+                  ep
+                };
+              } else {
+                // Local episodes not found
+                return undefined;
+              }
+            } else {
+              // Online Episodes
+              return undefined;
+            }
+          })
+        );
+
+        logger.println(
+          `${okColor('Download')} ${titleColor(anime.title)}    (${bangumiLink(
+            anime.bgmId
+          )})`
+        );
+        for (const task of tasks) {
+          logger.println(
+            `  ${dim(formatEP(task.ep.ep))} ${link(
+              path.basename(task.filepath),
+              task.url
+            )}`
+          );
+        }
+
+        if (
+          await promptConfirm(
+            `Are you sure to download these ${tasks.length} videos`
+          )
+        ) {
+          await download(...tasks);
+          logger.println(
+            `${okColor('Download')} ${titleColor(anime.title)} ${okColor(
+              'OK'
+            )} (${bangumiLink(anime.bgmId)})`
+          );
+        }
+      }
     }
   });
 

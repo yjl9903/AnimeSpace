@@ -1,7 +1,6 @@
 import * as path from 'node:path';
 import { remove } from 'fs-extra';
 
-import prompts from 'prompts';
 import { format } from 'date-fns';
 import {
   bold,
@@ -19,6 +18,7 @@ import { context } from '../context';
 import { DOT, logger, padRight } from '../logger';
 
 import { app } from './app';
+import { promptConfirm } from './utils';
 
 app
   .command('store list [name]', 'List all uploaded video info')
@@ -129,20 +129,11 @@ app
         );
         printVideoInfoList(videos);
 
-        const { yes } = await prompts(
-          {
-            type: 'confirm',
-            name: 'yes',
-            message: `Are you sure to remove these ${videos.length} videos`,
-            initial: true
-          },
-          {
-            onCancel: () => {
-              throw new Error('Operation cancelled');
-            }
-          }
-        );
-        if (yes) {
+        if (
+          await promptConfirm(
+            `Are you sure to remove these ${videos.length} videos`
+          )
+        ) {
           for (const video of videos) {
             await removeVideo(video.videoId, video);
           }

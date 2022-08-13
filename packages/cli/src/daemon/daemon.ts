@@ -3,10 +3,11 @@ import { bold, dim, link } from 'kolorist';
 import { format, subMonths } from 'date-fns';
 
 import type { Store, VideoInfo } from '../io';
-import type { RawPlan, OnairPlan, EpisodeList } from '../types';
+import type { OnairPlan, EpisodeList } from '../types';
 
 import { context } from '../context';
-import { formatEP } from '../utils';
+import { MAX_RETRY } from '../constant';
+import { formatEP, formatEpisodeName } from '../utils';
 import {
   logger,
   IndexListener,
@@ -328,7 +329,7 @@ export class Daemon {
           const { filename, magnetId } = magnet;
           const resp = await this.store.upload(path.join(localRoot, filename), {
             magnetId,
-            retry: 3
+            retry: MAX_RETRY
           });
           if (resp && resp.playUrl.length > 0) {
             // Fix missing magnetId
@@ -418,18 +419,6 @@ export class Daemon {
       logger.error(`Fail connecting server (baseURL or token may be wrong)`);
     }
   }
-}
-
-function formatEpisodeName(
-  format: string | undefined,
-  anime: Anime,
-  ep: Episode
-) {
-  if (!format) format = '[{fansub}] {title} - {ep}.mp4';
-  return format
-    .replace('{fansub}', ep.fansub)
-    .replace('{title}', anime.title)
-    .replace('{ep}', formatEP(ep.ep, '0'));
 }
 
 function resolveEP(eps: EpisodeList) {

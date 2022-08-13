@@ -5,13 +5,14 @@ import { proxy } from '@animepaste/database';
 
 import { Plan } from '../daemon';
 import { context } from '../context';
+import { MAX_RETRY } from '../constant';
 
 import type { OnairAnime, UserOption } from './types';
 
 const debug = createDebug('anime:client');
 
 export class AdminClient {
-  private static MAX_RETRY = 5;
+  private static MAX_RETRY = MAX_RETRY;
 
   private readonly token: string;
   private readonly api: AxiosInstance;

@@ -34,7 +34,7 @@ export interface ProgressBarOption<T> {
 }
 
 export function createProgressBar<T extends object>(
-  option: ProgressBarOption<T>
+  option: ProgressBarOption<T> = {}
 ) {
   const multibar = new MultiBar(
     {

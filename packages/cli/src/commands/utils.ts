@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { existsSync, readFileSync } from 'fs-extra';
 
+import prompts from 'prompts';
 import createDebug from 'debug';
 
 export const debug = createDebug('anime:cli');
@@ -14,4 +15,21 @@ export function getVersion(): string {
       readFileSync(path.join(__dirname, '../../package.json'), 'utf-8')
     ).version;
   }
+}
+
+export async function promptConfirm(message: string, initial: boolean = true) {
+  const { yes } = await prompts(
+    {
+      type: 'confirm',
+      name: 'yes',
+      message,
+      initial
+    },
+    {
+      onCancel: () => {
+        throw new Error('Operation cancelled');
+      }
+    }
+  );
+  return yes;
 }
