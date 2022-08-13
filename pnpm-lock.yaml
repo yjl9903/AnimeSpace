@@ -63,7 +63,7 @@ importers:
     specifiers:
       '@animepaste/bangumi': workspace:*
       '@iconify-json/carbon': ^1.1.7
-      '@iconify-json/ic': ^1.1.8
+      '@iconify-json/ic': ^1.1.9
       '@iconify-json/mdi': ^1.1.30
       '@types/node': ^18.6.5
       '@types/nprogress': ^0.2.0
@@ -109,7 +109,7 @@ importers:
       vue-scrollto: 2.20.0
     devDependencies:
       '@iconify-json/carbon': 1.1.7
-      '@iconify-json/ic': 1.1.8
+      '@iconify-json/ic': 1.1.9
       '@iconify-json/mdi': 1.1.30
       '@types/node': 18.6.5
       '@types/nprogress': 0.2.0
@@ -1598,8 +1598,8 @@ packages:
       '@iconify/types': 1.1.0
     dev: true
 
-  /@iconify-json/ic/1.1.8:
-    resolution: {integrity: sha512-z7wF/a4wldA+6LVShp8rDCTd3zK/IovKCIdHuiTe5xgxzi9GdnexmZCZbMFol5JqgE1cFDveygTE9wtpfGq3tw==}
+  /@iconify-json/ic/1.1.9:
+    resolution: {integrity: sha512-yRHx4AnNNf5kpWVnNMaeXGYnLmaR2tkGsjSc//FaI7LhljUaDkiawUvmnYbjh6M61O78EeEoNk8HgYJVqb+y8A==}
     dependencies:
       '@iconify/types': 1.1.0
     dev: true
