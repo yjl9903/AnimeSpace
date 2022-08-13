@@ -21,7 +21,7 @@ Paste your favourite anime online.
 >
 > Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
 
-See [指南 | Anime Paste](https://anime.docs.xlorpaste.cn/guide/).
+See [部署 | Anime Paste](https://anime.docs.xlorpaste.cn/deploy/) and [安装 CLI | Anime Paste](https://anime.docs.xlorpaste.cn/admin/).
 
 ## Credits
 
