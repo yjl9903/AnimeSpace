@@ -1,39 +1,8 @@
-# 指南
+# 开始
 
-## Use local admin CLI
+Anime Paste 核心分为 [前端应用](https://github.com/XLorPaste/AnimePaste/tree/main/packages/app) 和 [管理后台命令行程序](https://github.com/XLorPaste/AnimePaste/tree/main/packages/cli)。
 
-> **Prerequisite**
->
-> Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
-
-First, clone this repo to your machine.
-
-```bash
-git clone https://github.com/XLorPaste/AnimePaste.git
-```
-
-Second, install dependencies and build locally.
-
-```bash
-pnpm install
-pnpm build:cli
-```
-
-Finally, link the cli binary globally.
-
-```bash
-cd packages/cli
-pnpm link -g
-```
-
-Test installation:
-
-```bash
-anime --version
-# anime/0.0.0
-```
-
-## Deploy Web Application
+## 部署前端应用
 
 AnimePaste web application is implemented to be deployed on [Cloudflare Pages](https://pages.cloudflare.com/) and [Functions](https://developers.cloudflare.com/pages/platform/functions/) (Serverless workers).
 

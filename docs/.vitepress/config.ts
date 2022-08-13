@@ -28,27 +28,39 @@ export default defineConfig({
       indexName: 'docs'
     },
     nav: [
-      { text: '指南', link: '/guide/' },
-      { text: '配置', link: '/config/' },
+      { text: '部署', link: '/deploy/' },
+      { text: '管理', link: '/admin/' },
       { text: '体验', link: 'https://anime.xlorpaste.cn' }
     ],
     sidebar: {
       '/': [
         {
-          text: '指南',
+          text: '部署',
           items: [
             {
               text: '开始',
-              link: '/guide/'
+              link: '/deploy/'
             }
           ]
         },
         {
-          text: '配置',
+          text: '管理',
           items: [
             {
+              text: '安装 CLI',
+              link: '/admin/'
+            },
+            {
               text: '配置',
-              link: '/config/'
+              link: '/admin/config'
+            },
+            {
+              text: '使用 CLI',
+              link: '/admin/usage'
+            },
+            {
+              text: '放映计划',
+              link: '/admin/plan'
             }
           ]
         }
