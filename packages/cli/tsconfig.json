@@ -15,5 +15,6 @@
       "@animepaste/bangumi/*": ["../bangumi/src/*"],
       "@animepaste/database": ["../database/src/index.ts"],
     }
-  }
+  },
+  "include": ["src/**/*.ts"]
 }
