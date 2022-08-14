@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/javascript-node
 {
-	"name": "[name]",
+	"name": "animepaste",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
@@ -20,6 +20,10 @@
 	"portsAttributes": {
 		"3000": {
 			"label": "Vite Dev Server",
+			"onAutoForward": "notify"
+		},
+		"8788": {
+			"label": "Cloudflare Pages Dev Server",
 			"onAutoForward": "notify"
 		}
 	},
