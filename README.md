@@ -28,6 +28,7 @@ See [部署 | Anime Paste](https://anime.docs.xlorpaste.cn/deploy/) and [安装 
 + [動漫花園](https://share.dmhy.org/) and all the fansubs
 + [Bangumi 番组计划](https://bangumi.tv/) provides a platform for sharing anything about ACG
 + [Bangumi Data](https://github.com/bangumi-data/bangumi-data) collects the infomation of animes
++ [Anime Tracker List](https://github.com/DeSireFire/animeTrackerList) collects trackers for downloading bangumi resources
 
 ## License
 
