@@ -61,9 +61,9 @@ export interface OnairAnime {
   link?: string;
 
   /**
-   * Upload by an admin or root user
+   * Refresh timestamp
    */
-  uploadBy: string;
+  timestamp: string;
 }
 
 export interface OnairEpisode {

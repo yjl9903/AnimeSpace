@@ -4,6 +4,8 @@ import { ONAIR_KEY } from '../../utils/constant';
 import { makeErrorResponse, makeResponse } from '../../utils';
 
 interface Payload {
+  timestamp: string;
+
   onair: OnairAnime[];
 }
 
@@ -19,15 +21,16 @@ export const onRequestGet: APIFunction = async ({ env }) => {
 
 export const onRequestPost: APIFunction = async ({ env, request }) => {
   if (env.user.type === 'root' || env.user.type === 'admin') {
-    const { onair } = await request.json<Payload>();
+    const { onair, timestamp = new Date().toISOString() } =
+      await request.json<Payload>();
 
-    // Setup uploadBy token
+    // Setup timestamp
     const setOnair = onair.map((o) => {
       return {
         title: o.title,
         bgmId: o.bgmId,
         link: o.link,
-        uploadBy: env.user.token,
+        timestamp,
         episodes: o.episodes.map((ep) => ({
           ep: ep.ep,
           quality: ep.quality,
@@ -46,7 +49,7 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
     newOnair[env.user.token] = setOnair;
     await env.AnimeStore.put(ONAIR_KEY, newOnair);
 
-    return makeResponse({ onair });
+    return makeResponse({ onair: setOnair });
   } else {
     return makeErrorResponse('Unauthorized', { status: 401 });
   }

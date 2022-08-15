@@ -19,8 +19,12 @@ export const onRequestGet: APIFunction = async ({ env }) => {
       });
       return anime;
     });
+  const timestamp = new Date(
+    onair.reduce((p, o) => Math.max(new Date(o.timestamp).getTime(), p), 0)
+  ).toISOString();
+
   return makeResponse(
-    { onair },
+    { onair, timestamp },
     { headers: { 'Cache-Control': `public, max-age=${CacheDuration}` } }
   );
 };

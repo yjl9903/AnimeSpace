@@ -89,7 +89,8 @@ export class AdminClient {
         const { data } = await this.api.post(
           '/api/admin/anime',
           {
-            onair
+            onair,
+            timestamp: new Date().toISOString()
           },
           retry ? {} : { proxy: proxy() }
         );
