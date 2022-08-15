@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue';
 
-import { differenceInHours } from 'date-fns';
+import { differenceInHours, format } from 'date-fns';
 
 import IndexGrid from './components/IndexGrid.vue';
 import { Bangumi, SubjectBangumi } from '~/composables/types';
@@ -109,6 +109,18 @@ const calendar = computed(() =>
         p4
       >
         <IndexGrid :bangumis="latestBangumis" />
+        <div
+          mt4
+          pt2
+          text-right
+          text-sm
+          font-mono
+          border="t-1 base"
+          class="text-gray-500/50"
+        >
+          <span>最近更新于 </span>
+          <span>{{ format(client.timestamp, 'yyyy-MM-dd HH:mm') }}</span>
+        </div>
       </div>
     </div>
 

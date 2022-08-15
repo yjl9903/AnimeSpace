@@ -28,6 +28,9 @@ export const useClient = defineStore('client', () => {
   );
 
   const onair = ref(useLocalStorage('animepaste:onair', [] as OnairAnime[]));
+  const timestamp = ref(
+    useLocalStorage('animepaste:onair-timestamp', new Date(0))
+  );
 
   const onairMap = computed(() => {
     const map = new Map<string, OnairAnime>();
@@ -37,27 +40,28 @@ export const useClient = defineStore('client', () => {
     return map;
   });
 
-  watch(
-    client,
-    async (client) => {
-      if (client) {
-        try {
-          const result = await client.fetchOnair();
-          onair.value.splice(0, onair.value.length, ...result);
-        } catch (err) {
-          if (axios.isAxiosError(err) && err?.response?.status === 401) {
-            token.value = '';
-          }
+  const refresh = async (client: UserClient | undefined) => {
+    if (client) {
+      try {
+        const { onair: result, timestamp: t } = await client.fetchOnair();
+        timestamp.value = t;
+        onair.value.splice(0, onair.value.length, ...result);
+      } catch (err) {
+        if (axios.isAxiosError(err) && err?.response?.status === 401) {
+          token.value = '';
         }
       }
-    },
-    { immediate: true }
-  );
+    }
+  };
+
+  watch(client, refresh, { immediate: true });
 
   return {
     token,
     client,
+    refresh,
     onair,
+    timestamp,
     onairMap
   };
 });
