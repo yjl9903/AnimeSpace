@@ -33,7 +33,7 @@ importers:
       unplugin-vue-components: ^0.22.4
       vite: ^3.0.7
       vite-plugin-pwa: ^0.12.3
-      vitepress: ^1.0.0-alpha.4
+      vitepress: ^1.0.0-alpha.5
       vue: ^3.2.37
       workbox-window: ^6.5.4
     dependencies:
@@ -50,7 +50,7 @@ importers:
       unplugin-vue-components: 0.22.4_vite@3.0.7+vue@3.2.37
       vite: 3.0.7
       vite-plugin-pwa: 0.12.3_vite@3.0.7
-      vitepress: 1.0.0-alpha.4
+      vitepress: 1.0.0-alpha.5
       workbox-window: 6.5.4
 
   functions:
@@ -2383,10 +2383,6 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.2.37
       '@vue/shared': 3.2.37
-
-  /@vue/devtools-api/6.1.4:
-    resolution: {integrity: sha512-IiA0SvDrJEgXvVxjNkHPFfDx6SXw0b/TUkqMcDZWNg9fnCAHbTpoo59YfJ9QLFkwa3raau5vSlRVzMSLDnfdtQ==}
-    dev: true
 
   /@vue/devtools-api/6.2.1:
     resolution: {integrity: sha512-OEgAMeQXvCoJ+1x8WyQuVZzFo0wcyCmUR3baRVLmKBo1LmYZWMlRiXlux5jd0fqVJu6PfDbOrZItVqUEzLobeQ==}
@@ -8002,15 +7998,15 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress/1.0.0-alpha.4:
-    resolution: {integrity: sha512-bOAA4KW6vYGlkbcrPLZLTKWTgXVroObU+o9xj9EENyEl6yg26WWvfN7DGA4BftjdM5O8nR93Z5khPQ3W/tFE7Q==}
+  /vitepress/1.0.0-alpha.5:
+    resolution: {integrity: sha512-bhUfmTzd+i5fm2rInBR1Q/1RBhT0xTXM+vPqVWJdHmIc8XnWF/O7lT6kai38rOTNTt/KyPDk2SRRourPVhQJMA==}
     engines: {node: '>=14.6.0'}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.1.1
       '@docsearch/js': 3.1.1
       '@vitejs/plugin-vue': 2.3.3_vite@2.9.14+vue@3.2.37
-      '@vue/devtools-api': 6.1.4
+      '@vue/devtools-api': 6.2.1
       '@vueuse/core': 8.9.4_vue@3.2.37
       body-scroll-lock: 4.0.0-beta.0
       shiki: 0.10.1
