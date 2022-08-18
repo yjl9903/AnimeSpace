@@ -24,7 +24,7 @@ importers:
     specifiers:
       '@iconify-json/carbon': ^1.1.7
       '@types/node': ^18.6.5
-      '@unocss/reset': ^0.45.7
+      '@unocss/reset': ^0.45.8
       '@vitejs/plugin-vue': ^3.0.3
       '@vueuse/core': ^9.1.0
       fast-glob: ^3.2.11
@@ -42,14 +42,14 @@ importers:
     devDependencies:
       '@iconify-json/carbon': 1.1.7
       '@types/node': 18.6.5
-      '@unocss/reset': 0.45.7
+      '@unocss/reset': 0.45.8
       '@vitejs/plugin-vue': 3.0.3_vite@3.0.8+vue@3.2.37
       fast-glob: 3.2.11
       https-localhost: 4.7.1
       unocss: 0.45.7_vite@3.0.8
       unplugin-vue-components: 0.22.4_vite@3.0.8+vue@3.2.37
       vite: 3.0.8
-      vite-plugin-pwa: 0.12.3_vite@3.0.8
+      vite-plugin-pwa: 0.12.3_zz5rv25dunwhhp2yo7fftka3gi
       vitepress: 1.0.0-alpha.8
       workbox-window: 6.5.4
 
@@ -69,7 +69,7 @@ importers:
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.0
       '@types/scrollreveal': ^0.0.8
-      '@unocss/reset': ^0.45.7
+      '@unocss/reset': ^0.45.8
       '@vitejs/plugin-vue': ^3.0.3
       '@vueuse/core': ^9.1.0
       '@vueuse/head': ^0.7.9
@@ -115,7 +115,7 @@ importers:
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.0
       '@types/scrollreveal': 0.0.8
-      '@unocss/reset': 0.45.7
+      '@unocss/reset': 0.45.8
       '@vitejs/plugin-vue': 3.0.3_vite@3.0.8+vue@3.2.37
       bangumi-data: 0.3.97
       typescript: 4.7.4
@@ -2248,6 +2248,10 @@ packages:
 
   /@unocss/reset/0.45.7:
     resolution: {integrity: sha512-Gqx62iHO2hufpnS2vSm/NzCDG4UkF+XYwkKFarLzcj0UKCtOpQ9HCzSnZC422b3pM3lOvUIPpOOSncV6MUe5lg==}
+    dev: true
+
+  /@unocss/reset/0.45.8:
+    resolution: {integrity: sha512-zeIYa/d/amPhX6/del0k6K8/Hdl/nN12XCeiVfBKymlilAjQQyV64V/qdLBtSKzqegT68O/xMscla7pZDto4Hw==}
     dev: true
 
   /@unocss/scope/0.45.7:
@@ -7856,6 +7860,25 @@ packages:
     resolution: {integrity: sha512-gmYdIVXpmBuNjzbJFPZFzxWYrX4lHqwMAlOtjmXBbxApiHjx9QPXKQPJjSpeTeosLKvVbNcKSAAhfxMda0QVNQ==}
     peerDependencies:
       vite: ^2.0.0 || ^3.0.0-0
+      workbox-window: ^6.4.0
+    dependencies:
+      debug: 4.3.4
+      fast-glob: 3.2.11
+      pretty-bytes: 6.0.0
+      rollup: 2.75.7
+      vite: 3.0.8
+      workbox-build: 6.5.3
+      workbox-window: 6.5.4
+    transitivePeerDependencies:
+      - '@types/babel__core'
+      - supports-color
+    dev: true
+
+  /vite-plugin-pwa/0.12.3_zz5rv25dunwhhp2yo7fftka3gi:
+    resolution: {integrity: sha512-gmYdIVXpmBuNjzbJFPZFzxWYrX4lHqwMAlOtjmXBbxApiHjx9QPXKQPJjSpeTeosLKvVbNcKSAAhfxMda0QVNQ==}
+    peerDependencies:
+      vite: ^2.0.0 || ^3.0.0-0
+      workbox-window: ^6.4.0
     dependencies:
       debug: 4.3.4
       fast-glob: 3.2.11
