@@ -74,7 +74,7 @@ importers:
       '@vueuse/core': ^9.1.0
       '@vueuse/head': ^0.7.9
       bangumi-data: ^0.3.97
-      date-fns: ^2.29.1
+      date-fns: ^2.29.2
       nprogress: ^0.2.0
       pinia: ^2.0.18
       plyr: ^3.7.2
@@ -99,7 +99,7 @@ importers:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.1.0_vue@3.2.37
       '@vueuse/head': 0.7.9_vue@3.2.37
-      date-fns: 2.29.1
+      date-fns: 2.29.2
       nprogress: 0.2.0
       pinia: 2.0.18_j6bzmzd4ujpabbp5objtwxyjp4
       plyr: 3.7.2
@@ -137,7 +137,7 @@ importers:
       axios: ^0.27.2
       bangumi-data: ^0.3.97
       breadc: ^0.6.3
-      date-fns: ^2.29.1
+      date-fns: ^2.29.2
       debug: ^4.3.4
       optc: ^0.3.6
       unbuild: ^0.7.6
@@ -148,7 +148,7 @@ importers:
       debug: 4.3.4
     devDependencies:
       bangumi-data: 0.3.97
-      date-fns: 2.29.1
+      date-fns: 2.29.2
       optc: 0.3.6_vite@3.0.8
       unbuild: 0.7.6
       vite: 3.0.8
@@ -170,7 +170,7 @@ importers:
       bangumi-data: ^0.3.97
       breadc: ^0.6.3
       cli-progress: ^3.11.2
-      date-fns: ^2.29.1
+      date-fns: ^2.29.2
       death: ^1.1.0
       debug: ^4.3.4
       fastest-levenshtein: ^1.0.16
@@ -191,7 +191,7 @@ importers:
       axios: 0.27.2_debug@4.3.4
       breadc: 0.6.3
       cli-progress: 3.11.2
-      date-fns: 2.29.1
+      date-fns: 2.29.2
       death: 1.1.0
       debug: 4.3.4
       fastest-levenshtein: 1.0.16
@@ -220,7 +220,7 @@ importers:
       axios: ^0.27.2
       cnchar: ^3.2.2
       cnchar-trad: ^3.2.2
-      date-fns: ^2.29.1
+      date-fns: ^2.29.2
       debug: ^4.3.4
       node-html-parser: ^5.4.1
       prisma: ^4.2.1
@@ -230,7 +230,7 @@ importers:
       axios: 0.27.2_debug@4.3.4
       cnchar: 3.2.2
       cnchar-trad: 3.2.2
-      date-fns: 2.29.1
+      date-fns: 2.29.2
       debug: 4.3.4
       node-html-parser: 5.4.1
     devDependencies:
@@ -3380,8 +3380,8 @@ packages:
       whatwg-url: 11.0.0
     dev: true
 
-  /date-fns/2.29.1:
-    resolution: {integrity: sha512-dlLD5rKaKxpFdnjrs+5azHDFOPEu4ANy/LTh04A1DTzMM7qoajmKCBc8pkKRFT41CNzw+4gQh79X5C+Jq27HAw==}
+  /date-fns/2.29.2:
+    resolution: {integrity: sha512-0VNbwmWJDS/G3ySwFSJA3ayhbURMTJLtwM2DTxf9CWondCnh6DTNlO9JgRSq6ibf4eD0lfMJNBxUdEAHHix+bA==}
     engines: {node: '>=0.11'}
 
   /dateformat/2.2.0:

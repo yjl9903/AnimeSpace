@@ -13,7 +13,7 @@
     "@animepaste/bangumi": "workspace:*",
     "@vueuse/core": "^9.1.0",
     "@vueuse/head": "^0.7.9",
-    "date-fns": "^2.29.1",
+    "date-fns": "^2.29.2",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.18",
     "plyr": "^3.7.2",
