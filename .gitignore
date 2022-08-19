@@ -13,8 +13,10 @@ dist
 dist-ssr
 *.local
 .vite-ssg-temp
+.cloudflare
 .mf
 wrangler-local-state
+/functions
 
 # Editor directories and files
 .vscode/*

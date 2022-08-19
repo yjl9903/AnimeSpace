@@ -1,14 +1,12 @@
-import type { APIFunction } from '../../types';
+import { makePagesFunction, makeResponse } from '../../utils';
 
-import { makeResponse } from '../../utils';
-
-export const onRequestGet: APIFunction = async ({ env }) => {
+export const onRequestGet = makePagesFunction(async ({ env }) => {
   const content = (await env.UserSyncStore.get(env.user.token)) ?? 'null';
   return makeResponse({ content });
-};
+});
 
-export const onRequestPost: APIFunction = async ({ env, request }) => {
+export const onRequestPost = makePagesFunction(async ({ env, request }) => {
   const content = await request.text();
   await env.UserSyncStore.put(env.user.token, content);
   return makeResponse({ content });
-};
+});

@@ -1,12 +1,10 @@
-import type { APIFunction } from '../types';
-
-import { makeResponse } from '../utils';
 import { ONAIR_KEY } from '../utils/constant';
+import { makePagesFunction, makeResponse } from '../utils';
 
 // Cache one hour
 const CacheDuration = 60 * 60;
 
-export const onRequestGet: APIFunction = async ({ env }) => {
+export const onRequestGet = makePagesFunction(async ({ env }) => {
   const onairCache = (await env.AnimeStore.get(ONAIR_KEY)) ?? {};
   const onair = Object.values(onairCache)
     .flat()
@@ -19,6 +17,7 @@ export const onRequestGet: APIFunction = async ({ env }) => {
       });
       return anime;
     });
+
   const timestamp = new Date(
     onair.reduce((p, o) => Math.max(new Date(o.timestamp).getTime(), p), 0)
   ).toISOString();
@@ -27,4 +26,4 @@ export const onRequestGet: APIFunction = async ({ env }) => {
     { onair, timestamp },
     { headers: { 'Cache-Control': `public, max-age=${CacheDuration}` } }
   );
-};
+});

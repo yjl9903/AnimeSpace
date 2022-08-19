@@ -1,10 +1,9 @@
-import { Visitor } from './../types.d';
-import type { Admin, APIFunction, User } from '../types';
+import type { Admin, User, Visitor } from '../types';
 
 import { KVStore } from '../utils/store';
-import { makeErrorResponse, now } from '../utils';
+import { makeErrorResponse, makePagesFunction, now } from '../utils';
 
-export const onRequest: APIFunction = async (ctx) => {
+export const onRequest = makePagesFunction(async (ctx) => {
   const request = ctx.request;
   const auth = request.headers.get('Authorization');
 
@@ -52,7 +51,7 @@ export const onRequest: APIFunction = async (ctx) => {
   } else {
     return makeUnauthResponse();
   }
-};
+});
 
 /**
  * 3 connections

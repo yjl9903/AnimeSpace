@@ -1,7 +1,11 @@
-import type { APIFunction, OnairAnime } from '../../types';
+import type { OnairAnime } from '../../types';
 
 import { ONAIR_KEY } from '../../utils/constant';
-import { makeErrorResponse, makeResponse } from '../../utils';
+import {
+  makePagesFunction,
+  makeErrorResponse,
+  makeResponse
+} from '../../utils';
 
 interface Payload {
   timestamp: string;
@@ -9,7 +13,7 @@ interface Payload {
   onair: OnairAnime[];
 }
 
-export const onRequestGet: APIFunction = async ({ env }) => {
+export const onRequestGet = makePagesFunction(async ({ env }) => {
   if (env.user.type === 'root' || env.user.type === 'admin') {
     const oldOnair = (await env.AnimeStore.get(ONAIR_KEY)) ?? {};
     const onair = oldOnair[env.user.token] ?? [];
@@ -17,9 +21,9 @@ export const onRequestGet: APIFunction = async ({ env }) => {
   } else {
     return makeErrorResponse('Unauthorized', { status: 401 });
   }
-};
+});
 
-export const onRequestPost: APIFunction = async ({ env, request }) => {
+export const onRequestPost = makePagesFunction(async ({ env, request }) => {
   if (env.user.type === 'root' || env.user.type === 'admin') {
     const { onair, timestamp = new Date().toISOString() } =
       await request.json<Payload>();
@@ -53,4 +57,4 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
   } else {
     return makeErrorResponse('Unauthorized', { status: 401 });
   }
-};
+});

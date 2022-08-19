@@ -1,5 +1,3 @@
-import type { KVStore } from './utils/store';
-
 export type UserType = 'root' | 'admin' | 'user' | 'visitor';
 
 export interface BaseUser {
@@ -96,13 +94,3 @@ export interface OnairEpisode {
     source: {};
   };
 }
-
-declare type APIFunction = PagesFunction<{
-  ANIME: KVNamespace;
-  UserStore: KVStore<User | Admin | Visitor>;
-  UserSyncStore: KVStore<string>;
-  AnimeStore: KVStore<Record<string, OnairAnime[]>>;
-  user: User | Admin | Visitor;
-  DEV: string;
-  ENABLE_PUBLIC: string;
-}>;

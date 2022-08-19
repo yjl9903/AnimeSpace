@@ -1,8 +1,10 @@
-import type { APIFunction } from '../../types';
+import {
+  makePagesFunction,
+  makeErrorResponse,
+  makeResponse
+} from '../../utils';
 
-import { makeErrorResponse, makeResponse } from '../../utils';
-
-export const onRequestPost: APIFunction = async ({ env, request }) => {
+export const onRequestPost = makePagesFunction(async ({ env, request }) => {
   if (env.user.type === 'root') {
     const {
       token = randomString(),
@@ -25,9 +27,9 @@ export const onRequestPost: APIFunction = async ({ env, request }) => {
   } else {
     return makeErrorResponse('Unauthorized', { status: 401 });
   }
-};
+});
 
-export const onRequestGet: APIFunction = async ({ env }) => {
+export const onRequestGet = makePagesFunction(async ({ env }) => {
   if (env.user.type === 'root') {
     const tokens = (await env.UserStore.list())
       .map((token) => ({
@@ -49,9 +51,9 @@ export const onRequestGet: APIFunction = async ({ env }) => {
   } else {
     return makeErrorResponse('Unauthorized', { status: 401 });
   }
-};
+});
 
-export const onRequestDelete: APIFunction = async ({ env, request }) => {
+export const onRequestDelete = makePagesFunction(async ({ env, request }) => {
   if (env.user.type === 'root') {
     const { command = 'delete', token } = await request.json<{
       command?: 'delete' | 'visitor';
@@ -79,7 +81,7 @@ export const onRequestDelete: APIFunction = async ({ env, request }) => {
   } else {
     return makeErrorResponse('Unauthorized', { status: 401 });
   }
-};
+});
 
 function rand(l: number, r: number): number {
   return l + Math.round(Math.random() * (r - l));

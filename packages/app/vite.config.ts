@@ -1,10 +1,10 @@
 import * as path from 'node:path';
-import { createRequire } from 'node:module';
 
-import vue from '@vitejs/plugin-vue';
-import { defineConfig, Plugin } from 'vite';
+import { defineConfig } from 'vite';
 
 import Unocss from 'unocss/vite';
+import vue from '@vitejs/plugin-vue';
+
 import Icons from 'unplugin-icons/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
@@ -12,16 +12,12 @@ import Components from 'unplugin-vue-components/vite';
 import Pages from 'vite-plugin-pages';
 import BuildInfo from 'vite-plugin-info';
 import Inspect from 'vite-plugin-inspect';
+import CloudflarePagesFunctions from 'vite-plugin-cloudflare-functions';
 import { VitePWA } from 'vite-plugin-pwa';
 
 import Bangumi from '@animepaste/bangumi/vite';
 
 import { getMonth, setDate, setMonth, subDays, subYears } from 'date-fns';
-
-// For node v16, ESM does not support import json module
-// It fallbacks to node require
-const require = createRequire(import.meta.url);
-const { items: bgmItems } = require('bangumi-data');
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -53,6 +49,18 @@ export default defineConfig({
       github: 'XLorPaste/AnimePaste',
       meta: {
         PUBLIC: process.env.ENABLE_PUBLIC === 'true' ?? false
+      }
+    }),
+    CloudflarePagesFunctions({
+      root: '../functions',
+      outDir: '../../',
+      dts: './src/cloudflare.d.ts',
+      wrangler: {
+        kv: ['ANIME'],
+        binding: {
+          DEV: process.env.DEV ? 'true' : 'false',
+          ENABLE_PUBLIC: process.env.ENABLE_PUBLIC === 'true' ? 'true' : 'false'
+        }
       }
     }),
     Inspect(),
@@ -162,7 +170,6 @@ export default defineConfig({
         fields: ['titleCN', 'begin', 'officialSite']
       }
     )
-    // BangumiDate(200)
   ]
 });
 
@@ -178,39 +185,4 @@ function getRecent() {
   } else {
     return subDays(setDate(setMonth(date, 6), 1), 15);
   }
-}
-
-/**
- * Only bundle first count piece of items
- *
- * @param count static import count
- * @returns
- */
-function BangumiDate(count = 100): Plugin {
-  const ModuleId = '~bangumi/data';
-  const StaticImportCount = count;
-
-  return {
-    name: 'bangumi-data',
-    resolveId(id) {
-      if (id === ModuleId) return id;
-    },
-    load(id) {
-      if (id === ModuleId) {
-        bgmItems.sort((lhs, rhs) => {
-          const d1 = new Date(lhs.begin).getTime();
-          const d2 = new Date(rhs.begin).getTime();
-          return d2 - d1;
-        });
-        const staticImport = [
-          `export const bangumis = [`,
-          ...bgmItems
-            .slice(0, StaticImportCount)
-            .map((b) => JSON.stringify(b) + ','),
-          `]`
-        ];
-        return staticImport.join('\n');
-      }
-    }
-  };
 }

@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
-    "@cloudflare/workers-types": "^3.14.1"
+    "vite-plugin-cloudflare-functions": "^0.1.7"
   }
 }

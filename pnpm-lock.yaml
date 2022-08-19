@@ -10,7 +10,6 @@ importers:
       typescript: ^4.7.4
       vite: ^3.0.8
       vitest: ^0.22.1
-      wrangler: 2.0.26
     devDependencies:
       '@types/node': 18.6.5
       optc: 0.3.6_vite@3.0.8
@@ -18,7 +17,6 @@ importers:
       typescript: 4.7.4
       vite: 3.0.8
       vitest: 0.22.1
-      wrangler: 2.0.26
 
   docs:
     specifiers:
@@ -53,12 +51,6 @@ importers:
       vitepress: 1.0.0-alpha.8
       workbox-window: 6.5.4
 
-  functions:
-    specifiers:
-      '@cloudflare/workers-types': ^3.14.1
-    devDependencies:
-      '@cloudflare/workers-types': 3.14.1
-
   packages/app:
     specifiers:
       '@animepaste/bangumi': workspace:*
@@ -73,7 +65,9 @@ importers:
       '@vitejs/plugin-vue': ^3.0.3
       '@vueuse/core': ^9.1.0
       '@vueuse/head': ^0.7.9
+      axios: ^0.27.2
       bangumi-data: ^0.3.97
+      cross-env: ^7.0.3
       date-fns: ^2.29.2
       nprogress: ^0.2.0
       pinia: ^2.0.18
@@ -85,6 +79,7 @@ importers:
       unplugin-icons: ^0.14.8
       unplugin-vue-components: ^0.22.4
       vite: ^3.0.8
+      vite-plugin-cloudflare-functions: ^0.1.7
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.6.0
       vite-plugin-pages: ^0.25.0
@@ -95,10 +90,13 @@ importers:
       vue-router: ^4.1.3
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.40.1
+      workbox-window: ^6.5.4
+      wrangler: ^2.0.26
     dependencies:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.1.0_vue@3.2.37
       '@vueuse/head': 0.7.9_vue@3.2.37
+      axios: 0.27.2
       date-fns: 2.29.2
       nprogress: 0.2.0
       pinia: 2.0.18_j6bzmzd4ujpabbp5objtwxyjp4
@@ -118,19 +116,23 @@ importers:
       '@unocss/reset': 0.45.8
       '@vitejs/plugin-vue': 3.0.3_vite@3.0.8+vue@3.2.37
       bangumi-data: 0.3.97
+      cross-env: 7.0.3
       typescript: 4.7.4
       unocss: 0.45.8_vite@3.0.8
       unplugin-auto-import: 0.11.2_obmlko6hceoahr6itoucrugfeu
       unplugin-icons: 0.14.8_vite@3.0.8
       unplugin-vue-components: 0.22.4_vite@3.0.8+vue@3.2.37
       vite: 3.0.8
+      vite-plugin-cloudflare-functions: 0.1.7_6xvmcx5tpphvi3l7p23rmxuyou
       vite-plugin-info: 0.3.1_vite@3.0.8
       vite-plugin-inspect: 0.6.0_vite@3.0.8
       vite-plugin-pages: 0.25.0_vite@3.0.8
-      vite-plugin-pwa: 0.12.3_vite@3.0.8
+      vite-plugin-pwa: 0.12.3_zz5rv25dunwhhp2yo7fftka3gi
       vite-ssg: 0.20.2_ba6v2xcj6qof4vp62hbfplcqgi
       vitest: 0.22.1
       vue-tsc: 0.40.1_typescript@4.7.4
+      workbox-window: 6.5.4
+      wrangler: 2.0.26
 
   packages/bangumi:
     specifiers:
@@ -236,6 +238,12 @@ importers:
     devDependencies:
       prisma: 4.2.1
       unbuild: 0.7.6
+
+  packages/functions:
+    specifiers:
+      vite-plugin-cloudflare-functions: ^0.1.7
+    devDependencies:
+      vite-plugin-cloudflare-functions: 0.1.7
 
 packages:
 
@@ -2658,6 +2666,14 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /axios/0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.1
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+
   /axios/0.27.2_debug@4.3.4:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
     dependencies:
@@ -3305,6 +3321,14 @@ packages:
 
   /cron-schedule/3.0.6:
     resolution: {integrity: sha512-izfGgKyzzIyLaeb1EtZ3KbglkS6AKp9cv7LxmiyoOu+fXfol1tQDC0Cof0enVZGNtudTHW+3lfuW9ZkLQss4Wg==}
+    dev: true
+
+  /cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/7.0.3:
@@ -4354,6 +4378,15 @@ packages:
       locate-path: 6.0.0
       path-exists: 4.0.0
     dev: true
+
+  /follow-redirects/1.15.1:
+    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
 
   /follow-redirects/1.15.1_debug@4.3.4:
     resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
@@ -5633,6 +5666,15 @@ packages:
       typescript: 4.7.4
     dev: true
 
+  /mlly/0.5.13:
+    resolution: {integrity: sha512-0SK2fqoan+PMjADs4I2egAtrtNtpjqRez6PDTCeAdGjUQNJCvO5o9v2NEq52WA1jFmMU97qBr/JgdvCquehDbA==}
+    dependencies:
+      acorn: 8.8.0
+      pathe: 0.3.5
+      pkg-types: 0.3.3
+      ufo: 0.8.5
+    dev: true
+
   /mlly/0.5.4:
     resolution: {integrity: sha512-gFlsLWCjVwu/LM/ZfYUkmnbBoz7eyBIMUwVQYDqhd8IvtNFDeZ95uwAyxHE2Xx7tQwePQaCo4fECZ9MWFEUTgQ==}
     dependencies:
@@ -5651,7 +5693,7 @@ packages:
     resolution: {integrity: sha512-rz+n2i9862ymLH+UDlHpsuTVyCIAs+9WejS2De2VUlAKdpq8OJ9x/C2M7nNUMLEW1H+D6n0uZlpz8+tMGxCmyQ==}
     dependencies:
       acorn: 8.8.0
-      pathe: 0.3.3
+      pathe: 0.3.5
       pkg-types: 0.3.3
     dev: true
 
@@ -6095,6 +6137,10 @@ packages:
 
   /pathe/0.3.3:
     resolution: {integrity: sha512-x3nrPvG0HDSDzUiJ0WqtzhN4MD+h5B+dFJ3/qyxVuARlr4Y3aJv8gri2cZzp9Z8sGs2a+aG9gNbKngh3gme57A==}
+    dev: true
+
+  /pathe/0.3.5:
+    resolution: {integrity: sha512-grU/QeYP0ChuE5kjU2/k8VtAeODzbernHlue0gTa27+ayGIu3wqYBIPGfP9r5xSqgCgDd4nWrjKXEfxMillByg==}
     dev: true
 
   /pathval/1.1.1:
@@ -6926,7 +6972,7 @@ packages:
     dev: false
 
   /stack-trace/0.0.10:
-    resolution: {integrity: sha512-KGzahc7puUKkzyMt+IqAep+TVNbKP+k2Lmwhub39m1AsTSkaDutx56aDCo+HLDzf/D26BIHTJWNiTG1KAJiQCg==}
+    resolution: {integrity: sha1-VHxws0fo0ytOEI6hoqFZ5f3eGcA=}
     dev: true
 
   /statuses/1.5.0:
@@ -7801,6 +7847,65 @@ packages:
       range-slice-stream: 2.0.0
     dev: false
 
+  /vite-plugin-cloudflare-functions/0.1.7:
+    resolution: {integrity: sha512-ujw8XF8W8xxxNmwPqm/xZrRbevx4LGbqf4po6LtB09g5GHs2uzP3hwk6tMpkBYyv6dn8cBU4BQGyy8E4/qc0qQ==}
+    engines: {node: '>=v16.17.0'}
+    requiresBuild: true
+    peerDependencies:
+      axios: ^0.27.2
+      ohmyfetch: ^0.4.18
+      vite: ^3.0.8
+      wrangler: ^2.0.26
+    peerDependenciesMeta:
+      axios:
+        optional: true
+      ohmyfetch:
+        optional: true
+      vite:
+        optional: true
+      wrangler:
+        optional: true
+    dependencies:
+      '@cloudflare/workers-types': 3.14.1
+      debug: 4.3.4
+      fast-glob: 3.2.11
+      mlly: 0.5.13
+      picocolors: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /vite-plugin-cloudflare-functions/0.1.7_6xvmcx5tpphvi3l7p23rmxuyou:
+    resolution: {integrity: sha512-ujw8XF8W8xxxNmwPqm/xZrRbevx4LGbqf4po6LtB09g5GHs2uzP3hwk6tMpkBYyv6dn8cBU4BQGyy8E4/qc0qQ==}
+    engines: {node: '>=v16.17.0'}
+    requiresBuild: true
+    peerDependencies:
+      axios: ^0.27.2
+      ohmyfetch: ^0.4.18
+      vite: ^3.0.8
+      wrangler: ^2.0.26
+    peerDependenciesMeta:
+      axios:
+        optional: true
+      ohmyfetch:
+        optional: true
+      vite:
+        optional: true
+      wrangler:
+        optional: true
+    dependencies:
+      '@cloudflare/workers-types': 3.14.1
+      axios: 0.27.2
+      debug: 4.3.4
+      fast-glob: 3.2.11
+      mlly: 0.5.13
+      picocolors: 1.0.0
+      vite: 3.0.8
+      wrangler: 2.0.26
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /vite-plugin-info/0.3.1_vite@3.0.8:
     resolution: {integrity: sha512-+nhVdmBGSMBTRKNT4mTo4yBkepIH6YtIJnw4UIfW9kyDy9DDZ/xEsyCoaboait9/lZBoi1mOAOnHgZLN6+Yz3g==}
     peerDependencies:
@@ -7849,24 +7954,6 @@ packages:
       vite: 3.0.8
       yaml: 2.1.1
     transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /vite-plugin-pwa/0.12.3_vite@3.0.8:
-    resolution: {integrity: sha512-gmYdIVXpmBuNjzbJFPZFzxWYrX4lHqwMAlOtjmXBbxApiHjx9QPXKQPJjSpeTeosLKvVbNcKSAAhfxMda0QVNQ==}
-    peerDependencies:
-      vite: ^2.0.0 || ^3.0.0-0
-      workbox-window: ^6.4.0
-    dependencies:
-      debug: 4.3.4
-      fast-glob: 3.2.11
-      pretty-bytes: 6.0.0
-      rollup: 2.75.7
-      vite: 3.0.8
-      workbox-build: 6.5.3
-      workbox-window: 6.5.4
-    transitivePeerDependencies:
-      - '@types/babel__core'
       - supports-color
     dev: true
 
