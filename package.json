@@ -23,7 +23,7 @@
     "optc": "^0.3.6",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4",
-    "vite": "^3.0.8",
+    "vite": "^3.0.9",
     "vitest": "^0.22.1"
   },
   "packageManager": "pnpm@7.9.3",
