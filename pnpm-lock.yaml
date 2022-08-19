@@ -72,7 +72,7 @@ importers:
       cross-env: ^7.0.3
       date-fns: ^2.29.2
       nprogress: ^0.2.0
-      pinia: ^2.0.18
+      pinia: ^2.0.20
       plyr: ^3.7.2
       scrollreveal: ^4.0.9
       typescript: ^4.7.4
@@ -101,7 +101,7 @@ importers:
       axios: 0.27.2
       date-fns: 2.29.2
       nprogress: 0.2.0
-      pinia: 2.0.18_j6bzmzd4ujpabbp5objtwxyjp4
+      pinia: 2.0.20_j6bzmzd4ujpabbp5objtwxyjp4
       plyr: 3.7.2
       scrollreveal: 4.0.9
       vue: 3.2.37
@@ -6207,8 +6207,8 @@ packages:
     resolution: {integrity: sha512-dBILiDmm43y0JPISWEmVGKBETQjwJe6mSU9GND+P9KW0SJGUwoU/odyH1nbalOP9i8WSYuqf1lQnaj92Bhw+Ug==}
     dev: false
 
-  /pinia/2.0.18_j6bzmzd4ujpabbp5objtwxyjp4:
-    resolution: {integrity: sha512-I5MW05UVX6a5Djka136oH3VzYFiZUgeOApBwFjMx6pL91eHtGVlE3adjNUKLgtwGnrxiBRuJ8+4R3LKJKwnyZg==}
+  /pinia/2.0.20_j6bzmzd4ujpabbp5objtwxyjp4:
+    resolution: {integrity: sha512-fdHHumXW/0U5HhxmY1emo3I4z85p8NJPdbtFQSlmJXFe3ktuF0pYNVgVtk2q+j2zCtTufY763xzaEMx0t6T59g==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
