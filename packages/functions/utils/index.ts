@@ -5,7 +5,10 @@ import {
 
 export const makePagesFunction = makeRawPagesFunction;
 
-export function makeResponse(body: object, init: ResponseInit = {}) {
+export function makeResponse<T extends object>(
+  body: T,
+  init: ResponseInit = {}
+) {
   return _makeResponse({ status: 'Ok', data: body }, init);
 }
 

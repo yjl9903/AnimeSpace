@@ -10,17 +10,17 @@ declare module 'vite-plugin-cloudflare-functions/client' {
     '/api/**': {
       ALL: CloudflareResponseBody<typeof import('../../functions/api/_middleware')['onRequest']>;
     };
-    '/api/anime/:bgmId': {
-      GET: CloudflareResponseBody<typeof import('../../functions/api/anime/[bgmId]')['onRequestGet']>;
-    };
     '/api/admin/anime': {
       GET: CloudflareResponseBody<typeof import('../../functions/api/admin/anime')['onRequestGet']>;
       POST: CloudflareResponseBody<typeof import('../../functions/api/admin/anime')['onRequestPost']>;
     };
     '/api/admin/token': {
-      POST: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestPost']>;
-      GET: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestGet']>;
       DELETE: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestDelete']>;
+      GET: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestGet']>;
+      POST: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestPost']>;
+    };
+    '/api/anime/:bgmId': {
+      GET: CloudflareResponseBody<typeof import('../../functions/api/anime/[bgmId]')['onRequestGet']>;
     };
     '/api/user/sync': {
       GET: CloudflareResponseBody<typeof import('../../functions/api/user/sync')['onRequestGet']>;

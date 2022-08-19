@@ -40,6 +40,8 @@
     "src/**/*.vue",
     "../bangumi/src/**/*.ts",
     "../bangumi/dist/**/*.d.ts",
+    "../functions/**/*.ts",
+    "../functions/**/*.d.ts"
   ],
   "references": [
     {

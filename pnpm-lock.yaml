@@ -79,7 +79,7 @@ importers:
       unplugin-icons: ^0.14.8
       unplugin-vue-components: ^0.22.4
       vite: ^3.0.8
-      vite-plugin-cloudflare-functions: ^0.1.7
+      vite-plugin-cloudflare-functions: ^0.2.0
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.6.0
       vite-plugin-pages: ^0.25.0
@@ -123,7 +123,7 @@ importers:
       unplugin-icons: 0.14.8_vite@3.0.8
       unplugin-vue-components: 0.22.4_vite@3.0.8+vue@3.2.37
       vite: 3.0.8
-      vite-plugin-cloudflare-functions: 0.1.7_6xvmcx5tpphvi3l7p23rmxuyou
+      vite-plugin-cloudflare-functions: 0.2.0_6xvmcx5tpphvi3l7p23rmxuyou
       vite-plugin-info: 0.3.1_vite@3.0.8
       vite-plugin-inspect: 0.6.0_vite@3.0.8
       vite-plugin-pages: 0.25.0_vite@3.0.8
@@ -241,9 +241,9 @@ importers:
 
   packages/functions:
     specifiers:
-      vite-plugin-cloudflare-functions: ^0.1.7
+      vite-plugin-cloudflare-functions: ^0.2.0
     devDependencies:
-      vite-plugin-cloudflare-functions: 0.1.7
+      vite-plugin-cloudflare-functions: 0.2.0
 
 packages:
 
@@ -7847,8 +7847,8 @@ packages:
       range-slice-stream: 2.0.0
     dev: false
 
-  /vite-plugin-cloudflare-functions/0.1.7:
-    resolution: {integrity: sha512-ujw8XF8W8xxxNmwPqm/xZrRbevx4LGbqf4po6LtB09g5GHs2uzP3hwk6tMpkBYyv6dn8cBU4BQGyy8E4/qc0qQ==}
+  /vite-plugin-cloudflare-functions/0.2.0:
+    resolution: {integrity: sha512-DZB8LotrVBXOBpa1xaHf23UxrPYYk6Od3/asOcz2C0JTnkCXmURuI+F1JU1jSAh8n/y0rFDj4qHBzlolrUDDyw==}
     engines: {node: '>=v16.17.0'}
     requiresBuild: true
     peerDependencies:
@@ -7875,8 +7875,8 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.1.7_6xvmcx5tpphvi3l7p23rmxuyou:
-    resolution: {integrity: sha512-ujw8XF8W8xxxNmwPqm/xZrRbevx4LGbqf4po6LtB09g5GHs2uzP3hwk6tMpkBYyv6dn8cBU4BQGyy8E4/qc0qQ==}
+  /vite-plugin-cloudflare-functions/0.2.0_6xvmcx5tpphvi3l7p23rmxuyou:
+    resolution: {integrity: sha512-DZB8LotrVBXOBpa1xaHf23UxrPYYk6Od3/asOcz2C0JTnkCXmURuI+F1JU1jSAh8n/y0rFDj4qHBzlolrUDDyw==}
     engines: {node: '>=v16.17.0'}
     requiresBuild: true
     peerDependencies:
