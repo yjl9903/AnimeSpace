@@ -54,7 +54,7 @@
     "axios": "^0.27.2",
     "breadc": "^0.6.3",
     "cli-progress": "^3.11.2",
-    "date-fns": "^2.29.1",
+    "date-fns": "^2.29.2",
     "death": "^1.1.0",
     "debug": "^4.3.4",
     "fastest-levenshtein": "^1.0.16",
