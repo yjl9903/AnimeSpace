@@ -32,7 +32,7 @@ importers:
       unplugin-vue-components: ^0.22.4
       vite: ^3.0.9
       vite-plugin-pwa: ^0.12.3
-      vitepress: ^1.0.0-alpha.8
+      vitepress: ^1.0.0-alpha.9
       vue: ^3.2.37
       workbox-window: ^6.5.4
     dependencies:
@@ -50,7 +50,7 @@ importers:
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9
       vite-plugin-pwa: 0.12.3_f7se6o6eqkwcix4u3svh6mkvda
-      vitepress: 1.0.0-alpha.8_tbpndr44ulefs3hehwpi2mkf2y
+      vitepress: 1.0.0-alpha.9_tbpndr44ulefs3hehwpi2mkf2y
       workbox-window: 6.5.4
 
   packages/app:
@@ -8078,8 +8078,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress/1.0.0-alpha.8_tbpndr44ulefs3hehwpi2mkf2y:
-    resolution: {integrity: sha512-kTRN5DCagvMqr9OjylSV9/waGg0IHrxL0hBVuJoz7ykleZq2qR02n5CaiFq5QrSB/VRBGqiVsFQzet9vJsXS8g==}
+  /vitepress/1.0.0-alpha.9_tbpndr44ulefs3hehwpi2mkf2y:
+    resolution: {integrity: sha512-+VxgjflIcssbuyUBRYjZRpQ8w25v6XnIbXFmm9qwLVaqZdC0rN6qViEp7oRwA3HUlrGxj7GEzqQjW7xj4+E83w==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.2.1
