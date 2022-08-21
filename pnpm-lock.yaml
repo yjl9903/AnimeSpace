@@ -81,7 +81,7 @@ importers:
       unplugin-icons: ^0.14.8
       unplugin-vue-components: ^0.22.4
       vite: ^3.0.9
-      vite-plugin-cloudflare-functions: ^0.2.1
+      vite-plugin-cloudflare-functions: ^0.2.2
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.6.0
       vite-plugin-pages: ^0.25.0
@@ -125,7 +125,7 @@ importers:
       unplugin-icons: 0.14.8_vite@3.0.9
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9
-      vite-plugin-cloudflare-functions: 0.2.1_3usof45yz6crzy3olaps6667qq
+      vite-plugin-cloudflare-functions: 0.2.2_3usof45yz6crzy3olaps6667qq
       vite-plugin-info: 0.3.1_vite@3.0.9
       vite-plugin-inspect: 0.6.0_vite@3.0.9
       vite-plugin-pages: 0.25.0_vite@3.0.9
@@ -243,9 +243,9 @@ importers:
 
   packages/functions:
     specifiers:
-      vite-plugin-cloudflare-functions: ^0.2.1
+      vite-plugin-cloudflare-functions: ^0.2.2
     devDependencies:
-      vite-plugin-cloudflare-functions: 0.2.1
+      vite-plugin-cloudflare-functions: 0.2.2
 
 packages:
 
@@ -7890,13 +7890,13 @@ packages:
       range-slice-stream: 2.0.0
     dev: false
 
-  /vite-plugin-cloudflare-functions/0.2.1:
-    resolution: {integrity: sha512-kfCkhEFNPyUAWTqzLDVkbPZ2FngE9MAa90twjsLNZpjKi1sWwreEMfbMtMmKMjYRYYOzkAR6E5nW4gbQCLnmKQ==}
+  /vite-plugin-cloudflare-functions/0.2.2:
+    resolution: {integrity: sha512-8UsdL1vpFg2crqwqIMV+Oy+7D20rPzz9Yfhc01b0poCbO/HHSXzAEz3GjdCLiGrewadurcMIc41MFGARnyvH6Q==}
     engines: {node: '>=v16.17.0'}
     peerDependencies:
       axios: ^0.27.2
       ohmyfetch: ^0.4.18
-      vite: ^3.0.8
+      vite: ^3.0.9
       wrangler: ^2.0.26
     peerDependenciesMeta:
       axios:
@@ -7918,13 +7918,13 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.2.1_3usof45yz6crzy3olaps6667qq:
-    resolution: {integrity: sha512-kfCkhEFNPyUAWTqzLDVkbPZ2FngE9MAa90twjsLNZpjKi1sWwreEMfbMtMmKMjYRYYOzkAR6E5nW4gbQCLnmKQ==}
+  /vite-plugin-cloudflare-functions/0.2.2_3usof45yz6crzy3olaps6667qq:
+    resolution: {integrity: sha512-8UsdL1vpFg2crqwqIMV+Oy+7D20rPzz9Yfhc01b0poCbO/HHSXzAEz3GjdCLiGrewadurcMIc41MFGARnyvH6Q==}
     engines: {node: '>=v16.17.0'}
     peerDependencies:
       axios: ^0.27.2
       ohmyfetch: ^0.4.18
-      vite: ^3.0.8
+      vite: ^3.0.9
       wrangler: ^2.0.26
     peerDependenciesMeta:
       axios:
