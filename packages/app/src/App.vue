@@ -17,7 +17,7 @@ useHead({
   <Banner v-if="!isLogin"></Banner>
   <div id="root-container" :class="isLogin || `pt8 px24 lt-md:px8`">
     <router-view v-slot="{ Component }">
-      <keep-alive>
+      <keep-alive :exclude="['PlayEP']">
         <component
           :is="Component"
           :key="route.meta.usePathKey ? route.path : undefined"

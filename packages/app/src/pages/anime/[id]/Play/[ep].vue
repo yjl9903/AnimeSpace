@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: 'PlayEP'
+};
+</script>
+
 <script setup lang="ts">
 import { onBeforeRouteLeave } from 'vue-router';
 

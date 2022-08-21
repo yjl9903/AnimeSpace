@@ -39,19 +39,20 @@ const addFullscreenBtn = () => {
       '.plyr__controls [data-plyr="fullscreen"]'
     );
     if (fullscreen) {
-      const btn: HTMLElement =
-        document.querySelector('button.__fullscreen__') ??
-        document.createElement('button');
-      btn.setAttribute(
-        'class',
-        '__fullscreen__ plyr__controls__item plyr__control'
-      );
-      btn.setAttribute('type', 'button');
-      btn.addEventListener('click', () => {
-        expandFullscreen();
-      });
-      fullscreen.parentElement!.insertBefore(btn, fullscreen);
-      portTarget.value = btn;
+      const previous = document.querySelector('button.__fullscreen__');
+      if (!previous) {
+        const btn: HTMLElement = document.createElement('button');
+        btn.setAttribute(
+          'class',
+          '__fullscreen__ plyr__controls__item plyr__control'
+        );
+        btn.setAttribute('type', 'button');
+        btn.addEventListener('click', () => {
+          expandFullscreen();
+        });
+        fullscreen.parentElement!.insertBefore(btn, fullscreen);
+        portTarget.value = btn;
+      }
     } else {
       console.warn('Register window fullscreen fail');
     }
