@@ -40,28 +40,42 @@ export class Daemon {
   }
 
   async init() {
-    logger.info('Start initing daemon ' + now());
+    try {
+      logger.info('Start initing daemon ' + now());
 
-    await this.refreshPlan();
-    await this.refreshDatabase();
-    await this.refreshEpisode();
-    await this.refreshStore();
+      await this.refreshPlan();
+      await this.refreshDatabase();
+      await this.refreshEpisode();
+      await this.refreshStore();
 
-    logger.empty();
-    logger.info(okColor('Init daemon OK ') + now());
+      logger.empty();
+      logger.info(okColor('Init daemon OK ') + now());
+    } catch (error: any) {
+      if ('message' in error) {
+        logger.error(error.message);
+      }
+      debug(error);
+    }
   }
 
   async update() {
-    logger.info('Start updating anime ' + now());
+    try {
+      logger.info('Start updating anime ' + now());
 
-    await context.init({ force: false });
-    await this.refreshPlan();
-    await this.refreshDatabase();
-    await this.refreshEpisode();
-    await this.refreshStore();
+      await context.init({ force: false });
+      await this.refreshPlan();
+      await this.refreshDatabase();
+      await this.refreshEpisode();
+      await this.refreshStore();
 
-    logger.empty();
-    logger.info(okColor('Update OK ') + now());
+      logger.empty();
+      logger.info(okColor('Update OK ') + now());
+    } catch (error: any) {
+      if ('message' in error) {
+        logger.error(error.message);
+      }
+      debug(error);
+    }
   }
 
   private async refreshPlan() {
