@@ -93,7 +93,7 @@ importers:
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.40.1
       workbox-window: ^6.5.4
-      wrangler: ^2.0.26
+      wrangler: ^2.0.27
     dependencies:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.1.0_vue@3.2.37
@@ -125,7 +125,7 @@ importers:
       unplugin-icons: 0.14.8_vite@3.0.9
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.37
       vite: 3.0.9
-      vite-plugin-cloudflare-functions: 0.2.2_3usof45yz6crzy3olaps6667qq
+      vite-plugin-cloudflare-functions: 0.2.2_iv562wh2or5ich2qqu27nva4o4
       vite-plugin-info: 0.3.1_vite@3.0.9
       vite-plugin-inspect: 0.6.0_vite@3.0.9
       vite-plugin-pages: 0.25.0_vite@3.0.9
@@ -134,7 +134,7 @@ importers:
       vitest: 0.22.1
       vue-tsc: 0.40.1_typescript@4.7.4
       workbox-window: 6.5.4
-      wrangler: 2.0.26
+      wrangler: 2.0.27
 
   packages/bangumi:
     specifiers:
@@ -7014,7 +7014,7 @@ packages:
     dev: false
 
   /stack-trace/0.0.10:
-    resolution: {integrity: sha1-VHxws0fo0ytOEI6hoqFZ5f3eGcA=}
+    resolution: {integrity: sha512-KGzahc7puUKkzyMt+IqAep+TVNbKP+k2Lmwhub39m1AsTSkaDutx56aDCo+HLDzf/D26BIHTJWNiTG1KAJiQCg==}
     dev: true
 
   /statuses/1.5.0:
@@ -7922,7 +7922,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.2.2_3usof45yz6crzy3olaps6667qq:
+  /vite-plugin-cloudflare-functions/0.2.2_iv562wh2or5ich2qqu27nva4o4:
     resolution: {integrity: sha512-8UsdL1vpFg2crqwqIMV+Oy+7D20rPzz9Yfhc01b0poCbO/HHSXzAEz3GjdCLiGrewadurcMIc41MFGARnyvH6Q==}
     engines: {node: '>=v16.17.0'}
     peerDependencies:
@@ -7948,7 +7948,7 @@ packages:
       picocolors: 1.0.0
       tree-kill: 1.2.2
       vite: 3.0.9
-      wrangler: 2.0.26
+      wrangler: 2.0.27
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8537,8 +8537,8 @@ packages:
       workbox-core: 6.5.4
     dev: true
 
-  /wrangler/2.0.26:
-    resolution: {integrity: sha512-r0uuk8Iu0iDmADG5l2DuN1++bis8giGSqjvXroiltd6jXd1xHgLhiAOowLpDK48CM9e6AYNVZ/0QF3XGCRUq/w==}
+  /wrangler/2.0.27:
+    resolution: {integrity: sha512-dH0Nv41OiFsHu+mZFMGv1kEO6lOEoxon8kKHToG0YSpGBsObsxurkoyWJDvkAgtnrM00QF8F1Chy15zs0sjJkg==}
     engines: {node: '>=16.7.0'}
     hasBin: true
     dependencies:
