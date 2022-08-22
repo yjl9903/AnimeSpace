@@ -23,7 +23,7 @@ importers:
       '@algolia/client-search': ^4.14.2
       '@iconify-json/carbon': ^1.1.7
       '@types/node': ^18.6.5
-      '@unocss/reset': ^0.45.9
+      '@unocss/reset': ^0.45.12
       '@vitejs/plugin-vue': ^3.0.3
       '@vueuse/core': ^9.1.0
       fast-glob: ^3.2.11
@@ -42,7 +42,7 @@ importers:
       '@algolia/client-search': 4.14.2
       '@iconify-json/carbon': 1.1.7
       '@types/node': 18.6.5
-      '@unocss/reset': 0.45.9
+      '@unocss/reset': 0.45.12
       '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.37
       fast-glob: 3.2.11
       https-localhost: 4.7.1
@@ -63,7 +63,7 @@ importers:
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.0
       '@types/scrollreveal': ^0.0.8
-      '@unocss/reset': ^0.45.9
+      '@unocss/reset': ^0.45.12
       '@vitejs/plugin-vue': ^3.0.3
       '@vueuse/core': ^9.1.0
       '@vueuse/head': ^0.7.9
@@ -115,7 +115,7 @@ importers:
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.0
       '@types/scrollreveal': 0.0.8
-      '@unocss/reset': 0.45.9
+      '@unocss/reset': 0.45.12
       '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.37
       bangumi-data: 0.3.97
       cross-env: 7.0.3
@@ -2290,6 +2290,10 @@ packages:
     dependencies:
       '@unocss/core': 0.45.9
       '@unocss/preset-mini': 0.45.9
+    dev: true
+
+  /@unocss/reset/0.45.12:
+    resolution: {integrity: sha512-4HldzkLErjp90W9RMkMgnDbFQzZNz+cpLTB/3Wnj9UqvIBYAZ+gfZ7Y7YEntFKmHLMV1W+6emnuMNI4qS3B0Jg==}
     dev: true
 
   /@unocss/reset/0.45.9:
