@@ -2,7 +2,6 @@ import * as fs from 'fs-extra';
 import * as path from 'node:path';
 import { homedir } from 'node:os';
 
-import { subMonths } from 'date-fns';
 import { load, dump } from 'js-yaml';
 
 import { MagnetStore, VideoStore } from '@animepaste/database';
@@ -161,32 +160,7 @@ export class GlobalContex {
       if (!fs.existsSync(planPath)) {
         throw new Error(`You should provide plan "${plan}"`);
       }
-      const body = load(fs.readFileSync(planPath, 'utf-8')) as RawPlan;
-      // Setup date (default: 6 months ago)
-      if (!Boolean(body.date)) {
-        body.date = subMonths(new Date(), 6);
-      } else {
-        body.date = new Date(body.date);
-      }
-      // Setup state (default: onair)
-      if (!Boolean(body.state)) {
-        body.state = 'onair';
-      }
-      // Setup store platform (default: ali)
-      if (!Boolean(body.store)) {
-        body.store = 'ali';
-      }
-      for (const bgm of body.onair) {
-        // Fix bgmId string type
-        if (typeof bgm.bgmId === 'number') {
-          bgm.bgmId = String(bgm.bgmId);
-        }
-        // Fix empty fansub
-        if (!('fansub' in bgm)) {
-          bgm.fansub = [];
-        }
-      }
-      planBody.push(body);
+      planBody.push(load(fs.readFileSync(planPath, 'utf-8')) as RawPlan);
     }
     return planBody;
   }

@@ -71,10 +71,7 @@ app
               );
               if (ep) {
                 return {
-                  filepath: path.join(
-                    localRoot,
-                    formatEpisodeName(plan?.format, anime, ep)
-                  ),
+                  filepath: path.join(localRoot, formatEpisodeName(plan, ep)),
                   url: onairEp.playURL,
                   ep
                 };
