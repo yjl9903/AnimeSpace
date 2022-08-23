@@ -38,8 +38,12 @@ export default defineConfig({
           text: '部署',
           items: [
             {
-              text: '开始',
+              text: 'Cloudflare Pages',
               link: '/deploy/'
+            },
+            {
+              text: '集成 Jellyfin',
+              link: '/deploy/jellyfin'
             }
           ]
         },

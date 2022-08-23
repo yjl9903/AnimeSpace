@@ -1,4 +1,4 @@
-# 开始
+# Cloudflare Pages
 
 Anime Paste 核心分为 [前端应用](https://github.com/XLorPaste/AnimePaste/tree/main/packages/app) 和 [管理后台命令行程序](https://github.com/XLorPaste/AnimePaste/tree/main/packages/cli)。
 
@@ -18,3 +18,5 @@ Second, go to Pages settings tab. Set production environment variables:
 Third, go to `Workers`, `KV` tab in the left navbar. Create a new KV namespace for data storage. Then, create a new key-value pair, `user:<token>` maps to `{"token":"<token>","type":"root"}`. Note that this key-value pair is used for authorization, and you should generate a private token to replace `<token>` and **DO NOT** share this token with others.
 
 Finally, go back to the Pages settings, and add a new binding called `anime` for functions production usage.
+
+![Anime Paste](/animepaste.png)
