@@ -16,6 +16,10 @@ Paste your favourite anime online.
 + :house: **Offline application**
 + :film_strip: **Support [Jellyfin](https://github.com/jellyfin/jellyfin) and so on**
 
+![Anime Paste](./docs//public/animepaste.png)
+
+![Jellyfin](./docs/public/Jellyfin.jpeg)
+
 ## Installation and Deploy
 
 > **Prerequisite**
