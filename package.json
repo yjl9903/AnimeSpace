@@ -26,7 +26,7 @@
     "vite": "^3.0.9",
     "vitest": "^0.22.1"
   },
-  "packageManager": "pnpm@7.9.3",
+  "packageManager": "pnpm@7.9.4",
   "engines": {
     "node": ">=v16.16.0"
   }
