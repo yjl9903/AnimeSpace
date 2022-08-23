@@ -1,6 +1,6 @@
 # 集成 Jellyfin
 
-![Jellyfin](/jellyfin.jpeg)
+![Jellyfin](/Jellyfin.jpeg)
 
 ## Bangumi 元数据插件
 
