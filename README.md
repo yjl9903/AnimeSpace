@@ -14,6 +14,7 @@ Paste your favourite anime online.
 + :gear: **Automatically**
 + :cloud: **Serverless**
 + :house: **Offline application**
++ :film_strip: **Support [Jellyfin](https://github.com/jellyfin/jellyfin) and so on**
 
 ## Installation and Deploy
 
