@@ -53,6 +53,13 @@ export interface OnairPlan {
   title: string;
 
   /**
+   * Anime season
+   *
+   * This value may be inferred from the title or be set with the default value 1
+   */
+  season: number;
+
+  /**
    * Bangumi ID
    */
   bgmId: string;
@@ -84,7 +91,7 @@ export interface OnairPlan {
   /**
    * Template string for names
    *
-   * @default '[{fansub}] {title} - {ep}.mp4'
+   * @default '[{fansub}] {title} - S{season}E{ep}.mp4'
    */
   format?: string;
 

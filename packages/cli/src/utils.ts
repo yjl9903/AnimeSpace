@@ -1,20 +1,18 @@
 import { ImmutableMap, MutableMap } from 'lbear';
 
-import type { Anime, Episode } from './anime';
+import type { Episode } from './anime';
+import type { OnairPlan } from './types';
 
 export function formatEP(ep: number, fill = '0') {
   return `${ep < 10 ? fill : ''}${ep}`;
 }
 
-export function formatEpisodeName(
-  format: string | undefined,
-  anime: Anime,
-  ep: Episode
-) {
-  if (!format) format = '[{fansub}] {title} - {ep}.mp4';
+export function formatEpisodeName(anime: OnairPlan, ep: Episode) {
+  const format = anime.format ?? '[{fansub}] {title} - S{season}E{ep}.mp4';
   return format
     .replace('{fansub}', ep.fansub)
     .replace('{title}', anime.title)
+    .replace('{season}', formatEP(anime.season ?? 1))
     .replace('{ep}', formatEP(ep.ep, '0'));
 }
 

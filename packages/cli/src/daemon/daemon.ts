@@ -40,28 +40,42 @@ export class Daemon {
   }
 
   async init() {
-    logger.info('Start initing daemon ' + now());
+    try {
+      logger.info('Start initing daemon ' + now());
 
-    await this.refreshPlan();
-    await this.refreshDatabase();
-    await this.refreshEpisode();
-    await this.refreshStore();
+      await this.refreshPlan();
+      await this.refreshDatabase();
+      await this.refreshEpisode();
+      await this.refreshStore();
 
-    logger.empty();
-    logger.info(okColor('Init daemon OK ') + now());
+      logger.empty();
+      logger.info(okColor('Init daemon OK ') + now());
+    } catch (error: any) {
+      if ('message' in error) {
+        logger.error(error.message);
+      }
+      debug(error);
+    }
   }
 
   async update() {
-    logger.info('Start updating anime ' + now());
+    try {
+      logger.info('Start updating anime ' + now());
 
-    await context.init({ force: false });
-    await this.refreshPlan();
-    await this.refreshDatabase();
-    await this.refreshEpisode();
-    await this.refreshStore();
+      await context.init({ force: false });
+      await this.refreshPlan();
+      await this.refreshDatabase();
+      await this.refreshEpisode();
+      await this.refreshStore();
 
-    logger.empty();
-    logger.info(okColor('Update OK ') + now());
+      logger.empty();
+      logger.info(okColor('Update OK ') + now());
+    } catch (error: any) {
+      if ('message' in error) {
+        logger.error(error.message);
+      }
+      debug(error);
+    }
   }
 
   private async refreshPlan() {
@@ -112,7 +126,7 @@ export class Daemon {
         if (anime) {
           logger.info(
             okColor('Refresh  ') +
-              titleColor(anime.title) +
+              formatTitle(onair.title, onair.season) +
               okColor(' OK ') +
               `(${bangumiLink(onair.bgmId)})`
           );
@@ -168,7 +182,7 @@ export class Daemon {
         logger.empty();
 
         await this.refreshAnime(anime, onair);
-        await this.syncPlaylist(anime.title, anime.bgmId);
+        await this.syncPlaylist(onair);
       }
     }
 
@@ -205,7 +219,7 @@ export class Daemon {
 
     logger.info(
       startColor('Download ') +
-        titleColor(anime.title) +
+        formatTitle(onair.title, onair.season) +
         '    ' +
         `(${bangumiLink(onair.bgmId)})`
     );
@@ -222,7 +236,7 @@ export class Daemon {
     // If not enable donwload and upload, continue
     if (!this.enable) return;
 
-    const localRoot = await context.makeLocalAnimeRoot(anime.title);
+    const localRoot = await context.makeLocalAnimeRoot(onair.title);
 
     type InlineMagnet = {
       magnetId: string;
@@ -268,7 +282,7 @@ export class Daemon {
           return {
             magnetId: ep.magnetId,
             magnetURI: magnet?.magnet ?? '',
-            filename: formatEpisodeName(onair.format, anime, ep)
+            filename: formatEpisodeName(onair, ep)
           };
         })
       )
@@ -291,7 +305,7 @@ export class Daemon {
       }
       logger.info(
         okColor('Download ') +
-          titleColor(anime.title) +
+          formatTitle(onair.title, onair.season) +
           okColor(' OK ') +
           `(Total: ${magnets.length} episodes)`
       );
@@ -303,7 +317,7 @@ export class Daemon {
     {
       logger.info(
         startColor('Upload   ') +
-          titleColor(anime.title) +
+          formatTitle(onair.title, onair.season) +
           '    ' +
           `(${bangumiLink(onair.bgmId)})`
       );
@@ -345,7 +359,7 @@ export class Daemon {
       }
       logger.info(
         okColor('Upload   ') +
-          titleColor(anime.title) +
+          formatTitle(onair.title, onair.season) +
           okColor(' OK ') +
           `(Total: ${magnets.length} episodes)`
       );
@@ -365,8 +379,8 @@ export class Daemon {
     }));
 
     this.client.updateOnair({
-      title: anime.title,
-      bgmId: anime.bgmId,
+      title: onair.title,
+      bgmId: onair.bgmId,
       episodes: [
         ...syncEpisodes,
         ...[...epLink.entries()].map(([ep, playURL]) => ({
@@ -377,46 +391,46 @@ export class Daemon {
     });
   }
 
-  private async syncPlaylist(title = '', curId = '') {
-    if (curId === '') {
+  private async syncPlaylist(onair?: OnairPlan) {
+    if (!onair) {
       logger.info(
         `${startColor('Sync')}     ${bold(
           this.client.newOnair.length
         )}  local onair animes`
       );
-    }
-    if (title !== '') {
+    } else {
       logger.info(
         `${startColor('Sync')}     ` +
-          titleColor(title) +
+          formatTitle(onair.title, onair.season) +
           '    ' +
-          `(${bangumiLink(curId)})`
+          `(${bangumiLink(onair.bgmId)})`
       );
     }
+
     try {
-      const onair = await this.client.syncOnair();
-      if (curId === '') {
+      const onairs = await this.client.syncOnair();
+      if (!onair) {
         logger.info(
           `${okColor('Sync')}     ${bold(
-            onair.length
+            onairs.length
           )} remote onair animes ${okColor('OK')}`
         );
       } else {
-        for (const anime of onair) {
-          if (anime.bgmId !== curId) continue;
+        for (const remoteOnair of onairs) {
+          if (onair.bgmId !== remoteOnair.bgmId) continue;
           logger.info(
             okColor('Sync     ') +
-              titleColor(anime.title) +
+              formatTitle(onair.title, onair.season) +
               okColor(' OK ') +
-              `(Total: ${bold(anime.episodes.length)} episodes)`
+              `(Total: ${bold(remoteOnair.episodes.length)} episodes)`
           );
-          for (const ep of anime.episodes) {
+          for (const ep of remoteOnair.episodes) {
             logger.tab.info(`${dim(formatEP(ep.ep))} ${ep.playURL}`);
           }
         }
       }
     } catch {
-      logger.error(`Fail connecting server (baseURL or token may be wrong)`);
+      logger.error(`Fail connecting server`);
     }
   }
 }
@@ -431,6 +445,10 @@ function resolveEP(eps: EpisodeList) {
     }
     return map;
   }
+}
+
+function formatTitle(title: string, season: number) {
+  return titleColor(title + (season > 1 ? ` Season ${season}` : ''));
 }
 
 function now() {

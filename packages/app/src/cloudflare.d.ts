@@ -4,9 +4,6 @@ import 'vite-plugin-cloudflare-functions/client';
 
 declare module 'vite-plugin-cloudflare-functions/client' {
   interface PagesResponseBody {
-    '/api/play': {
-      GET: CloudflareResponseBody<typeof import('../../functions/api/play')['onRequestGet']>;
-    };
     '/api/**': {
       ALL: CloudflareResponseBody<typeof import('../../functions/api/_middleware')['onRequest']>;
     };
@@ -15,12 +12,15 @@ declare module 'vite-plugin-cloudflare-functions/client' {
       POST: CloudflareResponseBody<typeof import('../../functions/api/admin/anime')['onRequestPost']>;
     };
     '/api/admin/token': {
-      DELETE: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestDelete']>;
       GET: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestGet']>;
       POST: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestPost']>;
+      DELETE: CloudflareResponseBody<typeof import('../../functions/api/admin/token')['onRequestDelete']>;
     };
     '/api/anime/:bgmId': {
       GET: CloudflareResponseBody<typeof import('../../functions/api/anime/[bgmId]')['onRequestGet']>;
+    };
+    '/api/play': {
+      GET: CloudflareResponseBody<typeof import('../../functions/api/play')['onRequestGet']>;
     };
     '/api/user/sync': {
       GET: CloudflareResponseBody<typeof import('../../functions/api/user/sync')['onRequestGet']>;
