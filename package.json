@@ -22,7 +22,7 @@
     "@types/node": "^18.6.5",
     "optc": "^0.3.6",
     "prettier": "^2.7.1",
-    "typescript": "^4.7.4",
+    "typescript": "^4.8.2",
     "vite": "^3.0.9",
     "vitest": "^0.22.1"
   },
