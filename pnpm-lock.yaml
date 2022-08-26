@@ -89,7 +89,7 @@ importers:
       vite-ssg: ^0.20.2
       vitest: ^0.22.1
       vue: ^3.2.37
-      vue-router: ^4.1.4
+      vue-router: ^4.1.5
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.40.1
       workbox-window: ^6.5.4
@@ -105,7 +105,7 @@ importers:
       plyr: 3.7.2
       scrollreveal: 4.0.9
       vue: 3.2.37
-      vue-router: 4.1.4_vue@3.2.37
+      vue-router: 4.1.5_vue@3.2.37
       vue-scrollto: 2.20.0
     devDependencies:
       '@iconify-json/carbon': 1.1.7
@@ -130,7 +130,7 @@ importers:
       vite-plugin-inspect: 0.6.0_vite@3.0.9
       vite-plugin-pages: 0.25.0_vite@3.0.9
       vite-plugin-pwa: 0.12.3_f7se6o6eqkwcix4u3svh6mkvda
-      vite-ssg: 0.20.2_xurzx7tuarc7mdzvuswetigddy
+      vite-ssg: 0.20.2_vnf24kjtnrmxqevgx2bvtbop4q
       vitest: 0.22.1
       vue-tsc: 0.40.1_typescript@4.8.2
       workbox-window: 6.5.4
@@ -8035,7 +8035,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-ssg/0.20.2_xurzx7tuarc7mdzvuswetigddy:
+  /vite-ssg/0.20.2_vnf24kjtnrmxqevgx2bvtbop4q:
     resolution: {integrity: sha512-XtBgJEDrN9cL6pgzXvThrTS7Pm5zwZZnBt50EmL/O+QbdhD/ZjCbcp4GmIrWFBWjVBFcgfwgPccmWv3DAF6s/w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -8059,7 +8059,7 @@ packages:
       prettier: 2.7.1
       vite: 3.0.9
       vue: 3.2.37
-      vue-router: 4.1.4_vue@3.2.37
+      vue-router: 4.1.5_vue@3.2.37
       yargs: 17.5.1
     transitivePeerDependencies:
       - bufferutil
@@ -8190,8 +8190,8 @@ packages:
     dependencies:
       vue: 3.2.37
 
-  /vue-router/4.1.4_vue@3.2.37:
-    resolution: {integrity: sha512-UgYen33gOtwT3cOG1+yRen+Brk9py8CSlC9LEa3UjvKZ4EAoSo8NjZPDeDnmNerfazorHIJG1NC7qdi1SuQJnQ==}
+  /vue-router/4.1.5_vue@3.2.37:
+    resolution: {integrity: sha512-IsvoF5D2GQ/EGTs/Th4NQms9gd2NSqV+yylxIyp/OYp8xOwxmU8Kj/74E9DTSYAyH5LX7idVUngN3JSj1X4xcQ==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
