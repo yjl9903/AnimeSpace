@@ -13,6 +13,7 @@ import './magnet';
 
 app
   .command('space', 'Open AnimePaste space directory and run script on it')
+  .option('--editor', 'Open AnimePaste space editor')
   .action(async (option) => {
     const cmd = option['--'];
     if (cmd.length > 0) {
@@ -23,10 +24,12 @@ app
       });
     } else {
       console.log(context.root);
-      execSync(`code "${context.root}"`, {
-        env: process.env,
-        stdio: ['pipe', 'pipe', 'pipe'],
-        windowsHide: true
-      });
+      if (option.editor) {
+        execSync(`code "${context.root}"`, {
+          env: process.env,
+          stdio: ['pipe', 'pipe', 'pipe'],
+          windowsHide: true
+        });
+      }
     }
   });
