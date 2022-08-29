@@ -22,8 +22,19 @@ export class AdminClient {
    */
   private dirty: boolean = false;
 
+  /**
+   * Filter all the ids of onair bangumis
+   */
   readonly onairIds: Set<string> | undefined;
+
+  /**
+   * Current onair bangumis
+   */
   readonly onair: OnairAnime[] = [];
+
+  /**
+   * Onair bangumis to be uploaded
+   */
   readonly newOnair: OnairAnime[] = [];
 
   constructor(option: UserOption) {

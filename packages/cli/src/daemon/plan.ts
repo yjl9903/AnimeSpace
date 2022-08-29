@@ -1,11 +1,16 @@
 import { link } from 'kolorist';
 import { subMonths } from 'date-fns';
 
+import type { Episode } from '@animepaste/database';
+
 import type { RawPlan } from '../types';
 
 import { context } from '../context';
+import { groupBy } from '../utils';
 import { bangumiLink } from '../anime';
 import { DOT, logger, padRight, titleColor } from '../logger';
+
+import { LOCALE } from './constant';
 
 export class Plan {
   private readonly baseURL: string;
@@ -104,6 +109,38 @@ export class Plan {
         logger.println(`${DOT} ${padded[i]} ${bgmLink}`);
       }
     }
+  }
+
+  genEpisodes(allEpisodes: Episode[], fansubOrder: string[]) {
+    const fansubs = groupBy(allEpisodes, (ep) => ep.fansub);
+    const episodes: Episode[] = [];
+    for (let epId = 1, found = true; found; epId++) {
+      found = false;
+      for (const fs of fansubOrder) {
+        const eps = fansubs.getOrDefault(fs, []).filter((ep) => ep.ep === epId);
+        if (eps.length === 1) {
+          found = true;
+          episodes.push(eps[0]);
+        } else if (eps.length > 1) {
+          eps.sort((a, b) => {
+            if (a.quality !== b.quality) {
+              return b.quality - a.quality;
+            }
+            const gL = (a: Episode) => (a.language === LOCALE ? 1 : 0);
+            const dL = gL(b) - gL(a);
+            if (dL !== 0) return dL;
+            return (
+              new Date(b.magnet.createdAt).getTime() -
+              new Date(a.magnet.createdAt).getTime()
+            );
+          });
+          found = true;
+          episodes.push(eps[0]);
+        }
+        if (found) break;
+      }
+    }
+    return episodes;
   }
 }
 

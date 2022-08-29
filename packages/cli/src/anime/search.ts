@@ -1,10 +1,12 @@
 import { createRequire } from 'node:module';
 
 import prompts from 'prompts';
+import createDebug from 'debug';
 import { distance } from 'fastest-levenshtein';
-import { format, subMonths } from 'date-fns';
-import { debug as createDebug } from 'debug';
 import { link, bold, dim } from 'kolorist';
+import { format, subMonths } from 'date-fns';
+
+import type { BaseBangumi, ExtendBangumi } from '@animepaste/bangumi';
 
 import type { CustomBangumi, AnimeType } from '../types';
 
@@ -18,7 +20,6 @@ import {
   titleColor
 } from '../logger';
 
-import { Anime } from './anime';
 import { bangumiLink } from './utils';
 
 interface SearchOption {
@@ -28,6 +29,7 @@ interface SearchOption {
   year?: string;
   month?: string;
   title?: string;
+  fansub?: string[];
 
   // Filter outdated resources with same name
   beginDate?: Date;
@@ -48,16 +50,13 @@ export async function userSearch(
   option: SearchOption
 ) {
   const bgms = await promptSearch(anime, option);
-  const animes: Anime[] = [];
   for (const bgm of bgms) {
-    const anime = (await context.getAnime(bgm.bgmId)) ?? Anime.bangumi(bgm);
     const keywords = getDefaultKeywords(bgm);
     option.beginDate = subMonths(new Date(bgm.begin), 1);
-    const res = await search(anime, keywords, option);
-    if (res) animes.push(res);
+    await search(bgm, keywords, option);
   }
-  if (option.plan && animes.length > 0) {
-    outputPlan(animes);
+  if (option.plan && bgms.length > 0) {
+    await outputPlan(bgms);
   }
 }
 
@@ -67,48 +66,61 @@ export async function daemonSearch(
   option: SearchOption = { type: 'tv' }
 ) {
   const items = await importBgmdata();
-  const animes: Anime[] = [];
+
   let found = false;
   for (const bgm of items) {
     if (bgmId === bgm.bgmId) {
       found = true;
-      const anime = (await context.getAnime(bgm.bgmId)) ?? Anime.bangumi(bgm);
       const keywords = optionKeywords ?? getDefaultKeywords(bgm);
       option.beginDate = subMonths(new Date(bgm.begin), 1);
-      const res = await search(anime, keywords, option);
-      if (res) animes.push(res);
+      await search(bgm, keywords, option);
+
+      if (option.plan) {
+        await outputPlan([bgm]);
+      }
+
       break;
     }
   }
 
-  // Fallback to manually specify
-  if (!found && option.title) {
-    const anime = Anime.empty(option.title, bgmId);
-    const keywords = [...(optionKeywords ?? []), option.title];
-    const res = await search(anime, keywords, option);
-    if (res) animes.push(res);
-  }
+  // Fallback to bgm.tv
+  if (!found) {
+    const keywords = [...(optionKeywords ?? [])];
+    if (option.title && !option.plan) {
+      await search({ bgmId, titleCN: option.title }, keywords, option);
+    } else if (!option.title) {
+      debug(`Fallback to search ${bgmId} on bgm.tv`);
 
-  if (option.plan) {
-    outputPlan(animes);
+      const { BgmClient } = await import('@animepaste/bangumi/bgm');
+      const client = new BgmClient();
+      client.setupUserAgent();
+
+      const bgm = await client.fetchSubject(bgmId);
+      keywords.push(bgm.title, bgm.titleCN);
+
+      await search(bgm, keywords, option);
+
+      if (option.plan) {
+        await outputPlan([bgm]);
+      }
+    }
   }
 }
 
 export async function search(
-  anime: Anime,
+  bgm: { bgmId: string; titleCN: string },
   keywords: string[],
   option: SearchOption = { type: 'tv' }
 ) {
   logger.empty();
-  // logger.info(lightGreen(anime.title) + ' ' + `(${bangumiLink(anime.bgmId)})`);
   logger.info(
     okColor('Refresh  ') +
-      titleColor(anime.title) +
+      titleColor(bgm.titleCN) +
       '    ' +
-      `(${bangumiLink(anime.bgmId)})`
+      `(${bangumiLink(bgm.bgmId)})`
   );
 
-  debug(`Search "${anime.title}"`);
+  debug(`Search "${bgm.titleCN}"`);
   for (const keyword of keywords) {
     debug('- ' + keyword);
   }
@@ -117,34 +129,41 @@ export async function search(
     limit: option.beginDate,
     listener: IndexListener
   });
+  for (const resource of result) {
+    // Disable download MKV
+    if (resource.title.indexOf('MKV') !== -1) continue;
+    // Disable download HEVC
+    if (resource.title.indexOf('HEVC') !== -1) continue;
+
+    await context.episodeStore.createEpisode(bgm.bgmId, resource);
+  }
 
   if (option.raw) {
     printMagnets(result);
-    return;
-  }
-
-  anime.addSearchResult(result);
-  await context.updateAnime(anime);
-
-  const map = groupBy(anime.episodes, (ep) => ep.fansub);
-  for (const [key, eps] of map) {
-    logger.tab.info(bold(key));
-    eps.sort((a, b) => a.ep - b.ep);
-    for (const ep of eps) {
-      logger.tab.tab.info(
-        `${dim(formatEP(ep.ep))} ${link(
-          ep.magnetName,
-          context.magnetStore.idToLink(ep.magnetId)
-        )}`
-      );
+  } else {
+    const episodes = await context.episodeStore.listEpisodes(bgm.bgmId);
+    const map = groupBy(episodes, (ep) => ep.fansub);
+    for (const [key, eps] of map) {
+      logger.tab.info(bold(key));
+      eps.sort((a, b) => a.ep - b.ep);
+      for (const ep of eps) {
+        logger.tab.tab.info(
+          `${dim(formatEP(ep.ep))} ${link(
+            ep.magnet.title,
+            context.magnetStore.idToLink(ep.magnet.id)
+          )}`
+        );
+      }
     }
   }
-
-  return anime;
 }
 
-function outputPlan(animes: Anime[]) {
-  const date = new Date(Math.min(...animes.map((a) => a.date.getTime())));
+async function outputPlan(
+  animes: (BaseBangumi & Pick<ExtendBangumi, 'titleCN' | 'begin'>)[]
+) {
+  const date = new Date(
+    Math.min(...animes.map((a) => new Date(a.begin).getTime()))
+  );
 
   logger.empty();
   logger.println(`--- ${format(new Date(), 'yyyy-MM-dd 新番放送计划')} ---`);
@@ -156,11 +175,15 @@ function outputPlan(animes: Anime[]) {
   logger.println(`state: onair`);
   logger.empty();
   logger.println(`onair:`);
+
   for (const anime of animes) {
-    logger.tab.println(`- title: ${anime.title}`);
+    const episodes = await context.episodeStore.listEpisodes(anime.bgmId);
+
+    logger.tab.println(`- title: ${anime.titleCN}`);
     logger.tab.println(`  bgmId: '${anime.bgmId}'`);
     logger.tab.println(`  fansub:`);
-    const map = groupBy(anime.episodes, (ep) => ep.fansub);
+
+    const map = groupBy(episodes, (ep) => ep.fansub);
     for (const [key] of map) {
       logger.tab.tab.println(`  - ${key}`);
     }
@@ -238,11 +261,7 @@ async function promptBgm(
   return bgm ?? [];
 }
 
-export async function searchInBgmdata(
-  name: string,
-  option: SearchOption,
-  length = 5
-) {
+async function searchInBgmdata(name: string, option: SearchOption, length = 5) {
   const items = await importBgmdata(option);
 
   const include: CustomBangumi[] = [];
@@ -288,7 +307,7 @@ export async function searchInBgmdata(
   }
 }
 
-export async function importBgmdata(
+async function importBgmdata(
   option: SearchOption = { type: 'tv' }
 ): Promise<CustomBangumi[]> {
   const require = createRequire(import.meta.url);

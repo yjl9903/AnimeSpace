@@ -2,6 +2,8 @@ import path from 'node:path';
 import { bold, dim, link } from 'kolorist';
 import { format, subMonths } from 'date-fns';
 
+import type { Episode } from '@animepaste/database';
+
 import type { Store, VideoInfo } from '../io';
 import type { OnairPlan, EpisodeList } from '../types';
 
@@ -16,8 +18,8 @@ import {
   okColor
 } from '../logger';
 import { OnairEpisode, AdminClient } from '../client';
+import { daemonSearch, bangumiLink } from '../anime';
 import { TorrentClient, useStore, checkVideo } from '../io';
-import { Anime, Episode, daemonSearch, bangumiLink } from '../anime';
 
 import { Plan } from './plan';
 import { debug } from './constant';
@@ -97,14 +99,23 @@ export class Daemon {
   }
 
   private async refreshEpisode() {
+    this.client = await AdminClient.create(
+      new Set(new Set(this.plan.onairs().map((o) => o.bgmId)))
+    );
+    await this.client.fetchOnair();
+
     let count = 0;
 
     for (const plan of this.plan) {
       for (const onair of plan.onair) {
         // Skip finished plan
-        if (plan.state === 'finish' && (await context.getAnime(onair.bgmId))) {
+        if (
+          plan.state === 'finish' &&
+          this.client.onair.find((o) => o.bgmId === onair.bgmId)
+        ) {
           continue;
         }
+
         // Continue outside onair anime
         if (onair.link && typeof onair.link === 'string') {
           continue;
@@ -121,21 +132,13 @@ export class Daemon {
           title: onair.title
         });
 
-        const anime = await context.getAnime(onair.bgmId);
-
-        if (anime) {
-          logger.info(
-            okColor('Refresh  ') +
-              formatTitle(onair.title, onair.season) +
-              okColor(' OK ') +
-              `(${bangumiLink(onair.bgmId)})`
-          );
-          count++;
-        } else {
-          throw new Error(
-            `Fail to init ${onair.title} (${bangumiLink(onair.bgmId)})`
-          );
-        }
+        logger.info(
+          okColor('Refresh  ') +
+            formatTitle(onair.title, onair.season) +
+            okColor(' OK ') +
+            `(${bangumiLink(onair.bgmId)})`
+        );
+        count++;
       }
     }
 
@@ -146,10 +149,6 @@ export class Daemon {
 
   private async refreshStore() {
     this.store = await useStore('ali')();
-    this.client = await AdminClient.create(
-      new Set(new Set(this.plan.onairs().map((o) => o.bgmId)))
-    );
-    await this.client.fetchOnair();
 
     for (const plan of this.plan) {
       for (const onair of plan.onair) {
@@ -171,17 +170,9 @@ export class Daemon {
           continue;
         }
 
-        const anime = await context.getAnime(onair.bgmId);
-        if (!anime) {
-          logger.error(
-            `Fail to get ${onair.title} (${bangumiLink(onair.bgmId)})`
-          );
-          continue;
-        }
-
         logger.empty();
 
-        await this.refreshAnime(anime, onair);
+        await this.refreshAnime(onair);
         await this.syncPlaylist(onair);
       }
     }
@@ -189,7 +180,7 @@ export class Daemon {
     await this.syncPlaylist();
   }
 
-  private async refreshAnime(anime: Anime, onair: OnairPlan) {
+  private async refreshAnime(onair: OnairPlan) {
     const epLink =
       onair.link && typeof onair.link !== 'string'
         ? resolveEP(onair.link)
@@ -200,19 +191,28 @@ export class Daemon {
       : new Map<number, string>();
     const epMagnet = (
       await Promise.all(
-        [...givenMagnet.entries()].map(async ([ep, magnet]) => {
-          const m = await context.magnetStore.findById(magnet);
-          if (!!m) {
-            const parsedEP = anime.parseEpisode(m);
-            parsedEP && (parsedEP.ep = ep);
-            return parsedEP;
+        [...givenMagnet.entries()].map(async ([ep, magnetId]) => {
+          const magnet = await context.magnetStore.findById(magnetId);
+          if (!!magnet) {
+            const res = await context.episodeStore.createEpisode(
+              onair.bgmId,
+              magnet
+            );
+            if (res && res.ep === ep) {
+              return res;
+            } else {
+              return undefined;
+            }
           }
         })
       )
     ).filter(Boolean) as Episode[];
 
-    const episodes = anime
-      .genEpisodes(onair.fansub ?? [])
+    const episodes = this.plan
+      .genEpisodes(
+        await context.episodeStore.listEpisodes(onair.bgmId),
+        onair.fansub ?? []
+      )
       .filter((ep) => !givenMagnet.has(ep.ep))
       .concat(epMagnet)
       .filter((ep) => !epLink.has(ep.ep));
@@ -226,9 +226,9 @@ export class Daemon {
     for (const ep of episodes) {
       logger.tab.info(
         `${dim(formatEP(ep.ep))} ${
-          ep.magnetName
-            ? link(ep.magnetName, context.magnetStore.idToLink(ep.magnetId))
-            : context.magnetStore.idToLink(ep.magnetId)
+          ep.magnet.title
+            ? link(ep.magnet.title, context.magnetStore.idToLink(ep.magnet.id))
+            : context.magnetStore.idToLink(ep.magnet.id)
         }`
       );
     }
@@ -245,6 +245,7 @@ export class Daemon {
     };
 
     const serverOnair = this.client.onair.find((o) => o.bgmId === onair.bgmId);
+    debug(serverOnair);
     const getServerMagnet = (magnet: InlineMagnet) => {
       if (serverOnair) {
         for (const ep of serverOnair.episodes) {
@@ -270,17 +271,17 @@ export class Daemon {
     const magnets: InlineMagnet[] = (
       await Promise.all(
         episodes.map(async (ep) => {
-          const magnet = await context.magnetStore.findById(ep.magnetId);
+          const magnet = await context.magnetStore.findById(ep.magnet.id);
           if (!magnet) {
             logger.error(
               `Can not find magnet (ID: ${link(
-                ep.magnetId,
-                context.magnetStore.idToLink(ep.magnetId)
+                ep.magnet.id,
+                context.magnetStore.idToLink(ep.magnet.id)
               )})`
             );
           }
           return {
-            magnetId: ep.magnetId,
+            magnetId: ep.magnet.id,
             magnetURI: magnet?.magnet ?? '',
             filename: formatEpisodeName(onair, ep)
           };
@@ -325,7 +326,6 @@ export class Daemon {
         const serverMagnet = getServerMagnet(magnet);
         if (serverMagnet) {
           debug(`${magnet.filename} has been uploaded`);
-          debug(serverMagnet);
           const foundVideo = await context.videoStore.findVideo(
             serverMagnet.storage.type!,
             serverMagnet.storage.videoId!
@@ -335,7 +335,7 @@ export class Daemon {
             continue;
           }
         } else {
-          debug(`Can not find ${magnet.filename}, and try upload`);
+          debug(`Can not find ${magnet.filename} on server, and try uploading`);
         }
 
         // Do upload
@@ -369,7 +369,7 @@ export class Daemon {
     const syncEpisodes: OnairEpisode[] = episodes.map((ep, idx) => ({
       ep: ep.ep,
       quality: ep.quality,
-      creationTime: ep.creationTime,
+      creationTime: ep.magnet.createdAt.toISOString(),
       playURL: videoInfos[idx].playUrl[0],
       storage: {
         type: videoInfos[idx].platform,

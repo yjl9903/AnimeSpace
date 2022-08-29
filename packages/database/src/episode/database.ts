@@ -1,6 +1,9 @@
-import type { Episode as RawEpisode, Resource } from '@prisma/client';
-
 import createDebug from 'debug';
+import {
+  type Episode as RawEpisode,
+  type Resource,
+  Prisma
+} from '@prisma/client';
 
 import { MagnetParser } from '../parser';
 import { AbstractDatabase } from '../database';
@@ -26,24 +29,39 @@ export class EpisodeStore extends AbstractDatabase {
     };
   }
 
-  async createEpisode(bgmId: string, payload: Resource) {
-    const parsed = this.parser.parse(payload.title);
-    debug(payload.title + ' => ' + JSON.stringify(parsed, null, 2));
+  async createEpisode(
+    bgmId: string,
+    magnet: Resource
+  ): Promise<Episode | undefined> {
+    const parsed = this.parser.parse(magnet.title);
+    debug(magnet.title + ' => ' + JSON.stringify(parsed, null, 2));
 
-    return this.toEpisode(
-      await this.prisma.episode.create({
-        data: {
-          magnetId: payload.id,
-          bgmId: +bgmId,
-          ep: parsed.ep,
-          fansub: payload.fansub,
-          attrs: JSON.stringify(parsed.tags ?? [])
-        },
-        include: {
-          magnet: true
+    try {
+      return this.toEpisode(
+        await this.prisma.episode.create({
+          data: {
+            magnetId: magnet.id,
+            bgmId: +bgmId,
+            ep: parsed.ep,
+            fansub: magnet.fansub,
+            attrs: JSON.stringify(parsed.tags ?? [])
+          },
+          include: {
+            magnet: true
+          }
+        })
+      );
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
+          debug(`Found episode: ${magnet.title}`);
+        } else {
+          debug(error);
         }
-      })
-    );
+      } else {
+        debug(error);
+      }
+    }
   }
 
   async findEpisode(magnetId: string): Promise<Episode | undefined> {
@@ -65,9 +83,7 @@ export class EpisodeStore extends AbstractDatabase {
   async listEpisodes(bgmId: string): Promise<Episode[]> {
     const eps = await this.prisma.episode.findMany({
       where: {
-        bgmId: {
-          equals: +bgmId
-        }
+        bgmId: +bgmId
       },
       include: {
         magnet: true

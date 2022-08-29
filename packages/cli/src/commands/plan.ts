@@ -59,59 +59,57 @@ app
     const onair = client.onair.find(findFn);
 
     if (onair && plan) {
-      const anime = await context.getAnime(plan.bgmId);
+      const episodes = await context.episodeStore.listEpisodes(onair.bgmId);
 
-      if (anime) {
-        const localRoot = await context.makeLocalAnimeRoot(onair.title);
-        const tasks = filterDef(
-          onair.episodes.map((onairEp) => {
-            if ('storage' in onairEp) {
-              const ep = anime.episodes.find(
-                (ep) => ep.magnetId === onairEp.storage.source.magnetId
-              );
-              if (ep) {
-                return {
-                  filepath: path.join(localRoot, formatEpisodeName(plan, ep)),
-                  url: onairEp.playURL,
-                  ep
-                };
-              } else {
-                // Local episodes not found
-                return undefined;
-              }
+      const localRoot = await context.makeLocalAnimeRoot(onair.title);
+      const tasks = filterDef(
+        onair.episodes.map((onairEp) => {
+          if ('storage' in onairEp) {
+            const ep = episodes.find(
+              (ep) => ep.magnet.id === onairEp.storage.source.magnetId
+            );
+            if (ep) {
+              return {
+                filepath: path.join(localRoot, formatEpisodeName(plan, ep)),
+                url: onairEp.playURL,
+                ep
+              };
             } else {
-              // Online Episodes
+              // Local episodes not found
               return undefined;
             }
-          })
-        );
+          } else {
+            // Online Episodes
+            return undefined;
+          }
+        })
+      );
 
+      logger.println(
+        `${okColor('Download')} ${titleColor(onair.title)}    (${bangumiLink(
+          onair.bgmId
+        )})`
+      );
+      for (const task of tasks) {
         logger.println(
-          `${okColor('Download')} ${titleColor(anime.title)}    (${bangumiLink(
-            anime.bgmId
-          )})`
+          `  ${dim(formatEP(task.ep.ep))} ${link(
+            path.basename(task.filepath),
+            task.url
+          )}`
         );
-        for (const task of tasks) {
-          logger.println(
-            `  ${dim(formatEP(task.ep.ep))} ${link(
-              path.basename(task.filepath),
-              task.url
-            )}`
-          );
-        }
+      }
 
-        if (
-          await promptConfirm(
-            `Are you sure to download these ${tasks.length} videos`
-          )
-        ) {
-          await download(...tasks);
-          logger.println(
-            `${okColor('Download')} ${titleColor(anime.title)} ${okColor(
-              'OK'
-            )} (${bangumiLink(anime.bgmId)})`
-          );
-        }
+      if (
+        await promptConfirm(
+          `Are you sure to download these ${tasks.length} videos`
+        )
+      ) {
+        await download(...tasks);
+        logger.println(
+          `${okColor('Download')} ${titleColor(onair.title)} ${okColor(
+            'OK'
+          )} (${bangumiLink(onair.bgmId)})`
+        );
       }
     }
   });

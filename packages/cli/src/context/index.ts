@@ -4,12 +4,10 @@ import { homedir } from 'node:os';
 
 import { load, dump } from 'js-yaml';
 
-import { MagnetStore, VideoStore } from '@animepaste/database';
+import { EpisodeStore, MagnetStore, VideoStore } from '@animepaste/database';
 
-import type { CliOption, RawPlan } from '../types';
 import type { VideoStorePlatform } from '../io';
-
-import { Anime } from '../anime';
+import type { CliOption, RawPlan } from '../types';
 
 export interface GlobalConfig {
   plan: string | string[];
@@ -55,13 +53,12 @@ export class GlobalContex {
   readonly databaseFilepath: string;
 
   readonly videoStore: VideoStore<VideoStorePlatform>;
+  readonly episodeStore: EpisodeStore;
   readonly magnetStore: MagnetStore;
 
   private _cacheRoot: string;
   private _localRoot: string;
-
   private configCache: any;
-  private animeCache: Map<string, Anime> = new Map();
 
   constructor() {
     this.root =
@@ -75,6 +72,7 @@ export class GlobalContex {
     this.databaseFilepath = path.join(this.root, 'store.db');
     this.videoStore = new VideoStore({ url: this.databaseFilepath });
     this.magnetStore = new MagnetStore({ url: this.databaseFilepath });
+    this.episodeStore = new EpisodeStore({ url: this.databaseFilepath });
   }
 
   get localRoot() {
@@ -127,16 +125,6 @@ export class GlobalContex {
       }
     }
 
-    if (fs.existsSync(this.anime)) {
-      const animes = JSON.parse(
-        await fs.readFile(this.anime, 'utf-8')
-      ) as Anime[];
-      this.animeCache.clear();
-      for (const anime of animes) {
-        this.animeCache.set(anime.bgmId, Anime.copy(anime));
-      }
-    }
-
     await this.magnetStore.ensure();
     await this.loadConfig();
   }
@@ -174,21 +162,6 @@ export class GlobalContex {
 
   async getStoreConfig<T = any>(key: string): Promise<T> {
     return (await this.loadConfig()).store[key];
-  }
-
-  // -----------
-
-  /**
-   * Anime
-   */
-  async getAnime(bgmId: string): Promise<Anime | undefined> {
-    return this.animeCache.get(bgmId);
-  }
-
-  async updateAnime(anime: Anime) {
-    this.animeCache.set(anime.bgmId, anime);
-    const content = [...this.animeCache.values()];
-    await fs.writeFile(this.anime, JSON.stringify(content, null, 2), 'utf-8');
   }
 
   // -----------

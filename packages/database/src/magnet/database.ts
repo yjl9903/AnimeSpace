@@ -154,11 +154,10 @@ export class MagnetStore extends AbstractDatabase {
           // debug(
           //   `There is a unique constraint violation when inserting resource`
           // );
-          debug(`Title: ${payload.title}`);
+          debug(`Found title: ${payload.title}`);
 
           // Update keywords
           if (payload.keywords) {
-            debug(JSON.parse(payload.keywords));
             try {
               await this.prisma.resource.update({
                 where: {
@@ -173,7 +172,11 @@ export class MagnetStore extends AbstractDatabase {
               debug(error);
             }
           }
+        } else {
+          debug(error);
         }
+      } else {
+        debug(error);
       }
     }
   }

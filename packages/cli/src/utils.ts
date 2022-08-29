@@ -1,6 +1,7 @@
 import { ImmutableMap, MutableMap } from 'lbear';
 
-import type { Episode } from './anime';
+import type { Episode } from '@animepaste/database';
+
 import type { OnairPlan } from './types';
 
 export function formatEP(ep: number, fill = '0') {
