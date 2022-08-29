@@ -142,7 +142,11 @@ export class GlobalContex {
 
   async getPlans(): Promise<RawPlan[]> {
     const config = await this.loadConfig<GlobalConfig>();
-    const planPath = Array.isArray(config.plan) ? config.plan : [config.plan];
+    const planPath = [
+      // @ts-ignore
+      ...(Array.isArray(config.plans) ? config.plans : [config.plans]),
+      ...(Array.isArray(config.plan) ? config.plan : [config.plan])
+    ];
     const planBody: RawPlan[] = [];
     for (const plan of planPath) {
       const planPath = path.join(this.root, plan);
