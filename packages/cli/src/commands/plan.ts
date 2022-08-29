@@ -137,6 +137,7 @@ app
     if (option.index) {
       await context.magnetStore.index({ listener: IndexListener });
     }
+    logger.config.level = false;
     await userSearch(anime, option);
   });
 
@@ -164,6 +165,7 @@ app
       logger.println(`${bold('Begin')} ${bgm.begin}`);
     }
 
+    logger.config.level = false;
     await daemonSearch(id, [bgm.title, bgm.titleCN, ...keywords], {
       ...option,
       title: bgm.titleCN,

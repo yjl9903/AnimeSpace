@@ -7,6 +7,11 @@ import { context } from '../context';
 
 export * from './constant';
 
+const GlobalConfig = {
+  enable: true,
+  level: true
+};
+
 interface Logger {
   tab: Logger;
 
@@ -16,18 +21,13 @@ interface Logger {
   error: (message: string, ...args: string[]) => void;
   empty: () => void;
 
-  enable: () => void;
-  disable: () => void;
+  config: typeof GlobalConfig;
 }
 
 interface LoggerOption {
   prefix: string;
   tabwidth: number;
 }
-
-const GlobalConfig = {
-  enable: true
-};
 
 export const logger = factory({ prefix: '  ' });
 
@@ -43,17 +43,20 @@ function factory(option: Partial<LoggerOption> = {}) {
   };
   const info: Logger['info'] = (message, ...args) => {
     if (GlobalConfig.enable) {
-      console.log(prefix + lightBlue('Info') + ' ' + tab + message, ...args);
+      const level = GlobalConfig.level ? lightBlue('Info') + ' ' : '';
+      console.log(prefix + level + tab + message, ...args);
     }
   };
   const warn: Logger['warn'] = (message, ...args) => {
     if (GlobalConfig.enable) {
-      console.log(prefix + lightYellow('Warn') + ' ' + tab + message, ...args);
+      const level = GlobalConfig.level ? lightYellow('Warn') + ' ' : '';
+      console.log(prefix + level + tab + message, ...args);
     }
   };
   const error: Logger['error'] = (message, ...args) => {
     if (GlobalConfig.enable) {
-      console.log(prefix + lightRed('Error') + ' ' + tab + message, ...args);
+      const level = GlobalConfig.level ? lightRed('Error') + ' ' : '';
+      console.log(prefix + level + tab + message, ...args);
     }
   };
 
@@ -68,12 +71,7 @@ function factory(option: Partial<LoggerOption> = {}) {
           console.log();
         }
       },
-      enable() {
-        GlobalConfig.enable = true;
-      },
-      disable() {
-        GlobalConfig.enable = false;
-      }
+      config: GlobalConfig
     } as Logger,
     {
       get(target, key, receiver) {
