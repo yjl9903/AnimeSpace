@@ -6,8 +6,7 @@
   "scripts": {
     "build": "vite-ssg build",
     "dev": "cross-env DEV=true ENABLE_PUBLIC=true vite",
-    "preview": "vite preview",
-    "typecheck": "vue-tsc --noEmit -p package.json --resolveJsonModule --skipLibCheck"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@animepaste/bangumi": "workspace:*",
