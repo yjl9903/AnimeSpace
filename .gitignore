@@ -15,6 +15,7 @@ dist-ssr
 .vite-ssg-temp
 .cloudflare
 .mf
+.turbo
 wrangler-local-state
 /functions
 
