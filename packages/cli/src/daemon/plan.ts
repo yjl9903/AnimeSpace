@@ -84,26 +84,24 @@ export class Plan {
     const bgms: string[] = [];
     for (const plan of this.plans) {
       for (const onair of plan.onair) {
+        const onlineLink = !!this.baseURL
+          ? context.formatOnlineURL(this.baseURL, onair.bgmId)
+          : '';
+        const title =
+          onair.title + (onair.season > 1 ? ` Season ${onair.season}` : '');
         titles.push(
-          onair.title + (onair.season > 1 ? ` Season ${onair.season}` : '')
+          !!onlineLink ? link(titleColor(title), onlineLink) : titleColor(title)
         );
         bgms.push(onair.bgmId);
       }
     }
     const padded = padRight(titles);
     for (let i = 0; i < padded.length; i++) {
-      const onlineLink = !!this.baseURL
-        ? context.formatOnlineURL(this.baseURL, bgms[i])
-        : '';
-      const title = !!onlineLink
-        ? link(titleColor(padded[i]), onlineLink)
-        : titleColor(padded[i]);
       const bgmLink = `(${bangumiLink(bgms[i])})`;
-
       if (context.isDaemon) {
-        logger.info(`Onair ${title} ${bgmLink}`);
+        logger.info(`Onair ${padded[i]} ${bgmLink}`);
       } else {
-        logger.println(`${DOT} ${title} ${bgmLink}`);
+        logger.println(`${DOT} ${padded[i]} ${bgmLink}`);
       }
     }
   }
