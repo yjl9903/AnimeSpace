@@ -89,12 +89,14 @@ export class GlobalContex {
     this.cliOption = option;
 
     await fs.ensureDir(this.root);
-    await fs.ensureDir(path.join(this.root, 'anime'));
-    await fs.ensureDir(path.join(this.root, 'cache'));
-    await fs.ensureDir(path.join(this.root, 'plans'));
+    await Promise.all([
+      fs.ensureDir(path.join(this.root, 'anime')),
+      fs.ensureDir(path.join(this.root, 'cache')),
+      fs.ensureDir(path.join(this.root, 'plans'))
+    ]);
 
     if (!(await fs.pathExists(this.config))) {
-      fs.writeFile(
+      await fs.writeFile(
         this.config,
         dump(DefaultGlobalConfig, { indent: 2 })
           .replace('server', '\nserver')
