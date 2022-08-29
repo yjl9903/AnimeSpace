@@ -34,11 +34,6 @@ jobs:
         run: pnpm build:all
 
       - name: Test
-        run: pnpm test
-
-#       - name: Deploy
-#         uses: peaceiris/actions-gh-pages@v3
-#         if: ${{ github.event_name == 'push' }}
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: ./dist
+        run: |
+          pnpm typecheck
+          pnpm test
