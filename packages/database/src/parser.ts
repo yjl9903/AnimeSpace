@@ -226,8 +226,8 @@ export class MagnetParser {
 
   private extractEP(title: string) {
     for (const RE of [
-      /\[(\d+)([vV]\d+)?\]/,
-      /【(\d+)([vV]\d+)?】/,
+      /\[(\d+)(_?[vV]\d+)?\]/,
+      /【(\d+)(_?[vV]\d+)?】/,
       /- (\d+) /,
       /- (\d+)$/,
       /第(\d+)話/,
