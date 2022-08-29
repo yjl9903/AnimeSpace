@@ -38,7 +38,7 @@ model Video {
 
 model Epsiode {
   magnet   Resource @relation(fields: [magnetId], references: [id])
-  magnetId String    @id
+  magnetId String   @id
 
   bgmId  Int
   ep     Int    @default(1)
