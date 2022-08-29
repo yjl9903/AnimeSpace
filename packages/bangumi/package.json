@@ -58,6 +58,14 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./types.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
   "bin": {
     "bangumi": "./cli.mjs"
   },
