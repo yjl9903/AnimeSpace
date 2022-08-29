@@ -1,42 +1,49 @@
 import type { Episode as RawEpisode, Resource } from '@prisma/client';
 
+import createDebug from 'debug';
+
+import { MagnetParser } from '../parser';
 import { AbstractDatabase } from '../database';
 
-import type { EpisodePayload, Episode } from './types';
+import type { Episode } from './types';
 
 export type { Episode };
 
+const debug = createDebug('anime:database');
+
 export class EpisodeStore extends AbstractDatabase {
-  private static toEpisode(raw: RawEpisode & { magnet: Resource }): Episode {
+  readonly parser: MagnetParser = new MagnetParser();
+
+  private toEpisode(raw: RawEpisode & { magnet: Resource }): Episode {
     const attrs: string[] = JSON.parse(raw.attrs);
     return {
       bgmId: String(raw.bgmId),
       magnet: raw.magnet,
       ep: raw.ep,
       fansub: raw.fansub,
-      quality: attrs.includes('720') ? 720 : 1080,
-      language: attrs.includes('zh-Hant') ? 'zh-Hant' : 'zh-Hans'
+      quality: this.parser.quality({ tags: attrs }),
+      language: this.parser.language({ tags: attrs })
     };
   }
 
-  async createEpisode(payload: EpisodePayload) {
-    const attrs = payload.attrs ?? [];
-    if (payload.quality) {
-      attrs.push(String(payload.quality));
-    }
-    if (payload.language) {
-      attrs.push(String(payload.language));
-    }
+  async createEpisode(bgmId: string, payload: Resource) {
+    const parsed = this.parser.parse(payload.title);
+    debug(payload.title + ' => ' + JSON.stringify(parsed, null, 2));
 
-    return await this.prisma.episode.create({
-      data: {
-        magnetId: payload.magnetId,
-        bgmId: +payload.bgmId,
-        ep: payload.ep,
-        fansub: payload.fansub,
-        attrs: JSON.stringify(attrs)
-      }
-    });
+    return this.toEpisode(
+      await this.prisma.episode.create({
+        data: {
+          magnetId: payload.id,
+          bgmId: +bgmId,
+          ep: parsed.ep,
+          fansub: payload.fansub,
+          attrs: JSON.stringify(parsed.tags ?? [])
+        },
+        include: {
+          magnet: true
+        }
+      })
+    );
   }
 
   async findEpisode(magnetId: string): Promise<Episode | undefined> {
@@ -49,7 +56,7 @@ export class EpisodeStore extends AbstractDatabase {
       }
     });
     if (raw) {
-      return EpisodeStore.toEpisode(raw);
+      return this.toEpisode(raw);
     } else {
       return undefined;
     }
@@ -66,6 +73,6 @@ export class EpisodeStore extends AbstractDatabase {
         magnet: true
       }
     });
-    return eps.map((ep) => EpisodeStore.toEpisode(ep));
+    return eps.map((ep) => this.toEpisode(ep));
   }
 }

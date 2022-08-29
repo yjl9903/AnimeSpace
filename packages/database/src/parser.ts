@@ -1,4 +1,4 @@
-import { tradToSimple } from '../utils';
+import { tradToSimple } from './utils';
 
 export interface ParsedMagnet {
   title: string;
@@ -152,11 +152,11 @@ export class MagnetParser {
     return JSON.stringify(titles.map(this.normalize));
   }
 
-  hevc(magnet: ParsedMagnet) {
+  hevc(magnet: { tags: string[] }) {
     return magnet.tags.some((t) => HEVC.includes(t));
   }
 
-  quality(magnet: ParsedMagnet) {
+  quality(magnet: { tags: string[] }) {
     for (const tag of magnet.tags) {
       if (P1080.includes(tag)) {
         return 1080;
@@ -167,7 +167,7 @@ export class MagnetParser {
     return 1080;
   }
 
-  language(magnet: ParsedMagnet) {
+  language(magnet: { tags: string[] }) {
     for (const tag of magnet.tags) {
       if (tag.indexOf('简') !== -1) {
         return 'zh-Hans';

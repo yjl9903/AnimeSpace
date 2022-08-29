@@ -5,3 +5,5 @@ export * from './video';
 export * from './magnet';
 
 export * from './episode';
+
+export * from './parser';

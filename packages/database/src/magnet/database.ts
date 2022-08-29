@@ -5,7 +5,7 @@ import { subMonths, isBefore, subDays } from 'date-fns';
 import { simpleToTrad, sleep } from '../utils';
 import { AbstractDatabase, DatabaseOption } from '../database';
 
-import { MagnetParser } from './parser';
+import { MagnetParser } from '../parser';
 import { fetchResource } from './fetch';
 
 const debug = createDebug('anime:database');
