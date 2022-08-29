@@ -41,14 +41,14 @@ const DefaultGlobalConfig: GlobalConfig = {
 };
 
 export class GlobalContex {
-  static ConfigFileName = 'config.yaml';
-  static AnimeDdName = 'anime.json';
+  static SpaceDirectory = '.animepaste';
+  static ConfigFilename = 'config.yaml';
+  static DatabaseFilename = 'anime.db';
 
   cliOption!: CliOption;
   isDaemon: boolean = false;
 
   readonly root: string;
-  readonly anime: string;
   readonly config: string;
   readonly databaseFilepath: string;
 
@@ -62,14 +62,13 @@ export class GlobalContex {
 
   constructor() {
     this.root =
-      process.env.ANIMEPASTE_ROOT ?? path.join(homedir(), '.animepaste');
+      process.env.ANIMEPASTE_ROOT ??
+      path.join(homedir(), GlobalContex.SpaceDirectory);
     this._cacheRoot = path.join(this.root, 'cache');
     this._localRoot = path.join(this.root, 'anime');
+    this.config = path.join(this.root, GlobalContex.ConfigFilename);
+    this.databaseFilepath = path.join(this.root, GlobalContex.DatabaseFilename);
 
-    this.anime = path.join(this.root, GlobalContex.AnimeDdName);
-    this.config = path.join(this.root, GlobalContex.ConfigFileName);
-
-    this.databaseFilepath = path.join(this.root, 'store.db');
     this.videoStore = new VideoStore({ url: this.databaseFilepath });
     this.magnetStore = new MagnetStore({ url: this.databaseFilepath });
     this.episodeStore = new EpisodeStore({ url: this.databaseFilepath });
