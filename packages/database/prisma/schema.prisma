@@ -17,7 +17,7 @@ model Resource {
   keywords  String   @default("")
 
   Video   Video?
-  Epsiode Epsiode?
+  Episode Episode?
 }
 
 model Video {
@@ -36,7 +36,7 @@ model Video {
   @@id([id, platform])
 }
 
-model Epsiode {
+model Episode {
   magnet   Resource @relation(fields: [magnetId], references: [id])
   magnetId String   @id
 

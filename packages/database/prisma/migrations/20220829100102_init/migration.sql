@@ -26,13 +26,13 @@ CREATE TABLE "Video" (
 );
 
 -- CreateTable
-CREATE TABLE "Epsiode" (
+CREATE TABLE "Episode" (
     "magnetId" TEXT NOT NULL PRIMARY KEY,
     "bgmId" INTEGER NOT NULL,
     "ep" INTEGER NOT NULL DEFAULT 1,
     "fansub" TEXT NOT NULL DEFAULT '',
     "attrs" TEXT NOT NULL DEFAULT '[]',
-    CONSTRAINT "Epsiode_magnetId_fkey" FOREIGN KEY ("magnetId") REFERENCES "Resource" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Episode_magnetId_fkey" FOREIGN KEY ("magnetId") REFERENCES "Resource" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex
