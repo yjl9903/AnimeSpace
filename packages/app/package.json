@@ -49,7 +49,7 @@
     "vitest": "^0.22.1",
     "vue-tsc": "^0.40.4",
     "workbox-window": "^6.5.4",
-    "wrangler": "^2.0.27"
+    "wrangler": "^2.0.28"
   },
   "engines": {
     "node": ">=v16.16.0"
