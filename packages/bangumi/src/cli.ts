@@ -4,10 +4,14 @@ import { fileURLToPath } from 'node:url';
 
 import Breadc from 'breadc';
 
-import { version } from '../package.json';
-
 import type { ExtendBangumi, BangumiType } from './core/types';
 
+const version = JSON.parse(
+  fs.readFileSync(
+    path.join(fileURLToPath(import.meta.url), '../../package.json'),
+    'utf-8'
+  )
+).version;
 const bangumi = Breadc('bangumi', { version });
 
 bangumi
