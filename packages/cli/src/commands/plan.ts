@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import { dim, link } from 'kolorist';
+import { bold, dim, link } from 'kolorist';
 
 import type { AnimeType } from '../types';
 
@@ -141,21 +141,32 @@ app
   });
 
 app
-  .command(
-    'fetch <id> <title> [...keywords]',
-    'Fetch resources using Bangumi ID'
-  )
+  .command('fetch <id> [...keywords]', 'Fetch resources using Bangumi ID')
   .option('--raw', 'Print raw magnets')
   .option('--index', 'Index magnet database')
   .option('-p, --plan', 'Output plan.yaml')
-  .action(async (id, title, anime, option) => {
+  .action(async (id, keywords, option) => {
     const { daemonSearch } = await import('../anime');
     if (option.index) {
       await context.magnetStore.index({ listener: IndexListener });
     }
-    await daemonSearch(id, [title, ...anime], {
+
+    const { BgmClient } = await import('@animepaste/bangumi/bgm');
+    const { getBgmLink } = await import('@animepaste/bangumi/utils');
+    const client = new BgmClient();
+    client.setupUserAgent();
+
+    const bgm = await client.fetchSubject(id);
+    {
+      logger.println(
+        `${bold('Title')} ${link(bgm.titleCN, getBgmLink(bgm.bgmId))}`
+      );
+      logger.println(`${bold('Begin')} ${bgm.begin}`);
+    }
+
+    await daemonSearch(id, [bgm.title, bgm.titleCN, ...keywords], {
       ...option,
-      title,
+      title: bgm.titleCN,
       type: 'tv' as 'tv'
     });
   });

@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-import type { BaseBangumi, Calendar, ExtendBangumiSubject } from '../types';
+import type {
+  BaseBangumi,
+  Calendar,
+  ExtendBangumi,
+  ExtendBangumiSubject
+} from '../types';
 
 import type { RawCalendar, Subject } from './types';
 
@@ -11,7 +16,7 @@ export class BgmClient<T extends BaseBangumi> {
 
   static maxRetry = 5;
 
-  private readonly api = axios.create({
+  private api = axios.create({
     baseURL: BgmClient.baseURL,
     timeout: 10 * 1000
   });
@@ -20,6 +25,20 @@ export class BgmClient<T extends BaseBangumi> {
 
   constructor(bangumis: T[] = []) {
     this.bangumis = new Map(bangumis.map((bgm) => [bgm.bgmId, bgm]));
+  }
+
+  /**
+   * See https://github.com/bangumi/api/blob/master/docs-raw/user%20agent.md
+   */
+  setupUserAgent() {
+    this.api = axios.create({
+      baseURL: BgmClient.baseURL,
+      timeout: 10 * 1000,
+      headers: {
+        'User-Agent':
+          'XLorPaste/AnimePaste (https://github.com/XLorPaste/AnimePaste)'
+      }
+    });
   }
 
   async fetchRawCalendar(): Promise<RawCalendar[]> {
@@ -71,7 +90,11 @@ export class BgmClient<T extends BaseBangumi> {
     }));
   }
 
-  async fetchSubject(bgm: T | string): Promise<T & ExtendBangumiSubject> {
+  async fetchSubject(
+    bgm: T | string
+  ): Promise<
+    T & Pick<ExtendBangumi, 'titleCN' | 'begin'> & ExtendBangumiSubject
+  > {
     const id = typeof bgm === 'string' ? bgm : bgm.bgmId;
 
     const subject = await this.fetchRawSubject(id);
