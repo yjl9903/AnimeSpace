@@ -9,6 +9,8 @@ import { EpisodeStore, MagnetStore, VideoStore } from '@animepaste/database';
 import type { VideoStorePlatform } from '../io';
 import type { CliOption, RawPlan } from '../types';
 
+import { filterDef } from '../utils';
+
 export interface GlobalConfig {
   plan: string | string[];
 
@@ -142,11 +144,11 @@ export class GlobalContex {
 
   async getPlans(): Promise<RawPlan[]> {
     const config = await this.loadConfig<GlobalConfig>();
-    const planPath = [
+    const planPath = filterDef([
       // @ts-ignore
       ...(Array.isArray(config.plans) ? config.plans : [config.plans]),
       ...(Array.isArray(config.plan) ? config.plan : [config.plan])
-    ];
+    ]);
     const planBody: RawPlan[] = [];
     for (const plan of planPath) {
       const planPath = path.join(this.root, plan);
