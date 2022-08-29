@@ -25,5 +25,18 @@ CREATE TABLE "Video" (
     CONSTRAINT "Video_magnetId_fkey" FOREIGN KEY ("magnetId") REFERENCES "Resource" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "Epsiode" (
+    "magnetId" TEXT NOT NULL PRIMARY KEY,
+    "bgmId" INTEGER NOT NULL,
+    "ep" INTEGER NOT NULL DEFAULT 1,
+    "fansub" TEXT NOT NULL DEFAULT '',
+    "attrs" TEXT NOT NULL DEFAULT '[]',
+    CONSTRAINT "Epsiode_magnetId_fkey" FOREIGN KEY ("magnetId") REFERENCES "Resource" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Resource_title_key" ON "Resource"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Video_magnetId_key" ON "Video"("magnetId");
