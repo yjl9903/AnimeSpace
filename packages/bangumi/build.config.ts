@@ -1,4 +1,9 @@
+import * as fs from 'node:fs';
 import { defineBuildConfig } from 'unbuild';
+
+try {
+  fs.mkdirSync('data');
+} catch {}
 
 export default defineBuildConfig({
   entries: [
