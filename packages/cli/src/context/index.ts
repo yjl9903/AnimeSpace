@@ -12,7 +12,7 @@ import type { CliOption, RawPlan } from '../types';
 import { filterDef } from '../utils';
 
 export interface GlobalConfig {
-  plan: string | string[];
+  plans: string | string[];
 
   server: {
     baseURL: string;
@@ -24,7 +24,7 @@ export interface GlobalConfig {
 }
 
 const DefaultGlobalConfig: GlobalConfig = {
-  plan: ['./plans/test.yaml'],
+  plans: ['./plans/test.yaml'],
   server: {
     baseURL: '',
     token: ''
@@ -145,8 +145,8 @@ export class GlobalContex {
   async getPlans(): Promise<RawPlan[]> {
     const config = await this.loadConfig<GlobalConfig>();
     const planPath = filterDef([
-      // @ts-ignore
       ...(Array.isArray(config.plans) ? config.plans : [config.plans]),
+      // @ts-ignore
       ...(Array.isArray(config.plan) ? config.plan : [config.plan])
     ]);
     const planBody: RawPlan[] = [];
