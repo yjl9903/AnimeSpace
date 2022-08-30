@@ -28,6 +28,6 @@ features:
     details: 自动抓取 / 下载 / 上传动画资源
   - title: 无服务器架构
     details: 你无需购买服务器来部署
-  - title: 离线应用
-    details: 应用将自动缓存必要数据以便离线浏览
+  - title: 集成媒体库
+    details: 本地资源可被 Jellyfin, Plex 等软件自动识别
 ---
