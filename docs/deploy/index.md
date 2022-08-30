@@ -1,6 +1,6 @@
 # 开始
 
-Anime Paste 核心分为 [前端应用](https://github.com/XLorPaste/AnimePaste/tree/main/packages/app) 和 [管理后台命令行程序](https://github.com/XLorPaste/AnimePaste/tree/main/packages/cli)。
+Anime Paste 核心分为 [Web 应用](https://github.com/XLorPaste/AnimePaste/tree/main/packages/app) 和 [管理后台命令行程序](https://github.com/XLorPaste/AnimePaste/tree/main/packages/cli)。
 
 > **注意**
 >
