@@ -137,8 +137,8 @@ app
   })
   .option('--raw', 'Print raw magnets')
   .option('--index', 'Index magnet database')
-  .option('-y, --year [year]')
-  .option('-m, --month [month]')
+  .option('--year [year]')
+  .option('--month [month]')
   .option('-p, --plan', 'Output plan.yaml')
   .action(async (anime, option) => {
     const { userSearch } = await import('../anime');

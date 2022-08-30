@@ -78,6 +78,7 @@ app
 app
   .command('store remove [...ids]', 'Remove video info on OSS')
   .alias('store rm')
+  .option('-y, --yes', 'Disable prompt')
   .option('--local', 'Remove local videos')
   .action(async (ids, option) => {
     const { useStore } = await import('../io');
@@ -130,9 +131,10 @@ app
         printVideoInfoList(videos);
 
         if (
-          await promptConfirm(
+          option.yes ||
+          (await promptConfirm(
             `Are you sure to remove these ${videos.length} videos`
-          )
+          ))
         ) {
           for (const video of videos) {
             await removeVideo(video.videoId, video);
