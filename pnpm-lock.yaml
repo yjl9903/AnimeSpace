@@ -144,7 +144,7 @@ importers:
     specifiers:
       axios: ^0.27.2
       bangumi-data: ^0.3.97
-      breadc: ^0.6.3
+      breadc: ^0.6.4
       date-fns: ^2.29.2
       debug: ^4.3.4
       optc: ^0.3.6
@@ -152,7 +152,7 @@ importers:
       vite: ^3.0.9
     dependencies:
       axios: 0.27.2_debug@4.3.4
-      breadc: 0.6.3
+      breadc: 0.6.4
       debug: 4.3.4
     devDependencies:
       bangumi-data: 0.3.97
@@ -3152,13 +3152,6 @@ packages:
     dependencies:
       fill-range: 7.0.1
     dev: true
-
-  /breadc/0.6.3:
-    resolution: {integrity: sha512-9dXooTIB4eevuViI2ORRmDQOWjtDzoGGMPDo/2GLNMywa6DzXI075lfBsYID5kgz9zVTZRdSfgMuXIOFIIsMXw==}
-    dependencies:
-      kolorist: 1.5.1
-      minimist: 1.2.6
-    dev: false
 
   /breadc/0.6.4:
     resolution: {integrity: sha512-qJZ8oGVdSbr8ZKRGZjzni1f0go6FK4VcveqBqcoiXOdMcx/AECPtkEpdMBOd+nsiisuUXr/lBupsJpCM0LjBDQ==}
