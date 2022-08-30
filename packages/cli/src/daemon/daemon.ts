@@ -30,14 +30,26 @@ export class Daemon {
   private client!: AdminClient;
 
   /**
-   * Enable donwload and upload
+   * Enable sync onair list
    *
    * @default 'true'
    */
-  private readonly enable: boolean;
+  private readonly enableSync: boolean;
 
-  constructor(option: { update: boolean }) {
-    this.enable = !option.update;
+  /**
+   * Enable upload
+   *
+   * @default 'true'
+   */
+  private readonly enableUpload: boolean;
+
+  constructor(option: { sync: boolean; upload: boolean }) {
+    this.enableUpload = option.upload;
+    if (this.enableUpload) {
+      this.enableSync = option.sync;
+    } else {
+      this.enableSync = false;
+    }
     context.isDaemon = true;
   }
 
@@ -233,9 +245,6 @@ export class Daemon {
       );
     }
 
-    // If not enable donwload and upload, continue
-    if (!this.enable) return;
-
     const localRoot = await context.makeLocalAnimeRoot(onair.title);
 
     type InlineMagnet = {
@@ -315,7 +324,7 @@ export class Daemon {
 
     // Start uploading
     const videoInfos: VideoInfo[] = [];
-    {
+    if (this.enableUpload) {
       logger.info(
         startColor('Upload   ') +
           formatTitle(onair.title, onair.season) +
@@ -366,32 +375,37 @@ export class Daemon {
     }
     // Upload OK
 
-    const syncEpisodes: OnairEpisode[] = episodes.map((ep, idx) => ({
-      ep: ep.ep,
-      quality: ep.quality,
-      creationTime: ep.magnet.createdAt.toISOString(),
-      playURL: videoInfos[idx].playUrl[0],
-      storage: {
-        type: videoInfos[idx].platform,
-        videoId: videoInfos[idx].videoId,
-        source: videoInfos[idx].source
-      }
-    }));
+    // Start modify onair info
+    if (this.enableUpload) {
+      const syncEpisodes: OnairEpisode[] = episodes.map((ep, idx) => ({
+        ep: ep.ep,
+        quality: ep.quality,
+        creationTime: ep.magnet.createdAt.toISOString(),
+        playURL: videoInfos[idx].playUrl[0],
+        storage: {
+          type: videoInfos[idx].platform,
+          videoId: videoInfos[idx].videoId,
+          source: videoInfos[idx].source
+        }
+      }));
 
-    this.client.updateOnair({
-      title: onair.title,
-      bgmId: onair.bgmId,
-      episodes: [
-        ...syncEpisodes,
-        ...[...epLink.entries()].map(([ep, playURL]) => ({
-          ep: +ep,
-          playURL
-        }))
-      ].sort((a, b) => a.ep - b.ep)
-    });
+      this.client.updateOnair({
+        title: onair.title,
+        bgmId: onair.bgmId,
+        episodes: [
+          ...syncEpisodes,
+          ...[...epLink.entries()].map(([ep, playURL]) => ({
+            ep: +ep,
+            playURL
+          }))
+        ].sort((a, b) => a.ep - b.ep)
+      });
+    }
   }
 
   private async syncPlaylist(onair?: OnairPlan) {
+    if (!this.enableSync) return;
+
     if (!onair) {
       logger.info(
         `${startColor('Sync')}     ${bold(

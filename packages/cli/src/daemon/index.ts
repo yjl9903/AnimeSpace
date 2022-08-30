@@ -6,7 +6,8 @@ export * from './plan';
 export async function startDaemon(option: {
   once: boolean;
   interval: number;
-  update: boolean;
+  sync: boolean;
+  upload: boolean;
 }): Promise<void> {
   const daemon = new Daemon(option);
 
