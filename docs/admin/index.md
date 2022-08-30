@@ -34,7 +34,7 @@ anime space
 该文件位于：`~/.animepaste/config.yaml`。
 
 ```yaml
-plan:
+plans:
   - ./plans/2022-7.yaml
 
 server:

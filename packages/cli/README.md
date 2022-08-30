@@ -44,7 +44,7 @@ Global config:
 ```yaml
 # ~/.animepaste/config.yaml
 
-plan:
+plans:
   - ./plans/2022-4.yaml
 
 server:
