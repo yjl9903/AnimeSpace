@@ -1,37 +1,60 @@
-# 安装管理后台 CLI
+# 配置
 
-为了给 Anime Paste 添加动画资源，你需要使用配套的[管理后台命令行程序](https://github.com/XLorPaste/AnimePaste/tree/main/packages/cli)。
+Anime Paste 默认使用 `~/.animepaste` （或者 `ANIMEPASTE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
 
-> **环境准备**
->
-> 全局安装最新的 [Node.js](https://nodejs.org/) 和 [pnpm](https://pnpm.io/)。
-
-## 从 npm 上全局安装
+安装完成后，你必须运行
 
 ```bash
-npm i -g animepaste
-# or
-pnpm i -g animepaste
+anime space
 ```
 
-## 手动安装
+初始化并打开当前的工作目录。
 
-首先，克隆本仓库（或者你部署时 fork 的仓库）。
+## 目录结构
 
-```bash
-git clone https://github.com/XLorPaste/AnimePaste.git
+```text
+~/.animepaste/
+  ├── plans/                     # Plans folder
+  │   ├─ 2022-04.yml
+  │   └─ 2022-07.yml
+  ├── anime/                     # Anime store
+  │   └─ 相合之物
+  │      ├─ 相合之物 - S01E01.mp4
+  │      ├─ 相合之物 - S01E02.mp4
+  │      └─ 相合之物 - S01E03.mp4
+  ├── cache/                     # Videos cache
+  │   ├─ xxx.mp4
+  │   └─ yyy.mp4
+  ├── config.yaml                # AnimePaste config file
+  └── anime.db                   # SQLite database file
 ```
 
-然后，安装依赖，并构建 CLI。
+## 根配置文件
 
-```bash
-pnpm install
-pnpm build:cli
+该文件位于：`~/.animepaste/config.yaml`。
+
+```yaml
+plan:
+  - ./plans/2022-7.yaml
+
+server:
+  baseURL: http://localhost:8788/api/
+  token: ''
+
+store:
+  local: # Local anime store
+    anime: ./anime
+    cache: ./cache
+  ali:   # Ali OSS config
+    accessKeyId: ''
+    accessKeySecret: ''
+    regionId: 'cn-shanghai'
 ```
 
-最后，将 CLI 链接为全局可执行程序。
+## 放映计划配置
 
-```bash
-cd packages/cli
-pnpm link -g
-```
+在根配置文件的 `plan` 字段下，你可以指定一个放映计划的配置文件路径列表（相对于工作目录）。
+
+推荐在工作目录下创建一个 `plans` 文件夹，用于储存所有的放映计划配置文件。
+
+详细配置见 [放映计划](./plan.md)。

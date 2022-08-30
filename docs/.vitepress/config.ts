@@ -38,11 +38,19 @@ export default defineConfig({
           text: '部署',
           items: [
             {
-              text: 'Cloudflare Pages',
+              text: '开始',
               link: '/deploy/'
             },
             {
-              text: '集成 Jellyfin',
+              text: '部署 Cloudflare Pages',
+              link: '/deploy/cloudflare'
+            },
+            {
+              text: '安装 CLI',
+              link: '/deploy/admin'
+            },
+            {
+              text: '集成媒体库软件',
               link: '/deploy/jellyfin'
             }
           ]
@@ -51,20 +59,16 @@ export default defineConfig({
           text: '管理',
           items: [
             {
-              text: '安装 CLI',
-              link: '/admin/'
-            },
-            {
               text: '配置',
-              link: '/admin/config'
-            },
-            {
-              text: '使用 CLI',
-              link: '/admin/usage'
+              link: '/admin/'
             },
             {
               text: '放映计划',
               link: '/admin/plan'
+            },
+            {
+              text: '使用 CLI',
+              link: '/admin/usage'
             }
           ]
         }

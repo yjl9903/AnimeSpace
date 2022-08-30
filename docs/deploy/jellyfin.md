@@ -1,7 +1,9 @@
-# 集成 Jellyfin
+# 集成媒体库软件
+
+## Jellyfin
 
 ![Jellyfin](/Jellyfin.jpeg)
 
-## Bangumi 元数据插件
+### Bangumi 元数据插件
 
 见 [jellyfin-plugin-bangumi](https://github.com/kookxiang/jellyfin-plugin-bangumi)。

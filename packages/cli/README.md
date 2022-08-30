@@ -22,12 +22,19 @@ Command line application for managing [Anime Paste](https://github.com/XLorPaste
 
 ```text
 ~/.animepaste/
-  ├── plans/         # Plans folder
-  ├── anime/         # Anime store
-  ├── cache/         # Videos cache
-  ├── config.yaml    # AnimePaste config file
-  ├── store.db       # Cache found magnets and uploaded videos (SQLite)
-  └── anime.json     # Cache found animes
+  ├── plans/                     # Plans folder
+  │   ├─ 2022-04.yml
+  │   └─ 2022-07.yml
+  ├── anime/                     # Anime store
+  │   └─ 相合之物
+  │      ├─ 相合之物 - S01E01.mp4
+  │      ├─ 相合之物 - S01E02.mp4
+  │      └─ 相合之物 - S01E03.mp4
+  ├── cache/                     # Videos cache
+  │   ├─ xxx.mp4
+  │   └─ yyy.mp4
+  ├── config.yaml                # AnimePaste config file
+  └── anime.db                   # SQLite database file
 ```
 
 ### Config
