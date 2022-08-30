@@ -79,6 +79,7 @@ export class Daemon {
 
   async update() {
     try {
+      logger.empty();
       logger.info('Start updating anime ' + now());
 
       await context.init({ force: false });
