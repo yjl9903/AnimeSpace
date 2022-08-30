@@ -104,14 +104,17 @@ export class MagnetStore extends AbstractDatabase {
     }
   }
 
-  async search(keyword: string | string[], indexOption: IndexOption = {}) {
-    if (indexOption.limit) {
+  async search(
+    keyword: string | string[],
+    option: IndexOption & { Video?: boolean; Episode?: boolean } = {}
+  ) {
+    if (option.limit) {
       const oldest = await this.timestamp();
-      if (isBefore(indexOption.limit, oldest)) {
-        indexOption.earlyStop = false;
+      if (isBefore(option.limit, oldest)) {
+        option.earlyStop = false;
         // Avoid the oldest date in database not being exist
-        indexOption.limit = subDays(indexOption.limit, 1);
-        await this.index(indexOption);
+        option.limit = subDays(option.limit, 1);
+        await this.index(option);
       }
     }
 
@@ -132,8 +135,12 @@ export class MagnetStore extends AbstractDatabase {
         OR: [...keywordsWhere, ...titleWhere],
         type: '動畫',
         createdAt: {
-          gt: indexOption.limit
+          gt: option.limit
         }
+      },
+      include: {
+        Video: option.Video,
+        Episode: option.Episode
       }
     });
     return result;

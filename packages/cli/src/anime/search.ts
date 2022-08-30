@@ -127,7 +127,8 @@ export async function search(
 
   const result = await context.magnetStore.search(keywords, {
     limit: option.beginDate,
-    listener: IndexListener
+    listener: IndexListener,
+    Episode: true
   });
   for (const resource of result) {
     // Disable download MKV
@@ -135,7 +136,9 @@ export async function search(
     // Disable download HEVC
     if (resource.title.indexOf('HEVC') !== -1) continue;
 
-    await context.episodeStore.createEpisode(bgm.bgmId, resource);
+    if (!resource.Episode) {
+      await context.episodeStore.createEpisode(bgm.bgmId, resource);
+    }
   }
 
   if (option.raw) {
