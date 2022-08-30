@@ -32,6 +32,15 @@ app.command('plan onair', 'Preview onair plan').action(async () => {
   plan.printOnair();
 });
 
+app.command('plan refresh', 'Refresh resource list').action(async () => {
+  const { createDaemon } = await import('../daemon');
+  logger.config.level = false;
+  const daemon = createDaemon();
+  await daemon.initPlan({ log: false });
+  await daemon.initClient();
+  await daemon.refreshEpisode();
+});
+
 app
   .command('plan download <anime>', 'Download remote videos from OSS')
   .alias('plan down')

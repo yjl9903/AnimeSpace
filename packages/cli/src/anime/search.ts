@@ -31,6 +31,8 @@ interface SearchOption {
   title?: string;
   fansub?: string[];
 
+  log?: boolean;
+
   // Filter outdated resources with same name
   beginDate?: Date;
 }
@@ -112,13 +114,17 @@ export async function search(
   keywords: string[],
   option: SearchOption = { type: 'tv' }
 ) {
-  logger.empty();
-  logger.info(
-    okColor('Refresh  ') +
-      titleColor(bgm.titleCN) +
-      '    ' +
-      `(${bangumiLink(bgm.bgmId)})`
-  );
+  const log = option.log ?? true;
+
+  if (log) {
+    logger.empty();
+    logger.info(
+      okColor('Refresh  ') +
+        titleColor(bgm.titleCN) +
+        '    ' +
+        `(${bangumiLink(bgm.bgmId)})`
+    );
+  }
 
   debug(`Search "${bgm.titleCN}"`);
   for (const keyword of keywords) {
@@ -143,7 +149,7 @@ export async function search(
 
   if (option.raw) {
     printMagnets(result);
-  } else {
+  } else if (log) {
     const episodes = await context.episodeStore.listEpisodes(bgm.bgmId);
     const map = groupBy(episodes, (ep) => ep.fansub);
     for (const [key, eps] of map) {

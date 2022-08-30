@@ -9,6 +9,8 @@ export async function startDaemon(option: {
   sync: boolean;
   upload: boolean;
 }): Promise<void> {
+  context.isDaemon = true;
+
   const daemon = new Daemon(option);
 
   await daemon.init();
@@ -26,4 +28,8 @@ export async function startDaemon(option: {
       isRunning = false;
     }, option.interval * 60 * 1000);
   });
+}
+
+export function createDaemon() {
+  return new Daemon({ sync: false, upload: false });
 }

@@ -24,6 +24,10 @@ import { TorrentClient, useStore, checkVideo } from '../io';
 import { Plan } from './plan';
 import { debug } from './constant';
 
+export interface DaemonStepOption {
+  log?: boolean;
+}
+
 export class Daemon {
   private plan!: Plan;
   private store!: Store;
@@ -50,16 +54,16 @@ export class Daemon {
     } else {
       this.enableSync = false;
     }
-    context.isDaemon = true;
   }
 
   async init() {
     try {
       logger.info('Start initing daemon ' + now());
 
-      await this.refreshPlan();
+      await this.initPlan();
       await this.refreshDatabase();
-      await this.refreshEpisode();
+      await this.initClient();
+      await this.refreshEpisode({ log: false });
       await this.refreshStore();
 
       logger.empty();
@@ -77,9 +81,10 @@ export class Daemon {
       logger.info('Start updating anime ' + now());
 
       await context.init({ force: false });
-      await this.refreshPlan();
+      await this.initPlan();
       await this.refreshDatabase();
-      await this.refreshEpisode();
+      await this.initClient();
+      await this.refreshEpisode({ log: false });
       await this.refreshStore();
 
       logger.empty();
@@ -92,10 +97,19 @@ export class Daemon {
     }
   }
 
-  private async refreshPlan() {
+  public async initPlan({ log = true }: DaemonStepOption = {}) {
     this.plan = await Plan.create();
-    logger.empty();
-    this.plan.printOnair();
+    if (log) {
+      logger.empty();
+      this.plan.printOnair();
+    }
+  }
+
+  public async initClient() {
+    this.client = await AdminClient.create(
+      new Set(new Set(this.plan.onairs().map((o) => o.bgmId)))
+    );
+    await this.client.fetchOnair();
   }
 
   private async refreshDatabase() {
@@ -110,13 +124,12 @@ export class Daemon {
     });
   }
 
-  private async refreshEpisode() {
-    this.client = await AdminClient.create(
-      new Set(new Set(this.plan.onairs().map((o) => o.bgmId)))
-    );
-    await this.client.fetchOnair();
-
+  public async refreshEpisode({ log = true }: DaemonStepOption = {}) {
     let count = 0;
+
+    if (!log) {
+      logger.empty();
+    }
 
     for (const plan of this.plan) {
       for (const onair of plan.onair) {
@@ -141,7 +154,8 @@ export class Daemon {
 
         await daemonSearch(onair.bgmId, keywords, {
           type: 'tv',
-          title: onair.title
+          title: onair.title,
+          log: log
         });
 
         logger.info(
