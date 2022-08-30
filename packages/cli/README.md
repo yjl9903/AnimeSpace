@@ -45,12 +45,11 @@ Global config:
 # ~/.animepaste/config.yaml
 
 plans:
-  - ./plans/2022-4.yaml
+  - ./plans/2022-7.yaml
 
 server:
-  baseURL: https://anime.xlorpaste.cn/api/
-  # baseURL: http://localhost:8788/api/
-  token:
+  baseURL: http://localhost:8788/
+  token: ''
 
 store:
   local: # Local anime store

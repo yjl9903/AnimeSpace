@@ -1,6 +1,6 @@
 # 配置
 
-Anime Paste 默认使用 `~/.animepaste` （或者 `ANIMEPASTE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
+Anime Paste 默认使用 `~/.animepaste/` （或者 `ANIMEPASTE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
 
 安装完成后，你必须运行
 
@@ -8,7 +8,7 @@ Anime Paste 默认使用 `~/.animepaste` （或者 `ANIMEPASTE_ROOT` 环境变�
 anime space
 ```
 
-初始化并打开当前的工作目录。
+初始化工作目录。
 
 ## 目录结构
 
@@ -38,7 +38,7 @@ plans:
   - ./plans/2022-7.yaml
 
 server:
-  baseURL: http://localhost:8788/api/
+  baseURL: http://localhost:8788/
   token: ''
 
 store:
@@ -53,7 +53,7 @@ store:
 
 ## 放映计划配置
 
-在根配置文件的 `plan` 字段下，你可以指定一个放映计划的配置文件路径列表（相对于工作目录）。
+在根配置文件的 `plans` 字段下，你可以指定一个放映计划的配置文件路径列表（相对于工作目录）。
 
 推荐在工作目录下创建一个 `plans` 文件夹，用于储存所有的放映计划配置文件。
 
