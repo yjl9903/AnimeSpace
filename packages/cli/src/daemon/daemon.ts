@@ -69,10 +69,11 @@ export class Daemon {
       logger.empty();
       logger.info(okColor('Init daemon OK ') + now());
     } catch (error: any) {
+      debug(error);
       if ('message' in error) {
         logger.error(error.message);
       }
-      debug(error);
+      logger.info(okColor('Init daemon Fail ') + now());
     }
   }
 
@@ -90,10 +91,11 @@ export class Daemon {
       logger.empty();
       logger.info(okColor('Update OK ') + now());
     } catch (error: any) {
+      debug(error);
       if ('message' in error) {
         logger.error(error.message);
       }
-      debug(error);
+      logger.info(okColor('Update Fail ') + now());
     }
   }
 
