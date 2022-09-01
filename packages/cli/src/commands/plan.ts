@@ -32,7 +32,7 @@ app.command('plan onair', 'Preview onair plan').action(async () => {
   plan.printOnair();
 });
 
-app.command('plan refresh', 'Refresh resource list').action(async () => {
+app.command('plan magnet', 'Refresh resource list').action(async () => {
   const { createDaemon } = await import('../daemon');
   logger.config.level = false;
   const daemon = createDaemon();
