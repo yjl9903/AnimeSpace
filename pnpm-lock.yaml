@@ -87,7 +87,7 @@ importers:
       vite-plugin-cloudflare-functions: ^0.2.2
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.6.1
-      vite-plugin-pages: ^0.25.0
+      vite-plugin-pages: ^0.26.0
       vite-plugin-pwa: ^0.12.4
       vite-ssg: ^0.20.2
       vitest: ^0.22.1
@@ -130,7 +130,7 @@ importers:
       vite-plugin-cloudflare-functions: 0.2.2_5tbtdq5ioahneezoq4tw5pu4da
       vite-plugin-info: 0.3.1_vite@3.0.9
       vite-plugin-inspect: 0.6.1_vite@3.0.9
-      vite-plugin-pages: 0.25.0_vite@3.0.9
+      vite-plugin-pages: 0.26.0_vite@3.0.9
       vite-plugin-pwa: 0.12.4_f7se6o6eqkwcix4u3svh6mkvda
       vite-ssg: 0.20.2_bfq3gzdvlavb2sn3qqvybkgwxu
       vitest: 0.22.1
@@ -5471,11 +5471,6 @@ packages:
     resolution: {integrity: sha512-AgQGZisAlTPbTEzrHPb6q+NYBMD+DP9uvGSIjSUM5uG+0jG15cb8axWpxuOIqrmQjn6scaaH8JwloiP27b2KXA==}
     dev: false
 
-  /local-pkg/0.4.1:
-    resolution: {integrity: sha512-lL87ytIGP2FU5PWwNDo0w3WhIo2gopIAxPg9RxDYF7m4rr5ahuZxP22xnJHIvaLTe4Z9P6uKKY2UHiwyB4pcrw==}
-    engines: {node: '>=14'}
-    dev: true
-
   /local-pkg/0.4.2:
     resolution: {integrity: sha512-mlERgSPrbxU3BP4qBqAvvwlgW4MTg78iwJdGGnv7kibKjWcJksrG3t6LB5lXI93wXRDvG4NpUgJFmTG4T6rdrg==}
     engines: {node: '>=14'}
@@ -8173,8 +8168,8 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-pages/0.25.0_vite@3.0.9:
-    resolution: {integrity: sha512-q0SX2iSw0UrTnivkzsPb19ZxamShq1nE/e/CKOe8+uVg70/e14uJuzKnw7dZ2omPjmV9Lhks38nzJL6RDRGmeA==}
+  /vite-plugin-pages/0.26.0_vite@3.0.9:
+    resolution: {integrity: sha512-yJZvwHEt7puYIf19S89IvkDsWPjWleSied4H8hmdW6i8buCA93z1UAU1ipW1d8fNKrC4FzXsUHHbPm6+kl1p9w==}
     peerDependencies:
       '@vue/compiler-sfc': ^2.7.0 || ^3.0.0
       vite: ^2.0.0 || ^3.0.0-0
@@ -8188,7 +8183,7 @@ packages:
       extract-comments: 1.1.0
       fast-glob: 3.2.11
       json5: 2.2.1
-      local-pkg: 0.4.1
+      local-pkg: 0.4.2
       picocolors: 1.0.0
       vite: 3.0.9
       yaml: 2.1.1

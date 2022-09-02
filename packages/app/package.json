@@ -42,7 +42,7 @@
     "vite-plugin-cloudflare-functions": "^0.2.2",
     "vite-plugin-info": "^0.3.1",
     "vite-plugin-inspect": "^0.6.1",
-    "vite-plugin-pages": "^0.25.0",
+    "vite-plugin-pages": "^0.26.0",
     "vite-plugin-pwa": "^0.12.4",
     "vite-ssg": "^0.20.2",
     "vitest": "^0.22.1",
