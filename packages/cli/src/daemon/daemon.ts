@@ -1,4 +1,5 @@
-import path from 'node:path';
+import * as fs from 'fs-extra';
+import * as path from 'node:path';
 import { bold, dim, link } from 'kolorist';
 import { format, subMonths } from 'date-fns';
 
@@ -326,7 +327,7 @@ export class Daemon {
         // Format check (avoid HEVC / MKV)
         for (const { filename } of shouldDownloadMagnet) {
           if (!(await checkVideo(path.join(localRoot, filename)))) {
-            logger.error(`The format of ${filename} may be wrong`);
+            logger.warn(`The format of ${filename} may be wrong`);
           }
         }
       }
@@ -351,12 +352,12 @@ export class Daemon {
       for (const magnet of magnets) {
         const serverMagnet = getServerMagnet(magnet);
         if (serverMagnet) {
-          debug(`${magnet.filename} has been uploaded`);
           const foundVideo = await context.videoStore.findVideo(
             serverMagnet.storage.type!,
             serverMagnet.storage.videoId!
           );
           if (foundVideo) {
+            debug(`${magnet.filename} has been uploaded`);
             videoInfos.push(foundVideo);
             continue;
           }
@@ -367,6 +368,12 @@ export class Daemon {
         // Do upload
         {
           const { filename, magnetId } = magnet;
+
+          // Check whether server onair bangumi is deleted
+          if (!fs.existsSync(path.join(localRoot, filename))) {
+            continue;
+          }
+
           const resp = await this.store.upload(path.join(localRoot, filename), {
             magnetId,
             retry: MAX_RETRY
@@ -394,6 +401,7 @@ export class Daemon {
 
     // Start modify onair info
     if (this.enableUpload) {
+      episodes.splice(videoInfos.length);
       const syncEpisodes: OnairEpisode[] = episodes.map((ep, idx) => ({
         ep: ep.ep,
         quality: ep.quality,
