@@ -82,7 +82,6 @@ importers:
       typescript: ^4.8.2
       unocss: ^0.45.14
       unplugin-auto-import: 0.11.2
-      unplugin-icons: ^0.14.9
       unplugin-vue-components: ^0.22.4
       vite: ^3.0.9
       vite-plugin-cloudflare-functions: ^0.2.2
@@ -126,7 +125,6 @@ importers:
       typescript: 4.8.2
       unocss: 0.45.14_vite@3.0.9
       unplugin-auto-import: 0.11.2_jfxn32i2eq37u3jpfk3zc3f4hy
-      unplugin-icons: 0.14.9_vite@3.0.9
       unplugin-vue-components: 0.22.4_vite@3.0.9+vue@3.2.38
       vite: 3.0.9
       vite-plugin-cloudflare-functions: 0.2.2_5tbtdq5ioahneezoq4tw5pu4da
@@ -7785,38 +7783,6 @@ packages:
     transitivePeerDependencies:
       - esbuild
       - rollup
-      - vite
-      - webpack
-    dev: true
-
-  /unplugin-icons/0.14.9_vite@3.0.9:
-    resolution: {integrity: sha512-vPyVfNREH88dP6gszdaoGkAEFPpiScXj1A8eWN905jQgT53A3tsiPEiqJjCHOUVcsUaREt2JSudzumFOsCA78A==}
-    peerDependencies:
-      '@svgr/core': '>=5.5.0'
-      '@vue/compiler-sfc': ^3.0.2
-      vue-template-compiler: ^2.6.12
-      vue-template-es2015-compiler: ^1.9.0
-    peerDependenciesMeta:
-      '@svgr/core':
-        optional: true
-      '@vue/compiler-sfc':
-        optional: true
-      vue-template-compiler:
-        optional: true
-      vue-template-es2015-compiler:
-        optional: true
-    dependencies:
-      '@antfu/install-pkg': 0.1.0
-      '@antfu/utils': 0.5.2
-      '@iconify/utils': 1.0.33
-      debug: 4.3.4
-      kolorist: 1.5.1
-      local-pkg: 0.4.2
-      unplugin: 0.9.5_vite@3.0.9
-    transitivePeerDependencies:
-      - esbuild
-      - rollup
-      - supports-color
       - vite
       - webpack
     dev: true

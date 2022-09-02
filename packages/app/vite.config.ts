@@ -5,7 +5,6 @@ import { defineConfig } from 'vite';
 import Unocss from 'unocss/vite';
 import vue from '@vitejs/plugin-vue';
 
-import Icons from 'unplugin-icons/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 
@@ -38,9 +37,6 @@ export default defineConfig({
       dts: './src/components.d.ts'
     }),
     Unocss(),
-    Icons({
-      autoInstall: true
-    }),
     Pages({
       dirs: 'src/pages',
       exclude: ['**/components/*.vue', '**/context.ts']
