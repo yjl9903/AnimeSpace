@@ -39,6 +39,13 @@ export interface RawPlan {
   store: VideoStorePlatform;
 
   /**
+   * Template string for names
+   *
+   * @default '[{fansub}] {title} - S{season}E{ep}.mp4'
+   */
+  format?: string;
+
+  /**
    * Onair list
    */
   onair: OnairPlan[];
@@ -93,7 +100,7 @@ export interface OnairPlan {
    *
    * @default '[{fansub}] {title} - S{season}E{ep}.mp4'
    */
-  format?: string;
+  format: string;
 
   /**
    * Keywords for searching resources

@@ -9,8 +9,7 @@ export function formatEP(ep: number, fill = '0') {
 }
 
 export function formatEpisodeName(anime: OnairPlan, ep: Episode) {
-  const format = anime.format ?? '[{fansub}] {title} - S{season}E{ep}.mp4';
-  return format
+  return anime.format
     .replace('{fansub}', ep.fansub)
     .replace('{title}', anime.title)
     .replace('{season}', formatEP(anime.season ?? 1))

@@ -10,7 +10,7 @@ import { groupBy } from '../utils';
 import { bangumiLink } from '../anime';
 import { DOT, logger, padRight, titleColor } from '../logger';
 
-import { LOCALE } from './constant';
+import { DefaultEpisodeFormat, LOCALE } from './constant';
 
 export class Plan {
   private readonly baseURL: string;
@@ -66,6 +66,15 @@ export class Plan {
           bgm.fansub === null
         ) {
           bgm.fansub = [];
+        }
+
+        // Fix format string
+        if (
+          !('format' in bgm) ||
+          bgm.format === undefined ||
+          bgm.format === null
+        ) {
+          bgm.format = plan.format ?? DefaultEpisodeFormat;
         }
       }
     }
