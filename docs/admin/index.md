@@ -37,9 +37,11 @@ anime space
 plans:
   - ./plans/2022-7.yaml
 
-server:
-  baseURL: http://localhost:8788/
-  token: ''
+sync:
+  local: true
+  # remote:
+  #   baseURL: http://localhost:8788/
+  #   token: ''
 
 store:
   local: # Local anime store

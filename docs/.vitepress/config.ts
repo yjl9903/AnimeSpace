@@ -52,6 +52,10 @@ export default defineConfig({
             {
               text: '集成媒体库软件',
               link: '/deploy/jellyfin'
+            },
+            {
+              text: '使用 OSS',
+              link: '/deploy/oss'
             }
           ]
         },
