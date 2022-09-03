@@ -41,6 +41,7 @@ export class AdminClient {
     this.token = option.token;
     this.api = axios.create({
       baseURL: option.baseURL,
+      timeout: 30 * 1000,
       headers: {
         Authorization: this.token
       }
