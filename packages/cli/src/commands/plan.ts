@@ -46,16 +46,16 @@ app
   .alias('plan down')
   .option('--id', 'Use bgmId instead of name')
   .action(async (name, option) => {
-    const { download } = await import('../io');
     const { Plan } = await import('../daemon');
+    const { download } = await import('../io');
+    const { initClient } = await import('../client');
     const { bangumiLink } = await import('../anime');
-    const { AdminClient } = await import('../client');
 
     if (/^\d+$/.test(name)) {
       option.id = true;
     }
 
-    const client = await AdminClient.init();
+    const client = await initClient();
     const plans = await Plan.create();
 
     const findFn = (o: { bgmId: string; title: string }) => {

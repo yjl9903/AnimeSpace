@@ -109,8 +109,8 @@ app
     } else {
       logger.println(lightBlue('  Init admin client'));
 
-      const { AdminClient } = await import('../client');
-      const client = await AdminClient.init();
+      const { initClient } = await import('../client');
+      const client = await initClient();
       const onairs = client.onair.flatMap((o) => o.episodes);
       const videoIds = new Set<string>();
       for (const onair of onairs) {

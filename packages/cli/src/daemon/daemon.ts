@@ -18,7 +18,7 @@ import {
   startColor,
   okColor
 } from '../logger';
-import { OnairEpisode, AdminClient } from '../client';
+import { OnairEpisode, initClient, SyncClient } from '../client';
 import { daemonSearch, bangumiLink } from '../anime';
 import { TorrentClient, useStore, checkVideo } from '../io';
 
@@ -32,7 +32,7 @@ export interface DaemonStepOption {
 export class Daemon {
   private plan!: Plan;
   private store!: Store;
-  private client!: AdminClient;
+  private client!: SyncClient;
 
   /**
    * Enable sync onair list
@@ -110,9 +110,7 @@ export class Daemon {
   }
 
   public async initClient() {
-    this.client = await AdminClient.create(
-      new Set(new Set(this.plan.onairs().map((o) => o.bgmId)))
-    );
+    this.client = await initClient();
     await this.client.fetchOnair();
   }
 

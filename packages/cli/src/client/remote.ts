@@ -9,9 +9,11 @@ import { MAX_RETRY } from '../constant';
 
 import type { OnairAnime, UserOption } from './types';
 
+import { SyncClient } from './client';
+
 const debug = createDebug('anime:client');
 
-export class AdminClient {
+export class RemoteSyncClient extends SyncClient {
   private static MAX_RETRY = MAX_RETRY;
 
   private readonly token: string;
@@ -27,17 +29,8 @@ export class AdminClient {
    */
   readonly onairIds: Set<string> | undefined;
 
-  /**
-   * Current onair bangumis
-   */
-  readonly onair: OnairAnime[] = [];
-
-  /**
-   * Onair bangumis to be uploaded
-   */
-  readonly newOnair: OnairAnime[] = [];
-
   constructor(option: UserOption) {
+    super();
     this.token = option.token;
     this.api = axios.create({
       baseURL: option.baseURL,
@@ -50,16 +43,19 @@ export class AdminClient {
   }
 
   static async create(onairIds?: Set<string>) {
-    const option: UserOption = await context.getServerConfig();
+    const option: UserOption | undefined = await context.getRemoteConfig();
+    if (!option) {
+      throw new Error('Remote sync config is not provided');
+    }
     if (onairIds) {
       option.onairIds = onairIds;
     }
-    return new AdminClient(option);
+    return new RemoteSyncClient(option);
   }
 
-  static async init() {
+  static async init(): Promise<RemoteSyncClient> {
     const plan = await Plan.create();
-    const client = await AdminClient.create(
+    const client = await RemoteSyncClient.create(
       new Set(plan.onairs().map((o) => o.bgmId))
     );
     await client.fetchOnair();
@@ -67,7 +63,7 @@ export class AdminClient {
   }
 
   async fetchOnair() {
-    for (let retry = 0; retry < AdminClient.MAX_RETRY; retry++) {
+    for (let retry = 0; retry < RemoteSyncClient.MAX_RETRY; retry++) {
       try {
         const { data } = await this.api.get(
           '/api/admin/anime',
@@ -96,7 +92,7 @@ export class AdminClient {
     }
 
     debug(`Sync ${onair.length} bangumis`);
-    for (let retry = 0; retry < AdminClient.MAX_RETRY; retry++) {
+    for (let retry = 0; retry < RemoteSyncClient.MAX_RETRY; retry++) {
       try {
         const { data } = await this.api.post(
           '/api/admin/anime',
@@ -132,7 +128,6 @@ export class AdminClient {
         JSON.stringify(onair.episodes)
       ) {
         this.dirty = true;
-        this.onair[idx] = onair;
       }
       this.newOnair.push(onair);
     }

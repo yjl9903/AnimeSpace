@@ -14,10 +14,14 @@ import { filterDef } from '../utils';
 export interface GlobalConfig {
   plans: string | string[];
 
-  server: {
-    baseURL: string;
+  sync: {
+    local?: boolean;
 
-    token: string;
+    remote?: {
+      baseURL: string;
+
+      token: string;
+    };
   };
 
   store: {};
@@ -25,9 +29,11 @@ export interface GlobalConfig {
 
 const DefaultGlobalConfig: GlobalConfig = {
   plans: ['./plans/test.yaml'],
-  server: {
-    baseURL: '',
-    token: ''
+  sync: {
+    remote: {
+      baseURL: '',
+      token: ''
+    }
   },
   store: {
     local: {
@@ -98,7 +104,7 @@ export class GlobalContex {
       await fs.writeFile(
         this.config,
         dump(DefaultGlobalConfig, { indent: 2 })
-          .replace('server', '\nserver')
+          .replace('sync', '\nsync')
           .replace('store', '\nstore'),
         'utf-8'
       );
@@ -160,9 +166,14 @@ export class GlobalContex {
     return planBody;
   }
 
-  async getServerConfig(): Promise<GlobalConfig['server']> {
+  async getSyncConfig(): Promise<GlobalConfig['sync']> {
     const config = await this.loadConfig<GlobalConfig>();
-    return config.server;
+    return config.sync;
+  }
+
+  async getRemoteConfig(): Promise<GlobalConfig['sync']['remote']> {
+    const config = await this.loadConfig<GlobalConfig>();
+    return config.sync.remote;
   }
 
   async getStoreConfig<T = any>(key: string): Promise<T> {

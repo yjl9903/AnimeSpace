@@ -71,7 +71,7 @@ export class Plan {
     }
 
     return new Plan({
-      baseURL: (await context.getServerConfig()).baseURL,
+      baseURL: (await context.getRemoteConfig())?.baseURL ?? '',
       plans
     });
   }

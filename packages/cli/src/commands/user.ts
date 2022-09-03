@@ -9,12 +9,13 @@ app
   .option('--comment [comment]', 'Comment of the new token')
   .option('--type [type]', 'One of admin or user')
   .action(async (option) => {
-    const { AdminClient } = await import('../client');
-    const client = await AdminClient.create();
+    const { RemoteSyncClient: UserClient } = await import('../client');
+    const client = await UserClient.create();
     const token = await client.createToken({
       comment: option.comment,
       type: option.type === 'admin' ? 'admin' : 'user'
     });
+
     if (token) {
       logger.println(`${green(`✓ Create token OK`)}`);
       logger.tab.println(`${dim('Token')}   ${token.token}`);
@@ -31,9 +32,10 @@ app
   .command('user list', 'List user tokens')
   .alias('user ls')
   .action(async () => {
-    const { AdminClient } = await import('../client');
-    const client = await AdminClient.create();
+    const { RemoteSyncClient: UserClient } = await import('../client');
+    const client = await UserClient.create();
     const tokens = await client.listToken();
+
     if (tokens.length > 0) {
       logger.println(`${green(`✓ There are ${tokens.length} tokens`)}`);
       for (const token of tokens) {
@@ -55,8 +57,9 @@ app
   .alias('user rm')
   .option('--visitor', 'Clear all the visitor tokens')
   .action(async (token, option) => {
-    const { AdminClient } = await import('../client');
-    const client = await AdminClient.create();
+    const { RemoteSyncClient: UserClient } = await import('../client');
+    const client = await UserClient.create();
+
     if (option.visitor) {
       const tokens = await client.removeVisitors();
       if (tokens !== undefined) {
