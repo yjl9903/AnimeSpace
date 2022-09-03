@@ -13,7 +13,8 @@ export async function fetchResource(
   const result = await axios.get(
     `https://share.dmhy.org/topics/list/page/${page}`,
     {
-      proxy: proxy()
+      proxy: proxy(),
+      timeout: 30 * 1000
     }
   );
 
