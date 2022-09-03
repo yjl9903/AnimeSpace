@@ -75,7 +75,7 @@
     "*.d.ts"
   ],
   "scripts": {
-    "before:npm": "pnpm build",
+    "before:version": "vitest --run && pnpm typecheck && pnpm build",
     "build": "unbuild && pnpm build:data",
     "build:data": "optc scripts/build.ts",
     "dev": "unbuild --stub",
