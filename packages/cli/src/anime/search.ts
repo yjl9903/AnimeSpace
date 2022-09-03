@@ -114,6 +114,11 @@ export async function search(
   keywords: string[],
   option: SearchOption = { type: 'tv' }
 ) {
+  if (option.title) {
+    keywords = [...keywords];
+    keywords.push(option.title);
+  }
+
   const log = option.log ?? true;
 
   if (log) {
