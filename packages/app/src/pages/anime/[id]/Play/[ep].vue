@@ -80,21 +80,23 @@ onBeforeRouteLeave(async () => {
       <Playing ml1></Playing>
     </h2>
     <div flex="~ gap4 xl:gap8 lt-lg:col" w="lt-lg:full">
-      <div aspect="video" mt="4" w="full">
-        <Player
-          v-if="src"
-          :options="{}"
-          :source="{
-            title: `${title} - E${ep}`,
-            type: 'video',
-            sources: [{ src: src, type: 'video/mp4', size: 1080 }]
-          }"
-          :start="start"
-          class="w-[640px] h-[360px]"
-          @timeupdate="(t) => (playTime = t)"
-        >
-          <video controls playsinline crossorigin="anonymous"></video>
-        </Player>
+      <div lt-lg="mx--8">
+        <div aspect="video" mt="4" w="full">
+          <Player
+            v-if="src"
+            :options="{}"
+            :source="{
+              title: `${title} - E${ep}`,
+              type: 'video',
+              sources: [{ src: src, type: 'video/mp4', size: 1080 }]
+            }"
+            :start="start"
+            class="w-[640px] h-[360px]"
+            @timeupdate="(t) => (playTime = t)"
+          >
+            <video controls playsinline crossorigin="anonymous"></video>
+          </Player>
+        </div>
       </div>
       <div flex-auto></div>
       <div v-if="onair" mt4 w="xl:400px lg:280px" shadow-box rounded-2 p4>
