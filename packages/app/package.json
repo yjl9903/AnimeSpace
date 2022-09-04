@@ -45,7 +45,7 @@
     "vite-plugin-pages": "^0.26.0",
     "vite-plugin-pwa": "^0.12.6",
     "vite-ssg": "^0.20.2",
-    "vitest": "^0.22.1",
+    "vitest": "^0.23.0",
     "vue-tsc": "^0.40.6",
     "workbox-window": "^6.5.4",
     "wrangler": "^2.0.28"

@@ -11,7 +11,7 @@ importers:
       turbo: latest
       typescript: ^4.8.2
       vite: ^3.0.9
-      vitest: ^0.22.1
+      vitest: ^0.23.0
     devDependencies:
       '@types/node': 18.6.5
       bumpp: 8.2.1
@@ -20,7 +20,7 @@ importers:
       turbo: 1.4.5
       typescript: 4.8.2
       vite: 3.0.9
-      vitest: 0.22.1
+      vitest: 0.23.0
 
   docs:
     specifiers:
@@ -90,7 +90,7 @@ importers:
       vite-plugin-pages: ^0.26.0
       vite-plugin-pwa: ^0.12.6
       vite-ssg: ^0.20.2
-      vitest: ^0.22.1
+      vitest: ^0.23.0
       vue: ^3.2.38
       vue-router: ^4.1.5
       vue-scrollto: ^2.20.0
@@ -133,7 +133,7 @@ importers:
       vite-plugin-pages: 0.26.0_vite@3.0.9
       vite-plugin-pwa: 0.12.6_f7se6o6eqkwcix4u3svh6mkvda
       vite-ssg: 0.20.2_bfq3gzdvlavb2sn3qqvybkgwxu
-      vitest: 0.22.1
+      vitest: 0.23.0
       vue-tsc: 0.40.6_typescript@4.8.2
       workbox-window: 6.5.4
       wrangler: 2.0.28
@@ -7311,6 +7311,11 @@ packages:
     dev: false
     optional: true
 
+  /tinybench/2.1.4:
+    resolution: {integrity: sha512-NFWIw2Gg7EUPdeE8nL1Dc7AMVlk7sOr2PmSNKVuQrZ0YwTOFoshPQ+hcLrgnhK8dTP3FWMCJaf4N+/hXp6lKPw==}
+    engines: {node: '>=16.0.0'}
+    dev: true
+
   /tinypool/0.2.4:
     resolution: {integrity: sha512-Vs3rhkUH6Qq1t5bqtb816oT+HeJTXfwt2cbPH17sWHIYKTotQIFPk3tf2fgqRrVyMDVOc1EnPgzIxfIulXVzwQ==}
     engines: {node: '>=14.0.0'}
@@ -8271,8 +8276,8 @@ packages:
       - terser
     dev: true
 
-  /vitest/0.22.1:
-    resolution: {integrity: sha512-+x28YTnSLth4KbXg7MCzoDAzPJlJex7YgiZbUh6YLp0/4PqVZ7q7/zyfdL0OaPtKTpNiQFPpMC8Y2MSzk8F7dw==}
+  /vitest/0.23.0:
+    resolution: {integrity: sha512-I3ctlfiXYprA2tID1qP+m6pmgmKx3HYfRe66MetGOHKCHLY7hz74ihiwIEtN7LReJgF3U5cM735iYPkn/Go1iQ==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
@@ -8299,6 +8304,8 @@ packages:
       chai: 4.3.6
       debug: 4.3.4
       local-pkg: 0.4.2
+      strip-literal: 0.4.0
+      tinybench: 2.1.4
       tinypool: 0.2.4
       tinyspy: 1.0.2
       vite: 3.0.9
