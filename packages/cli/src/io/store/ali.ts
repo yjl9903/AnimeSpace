@@ -16,6 +16,8 @@ import { CreateStore, Store, StoreOption } from './base';
 
 const debug = createDebug('anime:ali');
 
+const TIMEOUT = 10 * 1000;
+
 export class AliStore extends Store {
   private readonly accessKeyId: string;
   private readonly accessKeySecret: string;
@@ -43,10 +45,16 @@ export class AliStore extends Store {
     file: string
   ): Promise<UploadResponse | undefined> {
     try {
-      const res = (await this.vodClient.request('CreateUploadVideo', {
-        Title: title,
-        FileName: file
-      })) as any;
+      const res = (await this.vodClient.request(
+        'CreateUploadVideo',
+        {
+          Title: title,
+          FileName: file
+        },
+        {
+          timeout: TIMEOUT
+        }
+      )) as any;
       res.UploadAuth = JSON.parse(b64decode(res.UploadAuth));
       res.UploadAddress = JSON.parse(b64decode(res.UploadAddress));
       return res as UploadResponse;
@@ -168,14 +176,16 @@ export class AliStore extends Store {
           {
             VideoId: videoId
           },
-          {}
+          {
+            timeout: TIMEOUT
+          }
         ) as Promise<any>,
         this.vodClient.request(
           'GetPlayInfo',
           {
             VideoId: videoId
           },
-          {}
+          { timeout: TIMEOUT }
         ) as Promise<any>
       ]);
       debug(resp, play);
