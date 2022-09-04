@@ -19,7 +19,7 @@
     "@vitejs/plugin-vue": "^3.0.3",
     "fast-glob": "^3.2.11",
     "https-localhost": "^4.7.1",
-    "unocss": "^0.45.14",
+    "unocss": "^0.45.15",
     "unplugin-vue-components": "^0.22.4",
     "vite": "^3.0.9",
     "vite-plugin-pwa": "^0.12.6",
