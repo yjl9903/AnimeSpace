@@ -27,7 +27,7 @@
     "prettier": "latest",
     "turbo": "latest",
     "typescript": "^4.8.2",
-    "vite": "^3.0.9",
+    "vite": "^3.1.0",
     "vitest": "^0.23.1"
   },
   "packageManager": "pnpm@7.10.0",
