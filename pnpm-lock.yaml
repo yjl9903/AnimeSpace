@@ -28,7 +28,7 @@ importers:
       '@iconify-json/carbon': ^1.1.7
       '@types/node': ^18.6.5
       '@unocss/reset': ^0.45.15
-      '@vitejs/plugin-vue': ^3.0.3
+      '@vitejs/plugin-vue': ^3.1.0
       '@vueuse/core': ^9.1.1
       fast-glob: ^3.2.11
       https-localhost: ^4.7.1
@@ -47,7 +47,7 @@ importers:
       '@iconify-json/carbon': 1.1.7
       '@types/node': 18.6.5
       '@unocss/reset': 0.45.15
-      '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.38
+      '@vitejs/plugin-vue': 3.1.0_vite@3.0.9+vue@3.2.38
       fast-glob: 3.2.11
       https-localhost: 4.7.1
       unocss: 0.45.15_vite@3.0.9
@@ -68,7 +68,7 @@ importers:
       '@types/prompts': ^2.4.0
       '@types/scrollreveal': ^0.0.8
       '@unocss/reset': ^0.45.15
-      '@vitejs/plugin-vue': ^3.0.3
+      '@vitejs/plugin-vue': ^3.1.0
       '@vueuse/core': ^9.1.1
       '@vueuse/head': ^0.7.9
       axios: ^0.27.2
@@ -119,7 +119,7 @@ importers:
       '@types/prompts': 2.4.0
       '@types/scrollreveal': 0.0.8
       '@unocss/reset': 0.45.15
-      '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.38
+      '@vitejs/plugin-vue': 3.1.0_vite@3.0.9+vue@3.2.38
       bangumi-data: 0.3.98
       cross-env: 7.0.3
       typescript: 4.8.2
@@ -2373,8 +2373,8 @@ packages:
       vite: 3.0.9
     dev: true
 
-  /@vitejs/plugin-vue/3.0.3_vite@3.0.9+vue@3.2.38:
-    resolution: {integrity: sha512-U4zNBlz9mg+TA+i+5QPc3N5lQvdUXENZLO2h0Wdzp56gI1MWhqJOv+6R+d4kOzoaSSq6TnGPBdZAXKOe4lXy6g==}
+  /@vitejs/plugin-vue/3.1.0_vite@3.0.9+vue@3.2.38:
+    resolution: {integrity: sha512-fmxtHPjSOEIRg6vHYDaem+97iwCUg/uSIaTzp98lhELt2ISOQuDo2hbkBdXod0g15IhfPMQmAxh4heUks2zvDA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^3.0.0
@@ -8250,7 +8250,7 @@ packages:
     dependencies:
       '@docsearch/css': 3.2.1
       '@docsearch/js': 3.2.1_tbpndr44ulefs3hehwpi2mkf2y
-      '@vitejs/plugin-vue': 3.0.3_vite@3.0.9+vue@3.2.38
+      '@vitejs/plugin-vue': 3.1.0_vite@3.0.9+vue@3.2.38
       '@vue/devtools-api': 6.2.1
       '@vueuse/core': 9.1.1_vue@3.2.38
       body-scroll-lock: 4.0.0-beta.0
