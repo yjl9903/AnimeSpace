@@ -35,7 +35,7 @@ importers:
       unocss: ^0.45.18
       unplugin-vue-components: ^0.22.4
       vite: ^3.1.0
-      vite-plugin-pwa: ^0.12.6
+      vite-plugin-pwa: ^0.12.7
       vitepress: ^1.0.0-alpha.13
       vue: ^3.2.38
       workbox-window: ^6.5.4
@@ -53,7 +53,7 @@ importers:
       unocss: 0.45.18_vite@3.1.0
       unplugin-vue-components: 0.22.4_vite@3.1.0+vue@3.2.38
       vite: 3.1.0
-      vite-plugin-pwa: 0.12.6_zp7t6aa2r77waajuyr5zt63phe
+      vite-plugin-pwa: 0.12.7_zp7t6aa2r77waajuyr5zt63phe
       vitepress: 1.0.0-alpha.13_tbpndr44ulefs3hehwpi2mkf2y
       workbox-window: 6.5.4
 
@@ -88,7 +88,7 @@ importers:
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.7.1
       vite-plugin-pages: ^0.26.0
-      vite-plugin-pwa: ^0.12.6
+      vite-plugin-pwa: ^0.12.7
       vite-ssg: ^0.20.2
       vitest: ^0.23.1
       vue: ^3.2.38
@@ -131,7 +131,7 @@ importers:
       vite-plugin-info: 0.3.1_vite@3.1.0
       vite-plugin-inspect: 0.7.1_vite@3.1.0
       vite-plugin-pages: 0.26.0_vite@3.1.0
-      vite-plugin-pwa: 0.12.6_zp7t6aa2r77waajuyr5zt63phe
+      vite-plugin-pwa: 0.12.7_zp7t6aa2r77waajuyr5zt63phe
       vite-ssg: 0.20.2_x7fx7r6l3vy4grgaxjfxbt6rju
       vitest: 0.23.1
       vue-tsc: 0.40.9_typescript@4.8.2
@@ -8150,8 +8150,8 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-pwa/0.12.6_zp7t6aa2r77waajuyr5zt63phe:
-    resolution: {integrity: sha512-qRxx1zUlwKq2QD20nDZVL449wV+dflRVeDMLa2k4LZiHfWRfHWwmdhnDZOlMEgni0Zss1DkhyTmuzLYuO6aO3A==}
+  /vite-plugin-pwa/0.12.7_zp7t6aa2r77waajuyr5zt63phe:
+    resolution: {integrity: sha512-salSwS1wWc1niNWfhX2W6gtfXmk+XESMz62w95EHLq6fSM2bDgDm1APmvq1nkDcxH6Onky7HxysCBKMzvOHXYg==}
     peerDependencies:
       vite: ^2.0.0 || ^3.0.0-0
       workbox-window: ^6.4.0
