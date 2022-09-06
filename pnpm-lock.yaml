@@ -96,7 +96,7 @@ importers:
       vue-scrollto: ^2.20.0
       vue-tsc: ^0.40.9
       workbox-window: ^6.5.4
-      wrangler: ^2.0.28
+      wrangler: ^2.0.29
     dependencies:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.1.1_vue@3.2.38
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.11.2_grlnpsa52k2zhig72z2c6xq4bm
       unplugin-vue-components: 0.22.4_vite@3.1.0+vue@3.2.38
       vite: 3.1.0
-      vite-plugin-cloudflare-functions: 0.2.2_25ycpa6trgzz3gfxpzbjrnzsla
+      vite-plugin-cloudflare-functions: 0.2.2_serainpbykmm6jyofsx274r76y
       vite-plugin-info: 0.3.1_vite@3.1.0
       vite-plugin-inspect: 0.7.1_vite@3.1.0
       vite-plugin-pages: 0.26.0_vite@3.1.0
@@ -136,7 +136,7 @@ importers:
       vitest: 0.23.1
       vue-tsc: 0.40.9_typescript@4.8.2
       workbox-window: 6.5.4
-      wrangler: 2.0.28
+      wrangler: 2.0.29
 
   packages/bangumi:
     specifiers:
@@ -8067,7 +8067,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.2.2_25ycpa6trgzz3gfxpzbjrnzsla:
+  /vite-plugin-cloudflare-functions/0.2.2_serainpbykmm6jyofsx274r76y:
     resolution: {integrity: sha512-8UsdL1vpFg2crqwqIMV+Oy+7D20rPzz9Yfhc01b0poCbO/HHSXzAEz3GjdCLiGrewadurcMIc41MFGARnyvH6Q==}
     engines: {node: '>=v16.17.0'}
     peerDependencies:
@@ -8093,7 +8093,7 @@ packages:
       picocolors: 1.0.0
       tree-kill: 1.2.2
       vite: 3.1.0
-      wrangler: 2.0.28
+      wrangler: 2.0.29
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8685,8 +8685,8 @@ packages:
       workbox-core: 6.5.4
     dev: true
 
-  /wrangler/2.0.28:
-    resolution: {integrity: sha512-BNN+xebKF8CnZGagirNXzPbU9GU1deawiH/ASDN4h5Bi1Kgm/HpUMZpkP1LoMjtveiiS7Pa53A6x00bm2JEFlQ==}
+  /wrangler/2.0.29:
+    resolution: {integrity: sha512-Z9W48pRpo87qO2WLMU24TFLL5Oq2WUwzqlwVDFrnSpBT+7GRrkAceepKU8V+aOXxLqyUaEzaSVHT3KVPyXh8KQ==}
     engines: {node: '>=16.13.0'}
     hasBin: true
     dependencies:
