@@ -51,8 +51,6 @@ export interface RawPlan {
   onair: OnairPlan[];
 }
 
-export type EpisodeList = Record<number, string> | string[];
-
 export interface OnairPlan {
   /**
    * Anime name
@@ -72,6 +70,13 @@ export interface OnairPlan {
   bgmId: string;
 
   /**
+   * Plan is onair or finish
+   *
+   * @default 'onair'
+   */
+  state: 'onair' | 'finish';
+
+  /**
    * Fansub order
    */
   fansub?: string[];
@@ -83,17 +88,17 @@ export interface OnairPlan {
    *
    * Type record for play urls
    */
-  link?: string | EpisodeList;
+  link?: string | EpisodesInputList;
 
   /**
    * Specify the magnet id of some episode
    */
-  magnet?: EpisodeList;
+  magnet?: EpisodesInputList;
 
   /**
    * Specify OSS source of some episode
    */
-  source?: EpisodeList;
+  source?: EpisodesInputList;
 
   /**
    * Template string for names
@@ -107,3 +112,5 @@ export interface OnairPlan {
    */
   keywords?: string[];
 }
+
+export type EpisodesInputList = Record<number, string> | string[];

@@ -68,6 +68,15 @@ export class Plan {
           bgm.fansub = [];
         }
 
+        // Fix empty onair state
+        if (
+          !('state' in bgm) ||
+          bgm.state === undefined ||
+          bgm.state === null
+        ) {
+          bgm.state = plan.state ?? 'onair';
+        }
+
         // Fix format string
         if (
           !('format' in bgm) ||

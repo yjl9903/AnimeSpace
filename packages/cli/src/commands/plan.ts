@@ -32,14 +32,21 @@ app.command('plan onair', 'Preview onair plan').action(async () => {
   plan.printOnair();
 });
 
-app.command('plan magnet', 'Refresh resource list').action(async () => {
-  const { createDaemon } = await import('../daemon');
-  logger.config.level = false;
-  const daemon = createDaemon();
-  await daemon.initPlan({ log: false });
-  await daemon.initClient();
-  await daemon.refreshEpisode();
-});
+app
+  .command('plan magnet [anime]', 'Refresh magnet list')
+  .action(async (anime) => {
+    const { createDaemon } = await import('../daemon');
+    logger.config.level = false;
+    const daemon = createDaemon();
+
+    await daemon.initPlan({ log: false });
+    await daemon.initClient();
+    await daemon.refreshEpisode({
+      filter: anime
+        ? (o) => o.bgmId === anime || o.title.indexOf(anime) !== -1
+        : undefined
+    });
+  });
 
 app
   .command('plan download <anime>', 'Download remote videos from OSS')

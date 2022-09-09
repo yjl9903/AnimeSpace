@@ -6,7 +6,7 @@ import { format, subMonths } from 'date-fns';
 import type { Episode } from '@animepaste/database';
 
 import type { Store, VideoInfo } from '../io';
-import type { OnairPlan, EpisodeList } from '../types';
+import type { OnairPlan, EpisodesInputList } from '../types';
 
 import { context } from '../context';
 import { MAX_RETRY } from '../constant';
@@ -26,6 +26,14 @@ import { Plan } from './plan';
 import { debug } from './constant';
 
 export interface DaemonStepOption {
+  /**
+   * Filter onair plan
+   */
+  filter?: (onair: OnairPlan) => boolean;
+
+  /**
+   * Enable log
+   */
   log?: boolean;
 }
 
@@ -126,48 +134,62 @@ export class Daemon {
     });
   }
 
-  public async refreshEpisode({ log = true }: DaemonStepOption = {}) {
+  /**
+   * Refresh episode magnet list
+   *
+   * Prerequisite: this.initPlan(), this.initClient()
+   */
+  public async refreshEpisode({ log = true, filter }: DaemonStepOption = {}) {
     let count = 0;
 
     if (!log) {
       logger.empty();
     }
 
-    for (const plan of this.plan) {
-      for (const onair of plan.onair) {
-        // Skip finished plan
-        if (
-          plan.state === 'finish' &&
-          this.client.onair.find((o) => o.bgmId === onair.bgmId)
-        ) {
-          continue;
-        }
+    if (!this.plan) {
+      throw new Error('Please init plan first');
+    }
+    if (!this.client) {
+      throw new Error('Please init client first');
+    }
 
-        // Continue outside onair anime
-        if (onair.link && typeof onair.link === 'string') {
-          continue;
-        }
-
-        const keywords = Array.isArray(onair.keywords)
-          ? onair.keywords
-          : typeof onair.keywords === 'string'
-          ? [onair.keywords]
-          : undefined;
-
-        await daemonSearch(onair.bgmId, keywords, {
-          type: 'tv',
-          title: onair.title,
-          log: log
-        });
-
-        logger.info(
-          okColor('Refresh  ') +
-            formatTitle(onair.title, onair.season) +
-            okColor(' OK ') +
-            `(${bangumiLink(onair.bgmId)})`
-        );
-        count++;
+    for (const onair of this.plan.onairs()) {
+      // Skip finished onair bangumi
+      if (
+        onair.state === 'finish' &&
+        this.client.onair.find((o) => o.bgmId === onair.bgmId)
+      ) {
+        continue;
       }
+
+      // Continue outside onair anime
+      if (onair.link && typeof onair.link === 'string') {
+        continue;
+      }
+
+      if (filter && !filter(onair)) {
+        continue;
+      }
+
+      const keywords = Array.isArray(onair.keywords)
+        ? onair.keywords
+        : typeof onair.keywords === 'string'
+        ? [onair.keywords]
+        : undefined;
+
+      await daemonSearch(onair.bgmId, keywords, {
+        type: 'tv',
+        title: onair.title,
+        log: log
+      });
+
+      logger.info(
+        okColor('Refresh  ') +
+          formatTitle(onair.title, onair.season) +
+          okColor(' OK ') +
+          `(${bangumiLink(onair.bgmId)})`
+      );
+      count++;
     }
 
     logger.info(
@@ -472,7 +494,7 @@ export class Daemon {
   }
 }
 
-function resolveEP(eps: EpisodeList) {
+function resolveEP(eps: EpisodesInputList) {
   if (Array.isArray(eps)) {
     return new Map(eps.map((t, idx) => [idx + 1, t]));
   } else {
