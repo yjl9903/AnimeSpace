@@ -236,6 +236,10 @@ export class Daemon {
         ? resolveEP(onair.link)
         : new Map<number, string>();
 
+    const epSource = onair.source
+      ? resolveEP(onair.source)
+      : new Map<number, string>();
+
     const givenMagnet = onair.magnet
       ? resolveEP(onair.magnet)
       : new Map<number, string>();
@@ -265,7 +269,8 @@ export class Daemon {
       )
       .filter((ep) => !givenMagnet.has(ep.ep))
       .concat(epMagnet)
-      .filter((ep) => !epLink.has(ep.ep));
+      .filter((ep) => !epLink.has(ep.ep))
+      .filter((ep) => !epSource.has(ep.ep));
 
     logger.info(
       startColor('Download ') +
