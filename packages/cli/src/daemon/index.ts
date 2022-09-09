@@ -6,8 +6,9 @@ export * from './plan';
 export async function startDaemon(option: {
   once: boolean;
   interval: number;
-  sync: boolean;
+  index: boolean;
   upload: boolean;
+  sync: boolean;
 }): Promise<void> {
   context.isDaemon = true;
 
@@ -30,6 +31,6 @@ export async function startDaemon(option: {
   });
 }
 
-export function createDaemon() {
-  return new Daemon({ sync: false, upload: false });
+export function createDaemon(index = false) {
+  return new Daemon({ index, sync: false, upload: false });
 }

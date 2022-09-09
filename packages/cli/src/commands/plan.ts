@@ -19,8 +19,9 @@ app
     }
   })
   .option('-o, --once', 'Just do an immediate update')
-  .option('--sync', 'Enable sync onair with the server', { default: true })
+  .option('--index', 'Enable index resource', { default: true })
   .option('--upload', 'Enable upload videos to OSS', { default: true })
+  .option('--sync', 'Enable sync onair with the server', { default: true })
   .action(async (option) => {
     const { startDaemon } = await import('../daemon');
     await startDaemon(option);

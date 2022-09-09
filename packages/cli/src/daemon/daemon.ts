@@ -43,11 +43,11 @@ export class Daemon {
   private client!: SyncClient;
 
   /**
-   * Enable sync onair list
+   * Enable index
    *
    * @default 'true'
    */
-  private readonly enableSync: boolean;
+  private readonly enableIndex: boolean;
 
   /**
    * Enable upload
@@ -56,7 +56,15 @@ export class Daemon {
    */
   private readonly enableUpload: boolean;
 
-  constructor(option: { sync: boolean; upload: boolean }) {
+  /**
+   * Enable sync onair list
+   *
+   * @default 'true'
+   */
+  private readonly enableSync: boolean;
+
+  constructor(option: { index: boolean; upload: boolean; sync: boolean }) {
+    this.enableIndex = option.index;
     this.enableUpload = option.upload;
     if (this.enableUpload) {
       this.enableSync = option.sync;
@@ -70,7 +78,9 @@ export class Daemon {
       logger.info('Start initing daemon ' + now());
 
       await this.initPlan();
-      await this.refreshDatabase();
+      if (this.enableIndex) {
+        await this.refreshDatabase();
+      }
       await this.initClient();
       await this.refreshEpisode({ log: false });
       await this.refreshStore();
