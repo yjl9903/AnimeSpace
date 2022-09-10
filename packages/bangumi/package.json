@@ -108,7 +108,7 @@
     }
   },
   "engines": {
-    "node": ">=v16.16.0"
+    "node": ">=v16.17.0"
   },
   "release-it": {
     "git": {
