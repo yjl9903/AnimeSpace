@@ -1,5 +1,6 @@
-import { Daemon } from './daemon';
 import { context } from '../context';
+
+import { Daemon } from './daemon';
 
 export * from './plan';
 
