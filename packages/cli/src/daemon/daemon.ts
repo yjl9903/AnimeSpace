@@ -377,6 +377,7 @@ export class Daemon {
 
     // Start uploading
     const videoInfos: VideoInfo[] = [];
+    const onairSource: OnairEpisode[] = [];
     if (this.enableUpload) {
       logger.info(
         startColor('Upload   ') +
@@ -384,6 +385,9 @@ export class Daemon {
           '    ' +
           `(${bangumiLink(onair.bgmId)})`
       );
+
+      let success = 0;
+
       for (const magnet of magnets) {
         const serverMagnet = getServerMagnet(magnet);
         if (serverMagnet) {
@@ -414,22 +418,46 @@ export class Daemon {
             retry: MAX_RETRY
           });
           if (resp && resp.playUrl.length > 0) {
-            // Fix missing magnetId
-            if (!resp.source.magnetId) {
-              resp.source.magnetId = magnetId;
-              await context.videoStore.updateVideo(resp);
-            }
+            success++;
             videoInfos.push(resp);
           } else {
             logger.error(`Fail uploading ${filename}`);
           }
         }
       }
+
+      for (const [ep, source] of epSource.entries()) {
+        const sourcePath = path.resolve(context.root, source);
+        // Check whether server onair bangumi is deleted
+        if (!fs.existsSync(sourcePath)) {
+          continue;
+        }
+        const resp = await this.store.upload(sourcePath, {
+          retry: MAX_RETRY
+        });
+        if (resp && resp.playUrl.length > 0) {
+          success++;
+          onairSource.push({
+            ep,
+            quality: 1080, // default value
+            creationTime: fs.statSync(sourcePath).birthtime.toISOString(),
+            playURL: resp.playUrl[0],
+            storage: {
+              type: resp.platform,
+              videoId: resp.videoId,
+              source: resp.source
+            }
+          });
+        } else {
+          logger.error(`Fail uploading ${path.basename(source)}`);
+        }
+      }
+
       logger.info(
         okColor('Upload   ') +
           formatTitle(onair.title, onair.season) +
           okColor(' OK ') +
-          `(Total: ${magnets.length} episodes)`
+          `(Total: ${success} episodes)`
       );
     }
     // Upload OK
@@ -454,6 +482,7 @@ export class Daemon {
         bgmId: onair.bgmId,
         episodes: [
           ...syncEpisodes,
+          ...onairSource,
           ...[...epLink.entries()].map(([ep, playURL]) => ({
             ep: +ep,
             playURL
