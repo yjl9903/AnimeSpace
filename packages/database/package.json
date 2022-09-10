@@ -50,7 +50,7 @@
     "cnchar-trad": "^3.2.2",
     "date-fns": "^2.29.2",
     "debug": "^4.3.4",
-    "node-html-parser": "^5.4.2"
+    "node-html-parser": "^6.0.0"
   },
   "devDependencies": {
     "prisma": "^4.3.1",
