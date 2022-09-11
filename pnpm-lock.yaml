@@ -182,7 +182,7 @@ importers:
       fastest-levenshtein: ^1.0.16
       fs-extra: ^10.1.0
       js-yaml: ^4.1.0
-      kolorist: ^1.5.1
+      kolorist: ^1.6.0
       lbear: ^0.1.2
       mediainfo.js: ^0.1.8
       optc: ^0.3.6
@@ -203,7 +203,7 @@ importers:
       fastest-levenshtein: 1.0.16
       fs-extra: 10.1.0
       js-yaml: 4.1.0
-      kolorist: 1.5.1
+      kolorist: 1.6.0
       lbear: 0.1.2
       mediainfo.js: 0.1.8
       prompts: 2.4.2
@@ -1690,7 +1690,7 @@ packages:
       '@antfu/utils': 0.5.2
       '@iconify/types': 1.1.0
       debug: 4.3.4
-      kolorist: 1.5.1
+      kolorist: 1.6.0
       local-pkg: 0.4.2
     transitivePeerDependencies:
       - supports-color
@@ -5418,6 +5418,9 @@ packages:
   /kolorist/1.5.1:
     resolution: {integrity: sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==}
 
+  /kolorist/1.6.0:
+    resolution: {integrity: sha512-dLkz37Ab97HWMx9KTes3Tbi3D1ln9fCAy2zr2YVExJasDRPGRaKcoE4fycWNtnCAJfjFqe0cnY+f8KT2JePEXQ==}
+
   /last-one-wins/1.0.4:
     resolution: {integrity: sha512-t+KLJFkHPQk8lfN6WBOiGkiUXoub+gnb2XTYI2P3aiISL+94xgZ1vgz1SXN/N4hthuOoLXarXfBZPUruyjQtfA==}
     dev: false
@@ -6013,7 +6016,7 @@ packages:
       fs-extra: 10.1.0
       globby: 13.1.2
       jiti: 1.14.0
-      kolorist: 1.5.1
+      kolorist: 1.6.0
       magic-regexp: 0.4.0
     transitivePeerDependencies:
       - esbuild
@@ -6034,7 +6037,7 @@ packages:
       fs-extra: 10.1.0
       globby: 13.1.2
       jiti: 1.14.0
-      kolorist: 1.5.1
+      kolorist: 1.6.0
       magic-regexp: 0.4.0_vite@3.1.0
     transitivePeerDependencies:
       - esbuild
