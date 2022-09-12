@@ -64,7 +64,7 @@
     "lbear": "^0.1.2",
     "mediainfo.js": "^0.1.8",
     "prompts": "^2.4.2",
-    "webtorrent": "^1.8.29"
+    "webtorrent": "^1.8.30"
   },
   "devDependencies": {
     "@types/ali-oss": "^6.16.4",
