@@ -76,7 +76,7 @@
     "@types/webtorrent": "^0.109.3",
     "bangumi-data": "^0.3.98",
     "optc": "^0.3.6",
-    "unbuild": "^0.8.10"
+    "unbuild": "^0.8.11"
   },
   "engines": {
     "node": ">=v16.17.0"
