@@ -15,6 +15,8 @@ app
     }
   })
   .action(async (option) => {
+    logger.config.level = false;
+
     await context.magnetStore.index({
       limit: option.limit ? new Date(option.limit) : undefined,
       startPage: option.page,
