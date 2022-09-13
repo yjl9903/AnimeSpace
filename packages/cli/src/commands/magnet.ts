@@ -23,11 +23,20 @@ app
     });
   });
 
+const NUM_RE = /^[pP]?(\d+)$/;
+const PAGE_SIZE = 80;
+
 app
-  .command('magnet list <keyword>', 'Search magnet database')
+  .command('magnet list <keyword/page>', 'List magnet resource')
   .alias('magnet ls')
   .action(async (keyword) => {
-    const magnets = await context.magnetStore.search(keyword);
+    const match = NUM_RE.exec(keyword);
+    const magnets = match
+      ? await context.magnetStore.list({
+          skip: (+match[1] - 1) * PAGE_SIZE,
+          take: PAGE_SIZE
+        })
+      : await context.magnetStore.search(keyword);
     magnets.sort((a, b) => a.title.localeCompare(b.title));
     for (const item of magnets) {
       logger.println(

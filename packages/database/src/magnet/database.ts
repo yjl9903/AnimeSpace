@@ -225,8 +225,16 @@ export class MagnetStore extends AbstractDatabase {
     }
   }
 
-  async list() {
-    return await this.prisma.resource.findMany();
+  async list(
+    option: { skip?: number; take?: number; order?: 'asc' | 'desc' } = {}
+  ) {
+    return await this.prisma.resource.findMany({
+      skip: option.skip,
+      take: option.take,
+      orderBy: {
+        createdAt: option.order ?? 'desc'
+      }
+    });
   }
 
   async destroy() {
