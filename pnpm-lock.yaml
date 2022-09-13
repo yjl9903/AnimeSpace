@@ -142,7 +142,7 @@ importers:
     specifiers:
       axios: ^0.27.2
       bangumi-data: ^0.3.99
-      breadc: ^0.6.4
+      breadc: ^0.6.5
       date-fns: ^2.29.2
       debug: ^4.3.4
       optc: ^0.3.6
@@ -150,7 +150,7 @@ importers:
       vite: ^3.1.0
     dependencies:
       axios: 0.27.2_debug@4.3.4
-      breadc: 0.6.4
+      breadc: 0.6.5
       debug: 4.3.4
     devDependencies:
       bangumi-data: 0.3.99
@@ -174,7 +174,7 @@ importers:
       ali-oss: ^6.17.1
       axios: ^0.27.2
       bangumi-data: ^0.3.99
-      breadc: ^0.6.4
+      breadc: ^0.6.5
       cli-progress: ^3.11.2
       date-fns: ^2.29.2
       death: ^1.1.0
@@ -195,7 +195,7 @@ importers:
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
       axios: 0.27.2_debug@4.3.4
-      breadc: 0.6.4
+      breadc: 0.6.5
       cli-progress: 3.11.2
       date-fns: 2.29.2
       death: 1.1.0
@@ -3046,10 +3046,10 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /breadc/0.6.4:
-    resolution: {integrity: sha512-qJZ8oGVdSbr8ZKRGZjzni1f0go6FK4VcveqBqcoiXOdMcx/AECPtkEpdMBOd+nsiisuUXr/lBupsJpCM0LjBDQ==}
+  /breadc/0.6.5:
+    resolution: {integrity: sha512-FbkLYxEcddwvg6HE6ytxmwA4dNk6oxQxeB5zTmRbsmhN7v37QCYrtEFLIFCZnVUyrECI7+m1cZ79OKgEuexbfg==}
     dependencies:
-      kolorist: 1.5.1
+      kolorist: 1.6.0
       minimist: 1.2.6
     dev: false
 
@@ -5468,6 +5468,7 @@ packages:
 
   /kolorist/1.5.1:
     resolution: {integrity: sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==}
+    dev: true
 
   /kolorist/1.6.0:
     resolution: {integrity: sha512-dLkz37Ab97HWMx9KTes3Tbi3D1ln9fCAy2zr2YVExJasDRPGRaKcoE4fycWNtnCAJfjFqe0cnY+f8KT2JePEXQ==}
