@@ -36,7 +36,7 @@ importers:
       unplugin-vue-components: ^0.22.7
       vite: ^3.1.0
       vite-plugin-pwa: ^0.12.7
-      vitepress: ^1.0.0-alpha.13
+      vitepress: ^1.0.0-alpha.14
       vue: ^3.2.39
       workbox-window: ^6.5.4
     dependencies:
@@ -54,7 +54,7 @@ importers:
       unplugin-vue-components: 0.22.7_vite@3.1.0+vue@3.2.39
       vite: 3.1.0
       vite-plugin-pwa: 0.12.7_zp7t6aa2r77waajuyr5zt63phe
-      vitepress: 1.0.0-alpha.13_tbpndr44ulefs3hehwpi2mkf2y
+      vitepress: 1.0.0-alpha.14_tbpndr44ulefs3hehwpi2mkf2y
       workbox-window: 6.5.4
 
   packages/app:
@@ -5389,10 +5389,6 @@ packages:
     hasBin: true
     dev: true
 
-  /jsonc-parser/3.0.0:
-    resolution: {integrity: sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==}
-    dev: true
-
   /jsonc-parser/3.2.0:
     resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
     dev: true
@@ -5962,7 +5958,6 @@ packages:
 
   /nprogress/0.2.0:
     resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
-    dev: false
 
   /nth-check/2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
@@ -6899,7 +6894,7 @@ packages:
   /shiki/0.11.1:
     resolution: {integrity: sha512-EugY9VASFuDqOexOgXR18ZV+TbFrQHeCpEYaXamO+SZlsnT/2LxuLBX25GGtIrwaEVFXUAbUQ601SWE2rMwWHA==}
     dependencies:
-      jsonc-parser: 3.0.0
+      jsonc-parser: 3.2.0
       vscode-oniguruma: 1.6.2
       vscode-textmate: 6.0.0
     dev: true
@@ -8240,8 +8235,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress/1.0.0-alpha.13_tbpndr44ulefs3hehwpi2mkf2y:
-    resolution: {integrity: sha512-gCbKb+6o0g5wHt2yyqBPk7FcvrB+MfwGtg1JMS5p99GTQR87l3b7symCl8o1ecv7MDXwJ2mPB8ZrYNLnQAJxLQ==}
+  /vitepress/1.0.0-alpha.14_tbpndr44ulefs3hehwpi2mkf2y:
+    resolution: {integrity: sha512-GVwDeZPc/+5vgxOh0NfbKlk/QT4e20hRUdLdG+hEP8myJmM0IC4uIL7xK2G/wn6ucei9hLb0YQh677oDhCxF6g==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.2.1
@@ -8250,6 +8245,7 @@ packages:
       '@vue/devtools-api': 6.2.1
       '@vueuse/core': 9.2.0_vue@3.2.39
       body-scroll-lock: 4.0.0-beta.0
+      nprogress: 0.2.0
       shiki: 0.11.1
       vite: 3.1.0
       vue: 3.2.39
