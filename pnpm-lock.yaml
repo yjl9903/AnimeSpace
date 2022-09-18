@@ -86,7 +86,7 @@ importers:
       vite: ^3.1.2
       vite-plugin-cloudflare-functions: ^0.2.3
       vite-plugin-info: ^0.3.1
-      vite-plugin-inspect: ^0.7.1
+      vite-plugin-inspect: ^0.7.2
       vite-plugin-pages: ^0.26.0
       vite-plugin-pwa: ^0.12.8
       vite-ssg: ^0.20.2
@@ -129,7 +129,7 @@ importers:
       vite: 3.1.2
       vite-plugin-cloudflare-functions: 0.2.3_bg64pblecrdanjcllcx457jcym
       vite-plugin-info: 0.3.1_vite@3.1.2
-      vite-plugin-inspect: 0.7.1_vite@3.1.2
+      vite-plugin-inspect: 0.7.2_vite@3.1.2
       vite-plugin-pages: 0.26.0_vite@3.1.2
       vite-plugin-pwa: 0.12.8_etjhesf6sppszzcdjjh7iyjgym
       vite-ssg: 0.20.2_z4alx64ql2k2h2ecobwmwtn6ha
@@ -8086,8 +8086,8 @@ packages:
       vite: 3.1.2
     dev: true
 
-  /vite-plugin-inspect/0.7.1_vite@3.1.2:
-    resolution: {integrity: sha512-mkTw5itsI+89WNJ6og0BpEAaV4ticrOGaoj+oWDR61W72H2mfkuw3MaAdpnnq6s6A7tKfM4nPaMtxjlmw3uXYg==}
+  /vite-plugin-inspect/0.7.2_vite@3.1.2:
+    resolution: {integrity: sha512-d6lR45+bjojVvBTNvDKssSdvHs238RLVIQ3sErRR5H0ktSncLQnjsm9TBMnxUDTFoIl75MIZZHsYpnCkh2a2mg==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0
@@ -8095,7 +8095,7 @@ packages:
       '@rollup/pluginutils': 4.2.1
       debug: 4.3.4
       fs-extra: 10.1.0
-      kolorist: 1.5.1
+      kolorist: 1.6.0
       sirv: 2.0.2
       ufo: 0.8.5
       vite: 3.1.2
