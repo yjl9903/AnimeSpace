@@ -228,7 +228,7 @@ importers:
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.3
       debug: ^4.3.4
-      node-html-parser: ^6.0.0
+      node-html-parser: ^6.1.0
       prisma: ^4.3.1
       unbuild: ^0.8.11
     dependencies:
@@ -238,7 +238,7 @@ importers:
       cnchar-trad: 3.2.2
       date-fns: 2.29.3
       debug: 4.3.4
-      node-html-parser: 6.0.0
+      node-html-parser: 6.1.0
     devDependencies:
       prisma: 4.3.1
       unbuild: 0.8.11
@@ -5902,8 +5902,8 @@ packages:
     hasBin: true
     dev: false
 
-  /node-html-parser/6.0.0:
-    resolution: {integrity: sha512-o4vS5Jm7ZdV5WN4/jHmCEVJOpm4exLCeXOcZnNzXi0BGv0AS8FsGwyQ4k0Ujmui1NMQs6qsTy+amjjpr9rmz4Q==}
+  /node-html-parser/6.1.0:
+    resolution: {integrity: sha512-lL3NirV1ihtYPfjTljB5Vu6gxMfxzWNkM1cz3VzYLxm8tuDgZhOKuHwx1JjaT+ceStTjV43H71a+SUq9Jq3BJQ==}
     dependencies:
       css-select: 4.3.0
       he: 1.2.0
