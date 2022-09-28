@@ -228,7 +228,7 @@ importers:
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.3
       debug: ^4.3.4
-      node-html-parser: ^6.1.0
+      node-html-parser: ^6.1.1
       prisma: ^4.4.0
       unbuild: ^0.8.11
     dependencies:
@@ -238,7 +238,7 @@ importers:
       cnchar-trad: 3.2.2
       date-fns: 2.29.3
       debug: 4.3.4
-      node-html-parser: 6.1.0
+      node-html-parser: 6.1.1
     devDependencies:
       prisma: 4.4.0
       unbuild: 0.8.11
@@ -3498,13 +3498,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /css-select/4.3.0:
-    resolution: {integrity: sha512-wPpOYtnsVontu2mODhA19JrqWxNsfdatRKd64kmpRbQgh1KtItko5sTnEpPdpSaJszTOhEMlF/RPz28qj4HqhQ==}
+  /css-select/5.1.0:
+    resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
     dependencies:
       boolbase: 1.0.0
       css-what: 6.1.0
-      domhandler: 4.3.1
-      domutils: 2.8.0
+      domhandler: 5.0.3
+      domutils: 3.0.1
       nth-check: 2.1.1
     dev: false
 
@@ -3710,12 +3710,12 @@ packages:
       path-type: 4.0.0
     dev: true
 
-  /dom-serializer/1.4.1:
-    resolution: {integrity: sha512-VHwB3KfrcOOkelEG2ZOfxqLZdfkil8PtJi4P8N2MMXucZq2yLp75ClViUlOVwyoHEDjYU433Aq+5zWP61+RGag==}
+  /dom-serializer/2.0.0:
+    resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
     dependencies:
       domelementtype: 2.3.0
-      domhandler: 4.3.1
-      entities: 2.2.0
+      domhandler: 5.0.3
+      entities: 4.3.0
     dev: false
 
   /domelementtype/2.3.0:
@@ -3729,19 +3729,19 @@ packages:
       webidl-conversions: 7.0.0
     dev: true
 
-  /domhandler/4.3.1:
-    resolution: {integrity: sha512-GrwoxYN+uWlzO8uhUXRl0P+kHE4GtVPfYzVLcUxPL7KNdHKj66vvlhiweIHqYYXWlw+T8iLMp42Lm67ghw4WMQ==}
+  /domhandler/5.0.3:
+    resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
     dependencies:
       domelementtype: 2.3.0
     dev: false
 
-  /domutils/2.8.0:
-    resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
+  /domutils/3.0.1:
+    resolution: {integrity: sha512-z08c1l761iKhDFtfXO04C7kTdPBLi41zwOZl00WS8b5eiaebNpY00HKbztwBq+e3vyqWNwWF3mP9YLUeqIrF+Q==}
     dependencies:
-      dom-serializer: 1.4.1
+      dom-serializer: 2.0.0
       domelementtype: 2.3.0
-      domhandler: 4.3.1
+      domhandler: 5.0.3
     dev: false
 
   /dotenv/10.0.0:
@@ -3787,14 +3787,9 @@ packages:
     engines: {node: '>= 0.11.14'}
     dev: false
 
-  /entities/2.2.0:
-    resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
-    dev: false
-
   /entities/4.3.0:
     resolution: {integrity: sha512-/iP1rZrSEJ0DTlPiX+jbzlA3eVkY/e8L8SozroF395fIqE3TYF/Nz7YOMAawta+vLmyJ/hkGNNPcSbMADCCXbg==}
     engines: {node: '>=0.12'}
-    dev: true
 
   /err-code/3.0.1:
     resolution: {integrity: sha512-GiaH0KJUewYok+eeY05IIgjtAe4Yltygk9Wqp1V5yVWLdhf0hYZchRjNIT9bb0mSwRcIusT3cx7PJUf3zEIfUA==}
@@ -5976,10 +5971,10 @@ packages:
     hasBin: true
     dev: false
 
-  /node-html-parser/6.1.0:
-    resolution: {integrity: sha512-lL3NirV1ihtYPfjTljB5Vu6gxMfxzWNkM1cz3VzYLxm8tuDgZhOKuHwx1JjaT+ceStTjV43H71a+SUq9Jq3BJQ==}
+  /node-html-parser/6.1.1:
+    resolution: {integrity: sha512-eYYblUeoMg0nR6cYGM4GRb1XncNa9FXEftuKAU1qyMIr6rXVtNyUKduvzZtkqFqSHVByq2lLjC7WO8tz7VDmnA==}
     dependencies:
-      css-select: 4.3.0
+      css-select: 5.1.0
       he: 1.2.0
     dev: false
 
