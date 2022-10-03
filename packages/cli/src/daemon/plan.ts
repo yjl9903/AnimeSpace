@@ -41,6 +41,9 @@ export class Plan {
         plan.store = 'ali';
       }
 
+      // Filter empty bgmId onair
+      plan.onair = plan.onair.filter((onair) => !!onair.bgmId);
+
       // Fix onairs
       for (const bgm of plan.onair) {
         // Fix bgmId string type
