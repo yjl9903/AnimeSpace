@@ -224,7 +224,7 @@ export class Daemon {
         }
         // Skip finish plan and anime is onairing
         if (
-          plan.state === 'finish' &&
+          onair.state === 'finish' &&
           this.client.onair.find((o) => o.bgmId === onair.bgmId)
         ) {
           continue;
