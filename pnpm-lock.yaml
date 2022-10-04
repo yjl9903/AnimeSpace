@@ -86,7 +86,7 @@ importers:
       vite: ^3.1.4
       vite-plugin-cloudflare-functions: ^0.2.3
       vite-plugin-info: ^0.3.1
-      vite-plugin-inspect: ^0.7.4
+      vite-plugin-inspect: ^0.7.5
       vite-plugin-pages: ^0.26.0
       vite-plugin-pwa: ^0.13.1
       vite-ssg: ^0.21.0
@@ -129,7 +129,7 @@ importers:
       vite: 3.1.4
       vite-plugin-cloudflare-functions: 0.2.3_fn4m4ki7bqcp5vjlnou7zwsnyq
       vite-plugin-info: 0.3.1_vite@3.1.4
-      vite-plugin-inspect: 0.7.4_vite@3.1.4
+      vite-plugin-inspect: 0.7.5_vite@3.1.4
       vite-plugin-pages: 0.26.0_vite@3.1.4
       vite-plugin-pwa: 0.13.1_bg4cnt4dy3xq3a47wkujd6ryzq
       vite-ssg: 0.21.0_acjjo5kgsqvt6xjx3lep3guor4
@@ -8110,8 +8110,8 @@ packages:
       vite: 3.1.4
     dev: true
 
-  /vite-plugin-inspect/0.7.4_vite@3.1.4:
-    resolution: {integrity: sha512-06uSil9CPWsGwICsXixx2O3vsIOLNTkQaiBijmJA84BuxYKIWJ3k0r4I96kX1WgdA3olxJxVBXOjzryzeHOSuQ==}
+  /vite-plugin-inspect/0.7.5_vite@3.1.4:
+    resolution: {integrity: sha512-O8xq6dbvD1G7le75u6BfQTXJDUMXcRYlMVPzUpRjSB6hLyqH6BNnNkNrb/cVgCNNmKwk7dX+H2I+XVU2xpJk9Q==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0
