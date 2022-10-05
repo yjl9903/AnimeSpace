@@ -67,7 +67,7 @@
     "webtorrent": "^1.8.30"
   },
   "devDependencies": {
-    "@types/ali-oss": "^6.16.4",
+    "@types/ali-oss": "^6.16.5",
     "@types/cli-progress": "^3.11.0",
     "@types/death": "^1.1.2",
     "@types/debug": "^4.1.7",
