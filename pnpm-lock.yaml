@@ -164,7 +164,7 @@ importers:
       '@alicloud/pop-core': ^1.7.12
       '@animepaste/bangumi': workspace:*
       '@animepaste/database': workspace:*
-      '@types/ali-oss': ^6.16.4
+      '@types/ali-oss': ^6.16.5
       '@types/cli-progress': ^3.11.0
       '@types/death': ^1.1.2
       '@types/debug': ^4.1.7
@@ -209,7 +209,7 @@ importers:
       prompts: 2.4.2
       webtorrent: 1.8.30
     devDependencies:
-      '@types/ali-oss': 6.16.4
+      '@types/ali-oss': 6.16.5
       '@types/cli-progress': 3.11.0
       '@types/death': 1.1.2
       '@types/debug': 4.1.7
@@ -2114,8 +2114,8 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@types/ali-oss/6.16.4:
-    resolution: {integrity: sha512-jcPp0qugBVcuFtewnlCVnpVDFqkNiGIklXHzq8kftFVXlBBYmVdAUYasyz1UGPMtF4qkbbAVToUxJnee+ky+NQ==}
+  /@types/ali-oss/6.16.5:
+    resolution: {integrity: sha512-t0hEN0VEVBE8kcmAeC/+ztHdzx9gvehowsD5z1Z3O/jMAecQPuArwGwq4zL4FEUwJWsNBUFTZ5wEwVsNM9RQ1A==}
     dev: true
 
   /@types/better-sqlite3/7.6.0:
