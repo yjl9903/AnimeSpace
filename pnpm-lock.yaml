@@ -65,7 +65,7 @@ importers:
       '@iconify-json/mdi': ^1.1.33
       '@types/node': ^18.6.5
       '@types/nprogress': ^0.2.0
-      '@types/prompts': ^2.4.0
+      '@types/prompts': ^2.4.1
       '@types/scrollreveal': ^0.0.8
       '@unocss/reset': ^0.45.26
       '@vitejs/plugin-vue': ^3.1.2
@@ -116,7 +116,7 @@ importers:
       '@iconify-json/mdi': 1.1.33
       '@types/node': 18.6.5
       '@types/nprogress': 0.2.0
-      '@types/prompts': 2.4.0
+      '@types/prompts': 2.4.1
       '@types/scrollreveal': 0.0.8
       '@unocss/reset': 0.45.26
       '@vitejs/plugin-vue': 3.1.2_vite@3.1.4+vue@3.2.40
@@ -2210,8 +2210,10 @@ packages:
       '@types/parse-torrent-file': 4.0.3
     dev: true
 
-  /@types/prompts/2.4.0:
-    resolution: {integrity: sha512-7th8Opn+0XlN0O6qzO7dXOPwL6rigq/EwRS2DntaTHwSw8cLaYKeAPt5dWEKHSL+ffVSUl1itTPUC06+FlsV4Q==}
+  /@types/prompts/2.4.1:
+    resolution: {integrity: sha512-1Mqzhzi9W5KlooNE4o0JwSXGUDeQXKldbGn9NO4tpxwZbHXYd+WcKpCksG2lbhH7U9I9LigfsdVsP2QAY0lNPA==}
+    dependencies:
+      '@types/node': 18.6.5
     dev: true
 
   /@types/resolve/1.17.1:
