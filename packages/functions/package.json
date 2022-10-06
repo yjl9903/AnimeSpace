@@ -3,6 +3,6 @@
   "version": "0.0.2",
   "private": true,
   "devDependencies": {
-    "vite-plugin-cloudflare-functions": "^0.2.3"
+    "vite-plugin-cloudflare-functions": "^0.2.4"
   }
 }

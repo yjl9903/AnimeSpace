@@ -84,7 +84,7 @@ importers:
       unplugin-auto-import: 0.11.2
       unplugin-vue-components: ^0.22.8
       vite: ^3.1.4
-      vite-plugin-cloudflare-functions: ^0.2.3
+      vite-plugin-cloudflare-functions: ^0.2.4
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.7.5
       vite-plugin-pages: ^0.26.0
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.11.2_dx2zxeb62273mftjrwe5shcdse
       unplugin-vue-components: 0.22.8_vue@3.2.40
       vite: 3.1.4
-      vite-plugin-cloudflare-functions: 0.2.3_fn4m4ki7bqcp5vjlnou7zwsnyq
+      vite-plugin-cloudflare-functions: 0.2.4_fn4m4ki7bqcp5vjlnou7zwsnyq
       vite-plugin-info: 0.3.1_vite@3.1.4
       vite-plugin-inspect: 0.7.5_vite@3.1.4
       vite-plugin-pages: 0.26.0_vite@3.1.4
@@ -245,9 +245,9 @@ importers:
 
   packages/functions:
     specifiers:
-      vite-plugin-cloudflare-functions: ^0.2.3
+      vite-plugin-cloudflare-functions: ^0.2.4
     devDependencies:
-      vite-plugin-cloudflare-functions: 0.2.3
+      vite-plugin-cloudflare-functions: 0.2.4
 
 packages:
 
@@ -5612,7 +5612,7 @@ packages:
     dependencies:
       estree-walker: 3.0.1
       magic-string: 0.26.5
-      mlly: 0.5.14
+      mlly: 0.5.16
       ufo: 0.8.5
       unplugin: 0.9.6
     dev: true
@@ -5854,7 +5854,16 @@ packages:
     dependencies:
       acorn: 8.8.0
       pathe: 0.3.8
-      pkg-types: 0.3.4
+      pkg-types: 0.3.5
+      ufo: 0.8.5
+    dev: true
+
+  /mlly/0.5.16:
+    resolution: {integrity: sha512-LaJ8yuh4v0zEmge/g3c7jjFlhoCPfQn6RCjXgm9A0Qiuochq4BcuOxVfWmdnCoLTlg2MV+hqhOek+W2OhG0Lwg==}
+    dependencies:
+      acorn: 8.8.0
+      pathe: 0.3.8
+      pkg-types: 0.3.5
       ufo: 0.8.5
     dev: true
 
@@ -6334,7 +6343,15 @@ packages:
     resolution: {integrity: sha512-s214f/xkRpwlwVBToWq9Mu0XlU3HhZMYCnr2var8+jjbavBHh/VCh4pBLsJW29rJ//B1jb4HlpMIaNIMH+W2/w==}
     dependencies:
       jsonc-parser: 3.2.0
-      mlly: 0.5.14
+      mlly: 0.5.16
+      pathe: 0.3.8
+    dev: true
+
+  /pkg-types/0.3.5:
+    resolution: {integrity: sha512-VkxCBFVgQhNHYk9subx+HOhZ4jzynH11ah63LZsprTKwPCWG9pfWBlkElWFbvkP9BVR0dP1jS9xPdhaHQNK74Q==}
+    dependencies:
+      jsonc-parser: 3.2.0
+      mlly: 0.5.16
       pathe: 0.3.8
     dev: true
 
@@ -7646,7 +7663,7 @@ packages:
       fast-glob: 3.2.12
       local-pkg: 0.4.2
       magic-string: 0.26.5
-      mlly: 0.5.14
+      mlly: 0.5.16
       pathe: 0.3.3
       scule: 0.3.2
       strip-literal: 0.4.2
@@ -7964,14 +7981,14 @@ packages:
       range-slice-stream: 2.0.0
     dev: false
 
-  /vite-plugin-cloudflare-functions/0.2.3:
-    resolution: {integrity: sha512-CepFivoCQUAIMfldmiSglrj5CiggqPeppGuuevvUJBL3DMnb58CufQT1wR4fnJTOE4Hnkjbi9tlIu8kNfqo3jg==}
+  /vite-plugin-cloudflare-functions/0.2.4:
+    resolution: {integrity: sha512-jOeoR4A1Hm+1mieMkcvwGWlNHKaIGOiWEQcs0wj5BsRmTiBLwEklYtjN3PID+CLpRPTt8FLm+e7XhqGIFwohIg==}
     engines: {node: '>=v16.17.0'}
     peerDependencies:
-      axios: ^0.27.2
-      ohmyfetch: ^0.4.18
-      vite: ^3.1.0
-      wrangler: ^2.1.2
+      axios: ^1.0.0
+      ohmyfetch: ^0.4.19
+      vite: ^3.1.5
+      wrangler: ^2.1.10
     peerDependenciesMeta:
       axios:
         optional: true
@@ -7985,21 +8002,21 @@ packages:
       '@cloudflare/workers-types': 3.16.0
       debug: 4.3.4
       fast-glob: 3.2.12
-      mlly: 0.5.14
+      mlly: 0.5.16
       picocolors: 1.0.0
       tree-kill: 1.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.2.3_fn4m4ki7bqcp5vjlnou7zwsnyq:
-    resolution: {integrity: sha512-CepFivoCQUAIMfldmiSglrj5CiggqPeppGuuevvUJBL3DMnb58CufQT1wR4fnJTOE4Hnkjbi9tlIu8kNfqo3jg==}
+  /vite-plugin-cloudflare-functions/0.2.4_fn4m4ki7bqcp5vjlnou7zwsnyq:
+    resolution: {integrity: sha512-jOeoR4A1Hm+1mieMkcvwGWlNHKaIGOiWEQcs0wj5BsRmTiBLwEklYtjN3PID+CLpRPTt8FLm+e7XhqGIFwohIg==}
     engines: {node: '>=v16.17.0'}
     peerDependencies:
-      axios: ^0.27.2
-      ohmyfetch: ^0.4.18
-      vite: ^3.1.0
-      wrangler: ^2.1.2
+      axios: ^1.0.0
+      ohmyfetch: ^0.4.19
+      vite: ^3.1.5
+      wrangler: ^2.1.10
     peerDependenciesMeta:
       axios:
         optional: true
@@ -8014,7 +8031,7 @@ packages:
       axios: 0.27.2
       debug: 4.3.4
       fast-glob: 3.2.12
-      mlly: 0.5.14
+      mlly: 0.5.16
       picocolors: 1.0.0
       tree-kill: 1.2.2
       vite: 3.1.4
