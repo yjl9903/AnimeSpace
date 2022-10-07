@@ -11,7 +11,7 @@
   "dependencies": {
     "@animepaste/bangumi": "workspace:*",
     "@vueuse/core": "^9.3.0",
-    "@vueuse/head": "^0.8.2",
+    "@vueuse/head": "^0.9.7",
     "axios": "^0.27.2",
     "date-fns": "^2.29.3",
     "nprogress": "^0.2.0",
@@ -46,7 +46,7 @@
     "vite-plugin-pwa": "^0.13.1",
     "vite-ssg": "^0.21.0",
     "vitest": "^0.23.4",
-    "vue-tsc": "^0.40.13",
+    "vue-tsc": "^1.0.0",
     "workbox-window": "^6.5.4",
     "wrangler": "^2.1.10"
   },
