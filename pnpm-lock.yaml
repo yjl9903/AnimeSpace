@@ -71,7 +71,7 @@ importers:
       '@vitejs/plugin-vue': ^3.1.2
       '@vueuse/core': ^9.3.0
       '@vueuse/head': ^0.9.7
-      axios: ^0.27.2
+      axios: ^1.1.2
       bangumi-data: ^0.3.101
       cross-env: ^7.0.3
       date-fns: ^2.29.3
@@ -101,7 +101,7 @@ importers:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.3.0_vue@3.2.40
       '@vueuse/head': 0.9.7_vue@3.2.40
-      axios: 0.27.2
+      axios: 1.1.2
       date-fns: 2.29.3
       nprogress: 0.2.0
       pinia: 2.0.22_bfjwoga25wxjazzogo7o372nwq
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.11.2_2ly2276emb3jimtemj25uhqski
       unplugin-vue-components: 0.22.8_vue@3.2.40
       vite: 3.1.6
-      vite-plugin-cloudflare-functions: 0.2.4_2we3pvdmtib5xggsfqgdfay7ge
+      vite-plugin-cloudflare-functions: 0.2.4_ycmntg3mcv3iwwhetctfxf7hgm
       vite-plugin-info: 0.3.1_vite@3.1.6
       vite-plugin-inspect: 0.7.5_vite@3.1.6
       vite-plugin-pages: 0.26.0_vite@3.1.6
@@ -140,7 +140,7 @@ importers:
 
   packages/bangumi:
     specifiers:
-      axios: ^0.27.2
+      axios: ^1.1.2
       bangumi-data: ^0.3.101
       breadc: ^0.6.5
       date-fns: ^2.29.3
@@ -149,7 +149,7 @@ importers:
       unbuild: ^0.8.11
       vite: ^3.1.6
     dependencies:
-      axios: 0.27.2_debug@4.3.4
+      axios: 1.1.2_debug@4.3.4
       breadc: 0.6.5
       debug: 4.3.4
     devDependencies:
@@ -172,7 +172,7 @@ importers:
       '@types/js-yaml': ^4.0.5
       '@types/webtorrent': ^0.109.3
       ali-oss: ^6.17.1
-      axios: ^0.27.2
+      axios: ^1.1.2
       bangumi-data: ^0.3.101
       breadc: ^0.6.5
       cli-progress: ^3.11.2
@@ -194,7 +194,7 @@ importers:
       '@animepaste/bangumi': link:../bangumi
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
-      axios: 0.27.2_debug@4.3.4
+      axios: 1.1.2_debug@4.3.4
       breadc: 0.6.5
       cli-progress: 3.11.2
       date-fns: 2.29.3
@@ -223,7 +223,7 @@ importers:
   packages/database:
     specifiers:
       '@prisma/client': ^4.4.0
-      axios: ^0.27.2
+      axios: ^1.1.2
       cnchar: ^3.2.2
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.3
@@ -233,7 +233,7 @@ importers:
       unbuild: ^0.8.11
     dependencies:
       '@prisma/client': 4.4.0_prisma@4.4.0
-      axios: 0.27.2_debug@4.3.4
+      axios: 1.1.2_debug@4.3.4
       cnchar: 3.2.2
       cnchar-trad: 3.2.2
       date-fns: 2.29.3
@@ -2809,32 +2809,23 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axios/0.27.2:
-    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+  /axios/1.1.2:
+    resolution: {integrity: sha512-bznQyETwElsXl2RK7HLLwb5GPpOLlycxHCtrpDR/4RqqBzjARaOTo3jz4IgtntWUYee7Ne4S8UHd92VCuzPaWA==}
     dependencies:
       follow-redirects: 1.15.1
       form-data: 4.0.0
+      proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
 
-  /axios/0.27.2_debug@4.3.4:
-    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
-    dependencies:
-      follow-redirects: 1.15.1_debug@4.3.4
-      form-data: 4.0.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
-  /axios/1.0.0_debug@4.3.4:
-    resolution: {integrity: sha512-SsHsGFN1qNPFT5QhSoSD37SHDfGyLSW5AESmyLk2JeCMHv5g0I9g0Hz/zQHx2KNe0jGXh2q2hAm7OdkXm360CA==}
+  /axios/1.1.2_debug@4.3.4:
+    resolution: {integrity: sha512-bznQyETwElsXl2RK7HLLwb5GPpOLlycxHCtrpDR/4RqqBzjARaOTo3jz4IgtntWUYee7Ne4S8UHd92VCuzPaWA==}
     dependencies:
       follow-redirects: 1.15.1_debug@4.3.4
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
-    dev: true
 
   /b4a/1.5.3:
     resolution: {integrity: sha512-1aCQIzQJK7G0z1Una75tWMlwVAR8o+QHoAlnWc5XAxRVBESY9WsitfBgM5nPyDBP5HrhPU1Np4Pq2Y7CJQ+tVw==}
@@ -6340,7 +6331,7 @@ packages:
     dependencies:
       '@types/fs-extra': 9.0.13
       '@types/node': 18.6.5
-      axios: 1.0.0_debug@4.3.4
+      axios: 1.1.2_debug@4.3.4
       cac: 6.7.14
       debug: 4.3.4
       fs-extra: 10.1.0
@@ -8245,7 +8236,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.2.4_2we3pvdmtib5xggsfqgdfay7ge:
+  /vite-plugin-cloudflare-functions/0.2.4_ycmntg3mcv3iwwhetctfxf7hgm:
     resolution: {integrity: sha512-jOeoR4A1Hm+1mieMkcvwGWlNHKaIGOiWEQcs0wj5BsRmTiBLwEklYtjN3PID+CLpRPTt8FLm+e7XhqGIFwohIg==}
     engines: {node: '>=v16.17.0'}
     peerDependencies:
@@ -8264,7 +8255,7 @@ packages:
         optional: true
     dependencies:
       '@cloudflare/workers-types': 3.16.0
-      axios: 0.27.2
+      axios: 1.1.2
       debug: 4.3.4
       fast-glob: 3.2.12
       mlly: 0.5.16
