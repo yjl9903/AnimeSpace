@@ -50,7 +50,7 @@ export async function download(...payloads: DownloadPayload[]): Promise<void> {
 
     const bar = multibar.create(
       path.basename(payload.filepath),
-      +headers['content-length']
+      +headers['content-length']!
     );
 
     const writeStream = createWriteStream(payload.filepath);
