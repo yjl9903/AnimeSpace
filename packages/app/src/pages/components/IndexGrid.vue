@@ -47,7 +47,7 @@ const getOnairMaxEps = (bgm: SubjectBangumi) => {
           />
           <img
             :src="ensureHTTPS(bgm.bgm.images.large)"
-            :alt="'Picture for ' + bgm.titleCN"
+            :alt="'Picture for ' + getCnTitle(bgm)"
             object-fill
             w="full"
             h="196px lt-md:140px"
@@ -68,7 +68,7 @@ const getOnairMaxEps = (bgm: SubjectBangumi) => {
         :to="`/anime/${bgm.bgmId}`"
         target="_blank"
         class="text-base hover:text-$c-brand text-sm"
-        >{{ bgm.titleCN !== '' ? bgm.titleCN : bgm.title }}</router-link
+        >{{ getCnTitle(bgm) }}</router-link
       >
       <span
         v-if="isOnair(bgm) && getOnairMaxEps(bgm)"

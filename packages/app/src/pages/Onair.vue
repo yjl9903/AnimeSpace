@@ -54,7 +54,7 @@ const formatDate = (d: string) => {
             />
             <img
               :src="ensureHTTPS(subjects[idx].value!.bgm.images.large)"
-              :alt="subjects[idx].value!.titleCN"
+              :alt="getCnTitle(subjects[idx].value!)"
               w="full"
               max-w="full"
               object-contain
@@ -69,7 +69,9 @@ const formatDate = (d: string) => {
             :to="'/anime/' + anime.bgmId"
             class="text-$light-1 hover:text-$c-brand"
             >{{
-              subjects[idx].value ? subjects[idx].value?.titleCN : anime.title
+              subjects[idx].value && subjects[idx].value?.titleCN
+                ? subjects[idx].value?.titleCN
+                : anime.title
             }}<Playing ml1></Playing>
           </router-link>
           <div flex-auto></div>

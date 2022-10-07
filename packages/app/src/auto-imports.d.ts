@@ -38,6 +38,7 @@ declare global {
   const getBgmDate: typeof import('./composables/bangumi/utils')['getBgmDate']
   const getBgmId: typeof import('./composables/bangumi/utils')['getBgmId']
   const getBgmTitle: typeof import('./composables/bangumi/utils')['getBgmTitle']
+  const getCnTitle: typeof import('./composables/bangumi/utils')['getCnTitle']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
@@ -317,6 +318,7 @@ declare module '@vue/runtime-core' {
     readonly getBgmDate: UnwrapRef<typeof import('./composables/bangumi/utils')['getBgmDate']>
     readonly getBgmId: UnwrapRef<typeof import('./composables/bangumi/utils')['getBgmId']>
     readonly getBgmTitle: UnwrapRef<typeof import('./composables/bangumi/utils')['getBgmTitle']>
+    readonly getCnTitle: UnwrapRef<typeof import('./composables/bangumi/utils')['getCnTitle']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>

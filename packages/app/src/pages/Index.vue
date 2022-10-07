@@ -77,7 +77,7 @@ const latestBangumis = computedAsync(() => {
 
 const filterBgm = (bgm: Bangumi) => {
   if (hiddenBgm.has(bgm.bgmId)) return false;
-  return bangumi.bgmMap.has(bgm.bgmId) && bgm.titleCN !== '';
+  return bangumi.bgmMap.has(bgm.bgmId);
 };
 
 const calendar = computed(() =>

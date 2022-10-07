@@ -1,5 +1,7 @@
 import type { Item, Language } from 'bangumi-data';
 
+import type { SubjectBangumi } from '../types';
+
 export function getBgmDate(bgm: Item) {
   const d = new Date(bgm.begin);
   return {
@@ -20,4 +22,8 @@ export function getBgmId(bgm: Item) {
       return site.id;
     }
   }
+}
+
+export function getCnTitle(bgm: SubjectBangumi) {
+  return Boolean(bgm.titleCN) ? bgm.titleCN : bgm.title;
 }
