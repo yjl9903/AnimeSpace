@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.4.0",
-    "axios": "^1.1.2",
+    "axios": "^0.27.2",
     "cnchar": "^3.2.2",
     "cnchar-trad": "^3.2.2",
     "date-fns": "^2.29.3",

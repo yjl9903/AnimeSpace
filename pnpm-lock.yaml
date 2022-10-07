@@ -172,7 +172,7 @@ importers:
       '@types/js-yaml': ^4.0.5
       '@types/webtorrent': ^0.109.3
       ali-oss: ^6.17.1
-      axios: ^1.1.2
+      axios: ^0.27.2
       bangumi-data: ^0.3.101
       breadc: ^0.6.5
       cli-progress: ^3.11.2
@@ -194,7 +194,7 @@ importers:
       '@animepaste/bangumi': link:../bangumi
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
-      axios: 1.1.2_debug@4.3.4
+      axios: 0.27.2_debug@4.3.4
       breadc: 0.6.5
       cli-progress: 3.11.2
       date-fns: 2.29.3
@@ -223,7 +223,7 @@ importers:
   packages/database:
     specifiers:
       '@prisma/client': ^4.4.0
-      axios: ^1.1.2
+      axios: ^0.27.2
       cnchar: ^3.2.2
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.3
@@ -233,7 +233,7 @@ importers:
       unbuild: ^0.8.11
     dependencies:
       '@prisma/client': 4.4.0_prisma@4.4.0
-      axios: 1.1.2_debug@4.3.4
+      axios: 0.27.2_debug@4.3.4
       cnchar: 3.2.2
       cnchar-trad: 3.2.2
       date-fns: 2.29.3
@@ -2808,6 +2808,15 @@ packages:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /axios/0.27.2_debug@4.3.4:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.1_debug@4.3.4
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
 
   /axios/1.1.2:
     resolution: {integrity: sha512-bznQyETwElsXl2RK7HLLwb5GPpOLlycxHCtrpDR/4RqqBzjARaOTo3jz4IgtntWUYee7Ne4S8UHd92VCuzPaWA==}
