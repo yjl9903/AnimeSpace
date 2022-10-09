@@ -89,7 +89,7 @@ importers:
       vite-plugin-inspect: ^0.7.5
       vite-plugin-pages: ^0.26.0
       vite-plugin-pwa: ^0.13.1
-      vite-ssg: ^0.21.0
+      vite-ssg: ^0.21.1
       vitest: ^0.24.0
       vue: ^3.2.40
       vue-router: ^4.1.5
@@ -132,7 +132,7 @@ importers:
       vite-plugin-inspect: 0.7.5_vite@3.1.6
       vite-plugin-pages: 0.26.0_vite@3.1.6
       vite-plugin-pwa: 0.13.1_gyrleic7ffhni7br4mjyda3ene
-      vite-ssg: 0.21.0_4ewvugl3ueew5fb47fkm7emdk4
+      vite-ssg: 0.21.1_4ewvugl3ueew5fb47fkm7emdk4
       vitest: 0.24.0
       vue-tsc: 1.0.1_typescript@4.8.4
       workbox-window: 6.5.4
@@ -8353,12 +8353,12 @@ packages:
       - supports-color
     dev: true
 
-  /vite-ssg/0.21.0_4ewvugl3ueew5fb47fkm7emdk4:
-    resolution: {integrity: sha512-hN8QIdZ8S8PlHFIWz5QMZD3Ile0wxTZJTzlZ1tt/IlediqX+ar9H5jSOMBAQxiWpVnfFX43peW3t3/1bwJiaRA==}
+  /vite-ssg/0.21.1_4ewvugl3ueew5fb47fkm7emdk4:
+    resolution: {integrity: sha512-P39lT+ndBbN83SsfrDSc/uU9IHp7BUjYy7ly3I0jB0L+CvI1/R/bJTOkFikw2mS0FDkPTUN2bCqD6VTshtsO2w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     peerDependencies:
-      '@vueuse/head': ^0.5.0 || ^0.6.0 || ^0.7.0
+      '@vueuse/head': ^0.5.0 || ^0.6.0 || ^0.7.0 || ^0.8.0 || ^0.9.0
       critters: ^0.0.16
       vite: ^2.0.0 || ^3.0.0-0
       vue: ^3.2.10
