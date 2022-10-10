@@ -70,7 +70,7 @@ importers:
       '@unocss/reset': ^0.45.29
       '@vitejs/plugin-vue': ^3.1.2
       '@vueuse/core': ^9.3.0
-      '@vueuse/head': ^0.9.7
+      '@vueuse/head': ^0.9.8
       axios: ^1.1.2
       bangumi-data: ^0.3.101
       cross-env: ^7.0.3
@@ -100,7 +100,7 @@ importers:
     dependencies:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.3.0_vue@3.2.40
-      '@vueuse/head': 0.9.7_vue@3.2.40
+      '@vueuse/head': 0.9.8_vue@3.2.40
       axios: 1.1.2
       date-fns: 2.29.3
       nprogress: 0.2.0
@@ -132,7 +132,7 @@ importers:
       vite-plugin-inspect: 0.7.5_vite@3.1.7
       vite-plugin-pages: 0.26.0_vite@3.1.7
       vite-plugin-pwa: 0.13.1_734hhxiaz4siulgwolenyplg2y
-      vite-ssg: 0.21.1_zsfwdzmacqhqeiiz3ts3dmdbiu
+      vite-ssg: 0.21.1_z3x7zip5bruvhmjjxigv43osfi
       vitest: 0.24.1
       vue-tsc: 1.0.3_typescript@4.8.4
       workbox-window: 6.5.4
@@ -2566,8 +2566,8 @@ packages:
       - '@vue/composition-api'
       - vue
 
-  /@vueuse/head/0.9.7_vue@3.2.40:
-    resolution: {integrity: sha512-zuU4qpDEVoDg/XY5phQWZY7/W4M6IoenaJMu5ZGY4plzOzBkkTwmq7jA6z9nxMYo2n1z5RaU5WL9ypZrZkQOjQ==}
+  /@vueuse/head/0.9.8_vue@3.2.40:
+    resolution: {integrity: sha512-zt8+JksoVFKxRvmABlaUHA62w+8nOcD8cJnaJ0+SHcr6xaIP3GXgh7/n2TzUoWw4l3d9UxRNs+tapgHdsQ7RbA==}
     peerDependencies:
       vue: '>=2.7 || >=3'
     dependencies:
@@ -8353,7 +8353,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-ssg/0.21.1_zsfwdzmacqhqeiiz3ts3dmdbiu:
+  /vite-ssg/0.21.1_z3x7zip5bruvhmjjxigv43osfi:
     resolution: {integrity: sha512-P39lT+ndBbN83SsfrDSc/uU9IHp7BUjYy7ly3I0jB0L+CvI1/R/bJTOkFikw2mS0FDkPTUN2bCqD6VTshtsO2w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -8369,7 +8369,7 @@ packages:
       vue-router:
         optional: true
     dependencies:
-      '@vueuse/head': 0.9.7_vue@3.2.40
+      '@vueuse/head': 0.9.8_vue@3.2.40
       fs-extra: 10.1.0
       html-minifier: 4.0.0
       html5parser: 2.0.2
