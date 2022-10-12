@@ -7364,7 +7364,7 @@ packages:
     dev: false
 
   /stack-trace/0.0.10:
-    resolution: {integrity: sha512-KGzahc7puUKkzyMt+IqAep+TVNbKP+k2Lmwhub39m1AsTSkaDutx56aDCo+HLDzf/D26BIHTJWNiTG1KAJiQCg==}
+    resolution: {integrity: sha1-VHxws0fo0ytOEI6hoqFZ5f3eGcA=}
     dev: true
 
   /statuses/1.5.0:
@@ -8260,10 +8260,10 @@ packages:
     resolution: {integrity: sha512-jOeoR4A1Hm+1mieMkcvwGWlNHKaIGOiWEQcs0wj5BsRmTiBLwEklYtjN3PID+CLpRPTt8FLm+e7XhqGIFwohIg==}
     engines: {node: '>=v16.17.0'}
     peerDependencies:
-      axios: ^1.0.0
+      axios: ^1.1.2
       ohmyfetch: ^0.4.19
-      vite: ^3.1.5
-      wrangler: ^2.1.10
+      vite: ^3.1.7
+      wrangler: ^2.1.11
     peerDependenciesMeta:
       axios:
         optional: true

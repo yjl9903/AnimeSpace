@@ -15,8 +15,8 @@ dist-ssr
 .vite-ssg-temp
 .cloudflare
 .mf
+.wrangler
 .turbo
-wrangler-local-state
 /functions
 
 # Editor directories and files
