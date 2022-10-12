@@ -31,7 +31,15 @@ export function useAnimeInfo() {
     }
   });
 
-  const title = computed(() => bgm.value?.titleCN ?? bgm.value?.title ?? '');
+  const title = computed(() =>
+    !!bgm.value?.titleCN
+      ? bgm.value?.titleCN
+      : !!onair.value?.title
+      ? onair.value.title
+      : !!bgm.value?.title
+      ? bgm.value.title
+      : ''
+  );
 
   useHead({
     title: computed(() => {

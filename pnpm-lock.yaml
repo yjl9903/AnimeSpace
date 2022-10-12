@@ -84,7 +84,7 @@ importers:
       unplugin-auto-import: 0.11.2
       unplugin-vue-components: ^0.22.8
       vite: ^3.1.7
-      vite-plugin-cloudflare-functions: ^0.2.4
+      vite-plugin-cloudflare-functions: ^0.3.0
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.7.5
       vite-plugin-pages: ^0.26.0
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.11.2_vb2jqpr6hhfyvqmjqgk4cfapu4
       unplugin-vue-components: 0.22.8_vue@3.2.40
       vite: 3.1.7
-      vite-plugin-cloudflare-functions: 0.2.4_gb7cbzrqkbnao6lei6yyahy2wa
+      vite-plugin-cloudflare-functions: 0.3.0_gb7cbzrqkbnao6lei6yyahy2wa
       vite-plugin-info: 0.3.1_vite@3.1.7
       vite-plugin-inspect: 0.7.5_vite@3.1.7
       vite-plugin-pages: 0.26.0_vite@3.1.7
@@ -8256,9 +8256,9 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.2.4_gb7cbzrqkbnao6lei6yyahy2wa:
-    resolution: {integrity: sha512-jOeoR4A1Hm+1mieMkcvwGWlNHKaIGOiWEQcs0wj5BsRmTiBLwEklYtjN3PID+CLpRPTt8FLm+e7XhqGIFwohIg==}
-    engines: {node: '>=v16.17.0'}
+  /vite-plugin-cloudflare-functions/0.3.0_gb7cbzrqkbnao6lei6yyahy2wa:
+    resolution: {integrity: sha512-+E/2mxXRH714+EyyM+fj7Bw38QwQ/Dzzv1fuNJBA/o4+hJtlYFgYt4AhP4U8qMalAmpL75mw7/4gNNHEdawQZQ==}
+    engines: {node: '>=v16.17.1'}
     peerDependencies:
       axios: ^1.1.2
       ohmyfetch: ^0.4.19
