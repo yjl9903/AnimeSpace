@@ -142,7 +142,7 @@ importers:
     specifiers:
       axios: ^1.1.2
       bangumi-data: ^0.3.101
-      breadc: ^0.6.5
+      breadc: ^0.6.6
       date-fns: ^2.29.3
       debug: ^4.3.4
       optc: ^0.4.2
@@ -150,7 +150,7 @@ importers:
       vite: ^3.1.7
     dependencies:
       axios: 1.1.2_debug@4.3.4
-      breadc: 0.6.5
+      breadc: 0.6.6
       debug: 4.3.4
     devDependencies:
       bangumi-data: 0.3.101
@@ -174,7 +174,7 @@ importers:
       ali-oss: ^6.17.1
       axios: ^0.27.2
       bangumi-data: ^0.3.101
-      breadc: ^0.6.5
+      breadc: ^0.6.6
       cli-progress: ^3.11.2
       date-fns: ^2.29.3
       death: ^1.1.0
@@ -195,7 +195,7 @@ importers:
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
       axios: 0.27.2_debug@4.3.4
-      breadc: 0.6.5
+      breadc: 0.6.6
       cli-progress: 3.11.2
       date-fns: 2.29.3
       death: 1.1.0
@@ -2980,7 +2980,7 @@ packages:
       debug: 4.3.4
       ip: 1.1.8
       lru: 3.1.0
-      minimist: 1.2.6
+      minimist: 1.2.7
       once: 1.4.0
       queue-microtask: 1.2.3
       random-iterate: 1.0.1
@@ -3070,11 +3070,11 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /breadc/0.6.5:
-    resolution: {integrity: sha512-FbkLYxEcddwvg6HE6ytxmwA4dNk6oxQxeB5zTmRbsmhN7v37QCYrtEFLIFCZnVUyrECI7+m1cZ79OKgEuexbfg==}
+  /breadc/0.6.6:
+    resolution: {integrity: sha512-2r/FfWaX4fVken7Jp7dCeQnmI++R97TGLbu6cNutc5mwqmAtzaTsRxqN+FEr5GeKwUdJ2oJ4GTGDG5v97tvmVw==}
     dependencies:
       kolorist: 1.6.0
-      minimist: 1.2.6
+      minimist: 1.2.7
     dev: false
 
   /browserify-package-json/1.0.1:
@@ -3490,7 +3490,7 @@ packages:
       is-file: 1.0.0
       join-async-iterator: 1.1.1
       junk: 3.1.0
-      minimist: 1.2.6
+      minimist: 1.2.7
       once: 1.4.0
       piece-length: 2.0.1
       queue-microtask: 1.2.3
@@ -6041,8 +6041,8 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /minimist/1.2.6:
-    resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
+  /minimist/1.2.7:
+    resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
     dev: false
 
   /miniraf/1.0.0:
@@ -6057,7 +6057,7 @@ packages:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
     hasBin: true
     dependencies:
-      minimist: 1.2.6
+      minimist: 1.2.7
     dev: false
 
   /mkdirp/1.0.4:
@@ -6381,7 +6381,7 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
     dependencies:
-      minimist: 1.2.6
+      minimist: 1.2.7
     dev: false
 
   /p-limit/3.1.0:
