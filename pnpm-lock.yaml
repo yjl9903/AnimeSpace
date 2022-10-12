@@ -245,9 +245,9 @@ importers:
 
   packages/functions:
     specifiers:
-      vite-plugin-cloudflare-functions: ^0.2.4
+      vite-plugin-cloudflare-functions: ^0.3.0
     devDependencies:
-      vite-plugin-cloudflare-functions: 0.2.4
+      vite-plugin-cloudflare-functions: 0.3.0
 
 packages:
 
@@ -6098,7 +6098,7 @@ packages:
     resolution: {integrity: sha512-LaJ8yuh4v0zEmge/g3c7jjFlhoCPfQn6RCjXgm9A0Qiuochq4BcuOxVfWmdnCoLTlg2MV+hqhOek+W2OhG0Lwg==}
     dependencies:
       acorn: 8.8.0
-      pathe: 0.3.8
+      pathe: 0.3.9
       pkg-types: 0.3.5
       ufo: 0.8.5
     dev: true
@@ -6527,10 +6527,6 @@ packages:
     resolution: {integrity: sha512-grU/QeYP0ChuE5kjU2/k8VtAeODzbernHlue0gTa27+ayGIu3wqYBIPGfP9r5xSqgCgDd4nWrjKXEfxMillByg==}
     dev: true
 
-  /pathe/0.3.8:
-    resolution: {integrity: sha512-c71n61F1skhj/jzZe+fWE9XDoTYjWbUwIKVwFftZ5IOgiX44BVkTkD+/803YDgR50tqeO4eXWxLyVHBLWQAD1g==}
-    dev: true
-
   /pathe/0.3.9:
     resolution: {integrity: sha512-6Y6s0vT112P3jD8dGfuS6r+lpa0qqNrLyHPOwvXMnyNTQaYiwgau2DP3aNDsR13xqtGj7rrPo+jFUATpU6/s+g==}
     dev: true
@@ -6592,7 +6588,7 @@ packages:
     dependencies:
       jsonc-parser: 3.2.0
       mlly: 0.5.16
-      pathe: 0.3.8
+      pathe: 0.3.9
     dev: true
 
   /platform/1.3.6:
@@ -8228,14 +8224,14 @@ packages:
       range-slice-stream: 2.0.0
     dev: false
 
-  /vite-plugin-cloudflare-functions/0.2.4:
-    resolution: {integrity: sha512-jOeoR4A1Hm+1mieMkcvwGWlNHKaIGOiWEQcs0wj5BsRmTiBLwEklYtjN3PID+CLpRPTt8FLm+e7XhqGIFwohIg==}
-    engines: {node: '>=v16.17.0'}
+  /vite-plugin-cloudflare-functions/0.3.0:
+    resolution: {integrity: sha512-+E/2mxXRH714+EyyM+fj7Bw38QwQ/Dzzv1fuNJBA/o4+hJtlYFgYt4AhP4U8qMalAmpL75mw7/4gNNHEdawQZQ==}
+    engines: {node: '>=v16.17.1'}
     peerDependencies:
-      axios: ^1.0.0
+      axios: ^1.1.2
       ohmyfetch: ^0.4.19
-      vite: ^3.1.5
-      wrangler: ^2.1.10
+      vite: ^3.1.7
+      wrangler: ^2.1.11
     peerDependenciesMeta:
       axios:
         optional: true
