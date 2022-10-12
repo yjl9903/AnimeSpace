@@ -245,9 +245,9 @@ importers:
 
   packages/functions:
     specifiers:
-      vite-plugin-cloudflare-functions: ^0.2.4
+      vite-plugin-cloudflare-functions: ^0.3.0
     devDependencies:
-      vite-plugin-cloudflare-functions: 0.2.4
+      vite-plugin-cloudflare-functions: 0.3.0
 
 packages:
 
@@ -8228,14 +8228,14 @@ packages:
       range-slice-stream: 2.0.0
     dev: false
 
-  /vite-plugin-cloudflare-functions/0.2.4:
-    resolution: {integrity: sha512-jOeoR4A1Hm+1mieMkcvwGWlNHKaIGOiWEQcs0wj5BsRmTiBLwEklYtjN3PID+CLpRPTt8FLm+e7XhqGIFwohIg==}
-    engines: {node: '>=v16.17.0'}
+  /vite-plugin-cloudflare-functions/0.3.0:
+    resolution: {integrity: sha512-+E/2mxXRH714+EyyM+fj7Bw38QwQ/Dzzv1fuNJBA/o4+hJtlYFgYt4AhP4U8qMalAmpL75mw7/4gNNHEdawQZQ==}
+    engines: {node: '>=v16.17.1'}
     peerDependencies:
-      axios: ^1.0.0
+      axios: ^1.1.2
       ohmyfetch: ^0.4.19
-      vite: ^3.1.5
-      wrangler: ^2.1.10
+      vite: ^3.1.7
+      wrangler: ^2.1.11
     peerDependenciesMeta:
       axios:
         optional: true
