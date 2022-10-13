@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "prisma": "^4.4.0",
-    "unbuild": "^0.8.11"
+    "unbuild": "^0.9.1"
   },
   "engines": {
     "node": ">=v16.17.1"
