@@ -62,7 +62,7 @@ importers:
       '@animepaste/bangumi': workspace:*
       '@iconify-json/carbon': ^1.1.8
       '@iconify-json/ic': ^1.1.9
-      '@iconify-json/mdi': ^1.1.33
+      '@iconify-json/mdi': ^1.1.34
       '@types/node': ^18.6.5
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.1
@@ -113,7 +113,7 @@ importers:
     devDependencies:
       '@iconify-json/carbon': 1.1.8
       '@iconify-json/ic': 1.1.9
-      '@iconify-json/mdi': 1.1.33
+      '@iconify-json/mdi': 1.1.34
       '@types/node': 18.6.5
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.1
@@ -1682,10 +1682,10 @@ packages:
       '@iconify/types': 1.1.0
     dev: true
 
-  /@iconify-json/mdi/1.1.33:
-    resolution: {integrity: sha512-P8zIjwYvQ6SsmHc02O4oNV3jsqbL4bXcfKSt9MfCPMBvF9CLzz6QHMzQgt/Okgsb8wfhkfSQeREp+dSxV9pLRA==}
+  /@iconify-json/mdi/1.1.34:
+    resolution: {integrity: sha512-Jle/BrVmaKMMPVitsO3lbJ8VpXUVCAhfMFAMo0VoxLDX8ZiKiQyVDHXPug9wGaXYb9mrFZE4UWVK63Cjx8L3rQ==}
     dependencies:
-      '@iconify/types': 1.1.0
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify/types/1.1.0:
@@ -5687,13 +5687,6 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
-  /magic-string/0.26.6:
-    resolution: {integrity: sha512-6d+3bFybzyQFJYSoRsl9ZC0wheze8M1LrQC7tNMRqXR4izUTDOLMd9BtSuExK9iAukFh+s5K0WAhc/dlQ+HKYA==}
-    engines: {node: '>=12'}
-    dependencies:
-      sourcemap-codec: 1.4.8
-    dev: true
-
   /magic-string/0.26.7:
     resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
     engines: {node: '>=12'}
@@ -7712,7 +7705,7 @@ packages:
       escape-string-regexp: 5.0.0
       fast-glob: 3.2.12
       local-pkg: 0.4.2
-      magic-string: 0.26.6
+      magic-string: 0.26.7
       mlly: 0.5.16
       pathe: 0.3.9
       scule: 0.3.2
