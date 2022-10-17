@@ -25,7 +25,7 @@ importers:
   docs:
     specifiers:
       '@algolia/client-search': ^4.14.2
-      '@iconify-json/carbon': ^1.1.8
+      '@iconify-json/carbon': ^1.1.9
       '@types/node': ^18.6.5
       '@unocss/reset': ^0.45.29
       '@vitejs/plugin-vue': ^3.1.2
@@ -44,7 +44,7 @@ importers:
       vue: 3.2.40
     devDependencies:
       '@algolia/client-search': 4.14.2
-      '@iconify-json/carbon': 1.1.8
+      '@iconify-json/carbon': 1.1.9
       '@types/node': 18.6.5
       '@unocss/reset': 0.45.29
       '@vitejs/plugin-vue': 3.1.2_vite@3.1.8+vue@3.2.40
@@ -60,7 +60,7 @@ importers:
   packages/app:
     specifiers:
       '@animepaste/bangumi': workspace:*
-      '@iconify-json/carbon': ^1.1.8
+      '@iconify-json/carbon': ^1.1.9
       '@iconify-json/ic': ^1.1.9
       '@iconify-json/mdi': ^1.1.34
       '@types/node': ^18.6.5
@@ -111,7 +111,7 @@ importers:
       vue-router: 4.1.5_vue@3.2.40
       vue-scrollto: 2.20.0
     devDependencies:
-      '@iconify-json/carbon': 1.1.8
+      '@iconify-json/carbon': 1.1.9
       '@iconify-json/ic': 1.1.9
       '@iconify-json/mdi': 1.1.34
       '@types/node': 18.6.5
@@ -1688,10 +1688,10 @@ packages:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: true
 
-  /@iconify-json/carbon/1.1.8:
-    resolution: {integrity: sha512-aSoMgvZyvIXadLbMXcfS+qy8CVxSExvvp8Vd/nCrupLFc0KLKSukRInnVNc63zaHqoe1NBf5xUrgfyRYYfaKWQ==}
+  /@iconify-json/carbon/1.1.9:
+    resolution: {integrity: sha512-O3geRhhnE9dDDC4oT6qwBs7sdc37R9UqftiG7BP8YVDw8OcXv8i95J0ZEkIfdOXFj1Wb6kC/Uu/6VTlAqotVXg==}
     dependencies:
-      '@iconify/types': 1.1.0
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify-json/ic/1.1.9:
@@ -2861,7 +2861,7 @@ packages:
   /axios/1.1.2:
     resolution: {integrity: sha512-bznQyETwElsXl2RK7HLLwb5GPpOLlycxHCtrpDR/4RqqBzjARaOTo3jz4IgtntWUYee7Ne4S8UHd92VCuzPaWA==}
     dependencies:
-      follow-redirects: 1.15.1
+      follow-redirects: 1.15.1_debug@4.3.4
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -4819,15 +4819,6 @@ packages:
       locate-path: 6.0.0
       path-exists: 4.0.0
     dev: true
-
-  /follow-redirects/1.15.1:
-    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
 
   /follow-redirects/1.15.1_debug@4.3.4:
     resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
