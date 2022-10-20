@@ -30,7 +30,7 @@
     "vite": "^3.1.8",
     "vitest": "^0.24.3"
   },
-  "packageManager": "pnpm@7.13.5",
+  "packageManager": "pnpm@7.13.6",
   "engines": {
     "node": ">=v16.17.1"
   }
