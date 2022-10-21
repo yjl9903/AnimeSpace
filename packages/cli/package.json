@@ -75,7 +75,7 @@
     "@types/js-yaml": "^4.0.5",
     "@types/webtorrent": "^0.109.3",
     "bangumi-data": "^0.3.102",
-    "optc": "^0.4.4",
+    "optc": "^0.5.3",
     "unbuild": "^0.9.4"
   },
   "engines": {
