@@ -15,7 +15,7 @@ importers:
     devDependencies:
       '@types/node': 18.6.5
       bumpp: 8.2.1
-      optc: 0.5.1
+      optc: 0.5.2
       prettier: 2.7.1
       turbo: 1.5.6
       typescript: 4.8.4
@@ -71,7 +71,7 @@ importers:
       '@vitejs/plugin-vue': ^3.1.2
       '@vueuse/core': ^9.3.0
       '@vueuse/head': ^0.9.8
-      axios: ^1.1.2
+      axios: ^1.1.3
       bangumi-data: ^0.3.102
       cross-env: ^7.0.3
       date-fns: ^2.29.3
@@ -101,7 +101,7 @@ importers:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.3.0_vue@3.2.41
       '@vueuse/head': 0.9.8_vue@3.2.41
-      axios: 1.1.2
+      axios: 1.1.3
       date-fns: 2.29.3
       nprogress: 0.2.0
       pinia: 2.0.23_l7r24p6nevbtlimqmqcwa3ouhu
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.11.2_xprgaq42dappzfhggpxgvdf43y
       unplugin-vue-components: 0.22.8_vue@3.2.41
       vite: 3.1.8
-      vite-plugin-cloudflare-functions: 0.3.0_pyflwyogkvxrf7dlfdx5kfetq4
+      vite-plugin-cloudflare-functions: 0.3.0_4ibft6gurf47ldmtuwtsptjyiu
       vite-plugin-info: 0.3.1_vite@3.1.8
       vite-plugin-inspect: 0.7.5_vite@3.1.8
       vite-plugin-pages: 0.27.0_vite@3.1.8
@@ -140,7 +140,7 @@ importers:
 
   packages/bangumi:
     specifiers:
-      axios: ^1.1.2
+      axios: ^1.1.3
       bangumi-data: ^0.3.102
       breadc: ^0.6.6
       date-fns: ^2.29.3
@@ -149,7 +149,7 @@ importers:
       unbuild: ^0.9.4
       vite: ^3.1.8
     dependencies:
-      axios: 1.1.2_debug@4.3.4
+      axios: 1.1.3_debug@4.3.4
       breadc: 0.6.6
       debug: 4.3.4
     devDependencies:
@@ -172,7 +172,7 @@ importers:
       '@types/js-yaml': ^4.0.5
       '@types/webtorrent': ^0.109.3
       ali-oss: ^6.17.1
-      axios: ^0.27.2
+      axios: ^1.1.3
       bangumi-data: ^0.3.102
       breadc: ^0.6.6
       cli-progress: ^3.11.2
@@ -194,7 +194,7 @@ importers:
       '@animepaste/bangumi': link:../bangumi
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
-      axios: 0.27.2_debug@4.3.4
+      axios: 1.1.3_debug@4.3.4
       breadc: 0.6.6
       cli-progress: 3.11.2
       date-fns: 2.29.3
@@ -223,7 +223,7 @@ importers:
   packages/database:
     specifiers:
       '@prisma/client': ^4.5.0
-      axios: ^0.27.2
+      axios: ^1.1.3
       cnchar: ^3.2.2
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.3
@@ -233,7 +233,7 @@ importers:
       unbuild: ^0.9.4
     dependencies:
       '@prisma/client': 4.5.0_prisma@4.5.0
-      axios: 0.27.2_debug@4.3.4
+      axios: 1.1.3_debug@4.3.4
       cnchar: 3.2.2
       cnchar-trad: 3.2.2
       date-fns: 2.29.3
@@ -2630,7 +2630,7 @@ packages:
   /@vue/compiler-core/3.2.41:
     resolution: {integrity: sha512-oA4mH6SA78DT+96/nsi4p9DX97PHcNROxs51lYk7gb9Z4BPKQ3Mh+BLn6CQZBw857Iuhu28BfMSRHAlPvD4vlw==}
     dependencies:
-      '@babel/parser': 7.19.0
+      '@babel/parser': 7.19.6
       '@vue/shared': 3.2.41
       estree-walker: 2.0.2
       source-map: 0.6.1
@@ -2953,33 +2953,14 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axios/0.27.2_debug@4.3.4:
-    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+  /axios/1.1.3:
+    resolution: {integrity: sha512-00tXVRwKx/FZr/IDVFt4C+f9FYairX517WoGCL6dpOntqLkZofjhu43F/Xl44UOpqa+9sLFDrG/XAnFsUYgkDA==}
     dependencies:
-      follow-redirects: 1.15.1_debug@4.3.4
-      form-data: 4.0.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
-  /axios/1.1.2:
-    resolution: {integrity: sha512-bznQyETwElsXl2RK7HLLwb5GPpOLlycxHCtrpDR/4RqqBzjARaOTo3jz4IgtntWUYee7Ne4S8UHd92VCuzPaWA==}
-    dependencies:
-      follow-redirects: 1.15.1_debug@4.3.4
+      follow-redirects: 1.15.1
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
-
-  /axios/1.1.2_debug@4.3.4:
-    resolution: {integrity: sha512-bznQyETwElsXl2RK7HLLwb5GPpOLlycxHCtrpDR/4RqqBzjARaOTo3jz4IgtntWUYee7Ne4S8UHd92VCuzPaWA==}
-    dependencies:
-      follow-redirects: 1.15.1_debug@4.3.4
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
 
   /axios/1.1.3_debug@4.3.4:
     resolution: {integrity: sha512-00tXVRwKx/FZr/IDVFt4C+f9FYairX517WoGCL6dpOntqLkZofjhu43F/Xl44UOpqa+9sLFDrG/XAnFsUYgkDA==}
@@ -2989,7 +2970,6 @@ packages:
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
-    dev: true
 
   /b4a/1.5.3:
     resolution: {integrity: sha512-1aCQIzQJK7G0z1Una75tWMlwVAR8o+QHoAlnWc5XAxRVBESY9WsitfBgM5nPyDBP5HrhPU1Np4Pq2Y7CJQ+tVw==}
@@ -4935,6 +4915,15 @@ packages:
       path-exists: 4.0.0
     dev: true
 
+  /follow-redirects/1.15.1:
+    resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+
   /follow-redirects/1.15.1_debug@4.3.4:
     resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
     engines: {node: '>=4.0'}
@@ -6487,8 +6476,8 @@ packages:
       - supports-color
     dev: true
 
-  /optc/0.5.1:
-    resolution: {integrity: sha512-N7gueHfObXJg6ZkOt1+JjMc+PBgD7zYnjlTtM+2SBqFDl2qmfzcAtl8opVZCM+N5Z8JCVZ6tA5UoyZBKEO318g==}
+  /optc/0.5.2:
+    resolution: {integrity: sha512-FMlyOxaC11gX6mz6xWGbpIhfw3udrPhBtcwQv/uIxCiepiYibhWY7l4pQYkCGFNbXh/+KvlBFjUhNwiXNVYObg==}
     engines: {node: '>=v16.0.0'}
     hasBin: true
     dependencies:
@@ -8384,7 +8373,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.3.0_pyflwyogkvxrf7dlfdx5kfetq4:
+  /vite-plugin-cloudflare-functions/0.3.0_4ibft6gurf47ldmtuwtsptjyiu:
     resolution: {integrity: sha512-+E/2mxXRH714+EyyM+fj7Bw38QwQ/Dzzv1fuNJBA/o4+hJtlYFgYt4AhP4U8qMalAmpL75mw7/4gNNHEdawQZQ==}
     engines: {node: '>=v16.17.1'}
     peerDependencies:
@@ -8403,7 +8392,7 @@ packages:
         optional: true
     dependencies:
       '@cloudflare/workers-types': 3.16.0
-      axios: 1.1.2
+      axios: 1.1.3
       debug: 4.3.4
       fast-glob: 3.2.12
       mlly: 0.5.16
