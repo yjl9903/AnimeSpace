@@ -6,10 +6,10 @@ import { app } from './app';
 
 export { app };
 
-import './plan';
-import './store';
-import './user';
-import './magnet';
+import setupPlan from './plan';
+import setupUser from './user';
+import setupStore from './store';
+import setupMagnet from './magnet';
 
 app
   .command('space', 'Open AnimePaste space directory and run script on it')
@@ -33,3 +33,8 @@ app
       }
     }
   });
+
+setupPlan();
+setupUser();
+setupStore();
+setupMagnet();
