@@ -1,6 +1,6 @@
 {
   "name": "@animepaste/monorepo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "build": "turbo run build --filter !docs",
@@ -14,11 +14,12 @@
     "dev:cli": "pnpm -C packages/cli dev",
     "dev:docs": "pnpm -C docs dev",
     "format": "prettier --write ./**/*.{js,ts,vue} --ignore-path .prettierignore",
-    "release": "bumpp package.json */package.json packages/*/package.json !packages/bangumi --commit --push --tag && pnpm -r publish --access public",
+    "release": "bumpp package.json docs/package.json packages/*/package.json !packages/bangumi --commit --push --tag && pnpm -r publish --access public",
     "release:bgm": "pnpm -C packages/bangumi release",
     "test": "pnpm -r test -- --run",
     "typecheck": "pnpm -r typecheck",
-    "preversion": "pnpm test && pnpm build:cli"
+    "preversion": "pnpm test",
+    "postversion": "pnpm build:cli"
   },
   "devDependencies": {
     "@types/node": "^18.6.5",
