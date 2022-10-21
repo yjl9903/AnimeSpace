@@ -7,6 +7,7 @@ import { debug as createDebug } from 'debug';
 
 import { logger } from '../../logger';
 import { context } from '../../context';
+import { MAX_RETRY } from '../../constant';
 
 import type { VideoInfo } from '../types';
 
@@ -44,24 +45,33 @@ export class AliStore extends Store {
     title: string,
     file: string
   ): Promise<UploadResponse | undefined> {
-    try {
-      const res = (await this.vodClient.request(
-        'CreateUploadVideo',
-        {
-          Title: title,
-          FileName: file
-        },
-        {
-          timeout: TIMEOUT
+    for (let i = 0; i < MAX_RETRY; i++) {
+      try {
+        const res = await Promise.race([
+          this.vodClient.request<any>(
+            'CreateUploadVideo',
+            {
+              Title: title,
+              FileName: file
+            },
+            {
+              timeout: TIMEOUT
+            }
+          ),
+          new Promise((res) => setTimeout(() => res(undefined), TIMEOUT * 6))
+        ]);
+        if (res) {
+          res.UploadAuth = JSON.parse(b64decode(res.UploadAuth));
+          res.UploadAddress = JSON.parse(b64decode(res.UploadAddress));
+          return res as UploadResponse;
         }
-      )) as any;
-      res.UploadAuth = JSON.parse(b64decode(res.UploadAuth));
-      res.UploadAddress = JSON.parse(b64decode(res.UploadAddress));
-      return res as UploadResponse;
-    } catch (error) {
-      debug(error);
-      return undefined;
+      } catch (error) {
+        debug(error);
+        return undefined;
+      }
     }
+    logger.error(`Create Upload ${title} timeout`);
+    return undefined;
   }
 
   async doUpload(
