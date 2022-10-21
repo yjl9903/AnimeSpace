@@ -15,7 +15,7 @@ hero:
   actions:
     - theme: brand
       text: 开始
-      link: /deploy/
+      link: /intro/
     - theme: alt
       text: 试一试
       link: https://anime.xlorpaste.cn

@@ -6,10 +6,16 @@
 
 Paste your favourite anime online.
 
-Command line application for managing [Anime Paste](https://github.com/XLorPaste/AnimePaste).
+Anime Paste is yet another solution for automatically downloading bangumis.
 
-+ 📺 [Online Demo](https://anime.xlorpaste.cn/)
-+ 📖 [Documentation](https://anime.docs.xlorpaste.cn/)
+This is the command line application package for managing [Anime Paste](https://github.com/XLorPaste/AnimePaste).
+
+Anime Paste includes **an admin command-line application** to config what bangumis and how to download and **a builtin web application** to view bangumis which can also be deployed on [Cloudflare Pages](https://pages.cloudflare.com/). It also support download resource for the media library software like [Jellyfin](https://github.com/jellyfin/jellyfin) and so on.
+
+All the bangumi resource is automatically fetched from [動漫花園](https://share.dmhy.org/). Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.
+
++ 📺 [Online Demo | 在线 Demo](https://anime.xlorpaste.cn/)
++ 📖 [Document | 文档](https://anime.docs.xlorpaste.cn/)
 
 ## Features
 

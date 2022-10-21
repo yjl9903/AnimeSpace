@@ -35,15 +35,15 @@ export default defineConfig({
     sidebar: {
       '/': [
         {
+          text: 'Anime Paste',
+          items: [{ text: '介绍', link: '/intro/' }]
+        },
+        {
           text: '部署',
           items: [
             {
               text: '开始',
               link: '/deploy/'
-            },
-            {
-              text: '部署 Cloudflare Pages',
-              link: '/deploy/cloudflare'
             },
             {
               text: '安装 CLI',
@@ -56,6 +56,10 @@ export default defineConfig({
             {
               text: '使用 OSS',
               link: '/deploy/oss'
+            },
+            {
+              text: '部署 Cloudflare Pages',
+              link: '/deploy/cloudflare'
             }
           ]
         },
