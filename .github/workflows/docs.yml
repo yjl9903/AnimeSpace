@@ -30,7 +30,7 @@ jobs:
         run: pnpm build:docs
 
       - name: Setup ossutil
-        uses: manyuanrong/setup-ossutil@v2.0
+        uses: manyuanrong/setup-ossutil@v3.0
         with:
           endpoint: ${{ secrets.ACCESS_ENDPOINT }}
           access-key-id: ${{ secrets.ACCESS_KEY_ID }}
