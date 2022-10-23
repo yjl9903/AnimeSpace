@@ -87,7 +87,7 @@ importers:
       vite-plugin-cloudflare-functions: ^0.3.0
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.7.5
-      vite-plugin-pages: ^0.27.0
+      vite-plugin-pages: ^0.27.1
       vite-plugin-pwa: ^0.13.1
       vite-ssg: ^0.21.1
       vitest: ^0.24.3
@@ -130,7 +130,7 @@ importers:
       vite-plugin-cloudflare-functions: 0.3.0_4ibft6gurf47ldmtuwtsptjyiu
       vite-plugin-info: 0.3.1_vite@3.1.8
       vite-plugin-inspect: 0.7.5_vite@3.1.8
-      vite-plugin-pages: 0.27.0_vite@3.1.8
+      vite-plugin-pages: 0.27.1_vite@3.1.8
       vite-plugin-pwa: 0.13.1_a24bsgtcozgewh66gr7y47mcdm
       vite-ssg: 0.21.1_3dlpmnjq3xaq6x2ip7web643qm
       vitest: 0.24.3
@@ -8450,8 +8450,8 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-pages/0.27.0_vite@3.1.8:
-    resolution: {integrity: sha512-fLuBd8U9jcfB+MXj9yEsq6AHa0AHCP4Fhi7LCcCWJeL28Lx3o5B0uoBUhCZ+xwsnNs4GZwPOfgBG3yHKMsMNnA==}
+  /vite-plugin-pages/0.27.1_vite@3.1.8:
+    resolution: {integrity: sha512-KXfeG9aQSNsSXBs1mPeeuC0rwkLti+MgoJ3GknrwRDNrdrojb9czcFAVlnoPNVdfuvTHcWdf5zqN7+vuvz2JZQ==}
     peerDependencies:
       '@vue/compiler-sfc': ^2.7.0 || ^3.0.0
       vite: ^2.0.0 || ^3.0.0-0
