@@ -84,7 +84,7 @@ importers:
       unplugin-auto-import: 0.11.2
       unplugin-vue-components: ^0.22.8
       vite: ^3.1.8
-      vite-plugin-cloudflare-functions: ^0.3.0
+      vite-plugin-cloudflare-functions: ^0.3.1
       vite-plugin-info: ^0.3.1
       vite-plugin-inspect: ^0.7.5
       vite-plugin-pages: ^0.27.1
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.11.2_zqi2xhr3ahaiw6pxzygjgkwf7q
       unplugin-vue-components: 0.22.8_vue@3.2.41
       vite: 3.1.8
-      vite-plugin-cloudflare-functions: 0.3.0_4ibft6gurf47ldmtuwtsptjyiu
+      vite-plugin-cloudflare-functions: 0.3.1_4ibft6gurf47ldmtuwtsptjyiu
       vite-plugin-info: 0.3.1_vite@3.1.8
       vite-plugin-inspect: 0.7.5_vite@3.1.8
       vite-plugin-pages: 0.27.1_vite@3.1.8
@@ -245,9 +245,9 @@ importers:
 
   packages/functions:
     specifiers:
-      vite-plugin-cloudflare-functions: ^0.3.0
+      vite-plugin-cloudflare-functions: ^0.3.1
     devDependencies:
-      vite-plugin-cloudflare-functions: 0.3.0
+      vite-plugin-cloudflare-functions: 0.3.1
 
 packages:
 
@@ -1666,8 +1666,8 @@ packages:
       mime: 3.0.0
     dev: true
 
-  /@cloudflare/workers-types/3.16.0:
-    resolution: {integrity: sha512-gaBUSaKS65mN3iKZEgichbXYEmAa/pXkc5Gbt+1BptYphdGkj09ggdsiE4w8g0F/uI1g36QaTKrzVnBAWMipvQ==}
+  /@cloudflare/workers-types/3.18.0:
+    resolution: {integrity: sha512-ehKOJVLMeR+tZkYhWEaLYQxl0TaIZu/kE86HF3/RidR8Xv5LuQxpbh+XXAoKVqsaphWLhIgBhgnlN5HGdheXSQ==}
     dev: true
 
   /@docsearch/css/3.2.1:
@@ -6234,9 +6234,9 @@ packages:
     resolution: {integrity: sha512-LaJ8yuh4v0zEmge/g3c7jjFlhoCPfQn6RCjXgm9A0Qiuochq4BcuOxVfWmdnCoLTlg2MV+hqhOek+W2OhG0Lwg==}
     dependencies:
       acorn: 8.8.0
-      pathe: 0.3.8
+      pathe: 0.3.9
       pkg-types: 0.3.5
-      ufo: 0.8.5
+      ufo: 0.8.6
     dev: true
 
   /mp4-box-encoding/1.4.1:
@@ -6679,10 +6679,6 @@ packages:
 
   /pathe/0.2.0:
     resolution: {integrity: sha512-sTitTPYnn23esFR3RlqYBWn4c45WGeLcsKzQiUpXJAyfcWkolvlYpV8FLo7JishK946oQwMFUCHXQ9AjGPKExw==}
-    dev: true
-
-  /pathe/0.3.8:
-    resolution: {integrity: sha512-c71n61F1skhj/jzZe+fWE9XDoTYjWbUwIKVwFftZ5IOgiX44BVkTkD+/803YDgR50tqeO4eXWxLyVHBLWQAD1g==}
     dev: true
 
   /pathe/0.3.9:
@@ -8362,14 +8358,14 @@ packages:
       range-slice-stream: 2.0.0
     dev: false
 
-  /vite-plugin-cloudflare-functions/0.3.0:
-    resolution: {integrity: sha512-+E/2mxXRH714+EyyM+fj7Bw38QwQ/Dzzv1fuNJBA/o4+hJtlYFgYt4AhP4U8qMalAmpL75mw7/4gNNHEdawQZQ==}
+  /vite-plugin-cloudflare-functions/0.3.1:
+    resolution: {integrity: sha512-jCrHqjscXSkL2M4jFod/ig9ake0FDZK5FsaEeu9Vm2Qh0+d/Vr+tp96jrXnNac6iZeI9F3aa3SVLH2qjJawGIQ==}
     engines: {node: '>=v16.17.1'}
     peerDependencies:
-      axios: ^1.1.2
-      ohmyfetch: ^0.4.19
-      vite: ^3.1.7
-      wrangler: ^2.1.11
+      axios: ^1.1.3
+      ohmyfetch: ^0.4.20
+      vite: ^3.1.8
+      wrangler: ^2.1.13
     peerDependenciesMeta:
       axios:
         optional: true
@@ -8380,7 +8376,7 @@ packages:
       wrangler:
         optional: true
     dependencies:
-      '@cloudflare/workers-types': 3.16.0
+      '@cloudflare/workers-types': 3.18.0
       debug: 4.3.4
       fast-glob: 3.2.12
       mlly: 0.5.16
@@ -8390,14 +8386,14 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.3.0_4ibft6gurf47ldmtuwtsptjyiu:
-    resolution: {integrity: sha512-+E/2mxXRH714+EyyM+fj7Bw38QwQ/Dzzv1fuNJBA/o4+hJtlYFgYt4AhP4U8qMalAmpL75mw7/4gNNHEdawQZQ==}
+  /vite-plugin-cloudflare-functions/0.3.1_4ibft6gurf47ldmtuwtsptjyiu:
+    resolution: {integrity: sha512-jCrHqjscXSkL2M4jFod/ig9ake0FDZK5FsaEeu9Vm2Qh0+d/Vr+tp96jrXnNac6iZeI9F3aa3SVLH2qjJawGIQ==}
     engines: {node: '>=v16.17.1'}
     peerDependencies:
-      axios: ^1.1.2
-      ohmyfetch: ^0.4.19
-      vite: ^3.1.7
-      wrangler: ^2.1.11
+      axios: ^1.1.3
+      ohmyfetch: ^0.4.20
+      vite: ^3.1.8
+      wrangler: ^2.1.13
     peerDependenciesMeta:
       axios:
         optional: true
@@ -8408,7 +8404,7 @@ packages:
       wrangler:
         optional: true
     dependencies:
-      '@cloudflare/workers-types': 3.16.0
+      '@cloudflare/workers-types': 3.18.0
       axios: 1.1.3
       debug: 4.3.4
       fast-glob: 3.2.12
