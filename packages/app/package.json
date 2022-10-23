@@ -39,7 +39,7 @@
     "unplugin-auto-import": "0.11.2",
     "unplugin-vue-components": "^0.22.8",
     "vite": "^3.1.8",
-    "vite-plugin-cloudflare-functions": "^0.3.0",
+    "vite-plugin-cloudflare-functions": "^0.3.1",
     "vite-plugin-info": "^0.3.1",
     "vite-plugin-inspect": "^0.7.5",
     "vite-plugin-pages": "^0.27.1",
