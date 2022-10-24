@@ -37,7 +37,7 @@
     "typescript": "^4.8.4",
     "unocss": "^0.45.30",
     "unplugin-auto-import": "0.11.3",
-    "unplugin-vue-components": "^0.22.8",
+    "unplugin-vue-components": "^0.22.9",
     "vite": "^3.1.8",
     "vite-plugin-cloudflare-functions": "^0.3.1",
     "vite-plugin-info": "^0.3.1",

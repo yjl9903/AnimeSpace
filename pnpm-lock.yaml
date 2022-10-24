@@ -33,7 +33,7 @@ importers:
       fast-glob: ^3.2.12
       https-localhost: ^4.7.1
       unocss: ^0.45.30
-      unplugin-vue-components: ^0.22.8
+      unplugin-vue-components: ^0.22.9
       vite: ^3.1.8
       vite-plugin-pwa: ^0.13.1
       vitepress: ^1.0.0-alpha.22
@@ -51,7 +51,7 @@ importers:
       fast-glob: 3.2.12
       https-localhost: 4.7.1
       unocss: 0.45.30_vite@3.1.8
-      unplugin-vue-components: 0.22.8_vue@3.2.41
+      unplugin-vue-components: 0.22.9_vue@3.2.41
       vite: 3.1.8
       vite-plugin-pwa: 0.13.1_a24bsgtcozgewh66gr7y47mcdm
       vitepress: 1.0.0-alpha.22_tbpndr44ulefs3hehwpi2mkf2y
@@ -82,7 +82,7 @@ importers:
       typescript: ^4.8.4
       unocss: ^0.45.30
       unplugin-auto-import: 0.11.3
-      unplugin-vue-components: ^0.22.8
+      unplugin-vue-components: ^0.22.9
       vite: ^3.1.8
       vite-plugin-cloudflare-functions: ^0.3.1
       vite-plugin-info: ^0.3.1
@@ -125,7 +125,7 @@ importers:
       typescript: 4.8.4
       unocss: 0.45.30_vite@3.1.8
       unplugin-auto-import: 0.11.3_@vueuse+core@9.3.1
-      unplugin-vue-components: 0.22.8_vue@3.2.41
+      unplugin-vue-components: 0.22.9_vue@3.2.41
       vite: 3.1.8
       vite-plugin-cloudflare-functions: 0.3.1_4ibft6gurf47ldmtuwtsptjyiu
       vite-plugin-info: 0.3.1_vite@3.1.8
@@ -6007,13 +6007,6 @@ packages:
     dependencies:
       sourcemap-codec: 1.4.8
 
-  /magic-string/0.26.5:
-    resolution: {integrity: sha512-yXUIYOOQnEHKHOftp5shMWpB9ImfgfDJpapa38j/qMtTj5QHWucvxP4lUtuRmHT9vAzvtpHkWKXW9xBwimXeNg==}
-    engines: {node: '>=12'}
-    dependencies:
-      sourcemap-codec: 1.4.8
-    dev: true
-
   /magic-string/0.26.7:
     resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
     engines: {node: '>=12'}
@@ -8129,8 +8122,8 @@ packages:
       - rollup
     dev: true
 
-  /unplugin-vue-components/0.22.8_vue@3.2.41:
-    resolution: {integrity: sha512-Musnwdtr6uj9Zopo4oeh4lp9+fJ2ArXVDzSiZxF4YC9v+pLnasKVKEEAjdXuQQ3u3KtntVw6PCscyAt52eS75g==}
+  /unplugin-vue-components/0.22.9_vue@3.2.41:
+    resolution: {integrity: sha512-qBvooq3EgpjtYicxeccRUGUBBQCCw9rJ0kHPZPOSJd8TBZViSv86vuKLTRDHPyjWtclwOIkVStZJfPdJFhYUMw==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -8139,18 +8132,19 @@ packages:
       '@babel/parser':
         optional: true
     dependencies:
-      '@antfu/utils': 0.5.2
-      '@rollup/pluginutils': 4.2.1
+      '@antfu/utils': 0.6.0
+      '@rollup/pluginutils': 5.0.2
       chokidar: 3.5.3
       debug: 4.3.4
       fast-glob: 3.2.12
       local-pkg: 0.4.2
-      magic-string: 0.26.5
+      magic-string: 0.26.7
       minimatch: 5.1.0
       resolve: 1.22.1
-      unplugin: 0.9.6
+      unplugin: 0.10.1
       vue: 3.2.41
     transitivePeerDependencies:
+      - rollup
       - supports-color
     dev: true
 
