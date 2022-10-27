@@ -15,7 +15,7 @@
     "@algolia/client-search": "^4.14.2",
     "@iconify-json/carbon": "^1.1.9",
     "@types/node": "^18.11.7",
-    "@unocss/reset": "^0.46.0",
+    "@unocss/reset": "^0.46.1",
     "@vitejs/plugin-vue": "^3.2.0",
     "fast-glob": "^3.2.12",
     "https-localhost": "^4.7.1",
