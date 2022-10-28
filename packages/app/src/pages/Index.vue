@@ -44,7 +44,7 @@ const client = useClient();
 const bangumi = useBangumi();
 
 // TODO: config from user
-const hiddenBgm = new Set(['899', '975']);
+const hiddenBgm = new Set(['899', '975', '236657']);
 
 const isOnair = (bgm: Bangumi) => {
   return client.onairMap.has(bgm.bgmId);
