@@ -92,7 +92,7 @@ onBeforeRouteLeave(async () => {
             }"
             :start="start"
             class="w-[640px] h-[360px]"
-            @timeupdate="(t) => (playTime = t)"
+            @timeupdate="(t: number) => (playTime = t)"
           >
             <video controls playsinline crossorigin="anonymous"></video>
           </Player>

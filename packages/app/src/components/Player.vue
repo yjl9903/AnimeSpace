@@ -90,6 +90,8 @@ watch(container, (container, _container, _onCleanup) => {
       };
       player.value = new Plyr(video, plyrOptions);
       player.value.source = source.value;
+      // @ts-ignore
+      player.value.download = source.value.sources[0].src;
 
       {
         // Use source title to check whether source was changed
