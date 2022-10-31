@@ -29,7 +29,7 @@
     "turbo": "latest",
     "typescript": "^4.8.4",
     "vite": "^3.2.1",
-    "vitest": "^0.24.3"
+    "vitest": "^0.24.4"
   },
   "packageManager": "pnpm@7.14.1",
   "engines": {
