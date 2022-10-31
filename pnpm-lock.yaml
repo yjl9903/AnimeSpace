@@ -188,7 +188,7 @@ importers:
       optc: ^0.5.3
       prompts: ^2.4.2
       unbuild: ^0.9.4
-      webtorrent: ^1.8.32
+      webtorrent: ^1.9.1
     dependencies:
       '@alicloud/pop-core': 1.7.12
       '@animepaste/bangumi': link:../bangumi
@@ -207,7 +207,7 @@ importers:
       lbear: 0.1.2
       mediainfo.js: 0.1.8
       prompts: 2.4.2
-      webtorrent: 1.8.32
+      webtorrent: 1.9.1
     devDependencies:
       '@types/ali-oss': 6.16.6
       '@types/cli-progress': 3.11.0
@@ -3564,7 +3564,7 @@ packages:
       queue-microtask: 1.2.3
       run-parallel: 1.2.0
       simple-sha1: 3.1.0
-      streamx: 2.12.4
+      streamx: 2.12.5
     dev: false
 
   /cron-schedule/3.0.6:
@@ -4550,7 +4550,7 @@ packages:
     resolution: {integrity: sha512-wdRazMMeM2pl8hq1lFG8fzix8p1VLAJunTTE2RADiFBwbUfZwybUm6IwPrmMS7qTthiayr166NoXeqWe3hfR5w==}
     dependencies:
       fast-readable-async-iterator: 1.1.1
-      streamx: 2.12.4
+      streamx: 2.12.5
     dev: false
 
   /fast-deep-equal/3.1.3:
@@ -4699,13 +4699,12 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  /fs-chunk-store/2.0.5:
-    resolution: {integrity: sha512-z3c2BmyaHdQTtIVXJDQOvwZVWN2gNU//0IYKK2LuPr+cZyGoIrgDwI4iDASaTUyQbOBtyg/k6GuDZepB6jQIPw==}
+  /fs-chunk-store/3.0.1:
+    resolution: {integrity: sha512-YrOFuXtUJQBkOZ2QBXBoIrjLJ/TNTpEaGnxV+TmL1qaW5J4ah6lxMh/X9pb3To+hbaoT/pRuBXLkkqoavQoQFw==}
     dependencies:
       queue-microtask: 1.2.3
       random-access-file: 2.2.1
       randombytes: 2.1.0
-      rimraf: 3.0.2
       run-parallel: 1.2.0
       thunky: 1.1.0
     dev: false
@@ -6787,6 +6786,7 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+    dev: true
 
   /rollup-plugin-dts/5.0.0_em67h3dl2s4tcthxg4ia4iozly:
     resolution: {integrity: sha512-OO8ayCvuJCKaQSShyVTARxGurVVk4ulzbuvz+0zFd1f93vlnWFU5pBMT7HFeS6uj7MvvZLx4kUAarGATSU1+Ng==}
@@ -7195,7 +7195,7 @@ packages:
     resolution: {integrity: sha512-Ax+TbUOho84bWUc3AKqWtkIvAIVws7d6QI4oJkgH4yQ5Yil+lR3vjd/7qd51dHKGzS5bFxg0++QwyNRN7s6rZA==}
     dependencies:
       limiter: 1.1.5
-      streamx: 2.12.4
+      streamx: 2.12.5
     dev: false
 
   /speedometer/1.1.0:
@@ -7258,8 +7258,8 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: true
 
-  /streamx/2.12.4:
-    resolution: {integrity: sha512-K3xdIp8YSkvbdI0PrCcP0JkniN8cPCyeKlcZgRFSl1o1xKINCYM93FryvTSOY57x73pz5/AjO5B8b9BYf21wWw==}
+  /streamx/2.12.5:
+    resolution: {integrity: sha512-Y+nkFw57Z5JHT3zLlqFm3GccOy2FeYdUrrqita6Dd8kr/8enPn9GKa8IYf3/DmEKfZl/E2sWoSKUnd4qhonrgg==}
     dependencies:
       fast-fifo: 1.1.0
       queue-tick: 1.0.0
@@ -8431,9 +8431,9 @@ packages:
     resolution: {integrity: sha512-8bWq0Iluiv9lVf9YaqWQ9+liNgXSHICm+rg544yRgGYaR8yXZTVBaHZkINZSB2yZSWo4b0F6MIxqJezVfOEAlg==}
     dev: true
 
-  /webtorrent/1.8.32:
-    resolution: {integrity: sha512-PjtJn3sY4Uqb1PEuxID+Cps4AshUKZpo3EhkT14y1SySmMVHeSX2crwh1rXIGX3fJUeF0zM5iEg+Ic2mN4CFZw==}
-    engines: {node: '>=12'}
+  /webtorrent/1.9.1:
+    resolution: {integrity: sha512-lFVMY1+GmTJlPAzEuWqQKP3/83c4bGFuJGPjI0lFRgYvUeQqxHv2Qwriz1SOK96MKuhMPKS9y4kf1CddZzoBjQ==}
+    engines: {node: '>=14'}
     dependencies:
       '@webtorrent/http-node': 1.3.0
       addr-to-ip-port: 1.5.4
@@ -8449,7 +8449,7 @@ packages:
       end-of-stream: 1.4.4
       escape-html: 1.0.3
       fast-blob-stream: 1.1.1
-      fs-chunk-store: 2.0.5
+      fs-chunk-store: 3.0.1
       immediate-chunk-store: 2.2.0
       join-async-iterator: 1.1.1
       load-ip-set: 2.2.1
@@ -8472,7 +8472,7 @@ packages:
       simple-sha1: 3.1.0
       speed-limiter: 1.0.2
       stream-with-known-length-to-buffer: 1.0.4
-      streamx: 2.12.4
+      streamx: 2.12.5
       throughput: 1.0.1
       torrent-discovery: 9.4.14
       torrent-piece: 2.0.1
