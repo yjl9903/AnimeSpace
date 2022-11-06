@@ -134,7 +134,9 @@ export default function setup() {
           logger.println(
             lightRed(`✓ There are ${bold(videos.length)} videos to be removed`)
           );
-          printVideoInfoList(videos);
+          printVideoInfoList(
+            videos.sort((lhs, rhs) => lhs.title.localeCompare(rhs.title))
+          );
 
           if (
             option.yes ||
