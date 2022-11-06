@@ -30,7 +30,7 @@ const bangumi = useBangumi();
     >
       <router-link :to="`/anime/${log.bgmId}/play/${log.ep}`">
         <span v-if="bangumi.useBgm(log.bgmId).value"
-          >{{ bangumi.useBgm(log.bgmId).value!.titleCN }}
+          >{{ getCnTitle(bangumi.useBgm(log.bgmId).value!) }}
         </span>
       </router-link>
       <Episode :bgm-id="log.bgmId" :ep="log.ep" p1></Episode>

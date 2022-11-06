@@ -24,6 +24,6 @@ export function getBgmId(bgm: Item) {
   }
 }
 
-export function getCnTitle(bgm: SubjectBangumi) {
+export function getCnTitle(bgm: { titleCN?: string; title: string }) {
   return Boolean(bgm.titleCN) ? bgm.titleCN : bgm.title;
 }
