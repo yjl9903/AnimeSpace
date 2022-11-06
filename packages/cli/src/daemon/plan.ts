@@ -23,6 +23,7 @@ export class Plan {
 
   static async create() {
     const plans = await context.getPlans();
+
     for (const plan of plans) {
       // Setup date (default: 6 months ago)
       if (!Boolean(plan.date)) {
@@ -39,6 +40,11 @@ export class Plan {
       // Setup store platform (default: ali)
       if (!Boolean(plan.store)) {
         plan.store = 'ali';
+      }
+
+      // Enable sync by default
+      if (!('sync' in plan) || plan.sync === undefined || plan.sync === null) {
+        plan.sync = true;
       }
 
       // Filter empty bgmId onair
@@ -87,6 +93,11 @@ export class Plan {
           bgm.format === null
         ) {
           bgm.format = plan.format ?? DefaultEpisodeFormat;
+        }
+
+        // Fix enable sync
+        if (!('sync' in bgm) || bgm.sync === undefined || bgm.sync === null) {
+          bgm.sync = plan.sync ?? true;
         }
       }
     }

@@ -167,7 +167,7 @@ export class Daemon {
       // Skip finished onair bangumi
       if (
         onair.state === 'finish' &&
-        this.client.onair.find((o) => o.bgmId === onair.bgmId)
+        (!onair.sync || this.client.onair.find((o) => o.bgmId === onair.bgmId))
       ) {
         continue;
       }
@@ -222,10 +222,11 @@ export class Daemon {
           });
           continue;
         }
-        // Skip finish plan and anime is onairing
+        // Try skipping finished plan, when anime is onairing or syncing is disabled
         if (
           onair.state === 'finish' &&
-          this.client.onair.find((o) => o.bgmId === onair.bgmId)
+          (!onair.sync ||
+            this.client.onair.find((o) => o.bgmId === onair.bgmId))
         ) {
           continue;
         }
@@ -378,7 +379,7 @@ export class Daemon {
     // Start uploading
     const videoInfos: VideoInfo[] = [];
     const onairSource: OnairEpisode[] = [];
-    if (this.enableUpload) {
+    if (this.enableUpload && onair.sync) {
       logger.info(
         startColor('Upload   ') +
           formatTitle(onair.title, onair.season) +

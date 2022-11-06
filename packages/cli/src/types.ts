@@ -46,6 +46,13 @@ export interface RawPlan {
   format?: string;
 
   /**
+   * Enable upload bangumis to OSS
+   *
+   * @default true
+   */
+  sync: boolean;
+
+  /**
    * Onair list
    */
   onair: OnairPlan[];
@@ -106,6 +113,13 @@ export interface OnairPlan {
    * @default '[{fansub}] {title} - S{season}E{ep}.mp4'
    */
   format: string;
+
+  /**
+   * Enable upload bangumis to OSS
+   *
+   * @default true
+   */
+  sync: boolean;
 
   /**
    * Keywords for searching resources

@@ -56,7 +56,12 @@ export class RemoteSyncClient extends SyncClient {
   static async init(): Promise<RemoteSyncClient> {
     const plan = await Plan.create();
     const client = await RemoteSyncClient.create(
-      new Set(plan.onairs().map((o) => o.bgmId))
+      new Set(
+        plan
+          .onairs()
+          .filter((o) => o.sync)
+          .map((o) => o.bgmId)
+      )
     );
     await client.fetchOnair();
     return client;
