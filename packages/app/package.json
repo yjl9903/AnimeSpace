@@ -38,7 +38,7 @@
     "unocss": "^0.46.3",
     "unplugin-auto-import": "0.11.4",
     "unplugin-vue-components": "^0.22.9",
-    "vite": "^3.2.2",
+    "vite": "^3.2.3",
     "vite-plugin-cloudflare-functions": "^0.3.1",
     "vite-plugin-info": "^0.3.1",
     "vite-plugin-inspect": "^0.7.7",
