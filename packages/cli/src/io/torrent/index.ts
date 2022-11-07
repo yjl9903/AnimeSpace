@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { move, existsSync, rmSync, readdirSync } from 'fs-extra';
+import { move, existsSync, rmSync } from 'fs-extra';
 
 import createDebug from 'debug';
 import Webtorrent from 'webtorrent';
@@ -103,11 +103,13 @@ export class TorrentClient {
               );
               if (torrent.files.length === 1) {
                 const file = torrent.files[0];
-                if (finalPath && finalPath !== file.path) {
-                  move(file.path, finalPath).then(() => res());
-                } else {
-                  res();
+                const downloadedPath = file.path.startsWith(this.folder)
+                  ? file.path
+                  : path.join(this.folder, file.path);
+                if (finalPath && finalPath !== downloadedPath) {
+                  await move(downloadedPath, finalPath);
                 }
+                res();
               } else {
                 const file = torrent.files.reduce((a, b) => {
                   if (a.length > b.length) return a;
