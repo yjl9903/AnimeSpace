@@ -96,7 +96,7 @@ importers:
       vue-scrollto: ^2.20.0
       vue-tsc: ^1.0.9
       workbox-window: ^6.5.4
-      wrangler: ^2.3.0
+      wrangler: ^2.3.2
     dependencies:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.4.0_vue@3.2.41
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.11.4_@vueuse+core@9.4.0
       unplugin-vue-components: 0.22.9_vue@3.2.41
       vite: 3.2.4_@types+node@18.11.9
-      vite-plugin-cloudflare-functions: 0.3.1_7geeefmicrntau45rrn5bbmqda
+      vite-plugin-cloudflare-functions: 0.3.1_du5zvsoaxqe4pythn7jmny4h4u
       vite-plugin-info: 0.3.1_vite@3.2.4
       vite-plugin-inspect: 0.7.8_vite@3.2.4
       vite-plugin-pages: 0.27.1_vite@3.2.4
@@ -136,7 +136,7 @@ importers:
       vitest: 0.25.2
       vue-tsc: 1.0.9_typescript@4.9.3
       workbox-window: 6.5.4
-      wrangler: 2.3.0
+      wrangler: 2.3.2
 
   packages/bangumi:
     specifiers:
@@ -559,6 +559,24 @@ packages:
       '@babel/core': ^7.0.0
     dependencies:
       '@babel/core': 7.19.6
+      '@babel/helper-annotate-as-pure': 7.18.6
+      '@babel/helper-environment-visitor': 7.18.9
+      '@babel/helper-function-name': 7.19.0
+      '@babel/helper-member-expression-to-functions': 7.18.9
+      '@babel/helper-optimise-call-expression': 7.18.6
+      '@babel/helper-replace-supers': 7.19.1
+      '@babel/helper-split-export-declaration': 7.18.6
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@babel/helper-create-class-features-plugin/7.19.0_@babel+core@7.20.2:
+    resolution: {integrity: sha512-NRz8DwF4jT3UfrmUoZjd0Uph9HQnP30t7Ash+weACcyNkiYTywpIjDBgReJMKgr+n86sn2nPVVmJ28Dm053Kqw==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0
+    dependencies:
+      '@babel/core': 7.20.2
       '@babel/helper-annotate-as-pure': 7.18.6
       '@babel/helper-environment-visitor': 7.18.9
       '@babel/helper-function-name': 7.19.0
@@ -1121,13 +1139,13 @@ packages:
       '@babel/helper-plugin-utils': 7.19.0
     dev: true
 
-  /@babel/plugin-syntax-typescript/7.18.6_@babel+core@7.19.6:
+  /@babel/plugin-syntax-typescript/7.18.6_@babel+core@7.20.2:
     resolution: {integrity: sha512-mAWAuq4rvOepWCBid55JuRNvpTNf2UGVgoz4JV0fXEKolsVZDzsa4NqCef758WZJj/GDu0gVGItjKFiClTAmZA==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': 7.19.6
+      '@babel/core': 7.20.2
       '@babel/helper-plugin-utils': 7.19.0
     dev: true
 
@@ -1472,16 +1490,16 @@ packages:
       '@babel/helper-plugin-utils': 7.19.0
     dev: true
 
-  /@babel/plugin-transform-typescript/7.19.3_@babel+core@7.19.6:
+  /@babel/plugin-transform-typescript/7.19.3_@babel+core@7.20.2:
     resolution: {integrity: sha512-z6fnuK9ve9u/0X0rRvI9MY0xg+DOUaABDYOe+/SQTxtlptaBB/V9JIUxJn6xp3lMBeb9qe8xSFmHU35oZDXD+w==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': 7.19.6
-      '@babel/helper-create-class-features-plugin': 7.19.0_@babel+core@7.19.6
+      '@babel/core': 7.20.2
+      '@babel/helper-create-class-features-plugin': 7.19.0_@babel+core@7.20.2
       '@babel/helper-plugin-utils': 7.19.0
-      '@babel/plugin-syntax-typescript': 7.18.6_@babel+core@7.19.6
+      '@babel/plugin-syntax-typescript': 7.18.6_@babel+core@7.20.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2614,7 +2632,7 @@ packages:
   /@vue/compiler-core/3.2.41:
     resolution: {integrity: sha512-oA4mH6SA78DT+96/nsi4p9DX97PHcNROxs51lYk7gb9Z4BPKQ3Mh+BLn6CQZBw857Iuhu28BfMSRHAlPvD4vlw==}
     dependencies:
-      '@babel/parser': 7.19.6
+      '@babel/parser': 7.20.3
       '@vue/shared': 3.2.41
       estree-walker: 2.0.2
       source-map: 0.6.1
@@ -6458,8 +6476,8 @@ packages:
     engines: {node: '>=v16.0.0'}
     hasBin: true
     dependencies:
-      '@babel/core': 7.19.6
-      '@babel/plugin-transform-typescript': 7.19.3_@babel+core@7.19.6
+      '@babel/core': 7.20.2
+      '@babel/plugin-transform-typescript': 7.19.3_@babel+core@7.20.2
       '@types/fs-extra': 9.0.13
       '@types/node': 18.11.9
       axios: 1.1.3_debug@4.3.4
@@ -8362,7 +8380,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.3.1_7geeefmicrntau45rrn5bbmqda:
+  /vite-plugin-cloudflare-functions/0.3.1_du5zvsoaxqe4pythn7jmny4h4u:
     resolution: {integrity: sha512-jCrHqjscXSkL2M4jFod/ig9ake0FDZK5FsaEeu9Vm2Qh0+d/Vr+tp96jrXnNac6iZeI9F3aa3SVLH2qjJawGIQ==}
     engines: {node: '>=v16.17.1'}
     peerDependencies:
@@ -8388,7 +8406,7 @@ packages:
       picocolors: 1.0.0
       tree-kill: 1.2.2
       vite: 3.2.4_@types+node@18.11.9
-      wrangler: 2.3.0
+      wrangler: 2.3.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -9019,8 +9037,8 @@ packages:
       workbox-core: 6.5.4
     dev: true
 
-  /wrangler/2.3.0:
-    resolution: {integrity: sha512-zQlydmeM9nAhyIICeTF1xb+3IJ/mafnfseYTimOtdkC0nAbHmtCH/BoXzK8TGsIte1Z7SGhtp6OeKDTHC9pOmw==}
+  /wrangler/2.3.2:
+    resolution: {integrity: sha512-PWqNJclB7SGIRpuJSrF9zuTfLAqrS1VPembhf6HPGJC6zL96hx3XcHC01VjChC0lsadUqGRa7/iEvWtwdUy6kw==}
     engines: {node: '>=16.13.0'}
     hasBin: true
     dependencies:
