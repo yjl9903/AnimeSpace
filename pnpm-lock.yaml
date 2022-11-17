@@ -77,7 +77,7 @@ importers:
       date-fns: ^2.29.3
       nprogress: ^0.2.0
       pinia: ^2.0.23
-      plyr: ^3.7.2
+      plyr: ^3.7.3
       scrollreveal: ^4.0.9
       typescript: ^4.9.3
       unocss: ^0.46.5
@@ -105,7 +105,7 @@ importers:
       date-fns: 2.29.3
       nprogress: 0.2.0
       pinia: 2.0.23_lkvyoo2kqf5fp4b2zmqolhfxpe
-      plyr: 3.7.2
+      plyr: 3.7.3
       scrollreveal: 4.0.9
       vue: 3.2.41
       vue-router: 4.1.6_vue@3.2.41
@@ -3612,9 +3612,8 @@ packages:
       semver: 7.0.0
     dev: true
 
-  /core-js/3.23.2:
-    resolution: {integrity: sha512-ELJOWxNrJfOH/WK4VJ3Qd+fOqZuOuDNDJz0xG6Bt4mGg2eO/UT9CljCrbqDGovjLKUrGajEEBcoTOc0w+yBYeQ==}
-    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+  /core-js/3.26.1:
+    resolution: {integrity: sha512-21491RRQVzUn0GGM9Z1Jrpr6PNPxPi+Za8OM9q4tksTSnlbXXGKK1nXNg/QvwFYettXvSX6zWKCtHHfjN4puyA==}
     requiresBuild: true
     dev: false
 
@@ -6747,10 +6746,10 @@ packages:
     resolution: {integrity: sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==}
     dev: false
 
-  /plyr/3.7.2:
-    resolution: {integrity: sha512-I0ZC/OI4oJ0iWG9s2rrnO0YFO6aLyrPiQBq9kum0FqITYljwTPBbYL3TZZu8UJQJUq7tUWN18Q7ACwNCkGKABQ==}
+  /plyr/3.7.3:
+    resolution: {integrity: sha512-ORULENBvEvvzMYXRQBALDmEi8P+wZt1Hr/NvHqchu/t7E2xJKNkRYWx0qCA1HETIGZ6zobrOVgqeAUqWimS7fQ==}
     dependencies:
-      core-js: 3.23.2
+      core-js: 3.26.1
       custom-event-polyfill: 1.0.7
       loadjs: 4.2.0
       rangetouch: 2.0.1

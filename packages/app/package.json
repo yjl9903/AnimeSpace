@@ -16,7 +16,7 @@
     "date-fns": "^2.29.3",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.23",
-    "plyr": "^3.7.2",
+    "plyr": "^3.7.3",
     "scrollreveal": "^4.0.9",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6",
