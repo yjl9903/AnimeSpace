@@ -101,11 +101,13 @@ export class TorrentClient {
               multibar.println(
                 `  ${lightBlue('Info')} ${green('✓')} ${torrent.name}`
               );
+
+              const normalizePath = (p: string) =>
+                p.startsWith(this.folder) ? p : path.join(this.folder, p);
+
               if (torrent.files.length === 1) {
                 const file = torrent.files[0];
-                const downloadedPath = file.path.startsWith(this.folder)
-                  ? file.path
-                  : path.join(this.folder, file.path);
+                const downloadedPath = normalizePath(file.path);
                 if (finalPath && finalPath !== downloadedPath) {
                   await move(downloadedPath, finalPath);
                 }
@@ -118,24 +120,23 @@ export class TorrentClient {
 
                 logger.warn(`Use "${file.name}" as the result`);
 
-                if (finalPath && finalPath !== file.path) {
-                  move(file.path, finalPath).then(() => {
-                    // Clear other files
-                    for (const file of torrent.files) {
-                      try {
-                        rmSync(file.path);
-                      } catch {}
-                    }
-                    for (const file of torrent.files) {
-                      try {
-                        rmSync(path.dirname(file.path));
-                      } catch {}
-                    }
-                    res();
-                  });
-                } else {
-                  res();
+                const filepath = normalizePath(file.path);
+                if (finalPath && finalPath !== filepath) {
+                  await move(filepath, finalPath);
                 }
+
+                // Clear other files
+                for (const file of torrent.files) {
+                  try {
+                    rmSync(normalizePath(file.path));
+                  } catch {}
+                }
+                for (const file of torrent.files) {
+                  try {
+                    rmSync(path.dirname(normalizePath(file.path)));
+                  } catch {}
+                }
+                res();
               }
             });
 
