@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.4.0",
-    "vue": "^3.2.41"
+    "vue": "^3.2.45"
   },
   "devDependencies": {
     "@algolia/client-search": "^4.14.2",
