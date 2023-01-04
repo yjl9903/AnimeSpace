@@ -11,7 +11,7 @@
   "dependencies": {
     "@animepaste/bangumi": "workspace:*",
     "@vueuse/core": "^9.4.0",
-    "@vueuse/head": "^0.9.8",
+    "@vueuse/head": "^1.0.22",
     "axios": "^1.1.3",
     "date-fns": "^2.29.3",
     "nprogress": "^0.2.0",
