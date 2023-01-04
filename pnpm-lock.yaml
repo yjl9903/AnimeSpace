@@ -60,7 +60,7 @@ importers:
   packages/app:
     specifiers:
       '@animepaste/bangumi': workspace:*
-      '@iconify-json/carbon': ^1.1.10
+      '@iconify-json/carbon': ^1.1.13
       '@iconify-json/ic': ^1.1.9
       '@iconify-json/mdi': ^1.1.34
       '@types/node': ^18.11.9
@@ -111,7 +111,7 @@ importers:
       vue-router: 4.1.6_vue@3.2.45
       vue-scrollto: 2.20.0
     devDependencies:
-      '@iconify-json/carbon': 1.1.10
+      '@iconify-json/carbon': 1.1.13
       '@iconify-json/ic': 1.1.9
       '@iconify-json/mdi': 1.1.34
       '@types/node': 18.11.9
@@ -1984,12 +1984,6 @@ packages:
 
   /@iarna/toml/2.2.5:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
-    dev: true
-
-  /@iconify-json/carbon/1.1.10:
-    resolution: {integrity: sha512-k3/28wk+2CklUPdKBXWhPHQxquvLGiPYk1s6UWdQYR3YtneHRMuCp+0zc9yNjHYBzoSylMIECO0UPH+SdccguA==}
-    dependencies:
-      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify-json/carbon/1.1.13:
@@ -6848,7 +6842,7 @@ packages:
   /mlly/0.5.16:
     resolution: {integrity: sha512-LaJ8yuh4v0zEmge/g3c7jjFlhoCPfQn6RCjXgm9A0Qiuochq4BcuOxVfWmdnCoLTlg2MV+hqhOek+W2OhG0Lwg==}
     dependencies:
-      acorn: 8.8.0
+      acorn: 8.8.1
       pathe: 0.3.9
       pkg-types: 0.3.5
       ufo: 0.8.6
@@ -6860,7 +6854,7 @@ packages:
       acorn: 8.8.1
       pathe: 1.0.0
       pkg-types: 1.0.1
-      ufo: 1.0.0
+      ufo: 1.0.1
     dev: true
 
   /mp4-box-encoding/1.4.1:
@@ -8576,10 +8570,6 @@ packages:
 
   /ufo/0.8.6:
     resolution: {integrity: sha512-fk6CmUgwKCfX79EzcDQQpSCMxrHstvbLswFChHS0Vump+kFkw7nJBfTZoC1j0bOGoY9I7R3n2DGek5ajbcYnOw==}
-    dev: true
-
-  /ufo/1.0.0:
-    resolution: {integrity: sha512-DRty0ZBNlJ2R59y4mEupJRKLbkLQsc4qtxjpQv78AwEDuBkaUogMc2LkeqW3HddFlw6NwnXYfdThEZOiNgkmmQ==}
     dev: true
 
   /ufo/1.0.1:
