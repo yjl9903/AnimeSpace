@@ -1,6 +1,6 @@
 {
   "name": "@animepaste/functions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "devDependencies": {
     "vite-plugin-cloudflare-functions": "^0.4.0"
