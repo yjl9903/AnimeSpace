@@ -9,7 +9,7 @@ importers:
       optc: latest
       prettier: latest
       turbo: latest
-      typescript: ^4.9.3
+      typescript: ^4.9.4
       vite: ^4.0.4
       vitest: ^0.25.2
     devDependencies:
@@ -18,7 +18,7 @@ importers:
       optc: 0.5.3
       prettier: 2.8.1
       turbo: 1.6.3
-      typescript: 4.9.3
+      typescript: 4.9.4
       vite: 4.0.4_@types+node@18.11.18
       vitest: 0.25.2
 
@@ -79,7 +79,7 @@ importers:
       pinia: ^2.0.28
       plyr: ^3.7.3
       scrollreveal: ^4.0.9
-      typescript: ^4.9.3
+      typescript: ^4.9.4
       unocss: ^0.48.0
       unplugin-auto-import: 0.12.1
       unplugin-vue-components: ^0.22.12
@@ -104,7 +104,7 @@ importers:
       axios: 1.2.2
       date-fns: 2.29.3
       nprogress: 0.2.0
-      pinia: 2.0.28_mgnvym7yiazkylwwogi5r767ue
+      pinia: 2.0.28_prq2uz4lho2pwp6irk4cfkrxwu
       plyr: 3.7.3
       scrollreveal: 4.0.9
       vue: 3.2.45
@@ -122,7 +122,7 @@ importers:
       '@vitejs/plugin-vue': 4.0.0_vite@4.0.4+vue@3.2.45
       bangumi-data: 0.3.106
       cross-env: 7.0.3
-      typescript: 4.9.3
+      typescript: 4.9.4
       unocss: 0.48.0_vite@4.0.4
       unplugin-auto-import: 0.12.1_@vueuse+core@9.10.0
       unplugin-vue-components: 0.22.12_vue@3.2.45
@@ -134,7 +134,7 @@ importers:
       vite-plugin-pwa: 0.14.1_aln3rhi4rqbizqxdkcc2hwlswu
       vite-ssg: 0.22.1_dqlrgv66en56hcbzuizlxorhk4
       vitest: 0.26.3
-      vue-tsc: 1.0.20_typescript@4.9.3
+      vue-tsc: 1.0.20_typescript@4.9.4
       workbox-window: 6.5.4
       wrangler: 2.6.2
 
@@ -6814,7 +6814,7 @@ packages:
     hasBin: true
     dev: true
 
-  /mkdist/1.0.0_typescript@4.9.3:
+  /mkdist/1.0.0_typescript@4.9.4:
     resolution: {integrity: sha512-aJke+yvXwwcrOh+3KfAdDgDA+MPe7c+R8hQ7IPfp0gqL1/WPZZUS9rwS6CNjdwDJmHm6DTMA9KwX1FNjZG3I1Q==}
     hasBin: true
     peerDependencies:
@@ -6833,7 +6833,7 @@ packages:
       jiti: 1.16.0
       mri: 1.2.0
       pathe: 1.0.0
-      typescript: 4.9.3
+      typescript: 4.9.4
     dev: true
 
   /mlly/0.5.16:
@@ -7340,7 +7340,7 @@ packages:
     resolution: {integrity: sha512-dBILiDmm43y0JPISWEmVGKBETQjwJe6mSU9GND+P9KW0SJGUwoU/odyH1nbalOP9i8WSYuqf1lQnaj92Bhw+Ug==}
     dev: false
 
-  /pinia/2.0.28_mgnvym7yiazkylwwogi5r767ue:
+  /pinia/2.0.28_prq2uz4lho2pwp6irk4cfkrxwu:
     resolution: {integrity: sha512-YClq9DkqCblq9rlyUual7ezMu/iICWdBtfJrDt4oWU9Zxpijyz7xB2xTwx57DaBQ96UGvvTMORzALr+iO5PVMw==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
@@ -7353,7 +7353,7 @@ packages:
         optional: true
     dependencies:
       '@vue/devtools-api': 6.4.5
-      typescript: 4.9.3
+      typescript: 4.9.4
       vue: 3.2.45
       vue-demi: 0.13.1_vue@3.2.45
     dev: false
@@ -7730,7 +7730,7 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rollup-plugin-dts/5.0.0_6d5azzlhbdljnhqkl6qv6huqsy:
+  /rollup-plugin-dts/5.0.0_esmavzhadgk2idmxtiodxm33ma:
     resolution: {integrity: sha512-OO8ayCvuJCKaQSShyVTARxGurVVk4ulzbuvz+0zFd1f93vlnWFU5pBMT7HFeS6uj7MvvZLx4kUAarGATSU1+Ng==}
     engines: {node: '>=v14'}
     peerDependencies:
@@ -7739,7 +7739,7 @@ packages:
     dependencies:
       magic-string: 0.26.7
       rollup: 3.9.1
-      typescript: 4.9.3
+      typescript: 4.9.4
     optionalDependencies:
       '@babel/code-frame': 7.18.6
     dev: true
@@ -8560,8 +8560,8 @@ packages:
       mime-types: 2.1.35
     dev: true
 
-  /typescript/4.9.3:
-    resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
+  /typescript/4.9.4:
+    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
 
@@ -8613,7 +8613,7 @@ packages:
       jiti: 1.16.0
       magic-string: 0.27.0
       mkdirp: 1.0.4
-      mkdist: 1.0.0_typescript@4.9.3
+      mkdist: 1.0.0_typescript@4.9.4
       mlly: 1.0.0
       mri: 1.2.0
       pathe: 1.0.0
@@ -8621,9 +8621,9 @@ packages:
       pretty-bytes: 6.0.0
       rimraf: 3.0.2
       rollup: 3.9.1
-      rollup-plugin-dts: 5.0.0_6d5azzlhbdljnhqkl6qv6huqsy
+      rollup-plugin-dts: 5.0.0_esmavzhadgk2idmxtiodxm33ma
       scule: 1.0.0
-      typescript: 4.9.3
+      typescript: 4.9.4
       untyped: 1.0.0
     transitivePeerDependencies:
       - sass
@@ -9487,7 +9487,7 @@ packages:
       he: 1.2.0
     dev: true
 
-  /vue-tsc/1.0.20_typescript@4.9.3:
+  /vue-tsc/1.0.20_typescript@4.9.4:
     resolution: {integrity: sha512-AApewYXozAD7v4Iz9I0QzQebSVgvlUvpfbGe2e9TwtBdcw5gBsGiX8Oj5BdxRRiGnOdDG3BHPK8msl7Qhmy/1A==}
     hasBin: true
     peerDependencies:
@@ -9495,7 +9495,7 @@ packages:
     dependencies:
       '@volar/vue-language-core': 1.0.20
       '@volar/vue-typescript': 1.0.20
-      typescript: 4.9.3
+      typescript: 4.9.4
     dev: true
 
   /vue/3.2.33:
