@@ -222,17 +222,17 @@ importers:
 
   packages/database:
     specifiers:
-      '@prisma/client': ^4.8.0
+      '@prisma/client': ^4.8.1
       axios: ^1.2.2
       cnchar: ^3.2.2
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.3
       debug: ^4.3.4
       node-html-parser: ^6.1.4
-      prisma: ^4.8.0
+      prisma: ^4.8.1
       unbuild: ^1.0.2
     dependencies:
-      '@prisma/client': 4.8.0_prisma@4.8.0
+      '@prisma/client': 4.8.1_prisma@4.8.1
       axios: 1.2.2_debug@4.3.4
       cnchar: 3.2.2
       cnchar-trad: 3.2.2
@@ -240,7 +240,7 @@ importers:
       debug: 4.3.4
       node-html-parser: 6.1.4
     devDependencies:
-      prisma: 4.8.0
+      prisma: 4.8.1
       unbuild: 1.0.2
 
   packages/functions:
@@ -2254,8 +2254,8 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@prisma/client/4.8.0_prisma@4.8.0:
-    resolution: {integrity: sha512-Y1riB0p2W52kh3zgssP/YAhln3RjBFcJy3uwEiyjmU+TQYh6QTZDRFBo3JtBWuq2FyMOl1Rye8jxzUP+n0l5Cg==}
+  /@prisma/client/4.8.1_prisma@4.8.1:
+    resolution: {integrity: sha512-d4xhZhETmeXK/yZ7K0KcVOzEfI5YKGGEr4F5SBV04/MU4ncN/HcE28sy3e4Yt8UFW0ZuImKFQJE+9rWt9WbGSQ==}
     engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
@@ -2265,15 +2265,15 @@ packages:
         optional: true
     dependencies:
       '@prisma/engines-version': 4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe
-      prisma: 4.8.0
+      prisma: 4.8.1
     dev: false
 
   /@prisma/engines-version/4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe:
     resolution: {integrity: sha512-MHSOSexomRMom8QN4t7bu87wPPD+pa+hW9+71JnVcF3DqyyO/ycCLhRL1we3EojRpZxKvuyGho2REQsMCvxcJw==}
     dev: false
 
-  /@prisma/engines/4.8.0:
-    resolution: {integrity: sha512-A1Asn2rxZMlLAj1HTyfaCv0VQrLUv034jVay05QlqZg1qiHPeA3/pGTfNMijbsMYCsGVxfWEJuaZZuNxXGMCrA==}
+  /@prisma/engines/4.8.1:
+    resolution: {integrity: sha512-93tctjNXcIS+i/e552IO6tqw17sX8liivv8WX9lDMCpEEe3ci+nT9F+1oHtAafqruXLepKF80i/D20Mm+ESlOw==}
     requiresBuild: true
 
   /@rollup/plugin-alias/4.0.2_rollup@3.9.1:
@@ -7161,13 +7161,13 @@ packages:
     engines: {node: ^14.13.1 || >=16.0.0}
     dev: true
 
-  /prisma/4.8.0:
-    resolution: {integrity: sha512-DWIhxvxt8f4h6MDd35mz7BJff+fu7HItW3WPDIEpCR3RzcOWyiHBbLQW5/DOgmf+pRLTjwXQob7kuTZVYUAw5w==}
+  /prisma/4.8.1:
+    resolution: {integrity: sha512-ZMLnSjwulIeYfaU1O6/LF6PEJzxN5par5weykxMykS9Z6ara/j76JH3Yo2AH3bgJbPN4Z6NeCK9s5fDkzf33cg==}
     engines: {node: '>=14.17'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 4.8.0
+      '@prisma/engines': 4.8.1
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
