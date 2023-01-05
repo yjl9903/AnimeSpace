@@ -30,7 +30,7 @@
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.2",
     "@types/scrollreveal": "^0.0.8",
-    "@unocss/reset": "^0.46.5",
+    "@unocss/reset": "^0.48.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "bangumi-data": "^0.3.106",
     "cross-env": "^7.0.3",
@@ -46,7 +46,7 @@
     "vite-plugin-pwa": "^0.14.1",
     "vite-ssg": "^0.22.1",
     "vitest": "^0.26.3",
-    "vue-tsc": "^1.0.20",
+    "vue-tsc": "^1.0.22",
     "workbox-window": "^6.5.4",
     "wrangler": "^2.6.2"
   },
