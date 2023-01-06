@@ -74,7 +74,7 @@
     "@types/fs-extra": "^9.0.13",
     "@types/js-yaml": "^4.0.5",
     "@types/webtorrent": "^0.109.3",
-    "bangumi-data": "^0.3.106",
+    "bangumi-data": "^0.3.107",
     "optc": "^0.5.3",
     "unbuild": "^1.0.2"
   },
