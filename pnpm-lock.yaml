@@ -67,7 +67,7 @@ importers:
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.2
       '@types/scrollreveal': ^0.0.8
-      '@unocss/reset': ^0.48.0
+      '@unocss/reset': ^0.48.2
       '@vitejs/plugin-vue': ^4.0.0
       '@vueuse/core': ^9.10.0
       '@vueuse/head': ^1.0.22
@@ -118,7 +118,7 @@ importers:
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.2
       '@types/scrollreveal': 0.0.8
-      '@unocss/reset': 0.48.0
+      '@unocss/reset': 0.48.2
       '@vitejs/plugin-vue': 4.0.0_vite@4.0.4+vue@3.2.45
       bangumi-data: 0.3.107
       cross-env: 7.0.3
