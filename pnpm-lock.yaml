@@ -27,7 +27,7 @@ importers:
       '@algolia/client-search': ^4.14.3
       '@iconify-json/carbon': ^1.1.13
       '@types/node': ^18.11.18
-      '@unocss/reset': ^0.48.0
+      '@unocss/reset': ^0.48.2
       '@vitejs/plugin-vue': ^4.0.0
       '@vueuse/core': ^9.10.0
       fast-glob: ^3.2.12
@@ -46,7 +46,7 @@ importers:
       '@algolia/client-search': 4.14.3
       '@iconify-json/carbon': 1.1.13
       '@types/node': 18.11.18
-      '@unocss/reset': 0.48.0
+      '@unocss/reset': 0.48.2
       '@vitejs/plugin-vue': 4.0.0_vite@4.0.4+vue@3.2.45
       fast-glob: 3.2.12
       https-localhost: 4.7.1
@@ -2736,10 +2736,6 @@ packages:
     dependencies:
       '@unocss/core': 0.48.2
       '@unocss/preset-mini': 0.48.2
-    dev: true
-
-  /@unocss/reset/0.48.0:
-    resolution: {integrity: sha512-i7z6Rbs7fXFD3NdlVJViFltpDJUCo5xDm5y01Xaoa4mJQHr/1335Ht0JW/emAJXf170UYSwb2rUeK1J3fty9eg==}
     dev: true
 
   /@unocss/reset/0.48.2:
