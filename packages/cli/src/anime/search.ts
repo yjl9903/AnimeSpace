@@ -188,6 +188,8 @@ async function outputPlan(
   logger.empty();
   logger.println(`state: onair`);
   logger.empty();
+  logger.println(`sync: true`);
+  logger.empty();
   logger.println(`onair:`);
 
   for (const anime of animes) {
