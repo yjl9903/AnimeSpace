@@ -86,7 +86,7 @@ importers:
       vite: ^4.0.4
       vite-plugin-cloudflare-functions: ^0.4.0
       vite-plugin-info: ^0.4.0
-      vite-plugin-inspect: ^0.7.12
+      vite-plugin-inspect: ^0.7.14
       vite-plugin-pages: ^0.28.0
       vite-plugin-pwa: ^0.14.1
       vite-ssg: ^0.22.1
@@ -129,7 +129,7 @@ importers:
       vite: 4.0.4_@types+node@18.11.18
       vite-plugin-cloudflare-functions: 0.4.0_e2k5adxwoy4txwo42t6ldzybve
       vite-plugin-info: 0.4.0_vite@4.0.4
-      vite-plugin-inspect: 0.7.12_vite@4.0.4
+      vite-plugin-inspect: 0.7.14_vite@4.0.4
       vite-plugin-pages: 0.28.0_vite@4.0.4
       vite-plugin-pwa: 0.14.1_aln3rhi4rqbizqxdkcc2hwlswu
       vite-ssg: 0.22.1_dqlrgv66en56hcbzuizlxorhk4
@@ -7837,6 +7837,7 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    deprecated: Please use @jridgewell/sourcemap-codec instead
 
   /spdy-transport/3.0.0:
     resolution: {integrity: sha512-hsLVFE5SjA6TCisWeJXFKniGGOpBgMLmerfO2aCyCU5s7nJ/rpAepqmFifv/GCbSbueEeAJJnmSQ2rKC/g8Fcw==}
@@ -8823,12 +8824,13 @@ packages:
       vite: 4.0.4_@types+node@18.11.18
     dev: true
 
-  /vite-plugin-inspect/0.7.12_vite@4.0.4:
-    resolution: {integrity: sha512-hI093vkhCVkDW9rnss+iJZ6mgCKKIZNcV0QJ2qnfzn15s67+WQcKK5byBTZEbfx2MBzMJInYsQfWiLdScgneIg==}
+  /vite-plugin-inspect/0.7.14_vite@4.0.4:
+    resolution: {integrity: sha512-C9V93Yy2yUf941oVxIq93K6T1o0SZxoG8MdmyJsnoNDijOAGHT1rVSVjzF/uKFYvgnvLvaXioaoy6ica6aOS0g==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
     dependencies:
+      '@antfu/utils': 0.7.2
       '@rollup/pluginutils': 5.0.2
       debug: 4.3.4
       fs-extra: 11.1.0
