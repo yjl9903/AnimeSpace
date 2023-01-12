@@ -91,7 +91,7 @@
   "devDependencies": {
     "bangumi-data": "^0.3.108",
     "date-fns": "^2.29.3",
-    "optc": "^0.5.3",
+    "optc": "^0.5.6",
     "unbuild": "^1.0.2",
     "vite": "^4.0.4"
   },
