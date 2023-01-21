@@ -25,7 +25,7 @@ importers:
   docs:
     specifiers:
       '@algolia/client-search': ^4.14.3
-      '@iconify-json/carbon': ^1.1.13
+      '@iconify-json/carbon': ^1.1.14
       '@types/node': ^18.11.18
       '@unocss/reset': ^0.48.4
       '@vitejs/plugin-vue': ^4.0.0
@@ -44,7 +44,7 @@ importers:
       vue: 3.2.45
     devDependencies:
       '@algolia/client-search': 4.14.3
-      '@iconify-json/carbon': 1.1.13
+      '@iconify-json/carbon': 1.1.14
       '@types/node': 18.11.18
       '@unocss/reset': 0.48.4
       '@vitejs/plugin-vue': 4.0.0_vite@4.0.4+vue@3.2.45
@@ -60,7 +60,7 @@ importers:
   packages/app:
     specifiers:
       '@animepaste/bangumi': workspace:*
-      '@iconify-json/carbon': ^1.1.13
+      '@iconify-json/carbon': ^1.1.14
       '@iconify-json/ic': ^1.1.12
       '@iconify-json/mdi': ^1.1.43
       '@types/node': ^18.11.18
@@ -111,7 +111,7 @@ importers:
       vue-router: 4.1.6_vue@3.2.45
       vue-scrollto: 2.20.0
     devDependencies:
-      '@iconify-json/carbon': 1.1.13
+      '@iconify-json/carbon': 1.1.14
       '@iconify-json/ic': 1.1.12
       '@iconify-json/mdi': 1.1.43
       '@types/node': 18.11.18
@@ -2079,8 +2079,8 @@ packages:
     resolution: {integrity: sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==}
     dev: true
 
-  /@iconify-json/carbon/1.1.13:
-    resolution: {integrity: sha512-qPR7n3JkCqIrvjxnyUPIejhn0wrZJsLmija59U/zwFm5SMOITCfLx+Jp6VecnL0Sm76zRE5Kv54VzolQljB97A==}
+  /@iconify-json/carbon/1.1.14:
+    resolution: {integrity: sha512-Md5Vh3x2ALI5shFHlqZQBpEBk0coZf8bcFqzZBqf3bZuUTDg78y9vkwhQ+0PF1Q3wmZIfwkSJU9Pf6V228pXxw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
