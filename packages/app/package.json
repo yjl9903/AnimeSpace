@@ -23,20 +23,20 @@
     "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
-    "@iconify-json/carbon": "^1.1.13",
+    "@iconify-json/carbon": "^1.1.14",
     "@iconify-json/ic": "^1.1.12",
-    "@iconify-json/mdi": "^1.1.41",
+    "@iconify-json/mdi": "^1.1.44",
     "@types/node": "^18.11.18",
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.2",
     "@types/scrollreveal": "^0.0.8",
-    "@unocss/reset": "^0.48.3",
+    "@unocss/reset": "^0.49.0",
     "@vitejs/plugin-vue": "^4.0.0",
-    "bangumi-data": "^0.3.108",
+    "bangumi-data": "^0.3.109",
     "cross-env": "^7.0.3",
     "typescript": "^4.9.4",
-    "unocss": "^0.48.3",
-    "unplugin-auto-import": "0.12.1",
+    "unocss": "^0.49.0",
+    "unplugin-auto-import": "0.12.2",
     "unplugin-vue-components": "^0.22.12",
     "vite": "^4.0.4",
     "vite-plugin-cloudflare-functions": "^0.4.0",
@@ -45,10 +45,10 @@
     "vite-plugin-pages": "^0.28.0",
     "vite-plugin-pwa": "^0.14.1",
     "vite-ssg": "^0.22.1",
-    "vitest": "^0.27.0",
+    "vitest": "^0.28.2",
     "vue-tsc": "^1.0.24",
     "workbox-window": "^6.5.4",
-    "wrangler": "^2.7.1"
+    "wrangler": "^2.8.1"
   },
   "engines": {
     "node": ">=v16.0.0"

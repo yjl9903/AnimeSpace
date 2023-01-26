@@ -29,9 +29,9 @@
     "turbo": "latest",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
-    "vitest": "^0.27.0"
+    "vitest": "^0.28.2"
   },
-  "packageManager": "pnpm@7.23.0",
+  "packageManager": "pnpm@7.26.0",
   "engines": {
     "node": ">=v16.0.0"
   }
