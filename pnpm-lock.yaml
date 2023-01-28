@@ -36,7 +36,7 @@ importers:
       unplugin-vue-components: ^0.23.0
       vite: ^4.0.4
       vite-plugin-pwa: ^0.14.1
-      vitepress: ^1.0.0-alpha.40
+      vitepress: ^1.0.0-alpha.41
       vue: ^3.2.45
       workbox-window: ^6.5.4
     dependencies:
@@ -3851,7 +3851,7 @@ packages:
       fast-glob: 3.2.12
       kleur: 4.1.4
       prompts: 2.4.2
-      semver: 7.3.7
+      semver: 7.3.8
     dev: true
 
   /busboy/1.6.0:
@@ -7678,14 +7678,6 @@ packages:
   /semver/7.0.0:
     resolution: {integrity: sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==}
     hasBin: true
-    dev: true
-
-  /semver/7.3.7:
-    resolution: {integrity: sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
     dev: true
 
   /semver/7.3.8:
