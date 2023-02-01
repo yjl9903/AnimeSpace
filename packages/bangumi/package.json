@@ -89,14 +89,14 @@
     "debug": "^4.3.4"
   },
   "devDependencies": {
-    "bangumi-data": "^0.3.109",
+    "bangumi-data": "^0.3.110",
     "date-fns": "^2.29.3",
     "optc": "^0.5.7",
     "unbuild": "^1.1.1",
     "vite": "^4.0.4"
   },
   "peerDependencies": {
-    "bangumi-data": "^0.3.109",
+    "bangumi-data": "^0.3.110",
     "vite": "^2.9.14 || ^3.0.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
