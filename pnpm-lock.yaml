@@ -72,7 +72,7 @@ importers:
       '@vueuse/core': ^9.10.0
       '@vueuse/head': ^1.0.22
       axios: ^1.2.2
-      bangumi-data: ^0.3.109
+      bangumi-data: ^0.3.110
       cross-env: ^7.0.3
       date-fns: ^2.29.3
       nprogress: ^0.2.0
@@ -120,7 +120,7 @@ importers:
       '@types/scrollreveal': 0.0.8
       '@unocss/reset': 0.49.2
       '@vitejs/plugin-vue': 4.0.0_vite@4.0.4+vue@3.2.45
-      bangumi-data: 0.3.109
+      bangumi-data: 0.3.110
       cross-env: 7.0.3
       typescript: 4.9.5
       unocss: 0.49.2_vite@4.0.4
@@ -141,7 +141,7 @@ importers:
   packages/bangumi:
     specifiers:
       axios: ^1.2.2
-      bangumi-data: ^0.3.109
+      bangumi-data: ^0.3.110
       breadc: ^0.6.6
       date-fns: ^2.29.3
       debug: ^4.3.4
@@ -153,7 +153,7 @@ importers:
       breadc: 0.6.6
       debug: 4.3.4
     devDependencies:
-      bangumi-data: 0.3.109
+      bangumi-data: 0.3.110
       date-fns: 2.29.3
       optc: 0.5.7
       unbuild: 1.1.1
@@ -173,7 +173,7 @@ importers:
       '@types/webtorrent': ^0.109.3
       ali-oss: ^6.17.1
       axios: ^1.2.2
-      bangumi-data: ^0.3.109
+      bangumi-data: ^0.3.110
       breadc: ^0.6.6
       cli-progress: ^3.11.2
       date-fns: ^2.29.3
@@ -216,7 +216,7 @@ importers:
       '@types/fs-extra': 11.0.1
       '@types/js-yaml': 4.0.5
       '@types/webtorrent': 0.109.3
-      bangumi-data: 0.3.109
+      bangumi-data: 0.3.110
       optc: 0.5.7
       unbuild: 1.1.1
 
@@ -3578,8 +3578,8 @@ packages:
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  /bangumi-data/0.3.109:
-    resolution: {integrity: sha512-bnAKFGyHAybnq5V/lp5EQTN5Ewz0UZrBxWUYtRGa+4hPkgD9CxNAnFTZKytukbDJUPx7wNAUYUwEU/HTJxCZOQ==}
+  /bangumi-data/0.3.110:
+    resolution: {integrity: sha512-/eAH4+cMrncsRMjm3SCYjvtPxm9DGfhFIYFoK7nMcIMzVIiSpUQfzfDeNjVC1jB1i+s0tVNSzSnqGuEqeHUSdw==}
     dev: true
 
   /base64-js/1.5.1:
