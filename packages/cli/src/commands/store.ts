@@ -23,7 +23,7 @@ import { promptConfirm } from './utils';
 export default function setup() {
   app
     .command('store list [name]', 'List all uploaded video info')
-    // .alias('store ls')
+    .alias('store ls')
     .action(async (name) => {
       const { useStore } = await import('../io');
       const store = await useStore('ali')();
@@ -80,7 +80,7 @@ export default function setup() {
 
   app
     .command('store remove [...ids]', 'Remove video info on OSS')
-    // .alias('store rm')
+    .alias('store rm')
     .option('-y, --yes', 'Disable prompt')
     .option('--local', 'Remove local videos')
     .action(async (ids, option) => {

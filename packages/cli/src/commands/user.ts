@@ -31,7 +31,7 @@ export default function setup() {
 
   app
     .command('user list', 'List user tokens')
-    // .alias('user ls')
+    .alias('user ls')
     .action(async () => {
       const { RemoteSyncClient: UserClient } = await import('../client');
       const client = await UserClient.create();
