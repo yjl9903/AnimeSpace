@@ -85,7 +85,7 @@
   },
   "dependencies": {
     "axios": "^1.2.2",
-    "breadc": "^0.8.1",
+    "breadc": "^0.8.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

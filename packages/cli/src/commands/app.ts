@@ -9,9 +9,9 @@ const app = breadc('anime', {
   plugins: [
     {
       onPreCommand: {
-        '*': async () => {
+        '*': async (result) => {
           // await context.init(option);
-          await context.init({ force: false });
+          await context.init({ force: result.options.force ?? false });
         }
       }
     }
