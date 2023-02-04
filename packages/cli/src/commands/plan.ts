@@ -14,10 +14,9 @@ import { promptConfirm } from './utils';
 export default function setup() {
   app
     .command('watch', 'Watch anime resources update')
-    .option('-i, --interval [duration]', 'Damon interval in minutes', {
-      construct(t) {
-        return t ? +t : 10;
-      }
+    .option('-i, --interval <duration>', 'Damon interval in minutes', {
+      default: '10',
+      cast: (t) => +t
     })
     .option('-o, --once', 'Just do an immediate update')
     .option('--index', 'Enable index resource', { default: true })
@@ -52,7 +51,7 @@ export default function setup() {
 
   app
     .command('plan download <anime>', 'Download remote videos from OSS')
-    .alias('plan down')
+    // .alias('plan down')
     .option('--id', 'Use bgmId instead of name')
     .action(async (name, option) => {
       const { Plan } = await import('../daemon');
@@ -135,8 +134,9 @@ export default function setup() {
 
   app
     .command('search [anime]', 'Search Bangumi resources')
-    .option('--type [type]', {
-      construct(t) {
+    .option('--type <type>', {
+      default: 'tv',
+      cast(t) {
         if (t && ['tv', 'web', 'movie', 'ova'].includes(t)) {
           return t as AnimeType;
         } else {
@@ -146,8 +146,8 @@ export default function setup() {
     })
     .option('--raw', 'Print raw magnets')
     .option('--index', 'Index magnet database')
-    .option('--year [year]')
-    .option('--month [month]')
+    .option('--year <year>')
+    .option('--month <month>')
     .option('-p, --plan', 'Output plan.yaml')
     .action(async (anime, option) => {
       const { userSearch } = await import('../anime');

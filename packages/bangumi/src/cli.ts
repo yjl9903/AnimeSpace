@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import Breadc from 'breadc';
+import { breadc } from 'breadc';
 
 import type { ExtendBangumi, BangumiType } from './core/types';
 
@@ -12,14 +12,15 @@ const version = JSON.parse(
     'utf-8'
   )
 ).version;
-const bangumi = Breadc('bangumi', { version });
+
+const bangumi = breadc('bangumi', { version });
 
 bangumi
-  .command('[output]')
-  .option('--begin [begin]', 'Begin date')
-  .option('--end [end]', 'End date')
-  .option('--type [type]', 'Filter bangumi types')
-  .option('--fields [fileds]', 'Enable extension fields')
+  .command('<output>')
+  .option('--begin <begin>', 'Begin date')
+  .option('--end <end>', 'End date')
+  .option('--type <type>', 'Filter bangumi types')
+  .option('--fields <fileds>', 'Enable extension fields')
   .option('--compress', 'Enable compress')
   .action(async (name, option) => {
     const { transform } = await import('./transform');
@@ -27,8 +28,8 @@ bangumi
     const data = await transform({
       begin: option.begin,
       end: option.end,
-      type: option.type?.split(',') as BangumiType[],
-      fields: option.fields?.split(',') as Array<keyof ExtendBangumi>,
+      type: option.type.split(',') as BangumiType[],
+      fields: option.fields.split(',') as Array<keyof ExtendBangumi>,
       compress: option.compress
     });
 
@@ -48,6 +49,4 @@ bangumi
     );
   });
 
-bangumi
-  .run(process.argv.slice(2))
-  .catch((err) => bangumi.logger.error(err.message));
+bangumi.run(process.argv.slice(2)).catch((err) => console.error(err));

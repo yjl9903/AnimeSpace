@@ -7,8 +7,8 @@ import { app } from './app';
 export default function setup() {
   app
     .command('user create', 'Create a new token')
-    .option('--comment [comment]', 'Comment of the new token')
-    .option('--type [type]', 'One of admin or user')
+    .option('--comment <comment>', 'Comment of the new token')
+    .option('--type <type>', 'One of admin or user')
     .action(async (option) => {
       const { RemoteSyncClient: UserClient } = await import('../client');
       const client = await UserClient.create();
@@ -31,7 +31,7 @@ export default function setup() {
 
   app
     .command('user list', 'List user tokens')
-    .alias('user ls')
+    // .alias('user ls')
     .action(async () => {
       const { RemoteSyncClient: UserClient } = await import('../client');
       const client = await UserClient.create();
@@ -55,7 +55,7 @@ export default function setup() {
 
   app
     .command('user remove [token]', 'Remove user tokens')
-    .alias('user rm')
+    // .alias('user rm')
     .option('--visitor', 'Clear all the visitor tokens')
     .action(async (token, option) => {
       const { RemoteSyncClient: UserClient } = await import('../client');
