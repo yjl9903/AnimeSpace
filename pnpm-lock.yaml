@@ -142,7 +142,7 @@ importers:
     specifiers:
       axios: ^1.2.2
       bangumi-data: ^0.3.110
-      breadc: ^0.8.2
+      breadc: ^0.8.3
       date-fns: ^2.29.3
       debug: ^4.3.4
       optc: ^0.5.7
@@ -150,7 +150,7 @@ importers:
       vite: ^4.0.4
     dependencies:
       axios: 1.2.2_debug@4.3.4
-      breadc: 0.8.2
+      breadc: 0.8.3
       debug: 4.3.4
     devDependencies:
       bangumi-data: 0.3.110
@@ -174,7 +174,7 @@ importers:
       ali-oss: ^6.17.1
       axios: ^1.2.2
       bangumi-data: ^0.3.110
-      breadc: ^0.8.2
+      breadc: ^0.8.3
       cli-progress: ^3.11.2
       date-fns: ^2.29.3
       death: ^1.1.0
@@ -195,7 +195,7 @@ importers:
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
       axios: 1.2.2_debug@4.3.4
-      breadc: 0.8.2
+      breadc: 0.8.3
       cli-progress: 3.11.2
       date-fns: 2.29.3
       death: 1.1.0
@@ -1613,8 +1613,8 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@breadc/color/0.8.2:
-    resolution: {integrity: sha512-sHlTCI5Zo5jTSnWagLhHvU+sjgFvDGU5mQSrdjVOiR2OCiQllB4HKBEgoq/Y+DfIMU2+CyK0/PNi45RTF5ye+A==}
+  /@breadc/color/0.8.3:
+    resolution: {integrity: sha512-1/8xrOuvD1Gb6SOxER4L00cBOksUF/r0ssr8dgQfpmATWgaf4LG5iQDsX7Dv2uLDaUvzT/zlHeY6cgK0AkakJg==}
     dev: false
 
   /@cloudflare/kv-asset-handler/0.2.0:
@@ -3774,10 +3774,10 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /breadc/0.8.2:
-    resolution: {integrity: sha512-SwyHoINoiPLNNUCthCE8hkHukw9QnWFpEVGqk60e2dr5JAwOnQylPXVDK+i66GlfNy+uGiztM2Dd1CwG0ngjSg==}
+  /breadc/0.8.3:
+    resolution: {integrity: sha512-cwQ9mw2ZqE24gaMUYNywndVX3PUM/aBpCs7wcyriSs6H5+9daSApRiTQEFsyXDFmMqEe4gUctmI+eTwc7ZucHw==}
     dependencies:
-      '@breadc/color': 0.8.2
+      '@breadc/color': 0.8.3
     dev: false
 
   /browserify-package-json/1.0.1:

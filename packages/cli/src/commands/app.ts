@@ -10,7 +10,6 @@ const app = breadc('anime', {
     {
       onPreCommand: {
         '*': async (result) => {
-          // await context.init(option);
           await context.init({ force: result.options.force ?? false });
         }
       }

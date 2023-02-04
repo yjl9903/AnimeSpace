@@ -51,7 +51,7 @@ export default function setup() {
 
   app
     .command('plan download <anime>', 'Download remote videos from OSS')
-    // .alias('plan down')
+    .alias('plan down')
     .option('--id', 'Use bgmId instead of name')
     .action(async (name, option) => {
       const { Plan } = await import('../daemon');

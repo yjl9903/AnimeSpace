@@ -12,7 +12,7 @@ const PAGE_SIZE = 80;
 export default function setup() {
   app
     .command('magnet index', 'Index magnet database')
-    // .alias('index')
+    .alias('index')
     .option('--limit <date>', 'Stop at this date')
     .option('--page <page>', 'Start indexing at this page', {
       default: '1',
@@ -31,7 +31,7 @@ export default function setup() {
 
   app
     .command('magnet list <keyword/page>', 'List magnet resource')
-    // .alias('magnet ls')
+    .alias('magnet ls')
     .action(async (keyword) => {
       const match = NUM_RE.exec(keyword);
       const magnets = match
