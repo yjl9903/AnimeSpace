@@ -52,7 +52,7 @@
     "@animepaste/database": "workspace:*",
     "ali-oss": "^6.17.1",
     "axios": "^1.2.2",
-    "breadc": "^0.6.6",
+    "breadc": "^0.8.2",
     "cli-progress": "^3.11.2",
     "date-fns": "^2.29.3",
     "death": "^1.1.0",
@@ -74,7 +74,7 @@
     "@types/fs-extra": "^11.0.1",
     "@types/js-yaml": "^4.0.5",
     "@types/webtorrent": "^0.109.3",
-    "bangumi-data": "^0.3.109",
+    "bangumi-data": "^0.3.110",
     "optc": "^0.5.7",
     "unbuild": "^1.1.1"
   },

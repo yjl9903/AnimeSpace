@@ -120,8 +120,9 @@ export function printMagnets(magnets: Resource[], prefix = '  ') {
   }
 }
 
+// https://gist.github.com/shingchi/64c04e0dd2cbbfbc1350
 function calcLength(text: string) {
-  const RE = /[\u4e00-\u9fa5\uff00-\uffff]/;
+  const RE = /[\u4e00-\u9fa5\uff00-\uffff\u3000\u3000-\u303f]/;
   let sum = 0;
   for (const c of text) {
     sum += RE.test(c) ? 2 : 1;

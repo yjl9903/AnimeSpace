@@ -27,11 +27,11 @@
     "optc": "latest",
     "prettier": "latest",
     "turbo": "latest",
-    "typescript": "^4.9.4",
+    "typescript": "^4.9.5",
     "vite": "^4.0.4",
-    "vitest": "^0.28.2"
+    "vitest": "^0.28.3"
   },
-  "packageManager": "pnpm@7.26.0",
+  "packageManager": "pnpm@7.26.3",
   "engines": {
     "node": ">=v16.0.0"
   }

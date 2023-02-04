@@ -15,15 +15,15 @@
     "@algolia/client-search": "^4.14.3",
     "@iconify-json/carbon": "^1.1.14",
     "@types/node": "^18.11.18",
-    "@unocss/reset": "^0.49.0",
+    "@unocss/reset": "^0.49.2",
     "@vitejs/plugin-vue": "^4.0.0",
     "fast-glob": "^3.2.12",
     "https-localhost": "^4.7.1",
-    "unocss": "^0.49.0",
-    "unplugin-vue-components": "^0.22.12",
+    "unocss": "^0.49.2",
+    "unplugin-vue-components": "^0.23.0",
     "vite": "^4.0.4",
     "vite-plugin-pwa": "^0.14.1",
-    "vitepress": "^1.0.0-alpha.40",
+    "vitepress": "^1.0.0-alpha.45",
     "workbox-window": "^6.5.4"
   }
 }
