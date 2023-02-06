@@ -62,7 +62,7 @@ importers:
       '@animepaste/bangumi': workspace:*
       '@iconify-json/carbon': ^1.1.14
       '@iconify-json/ic': ^1.1.12
-      '@iconify-json/mdi': ^1.1.45
+      '@iconify-json/mdi': ^1.1.46
       '@types/node': ^18.11.19
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.2
@@ -113,7 +113,7 @@ importers:
     devDependencies:
       '@iconify-json/carbon': 1.1.14
       '@iconify-json/ic': 1.1.12
-      '@iconify-json/mdi': 1.1.45
+      '@iconify-json/mdi': 1.1.46
       '@types/node': 18.11.19
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.2
@@ -1897,8 +1897,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
-  /@iconify-json/mdi/1.1.45:
-    resolution: {integrity: sha512-2f4n7qEErLi7jIabpDuaqZ/1FcAN62z0pUY9BvCxOyU6IzqCF1N3trHEF10aHdUOyFZF9YVb2DCigkZrcvnaLw==}
+  /@iconify-json/mdi/1.1.46:
+    resolution: {integrity: sha512-1BGXzKpVRAgcDuoLGLvignvDXePiaGITbvQpfCi/C2FlhP9r9n0kPIyWVfjRYUYz4YzLnuDKr9YM0jIv9aus9A==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
