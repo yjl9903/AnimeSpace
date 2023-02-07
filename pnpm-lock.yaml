@@ -35,7 +35,7 @@ importers:
       unocss: ^0.49.4
       unplugin-vue-components: ^0.23.0
       vite: ^4.1.1
-      vite-plugin-pwa: ^0.14.1
+      vite-plugin-pwa: ^0.14.2
       vitepress: ^1.0.0-alpha.45
       vue: ^3.2.47
       workbox-window: ^6.5.4
@@ -53,7 +53,7 @@ importers:
       unocss: 0.49.4_vite@4.1.1
       unplugin-vue-components: 0.23.0_vue@3.2.47
       vite: 4.1.1_@types+node@18.13.0
-      vite-plugin-pwa: 0.14.1_xp2zqafvd45jbxqxxvnpcv3lzm
+      vite-plugin-pwa: 0.14.2_xp2zqafvd45jbxqxxvnpcv3lzm
       vitepress: 1.0.0-draft.8_2r467mdhb7mblpaox4bg7fatdi
       workbox-window: 6.5.4
 
@@ -88,7 +88,7 @@ importers:
       vite-plugin-info: ^0.4.0
       vite-plugin-inspect: ^0.7.15
       vite-plugin-pages: ^0.28.0
-      vite-plugin-pwa: ^0.14.1
+      vite-plugin-pwa: ^0.14.2
       vite-ssg: ^0.22.1
       vitest: ^0.28.4
       vue: ^3.2.47
@@ -131,7 +131,7 @@ importers:
       vite-plugin-info: 0.4.0_vite@4.1.1
       vite-plugin-inspect: 0.7.15_vite@4.1.1
       vite-plugin-pages: 0.28.0_vite@4.1.1
-      vite-plugin-pwa: 0.14.1_xp2zqafvd45jbxqxxvnpcv3lzm
+      vite-plugin-pwa: 0.14.2_xp2zqafvd45jbxqxxvnpcv3lzm
       vite-ssg: 0.22.1_7f7nm3os7xbpitv3i7ev4m4thm
       vitest: 0.28.4
       vue-tsc: 1.0.24_typescript@4.9.5
@@ -2544,20 +2544,6 @@ packages:
       rollup: 2.79.1
     dev: true
 
-  /@rollup/plugin-replace/5.0.1_rollup@3.9.1:
-    resolution: {integrity: sha512-Z3MfsJ4CK17BfGrZgvrcp/l6WXoKb0kokULO+zt/7bmcyayokDaQ2K3eDJcRLCTAlp5FPI4/gz9MHAsosz4Rag==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.9.1
-      magic-string: 0.26.7
-      rollup: 3.9.1
-    dev: true
-
   /@rollup/plugin-replace/5.0.2_rollup@3.10.0:
     resolution: {integrity: sha512-M9YXNekv/C/iHHK+cvORzfRYfPbq0RDD8r0G+bMiTXjNGKulPnCT9O3Ss46WfhI6ZOCgApOP7xAdmCQJ+U2LAA==}
     engines: {node: '>=14.0.0'}
@@ -2611,21 +2597,6 @@ packages:
       estree-walker: 2.0.2
       picomatch: 2.3.1
       rollup: 3.10.0
-    dev: true
-
-  /@rollup/pluginutils/5.0.2_rollup@3.9.1:
-    resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      '@types/estree': 1.0.0
-      estree-walker: 2.0.2
-      picomatch: 2.3.1
-      rollup: 3.9.1
     dev: true
 
   /@surma/rollup-plugin-off-main-thread/2.2.3:
@@ -3540,7 +3511,7 @@ packages:
   /babel-plugin-dynamic-import-node/2.3.3:
     resolution: {integrity: sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ==}
     dependencies:
-      object.assign: 4.1.2
+      object.assign: 4.1.4
     dev: true
 
   /babel-plugin-polyfill-corejs2/0.3.1_@babel+core@7.20.12:
@@ -3904,7 +3875,7 @@ packages:
     resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
     dependencies:
       function-bind: 1.1.1
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
 
   /call-me-maybe/1.0.1:
     resolution: {integrity: sha512-wCyFsDQkKPwwF8BDwOiWNx/9K45L/hvggQiDbve+viMNMQnWhrlYIuBk09offfwCRtCO9P6XwUttufzU11WCVw==}
@@ -4596,7 +4567,7 @@ packages:
       es-to-primitive: 1.2.1
       function-bind: 1.1.1
       function.prototype.name: 1.1.5
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
       get-symbol-description: 1.0.0
       has: 1.0.3
       has-property-descriptors: 1.0.0
@@ -4610,7 +4581,7 @@ packages:
       is-weakref: 1.0.2
       object-inspect: 1.12.2
       object-keys: 1.1.1
-      object.assign: 4.1.2
+      object.assign: 4.1.4
       regexp.prototype.flags: 1.4.3
       string.prototype.trimend: 1.0.5
       string.prototype.trimstart: 1.0.5
@@ -5345,20 +5316,12 @@ packages:
     resolution: {integrity: sha512-Hm0ixYtaSZ/V7C8FJrtZIuBBI+iSgL+1Aq82zSu8VQNB4S3Gk8e7Qs3VwBDJAhmRZcFqkl3tQu36g/Foh5I5ig==}
     dev: true
 
-  /get-intrinsic/1.1.2:
-    resolution: {integrity: sha512-Jfm3OyCxHh9DJyc28qGk+JmfkpO41A4XkneDSujN9MDXrm4oDKdHvndhZ2dN94+ERNfkYJWDclW6k2L/ZGHjXA==}
-    dependencies:
-      function-bind: 1.1.1
-      has: 1.0.3
-      has-symbols: 1.0.3
-
   /get-intrinsic/1.1.3:
     resolution: {integrity: sha512-QJVz1Tj7MS099PevUG5jvnt9tSkXN8K14dxQlikJuPt4uD9hHAHjLyLBiLR5zELelBdD9QNRAXZzsJx0WaDL9A==}
     dependencies:
       function-bind: 1.1.1
       has: 1.0.3
       has-symbols: 1.0.3
-    dev: true
 
   /get-own-enumerable-property-symbols/3.0.2:
     resolution: {integrity: sha512-I0UBV/XOz1XkIJHEUDMZAbzCThU/H8DxmSfmdGcKPnVhu2VfFqr34jr9777IyaTYvxjedWhqVIilEDsCdP5G6g==}
@@ -5383,7 +5346,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
     dev: true
 
   /get-uri/3.0.2:
@@ -5500,7 +5463,7 @@ packages:
   /has-property-descriptors/1.0.0:
     resolution: {integrity: sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==}
     dependencies:
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
     dev: true
 
   /has-symbols/1.0.3:
@@ -5712,7 +5675,7 @@ packages:
     resolution: {integrity: sha512-O0DB1JC/sPyZl7cIo78n5dR7eUSwwpYPiXRhTzNxZVAMUuB8vlnRFyLxdrVToks6XPLVnFfbzaVd5WLjhgg+vA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
       has: 1.0.3
       side-channel: 1.0.4
     dev: true
@@ -6794,16 +6757,6 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /object.assign/4.1.2:
-    resolution: {integrity: sha512-ixT2L5THXsApyiUPYKmW+2EHpXXe5Ii3M+f4e+aJFAHao5amFRW6J0OO6c/LU8Be47utCx2GL89hxGB6XSmKuQ==}
-    engines: {node: '>= 0.4'}
-    dependencies:
-      call-bind: 1.0.2
-      define-properties: 1.1.4
-      has-symbols: 1.0.3
-      object-keys: 1.1.1
-    dev: true
-
   /object.assign/4.1.4:
     resolution: {integrity: sha512-1mxKf0e58bvyjSCtKYY4sRe9itRk3PJpquJOjeIkz885CczcI4IvJJDLPS72oowuSh+pBxUFROpX+TU++hxhZQ==}
     engines: {node: '>= 0.4'}
@@ -7542,6 +7495,7 @@ packages:
 
   /rollup-plugin-terser/7.0.2_rollup@2.79.1:
     resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
+    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-terser
     peerDependencies:
       rollup: ^2.0.0
     dependencies:
@@ -7576,14 +7530,6 @@ packages:
 
   /rollup/3.10.0:
     resolution: {integrity: sha512-JmRYz44NjC1MjVF2VKxc0M1a97vn+cDxeqWmnwyAF4FvpjK8YFdHpaqvQB+3IxCvX05vJxKZkoMDU8TShhmJVA==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
-  /rollup/3.9.1:
-    resolution: {integrity: sha512-GswCYHXftN8ZKGVgQhTFUJB/NBXxrRGgO2NCy6E8s1rwEJ4Q9/VttNqcYfEvx4dTo4j58YqdC3OVztPzlKSX8w==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -7757,7 +7703,7 @@ packages:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
     dependencies:
       call-bind: 1.0.2
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
       object-inspect: 1.12.2
 
   /siginfo/2.0.0:
@@ -8032,7 +7978,7 @@ packages:
       call-bind: 1.0.2
       define-properties: 1.1.4
       es-abstract: 1.20.1
-      get-intrinsic: 1.1.2
+      get-intrinsic: 1.1.3
       has-symbols: 1.0.3
       internal-slot: 1.0.3
       regexp.prototype.flags: 1.4.3
@@ -8975,17 +8921,17 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-pwa/0.14.1_xp2zqafvd45jbxqxxvnpcv3lzm:
-    resolution: {integrity: sha512-5zx7yhQ8RTLwV71+GA9YsQQ63ALKG8XXIMqRJDdZkR8ZYftFcRgnzM7wOWmQZ/DATspyhPih5wCdcZnAIsM+mA==}
+  /vite-plugin-pwa/0.14.2_xp2zqafvd45jbxqxxvnpcv3lzm:
+    resolution: {integrity: sha512-3nTW1LX5i4l2qeuT0ypGyo52KtXagQoW4qdpMxHyUS/qvloa3BHLytQQfdNbU3cXTqV+cfuN99RXXKHiYDiLTA==}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
       workbox-window: ^6.5.4
     dependencies:
-      '@rollup/plugin-replace': 5.0.1_rollup@3.9.1
+      '@rollup/plugin-replace': 5.0.2_rollup@3.10.0
       debug: 4.3.4
       fast-glob: 3.2.12
       pretty-bytes: 6.0.0
-      rollup: 3.9.1
+      rollup: 3.10.0
       vite: 4.1.1_@types+node@18.13.0
       workbox-build: 6.5.4
       workbox-window: 6.5.4
