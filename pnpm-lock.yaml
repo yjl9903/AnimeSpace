@@ -35,7 +35,7 @@ importers:
       unocss: ^0.49.7
       unplugin-vue-components: ^0.23.0
       vite: ^4.1.2
-      vite-plugin-pwa: ^0.14.3
+      vite-plugin-pwa: ^0.14.4
       vitepress: ^1.0.0-alpha.45
       vue: ^3.2.47
       workbox-window: ^6.5.4
@@ -53,7 +53,7 @@ importers:
       unocss: 0.49.7_vite@4.1.2
       unplugin-vue-components: 0.23.0_vue@3.2.47
       vite: 4.1.2_@types+node@18.13.0
-      vite-plugin-pwa: 0.14.3_hqils2veansstxzaefh32znarq
+      vite-plugin-pwa: 0.14.4_hqils2veansstxzaefh32znarq
       vitepress: 1.0.0-draft.8_2r467mdhb7mblpaox4bg7fatdi
       workbox-window: 6.5.4
 
@@ -88,7 +88,7 @@ importers:
       vite-plugin-info: ^0.4.0
       vite-plugin-inspect: ^0.7.15
       vite-plugin-pages: ^0.28.0
-      vite-plugin-pwa: ^0.14.3
+      vite-plugin-pwa: ^0.14.4
       vite-ssg: ^0.22.1
       vitest: ^0.28.4
       vue: ^3.2.47
@@ -131,7 +131,7 @@ importers:
       vite-plugin-info: 0.4.0_vite@4.1.2
       vite-plugin-inspect: 0.7.15_vite@4.1.2
       vite-plugin-pages: 0.28.0_vite@4.1.2
-      vite-plugin-pwa: 0.14.3_hqils2veansstxzaefh32znarq
+      vite-plugin-pwa: 0.14.4_hqils2veansstxzaefh32znarq
       vite-ssg: 0.22.1_cixrkzijsbuq73sff4ej6rwgmu
       vitest: 0.28.4
       vue-tsc: 1.0.24_typescript@4.9.5
@@ -2791,20 +2791,6 @@ packages:
       rollup: 2.79.1
     dev: true
 
-  /@rollup/plugin-replace/5.0.2_rollup@3.10.0:
-    resolution: {integrity: sha512-M9YXNekv/C/iHHK+cvORzfRYfPbq0RDD8r0G+bMiTXjNGKulPnCT9O3Ss46WfhI6ZOCgApOP7xAdmCQJ+U2LAA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.10.0
-      magic-string: 0.27.0
-      rollup: 3.10.0
-    dev: true
-
   /@rollup/plugin-replace/5.0.2_rollup@3.15.0:
     resolution: {integrity: sha512-M9YXNekv/C/iHHK+cvORzfRYfPbq0RDD8r0G+bMiTXjNGKulPnCT9O3Ss46WfhI6ZOCgApOP7xAdmCQJ+U2LAA==}
     engines: {node: '>=14.0.0'}
@@ -2843,21 +2829,6 @@ packages:
       '@types/estree': 1.0.0
       estree-walker: 2.0.2
       picomatch: 2.3.1
-    dev: true
-
-  /@rollup/pluginutils/5.0.2_rollup@3.10.0:
-    resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      '@types/estree': 1.0.0
-      estree-walker: 2.0.2
-      picomatch: 2.3.1
-      rollup: 3.10.0
     dev: true
 
   /@rollup/pluginutils/5.0.2_rollup@3.15.0:
@@ -7454,11 +7425,6 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /pretty-bytes/6.0.0:
-    resolution: {integrity: sha512-6UqkYefdogmzqAZWzJ7laYeJnaXDy2/J+ZqiiMtS7t7OfpXWTlaeGMwX8U6EFvPV/YWWEKRkS8hKS4k60WHTOg==}
-    engines: {node: ^14.13.1 || >=16.0.0}
-    dev: true
-
   /pretty-bytes/6.1.0:
     resolution: {integrity: sha512-Rk753HI8f4uivXi4ZCIYdhmG1V+WKzvRMg/X+M42a6t7D07RcmopXJMDNk6N++7Bl75URRGsb40ruvg7Hcp2wQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
@@ -7842,14 +7808,6 @@ packages:
   /rollup/2.79.1:
     resolution: {integrity: sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==}
     engines: {node: '>=10.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
-  /rollup/3.10.0:
-    resolution: {integrity: sha512-JmRYz44NjC1MjVF2VKxc0M1a97vn+cDxeqWmnwyAF4FvpjK8YFdHpaqvQB+3IxCvX05vJxKZkoMDU8TShhmJVA==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
@@ -9250,17 +9208,17 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-pwa/0.14.3_hqils2veansstxzaefh32znarq:
-    resolution: {integrity: sha512-o/CEzdHXamdSV4WJ6hp1EQNe+yVvoFf9b5q1nMhOSqKxaW7BaDqAHAwnq8jt21wakDmcaipnuF3/j78AzZJ6wg==}
+  /vite-plugin-pwa/0.14.4_hqils2veansstxzaefh32znarq:
+    resolution: {integrity: sha512-M7Ct0so8OlouMkTWgXnl8W1xU95glITSKIe7qswZf1tniAstO2idElGCnsrTJ5NPNSx1XqfTCOUj8j94S6FD7Q==}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
       workbox-window: ^6.5.4
     dependencies:
-      '@rollup/plugin-replace': 5.0.2_rollup@3.10.0
+      '@rollup/plugin-replace': 5.0.2_rollup@3.15.0
       debug: 4.3.4
       fast-glob: 3.2.12
-      pretty-bytes: 6.0.0
-      rollup: 3.10.0
+      pretty-bytes: 6.1.0
+      rollup: 3.15.0
       vite: 4.1.2_@types+node@18.13.0
       workbox-build: 6.5.4
       workbox-window: 6.5.4
