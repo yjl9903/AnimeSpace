@@ -93,7 +93,7 @@
     "date-fns": "^2.29.3",
     "optc": "^0.5.7",
     "unbuild": "^1.1.2",
-    "vite": "^4.1.2"
+    "vite": "^4.1.4"
   },
   "peerDependencies": {
     "bangumi-data": "^0.3.110",
