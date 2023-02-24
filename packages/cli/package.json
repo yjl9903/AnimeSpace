@@ -52,7 +52,7 @@
     "@animepaste/database": "workspace:*",
     "ali-oss": "^6.17.1",
     "axios": "^1.2.2",
-    "breadc": "^0.8.4",
+    "breadc": "^0.8.6",
     "cli-progress": "^3.11.2",
     "date-fns": "^2.29.3",
     "death": "^1.1.0",
