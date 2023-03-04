@@ -17,7 +17,7 @@ importers:
       bumpp: 9.0.0
       optc: 0.5.7
       prettier: 2.8.4
-      turbo: 1.8.2
+      turbo: 1.8.3
       typescript: 4.9.5
       vite: 4.1.4_@types+node@18.14.1
       vitest: 0.29.1
@@ -142,7 +142,7 @@ importers:
     specifiers:
       axios: ^1.2.2
       bangumi-data: ^0.3.110
-      breadc: ^0.8.6
+      breadc: ^0.8.9
       date-fns: ^2.29.3
       debug: ^4.3.4
       optc: ^0.5.7
@@ -150,7 +150,7 @@ importers:
       vite: ^4.1.4
     dependencies:
       axios: 1.2.2_debug@4.3.4
-      breadc: 0.8.6
+      breadc: 0.8.9
       debug: 4.3.4
     devDependencies:
       bangumi-data: 0.3.110
@@ -174,7 +174,7 @@ importers:
       ali-oss: ^6.17.1
       axios: ^1.2.2
       bangumi-data: ^0.3.110
-      breadc: ^0.8.6
+      breadc: ^0.8.9
       cli-progress: ^3.11.2
       date-fns: ^2.29.3
       death: ^1.1.0
@@ -195,7 +195,7 @@ importers:
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
       axios: 1.2.2_debug@4.3.4
-      breadc: 0.8.6
+      breadc: 0.8.9
       cli-progress: 3.11.2
       date-fns: 2.29.3
       death: 1.1.0
@@ -1613,8 +1613,8 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@breadc/color/0.8.6:
-    resolution: {integrity: sha512-AEDiNXOrxiaLbfj0PCONoLmAvpV74zktS+j4vEQkDWcWKhKFx2bZbAuzAxj0S6AdduyxKzt5Nho7Ziaf3VnXhg==}
+  /@breadc/color/0.8.9:
+    resolution: {integrity: sha512-CIebG7OsOgNixe//W1drSXjEbc01Et6L4Y/VQRGulfecDcrxH9/RjqwMDZ+40G+iZVELIVMDDBAQcuYvOlFU1g==}
     dev: false
 
   /@cloudflare/kv-asset-handler/0.2.0:
@@ -3992,10 +3992,10 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /breadc/0.8.6:
-    resolution: {integrity: sha512-SKXX4qG+cD2JVZHM6/WGANw+KQvnhhwZPo3vxu8518gOTRo3sp33rkTqsAA4Khf/Qq8YbyV8FGacPX2nG3tS4A==}
+  /breadc/0.8.9:
+    resolution: {integrity: sha512-+Ui7PuGd2+gkqtzBYi8fsmrg8sskyZ09uNAF9yMpU7FbACOFScEwNtJeAq6lHl0hgvVtS4XrMe86jj5EV6C70g==}
     dependencies:
-      '@breadc/color': 0.8.6
+      '@breadc/color': 0.8.9
     dev: false
 
   /browserify-package-json/1.0.1:
@@ -8543,65 +8543,65 @@ packages:
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
-  /turbo-darwin-64/1.8.2:
-    resolution: {integrity: sha512-j77U0uOeppENexFsIvvzExADSqMBEeCHnm+6LSNQfaajHSrbUVSTsuD6ZMYHamT6bslc+ZZm21jdecWkwZFBbw==}
+  /turbo-darwin-64/1.8.3:
+    resolution: {integrity: sha512-bLM084Wr17VAAY/EvCWj7+OwYHvI9s/NdsvlqGp8iT5HEYVimcornCHespgJS/yvZDfC+mX9EQkn3V2JmYgGGw==}
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-darwin-arm64/1.8.2:
-    resolution: {integrity: sha512-1NoAvjlwt2wycsAFJouauy9epn9DptSMy6BoGqxJVc4jiibsLepp9qYc4f1/ln0zjd3FR1IvhGOiBfdpqMN7hg==}
+  /turbo-darwin-arm64/1.8.3:
+    resolution: {integrity: sha512-4oZjXtzakopMK110kue3z/hqu3WLv+eDLZOX1NGdo49gqca9BeD8GbH+sXpAp6tqyeuzpss+PIliVYuyt7LgbA==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-64/1.8.2:
-    resolution: {integrity: sha512-TcT3CRYnBYA46kLGGbGC2jDyCEAvMgVpUdpIZGTmod48EKpZaEfVgTkpa4GJde8W68yRFogPZjPVL3yJHFpXSA==}
+  /turbo-linux-64/1.8.3:
+    resolution: {integrity: sha512-uvX2VKotf5PU14FCxJA5iHItPQno2JWzerMd+g3/h/Asay6dvxvtVjc39MQeGT0H5njSvzVKFkT+3/5q8lgOEg==}
     cpu: [x64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-linux-arm64/1.8.2:
-    resolution: {integrity: sha512-Mb9+KBy4YJzPMZ6WGoMzMVZ6EtueCSvOvgmNpVFgkwbtabfBuaBOvN+irtg4RRSWvJQTDTziLABieocEEXZImQ==}
+  /turbo-linux-arm64/1.8.3:
+    resolution: {integrity: sha512-E1p+oH3XKMaPS4rqWhYsL4j2Pzc0d/9P5KU7Kn1kqVLo2T3iRA7n2KVULEieUNE0nTH+aIJPXYXOpqCI5wFJaA==}
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-64/1.8.2:
-    resolution: {integrity: sha512-/+R5ikRrw2w2w38JtNPubGLIQHgUC70m783DI9aPgaM5c8P5D/Y0k6HgjuC/uXgiaz2h3R7p7YWlr+2/E0bqyA==}
+  /turbo-windows-64/1.8.3:
+    resolution: {integrity: sha512-cnzAytHtoLXd0J7aNzRpZFpL/GTjcBmkvAPlbOdf/Pl1iwS4qzGrudZQ+OM1lmLgLIfBPIavsGHBknTwTNib4A==}
     cpu: [x64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo-windows-arm64/1.8.2:
-    resolution: {integrity: sha512-s07viz5nXSx4kyiksuPM4FGLRkoaGMaw0BpwFjdRQsl1p+WclUN1IPdokVPKOmFpu5pNCVYlG/raP/mXAEzDCg==}
+  /turbo-windows-arm64/1.8.3:
+    resolution: {integrity: sha512-ulIiItNm2w/zYJdD5/oAzjzNns1IjbpweRzpsE8tLXaWwo6+fnXXkyloUug0IUhcd2k6fJXfoiDZfygqpOVuXg==}
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
     dev: true
     optional: true
 
-  /turbo/1.8.2:
-    resolution: {integrity: sha512-G/uJx6bZK5RwTWHsRN/MP0MvXFznmCaL3MQXdSf+OG/q0o8GE7+yivyyWEplWI1Asc8AEN909A/wlIkoz2FKTg==}
+  /turbo/1.8.3:
+    resolution: {integrity: sha512-zGrkU1EuNFmkq6iky6LcMqD4h0OLE8XysVFxQWRIZbcTNnf0XAycbsbeEyiJpiWeqb7qtg2bVuY9EYcNoNhVuQ==}
     hasBin: true
     requiresBuild: true
     optionalDependencies:
-      turbo-darwin-64: 1.8.2
-      turbo-darwin-arm64: 1.8.2
-      turbo-linux-64: 1.8.2
-      turbo-linux-arm64: 1.8.2
-      turbo-windows-64: 1.8.2
-      turbo-windows-arm64: 1.8.2
+      turbo-darwin-64: 1.8.3
+      turbo-darwin-arm64: 1.8.3
+      turbo-linux-64: 1.8.3
+      turbo-linux-arm64: 1.8.3
+      turbo-windows-64: 1.8.3
+      turbo-windows-arm64: 1.8.3
     dev: true
 
   /type-check/0.3.2:
