@@ -175,7 +175,7 @@ importers:
       axios: ^1.2.2
       bangumi-data: ^0.3.110
       breadc: ^0.8.9
-      cli-progress: ^3.11.2
+      cli-progress: ^3.12.0
       date-fns: ^2.29.3
       death: ^1.1.0
       debug: ^4.3.4
@@ -196,7 +196,7 @@ importers:
       ali-oss: 6.17.1
       axios: 1.2.2_debug@4.3.4
       breadc: 0.8.9
-      cli-progress: 3.11.2
+      cli-progress: 3.12.0
       date-fns: 2.29.3
       death: 1.1.0
       debug: 4.3.4
@@ -4235,8 +4235,8 @@ packages:
       source-map: 0.6.1
     dev: true
 
-  /cli-progress/3.11.2:
-    resolution: {integrity: sha512-lCPoS6ncgX4+rJu5bS3F/iCz17kZ9MPZ6dpuTtI0KXKABkhyXIdYB3Inby1OpaGti3YlI3EeEkM9AuWpelJrVA==}
+  /cli-progress/3.12.0:
+    resolution: {integrity: sha512-tRkV3HJ1ASwm19THiiLIXLO7Im7wlTuKnvkYaTkyoAPefqjNg7W7DHKUlGRxy9vxDvbyCYQkQozvptuMkGCg8A==}
     engines: {node: '>=4'}
     dependencies:
       string-width: 4.2.3
