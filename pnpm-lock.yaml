@@ -65,7 +65,7 @@ importers:
       '@iconify-json/mdi': ^1.1.50
       '@types/node': ^18.14.6
       '@types/nprogress': ^0.2.0
-      '@types/prompts': ^2.4.2
+      '@types/prompts': ^2.4.3
       '@types/scrollreveal': ^0.0.8
       '@unocss/reset': ^0.50.4
       '@vitejs/plugin-vue': ^4.0.0
@@ -116,7 +116,7 @@ importers:
       '@iconify-json/mdi': 1.1.50
       '@types/node': 18.14.6
       '@types/nprogress': 0.2.0
-      '@types/prompts': 2.4.2
+      '@types/prompts': 2.4.3
       '@types/scrollreveal': 0.0.8
       '@unocss/reset': 0.50.4
       '@vitejs/plugin-vue': 4.0.0_vite@4.1.4+vue@3.2.47
@@ -1694,15 +1694,6 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/types/7.20.7:
-    resolution: {integrity: sha512-69OnhBxSSgK0OzTJai4kyPDiKTIe3j+ctaHdIGVbRahTLAT7L3R9oeXHC2aVSuGYt3cVnoAMDmOCgJ2yaiLMvg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/helper-string-parser': 7.19.4
-      '@babel/helper-validator-identifier': 7.19.1
-      to-fast-properties: 2.0.0
-    dev: true
-
   /@babel/types/7.21.3:
     resolution: {integrity: sha512-sBGdETxC+/M4o/zKC0sl6sjWv62WFR/uzxrJ6uYyMLZOUlPnwzw0tKgVHOXxaAd5l2g8pEDM5RZ495GPQI77kg==}
     engines: {node: '>=6.9.0'}
@@ -2996,7 +2987,7 @@ packages:
   /@types/bittorrent-protocol/3.1.2:
     resolution: {integrity: sha512-7k9nivNeG7Sc8wVuBs+XjBp2u7pH8tqW3BB93/SAg3xht/cZEK+Rqkj79xSyJqyj86eA0F6n85EKkkyGki8afg==}
     dependencies:
-      '@types/node': 18.14.6
+      '@types/node': 18.15.3
     dev: true
 
   /@types/chai-subset/1.3.3:
@@ -3047,13 +3038,13 @@ packages:
   /@types/jsonfile/6.1.1:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
-      '@types/node': 18.14.6
+      '@types/node': 18.15.3
     dev: true
 
   /@types/magnet-uri/5.1.3:
     resolution: {integrity: sha512-FvJN1yYdLhvU6zWJ2YnWQ2GnpFLsA8bt+85WY0tLh6ehzGNrvBorjlcc53/zY43r/IKn+ctFs1nt7andwGnQCQ==}
     dependencies:
-      '@types/node': 18.14.6
+      '@types/node': 18.15.3
     dev: true
 
   /@types/ms/0.7.31:
@@ -3079,21 +3070,21 @@ packages:
   /@types/parse-torrent-file/4.0.3:
     resolution: {integrity: sha512-dFkPnJPKiFWiGX+HXmyTVt2js3k0d9dThmUxX8nfGC22hbyZ5BTmetsEl45sQhHLcFo43njVrIKMXM3F1ahXRw==}
     dependencies:
-      '@types/node': 18.14.6
+      '@types/node': 18.15.3
     dev: true
 
   /@types/parse-torrent/5.8.4:
     resolution: {integrity: sha512-FdKs5yN5iYO5Cu9gVz1Zl30CbZe6HTsqloWmCf+LfbImgSzlsUkov2+npQWCQSQ3zi/a2G5C824K0UpZ2sRufA==}
     dependencies:
       '@types/magnet-uri': 5.1.3
-      '@types/node': 18.14.6
+      '@types/node': 18.15.3
       '@types/parse-torrent-file': 4.0.3
     dev: true
 
-  /@types/prompts/2.4.2:
-    resolution: {integrity: sha512-TwNx7qsjvRIUv/BCx583tqF5IINEVjCNqg9ofKHRlSoUHE62WBHrem4B1HGXcIrG511v29d1kJ9a/t2Esz7MIg==}
+  /@types/prompts/2.4.3:
+    resolution: {integrity: sha512-qpzXlxoPv67TCtTCS+SwYmz1M+G5ARTrE5YVlrZPy/xBD36dzLqiJLDzOzsMXkcJYq6+6UkWqFwtLAOjsfec5Q==}
     dependencies:
-      '@types/node': 18.14.6
+      '@types/node': 18.15.3
       kleur: 3.0.3
     dev: true
 
@@ -3114,7 +3105,7 @@ packages:
   /@types/simple-peer/9.11.4:
     resolution: {integrity: sha512-Elje14YvM47k+XEaoyRAeUSvZN7TOLWYL233QCckUaXjT4lRESHnYs0iOK2JoosO5DnCvWu/0Vpl9qnw4KCLWw==}
     dependencies:
-      '@types/node': 18.14.6
+      '@types/node': 18.15.3
     dev: true
 
   /@types/stack-trace/0.0.29:
@@ -6984,7 +6975,7 @@ packages:
       esbuild: 0.17.8
       fs-extra: 11.1.0
       globby: 13.1.3
-      jiti: 1.17.1
+      jiti: 1.18.2
       mri: 1.2.0
       pathe: 1.1.0
       typescript: 4.9.5
@@ -9090,9 +9081,9 @@ packages:
   /untyped/1.2.2:
     resolution: {integrity: sha512-EANYd5L6AdpgfldlgMcmvOOnj092nWhy0ybhc7uhEH12ipytDYz89EOegBQKj8qWL3u1wgYnmFjADhsuCJs5Aw==}
     dependencies:
-      '@babel/core': 7.20.12
+      '@babel/core': 7.21.3
       '@babel/standalone': 7.20.12
-      '@babel/types': 7.20.7
+      '@babel/types': 7.21.3
       scule: 1.0.0
     transitivePeerDependencies:
       - supports-color
