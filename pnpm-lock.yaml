@@ -71,7 +71,7 @@ importers:
       '@vitejs/plugin-vue': ^4.0.0
       '@vueuse/core': ^9.10.0
       '@vueuse/head': ^1.0.22
-      axios: ^1.2.2
+      axios: ^1.3.4
       bangumi-data: ^0.3.111
       cross-env: ^7.0.3
       date-fns: ^2.29.3
@@ -101,7 +101,7 @@ importers:
       '@animepaste/bangumi': link:../bangumi
       '@vueuse/core': 9.10.0_vue@3.2.47
       '@vueuse/head': 1.0.22_vue@3.2.47
-      axios: 1.2.2
+      axios: 1.3.4
       date-fns: 2.29.3
       nprogress: 0.2.0
       pinia: 2.0.28_hmuptsblhheur2tugfgucj7gc4
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.15.0_@vueuse+core@9.10.0
       unplugin-vue-components: 0.24.0_vue@3.2.47
       vite: 4.1.4_@types+node@18.14.6
-      vite-plugin-cloudflare-functions: 0.5.0_ip2yhjnbue26cgpqhxzjgremsq
+      vite-plugin-cloudflare-functions: 0.5.0_pqnhefgwxvdsyaie6bzd3mprvu
       vite-plugin-info: 0.4.0_vite@4.1.4
       vite-plugin-inspect: 0.7.15_vite@4.1.4
       vite-plugin-pages: 0.28.0_vite@4.1.4
@@ -140,7 +140,7 @@ importers:
 
   packages/bangumi:
     specifiers:
-      axios: ^1.2.2
+      axios: ^1.3.4
       bangumi-data: ^0.3.111
       breadc: ^0.8.9
       date-fns: ^2.29.3
@@ -149,7 +149,7 @@ importers:
       unbuild: ^1.1.2
       vite: ^4.1.4
     dependencies:
-      axios: 1.2.2_debug@4.3.4
+      axios: 1.3.4_debug@4.3.4
       breadc: 0.8.9
       debug: 4.3.4
     devDependencies:
@@ -172,7 +172,7 @@ importers:
       '@types/js-yaml': ^4.0.5
       '@types/webtorrent': ^0.109.3
       ali-oss: ^6.17.1
-      axios: ^1.2.2
+      axios: ^1.3.4
       bangumi-data: ^0.3.111
       breadc: ^0.8.9
       cli-progress: ^3.11.2
@@ -194,7 +194,7 @@ importers:
       '@animepaste/bangumi': link:../bangumi
       '@animepaste/database': link:../database
       ali-oss: 6.17.1
-      axios: 1.2.2_debug@4.3.4
+      axios: 1.3.4_debug@4.3.4
       breadc: 0.8.9
       cli-progress: 3.11.2
       date-fns: 2.29.3
@@ -223,7 +223,7 @@ importers:
   packages/database:
     specifiers:
       '@prisma/client': ^4.8.1
-      axios: ^1.2.2
+      axios: ^1.3.4
       cnchar: ^3.2.2
       cnchar-trad: ^3.2.2
       date-fns: ^2.29.3
@@ -233,7 +233,7 @@ importers:
       unbuild: ^1.1.2
     dependencies:
       '@prisma/client': 4.8.1_prisma@4.8.1
-      axios: 1.2.2_debug@4.3.4
+      axios: 1.3.4_debug@4.3.4
       cnchar: 3.2.2
       cnchar-trad: 3.2.2
       date-fns: 2.29.3
@@ -414,7 +414,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       '@jridgewell/gen-mapping': 0.1.1
-      '@jridgewell/trace-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.17
     dev: true
 
   /@antfu/install-pkg/0.1.1:
@@ -1694,15 +1694,6 @@ packages:
       - supports-color
     dev: true
 
-  /@babel/types/7.20.7:
-    resolution: {integrity: sha512-69OnhBxSSgK0OzTJai4kyPDiKTIe3j+ctaHdIGVbRahTLAT7L3R9oeXHC2aVSuGYt3cVnoAMDmOCgJ2yaiLMvg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/helper-string-parser': 7.19.4
-      '@babel/helper-validator-identifier': 7.19.1
-      to-fast-properties: 2.0.0
-    dev: true
-
   /@babel/types/7.21.3:
     resolution: {integrity: sha512-sBGdETxC+/M4o/zKC0sl6sjWv62WFR/uzxrJ6uYyMLZOUlPnwzw0tKgVHOXxaAd5l2g8pEDM5RZ495GPQI77kg==}
     engines: {node: '>=6.9.0'}
@@ -2419,7 +2410,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       '@jridgewell/set-array': 1.1.1
-      '@jridgewell/sourcemap-codec': 1.4.13
+      '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
   /@jridgewell/gen-mapping/0.3.2:
@@ -2427,13 +2418,8 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       '@jridgewell/set-array': 1.1.1
-      '@jridgewell/sourcemap-codec': 1.4.13
+      '@jridgewell/sourcemap-codec': 1.4.14
       '@jridgewell/trace-mapping': 0.3.17
-    dev: true
-
-  /@jridgewell/resolve-uri/3.0.7:
-    resolution: {integrity: sha512-8cXDaBBHOr2pQ7j77Y6Vp5VDT2sIqWyWQ56TjEq4ih/a4iST3dItRe8Q9fp0rrIl9DoKhWQtUQz/YpOxLkXbNA==}
-    engines: {node: '>=6.0.0'}
     dev: true
 
   /@jridgewell/resolve-uri/3.1.0:
@@ -2459,13 +2445,6 @@ packages:
 
   /@jridgewell/sourcemap-codec/1.4.14:
     resolution: {integrity: sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==}
-    dev: true
-
-  /@jridgewell/trace-mapping/0.3.13:
-    resolution: {integrity: sha512-o1xbKhp9qnIAoHJSWd6KlCZfqslL4valSF81H8ImioOAxluWYWOpWkpyktY2vnt4tbrX9XYaxovq6cgowaJp2w==}
-    dependencies:
-      '@jridgewell/resolve-uri': 3.0.7
-      '@jridgewell/sourcemap-codec': 1.4.13
     dev: true
 
   /@jridgewell/trace-mapping/0.3.17:
@@ -3047,7 +3026,7 @@ packages:
   /@types/jsonfile/6.1.1:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
-      '@types/node': 18.14.6
+      '@types/node': 18.15.3
     dev: true
 
   /@types/magnet-uri/5.1.3:
@@ -3859,19 +3838,10 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axios/1.2.2:
-    resolution: {integrity: sha512-bz/J4gS2S3I7mpN/YZfGFTqhXTYzRho8Ay38w2otuuDR322KzFIWm/4W2K6gIwvWaws5n+mnb7D1lN9uD+QH6Q==}
+  /axios/1.3.4:
+    resolution: {integrity: sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==}
     dependencies:
       follow-redirects: 1.15.1
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-
-  /axios/1.2.2_debug@4.3.4:
-    resolution: {integrity: sha512-bz/J4gS2S3I7mpN/YZfGFTqhXTYzRho8Ay38w2otuuDR322KzFIWm/4W2K6gIwvWaws5n+mnb7D1lN9uD+QH6Q==}
-    dependencies:
-      follow-redirects: 1.15.1_debug@4.3.4
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -3885,7 +3855,6 @@ packages:
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
-    dev: true
 
   /b4a/1.5.3:
     resolution: {integrity: sha512-1aCQIzQJK7G0z1Una75tWMlwVAR8o+QHoAlnWc5XAxRVBESY9WsitfBgM5nPyDBP5HrhPU1Np4Pq2Y7CJQ+tVw==}
@@ -6984,7 +6953,7 @@ packages:
       esbuild: 0.17.8
       fs-extra: 11.1.0
       globby: 13.1.3
-      jiti: 1.17.1
+      jiti: 1.18.2
       mri: 1.2.0
       pathe: 1.1.0
       typescript: 4.9.5
@@ -7250,7 +7219,7 @@ packages:
       '@babel/plugin-transform-typescript': 7.20.7_@babel+core@7.20.12
       '@types/fs-extra': 11.0.1
       '@types/node': 18.14.6
-      axios: 1.2.2_debug@4.3.4
+      axios: 1.3.4_debug@4.3.4
       cac: 6.7.14
       debug: 4.3.4
       find-up: 6.3.0
@@ -9090,9 +9059,9 @@ packages:
   /untyped/1.2.2:
     resolution: {integrity: sha512-EANYd5L6AdpgfldlgMcmvOOnj092nWhy0ybhc7uhEH12ipytDYz89EOegBQKj8qWL3u1wgYnmFjADhsuCJs5Aw==}
     dependencies:
-      '@babel/core': 7.20.12
+      '@babel/core': 7.21.3
       '@babel/standalone': 7.20.12
-      '@babel/types': 7.20.7
+      '@babel/types': 7.21.3
       scule: 1.0.0
     transitivePeerDependencies:
       - supports-color
@@ -9301,7 +9270,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.5.0_ip2yhjnbue26cgpqhxzjgremsq:
+  /vite-plugin-cloudflare-functions/0.5.0_pqnhefgwxvdsyaie6bzd3mprvu:
     resolution: {integrity: sha512-1m+NNWp2Ux0ESlwhp305GcpgKxxICZt2s6YIcavf+LA2mmuErBb2A/O7HzoOwl07JHA/mKeWKPSHvdtxHqC19A==}
     engines: {node: '>=v16'}
     peerDependencies:
@@ -9320,7 +9289,7 @@ packages:
         optional: true
     dependencies:
       '@cloudflare/workers-types': 4.20230215.0
-      axios: 1.2.2
+      axios: 1.3.4
       debug: 4.3.4
       fast-glob: 3.2.12
       mlly: 1.1.1
