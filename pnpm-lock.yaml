@@ -29,7 +29,7 @@ importers:
       '@types/node': ^18.14.6
       '@unocss/reset': ^0.50.6
       '@vitejs/plugin-vue': ^4.0.0
-      '@vueuse/core': ^9.10.0
+      '@vueuse/core': ^9.13.0
       fast-glob: ^3.2.12
       https-localhost: ^4.7.1
       unocss: ^0.50.6
@@ -40,7 +40,7 @@ importers:
       vue: ^3.2.47
       workbox-window: ^6.5.4
     dependencies:
-      '@vueuse/core': 9.10.0_vue@3.2.47
+      '@vueuse/core': 9.13.0_vue@3.2.47
       vue: 3.2.47
     devDependencies:
       '@algolia/client-search': 4.14.3
@@ -69,7 +69,7 @@ importers:
       '@types/scrollreveal': ^0.0.8
       '@unocss/reset': ^0.50.6
       '@vitejs/plugin-vue': ^4.0.0
-      '@vueuse/core': ^9.10.0
+      '@vueuse/core': ^9.13.0
       '@vueuse/head': ^1.0.22
       axios: ^1.2.2
       bangumi-data: ^0.3.111
@@ -99,7 +99,7 @@ importers:
       wrangler: ^2.11.1
     dependencies:
       '@animepaste/bangumi': link:../bangumi
-      '@vueuse/core': 9.10.0_vue@3.2.47
+      '@vueuse/core': 9.13.0_vue@3.2.47
       '@vueuse/head': 1.0.22_vue@3.2.47
       axios: 1.2.2
       date-fns: 2.29.3
@@ -124,7 +124,7 @@ importers:
       cross-env: 7.0.3
       typescript: 4.9.5
       unocss: 0.50.6_vite@4.1.4
-      unplugin-auto-import: 0.15.1_@vueuse+core@9.10.0
+      unplugin-auto-import: 0.15.1_@vueuse+core@9.13.0
       unplugin-vue-components: 0.24.1_vue@3.2.47
       vite: 4.1.4_@types+node@18.14.6
       vite-plugin-cloudflare-functions: 0.5.0_ip2yhjnbue26cgpqhxzjgremsq
@@ -3480,12 +3480,12 @@ packages:
       vue-demi: 0.13.1_vue@3.2.33
     dev: true
 
-  /@vueuse/core/9.10.0_vue@3.2.47:
-    resolution: {integrity: sha512-CxMewME07qeuzuT/AOIQGv0EhhDoojniqU6pC3F8m5VC76L47UT18DcX88kWlP3I7d3qMJ4u/PD8iSRsy3bmNA==}
+  /@vueuse/core/9.13.0_vue@3.2.47:
+    resolution: {integrity: sha512-pujnclbeHWxxPRqXWmdkKV5OX4Wk4YeK7wusHqRwU0Q7EFusHoqNA/aPhB6KCh9hEqJkLAJo7bb0Lh9b+OIVzw==}
     dependencies:
       '@types/web-bluetooth': 0.0.16
-      '@vueuse/metadata': 9.10.0
-      '@vueuse/shared': 9.10.0_vue@3.2.47
+      '@vueuse/metadata': 9.13.0
+      '@vueuse/shared': 9.13.0_vue@3.2.47
       vue-demi: 0.13.1_vue@3.2.47
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -3506,8 +3506,8 @@ packages:
     resolution: {integrity: sha512-IwSfzH80bnJMzqhaapqJl9JRIiyQU0zsRGEgnxN6jhq7992cPUJIRfV+JHRIZXjYqbwt07E1gTEp0R0zPJ1aqw==}
     dev: true
 
-  /@vueuse/metadata/9.10.0:
-    resolution: {integrity: sha512-G5VZhgTCapzU9rv0Iq2HBrVOSGzOKb+OE668NxhXNcTjUjwYxULkEhAw70FtRLMZc+hxcFAzDZlKYA0xcwNMuw==}
+  /@vueuse/metadata/9.13.0:
+    resolution: {integrity: sha512-gdU7TKNAUVlXXLbaF+ZCfte8BjRJQWPCa2J55+7/h+yDtzw3vOoGQDRXzI6pyKyo6bXFT5/QoPE4hAknExjRLQ==}
 
   /@vueuse/shared/8.9.4_vue@3.2.33:
     resolution: {integrity: sha512-wt+T30c4K6dGRMVqPddexEVLa28YwxW5OFIPmzUHICjphfAuBFTTdDoyqREZNDOFJZ44ARH1WWQNCUK8koJ+Ag==}
@@ -3524,8 +3524,8 @@ packages:
       vue-demi: 0.13.1_vue@3.2.33
     dev: true
 
-  /@vueuse/shared/9.10.0_vue@3.2.47:
-    resolution: {integrity: sha512-vakHJ2ZRklAzqmcVBL38RS7BxdBA4+5poG9NsSyqJxrt9kz0zX3P5CXMy0Hm6LFbZXUgvKdqAS3pUH1zX/5qTQ==}
+  /@vueuse/shared/9.13.0_vue@3.2.47:
+    resolution: {integrity: sha512-UrnhU+Cnufu4S6JLCPZnkWh0WwZGUp72ktOF2DFptMlOs3TOdVv8xJN53zhHGARmVOsz5KqOls09+J1NR6sBKw==}
     dependencies:
       vue-demi: 0.13.1_vue@3.2.47
     transitivePeerDependencies:
@@ -8704,7 +8704,7 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
-  /unplugin-auto-import/0.15.1_@vueuse+core@9.10.0:
+  /unplugin-auto-import/0.15.1_@vueuse+core@9.13.0:
     resolution: {integrity: sha512-xLS+BfVNy00Y3IkqBmEd0IThvjx8kSGIgSuf/1kETttiENK8sHrDA+poKkQxRCPTKYH4yWM6txGQANPTzwpUWQ==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -8718,7 +8718,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.7.2
       '@rollup/pluginutils': 5.0.2
-      '@vueuse/core': 9.10.0_vue@3.2.47
+      '@vueuse/core': 9.13.0_vue@3.2.47
       local-pkg: 0.4.3
       magic-string: 0.30.0
       minimatch: 7.4.2
