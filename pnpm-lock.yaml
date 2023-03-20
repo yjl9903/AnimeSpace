@@ -27,7 +27,7 @@ importers:
       '@algolia/client-search': ^4.14.3
       '@iconify-json/carbon': ^1.1.16
       '@types/node': ^18.14.6
-      '@unocss/reset': ^0.50.4
+      '@unocss/reset': ^0.50.6
       '@vitejs/plugin-vue': ^4.0.0
       '@vueuse/core': ^9.10.0
       fast-glob: ^3.2.12
@@ -46,7 +46,7 @@ importers:
       '@algolia/client-search': 4.14.3
       '@iconify-json/carbon': 1.1.16
       '@types/node': 18.14.6
-      '@unocss/reset': 0.50.4
+      '@unocss/reset': 0.50.6
       '@vitejs/plugin-vue': 4.0.0_vite@4.1.4+vue@3.2.47
       fast-glob: 3.2.12
       https-localhost: 4.7.1
@@ -67,7 +67,7 @@ importers:
       '@types/nprogress': ^0.2.0
       '@types/prompts': ^2.4.3
       '@types/scrollreveal': ^0.0.8
-      '@unocss/reset': ^0.50.4
+      '@unocss/reset': ^0.50.6
       '@vitejs/plugin-vue': ^4.0.0
       '@vueuse/core': ^9.10.0
       '@vueuse/head': ^1.0.22
@@ -118,7 +118,7 @@ importers:
       '@types/nprogress': 0.2.0
       '@types/prompts': 2.4.3
       '@types/scrollreveal': 0.0.8
-      '@unocss/reset': 0.50.4
+      '@unocss/reset': 0.50.6
       '@vitejs/plugin-vue': 4.0.0_vite@4.1.4+vue@3.2.47
       bangumi-data: 0.3.111
       cross-env: 7.0.3
@@ -414,7 +414,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       '@jridgewell/gen-mapping': 0.1.1
-      '@jridgewell/trace-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.17
     dev: true
 
   /@antfu/install-pkg/0.1.1:
@@ -2410,7 +2410,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       '@jridgewell/set-array': 1.1.1
-      '@jridgewell/sourcemap-codec': 1.4.13
+      '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
   /@jridgewell/gen-mapping/0.3.2:
@@ -2418,13 +2418,8 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       '@jridgewell/set-array': 1.1.1
-      '@jridgewell/sourcemap-codec': 1.4.13
+      '@jridgewell/sourcemap-codec': 1.4.14
       '@jridgewell/trace-mapping': 0.3.17
-    dev: true
-
-  /@jridgewell/resolve-uri/3.0.7:
-    resolution: {integrity: sha512-8cXDaBBHOr2pQ7j77Y6Vp5VDT2sIqWyWQ56TjEq4ih/a4iST3dItRe8Q9fp0rrIl9DoKhWQtUQz/YpOxLkXbNA==}
-    engines: {node: '>=6.0.0'}
     dev: true
 
   /@jridgewell/resolve-uri/3.1.0:
@@ -2450,13 +2445,6 @@ packages:
 
   /@jridgewell/sourcemap-codec/1.4.14:
     resolution: {integrity: sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==}
-    dev: true
-
-  /@jridgewell/trace-mapping/0.3.13:
-    resolution: {integrity: sha512-o1xbKhp9qnIAoHJSWd6KlCZfqslL4valSF81H8ImioOAxluWYWOpWkpyktY2vnt4tbrX9XYaxovq6cgowaJp2w==}
-    dependencies:
-      '@jridgewell/resolve-uri': 3.0.7
-      '@jridgewell/sourcemap-codec': 1.4.13
     dev: true
 
   /@jridgewell/trace-mapping/0.3.17:
@@ -3269,8 +3257,8 @@ packages:
     resolution: {integrity: sha512-BcANWHHrKgHML5TLaPuSl148L2WLA938r0pLi4PrRTmZtkgP4OhBLs8U8BaDNVVGR/nli7VDxNRZFb9es3Tq9Q==}
     dev: true
 
-  /@unocss/reset/0.50.4:
-    resolution: {integrity: sha512-UHNDhClJMx3sG3oi68XkOcTeJ2hkI20O0eHowSoua10NClbnS9tiKxeo4ZLInouzvac3tb1TsjKEgTosHfkR/w==}
+  /@unocss/reset/0.50.6:
+    resolution: {integrity: sha512-e1fuSEgp1p7FgpsIZKNejOKgq4gyZcDGDvi+6544x458hInM6MfiMQNP95UBJEG4JZXq6qCZ8t7tRVWS2m5IXg==}
     dev: true
 
   /@unocss/scope/0.50.1:
