@@ -76,7 +76,7 @@ importers:
       cross-env: ^7.0.3
       date-fns: ^2.29.3
       nprogress: ^0.2.0
-      pinia: ^2.0.28
+      pinia: ^2.0.33
       plyr: ^3.7.3
       scrollreveal: ^4.0.9
       typescript: ^4.9.5
@@ -104,7 +104,7 @@ importers:
       axios: 1.2.2
       date-fns: 2.29.3
       nprogress: 0.2.0
-      pinia: 2.0.28_hmuptsblhheur2tugfgucj7gc4
+      pinia: 2.0.33_hmuptsblhheur2tugfgucj7gc4
       plyr: 3.7.3
       scrollreveal: 4.0.9
       vue: 3.2.47
@@ -3433,6 +3433,10 @@ packages:
 
   /@vue/devtools-api/6.4.5:
     resolution: {integrity: sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==}
+
+  /@vue/devtools-api/6.5.0:
+    resolution: {integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==}
+    dev: false
 
   /@vue/reactivity-transform/3.2.33:
     resolution: {integrity: sha512-4UL5KOIvSQb254aqenW4q34qMXbfZcmEsV/yVidLUgvwYQQ/D21bGX3DlgPUGI3c4C+iOnNmDCkIxkILoX/Pyw==}
@@ -7436,8 +7440,8 @@ packages:
     resolution: {integrity: sha512-dBILiDmm43y0JPISWEmVGKBETQjwJe6mSU9GND+P9KW0SJGUwoU/odyH1nbalOP9i8WSYuqf1lQnaj92Bhw+Ug==}
     dev: false
 
-  /pinia/2.0.28_hmuptsblhheur2tugfgucj7gc4:
-    resolution: {integrity: sha512-YClq9DkqCblq9rlyUual7ezMu/iICWdBtfJrDt4oWU9Zxpijyz7xB2xTwx57DaBQ96UGvvTMORzALr+iO5PVMw==}
+  /pinia/2.0.33_hmuptsblhheur2tugfgucj7gc4:
+    resolution: {integrity: sha512-HOj1yVV2itw6rNIrR2f7+MirGNxhORjrULL8GWgRwXsGSvEqIQ+SE0MYt6cwtpegzCda3i+rVTZM+AM7CG+kRg==}
     peerDependencies:
       '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
@@ -7448,7 +7452,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@vue/devtools-api': 6.4.5
+      '@vue/devtools-api': 6.5.0
       typescript: 4.9.5
       vue: 3.2.47
       vue-demi: 0.13.1_vue@3.2.47
