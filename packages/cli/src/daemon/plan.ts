@@ -1,4 +1,4 @@
-import { link } from 'kolorist';
+import { link } from '@breadc/color';
 import { subMonths } from 'date-fns';
 
 import type { Episode } from '@animepaste/database';

@@ -3,7 +3,7 @@ import { move, existsSync, rmSync } from 'fs-extra';
 
 import createDebug from 'debug';
 import Webtorrent from 'webtorrent';
-import { green, lightBlue } from 'kolorist';
+import { green, lightBlue } from '@breadc/color';
 
 import { DOT, logger } from '../../logger';
 

@@ -1,5 +1,5 @@
 import createDebug from 'debug';
-import { lightRed } from 'kolorist';
+import { lightRed } from '@breadc/color';
 
 import { app } from './commands';
 

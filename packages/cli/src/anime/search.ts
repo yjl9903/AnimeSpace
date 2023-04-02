@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import prompts from 'prompts';
 import createDebug from 'debug';
 import { distance } from 'fastest-levenshtein';
-import { link, bold, dim } from 'kolorist';
+import { link, bold, dim } from '@breadc/color';
 import { format, subMonths } from 'date-fns';
 
 import type { BaseBangumi, ExtendBangumi } from '@animepaste/bangumi';

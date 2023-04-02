@@ -7,7 +7,7 @@ export {
   getBgmLink
 } from '@animepaste/bangumi/utils';
 
-import { link } from 'kolorist';
+import { link } from '@breadc/color';
 
 export function bangumiLink(bgmId: string) {
   return link(`Bangumi: ${bgmId}`, getBgmLink(bgmId));

@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import { bold, dim, link } from 'kolorist';
+import { bold, dim, link } from '@breadc/color';
 
 import type { AnimeType } from '../types';
 

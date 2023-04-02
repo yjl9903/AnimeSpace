@@ -1,4 +1,4 @@
-import { red, green, dim, lightBlue } from 'kolorist';
+import { red, green, dim, lightBlue } from '@breadc/color';
 
 import { DOT, logger } from '../logger';
 

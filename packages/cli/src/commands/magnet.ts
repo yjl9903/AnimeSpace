@@ -1,4 +1,4 @@
-import { link } from 'kolorist';
+import { link } from '@breadc/color';
 
 import { context } from '../context';
 import { logger, IndexListener, DOT } from '../logger';

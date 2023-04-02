@@ -1,6 +1,6 @@
 import * as fs from 'fs-extra';
 import * as path from 'node:path';
-import { bold, dim, link } from 'kolorist';
+import { bold, dim, link } from '@breadc/color';
 import { format, subMonths } from 'date-fns';
 
 import type { Episode } from '@animepaste/database';
