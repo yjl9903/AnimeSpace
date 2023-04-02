@@ -28,7 +28,7 @@
     "@iconify-json/mdi": "^1.1.50",
     "@types/node": "^18.14.6",
     "@types/nprogress": "^0.2.0",
-    "@types/prompts": "^2.4.3",
+    "@types/prompts": "^2.4.4",
     "@types/scrollreveal": "^0.0.8",
     "@unocss/reset": "^0.50.6",
     "@vitejs/plugin-vue": "^4.0.0",
