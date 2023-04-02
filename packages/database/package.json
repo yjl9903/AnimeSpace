@@ -1,6 +1,6 @@
 {
   "name": "@animepaste/database",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Local SQLite database used for Anime Paste CLI",
   "keywords": [
     "anime",
