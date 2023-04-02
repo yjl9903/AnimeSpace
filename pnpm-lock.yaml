@@ -182,7 +182,7 @@ importers:
       fastest-levenshtein: ^1.0.16
       fs-extra: ^11.1.0
       js-yaml: ^4.1.0
-      kolorist: ^1.6.0
+      kolorist: ^1.7.0
       lbear: ^0.2.1
       mediainfo.js: ^0.1.9
       optc: ^0.5.7
@@ -203,7 +203,7 @@ importers:
       fastest-levenshtein: 1.0.16
       fs-extra: 11.1.0
       js-yaml: 4.1.0
-      kolorist: 1.6.0
+      kolorist: 1.7.0
       lbear: 0.2.1
       mediainfo.js: 0.1.9
       prompts: 2.4.2
@@ -6358,10 +6358,10 @@ packages:
 
   /kolorist/1.6.0:
     resolution: {integrity: sha512-dLkz37Ab97HWMx9KTes3Tbi3D1ln9fCAy2zr2YVExJasDRPGRaKcoE4fycWNtnCAJfjFqe0cnY+f8KT2JePEXQ==}
+    dev: true
 
   /kolorist/1.7.0:
     resolution: {integrity: sha512-ymToLHqL02udwVdbkowNpzjFd6UzozMtshPQKVi5k1EjKRqKqBrOnE9QbLEb0/pV76SAiIT13hdL8R6suc+f3g==}
-    dev: true
 
   /last-one-wins/1.0.4:
     resolution: {integrity: sha512-t+KLJFkHPQk8lfN6WBOiGkiUXoub+gnb2XTYI2P3aiISL+94xgZ1vgz1SXN/N4hthuOoLXarXfBZPUruyjQtfA==}
