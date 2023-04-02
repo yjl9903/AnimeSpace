@@ -1,5 +1,11 @@
 import { format } from 'date-fns';
-import { lightBlue, lightRed, link, lightGreen, lightYellow } from 'kolorist';
+import {
+  lightBlue,
+  lightRed,
+  link,
+  lightGreen,
+  lightYellow
+} from '@breadc/color';
 
 import type { IndexOption, Resource } from '@animepaste/database';
 

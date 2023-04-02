@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import crypto from 'node:crypto';
 
-import { bold } from 'kolorist';
+import { bold } from '@breadc/color';
 import { Format, MultiBar, Presets, SingleBar } from 'cli-progress';
 
 export function b64encode(text: string) {

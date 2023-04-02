@@ -10,7 +10,7 @@ import {
   red,
   lightGreen,
   lightBlue
-} from 'kolorist';
+} from '@breadc/color';
 
 import type { VideoInfo } from '../io';
 

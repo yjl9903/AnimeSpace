@@ -4,14 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 import { breadc } from 'breadc';
 
-import type { ExtendBangumi, BangumiType } from './core/types';
+import { version } from '../package.json';
 
-const version = JSON.parse(
-  fs.readFileSync(
-    path.join(fileURLToPath(import.meta.url), '../../package.json'),
-    'utf-8'
-  )
-).version;
+import type { ExtendBangumi, BangumiType } from './core/types';
 
 const bangumi = breadc('bangumi', { version });
 
@@ -19,8 +14,8 @@ bangumi
   .command('<output>')
   .option('--begin <begin>', 'Begin date')
   .option('--end <end>', 'End date')
-  .option('--type <type>', 'Filter bangumi types')
-  .option('--fields <fileds>', 'Enable extension fields')
+  .option('--type <type>', 'Filter bangumi types', { default: '' })
+  .option('--fields <fileds>', 'Enable extension fields', { default: '' })
   .option('--compress', 'Enable compress')
   .action(async (name, option) => {
     const { transform } = await import('./transform');
