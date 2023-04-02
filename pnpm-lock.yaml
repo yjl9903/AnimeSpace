@@ -84,7 +84,7 @@ importers:
       unplugin-auto-import: 0.15.2
       unplugin-vue-components: ^0.24.1
       vite: ^4.1.4
-      vite-plugin-cloudflare-functions: ^0.5.0
+      vite-plugin-cloudflare-functions: ^0.5.1
       vite-plugin-info: ^0.4.0
       vite-plugin-inspect: ^0.7.18
       vite-plugin-pages: ^0.28.0
@@ -127,7 +127,7 @@ importers:
       unplugin-auto-import: 0.15.2_@vueuse+core@9.13.0
       unplugin-vue-components: 0.24.1_vue@3.2.47
       vite: 4.1.4_@types+node@18.14.6
-      vite-plugin-cloudflare-functions: 0.5.0_pqnhefgwxvdsyaie6bzd3mprvu
+      vite-plugin-cloudflare-functions: 0.5.1_pqnhefgwxvdsyaie6bzd3mprvu
       vite-plugin-info: 0.4.0_vite@4.1.4
       vite-plugin-inspect: 0.7.18_vite@4.1.4
       vite-plugin-pages: 0.28.0_vite@4.1.4
@@ -245,9 +245,9 @@ importers:
 
   packages/functions:
     specifiers:
-      vite-plugin-cloudflare-functions: ^0.5.0
+      vite-plugin-cloudflare-functions: ^0.5.1
     devDependencies:
-      vite-plugin-cloudflare-functions: 0.5.0
+      vite-plugin-cloudflare-functions: 0.5.1
 
 packages:
 
@@ -1709,8 +1709,8 @@ packages:
       mime: 3.0.0
     dev: true
 
-  /@cloudflare/workers-types/4.20230215.0:
-    resolution: {integrity: sha512-s71gaGwtEIxjSu6l0cekbXm9AwjrmrFVcHPNx9tHidG2dnqamYf5Nms/KgMYZf7gnjdKOp/ZChYFeJJkNv3QfA==}
+  /@cloudflare/workers-types/4.20230321.0:
+    resolution: {integrity: sha512-zyRFz9AUS0tbg3/kJ+3zxvp9fl/O9yOJlChih/o86hhOqRMcZVbWefYAvFPidRvYUHM5YTG1wjU1bF9FFckRVg==}
     dev: true
 
   /@docsearch/css/3.3.0:
@@ -9134,14 +9134,14 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.5.0:
-    resolution: {integrity: sha512-1m+NNWp2Ux0ESlwhp305GcpgKxxICZt2s6YIcavf+LA2mmuErBb2A/O7HzoOwl07JHA/mKeWKPSHvdtxHqC19A==}
-    engines: {node: '>=v16'}
+  /vite-plugin-cloudflare-functions/0.5.1:
+    resolution: {integrity: sha512-TZcp4BuWDmKxl64377nXpd0IxCbGazFXYmVaE71IIvzkB+fMYWNC5wMP7mwZq7d2qvINQHFIR25pXV7BXB81SQ==}
+    engines: {node: '>=v18.15.0'}
     peerDependencies:
-      axios: ^1.3.3
+      axios: ^1.3.4
       ohmyfetch: ^0.4.21
       vite: ^3.1.8 || ^4.0.0
-      wrangler: ^2.9.1
+      wrangler: ^2.13.0
     peerDependenciesMeta:
       axios:
         optional: true
@@ -9152,24 +9152,24 @@ packages:
       wrangler:
         optional: true
     dependencies:
-      '@cloudflare/workers-types': 4.20230215.0
+      '@cloudflare/workers-types': 4.20230321.0
       debug: 4.3.4
       fast-glob: 3.2.12
-      mlly: 1.1.1
+      mlly: 1.2.0
       picocolors: 1.0.0
       tree-kill: 1.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite-plugin-cloudflare-functions/0.5.0_pqnhefgwxvdsyaie6bzd3mprvu:
-    resolution: {integrity: sha512-1m+NNWp2Ux0ESlwhp305GcpgKxxICZt2s6YIcavf+LA2mmuErBb2A/O7HzoOwl07JHA/mKeWKPSHvdtxHqC19A==}
-    engines: {node: '>=v16'}
+  /vite-plugin-cloudflare-functions/0.5.1_pqnhefgwxvdsyaie6bzd3mprvu:
+    resolution: {integrity: sha512-TZcp4BuWDmKxl64377nXpd0IxCbGazFXYmVaE71IIvzkB+fMYWNC5wMP7mwZq7d2qvINQHFIR25pXV7BXB81SQ==}
+    engines: {node: '>=v18.15.0'}
     peerDependencies:
-      axios: ^1.3.3
+      axios: ^1.3.4
       ohmyfetch: ^0.4.21
       vite: ^3.1.8 || ^4.0.0
-      wrangler: ^2.9.1
+      wrangler: ^2.13.0
     peerDependenciesMeta:
       axios:
         optional: true
@@ -9180,11 +9180,11 @@ packages:
       wrangler:
         optional: true
     dependencies:
-      '@cloudflare/workers-types': 4.20230215.0
+      '@cloudflare/workers-types': 4.20230321.0
       axios: 1.3.4
       debug: 4.3.4
       fast-glob: 3.2.12
-      mlly: 1.1.1
+      mlly: 1.2.0
       picocolors: 1.0.0
       tree-kill: 1.2.2
       vite: 4.1.4_@types+node@18.14.6
