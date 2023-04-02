@@ -44,7 +44,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@prisma/client": "^4.8.1",
+    "@prisma/client": "^4.12.0",
     "axios": "^1.3.4",
     "cnchar": "^3.2.2",
     "cnchar-trad": "^3.2.2",
@@ -53,7 +53,7 @@
     "node-html-parser": "^6.1.5"
   },
   "devDependencies": {
-    "prisma": "^4.8.1",
+    "prisma": "^4.12.0",
     "unbuild": "^1.1.2"
   },
   "engines": {
