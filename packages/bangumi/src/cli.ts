@@ -14,7 +14,7 @@ bangumi
   .command('<output>')
   .option('--begin <begin>', 'Begin date')
   .option('--end <end>', 'End date')
-  .option('--type <type>', 'Filter bangumi types', { default: '' })
+  .option('--type <type>', 'Filter bangumi types', { default: 'tv' })
   .option('--fields <fileds>', 'Enable extension fields', { default: '' })
   .option('--compress', 'Enable compress')
   .action(async (name, option) => {
@@ -23,8 +23,10 @@ bangumi
     const data = await transform({
       begin: option.begin,
       end: option.end,
-      type: option.type.split(',') as BangumiType[],
-      fields: option.fields.split(',') as Array<keyof ExtendBangumi>,
+      type: option.type.split(',').filter(Boolean) as BangumiType[],
+      fields: option.fields.split(',').filter(Boolean) as Array<
+        keyof ExtendBangumi
+      >,
       compress: option.compress
     });
 
