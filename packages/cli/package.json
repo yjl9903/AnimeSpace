@@ -37,7 +37,7 @@
     "*.mjs"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "pnpm postinstall && unbuild",
     "dev": "unbuild --stub",
     "format": "prettier --write src/**/*.ts",
     "postinstall": "optc scripts/bangumi.ts",
