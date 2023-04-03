@@ -1,4 +1,4 @@
-import { Video } from '@prisma/client';
+import type { Video } from '@prisma/client';
 import { AbstractDatabase, DatabaseOption } from '../database';
 
 import type { VideoInfo } from './types';

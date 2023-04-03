@@ -1,9 +1,7 @@
+import type { Episode as RawEpisode, Resource } from '@prisma/client';
+
 import createDebug from 'debug';
-import {
-  type Episode as RawEpisode,
-  type Resource,
-  Prisma
-} from '@prisma/client';
+import * as Prisma from '@prisma/client';
 
 import { MagnetParser } from '../parser';
 import { AbstractDatabase } from '../database';
@@ -52,7 +50,7 @@ export class EpisodeStore extends AbstractDatabase {
         })
       );
     } catch (error) {
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error instanceof Prisma.Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
           debug(`Found episode: ${magnet.title}`);
         } else {

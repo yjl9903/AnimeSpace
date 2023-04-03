@@ -1,8 +1,10 @@
 import fs from 'fs-extra';
-import crypto from 'node:crypto';
+import * as crypto from 'node:crypto';
 
 import { bold } from '@breadc/color';
-import { Format, MultiBar, Presets, SingleBar } from 'cli-progress';
+import Progress from 'cli-progress';
+
+const { Format, MultiBar, Presets, SingleBar } = Progress;
 
 export function b64encode(text: string) {
   return Buffer.from(text, 'utf-8').toString('base64');

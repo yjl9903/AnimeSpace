@@ -3,7 +3,7 @@ import path from 'node:path';
 import OSS from 'ali-oss';
 import onDeath from 'death';
 import RPCClient from '@alicloud/pop-core';
-import { debug as createDebug } from 'debug';
+import createDebug from 'debug';
 
 import { logger } from '../../logger';
 import { context } from '../../context';

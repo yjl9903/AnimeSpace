@@ -1,5 +1,6 @@
+import * as Prisma from '@prisma/client';
+
 import createDebug from 'debug';
-import { Prisma, Resource } from '@prisma/client';
 import { subMonths, isBefore, subDays } from 'date-fns';
 
 import { simpleToTrad, sleep } from '../utils';
@@ -146,7 +147,7 @@ export class MagnetStore extends AbstractDatabase {
     return result;
   }
 
-  async createResource(payload: Prisma.ResourceCreateInput) {
+  async createResource(payload: Prisma.Prisma.ResourceCreateInput) {
     if (payload.type === '動畫') {
       payload.keywords = this.parser.normalizeMagnetTitle(payload.title);
     }
@@ -156,7 +157,7 @@ export class MagnetStore extends AbstractDatabase {
       await this.timestamp(new Date(payload.createdAt));
       return resp;
     } catch (error) {
-      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error instanceof Prisma.Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {
           // debug(
           //   `There is a unique constraint violation when inserting resource`
@@ -189,11 +190,11 @@ export class MagnetStore extends AbstractDatabase {
   }
 
   async createResources(
-    payloads: Prisma.ResourceCreateInput[]
-  ): Promise<Resource[]> {
+    payloads: Prisma.Prisma.ResourceCreateInput[]
+  ): Promise<Prisma.Resource[]> {
     return (
       await Promise.all(payloads.map((p) => this.createResource(p)))
-    ).filter(Boolean) as Resource[];
+    ).filter(Boolean) as Prisma.Resource[];
   }
 
   async findById(id: string) {

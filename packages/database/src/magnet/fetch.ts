@@ -1,7 +1,8 @@
+import type { Prisma } from '@prisma/client';
+
 import axios from 'axios';
 import createDebug from 'debug';
 import { parse } from 'node-html-parser';
-import { Prisma } from '@prisma/client';
 
 const debug = createDebug('anime:search');
 

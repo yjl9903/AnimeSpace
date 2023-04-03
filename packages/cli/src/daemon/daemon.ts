@@ -1,4 +1,4 @@
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import * as path from 'node:path';
 import { bold, dim, link } from '@breadc/color';
 import { format, subMonths } from 'date-fns';

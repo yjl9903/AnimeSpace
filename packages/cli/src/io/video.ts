@@ -1,4 +1,4 @@
-import { promises as fsPromises } from 'fs-extra';
+import fs from 'fs-extra';
 import MediaInfoFactory, { ReadChunkFunc, Result } from 'mediainfo.js';
 
 const mediaInfoPromise = MediaInfoFactory();
@@ -10,7 +10,7 @@ export async function closeMediaInfo() {
 
 export async function getVideoInfo(filepath: string) {
   const mediaInfo = await mediaInfoPromise;
-  let fileHandle: fsPromises.FileHandle | undefined = undefined;
+  let fileHandle: fs.promises.FileHandle | undefined = undefined;
   let fileSize: number = 0;
 
   const readChunk: ReadChunkFunc = async (size, offset) => {
@@ -20,7 +20,7 @@ export async function getVideoInfo(filepath: string) {
   };
 
   try {
-    fileHandle = await fsPromises.open(filepath, 'r');
+    fileHandle = await fs.promises.open(filepath, 'r');
     fileSize = (await fileHandle.stat()).size;
     const result = (await mediaInfo.analyzeData(
       () => fileSize,

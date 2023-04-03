@@ -1,5 +1,5 @@
+import fs from 'fs-extra';
 import * as path from 'node:path';
-import { remove } from 'fs-extra';
 
 import { format } from 'date-fns';
 import {
@@ -102,7 +102,7 @@ export default function setup() {
             info?.source.directory,
             info.title
           );
-          await remove(filepath);
+          await fs.remove(filepath);
           logger.println(`${green(`✓ Delete    ${filepath}`)}`);
         }
       };

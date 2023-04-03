@@ -1,5 +1,5 @@
-import path from 'node:path';
-import { move, existsSync, rmSync } from 'fs-extra';
+import fs from 'fs-extra';
+import * as path from 'node:path';
 
 import createDebug from 'debug';
 import Webtorrent from 'webtorrent';
@@ -46,7 +46,7 @@ export class TorrentClient {
     const tasks = downloadTasks.map((downloadTask): Promise<void> => {
       if (downloadTask.filename) {
         const finalPath = path.join(this.folder, downloadTask.filename);
-        if (existsSync(finalPath)) {
+        if (fs.existsSync(finalPath)) {
           return Promise.resolve();
         }
       }
@@ -71,7 +71,7 @@ export class TorrentClient {
             // Torrent ---> File -- copy --> Final File
             if (torrent.files.length === 1) {
               // Final File exists
-              if (finalPath && existsSync(finalPath)) {
+              if (finalPath && fs.existsSync(finalPath)) {
                 res();
                 return;
               }
@@ -109,7 +109,7 @@ export class TorrentClient {
                 const file = torrent.files[0];
                 const downloadedPath = normalizePath(file.path);
                 if (finalPath && finalPath !== downloadedPath) {
-                  await move(downloadedPath, finalPath);
+                  await fs.move(downloadedPath, finalPath);
                 }
                 res();
               } else {
@@ -122,18 +122,18 @@ export class TorrentClient {
 
                 const filepath = normalizePath(file.path);
                 if (finalPath && finalPath !== filepath) {
-                  await move(filepath, finalPath);
+                  await fs.move(filepath, finalPath);
                 }
 
                 // Clear other files
                 for (const file of torrent.files) {
                   try {
-                    rmSync(normalizePath(file.path));
+                    fs.rmSync(normalizePath(file.path));
                   } catch {}
                 }
                 for (const file of torrent.files) {
                   try {
-                    rmSync(path.dirname(normalizePath(file.path)));
+                    fs.rmSync(path.dirname(normalizePath(file.path)));
                   } catch {}
                 }
                 res();

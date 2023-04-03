@@ -1,4 +1,4 @@
-export { Resource } from '@prisma/client';
+export type { Resource } from '@prisma/client';
 
 export * from './video';
 

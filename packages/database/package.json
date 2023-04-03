@@ -19,6 +19,7 @@
   "license": "AGPL-3.0",
   "author": "XLor",
   "sideEffects": false,
+  "type": "module",
   "exports": {
     ".": {
       "require": "./dist/index.cjs",

@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { PrismaClient } from '@prisma/client';
+import * as Prisma from '@prisma/client';
 
 export interface DatabaseOption {
   url?: string;
@@ -15,17 +15,17 @@ export abstract class AbstractDatabase {
   );
 
   protected readonly filepath: string;
-  protected readonly prisma: PrismaClient;
+  protected readonly prisma: Prisma.PrismaClient;
 
   constructor(option: DatabaseOption = {}) {
     if (option.url) {
       this.filepath = option.url;
-      this.prisma = new PrismaClient({
+      this.prisma = new Prisma.PrismaClient({
         datasources: { db: { url: 'file:' + option.url } }
       });
     } else {
       this.filepath = AbstractDatabase.DefaultFilepath;
-      this.prisma = new PrismaClient();
+      this.prisma = new Prisma.PrismaClient();
     }
   }
 

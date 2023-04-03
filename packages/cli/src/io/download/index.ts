@@ -1,6 +1,6 @@
+import fs from 'fs-extra';
 import * as path from 'node:path';
 import { Transform, pipeline } from 'stream';
-import { createWriteStream, existsSync, removeSync } from 'fs-extra';
 
 import axios from 'axios';
 import onDeath from 'death';
@@ -28,7 +28,7 @@ export async function download(...payloads: DownloadPayload[]): Promise<void> {
   });
 
   const down = async (payload: DownloadPayload): Promise<void> => {
-    if (existsSync(payload.filepath)) {
+    if (fs.existsSync(payload.filepath)) {
       return;
     }
 
@@ -53,10 +53,10 @@ export async function download(...payloads: DownloadPayload[]): Promise<void> {
       +headers['content-length']!
     );
 
-    const writeStream = createWriteStream(payload.filepath);
+    const writeStream = fs.createWriteStream(payload.filepath);
 
     const cancel = onDeath(() => {
-      removeSync(payload.filepath);
+      fs.removeSync(payload.filepath);
     });
 
     return new Promise((res, rej) => {
@@ -72,7 +72,7 @@ export async function download(...payloads: DownloadPayload[]): Promise<void> {
         writeStream,
         (err) => {
           if (err) {
-            removeSync(payload.filepath);
+            fs.removeSync(payload.filepath);
             rej(err);
           } else {
             cancel();

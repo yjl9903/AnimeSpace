@@ -1,5 +1,5 @@
+import createDebug from 'debug';
 import axios, { AxiosInstance } from 'axios';
-import { debug as createDebug } from 'debug';
 
 import { proxy } from '@animepaste/database';
 

@@ -1,18 +1,21 @@
-import path from 'node:path';
-import { existsSync, readFileSync } from 'fs-extra';
+import fs from 'fs-extra';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import prompts from 'prompts';
 import createDebug from 'debug';
+
+const __dirname = path.join(fileURLToPath(import.meta.url), '../');
 
 export const debug = createDebug('anime:cli');
 
 export function getVersion(): string {
   const pkg = path.join(__dirname, '../package.json');
-  if (existsSync(pkg)) {
-    return JSON.parse(readFileSync(pkg, 'utf-8')).version;
+  if (fs.existsSync(pkg)) {
+    return JSON.parse(fs.readFileSync(pkg, 'utf-8')).version;
   } else {
     return JSON.parse(
-      readFileSync(path.join(__dirname, '../../package.json'), 'utf-8')
+      fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf-8')
     ).version;
   }
 }
