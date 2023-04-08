@@ -34,7 +34,7 @@
     "@vitejs/plugin-vue": "^4.1.0",
     "bangumi-data": "^0.3.112",
     "cross-env": "^7.0.3",
-    "typescript": "^5.0.3",
+    "typescript": "^5.0.4",
     "unocss": "^0.50.6",
     "unplugin-auto-import": "0.15.2",
     "unplugin-vue-components": "^0.24.1",
