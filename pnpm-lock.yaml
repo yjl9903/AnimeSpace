@@ -324,8 +324,8 @@ importers:
         specifier: ^3.2.3
         version: 3.2.3
       cnchar-trad:
-        specifier: ^3.2.3
-        version: 3.2.3
+        specifier: ^3.2.4
+        version: 3.2.4
       date-fns:
         specifier: ^2.29.3
         version: 2.29.3
@@ -4368,14 +4368,18 @@ packages:
     engines: {node: '>=0.8'}
     dev: false
 
-  /cnchar-trad@3.2.3:
-    resolution: {integrity: sha512-PD8Cak/QivSjzBoRuKXe2xjHvUNHqR7u0lWhaNGDbWJpaN4kux53ZBUog8IOH0u6x9pWEQeiHvfv5jnVAKuIIA==}
+  /cnchar-trad@3.2.4:
+    resolution: {integrity: sha512-RWqH8UjBN8WG/2CEl6+Kck58lFinP9WysWOoZndD0gSkDV9lgAU3ssdJMJUPxzrcAAI26CfBk1OVXSKuZTNu3A==}
     dependencies:
-      cnchar-types: 3.2.3
+      cnchar-types: 3.2.4
     dev: false
 
   /cnchar-types@3.2.3:
     resolution: {integrity: sha512-/ZVgp+8YQPTk2Gec1UibUJew0Ra+RVYOIqbbhTE20CxLZBQCA7VCEC/BYCGjqrsPoV3cIsymv4S09BZTZ1y38w==}
+    dev: false
+
+  /cnchar-types@3.2.4:
+    resolution: {integrity: sha512-px3V2FQ7M6iS0OJsu/XxNGQcCf4jfHV9xHmLte9UgQv04DK7Ss9x719FQwIVfT8uy+iyfIth77B/D4ufDGDAIA==}
     dev: false
 
   /cnchar@3.2.3:
