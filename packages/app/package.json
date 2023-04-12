@@ -41,7 +41,7 @@
     "vite": "^4.2.1",
     "vite-plugin-cloudflare-functions": "^0.5.1",
     "vite-plugin-info": "^0.4.0",
-    "vite-plugin-inspect": "^0.7.19",
+    "vite-plugin-inspect": "^0.7.20",
     "vite-plugin-pages": "^0.29.0",
     "vite-plugin-pwa": "^0.14.7",
     "vite-ssg": "^0.22.2",

@@ -172,8 +172,8 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0(vite@4.2.1)
       vite-plugin-inspect:
-        specifier: ^0.7.19
-        version: 0.7.19(rollup@2.79.1)(vite@4.2.1)
+        specifier: ^0.7.20
+        version: 0.7.20(rollup@2.79.1)(vite@4.2.1)(vue@3.2.47)
       vite-plugin-pages:
         specifier: ^0.29.0
         version: 0.29.0(vite@4.2.1)
@@ -3565,7 +3565,7 @@ packages:
       '@vueuse/metadata': 8.9.4
       '@vueuse/shared': 8.9.4(vue@3.2.33)
       vue: 3.2.33
-      vue-demi: 0.13.1(vue@3.2.33)
+      vue-demi: 0.13.11(vue@3.2.33)
     dev: true
 
   /@vueuse/core@9.13.0(vue@3.2.47):
@@ -3609,7 +3609,7 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.33
-      vue-demi: 0.13.1(vue@3.2.33)
+      vue-demi: 0.13.11(vue@3.2.33)
     dev: true
 
   /@vueuse/shared@9.13.0(vue@3.2.47):
@@ -4812,6 +4812,13 @@ packages:
 
   /duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
+    dev: true
+
+  /echarts@5.4.2:
+    resolution: {integrity: sha512-2W3vw3oI2tWJdyAz+b8DuWS0nfXtSDqlDmqgin/lfzbkB01cuMEN66KWBlmur3YMp5nEDEEt5s23pllnAzB4EA==}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.4.3
     dev: true
 
   /ee-first@1.1.1:
@@ -7710,6 +7717,10 @@ packages:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
     dev: true
 
+  /resize-detector@0.3.0:
+    resolution: {integrity: sha512-R/tCuvuOHQ8o2boRP6vgx8hXCCy87H1eY9V5imBYeVNyNVpuL9ciReSccLj2gDcax9+2weXy3bc8Vv+NRXeEvQ==}
+    dev: true
+
   /resolve@1.22.1:
     resolution: {integrity: sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==}
     hasBin: true
@@ -8480,6 +8491,10 @@ packages:
     hasBin: true
     dev: true
 
+  /tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: true
+
   /tslib@2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
 
@@ -9072,8 +9087,8 @@ packages:
       vite: 4.2.1(@types/node@18.15.11)
     dev: true
 
-  /vite-plugin-inspect@0.7.19(rollup@2.79.1)(vite@4.2.1):
-    resolution: {integrity: sha512-OdKObJGdzOMR7SuqykN/Rb6rVtMK1wp4EmUTM3xhTCuSR1K/oM7fi4CKeBWhpYSkqop7O4gVB/MOUk7+RO7gIQ==}
+  /vite-plugin-inspect@0.7.20(rollup@2.79.1)(vite@4.2.1)(vue@3.2.47):
+    resolution: {integrity: sha512-vpfIAGtkBtpeEWFWUulxmU9tG/EgLMS37te7zzXnoshH+FxcgO7/kUTHaKTF7gOXkMNpHsVX9+BWMMx4iM5dqg==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
@@ -9081,14 +9096,18 @@ packages:
       '@antfu/utils': 0.7.2
       '@rollup/pluginutils': 5.0.2(rollup@2.79.1)
       debug: 4.3.4
+      echarts: 5.4.2
       fs-extra: 11.1.1
       kolorist: 1.7.0
       sirv: 2.0.2
       ufo: 1.1.1
       vite: 4.2.1(@types/node@18.15.11)
+      vue-echarts: 6.5.4(echarts@5.4.2)(vue@3.2.47)
     transitivePeerDependencies:
+      - '@vue/composition-api'
       - rollup
       - supports-color
+      - vue
     dev: true
 
   /vite-plugin-pages@0.29.0(vite@4.2.1):
@@ -9334,21 +9353,6 @@ packages:
     resolution: {integrity: sha512-Uw5ooOQxRASHgu6C7GVvUxisKXfSgW4oFlO+aa+PAkgmH89O3CXxEEzNRNtHSqtXFTl0nAC1uYj0GMSH27uwtQ==}
     dev: true
 
-  /vue-demi@0.13.1(vue@3.2.33):
-    resolution: {integrity: sha512-xmkJ56koG3ptpLnpgmIzk9/4nFf4CqduSJbUM0OdPoU87NwRuZ6x49OLhjSa/fC15fV+5CbEnrxU4oyE022svg==}
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-    dependencies:
-      vue: 3.2.33
-    dev: true
-
   /vue-demi@0.13.1(vue@3.2.47):
     resolution: {integrity: sha512-xmkJ56koG3ptpLnpgmIzk9/4nFf4CqduSJbUM0OdPoU87NwRuZ6x49OLhjSa/fC15fV+5CbEnrxU4oyE022svg==}
     engines: {node: '>=12'}
@@ -9362,6 +9366,53 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.47
+
+  /vue-demi@0.13.11(vue@3.2.33):
+    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.33
+    dev: true
+
+  /vue-demi@0.13.11(vue@3.2.47):
+    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: 3.2.47
+    dev: true
+
+  /vue-echarts@6.5.4(echarts@5.4.2)(vue@3.2.47):
+    resolution: {integrity: sha512-pLJTk2hfhauoWdmiZGXByAtcO6bpfnAS+jkJqKimSBSV5I5ckh2nka9duLlIVbTvQOEb2tFa0XiXjACQNcEfpA==}
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.5
+      echarts: ^5.4.1
+      vue: ^2.6.12 || ^3.1.1
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      echarts: 5.4.2
+      resize-detector: 0.3.0
+      vue: 3.2.47
+      vue-demi: 0.13.11(vue@3.2.47)
+    dev: true
 
   /vue-router@4.1.6(vue@3.2.47):
     resolution: {integrity: sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==}
@@ -9913,3 +9964,9 @@ packages:
 
   /zhead@2.0.4:
     resolution: {integrity: sha512-V4R94t3ifk9AURym6OskbKcnowzgp5Z88tkoL/NF67vyryNxC62u6mx5F1Ux4oh4+YN7FFmKYEyWy6m5kfPH6g==}
+
+  /zrender@5.4.3:
+    resolution: {integrity: sha512-DRUM4ZLnoaT0PBVvGBDO9oWIDBKFdAVieNWxWwK0niYzJCMwGchRk21/hsE+RKkIveH3XHCyvXcJDkgLVvfizQ==}
+    dependencies:
+      tslib: 2.3.0
+    dev: true
