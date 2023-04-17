@@ -145,8 +145,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(vite@4.2.1)(vue@3.2.47)
       bangumi-data:
-        specifier: ^0.3.113
-        version: 0.3.113
+        specifier: ^0.3.114
+        version: 0.3.114
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -209,8 +209,8 @@ importers:
         version: 4.3.4
     devDependencies:
       bangumi-data:
-        specifier: ^0.3.113
-        version: 0.3.113
+        specifier: ^0.3.114
+        version: 0.3.114
       date-fns:
         specifier: ^2.29.3
         version: 2.29.3
@@ -303,8 +303,8 @@ importers:
         specifier: ^0.109.3
         version: 0.109.3
       bangumi-data:
-        specifier: ^0.3.113
-        version: 0.3.113
+        specifier: ^0.3.114
+        version: 0.3.114
       optc:
         specifier: ^0.6.2
         version: 0.6.2
@@ -3878,8 +3878,8 @@ packages:
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  /bangumi-data@0.3.113:
-    resolution: {integrity: sha512-YFtEgBAI0gE4qmKhpijC4R89/OAjDEs5sCXNbsAgtpkYW4+sn62e5XjMU0uNVIqvwzliOHvj/G+hn48S78T7rQ==}
+  /bangumi-data@0.3.114:
+    resolution: {integrity: sha512-WJCAmYJGDgDAetqjcMPx6Pwvjn5wmsFi88bBfN+eB8EemCnuwkqglH+upPlka8odTbigU2/fvylIZEwgIpCjXA==}
     dev: true
 
   /base64-arraybuffer@1.0.2:
