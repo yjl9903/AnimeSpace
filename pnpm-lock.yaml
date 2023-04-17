@@ -321,8 +321,8 @@ importers:
         specifier: ^0.0.7
         version: 0.0.7
       cnchar:
-        specifier: ^3.2.3
-        version: 3.2.3
+        specifier: ^3.2.4
+        version: 3.2.4
       cnchar-trad:
         specifier: ^3.2.3
         version: 3.2.3
@@ -4352,10 +4352,14 @@ packages:
     resolution: {integrity: sha512-/ZVgp+8YQPTk2Gec1UibUJew0Ra+RVYOIqbbhTE20CxLZBQCA7VCEC/BYCGjqrsPoV3cIsymv4S09BZTZ1y38w==}
     dev: false
 
-  /cnchar@3.2.3:
-    resolution: {integrity: sha512-1R0uAR+qxMYsMSu0+JGfniR52tiMgmr6LAZjdaBLv5YofH9863mV6bdc5T1zguXgr1g8VZVwPqvvQS7DN7No0Q==}
+  /cnchar-types@3.2.4:
+    resolution: {integrity: sha512-px3V2FQ7M6iS0OJsu/XxNGQcCf4jfHV9xHmLte9UgQv04DK7Ss9x719FQwIVfT8uy+iyfIth77B/D4ufDGDAIA==}
+    dev: false
+
+  /cnchar@3.2.4:
+    resolution: {integrity: sha512-Gpz66OIcBp2WGStVZFt4I9NcKZYEwf7k3CjZ6eDb9LZa7QXwTO2QKer2Ko7HEPPKosRiwxAshdR3BaQ5mR+qqA==}
     dependencies:
-      cnchar-types: 3.2.3
+      cnchar-types: 3.2.4
     dev: false
 
   /color-convert@1.9.3:

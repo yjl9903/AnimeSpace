@@ -47,7 +47,7 @@
   "dependencies": {
     "@prisma/client": "^4.12.0",
     "animegarden": "^0.0.7",
-    "cnchar": "^3.2.3",
+    "cnchar": "^3.2.4",
     "cnchar-trad": "^3.2.3",
     "date-fns": "^2.29.3",
     "debug": "^4.3.4",
