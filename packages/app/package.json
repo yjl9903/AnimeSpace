@@ -35,7 +35,7 @@
     "bangumi-data": "^0.3.113",
     "cross-env": "^7.0.3",
     "typescript": "^5.0.4",
-    "unocss": "^0.51.4",
+    "unocss": "^0.51.5",
     "unplugin-auto-import": "0.15.3",
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.2.2",
