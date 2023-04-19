@@ -187,8 +187,8 @@ importers:
         specifier: ^0.30.1
         version: 0.30.1
       vue-tsc:
-        specifier: ^1.3.18
-        version: 1.3.18(typescript@5.0.4)
+        specifier: ^1.3.19
+        version: 1.3.19(typescript@5.0.4)
       workbox-window:
         specifier: ^6.5.4
         version: 6.5.4
@@ -3158,8 +3158,8 @@ packages:
       typescript: 5.0.4
     dev: true
 
-  /@volar/vue-language-core@1.3.18:
-    resolution: {integrity: sha512-VI7diAriwTsNJFXLEKy+OwmFiFyl4gXPXXuB04K5W9BLi2P6HXWr8n7I7BdqrDYplcE0FZmEbCEp4D9AwNjXXw==}
+  /@volar/vue-language-core@1.3.19:
+    resolution: {integrity: sha512-085+WSkvb142SmH5/jF06q/F64U38oSou2A37LKxZwn2WyUB1/vGPyXyHHdW7vF7Vx1UfiEPW0bs34yeUQW2XA==}
     dependencies:
       '@volar/language-core': 1.4.0-alpha.12
       '@volar/source-map': 1.4.0-alpha.12
@@ -3172,11 +3172,11 @@ packages:
       vue-template-compiler: 2.7.14
     dev: true
 
-  /@volar/vue-typescript@1.3.18(typescript@5.0.4):
-    resolution: {integrity: sha512-OGBUpMiNlXhS6pXNOMRABr2XvWZ/5jzBlZac/EivJ1b6pP4aDgK3UqolOXSce5v3nvq7i0g0UtqAXyv8KAXzPg==}
+  /@volar/vue-typescript@1.3.19(typescript@5.0.4):
+    resolution: {integrity: sha512-rN8VuJ+Sq5iHcFkNIehffQ6YOyX6T3XToviYRAfCroqbYYsYsyO1rxD4q0Shvrf27uMmlqKvpdy0N52jsIudbg==}
     dependencies:
       '@volar/typescript': 1.4.0-alpha.12(typescript@5.0.4)
-      '@volar/vue-language-core': 1.3.18
+      '@volar/vue-language-core': 1.3.19
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -9197,14 +9197,14 @@ packages:
       he: 1.2.0
     dev: true
 
-  /vue-tsc@1.3.18(typescript@5.0.4):
-    resolution: {integrity: sha512-szHti3sVthJFD7ORbNw1P65Di3/7JaRAK1za3tkLfPyRv3GExa+ZWj4pHjRqQZOEhqQcZpSM1nJSZCSHZhJ8PQ==}
+  /vue-tsc@1.3.19(typescript@5.0.4):
+    resolution: {integrity: sha512-HQdws4xE6PnhrO9UtfehL4LXRThkiZolHahzuNo7P/bjlwQi7fGEgiCNN9lhUkTeP9zkYU/rPqv4/4/Tb48fog==}
     hasBin: true
     peerDependencies:
       typescript: '*'
     dependencies:
-      '@volar/vue-language-core': 1.3.18
-      '@volar/vue-typescript': 1.3.18(typescript@5.0.4)
+      '@volar/vue-language-core': 1.3.19
+      '@volar/vue-typescript': 1.3.19(typescript@5.0.4)
       semver: 7.3.8
       typescript: 5.0.4
     dev: true
