@@ -172,8 +172,8 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0(vite@4.2.2)
       vite-plugin-inspect:
-        specifier: ^0.7.22
-        version: 0.7.22(rollup@2.79.1)(vite@4.2.2)
+        specifier: ^0.7.23
+        version: 0.7.23(rollup@2.79.1)(vite@4.2.2)
       vite-plugin-pages:
         specifier: ^0.29.0
         version: 0.29.0(vite@4.2.2)
@@ -8872,8 +8872,8 @@ packages:
       vite: 4.2.2(@types/node@18.15.11)
     dev: true
 
-  /vite-plugin-inspect@0.7.22(rollup@2.79.1)(vite@4.2.2):
-    resolution: {integrity: sha512-Z4y3MPuvn//0/XcpNLwTBqjfSt+c2utIFZu8Dw+nbR2HrPoIrKHedvSuqC8mLzxOpRKRoW60HWvZUDz8J2zRIA==}
+  /vite-plugin-inspect@0.7.23(rollup@2.79.1)(vite@4.2.2):
+    resolution: {integrity: sha512-VodzewpE9ufA8aPQhzTihbiMKAJ1aFoXNe+BB/3L52HB4Hf7I2WEOc1Yu4BC45rvw2VFuVnlXYlXL7JVQuseUw==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
