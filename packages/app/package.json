@@ -26,7 +26,7 @@
     "@iconify-json/carbon": "^1.1.16",
     "@iconify-json/ic": "^1.1.13",
     "@iconify-json/mdi": "^1.1.50",
-    "@types/node": "^18.15.11",
+    "@types/node": "^18.15.12",
     "@types/nprogress": "^0.2.0",
     "@types/prompts": "^2.4.4",
     "@types/scrollreveal": "^0.0.8",
