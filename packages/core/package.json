@@ -1,0 +1,47 @@
+{
+  "name": "@animepaste/core",
+  "version": "0.0.6",
+  "description": "Paste your favourite anime online",
+  "keywords": [
+    "anime",
+    "AnimePaste",
+    "XLorPaste",
+    "cli"
+  ],
+  "homepage": "https://anime.docs.xlorpaste.cn/",
+  "bugs": {
+    "url": "https://github.com/XLorPaste/AnimePaste/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XLorPaste/AnimePaste.git"
+  },
+  "license": "AGPL-3.0",
+  "author": "XLor",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "*.mjs"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "format": "prettier --write src/**/*.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=v16.0.0"
+  }
+}

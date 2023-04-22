@@ -5,11 +5,13 @@ on:
     branches:
       - main
       - next
+      - ng
       - dev/*
   pull_request:
     branches:
       - main
       - next
+      - ng
       - dev/*
 
 jobs:
