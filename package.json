@@ -22,16 +22,16 @@
     "postversion": "pnpm build:cli"
   },
   "devDependencies": {
-    "@types/node": "^18.15.11",
+    "@types/node": "^18.15.12",
     "bumpp": "latest",
     "optc": "latest",
     "prettier": "latest",
     "turbo": "latest",
-    "typescript": "^5.0.3",
-    "vite": "^4.2.1",
-    "vitest": "^0.29.8"
+    "typescript": "^5.0.4",
+    "vite": "^4.2.2",
+    "vitest": "^0.30.1"
   },
-  "packageManager": "pnpm@8.1.0",
+  "packageManager": "pnpm@8.3.1",
   "engines": {
     "node": ">=v16.0.0"
   }
