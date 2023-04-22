@@ -202,8 +202,8 @@ importers:
         specifier: ^1.3.6
         version: 1.3.6(debug@4.3.4)
       breadc:
-        specifier: ^0.9.0
-        version: 0.9.0
+        specifier: ^0.9.3
+        version: 0.9.3
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -245,8 +245,8 @@ importers:
         specifier: ^1.3.6
         version: 1.3.6(debug@4.3.4)
       breadc:
-        specifier: ^0.9.0
-        version: 0.9.0
+        specifier: ^0.9.3
+        version: 0.9.3
       cli-progress:
         specifier: ^3.12.0
         version: 3.12.0
@@ -1718,12 +1718,8 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@breadc/color@0.9.0:
-    resolution: {integrity: sha512-NDOrslds8q+pSwpZyFRdFsMoIkHsf5czDAPsG9kFHdN/JUcOHILYk5DL5L8Ewig2rZ9VqCmxcUK5MgzTOOI2Gw==}
-
   /@breadc/color@0.9.3:
     resolution: {integrity: sha512-kBrkvSm1CwrQBu4OtVPvl9qj02HRnghNiZpkr5qg0oFXtxGSf5kSPqQ5YKCP0aI+Ub1t6nWpDMtSw2mKTHqTKg==}
-    dev: false
 
   /@cloudflare/kv-asset-handler@0.2.0:
     resolution: {integrity: sha512-MVbXLbTcAotOPUj0pAMhVtJ+3/kFkwJqc5qNOleOZTv6QkZZABDMS21dSrSlVswEHwrpWC03e4fWytjqKvuE2A==}
@@ -3880,10 +3876,10 @@ packages:
       fill-range: 7.0.1
     dev: true
 
-  /breadc@0.9.0:
-    resolution: {integrity: sha512-+xB2332Xmo3e8xe7lBu07OQJGx7TKGOWMuwZ34FmWzQ1mJKidr6Hb0Mm5vxnMoXHlxIxc40XdRm2TD9D59H0Kg==}
+  /breadc@0.9.3:
+    resolution: {integrity: sha512-+1CqbeNNURsnoLFEgGIKIkOGPV/k3ye/MjSMEAXKw++lfM0qYxS3SN3gSFUhBujB/3U6ud+67AtAF+B0jzkTKQ==}
     dependencies:
-      '@breadc/color': 0.9.0
+      '@breadc/color': 0.9.3
 
   /browserslist@4.21.4:
     resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}
@@ -6939,7 +6935,7 @@ packages:
       '@types/fs-extra': 11.0.1
       '@types/node': 18.15.12
       axios: 1.3.6(debug@4.3.4)
-      breadc: 0.9.0
+      breadc: 0.9.3
       debug: 4.3.4
       find-up: 6.3.0
       fs-extra: 11.1.1
@@ -7177,7 +7173,7 @@ packages:
       '@vue/devtools-api': 6.5.0
       typescript: 5.0.4
       vue: 3.2.47
-      vue-demi: 0.13.11(vue@3.2.47)
+      vue-demi: 0.14.0(vue@3.2.47)
     dev: false
 
   /pkg-types@1.0.2:
@@ -9136,21 +9132,6 @@ packages:
   /vscode-textmate@5.2.0:
     resolution: {integrity: sha512-Uw5ooOQxRASHgu6C7GVvUxisKXfSgW4oFlO+aa+PAkgmH89O3CXxEEzNRNtHSqtXFTl0nAC1uYj0GMSH27uwtQ==}
     dev: true
-
-  /vue-demi@0.13.1(vue@3.2.47):
-    resolution: {integrity: sha512-xmkJ56koG3ptpLnpgmIzk9/4nFf4CqduSJbUM0OdPoU87NwRuZ6x49OLhjSa/fC15fV+5CbEnrxU4oyE022svg==}
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-    dependencies:
-      vue: 3.2.47
-    dev: false
 
   /vue-demi@0.14.0(vue@3.2.33):
     resolution: {integrity: sha512-gt58r2ogsNQeVoQ3EhoUAvUsH9xviydl0dWJj7dabBC/2L4uBId7ujtCwDRD0JhkGsV1i0CtfLAeyYKBht9oWg==}
