@@ -1,8 +1,0 @@
-{
-  "name": "@animepaste/functions",
-  "version": "0.0.6",
-  "private": true,
-  "devDependencies": {
-    "vite-plugin-cloudflare-functions": "^0.5.1"
-  }
-}
