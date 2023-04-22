@@ -1,1 +1,3 @@
-export const hello = 'hello';
+export * from './system';
+
+export * from './plugin';
