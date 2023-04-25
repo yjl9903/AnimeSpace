@@ -208,8 +208,8 @@ importers:
         specifier: ^4.13.0
         version: 4.13.0(prisma@4.13.0)
       animegarden:
-        specifier: ^0.0.7
-        version: 0.0.7
+        specifier: ^0.0.9
+        version: 0.0.9
       date-fns:
         specifier: ^2.29.3
         version: 2.29.3
@@ -2883,8 +2883,8 @@ packages:
       - supports-color
     dev: false
 
-  /animegarden@0.0.7:
-    resolution: {integrity: sha512-1jkl9ZBV8Nl+LRKSCACXqtaJqkB87PBpKWO3qV6N+fhBE0iRJLPiXTBPcjJk1ufV4zxoYNvijda2kWdGWqA3Cg==}
+  /animegarden@0.0.9:
+    resolution: {integrity: sha512-Vsbqbw2dZzNoaWiEuQIlaZX8LgU0k9lJ9TOcqNmlCAh5aoUshrzHP31xotfELKI9B8SOJ58IXxYgmoMiEjkHCg==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
