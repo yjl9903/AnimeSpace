@@ -72,7 +72,7 @@ importers:
         specifier: ^0.14.7
         version: 0.14.7(vite@4.3.1)(workbox-build@6.5.4)(workbox-window@6.5.4)
       vitepress:
-        specifier: ^1.0.0-alpha.73
+        specifier: ^1.0.0-alpha.74
         version: 1.0.0-draft.8(@algolia/client-search@4.17.0)
       workbox-window:
         specifier: ^6.5.4
