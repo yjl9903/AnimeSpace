@@ -43,5 +43,11 @@
   },
   "engines": {
     "node": ">=v16.0.0"
+  },
+  "dependencies": {
+    "yaml": "^2.2.2"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.0"
   }
 }

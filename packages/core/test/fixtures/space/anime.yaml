@@ -1,0 +1,23 @@
+plans: []
+
+storage: ./anime
+
+preference:
+  keywords:
+    order:
+      language:
+        - 简
+        - 繁
+      resolution:
+        - '1080'
+        - '720'
+      format:
+        - 'mp4'
+        - 'mkv'
+    exclude:
+      - HEVC
+
+plugins:
+  - name: animegarden
+  - name: download
+    directory: ./download
