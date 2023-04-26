@@ -22,7 +22,7 @@
     "postversion": "pnpm build:cli"
   },
   "devDependencies": {
-    "@types/node": "^18.16.0",
+    "@types/node": "^18.16.1",
     "bumpp": "latest",
     "optc": "latest",
     "prettier": "latest",
