@@ -36,7 +36,8 @@ describe('Load Space', () => {
         }
       },
       root,
-      storage: path.join(root, 'anime')
+      storage: path.join(root, 'anime'),
+      plans: [path.join(root, './plans/2023.yaml')]
     });
   });
 });

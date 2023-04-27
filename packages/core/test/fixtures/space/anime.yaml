@@ -1,4 +1,5 @@
-plans: []
+plans:
+  - ./plans/2023.yaml
 
 storage: ./anime
 

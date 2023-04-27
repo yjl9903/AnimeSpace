@@ -16,12 +16,19 @@ export interface AnimeSpace {
 
   readonly preference: Preference;
 
+  readonly plans: string[];
+
   readonly plugins: PluginEntry[];
 }
 
-export interface Preference {}
+export interface Preference {
+  keywords: {
+    order: Record<string, string[]>;
+    exclude: string[];
+  };
+}
 
-interface PluginEntry {
+export interface PluginEntry {
   name: string;
 
   options: Record<string, any>;
@@ -37,10 +44,12 @@ export async function loadSpace(_root: string) {
     const config = parse(configContent);
 
     const storageDirectory: string = config.storage ?? DefaultStorageDirectory;
+    const plans = (config.plans ?? []).map((p: string) => path.join(root, p));
     const space: AnimeSpace = {
       root,
       storage: path.resolve(root, storageDirectory),
       preference: config.preference ?? {},
+      plans,
       plugins: ((config.plugins ?? []) as any[]).map((p) => {
         if (typeof p === 'string') {
           return { name: p, options: {} };
@@ -78,6 +87,11 @@ async function validateSpace(space: AnimeSpace) {
       throw new AnimeSystemError(`Plugin configuration may be incorrect`);
     }
   }
+  for (const p of space.plans) {
+    if (!fs.existsSync(p)) {
+      throw new AnimeSystemError(`Plan ${p} config is not found`);
+    }
+  }
   return true;
 }
 
@@ -95,13 +109,19 @@ async function makeNewSpace(root: string) {
         exclude: ['HEVC']
       }
     },
+    plans: [],
     plugins: [
       { name: 'animegarden', options: {} },
       { name: 'download', options: { directory: './download' } }
     ]
   };
+
   await fs.promises.mkdir(space.root, { recursive: true }).catch(() => {});
   await fs.promises.mkdir(space.storage, { recursive: true }).catch(() => {});
+  await fs.promises
+    .mkdir(path.join(space.root, './plans'), { recursive: true })
+    .catch(() => {});
+
   await fs.promises.writeFile(
     path.join(space.root, configFilename),
     stringify({
@@ -115,5 +135,6 @@ async function makeNewSpace(root: string) {
     }),
     'utf-8'
   );
+
   return space;
 }
