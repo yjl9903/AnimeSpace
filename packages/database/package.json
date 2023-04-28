@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
-    "animegarden": "^0.0.7",
+    "animegarden": "^0.0.9",
     "date-fns": "^2.29.3",
     "debug": "^4.3.4",
     "https-proxy-agent": "^5.0.1",
