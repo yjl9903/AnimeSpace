@@ -5,10 +5,10 @@ import { createDefu } from 'defu';
 
 import { parse, stringify } from 'yaml';
 
-import type { Plan } from './plan';
 import type { Plugin } from './plugin';
 
 import { AnimeSystemError } from './error';
+import { type Plan, loadPlan } from './plan';
 
 const defu = createDefu((obj, key, value) => {
   if (key === 'include' && Array.isArray(obj[key]) && Array.isArray(value)) {
@@ -37,7 +37,7 @@ export interface AnimeSpace {
 
   readonly preference: Preference;
 
-  readonly plans: Plan[];
+  readonly plans: () => Promise<Plan[]>;
 
   readonly plugins: Plugin[];
 }
@@ -119,9 +119,16 @@ export async function loadSpace(
   }
 
   async function load(space: RawAnimeSpace) {
+    let plans: Plan[] | undefined = undefined;
     return {
       ...space,
-      plans: [],
+      async plans() {
+        if (plans !== undefined) {
+          return plans;
+        } else {
+          return loadPlan(space.plans);
+        }
+      },
       plugins: importPlugin
         ? ((
             await Promise.all(space.plugins.map((p) => importPlugin(p)))
@@ -131,7 +138,7 @@ export async function loadSpace(
   }
 }
 
-async function validateSpace(space: AnimeSpace) {
+async function validateSpace(space: RawAnimeSpace) {
   try {
     fs.accessSync(space.root, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
