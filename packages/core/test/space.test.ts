@@ -47,21 +47,42 @@ describe('Load Space', () => {
         onair: [
           {
             title: '熊熊勇闯异世界 Punch!',
+            type: '番剧',
+            state: 'onair',
             season: 2,
             bgmId: '323651',
-            fansub: ['Lilith-Raws', 'ANi']
+            fansub: ['Lilith-Raws', 'ANi'],
+            date: new Date('2023-04-01 13:00:00 UTC'),
+            keywords: {
+              include: [['熊熊勇闯异世界 Punch!']],
+              exclude: []
+            }
           },
           {
             title: '天国大魔境',
+            type: '番剧',
+            state: 'onair',
             season: 1,
             bgmId: '404804',
-            fansub: 'SweetSub'
+            fansub: 'SweetSub',
+            date: new Date('2023-04-01 13:00:00 UTC'),
+            keywords: {
+              include: [['天国大魔境']],
+              exclude: []
+            }
           },
           {
             title: '偶像大师 灰姑娘女孩 U149',
+            type: '番剧',
+            state: 'onair',
             season: 1,
             bgmId: '376703',
-            fansub: '喵萌奶茶屋'
+            fansub: '喵萌奶茶屋',
+            date: new Date('2023-04-01 13:00:00 UTC'),
+            keywords: {
+              include: [['偶像大师', 'iDOLM@STER'], ['灰姑娘女孩'], ['U149']],
+              exclude: ['闪耀色彩']
+            }
           }
         ]
       }

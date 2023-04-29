@@ -66,7 +66,18 @@ export interface AnimePlan {
 
   readonly type: AnimePlanType;
 
+  readonly state: PlanState;
+
   readonly bgmId: string;
 
   readonly season: number;
+
+  readonly date: Date;
+
+  readonly keywords: KeywordsParams;
+}
+
+export interface KeywordsParams {
+  include: string[][];
+  exclude: string[];
 }
