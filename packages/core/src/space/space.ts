@@ -96,7 +96,7 @@ export async function loadSpace(
         if (plans !== undefined) {
           return plans;
         } else {
-          return loadPlan(space.plans);
+          return (plans = await loadPlan(space.plans));
         }
       },
       plugins: importPlugin
