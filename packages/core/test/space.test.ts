@@ -35,7 +35,33 @@ describe('Load Space', () => {
       root,
       storage: path.join(root, 'anime')
     });
-    expect(await space.plans()).toEqual([]);
+    expect(await space.plans()).toEqual([
+      {
+        date: new Date('2023-04-01 13:00:00 UTC'),
+        name: '2023-04-04 新番放送计划',
+        state: 'onair',
+        onair: [
+          {
+            title: '熊熊勇闯异世界 Punch!',
+            season: 2,
+            bgmId: '323651',
+            fansub: ['Lilith-Raws', 'ANi']
+          },
+          {
+            title: '天国大魔境',
+            season: 1,
+            bgmId: '404804',
+            fansub: 'SweetSub'
+          },
+          {
+            title: '偶像大师 灰姑娘女孩 U149',
+            season: 1,
+            bgmId: '376703',
+            fansub: '喵萌奶茶屋'
+          }
+        ]
+      }
+    ]);
   });
 });
 

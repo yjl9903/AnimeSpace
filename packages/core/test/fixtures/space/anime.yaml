@@ -21,7 +21,7 @@ preference:
     exclude: []
 
 plans:
-  - ./plans/2023.yaml
+  - ./plans/*.yaml
 
 plugins:
   - name: animegarden

@@ -1,4 +1,4 @@
-import { AnimeSpace } from './space';
+import { AnimeSpace } from './space/space';
 
 export interface AnimeSystem {
   space: AnimeSpace;

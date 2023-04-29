@@ -2,13 +2,16 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { createDefu } from 'defu';
-
 import { parse, stringify } from 'yaml';
 
-import type { Plugin } from './plugin';
+import type { Plugin } from '../plugin';
 
-import { AnimeSystemError } from './error';
-import { type Plan, loadPlan } from './plan';
+import { AnimeSystemError } from '../error';
+import { formatStringArray } from '../utils';
+
+import type { Plan, AnimeSpace, PluginEntry, RawAnimeSpace } from './types';
+
+import { loadPlan } from './plan';
 
 const defu = createDefu((obj, key, value) => {
   if (key === 'include' && Array.isArray(obj[key]) && Array.isArray(value)) {
@@ -17,49 +20,6 @@ const defu = createDefu((obj, key, value) => {
     return true;
   }
 });
-
-export interface RawAnimeSpace {
-  readonly root: string;
-
-  readonly storage: string;
-
-  readonly preference: Preference;
-
-  readonly plans: string[];
-
-  readonly plugins: PluginEntry[];
-}
-
-export interface AnimeSpace {
-  readonly root: string;
-
-  readonly storage: string;
-
-  readonly preference: Preference;
-
-  readonly plans: () => Promise<Plan[]>;
-
-  readonly plugins: Plugin[];
-}
-
-export interface Preference {
-  format: {
-    include: string[];
-    exclude: string[];
-  };
-  keyword: {
-    order: Record<string, string[]>;
-    exclude: string[];
-  };
-  fansub: {
-    order: string[];
-    exclude: string[];
-  };
-}
-
-export interface PluginEntry extends Record<string, any> {
-  name: string;
-}
 
 const configFilename = `./anime.yaml`;
 
@@ -80,7 +40,9 @@ export async function loadSpace(
     const config = parse(configContent);
 
     const storageDirectory: string = config.storage ?? DefaultStorageDirectory;
-    const plans = (config.plans ?? []).map((p: string) => path.join(root, p));
+    const plans = formatStringArray(config.plans).map((p: string) =>
+      path.join(root, p)
+    );
     const space: RawAnimeSpace = defu(
       {
         root,
@@ -174,7 +136,7 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
         exclude: []
       }
     },
-    plans: [],
+    plans: ['./plans/*.yaml'],
     plugins: [
       { name: 'animegarden' },
       { name: 'download', directory: './download' }
