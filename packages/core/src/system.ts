@@ -1,12 +1,7 @@
-import { AnimeSpace } from './space/space';
+import type { AnimeSpace } from './space';
 
 export interface AnimeSystem {
   space: AnimeSpace;
-
-  /**
-   * Run an indexing
-   */
-  index(): Promise<void>;
 
   /**
    * Refresh the media library
@@ -24,7 +19,6 @@ export async function createAnimeSystem(
 ): Promise<AnimeSystem> {
   const system: AnimeSystem = {
     space,
-    async index() {},
     async refresh() {},
     async introspect() {}
   };
