@@ -25,17 +25,21 @@ export interface AnimeSpace {
 }
 
 export interface Preference {
-  format: {
-    include: string[];
-    exclude: string[];
+  readonly format: {
+    readonly anime: string;
+    readonly episode: string;
   };
-  keyword: {
-    order: Record<string, string[]>;
-    exclude: string[];
+  readonly extension: {
+    readonly include: string[];
+    readonly exclude: string[];
   };
-  fansub: {
-    order: string[];
-    exclude: string[];
+  readonly keyword: {
+    readonly order: Record<string, string[]>;
+    readonly exclude: string[];
+  };
+  readonly fansub: {
+    readonly order: string[];
+    readonly exclude: string[];
   };
 }
 

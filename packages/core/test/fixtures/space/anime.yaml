@@ -2,19 +2,16 @@ storage: ./anime
 
 preference:
   format:
+    anime: '{title} ({yyyy}-{mm})'
+    episode: '[{fansub}] {title} - E{ep}.{extension}'
+  extension:
     include: [mp4, mkv]
     exclude: []
   keyword:
     order:
-      format:
-        - 'mp4'
-        - 'mkv'
-      resolution:
-        - '1080'
-        - '720'
-      language:
-        - 简
-        - 繁
+      format: [mp4, mkv]
+      resolution: ['1080', '720']
+      language: ['简', '繁']
     exclude: []
   fansub:
     order: []

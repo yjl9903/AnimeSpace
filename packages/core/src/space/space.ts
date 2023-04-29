@@ -25,6 +25,10 @@ const configFilename = `./anime.yaml`;
 
 const DefaultStorageDirectory = `./anime`;
 
+const DefaultAnimeFormat = '{title} ({yyyy}-{mm})';
+
+const DefaultEpisodeFormat = '[{fansub}] {title} - E{ep}.{extension}';
+
 export async function loadSpace(
   _root: string,
   importPlugin?: (
@@ -54,6 +58,10 @@ export async function loadSpace(
       {
         preference: {
           format: {
+            anime: DefaultAnimeFormat,
+            episode: DefaultEpisodeFormat
+          },
+          extension: {
             include: ['mp4'],
             exclude: []
           },
@@ -120,6 +128,10 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     storage: path.join(root, DefaultStorageDirectory),
     preference: {
       format: {
+        anime: DefaultAnimeFormat,
+        episode: DefaultEpisodeFormat
+      },
+      extension: {
         include: ['mp4', 'mkv'],
         exclude: []
       },
