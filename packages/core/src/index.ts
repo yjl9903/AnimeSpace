@@ -1,6 +1,4 @@
-export * from './space/space';
-
-export * from './space/plan';
+export * from './space';
 
 export * from './plugin';
 
