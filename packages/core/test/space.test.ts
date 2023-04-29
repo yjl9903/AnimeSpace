@@ -13,31 +13,28 @@ describe('Load Space', () => {
     const root = path.join(__dirname, './fixtures/space');
     const space = await loadSpace(root);
     expect(space).toEqual({
-      plugins: [
-        {
-          name: 'animegarden',
-          options: {}
-        },
-        {
-          name: 'download',
-          options: {
-            directory: './download'
-          }
-        }
-      ],
+      plugins: [],
       preference: {
-        keywords: {
+        format: {
+          include: ['mp4', 'mkv'],
+          exclude: []
+        },
+        keyword: {
           order: {
             format: ['mp4', 'mkv'],
             language: ['简', '繁'],
             resolution: ['1080', '720']
           },
-          exclude: ['HEVC']
+          exclude: []
+        },
+        fansub: {
+          order: [],
+          exclude: []
         }
       },
       root,
       storage: path.join(root, 'anime'),
-      plans: [path.join(root, './plans/2023.yaml')]
+      plans: []
     });
   });
 });

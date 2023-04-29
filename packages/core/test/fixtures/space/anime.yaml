@@ -1,22 +1,27 @@
-plans:
-  - ./plans/2023.yaml
-
 storage: ./anime
 
 preference:
-  keywords:
+  format:
+    include: [mp4, mkv]
+    exclude: []
+  keyword:
     order:
-      language:
-        - 简
-        - 繁
-      resolution:
-        - '1080'
-        - '720'
       format:
         - 'mp4'
         - 'mkv'
-    exclude:
-      - HEVC
+      resolution:
+        - '1080'
+        - '720'
+      language:
+        - 简
+        - 繁
+    exclude: []
+  fansub:
+    order: []
+    exclude: []
+
+plans:
+  - ./plans/2023.yaml
 
 plugins:
   - name: animegarden
