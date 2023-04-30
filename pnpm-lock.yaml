@@ -69,7 +69,7 @@ importers:
         specifier: ^0.14.7
         version: 0.14.7(vite@4.3.3)(workbox-build@6.5.4)(workbox-window@6.5.4)
       vitepress:
-        specifier: ^1.0.0-alpha.74
+        specifier: ^1.0.0-alpha.75
         version: 1.0.0-draft.8(@algolia/client-search@4.17.0)
       workbox-window:
         specifier: ^6.5.4
@@ -3247,7 +3247,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /concordance@5.0.4:
