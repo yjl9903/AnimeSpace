@@ -7,10 +7,6 @@ import {
   lightYellow
 } from '@breadc/color';
 
-import type { IndexOption, Resource } from '@animepaste/database';
-
-import { context } from '../context';
-
 export * from './constant';
 
 const GlobalConfig = {
@@ -100,30 +96,6 @@ function factory(option: Partial<LoggerOption> = {}) {
   ) as Logger;
 
   return instance;
-}
-
-export const IndexListener: IndexOption['listener'] = ({
-  page,
-  url,
-  timestamp,
-  ok
-}) => {
-  const pageLink = lightBlue(link(`P${page}`, url));
-  const time = timestamp ? `(${format(timestamp, 'yyyy-MM-dd HH:mm')})` : '';
-  if (ok === undefined) {
-    logger.info(`Fetching ${pageLink}  ${time}`);
-  } else {
-    logger.info(`There are ${lightGreen(`${ok} magnets`)} collected`);
-  }
-};
-
-export function printMagnets(magnets: Resource[], prefix = '  ') {
-  magnets.sort((a, b) => a.title.localeCompare(b.title));
-  for (const item of magnets) {
-    logger.info(
-      `${prefix}${link(item.title, context.magnetStore.idToLink(item.id))}`
-    );
-  }
 }
 
 // https://gist.github.com/shingchi/64c04e0dd2cbbfbc1350
