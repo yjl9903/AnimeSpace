@@ -4,6 +4,8 @@ import {
   formatStringArray
 } from '@animespace/core';
 
+import './plan.d';
+
 export interface AnimeGardenOptions extends PluginEntry {}
 
 export function AnimeGarden(_options: AnimeGardenOptions): Plugin {
