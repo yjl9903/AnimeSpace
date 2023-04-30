@@ -7,7 +7,6 @@
     "build:all": "turbo run build",
     "build:cli": "turbo run build --filter animepaste...",
     "build:docs": "turbo run build --filter docs",
-    "build:site": "optc scripts/build.ts",
     "dev:cli": "pnpm -C packages/cli dev",
     "dev:docs": "pnpm -C docs dev",
     "format": "turbo run format",
