@@ -48,7 +48,7 @@
     "preversion": "pnpm build"
   },
   "dependencies": {
-    "@alicloud/pop-core": "^1.7.12",
+    "@alicloud/pop-core": "^1.7.13",
     "@animepaste/core": "workspace:*",
     "@breadc/color": "^0.9.3",
     "ali-oss": "^6.17.1",
