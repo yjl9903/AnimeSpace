@@ -16,8 +16,8 @@ const pluginLoader: PluginLoader = async (entry) => {
   }
 };
 
-export async function makeSystem() {
-  const root = inferRoot();
+export async function makeSystem(_root?: string) {
+  const root = _root ?? inferRoot();
   const space = await loadSpace(root, pluginLoader);
   const system = createAnimeSystem(space);
   return system;

@@ -44,8 +44,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@animepaste/core": "workspace:*",
-    "animegarden": "^0.0.10"
+    "@animepaste/core": "workspace:*"
   },
   "engines": {
     "node": ">=v16.0.0"

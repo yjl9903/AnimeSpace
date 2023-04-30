@@ -98,7 +98,11 @@ export async function loadSpace(
         if (plans !== undefined) {
           return plans;
         } else {
-          return (plans = await loadPlan(space.plans));
+          plans = await loadPlan(space.plans);
+          for (const plugin of resolved.plugins) {
+            await plugin.preparePlans?.(resolved, plans);
+          }
+          return plans;
         }
       },
       plugins: importPlugin

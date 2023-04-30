@@ -184,9 +184,6 @@ importers:
       '@animepaste/core':
         specifier: workspace:*
         version: link:../core
-      animegarden:
-        specifier: ^0.0.10
-        version: 0.0.10
 
 packages:
 
