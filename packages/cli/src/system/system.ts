@@ -1,19 +1,24 @@
 import os from 'node:os';
 import path from 'node:path';
 
-import { loadSpace, createAnimeSystem } from '@animepaste/core';
+import { loadSpace, createAnimeSystem, PluginLoader } from '@animepaste/core';
+
+const pluginLoader: PluginLoader = async (entry) => {
+  switch (entry.name) {
+    case 'animegarden':
+      const { AnimeGarden } = await import('@animepaste/animegarden');
+      return AnimeGarden(entry);
+    case 'donwload':
+      const { Download } = await import('@animepaste/download');
+      return Download(entry);
+    default:
+      return undefined;
+  }
+};
 
 export async function makeSystem() {
   const root = inferRoot();
-  const space = await loadSpace(root, async (entry) => {
-    switch (entry.name) {
-      case 'animegarden':
-        const { AnimeGarden } = await import('@animepaste/animegarden');
-        return AnimeGarden(entry);
-      default:
-        return undefined;
-    }
-  });
+  const space = await loadSpace(root, pluginLoader);
   const system = createAnimeSystem(space);
   return system;
 }

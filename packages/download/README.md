@@ -1,4 +1,4 @@
-# @animepaste/animegarden
+# @animepaste/download
 
 ## License
 

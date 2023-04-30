@@ -29,11 +29,13 @@ const DefaultAnimeFormat = '{title} ({yyyy}-{mm})';
 
 const DefaultEpisodeFormat = '[{fansub}] {title} - E{ep}.{extension}';
 
+export type PluginLoader = (
+  entry: PluginEntry
+) => Plugin | undefined | Promise<Plugin | undefined>;
+
 export async function loadSpace(
   _root: string,
-  importPlugin?: (
-    entry: PluginEntry
-  ) => Plugin | undefined | Promise<Plugin | undefined>
+  importPlugin?: PluginLoader
 ): Promise<AnimeSpace> {
   const root = path.resolve(_root);
 
