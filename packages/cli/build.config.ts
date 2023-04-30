@@ -1,3 +1,4 @@
+import { Sea } from 'unbuild-sea';
 import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
@@ -7,5 +8,5 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: true
   },
-  externals: ['@prisma/client']
+  preset: Sea()
 });
