@@ -90,7 +90,7 @@ export async function loadSpace(
 
   async function load(space: RawAnimeSpace) {
     let plans: Plan[] | undefined = undefined;
-    return {
+    const resolved: AnimeSpace = {
       ...space,
       async plans() {
         if (plans !== undefined) {
@@ -105,6 +105,10 @@ export async function loadSpace(
           ).filter(Boolean) as Plugin[])
         : []
     };
+    for (const plugin of resolved.plugins) {
+      await plugin.prepare?.(resolved);
+    }
+    return resolved;
   }
 }
 

@@ -41,15 +41,16 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
-  "engines": {
-    "node": ">=v16.0.0"
-  },
   "dependencies": {
     "defu": "^6.1.2",
     "globby": "^13.1.4",
     "yaml": "^2.2.2"
   },
   "devDependencies": {
+    "breadc": "^0.9.3",
     "rimraf": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=v16.0.0"
   }
 }

@@ -212,6 +212,9 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2
     devDependencies:
+      breadc:
+        specifier: ^0.9.3
+        version: 0.9.3
       rimraf:
         specifier: ^5.0.0
         version: 5.0.0
