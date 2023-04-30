@@ -75,8 +75,17 @@ importers:
         specifier: ^6.5.4
         version: 6.5.4
 
+  packages/animegarden:
+    dependencies:
+      '@animepaste/core':
+        specifier: workspace:*
+        version: link:../core
+
   packages/cli:
     dependencies:
+      '@animepaste/animegarden':
+        specifier: workspace:*
+        version: link:../animegarden
       '@animepaste/core':
         specifier: workspace:*
         version: link:../core

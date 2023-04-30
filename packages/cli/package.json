@@ -1,5 +1,5 @@
 {
-  "name": "animepaste",
+  "name": "animespace",
   "version": "0.0.6",
   "description": "Paste your favourite anime online",
   "keywords": [
@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@animepaste/core": "workspace:*",
+    "@animepaste/animegarden": "workspace:*",
     "@breadc/color": "^0.9.3",
     "@onekuma/map": "^0.1.9",
     "axios": "^1.3.6",

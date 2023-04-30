@@ -97,4 +97,4 @@ It will automatically search the resources, download, and upload them to OSS bas
 
 ## License
 
-AGPL-3.0 License © 2021 [XLor](https://github.com/yjl9903)
+AGPL-3.0 License © 2023 [XLor](https://github.com/yjl9903)

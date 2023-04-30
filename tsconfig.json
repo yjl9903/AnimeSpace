@@ -16,6 +16,9 @@
       "@animepaste/core": [
         "./packages/core/src/index.ts"
       ],
+      "@animepaste/animegarden": [
+        "./packages/animegarden/src/index.ts"
+      ],
     }
   },
   "exclude": [
