@@ -3,6 +3,7 @@
   "version": "0.0.6",
   "private": true,
   "scripts": {
+    "anime": "tsx packages/cli/src/cli.ts",
     "build": "turbo run build --filter !docs",
     "build:all": "turbo run build",
     "build:cli": "turbo run build --filter animepaste...",
