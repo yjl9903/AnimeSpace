@@ -1,4 +1,4 @@
-import { ImmutableMap, MutableMap } from 'lbear';
+import { ImmutableMap, MutableMap } from '@onekuma/map';
 
 export function formatEP(ep: number, fill = '0') {
   return `${ep < 10 ? fill : ''}${ep}`;
