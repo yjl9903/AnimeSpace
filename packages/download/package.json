@@ -1,5 +1,5 @@
 {
-  "name": "@animepaste/download",
+  "name": "@animespace/download",
   "version": "0.0.7",
   "description": "Paste your favourite anime online",
   "keywords": [
@@ -44,7 +44,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@animepaste/core": "workspace:*"
+    "@animespace/core": "workspace:*"
   },
   "engines": {
     "node": ">=v16.0.0"

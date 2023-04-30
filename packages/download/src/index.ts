@@ -1,4 +1,4 @@
-import type { Plugin } from '@animepaste/core';
+import type { Plugin } from '@animespace/core';
 
 export function Download(options: {}): Plugin {
   return {

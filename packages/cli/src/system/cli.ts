@@ -1,5 +1,5 @@
 import { breadc } from 'breadc';
-import { AnimeSystem } from '@animepaste/core';
+import { AnimeSystem } from '@animespace/core';
 
 import { version, description } from '../../package.json';
 

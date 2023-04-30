@@ -77,7 +77,7 @@ importers:
 
   packages/animegarden:
     dependencies:
-      '@animepaste/core':
+      '@animespace/core':
         specifier: workspace:*
         version: link:../core
       animegarden:
@@ -86,13 +86,13 @@ importers:
 
   packages/cli:
     dependencies:
-      '@animepaste/animegarden':
+      '@animespace/animegarden':
         specifier: workspace:*
         version: link:../animegarden
-      '@animepaste/core':
+      '@animespace/core':
         specifier: workspace:*
         version: link:../core
-      '@animepaste/download':
+      '@animespace/download':
         specifier: workspace:*
         version: link:../download
       '@breadc/color':
@@ -181,7 +181,7 @@ importers:
 
   packages/download:
     dependencies:
-      '@animepaste/core':
+      '@animespace/core':
         specifier: workspace:*
         version: link:../core
 

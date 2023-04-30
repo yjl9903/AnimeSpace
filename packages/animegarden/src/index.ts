@@ -2,7 +2,7 @@ import {
   type Plugin,
   type PluginEntry,
   formatStringArray
-} from '@animepaste/core';
+} from '@animespace/core';
 
 export interface AnimeGardenOptions extends PluginEntry {}
 

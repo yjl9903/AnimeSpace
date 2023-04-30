@@ -1,5 +1,5 @@
 {
-  "name": "@animepaste/animegarden",
+  "name": "@animespace/animegarden",
   "version": "0.0.7",
   "description": "Paste your favourite anime online",
   "keywords": [
@@ -44,7 +44,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@animepaste/core": "workspace:*",
+    "@animespace/core": "workspace:*",
     "animegarden": "^0.0.10"
   },
   "engines": {

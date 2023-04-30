@@ -47,9 +47,9 @@
     "preversion": "pnpm build"
   },
   "dependencies": {
-    "@animepaste/animegarden": "workspace:*",
-    "@animepaste/core": "workspace:*",
-    "@animepaste/download": "workspace:*",
+    "@animespace/animegarden": "workspace:*",
+    "@animespace/core": "workspace:*",
+    "@animespace/download": "workspace:*",
     "@breadc/color": "^0.9.3",
     "@onekuma/map": "^0.1.9",
     "axios": "^1.3.6",

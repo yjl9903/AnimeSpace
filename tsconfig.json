@@ -13,13 +13,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@animepaste/core": [
+      "@animespace/core": [
         "./packages/core/src/index.ts"
       ],
-      "@animepaste/animegarden": [
+      "@animespace/animegarden": [
         "./packages/animegarden/src/index.ts"
       ],
-      "@animepaste/download": [
+      "@animespace/download": [
         "./packages/download/src/index.ts"
       ],
     }

@@ -1,15 +1,15 @@
 import os from 'node:os';
 import path from 'node:path';
 
-import { loadSpace, createAnimeSystem, PluginLoader } from '@animepaste/core';
+import { loadSpace, createAnimeSystem, PluginLoader } from '@animespace/core';
 
 const pluginLoader: PluginLoader = async (entry) => {
   switch (entry.name) {
     case 'animegarden':
-      const { AnimeGarden } = await import('@animepaste/animegarden');
+      const { AnimeGarden } = await import('@animespace/animegarden');
       return AnimeGarden(entry);
     case 'donwload':
-      const { Download } = await import('@animepaste/download');
+      const { Download } = await import('@animespace/download');
       return Download(entry);
     default:
       return undefined;

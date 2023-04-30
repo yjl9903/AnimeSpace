@@ -1,6 +1,6 @@
-import '@animepaste/core';
+import '@animespace/core';
 
-declare module '@animepaste/core' {
+declare module '@animespace/core' {
   interface AnimePlan {
     fansub: string[];
   }
