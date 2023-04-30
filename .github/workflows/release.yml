@@ -13,6 +13,9 @@ jobs:
       contents: write
 
     steps:
+      - name: Set Timezone
+        run: sudo timedatectl set-timezone "Asia/Shanghai"
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
