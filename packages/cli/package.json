@@ -49,9 +49,7 @@
   },
   "dependencies": {
     "@alicloud/pop-core": "^1.7.12",
-    "@animepaste/bangumi": "workspace:*",
     "@animepaste/core": "workspace:*",
-    "@animepaste/database": "workspace:*",
     "@breadc/color": "^0.9.3",
     "ali-oss": "^6.17.1",
     "axios": "^1.3.6",

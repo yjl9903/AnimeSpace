@@ -1,7 +1,7 @@
 import createDebug from 'debug';
 import { lightRed } from '@breadc/color';
 
-import { app } from './commands';
+// import { app } from './commands';
 
 const debug = createDebug('anime:cli');
 
@@ -21,7 +21,7 @@ export async function bootstrap() {
   });
 
   try {
-    await app.run(process.argv.slice(2));
+    // await app.run(process.argv.slice(2));
     process.exit(0);
   } catch (error: unknown) {
     handle(error);

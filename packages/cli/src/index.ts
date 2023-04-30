@@ -1,9 +1,11 @@
-export * from './anime';
+// export * from './anime';
 
-export * from './client';
+// export * from './client';
 
-export * from './context';
+// export * from './context';
 
-export * from './daemon';
+// export * from './daemon';
 
-export * from './io';
+// export * from './io';
+
+export const hello = 'hello';

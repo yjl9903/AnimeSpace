@@ -5,8 +5,6 @@
   "scripts": {
     "build": "turbo run build --filter !docs",
     "build:all": "turbo run build",
-    "build:app": "turbo run build --filter @animepaste/app...",
-    "build:bgm": "turbo run build --filter @animepaste/bangumi...",
     "build:cli": "turbo run build --filter animepaste...",
     "build:docs": "turbo run build --filter docs",
     "build:site": "optc scripts/build.ts",
@@ -14,8 +12,7 @@
     "dev:cli": "pnpm -C packages/cli dev",
     "dev:docs": "pnpm -C docs dev",
     "format": "prettier --write ./**/*.{js,ts,vue} --ignore-path .prettierignore",
-    "release": "bumpp package.json docs/package.json packages/*/package.json !packages/bangumi --commit --push --tag && pnpm -r publish --access public",
-    "release:bgm": "pnpm -C packages/bangumi release",
+    "release": "bumpp package.json docs/package.json packages/*/package.json --commit --push --tag && pnpm -r publish --access public",
     "test": "pnpm -r test -- --run",
     "typecheck": "pnpm -r typecheck",
     "preversion": "pnpm test",
@@ -23,10 +20,9 @@
   },
   "devDependencies": {
     "@types/node": "^18.16.3",
-    "bumpp": "latest",
-    "optc": "latest",
-    "prettier": "latest",
-    "turbo": "latest",
+    "optc": "^0.6.2",
+    "prettier": "^2.8.8",
+    "turbo": "^1.9.3",
     "typescript": "^5.0.4",
     "vite": "^4.3.3",
     "vitest": "^0.30.1"
