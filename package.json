@@ -8,14 +8,13 @@
     "build:cli": "turbo run build --filter animepaste...",
     "build:docs": "turbo run build --filter docs",
     "build:site": "optc scripts/build.ts",
-    "dev": "pnpm -C packages/app dev",
     "dev:cli": "pnpm -C packages/cli dev",
     "dev:docs": "pnpm -C docs dev",
-    "format": "prettier --write ./**/*.{js,ts,vue} --ignore-path .prettierignore",
+    "format": "turbo run format",
     "release": "bumpp package.json docs/package.json packages/*/package.json --commit --push --tag && pnpm -r publish --access public",
-    "test": "pnpm -r test -- --run",
-    "typecheck": "pnpm -r typecheck",
-    "preversion": "pnpm test",
+    "test:ci": "turbo run test:ci",
+    "typecheck": "turbo run typecheck",
+    "preversion": "pnpm test:ci",
     "postversion": "pnpm build:cli"
   },
   "devDependencies": {

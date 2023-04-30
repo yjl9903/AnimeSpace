@@ -38,12 +38,11 @@
     "*.mjs"
   ],
   "scripts": {
-    "build": "pnpm postinstall && unbuild",
+    "build": "unbuild",
     "dev": "unbuild --stub",
-    "format": "prettier --write src/**/*.ts",
-    "postinstall": "optc scripts/bangumi.ts",
-    "release": "bumpp --commit --push --tag && pnpm release",
+    "format": "prettier --write {src,test}/**/*.ts",
     "test": "vitest",
+    "test:ci": "vitest --run",
     "typecheck": "tsc --noEmit",
     "preversion": "pnpm build"
   },
