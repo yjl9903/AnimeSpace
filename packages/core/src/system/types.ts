@@ -1,5 +1,7 @@
 import type { AnimeSpace } from '../space/types';
 
+import type { Anime } from './anime';
+
 export interface AnimeSystem {
   space: AnimeSpace;
 
@@ -11,5 +13,5 @@ export interface AnimeSystem {
   /**
    * Sync with the modified anime config
    */
-  introspect(): Promise<void>;
+  introspect(): Promise<Anime[]>;
 }

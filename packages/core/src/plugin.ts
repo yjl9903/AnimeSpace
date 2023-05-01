@@ -1,6 +1,6 @@
 import type { Breadc } from 'breadc';
 
-import type { AnimeSystem } from './system';
+import type { AnimeSystem } from './system/types';
 import type { AnimeSpace, Plan } from './space/types';
 
 export interface Plugin {
