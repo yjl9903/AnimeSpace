@@ -51,7 +51,6 @@
     "@animespace/download": "workspace:*",
     "@breadc/color": "^0.9.3",
     "@onekuma/map": "^0.1.9",
-    "axios": "^1.4.0",
     "breadc": "^0.9.3",
     "cli-progress": "^3.12.0",
     "date-fns": "^2.30.0",
@@ -60,6 +59,7 @@
     "fastest-levenshtein": "^1.0.16",
     "fs-extra": "^11.1.1",
     "prompts": "^2.4.2",
+    "undici": "^5.22.0",
     "webtorrent": "^2.0.16"
   },
   "devDependencies": {

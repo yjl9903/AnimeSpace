@@ -44,7 +44,8 @@
   },
   "dependencies": {
     "@animespace/core": "workspace:*",
-    "animegarden": "^0.0.10"
+    "animegarden": "^0.0.10",
+    "undici": "^5.22.0"
   },
   "engines": {
     "node": ">=v16.0.0"
