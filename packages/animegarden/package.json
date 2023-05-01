@@ -1,13 +1,12 @@
 {
   "name": "@animespace/animegarden",
   "version": "0.0.7",
-  "description": "Paste your favourite anime online",
+  "description": "Create your own Anime Space",
   "keywords": [
     "anime",
     "animegarden",
     "dmhy",
-    "AnimePaste",
-    "XLorPaste",
+    "animespace",
     "cli"
   ],
   "homepage": "https://anime.docs.xlorpaste.cn/",
