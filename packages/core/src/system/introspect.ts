@@ -9,13 +9,18 @@ export async function introspect(system: AnimeSystem) {
     await plugin.introspect?.prepare?.(system);
   }
 
-  const plans = (await system.space.plans()).filter((p) => p.state === 'onair');
-  const animePlans = flatAnimePlan(plans);
-  const animes = animePlans.map((ap) => new Anime(system.space, ap));
+  const animes = loadAnime(system);
 
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.finish?.(system);
   }
+  return animes;
+}
+
+export async function loadAnime(system: AnimeSystem) {
+  const plans = (await system.space.plans()).filter((p) => p.state === 'onair');
+  const animePlans = flatAnimePlan(plans);
+  const animes = animePlans.map((ap) => new Anime(system.space, ap));
   return animes;
 }
 

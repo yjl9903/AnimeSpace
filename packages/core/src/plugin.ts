@@ -30,5 +30,9 @@ export interface Plugin {
     finish?: (system: AnimeSystem) => void | Promise<void>;
   };
 
-  refresh?: (space: AnimeSystem, anime: string) => void | Promise<void>;
+  refresh?: {
+    prepare?: (space: AnimeSystem) => void | Promise<void>;
+
+    finish?: (space: AnimeSystem) => void | Promise<void>;
+  };
 }

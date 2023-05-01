@@ -6,9 +6,14 @@ export interface AnimeSystem {
   space: AnimeSpace;
 
   /**
+   * Load animes from plans or introspect result
+   */
+  animes(): Promise<Anime[]>;
+
+  /**
    * Refresh the media library
    */
-  refresh(): Promise<void>;
+  refresh(): Promise<Anime[]>;
 
   /**
    * Sync with the modified anime config
