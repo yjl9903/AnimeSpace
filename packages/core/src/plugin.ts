@@ -12,19 +12,23 @@ export interface Plugin {
   /**
    * Prepare anime space configurations
    */
-  prepare?: (space: AnimeSpace) => Promise<void>;
+  prepare?: (space: AnimeSpace) => void | Promise<void>;
 
   /**
    * Prepare anime space plans
    */
-  preparePlans?: (space: AnimeSpace, plans: Plan[]) => Promise<void>;
+  preparePlans?: (space: AnimeSpace, plans: Plan[]) => void | Promise<void>;
 
   /**
    * Extend command line interface
    */
-  command?: (space: AnimeSystem, cli: Breadc<{}>) => Promise<void>;
+  command?: (system: AnimeSystem, cli: Breadc<{}>) => void | Promise<void>;
 
-  introspect?: (space: AnimeSystem, anime: string) => Promise<void>;
+  introspect?: {
+    prepare?: (system: AnimeSystem) => void | Promise<void>;
 
-  refresh?: (space: AnimeSystem, anime: string) => Promise<void>;
+    finish?: (system: AnimeSystem) => void | Promise<void>;
+  };
+
+  refresh?: (space: AnimeSystem, anime: string) => void | Promise<void>;
 }
