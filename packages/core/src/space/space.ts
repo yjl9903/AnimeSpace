@@ -29,9 +29,11 @@ const DefaultAnimeFormat = '{title} ({yyyy}-{mm})';
 
 const DefaultEpisodeFormat = '[{fansub}] {title} - E{ep}.{extension}';
 
-export type PluginLoader = (
+export type PluginLoaderFn = (
   entry: PluginEntry
 ) => Plugin | undefined | Promise<Plugin | undefined>;
+
+export type PluginLoader = Record<string, PluginLoaderFn> | PluginLoaderFn;
 
 export async function loadSpace(
   _root: string,
@@ -107,7 +109,7 @@ export async function loadSpace(
       },
       plugins: importPlugin
         ? ((
-            await Promise.all(space.plugins.map((p) => importPlugin(p)))
+            await Promise.all(space.plugins.map((p) => resolvePlugin(p)))
           ).filter(Boolean) as Plugin[])
         : []
     };
@@ -115,6 +117,17 @@ export async function loadSpace(
       await plugin.prepare?.(resolved);
     }
     return resolved;
+  }
+
+  async function resolvePlugin(p: PluginEntry) {
+    if (!!importPlugin) {
+      if (typeof importPlugin === 'function') {
+        return importPlugin(p);
+      } else if (typeof importPlugin === 'object') {
+        return importPlugin[p.name]?.(p);
+      }
+    }
+    return undefined;
   }
 }
 

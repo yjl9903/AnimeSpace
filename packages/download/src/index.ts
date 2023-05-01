@@ -1,6 +1,8 @@
-import type { Plugin } from '@animespace/core';
+import { type Plugin, type PluginEntry } from '@animespace/core';
 
-export function Download(options: {}): Plugin {
+export interface DownloadOptions extends PluginEntry {}
+
+export function Download(options: DownloadOptions): Plugin {
   return {
     name: 'download'
   };
