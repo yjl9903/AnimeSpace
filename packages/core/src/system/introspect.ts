@@ -9,12 +9,19 @@ export async function introspect(system: AnimeSystem) {
     await plugin.introspect?.prepare?.(system);
   }
 
-  const animes = loadAnime(system);
+  const animes = await loadAnime(system);
+  for (const anime of animes) {
+    await introspectAnime(system, anime);
+  }
 
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.finish?.(system);
   }
   return animes;
+}
+
+async function introspectAnime(system: AnimeSystem, anime: Anime) {
+  await anime.library();
 }
 
 export async function loadAnime(system: AnimeSystem) {

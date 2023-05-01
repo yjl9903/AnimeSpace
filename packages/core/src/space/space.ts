@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import fs from 'fs-extra';
 import path from 'node:path';
 
 import { createDefu } from 'defu';
@@ -40,9 +40,9 @@ export async function loadSpace(
   const root = path.resolve(_root);
 
   const configPath = path.join(root, configFilename);
-  if (fs.existsSync(root) && fs.existsSync(configPath)) {
+  if ((await fs.exists(root)) && (await fs.exists(configPath))) {
     // Load space directory
-    const configContent = fs.readFileSync(configPath, 'utf-8');
+    const configContent = await fs.readFile(configPath, 'utf-8');
     const config = parse(configContent);
 
     const storageDirectory: string = config.storage ?? DefaultStorageDirectory;
@@ -120,12 +120,12 @@ export async function loadSpace(
 
 async function validateSpace(space: RawAnimeSpace) {
   try {
-    fs.accessSync(space.root, fs.constants.R_OK | fs.constants.W_OK);
+    await fs.access(space.root, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
     throw new AnimeSystemError(`Can not access AnimePaste space directory`);
   }
   try {
-    fs.accessSync(space.storage, fs.constants.R_OK | fs.constants.W_OK);
+    await fs.access(space.storage, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
     throw new AnimeSystemError(`Can not access local anime storage directory`);
   }
@@ -165,14 +165,14 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     ]
   };
 
-  await fs.promises.mkdir(space.root, { recursive: true }).catch(() => {});
+  await fs.mkdir(space.root, { recursive: true }).catch(() => {});
 
   await Promise.all([
-    fs.promises.mkdir(space.storage, { recursive: true }).catch(() => {}),
-    fs.promises
+    fs.mkdir(space.storage, { recursive: true }).catch(() => {}),
+    fs
       .mkdir(path.join(space.root, './plans'), { recursive: true })
       .catch(() => {}),
-    fs.promises.writeFile(
+    fs.writeFile(
       path.join(space.root, configFilename),
       stringify({
         ...space,

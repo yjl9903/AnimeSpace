@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "defu": "^6.1.2",
+    "fs-extra": "^11.1.1",
     "globby": "^13.1.4",
     "yaml": "^2.2.2"
   },

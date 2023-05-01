@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+import fs from 'fs-extra';
 import { parse } from 'yaml';
 import { globby } from 'globby';
 
@@ -10,7 +10,7 @@ export async function loadPlan(patterns: string[]) {
   const files = await globby(patterns);
   const plans = await Promise.all(
     files.map(async (file) => {
-      const content = await fs.promises.readFile(file, 'utf-8');
+      const content = await fs.readFile(file, 'utf-8');
       const plan = parse(content);
 
       const state =

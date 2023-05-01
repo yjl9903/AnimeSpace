@@ -1,0 +1,96 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Introspect > should work 1`] = `
+[
+  Anime {
+    "_lib": {
+      "bgmId": "323651",
+      "title": "熊熊勇闯异世界 Punch!",
+      "videos": [],
+    },
+    "directory": "/Users/xlor/Repos/AnimePaste/packages/core/test/fixtures/space/anime/熊熊勇闯异世界 Punch!",
+    "dirty": false,
+    "plan": {
+      "bgmId": "323651",
+      "date": 2023-04-01T13:00:00.000Z,
+      "fansub": [
+        "Lilith-Raws",
+        "ANi",
+      ],
+      "keywords": {
+        "exclude": [],
+        "include": [
+          [
+            "熊熊勇闯异世界 Punch!",
+          ],
+        ],
+      },
+      "season": 2,
+      "state": "onair",
+      "title": "熊熊勇闯异世界 Punch!",
+      "type": "番剧",
+    },
+  },
+  Anime {
+    "_lib": {
+      "bgmId": "404804",
+      "title": "天国大魔境",
+      "videos": [],
+    },
+    "directory": "/Users/xlor/Repos/AnimePaste/packages/core/test/fixtures/space/anime/天国大魔境",
+    "dirty": false,
+    "plan": {
+      "bgmId": "404804",
+      "date": 2023-04-01T13:00:00.000Z,
+      "fansub": "SweetSub",
+      "keywords": {
+        "exclude": [],
+        "include": [
+          [
+            "天国大魔境",
+          ],
+        ],
+      },
+      "season": 1,
+      "state": "onair",
+      "title": "天国大魔境",
+      "type": "番剧",
+    },
+  },
+  Anime {
+    "_lib": {
+      "bgmId": "376703",
+      "title": "偶像大师 灰姑娘女孩 U149",
+      "videos": [],
+    },
+    "directory": "/Users/xlor/Repos/AnimePaste/packages/core/test/fixtures/space/anime/偶像大师 灰姑娘女孩 U149",
+    "dirty": false,
+    "plan": {
+      "bgmId": "376703",
+      "date": 2023-04-01T13:00:00.000Z,
+      "fansub": "喵萌奶茶屋",
+      "keywords": {
+        "exclude": [
+          "闪耀色彩",
+        ],
+        "include": [
+          [
+            "偶像大师",
+            "iDOLM@STER",
+          ],
+          [
+            "灰姑娘女孩",
+          ],
+          [
+            "U149",
+          ],
+        ],
+      },
+      "season": 1,
+      "state": "onair",
+      "title": "偶像大师 灰姑娘女孩 U149",
+      "type": "番剧",
+    },
+  },
+]
+`;
