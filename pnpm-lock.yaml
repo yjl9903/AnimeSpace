@@ -151,8 +151,8 @@ importers:
         specifier: ^0.109.3
         version: 0.109.3
       bangumi-data:
-        specifier: ^0.3.114
-        version: 0.3.114
+        specifier: ^0.3.115
+        version: 0.3.115
       unbuild:
         specifier: ^1.2.1
         version: 1.2.1
@@ -2867,8 +2867,8 @@ packages:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
 
-  /bangumi-data@0.3.114:
-    resolution: {integrity: sha512-WJCAmYJGDgDAetqjcMPx6Pwvjn5wmsFi88bBfN+eB8EemCnuwkqglH+upPlka8odTbigU2/fvylIZEwgIpCjXA==}
+  /bangumi-data@0.3.115:
+    resolution: {integrity: sha512-BBNAiNkdf9k0E1BTeMb18wXGJp/HS3fHjZLc5YUZXQGZfZ0fZxcXA9xIwVZCtA1akB7WSSvBU6F5d4iKzIdyLg==}
     dev: true
 
   /base64-arraybuffer@1.0.2:
@@ -3321,7 +3321,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /concordance@5.0.4:
