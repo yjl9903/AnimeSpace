@@ -192,6 +192,9 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     fs
       .mkdir(path.join(space.root, './plans'), { recursive: true })
       .catch(() => {}),
+    fs
+      .mkdir(path.join(space.root, './download'), { recursive: true })
+      .catch(() => {}),
     fs.writeFile(
       path.join(space.root, configFilename),
       stringify({
@@ -200,7 +203,13 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
         storage: DefaultStorageDirectory
       }),
       'utf-8'
-    )
+    ),
+    fs.writeFile(
+      path.join(space.root, '.gitignore'),
+      `*.mp4\n*.mkv\n`,
+      'utf-8'
+    ),
+    fs.writeFile(path.join(space.root, 'README.md'), `# AnimeSpace\n`, 'utf-8')
   ]);
 
   return space;

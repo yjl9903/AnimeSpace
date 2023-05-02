@@ -27,6 +27,20 @@ export class Anime {
     this.plan = plan;
   }
 
+  public matchKeywords(text: string): boolean {
+    for (const ban of this.plan.keywords.exclude) {
+      if (text.includes(ban)) {
+        return false;
+      }
+    }
+    for (const list of this.plan.keywords.include) {
+      if (list.every((keyword) => !text.includes(keyword))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public async library(force = false) {
     if (this._lib === undefined || force) {
       await fs.ensureDir(this.directory);

@@ -1,7 +1,8 @@
 import {
   listIncludeFiles,
   type Plugin,
-  type PluginEntry
+  type PluginEntry,
+  type LocalFile
 } from '@animespace/core';
 
 export interface DownloadOptions extends PluginEntry {
@@ -10,6 +11,7 @@ export interface DownloadOptions extends PluginEntry {
 
 export async function Download(options: DownloadOptions): Promise<Plugin> {
   const relDir = options.directory ?? './download';
+  const files: LocalFile[] = [];
 
   return {
     name: 'download',
@@ -19,8 +21,32 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
       }
     },
     refresh: {
+      async prepare(system) {
+        files.splice(
+          0,
+          files.length,
+          ...(await listIncludeFiles(system.space, relDir))
+        );
+      },
       async refresh(system, anime) {
-        const files = await listIncludeFiles(system.space, relDir);
+        const relatedFiles: LocalFile[] = [];
+        files.splice(
+          0,
+          files.length,
+          ...files.filter((f) => {
+            if (anime.matchKeywords(f.filename)) {
+              relatedFiles.push(f);
+              return false;
+            } else {
+              return true;
+            }
+          })
+        );
+        // Add file to anime library
+      },
+      async finish(system) {
+        if (files.length > 0) {
+        }
       }
     }
   };

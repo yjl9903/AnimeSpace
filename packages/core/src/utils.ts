@@ -15,12 +15,16 @@ export function formatStringArray(arr: string | string[] | undefined | null) {
 }
 
 export async function listIncludeFiles(space: AnimeSpace, directory: string) {
-  const exts = new Set(space.preference.extension.include);
-  return (await fs.readdir(space.resolvePath(directory)))
-    .filter((f) => exts.has(path.extname(f)))
-    .map((f) => ({
-      filename: f,
-      path: path.join(directory, f),
-      metadata: {}
-    }));
+  try {
+    const exts = new Set(space.preference.extension.include);
+    return (await fs.readdir(space.resolvePath(directory)))
+      .filter((f) => exts.has(path.extname(f).slice(1)))
+      .map((f) => ({
+        filename: f,
+        path: space.resolvePath(directory, f),
+        metadata: {}
+      }));
+  } catch {
+    return [];
+  }
 }
