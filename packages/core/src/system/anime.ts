@@ -113,7 +113,11 @@ export class Anime {
   public async writeLibrary(): Promise<void> {
     if (this._lib && this._dirty) {
       const libPath = path.join(this.directory, MetadataFilename);
-      await fs.writeFile(libPath, stringify(this._lib), 'utf-8');
+      await fs.writeFile(
+        libPath,
+        stringify(this._lib, { lineWidth: 0 }),
+        'utf-8'
+      );
       this._dirty = false;
     }
   }
