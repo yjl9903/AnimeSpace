@@ -22,6 +22,8 @@ export interface AnimeSpace {
   readonly plans: () => Promise<Plan[]>;
 
   readonly plugins: Plugin[];
+
+  readonly resolvePath: (...d: string[]) => string;
 }
 
 export interface Preference {

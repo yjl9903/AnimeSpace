@@ -98,6 +98,9 @@ export async function loadSpace(
     let plans: Plan[] | undefined = undefined;
     const resolved: AnimeSpace = {
       ...space,
+      resolvePath(...d) {
+        return path.resolve(resolved.root, ...d);
+      },
       async plans() {
         if (plans !== undefined) {
           return plans;
