@@ -27,6 +27,11 @@ export async function createAnimeSystem(
     async introspect() {
       // Introspect animes
       return (animes = await introspect(system));
+    },
+    async writeBack() {
+      const animes = await system.animes();
+      Promise.all(animes.map((a) => a.writeLibrary()));
+      return animes;
     }
   };
   return system;

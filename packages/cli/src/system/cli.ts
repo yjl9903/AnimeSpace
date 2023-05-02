@@ -36,12 +36,16 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       if (options.introspect) {
         await system.introspect();
       }
-      return await system.refresh();
+      const animes = await system.refresh();
+      await system.writeBack();
+      return animes;
     });
 
   app
     .command('introspect', 'Introspect the local anime system')
     .action(async () => {
-      return await system.introspect();
+      const animes = await system.introspect();
+      await system.writeBack();
+      return animes;
     });
 }

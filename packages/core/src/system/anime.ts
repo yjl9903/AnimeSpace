@@ -71,6 +71,13 @@ export class Anime {
       return this._files;
     }
   }
+
+  public async writeLibrary(): Promise<void> {
+    if (this._lib && this.dirty) {
+      const libPath = path.join(this.directory, MetadataFilename);
+      await fs.writeFile(libPath, stringify(this._lib), 'utf-8');
+    }
+  }
 }
 
 export interface LocalLibrary {

@@ -19,4 +19,9 @@ export interface AnimeSystem {
    * Sync with the modified anime config
    */
   introspect(): Promise<Anime[]>;
+
+  /**
+   * Write back the modified anime library
+   */
+  writeBack(): Promise<Anime[]>;
 }
