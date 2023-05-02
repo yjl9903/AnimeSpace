@@ -7,5 +7,5 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: true
   },
-  externals: ['breadc']
+  externals: ['breadc', 'anitomy']
 });
