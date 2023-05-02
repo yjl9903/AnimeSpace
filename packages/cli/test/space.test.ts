@@ -27,6 +27,7 @@ describe('system', () => {
             season: 2,
             state: 'onair',
             title: '熊熊勇闯异世界 Punch!',
+            translations: {},
             type: '番剧'
           },
           {
@@ -35,11 +36,14 @@ describe('system', () => {
             fansub: ['SweetSub'],
             keywords: {
               exclude: [],
-              include: [['天国大魔境']]
+              include: [['天国大魔境', 'Tengoku Daimakyou']]
             },
             season: 1,
             state: 'onair',
             title: '天国大魔境',
+            translations: {
+              unknown: ['Tengoku Daimakyou']
+            },
             type: '番剧'
           },
           {
@@ -53,6 +57,7 @@ describe('system', () => {
             season: 1,
             state: 'onair',
             title: '偶像大师 灰姑娘女孩 U149',
+            translations: {},
             type: '番剧'
           }
         ],

@@ -51,6 +51,8 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
           if (result) {
             const video: LocalVideo = {
               filename: anime.formatFilename(result),
+              fansub: result.release.group,
+              episode: result.episode.number,
               source: {
                 type: 'download',
                 from: file.filename

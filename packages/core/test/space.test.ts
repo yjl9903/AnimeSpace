@@ -49,6 +49,7 @@ describe('Load Space', () => {
         onair: [
           {
             title: '熊熊勇闯异世界 Punch!',
+            translations: {},
             type: '番剧',
             state: 'onair',
             season: 2,
@@ -62,6 +63,9 @@ describe('Load Space', () => {
           },
           {
             title: '天国大魔境',
+            translations: {
+              unknown: ['Tengoku Daimakyou']
+            },
             type: '番剧',
             state: 'onair',
             season: 1,
@@ -69,12 +73,13 @@ describe('Load Space', () => {
             fansub: 'SweetSub',
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
-              include: [['天国大魔境']],
+              include: [['天国大魔境', 'Tengoku Daimakyou']],
               exclude: []
             }
           },
           {
             title: '偶像大师 灰姑娘女孩 U149',
+            translations: {},
             type: '番剧',
             state: 'onair',
             season: 1,

@@ -31,16 +31,18 @@ export async function loadPlan(patterns: string[]) {
           const type = ['番剧', '电影', 'OVA'].includes(o.type)
             ? o.type
             : '番剧';
+          const translations = formatTranslations(o.translations);
 
           return {
             ...o,
             title,
+            translations,
             bgmId: String(o.bgmId),
             type,
             state: oState,
             season: o.season ? +o.season : 1,
             date: o.date ? new Date(o.date) : date,
-            keywords: formatKeywordsArray(title, o.keywords)
+            keywords: formatKeywordsArray(title, translations, o.keywords)
           };
         })
       };
@@ -49,13 +51,42 @@ export async function loadPlan(patterns: string[]) {
   return plans;
 }
 
-function formatKeywordsArray(title: string, keywords: any): KeywordsParams {
+function formatTranslations(trans: unknown) {
+  if (typeof trans === 'string') {
+    return {
+      unknown: [trans]
+    };
+  } else if (Array.isArray(trans)) {
+    return {
+      unknown: trans
+    };
+  } else if (typeof trans === 'object') {
+    const entries = Object.entries(trans as any);
+    return Object.fromEntries(
+      entries.map(([key, value]) => {
+        const arr = formatStringArray(value as any);
+        return [key, arr];
+      })
+    );
+  }
+  return {};
+}
+
+function formatKeywordsArray(
+  title: string,
+  translations: Record<string, string[]>,
+  keywords: any
+): KeywordsParams {
+  const titles = [
+    title,
+    ...Object.entries(translations).flatMap(([_key, value]) => value)
+  ];
   if (keywords !== undefined && keywords !== null) {
     if (typeof keywords === 'string') {
       if (!keywords.startsWith('!')) {
-        return { include: [[title, keywords]], exclude: [] };
+        return { include: [titles, [keywords]], exclude: [] };
       } else {
-        return { include: [[title]], exclude: [keywords.slice(1)] };
+        return { include: [titles], exclude: [keywords.slice(1)] };
       }
     } else if (Array.isArray(keywords)) {
       const include: string[][] = [];
@@ -74,5 +105,5 @@ function formatKeywordsArray(title: string, keywords: any): KeywordsParams {
       return { include, exclude };
     }
   }
-  return { include: [[title]], exclude: [] };
+  return { include: [titles], exclude: [] };
 }

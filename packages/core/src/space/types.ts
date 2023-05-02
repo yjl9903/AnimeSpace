@@ -68,6 +68,8 @@ export interface Plan {
 export interface AnimePlan {
   readonly title: string;
 
+  readonly translations: Record<string, string[]>;
+
   readonly type: AnimePlanType;
 
   readonly state: PlanState;
@@ -82,6 +84,6 @@ export interface AnimePlan {
 }
 
 export interface KeywordsParams {
-  include: string[][];
-  exclude: string[];
+  readonly include: string[][];
+  readonly exclude: string[];
 }
