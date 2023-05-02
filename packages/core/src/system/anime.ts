@@ -5,8 +5,8 @@ import type { AnitomyResult } from 'anitomy';
 
 import { parse, stringify } from 'yaml';
 
-import { listIncludeFiles } from '../utils';
 import { AnimePlan, AnimeSpace } from '../space';
+import { formatTitle, listIncludeFiles } from '../utils';
 
 const MetadataFilename = 'metadata.yaml';
 
@@ -25,8 +25,14 @@ export class Anime {
 
   public constructor(space: AnimeSpace, plan: AnimePlan) {
     this.space = space;
-    this.directory = path.join(space.storage, plan.title);
     this.plan = plan;
+
+    const dirname = formatTitle(space.preference.format.anime, {
+      title: plan.title,
+      yyyy: '' + plan.date.getFullYear(),
+      mm: '' + (plan.date.getMonth() + 1)
+    });
+    this.directory = path.join(space.storage, dirname);
   }
 
   public matchKeywords(text: string): boolean {
@@ -75,7 +81,7 @@ export class Anime {
   }
 
   public formatFilename(meta: AnitomyResult) {
-    const getFormat = () => {
+    const format = () => {
       switch (this.plan.type) {
         case '电影':
           return this.space.preference.format.film;
@@ -86,17 +92,14 @@ export class Anime {
           return this.space.preference.format.episode;
       }
     };
-    const format = getFormat();
-    return format
-      .replace(/{title}/g, this.plan.title)
-      .replace(/{yyyy}/, '' + this.plan.date.getFullYear())
-      .replace(/{mm}/, '' + (this.plan.date.getMonth() + 1))
-      .replace(
-        /{ep}/g,
-        meta.episode.number ? String(meta.episode.number) : '{ep}'
-      )
-      .replace(/{extension}/g, meta.file.extension ?? 'mp4')
-      .replace(/{fansub}/g, meta.release.group ?? 'fansub');
+    return formatTitle(format(), {
+      title: this.plan.title,
+      yyyy: '' + this.plan.date.getFullYear(),
+      mm: '' + (this.plan.date.getMonth() + 1),
+      ep: meta.episode.number ? String(meta.episode.number) : '{ep}',
+      extension: meta.file.extension ?? 'mp4',
+      fansub: meta.release.group ?? 'fansub'
+    });
   }
 
   // --- mutation ---

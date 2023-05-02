@@ -28,3 +28,10 @@ export async function listIncludeFiles(space: AnimeSpace, directory: string) {
     return [];
   }
 }
+
+export function formatTitle(template: string, data: Record<string, string>) {
+  for (const [key, value] of Object.entries(data)) {
+    template = template.replace(new RegExp(`{${key}}`, 'g'), value);
+  }
+  return template;
+}
