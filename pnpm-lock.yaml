@@ -168,6 +168,9 @@ importers:
 
   packages/core:
     dependencies:
+      consola:
+        specifier: ^3.1.0
+        version: 3.1.0
       defu:
         specifier: ^6.1.2
         version: 6.1.2
@@ -196,6 +199,9 @@ importers:
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
+      '@breadc/color':
+        specifier: ^0.9.3
+        version: 0.9.3
       anitomy:
         specifier: ^0.0.10
         version: 0.0.10
@@ -2251,7 +2257,7 @@ packages:
       cac: 6.7.14
       chokidar: 3.5.3
       colorette: 2.0.19
-      consola: 3.0.2
+      consola: 3.1.0
       fast-glob: 3.2.12
       magic-string: 0.30.0
       pathe: 1.1.0
@@ -3367,9 +3373,8 @@ packages:
       well-known-symbols: 2.0.0
     dev: true
 
-  /consola@3.0.2:
-    resolution: {integrity: sha512-o/Wau2FmZKiQgyp3c3IULgN6J5yc0lwYMnoyiZdEpdGxKGBtt2ACbkulBZ6BUsHy1HlSJqoP4YOyPIJLgRJyKQ==}
-    dev: true
+  /consola@3.1.0:
+    resolution: {integrity: sha512-rrrJE6rP0qzl/Srg+C9x/AE5Kxfux7reVm1Wh0wCjuXvih6DqZgqDZe8auTD28fzJ9TF0mHlSDrPpWlujQRo1Q==}
 
   /content-disposition@0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
@@ -6452,7 +6457,7 @@ packages:
       '@rollup/plugin-replace': 5.0.2(rollup@3.20.2)
       '@rollup/pluginutils': 5.0.2(rollup@3.20.2)
       chalk: 5.2.0
-      consola: 3.0.2
+      consola: 3.1.0
       defu: 6.1.2
       esbuild: 0.17.16
       globby: 13.1.4

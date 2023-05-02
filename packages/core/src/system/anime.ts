@@ -141,12 +141,14 @@ export interface LocalVideo {
   source: LocalVideoSource;
 }
 
-export type LocalVideoSource = any;
+export interface LocalVideoSource extends Record<string, any> {
+  type: string;
+}
 
 export interface LocalFile {
   filename: string;
 
   path: string;
 
-  metadata: {};
+  metadata: Record<string, string>;
 }

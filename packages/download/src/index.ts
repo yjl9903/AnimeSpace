@@ -3,10 +3,16 @@ import {
   type PluginEntry,
   type LocalFile,
   type LocalVideo,
+  type AnimeSystem,
   listIncludeFiles
 } from '@animespace/core';
 
+import { dim } from '@breadc/color';
 import { parse } from 'anitomy';
+
+const DOT = dim('•');
+
+export const DOWNLOAD = 'Download';
 
 export interface DownloadOptions extends PluginEntry {
   directory?: string;
@@ -32,6 +38,7 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
         );
       },
       async refresh(system, anime) {
+        const logger = createLogger(system);
         const relatedFiles: LocalFile[] = [];
         files.splice(
           0,
@@ -54,20 +61,34 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
               fansub: result.release.group,
               episode: result.episode.number,
               source: {
-                type: 'download',
+                type: DOWNLOAD,
                 from: file.filename
               }
             };
+            logger.info(
+              `Moving downloaded file ${file.filename} to ${video.filename}`
+            );
             await anime.moveVideo(file, video);
           } else {
-            // Log warning
+            logger.info(`Parse "${file.filename}" failed`);
           }
         }
       },
       async finish(system) {
         if (files.length > 0) {
+          const logger = createLogger(system);
+          logger.info(
+            `There are ${files.length} downloaded video files without matching animations found.`
+          );
+          for (const f of files) {
+            logger.info(`${DOT} ${f.filename}`);
+          }
         }
       }
     }
   };
+
+  function createLogger(system: AnimeSystem) {
+    return system.logger.withTag(DOWNLOAD);
+  }
 }

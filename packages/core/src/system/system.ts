@@ -1,3 +1,5 @@
+import { createConsola } from 'consola';
+
 import type { AnimeSpace } from '../space';
 
 import type { Anime } from './anime';
@@ -9,11 +11,14 @@ import { introspect, loadAnime } from './introspect';
 export async function createAnimeSystem(
   space: AnimeSpace
 ): Promise<AnimeSystem> {
+  const logger = createConsola();
+
   // Cache animes
   let animes: Anime[] | undefined = undefined;
 
   const system: AnimeSystem = {
     space,
+    logger,
     async animes() {
       if (animes !== undefined) {
         return animes;

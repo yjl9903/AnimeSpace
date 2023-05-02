@@ -1,9 +1,13 @@
+import type { ConsolaInstance } from 'consola';
+
 import type { AnimeSpace } from '../space/types';
 
 import type { Anime } from './anime';
 
 export interface AnimeSystem {
   space: AnimeSpace;
+
+  logger: ConsolaInstance;
 
   /**
    * Load animes from plans or introspect result
