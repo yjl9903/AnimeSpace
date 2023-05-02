@@ -4,6 +4,7 @@ import path from 'node:path';
 import { parse, stringify } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
+import { listIncludeFiles } from '../utils';
 
 const MetadataFilename = 'metadata.yaml';
 
@@ -50,14 +51,7 @@ export class Anime {
 
   public async list(force = false): Promise<LocalFile[]> {
     if (this._files === undefined || force) {
-      const exts = new Set(this.space.preference.extension.include);
-      const files = (await fs.readdir(this.directory))
-        .filter((f) => exts.has(path.extname(f)))
-        .map((f) => ({
-          filename: f,
-          path: path.join(this.directory, f),
-          metadata: {}
-        }));
+      const files = await listIncludeFiles(this.space, this.directory);
       return (this._files = files);
     } else {
       return this._files;

@@ -1,4 +1,8 @@
-import { type Plugin, type PluginEntry } from '@animespace/core';
+import {
+  listIncludeFiles,
+  type Plugin,
+  type PluginEntry
+} from '@animespace/core';
 
 export interface DownloadOptions extends PluginEntry {
   directory?: string;
@@ -15,7 +19,9 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
       }
     },
     refresh: {
-      async refresh(system, anime) {}
+      async refresh(system, anime) {
+        const files = await listIncludeFiles(system.space, relDir);
+      }
     }
   };
 }
