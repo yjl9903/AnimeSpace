@@ -3,6 +3,8 @@ import { AnimeSystem } from '@animespace/core';
 
 import { version, description } from '../../package.json';
 
+import { inferRoot } from './system';
+
 export async function makeCliApp(system: AnimeSystem) {
   const app = breadc('anime', { version, description });
   registerApp(system, app);
@@ -14,8 +16,22 @@ export async function makeCliApp(system: AnimeSystem) {
 
 function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   app
+    .command('space', 'Display the space directory')
+    .option('--open', 'Open space in your editor')
+    .action(async (options) => {
+      const root = inferRoot();
+      if (options.open) {
+        const openEditor = (await import('open-editor')).default;
+        openEditor([root]);
+      } else {
+        console.log(root);
+      }
+      return root;
+    });
+
+  app
     .command('refresh', 'Refresh the local anime system')
-    .option('--introspect')
+    .option('-i, --introspect')
     .action(async (options) => {
       if (options.introspect) {
         await system.introspect();

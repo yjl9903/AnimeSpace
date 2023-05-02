@@ -21,13 +21,13 @@ export async function makeSystem(_root?: string) {
   return system;
 }
 
-function inferRoot() {
+export function inferRoot() {
   try {
-    const envRoot = process.env.ANIMEPASTE_SPACE;
+    const envRoot = process.env.ANIMESPACE_ROOT;
     if (envRoot) {
       return path.resolve(envRoot);
     }
   } finally {
-    return path.resolve(os.homedir(), '.animepaste');
+    return path.resolve(os.homedir(), '.animespace');
   }
 }
