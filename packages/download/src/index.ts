@@ -1,7 +1,7 @@
 import { type Plugin, type PluginEntry } from '@animespace/core';
 
 export interface DownloadOptions extends PluginEntry {
-  directory: string;
+  directory?: string;
 }
 
 export async function Download(options: DownloadOptions): Promise<Plugin> {
