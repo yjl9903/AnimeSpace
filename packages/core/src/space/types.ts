@@ -28,6 +28,8 @@ export interface Preference {
   readonly format: {
     readonly anime: string;
     readonly episode: string;
+    readonly film: string;
+    readonly ova: string;
   };
   readonly extension: {
     readonly include: string[];

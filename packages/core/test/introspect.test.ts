@@ -15,6 +15,7 @@ describe('Introspect', () => {
     });
     const system = await createAnimeSystem(space);
     const animes = await system.introspect();
-    expect(animes).toMatchSnapshot();
+    expect(await Promise.all(animes.map((a) => a.library()))).toMatchSnapshot();
+    expect(await Promise.all(animes.map((a) => a.list()))).toMatchSnapshot();
   });
 });

@@ -17,7 +17,9 @@ describe('Load Space', () => {
       preference: {
         format: {
           anime: '{title} ({yyyy}-{mm})',
-          episode: '[{fansub}] {title} - E{ep}.{extension}'
+          episode: '[{fansub}] {title} - E{ep}.{extension}',
+          film: '[{fansub}] {title}.{extension}',
+          ova: '[{fansub}] {title}.{extension}'
         },
         extension: {
           include: ['mp4', 'mkv'],

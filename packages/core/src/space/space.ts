@@ -29,6 +29,8 @@ const DefaultAnimeFormat = '{title} ({yyyy}-{mm})';
 
 const DefaultEpisodeFormat = '[{fansub}] {title} - E{ep}.{extension}';
 
+const DefaultFilmFormat = '[{fansub}] {title}.{extension}';
+
 export type PluginLoaderFn = (
   entry: PluginEntry
 ) => Plugin | undefined | Promise<Plugin | undefined>;
@@ -152,7 +154,9 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     preference: {
       format: {
         anime: DefaultAnimeFormat,
-        episode: DefaultEpisodeFormat
+        episode: DefaultEpisodeFormat,
+        film: DefaultFilmFormat,
+        ova: DefaultFilmFormat
       },
       extension: {
         include: ['mp4', 'mkv'],
