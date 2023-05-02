@@ -2,6 +2,9 @@ import type { Breadc } from 'breadc';
 
 import type { AnimeSystem } from './system/types';
 import type { AnimeSpace, Plan } from './space/types';
+import type { Anime, LocalFile, LocalVideo } from './system/anime';
+
+type MayPromise<T> = T | Promise<T>;
 
 export interface Plugin {
   /**
@@ -12,27 +15,41 @@ export interface Plugin {
   /**
    * Prepare anime space configurations
    */
-  prepare?: (space: AnimeSpace) => void | Promise<void>;
+  prepare?: (space: AnimeSpace) => MayPromise<void>;
 
   /**
    * Prepare anime space plans
    */
-  preparePlans?: (space: AnimeSpace, plans: Plan[]) => void | Promise<void>;
+  preparePlans?: (space: AnimeSpace, plans: Plan[]) => MayPromise<void>;
 
   /**
    * Extend command line interface
    */
-  command?: (system: AnimeSystem, cli: Breadc<{}>) => void | Promise<void>;
+  command?: (system: AnimeSystem, cli: Breadc<{}>) => MayPromise<void>;
 
   introspect?: {
-    prepare?: (system: AnimeSystem) => void | Promise<void>;
+    prepare?: (system: AnimeSystem) => MayPromise<void>;
 
-    finish?: (system: AnimeSystem) => void | Promise<void>;
+    handleUnknownFile?: (
+      system: AnimeSystem,
+      anime: Anime,
+      file: LocalFile
+    ) => MayPromise<LocalVideo | undefined>;
+
+    handleUnknownVideo?: (
+      system: AnimeSystem,
+      anime: Anime,
+      video: LocalVideo
+    ) => MayPromise<LocalVideo | undefined>;
+
+    finish?: (system: AnimeSystem) => MayPromise<void>;
   };
 
   refresh?: {
-    prepare?: (space: AnimeSystem) => void | Promise<void>;
+    prepare?: (space: AnimeSystem) => MayPromise<void>;
 
-    finish?: (space: AnimeSystem) => void | Promise<void>;
+    refresh?: (space: AnimeSystem, anime: Anime) => MayPromise<void>;
+
+    finish?: (space: AnimeSystem) => MayPromise<void>;
   };
 }

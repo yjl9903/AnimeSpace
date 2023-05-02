@@ -41,7 +41,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@animespace/core": "workspace:*"
+    "@animespace/core": "workspace:*",
+    "anitomy": "^0.0.10"
   },
   "engines": {
     "node": ">=v16.0.0"

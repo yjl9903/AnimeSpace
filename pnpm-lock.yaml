@@ -193,6 +193,9 @@ importers:
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
+      anitomy:
+        specifier: ^0.0.10
+        version: 0.0.10
 
 packages:
 
@@ -2760,6 +2763,11 @@ packages:
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
+    dev: false
+
+  /anitomy@0.0.10:
+    resolution: {integrity: sha512-X+UW72J7r4IDmVXY9vhvRrCn3xgBDp8ygwR3+KXRmF0A4sll7ZbjoWh1Y6y0DWh34stMMQ4AQ/MFrzeEltga+g==}
+    engines: {node: '>=v18.16.0'}
     dev: false
 
   /ansi-regex@5.0.1:
