@@ -12,7 +12,7 @@ describe('Load Space', () => {
   it('should work', async () => {
     const root = path.join(__dirname, './fixtures/space');
     const space = await loadSpace(root);
-    expect({ ...space, plans: undefined }).toEqual({
+    expect({ ...space, resolvePath: undefined, plans: undefined }).toEqual({
       plugins: [],
       preference: {
         format: {
@@ -97,8 +97,9 @@ describe('Create Space', () => {
   it('should work', async () => {
     const space = await loadSpace(root);
     const loaded = await loadSpace(root);
-    expect({ ...loaded, plans: undefined }).toEqual({
+    expect({ ...loaded, resolvePath: undefined, plans: undefined }).toEqual({
       ...space,
+      resolvePath: undefined,
       plans: undefined
     });
     expect(await loaded.plans()).toEqual(await space.plans());
