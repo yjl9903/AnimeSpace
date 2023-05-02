@@ -181,6 +181,9 @@ importers:
         specifier: ^2.2.2
         version: 2.2.2
     devDependencies:
+      anitomy:
+        specifier: ^0.0.10
+        version: 0.0.10
       breadc:
         specifier: ^0.9.3
         version: 0.9.3
@@ -2768,7 +2771,6 @@ packages:
   /anitomy@0.0.10:
     resolution: {integrity: sha512-X+UW72J7r4IDmVXY9vhvRrCn3xgBDp8ygwR3+KXRmF0A4sll7ZbjoWh1Y6y0DWh34stMMQ4AQ/MFrzeEltga+g==}
     engines: {node: '>=v18.16.0'}
-    dev: false
 
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -3348,7 +3350,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /concordance@5.0.4:

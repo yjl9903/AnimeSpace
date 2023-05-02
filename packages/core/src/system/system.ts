@@ -30,7 +30,7 @@ export async function createAnimeSystem(
     },
     async writeBack() {
       const animes = await system.animes();
-      Promise.all(animes.map((a) => a.writeLibrary()));
+      await Promise.all(animes.map((a) => a.writeLibrary()));
       return animes;
     }
   };

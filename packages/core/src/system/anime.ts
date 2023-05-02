@@ -1,10 +1,12 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
+import type { AnitomyResult } from 'anitomy';
+
 import { parse, stringify } from 'yaml';
 
-import { AnimePlan, AnimeSpace } from '../space';
 import { listIncludeFiles } from '../utils';
+import { AnimePlan, AnimeSpace } from '../space';
 
 const MetadataFilename = 'metadata.yaml';
 
@@ -19,7 +21,7 @@ export class Anime {
 
   private _files: LocalFile[] | undefined;
 
-  private dirty = false;
+  private _dirty = false;
 
   public constructor(space: AnimeSpace, plan: AnimePlan) {
     this.space = space;
@@ -48,7 +50,7 @@ export class Anime {
       if (await fs.exists(libPath)) {
         const libContent = await fs.readFile(libPath, 'utf-8');
         const lib = parse(libContent) as LocalLibrary;
-        return (this.dirty = false), (this._lib = lib);
+        return (this._dirty = false), (this._lib = lib);
       } else {
         const lib: LocalLibrary = {
           title: this.plan.title,
@@ -56,7 +58,7 @@ export class Anime {
           videos: []
         };
         await fs.writeFile(libPath, stringify(lib), 'utf-8');
-        return (this.dirty = false), (this._lib = lib);
+        return (this._dirty = false), (this._lib = lib);
       }
     } else {
       return this._lib;
@@ -72,10 +74,44 @@ export class Anime {
     }
   }
 
+  public formatFilename(meta: AnitomyResult) {
+    const getFormat = () => {
+      switch (this.plan.type) {
+        case '电影':
+          return this.space.preference.format.film;
+        case 'OVA':
+          return this.space.preference.format.ova;
+        case '番剧':
+        default:
+          return this.space.preference.format.episode;
+      }
+    };
+    const format = getFormat();
+    return format
+      .replace(/{title}/g, this.plan.title)
+      .replace(/{yyyy}/, '' + this.plan.date.getFullYear())
+      .replace(/{mm}/, '' + (this.plan.date.getMonth() + 1))
+      .replace(
+        /{ep}/g,
+        meta.episode.number ? String(meta.episode.number) : '{ep}'
+      )
+      .replace(/{extension}/g, meta.file.extension ?? 'mp4')
+      .replace(/{fansub}/g, meta.release.group ?? 'fansub');
+  }
+
+  // --- mutation ---
+  public async moveVideo(file: LocalFile, video: LocalVideo): Promise<void> {
+    await this.library();
+    await fs.move(file.path, path.join(this.directory, video.filename));
+    this._dirty = true;
+    this._lib!.videos.push(video);
+  }
+
   public async writeLibrary(): Promise<void> {
-    if (this._lib && this.dirty) {
+    if (this._lib && this._dirty) {
       const libPath = path.join(this.directory, MetadataFilename);
       await fs.writeFile(libPath, stringify(this._lib), 'utf-8');
+      this._dirty = false;
     }
   }
 }

@@ -145,7 +145,13 @@ async function validateSpace(space: RawAnimeSpace) {
   try {
     await fs.access(space.storage, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
-    throw new AnimeSystemError(`Can not access local anime storage directory`);
+    try {
+      await fs.mkdir(space.storage, { recursive: true });
+    } catch {
+      throw new AnimeSystemError(
+        `Can not access local anime storage directory`
+      );
+    }
   }
   return true;
 }

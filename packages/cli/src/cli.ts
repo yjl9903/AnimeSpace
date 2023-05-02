@@ -1,14 +1,18 @@
 import createDebug from 'debug';
 import { lightRed } from '@breadc/color';
 
+import { AnimeSystemError } from '@animespace/core';
+
 import { makeSystem, makeCliApp } from './system';
 
 const debug = createDebug('anime:cli');
 
 export async function bootstrap() {
   const handle = (error: unknown) => {
-    if (error instanceof Error) {
-      console.error(lightRed('Error ') + error.message);
+    if (error instanceof AnimeSystemError) {
+      console.error(lightRed('Anime System Error ') + error.detail);
+    } else if (error instanceof Error) {
+      console.error(lightRed('Unknown Error ') + error.message);
     } else {
       console.error(error);
     }

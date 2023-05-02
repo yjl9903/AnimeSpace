@@ -47,6 +47,7 @@
     "yaml": "^2.2.2"
   },
   "devDependencies": {
+    "anitomy": "^0.0.10",
     "breadc": "^0.9.3",
     "rimraf": "^5.0.0"
   },
