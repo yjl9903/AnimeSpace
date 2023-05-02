@@ -80,19 +80,32 @@ export class Anime {
     }
   }
 
+  // --- format ---
+  private get format() {
+    switch (this.plan.type) {
+      case '电影':
+        return this.space.preference.format.film;
+      case 'OVA':
+        return this.space.preference.format.ova;
+      case '番剧':
+      default:
+        return this.space.preference.format.episode;
+    }
+  }
+
+  public reformatVideoFilename(video: LocalVideo) {
+    return formatTitle(this.format, {
+      title: this.plan.title,
+      yyyy: '' + this.plan.date.getFullYear(),
+      mm: '' + (this.plan.date.getMonth() + 1),
+      ep: video.episode ? String(video.episode) : '{ep}',
+      extension: path.extname(video.filename).slice(1) ?? 'mp4',
+      fansub: video.fansub ?? 'fansub'
+    });
+  }
+
   public formatFilename(meta: AnitomyResult) {
-    const format = () => {
-      switch (this.plan.type) {
-        case '电影':
-          return this.space.preference.format.film;
-        case 'OVA':
-          return this.space.preference.format.ova;
-        case '番剧':
-        default:
-          return this.space.preference.format.episode;
-      }
-    };
-    return formatTitle(format(), {
+    return formatTitle(this.format, {
       title: this.plan.title,
       yyyy: '' + this.plan.date.getFullYear(),
       mm: '' + (this.plan.date.getMonth() + 1),
@@ -103,11 +116,22 @@ export class Anime {
   }
 
   // --- mutation ---
-  public async moveVideo(file: LocalFile, video: LocalVideo): Promise<void> {
+  public async addVideo(file: LocalFile, video: LocalVideo): Promise<void> {
     await this.library();
     await fs.move(file.path, path.join(this.directory, video.filename));
     this._dirty = true;
     this._lib!.videos.push(video);
+  }
+
+  public async moveVideo(src: LocalVideo, dst: string): Promise<void> {
+    await this.library();
+    const oldFilename = src.filename;
+    src.filename = dst;
+    await fs.move(
+      path.join(this.directory, oldFilename),
+      path.join(this.directory, dst)
+    );
+    this._dirty = true;
   }
 
   public async writeLibrary(): Promise<void> {

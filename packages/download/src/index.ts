@@ -7,8 +7,8 @@ import {
   listIncludeFiles
 } from '@animespace/core';
 
-import { dim } from '@breadc/color';
 import { parse } from 'anitomy';
+import { dim, lightYellow } from '@breadc/color';
 
 const DOT = dim('•');
 
@@ -68,7 +68,7 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
             logger.info(
               `Moving downloaded file ${file.filename} to ${video.filename}`
             );
-            await anime.moveVideo(file, video);
+            await anime.addVideo(file, video);
           } else {
             logger.info(`Parse "${file.filename}" failed`);
           }
@@ -78,7 +78,9 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
         if (files.length > 0) {
           const logger = createLogger(system);
           logger.info(
-            `There are ${files.length} downloaded video files without matching animations found.`
+            `There are ${lightYellow(
+              `${files.length} downloaded files`
+            )} without matching animations found.`
           );
           for (const f of files) {
             logger.info(`${DOT} ${f.filename}`);

@@ -1,3 +1,5 @@
+import { bold } from '@breadc/color';
+
 import type { Plan } from '../space';
 
 import type { AnimeSystem } from './types';
@@ -45,6 +47,8 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     }
   }
 
+  const logger = system.logger.withTag('introspect');
+
   // Handle video in metadata.yaml, but not in directory
   for (const video of unknownVideos) {
     for (const plugin of system.space.plugins) {
@@ -67,6 +71,14 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
           break;
         }
       }
+    }
+  }
+  // Sync episode / fansub
+  for (const video of videos) {
+    const filename = anime.reformatVideoFilename(video);
+    if (filename !== video.filename) {
+      logger.info(`Moving "${bold(video.filename)}" to "${bold(filename)}"`);
+      await anime.moveVideo(video, filename);
     }
   }
 }

@@ -168,6 +168,9 @@ importers:
 
   packages/core:
     dependencies:
+      '@breadc/color':
+        specifier: ^0.9.3
+        version: 0.9.3
       consola:
         specifier: ^3.1.0
         version: 3.1.0
