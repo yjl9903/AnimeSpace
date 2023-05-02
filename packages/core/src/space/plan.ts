@@ -52,22 +52,24 @@ export async function loadPlan(patterns: string[]) {
 }
 
 function formatTranslations(trans: unknown) {
-  if (typeof trans === 'string') {
-    return {
-      unknown: [trans]
-    };
-  } else if (Array.isArray(trans)) {
-    return {
-      unknown: trans
-    };
-  } else if (typeof trans === 'object') {
-    const entries = Object.entries(trans as any);
-    return Object.fromEntries(
-      entries.map(([key, value]) => {
-        const arr = formatStringArray(value as any);
-        return [key, arr];
-      })
-    );
+  if (trans !== undefined && trans !== null) {
+    if (typeof trans === 'string') {
+      return {
+        unknown: [trans]
+      };
+    } else if (Array.isArray(trans)) {
+      return {
+        unknown: trans
+      };
+    } else if (typeof trans === 'object') {
+      const entries = Object.entries(trans as any);
+      return Object.fromEntries(
+        entries.map(([key, value]) => {
+          const arr = formatStringArray(value as any);
+          return [key, arr];
+        })
+      );
+    }
   }
   return {};
 }
