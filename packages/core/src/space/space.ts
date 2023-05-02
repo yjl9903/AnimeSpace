@@ -23,7 +23,7 @@ const defu = createDefu((obj, key, value) => {
 
 const configFilename = `./anime.yaml`;
 
-const DefaultStorageDirectory = `./anime`;
+const DefaultStorageDirectory = `./animes`;
 
 const DefaultAnimeFormat = '{title} ({yyyy}-{mm})';
 
