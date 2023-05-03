@@ -1,3 +1,4 @@
+import { ConsolaInstance } from 'consola';
 import {
   type Plugin,
   type PluginEntry,
@@ -19,6 +20,7 @@ export interface DownloadOptions extends PluginEntry {
 }
 
 export async function Download(options: DownloadOptions): Promise<Plugin> {
+  let _logger: ConsolaInstance | undefined = undefined;
   const relDir = options.directory ?? './download';
   const files: LocalFile[] = [];
 
@@ -26,6 +28,24 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
     name: 'download',
     introspect: {
       async handleUnknownFile(system, anime, file) {
+        const logger = createLogger(system);
+        const result = parse(file.filename);
+        if (result) {
+          const video: LocalVideo = {
+            filename: anime.formatFilename(result),
+            fansub: result.release.group,
+            episode: result.episode.number,
+            source: {
+              type: DOWNLOAD,
+              from: file.filename
+            }
+          };
+          logger.info(
+            `Moving downloaded file ${file.filename} to ${video.filename}`
+          );
+          await anime.addVideo(file, video);
+          return video;
+        }
         return undefined;
       }
     },
@@ -91,6 +111,10 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
   };
 
   function createLogger(system: AnimeSystem) {
-    return system.logger.withTag(DOWNLOAD);
+    if (_logger) {
+      return _logger;
+    } else {
+      return (_logger = system.logger.withTag(DOWNLOAD));
+    }
   }
 }

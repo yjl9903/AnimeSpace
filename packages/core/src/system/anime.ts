@@ -132,9 +132,13 @@ export class Anime {
   public async addVideo(file: LocalFile, video: LocalVideo): Promise<void> {
     await this.library();
     try {
-      await fs.move(file.path, path.join(this.directory, video.filename), {
-        overwrite: true
-      });
+      const src = file.path;
+      const dst = path.join(this.directory, video.filename);
+      if (src !== dst) {
+        await fs.move(file.path, dst, {
+          overwrite: true
+        });
+      }
       this._dirty = true;
       this._lib!.videos.push(video);
     } catch (error) {
@@ -148,11 +152,13 @@ export class Anime {
     const newFilename = dst;
     src.filename = newFilename;
     try {
-      await fs.move(
-        path.join(this.directory, oldFilename),
-        path.join(this.directory, newFilename)
-      );
-      this._dirty = true;
+      if (oldFilename !== newFilename) {
+        await fs.move(
+          path.join(this.directory, oldFilename),
+          path.join(this.directory, newFilename)
+        );
+        this._dirty = true;
+      }
     } catch (error) {
       src.filename = oldFilename;
       console.error(error);
