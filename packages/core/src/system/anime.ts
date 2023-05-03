@@ -120,7 +120,9 @@ export class Anime {
   public async addVideo(file: LocalFile, video: LocalVideo): Promise<void> {
     await this.library();
     try {
-      await fs.move(file.path, path.join(this.directory, video.filename));
+      await fs.move(file.path, path.join(this.directory, video.filename), {
+        overwrite: true
+      });
       this._dirty = true;
       this._lib!.videos.push(video);
     } catch (error) {

@@ -12,7 +12,6 @@ export async function createAnimeSystem(
   space: AnimeSpace
 ): Promise<AnimeSystem> {
   const logger = createConsola();
-  logger.wrapConsole();
 
   // Cache animes
   let animes: Anime[] | undefined = undefined;
@@ -28,15 +27,23 @@ export async function createAnimeSystem(
       }
     },
     async refresh() {
-      return refresh(system);
+      logger.wrapConsole();
+      const res = await refresh(system);
+      logger.restoreConsole();
+      return res;
     },
     async introspect() {
+      logger.wrapConsole();
       // Introspect animes
-      return (animes = await introspect(system));
+      animes = await introspect(system);
+      logger.restoreConsole();
+      return animes;
     },
     async writeBack() {
+      logger.wrapConsole();
       const animes = await system.animes();
       await Promise.all(animes.map((a) => a.writeLibrary()));
+      logger.restoreConsole();
       return animes;
     }
   };
