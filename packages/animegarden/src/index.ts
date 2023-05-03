@@ -4,16 +4,19 @@ import {
   formatStringArray
 } from '@animespace/core';
 import { fetchResources } from 'animegarden';
-import { bold, underline, lightGreen, link } from '@breadc/color';
+import { bold, dim, lightGreen, link, underline } from '@breadc/color';
 
 import './plan.d';
 import { ufetch } from './ufetch';
+import { el } from 'date-fns/locale';
+
+const DOT = dim('•');
+
+const ANIMEGARDEN = 'AnimeGarden';
 
 export interface AnimeGardenOptions extends PluginEntry {
   provider?: 'webtorrent' | 'aria2' | 'qbittorrent';
 }
-
-const ANIMEGARDEN = 'AnimeGarden';
 
 export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   const provider = options.provider ?? 'webtorrent';
@@ -45,6 +48,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             `https://bangumi.tv/subject/${anime.plan.bgmId}`
           )})`
         );
+        printKeywords();
 
         const { resources } = await fetchResources(ufetch, {
           type: '動畫',
@@ -62,6 +66,31 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             'https://garden.onekuma.cn/'
           )}`
         );
+
+        function printKeywords() {
+          if (anime.plan.keywords.include.length === 1) {
+            const first = anime.plan.keywords.include[0];
+            logger.info(
+              `${dim('Include keywords')}  ${first
+                .map((t) => underline(t))
+                .join(dim(' | '))}`
+            );
+          } else {
+            logger.info(dim(`Include keywords:`));
+            for (const include of anime.plan.keywords.include) {
+              logger.info(
+                `  ${DOT} ${include.map((t) => underline(t)).join(' | ')}`
+              );
+            }
+          }
+          if (anime.plan.keywords.exclude.length > 0) {
+            logger.info(
+              `${dim(`Exclude keywords`)}  [ ${anime.plan.keywords.exclude
+                .map((t) => underline(t))
+                .join(' , ')} ]`
+            );
+          }
+        }
       }
     }
   };
