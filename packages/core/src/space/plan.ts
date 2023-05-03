@@ -1,4 +1,5 @@
 import fs from 'fs-extra';
+import path from 'node:path';
 import { parse } from 'yaml';
 import { globby } from 'globby';
 
@@ -6,11 +7,11 @@ import { formatStringArray } from '../utils';
 
 import type { KeywordsParams, Plan } from './types';
 
-export async function loadPlan(patterns: string[]) {
-  const files = await globby(patterns);
+export async function loadPlan(cwd: string, patterns: string[]) {
+  const files = await globby(patterns, { cwd });
   const plans = await Promise.all(
     files.map(async (file) => {
-      const content = await fs.readFile(file, 'utf-8');
+      const content = await fs.readFile(path.resolve(cwd, file), 'utf-8');
       const plan = parse(content);
 
       const state =

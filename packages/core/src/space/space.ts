@@ -50,9 +50,8 @@ export async function loadSpace(
     const config = parse(configContent);
 
     const storageDirectory: string = config.storage ?? DefaultStorageDirectory;
-    const plans = formatStringArray(config.plans).map((p: string) =>
-      path.join(root, p)
-    );
+    const plans = formatStringArray(config.plans); // normalize to absolute path when loading
+
     const space: RawAnimeSpace = defu(
       {
         root,
@@ -105,7 +104,7 @@ export async function loadSpace(
         if (plans !== undefined) {
           return plans;
         } else {
-          plans = await loadPlan(space.plans);
+          plans = await loadPlan(space.root, space.plans);
           for (const plugin of resolved.plugins) {
             await plugin.preparePlans?.(resolved, plans);
           }
