@@ -168,7 +168,10 @@ export class Anime {
   public async removeVideo(target: LocalVideo) {
     const remove = () => {
       const idx = lib.videos.findIndex((v) => v === target);
-      lib.videos.splice(idx, 1);
+      if (idx !== -1) {
+        lib.videos.splice(idx, 1);
+        this._dirty = true;
+      }
     };
 
     const lib = await this.library();
