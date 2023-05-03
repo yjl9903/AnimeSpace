@@ -7,7 +7,7 @@ import { parse, stringify } from 'yaml';
 import type { Plugin } from '../plugin';
 
 import { AnimeSystemError } from '../error';
-import { formatStringArray } from '../utils';
+import { formatStringArray, isSubDir } from '../utils';
 
 import type { Plan, AnimeSpace, PluginEntry, RawAnimeSpace } from './types';
 
@@ -141,6 +141,7 @@ async function validateSpace(space: RawAnimeSpace) {
   } catch {
     throw new AnimeSystemError(`Can not access AnimePaste space directory`);
   }
+
   try {
     await fs.access(space.storage, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
@@ -152,6 +153,22 @@ async function validateSpace(space: RawAnimeSpace) {
       );
     }
   }
+
+  // Create a symlin from the outside storage dir to the local dir
+  // Make it easy to edit the storage dir
+  try {
+    if (!isSubDir(space.root, space.storage)) {
+      const dirname = path.basename(space.storage);
+      const target = path.join(space.root, dirname);
+      if (
+        !(await fs.pathExists(target)) ||
+        (await fs.readdir(target)).length === 0
+      ) {
+        fs.symlink(space.storage, target);
+      }
+    }
+  } catch {}
+
   return true;
 }
 

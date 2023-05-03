@@ -14,6 +14,11 @@ export function formatStringArray(arr: string | string[] | undefined | null) {
   return [];
 }
 
+export function isSubDir(parent: string, dir: string) {
+  const relative = path.relative(parent, dir);
+  return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+}
+
 export async function listIncludeFiles(space: AnimeSpace, directory: string) {
   try {
     const exts = new Set(space.preference.extension.include);
