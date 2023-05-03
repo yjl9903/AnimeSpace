@@ -119,20 +119,30 @@ export class Anime {
   // --- mutation ---
   public async addVideo(file: LocalFile, video: LocalVideo): Promise<void> {
     await this.library();
-    await fs.move(file.path, path.join(this.directory, video.filename));
-    this._dirty = true;
-    this._lib!.videos.push(video);
+    try {
+      await fs.move(file.path, path.join(this.directory, video.filename));
+      this._dirty = true;
+      this._lib!.videos.push(video);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   public async moveVideo(src: LocalVideo, dst: string): Promise<void> {
     await this.library();
     const oldFilename = src.filename;
-    src.filename = dst;
-    await fs.move(
-      path.join(this.directory, oldFilename),
-      path.join(this.directory, dst)
-    );
-    this._dirty = true;
+    const newFilename = dst;
+    src.filename = newFilename;
+    try {
+      await fs.move(
+        path.join(this.directory, oldFilename),
+        path.join(this.directory, newFilename)
+      );
+      this._dirty = true;
+    } catch (error) {
+      src.filename = oldFilename;
+      console.error(error);
+    }
   }
 
   public async writeLibrary(): Promise<void> {

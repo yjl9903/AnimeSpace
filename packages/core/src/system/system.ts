@@ -12,6 +12,7 @@ export async function createAnimeSystem(
   space: AnimeSpace
 ): Promise<AnimeSystem> {
   const logger = createConsola();
+  logger.wrapConsole();
 
   // Cache animes
   let animes: Anime[] | undefined = undefined;
