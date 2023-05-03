@@ -85,9 +85,12 @@ importers:
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
+      '@breadc/color':
+        specifier: ^0.9.3
+        version: 0.9.3
       animegarden:
-        specifier: ^0.0.10
-        version: 0.0.10
+        specifier: ^0.0.11
+        version: 0.0.11
       undici:
         specifier: ^5.22.0
         version: 5.22.0
@@ -168,8 +171,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       unbuild-sea:
-        specifier: ^0.0.4
-        version: 0.0.4(unbuild@1.2.1)
+        specifier: ^0.0.5
+        version: 0.0.5(unbuild@1.2.1)
 
   packages/core:
     dependencies:
@@ -196,8 +199,8 @@ importers:
         version: 2.2.2
     devDependencies:
       anitomy:
-        specifier: ^0.0.10
-        version: 0.0.10
+        specifier: ^0.0.11
+        version: 0.0.11
       breadc:
         specifier: ^0.9.3
         version: 0.9.3
@@ -214,8 +217,8 @@ importers:
         specifier: ^0.9.3
         version: 0.9.3
       anitomy:
-        specifier: ^0.0.10
-        version: 0.0.10
+        specifier: ^0.0.11
+        version: 0.0.11
 
 packages:
 
@@ -2778,15 +2781,15 @@ packages:
       '@algolia/transporter': 4.14.1
     dev: true
 
-  /animegarden@0.0.10:
-    resolution: {integrity: sha512-NS0DMltcOO0ddN/S8Kh5j7i03TGv3lIamgDhSdhowd/qF/i+Ruw1KMSto1prKE/C2auHiPZdqd4mBGy5GqiHmQ==}
+  /animegarden@0.0.11:
+    resolution: {integrity: sha512-+vgKOZmW2iJMuo641JrDQs7sVPZSIZTbHuruV5ovNM4MjnMrjuYsLSpOYYd//HpLzvyaF04qdGa31mAVWebcXA==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
     dev: false
 
-  /anitomy@0.0.10:
-    resolution: {integrity: sha512-X+UW72J7r4IDmVXY9vhvRrCn3xgBDp8ygwR3+KXRmF0A4sll7ZbjoWh1Y6y0DWh34stMMQ4AQ/MFrzeEltga+g==}
+  /anitomy@0.0.11:
+    resolution: {integrity: sha512-vDwigCjyNIIpHGQ5QO0oO41aczLdMh+Lt7E3jCjHfj8gZcyyO4opkrhtVH6MLHjNSBbc4OgfA7ymOaQgO37jBQ==}
     engines: {node: '>=v18.16.0'}
 
   /ansi-regex@5.0.1:
@@ -6446,8 +6449,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unbuild-sea@0.0.4(unbuild@1.2.1):
-    resolution: {integrity: sha512-iEhPD75kAfxyScltPGxs2uyluL8tLIkVERq/yptD4bsfkQtEig66QTjIsPyX1xc6VTMr5VcdPXJm4K0PHJivSg==}
+  /unbuild-sea@0.0.5(unbuild@1.2.1):
+    resolution: {integrity: sha512-DJ7X80w2mC20zHNwsIOkj7m/1AniLNk8yuQ4Byolr7P1NrxkSTE4l5Qeme4G0EmmZoG5IaMWvSW8SemieCOYnw==}
     engines: {node: '>=v20.0.0'}
     peerDependencies:
       unbuild: ^1.2.1

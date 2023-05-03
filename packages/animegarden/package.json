@@ -44,7 +44,8 @@
   },
   "dependencies": {
     "@animespace/core": "workspace:*",
-    "animegarden": "^0.0.10",
+    "@breadc/color": "^0.9.3",
+    "animegarden": "^0.0.11",
     "undici": "^5.22.0"
   },
   "engines": {

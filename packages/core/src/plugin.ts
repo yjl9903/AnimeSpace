@@ -46,10 +46,10 @@ export interface Plugin {
   };
 
   refresh?: {
-    prepare?: (space: AnimeSystem) => MayPromise<void>;
+    prepare?: (system: AnimeSystem) => MayPromise<void>;
 
-    refresh?: (space: AnimeSystem, anime: Anime) => MayPromise<void>;
+    refresh?: (system: AnimeSystem, anime: Anime) => MayPromise<void>;
 
-    finish?: (space: AnimeSystem) => MayPromise<void>;
+    finish?: (system: AnimeSystem) => MayPromise<void>;
   };
 }
