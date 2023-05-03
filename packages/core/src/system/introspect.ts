@@ -7,6 +7,9 @@ import type { AnimeSystem } from './types';
 import { Anime, LocalFile, LocalVideo } from './anime';
 
 export async function introspect(system: AnimeSystem) {
+  const logger = system.logger.withTag('introspect');
+  logger.info(`Introspect Anime Space ${system.space.storage}`);
+
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.prepare?.(system);
   }
@@ -19,6 +22,8 @@ export async function introspect(system: AnimeSystem) {
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.finish?.(system);
   }
+
+  logger.info(`Introspect Anime Space OK`);
   return animes;
 }
 

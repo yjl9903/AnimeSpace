@@ -3,8 +3,6 @@ import { AnimeSystem } from '@animespace/core';
 
 import { version, description } from '../../package.json';
 
-import { inferRoot } from './system';
-
 export async function makeCliApp(system: AnimeSystem) {
   const app = breadc('anime', { version, description });
   registerApp(system, app);
@@ -17,9 +15,10 @@ export async function makeCliApp(system: AnimeSystem) {
 function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   app
     .command('space', 'Display the space directory')
+    .option('--storage', 'Display the storage directory')
     .option('--open', 'Open space in your editor')
     .action(async (options) => {
-      const root = inferRoot();
+      const root = options.storage ? system.space.storage : system.space.root;
       if (options.open) {
         const openEditor = (await import('open-editor')).default;
         openEditor([root]);
