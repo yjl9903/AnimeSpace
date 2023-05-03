@@ -6,6 +6,8 @@ import {
 import { fetchResources } from 'animegarden';
 import { bold, dim, lightGreen, link, underline } from '@breadc/color';
 
+import fs from 'fs';
+
 import './plan.d';
 import { ufetch } from './ufetch';
 import { DownloadProviders } from './download';
@@ -57,17 +59,19 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             include: anime.plan.keywords.include,
             exclude: anime.plan.keywords.exclude
           },
+          retry: 10,
           count: -1,
           progress(res, { url, page }) {}
         });
+
         logger.info(
           `Found ${lightGreen('' + resources.length)} resources from ${link(
             'AnimeGarden',
-            `https://garden.onekuma.cn/resources/1?include=${encodeURI(
+            `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
               JSON.stringify(anime.plan.keywords.include)
-            )}&exclude=${encodeURI(
+            )}&exclude=${encodeURIComponent(
               JSON.stringify(anime.plan.keywords.exclude)
-            )}&after=${anime.plan.date.toISOString()}`
+            )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`
           )}`
         );
 

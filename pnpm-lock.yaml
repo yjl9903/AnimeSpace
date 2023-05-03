@@ -2,7 +2,7 @@ lockfileVersion: '6.0'
 
 patchedDependencies:
   consola@3.1.0:
-    hash: iqaq4digjxx6k3cxicvnsylzsa
+    hash: dlknvsja6ephrnzommeaxldidy
     path: patches/consola@3.1.0.patch
 
 importers:
@@ -89,8 +89,8 @@ importers:
         specifier: ^0.9.3
         version: 0.9.3
       animegarden:
-        specifier: ^0.0.11
-        version: 0.0.11
+        specifier: ^0.0.12
+        version: 0.0.12
       undici:
         specifier: ^5.22.0
         version: 5.22.0
@@ -181,7 +181,7 @@ importers:
         version: 0.9.3
       consola:
         specifier: ^3.1.0
-        version: 3.1.0(patch_hash=iqaq4digjxx6k3cxicvnsylzsa)
+        version: 3.1.0(patch_hash=dlknvsja6ephrnzommeaxldidy)
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -199,8 +199,8 @@ importers:
         version: 2.2.2
     devDependencies:
       anitomy:
-        specifier: ^0.0.11
-        version: 0.0.11
+        specifier: ^0.0.12
+        version: 0.0.12
       breadc:
         specifier: ^0.9.3
         version: 0.9.3
@@ -217,8 +217,8 @@ importers:
         specifier: ^0.9.3
         version: 0.9.3
       anitomy:
-        specifier: ^0.0.11
-        version: 0.0.11
+        specifier: ^0.0.12
+        version: 0.0.12
 
 packages:
 
@@ -2266,7 +2266,7 @@ packages:
       cac: 6.7.14
       chokidar: 3.5.3
       colorette: 2.0.19
-      consola: 3.1.0(patch_hash=iqaq4digjxx6k3cxicvnsylzsa)
+      consola: 3.1.0(patch_hash=dlknvsja6ephrnzommeaxldidy)
       fast-glob: 3.2.12
       magic-string: 0.30.0
       pathe: 1.1.0
@@ -2646,15 +2646,15 @@ packages:
       '@algolia/transporter': 4.14.1
     dev: true
 
-  /animegarden@0.0.11:
-    resolution: {integrity: sha512-+vgKOZmW2iJMuo641JrDQs7sVPZSIZTbHuruV5ovNM4MjnMrjuYsLSpOYYd//HpLzvyaF04qdGa31mAVWebcXA==}
+  /animegarden@0.0.12:
+    resolution: {integrity: sha512-QYJ3jjLwfNndaScm9YVLTm8rbzq+SKVfvinFIfa1Y346mN54UvJEUNKHJQm6y55QsjVE8/vqLOuZHEUu62iVGQ==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
     dev: false
 
-  /anitomy@0.0.11:
-    resolution: {integrity: sha512-vDwigCjyNIIpHGQ5QO0oO41aczLdMh+Lt7E3jCjHfj8gZcyyO4opkrhtVH6MLHjNSBbc4OgfA7ymOaQgO37jBQ==}
+  /anitomy@0.0.12:
+    resolution: {integrity: sha512-H6iMdztDNL7PKEbx0i8xuNmyY24QLu6zDJ6Sx/10HUGdDFlI4+4TYo7001aigy5cw6mfGfNFs7Bw9jWGiVoUQQ==}
     engines: {node: '>=v18.16.0'}
 
   /ansi-regex@5.0.1:
@@ -3256,7 +3256,7 @@ packages:
       well-known-symbols: 2.0.0
     dev: true
 
-  /consola@3.1.0(patch_hash=iqaq4digjxx6k3cxicvnsylzsa):
+  /consola@3.1.0(patch_hash=dlknvsja6ephrnzommeaxldidy):
     resolution: {integrity: sha512-rrrJE6rP0qzl/Srg+C9x/AE5Kxfux7reVm1Wh0wCjuXvih6DqZgqDZe8auTD28fzJ9TF0mHlSDrPpWlujQRo1Q==}
     patched: true
 
@@ -6134,7 +6134,7 @@ packages:
       '@rollup/plugin-replace': 5.0.2(rollup@3.20.2)
       '@rollup/pluginutils': 5.0.2(rollup@3.20.2)
       chalk: 5.2.0
-      consola: 3.1.0(patch_hash=iqaq4digjxx6k3cxicvnsylzsa)
+      consola: 3.1.0(patch_hash=dlknvsja6ephrnzommeaxldidy)
       defu: 6.1.2
       esbuild: 0.17.16
       globby: 13.1.4
