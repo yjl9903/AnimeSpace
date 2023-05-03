@@ -8,14 +8,14 @@ import { bold, dim, lightGreen, link, underline } from '@breadc/color';
 
 import './plan.d';
 import { ufetch } from './ufetch';
-import { el } from 'date-fns/locale';
+import { DownloadProviders } from './download';
 
 const DOT = dim('•');
 
 const ANIMEGARDEN = 'AnimeGarden';
 
 export interface AnimeGardenOptions extends PluginEntry {
-  provider?: 'webtorrent' | 'aria2' | 'qbittorrent';
+  provider?: DownloadProviders;
 }
 
 export function AnimeGarden(options: AnimeGardenOptions): Plugin {
