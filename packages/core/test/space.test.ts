@@ -16,7 +16,7 @@ describe('Load Space', () => {
       plugins: [],
       preference: {
         format: {
-          anime: '{title} ({yyyy}-{mm})',
+          anime: '{title} ({yyyy}-{MM})',
           episode: '[{fansub}] {title} - E{ep}.{extension}',
           film: '[{fansub}] {title}.{extension}',
           ova: '[{fansub}] {title}.{extension}'

@@ -43,6 +43,7 @@
   "dependencies": {
     "@breadc/color": "^0.9.3",
     "consola": "^3.1.0",
+    "date-fns": "^2.30.0",
     "defu": "^6.1.2",
     "fs-extra": "^11.1.1",
     "globby": "^13.1.4",

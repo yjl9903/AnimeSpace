@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import type { AnitomyResult } from 'anitomy';
 
+import { format } from 'date-fns';
 import { parse, stringify } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
@@ -29,8 +30,8 @@ export class Anime {
 
     const dirname = formatTitle(space.preference.format.anime, {
       title: plan.title,
-      yyyy: '' + plan.date.getFullYear(),
-      mm: '' + (plan.date.getMonth() + 1)
+      yyyy: format(plan.date, 'yyyy'),
+      MM: format(plan.date, 'MM')
     });
     this.directory = path.join(space.storage, dirname);
   }
@@ -96,8 +97,8 @@ export class Anime {
   public reformatVideoFilename(video: LocalVideo) {
     return formatTitle(this.format, {
       title: this.plan.title,
-      yyyy: '' + this.plan.date.getFullYear(),
-      mm: '' + (this.plan.date.getMonth() + 1),
+      yyyy: format(this.plan.date, 'yyyy'),
+      MM: format(this.plan.date, 'MM'),
       ep: video.episode ? String(video.episode) : '{ep}',
       extension: path.extname(video.filename).slice(1) ?? 'mp4',
       fansub: video.fansub ?? 'fansub'

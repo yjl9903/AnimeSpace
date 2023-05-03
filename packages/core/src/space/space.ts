@@ -25,7 +25,7 @@ const configFilename = `./anime.yaml`;
 
 const DefaultStorageDirectory = `./animes`;
 
-const DefaultAnimeFormat = '{title} ({yyyy}-{mm})';
+const DefaultAnimeFormat = '{title} ({yyyy}-{MM})';
 
 const DefaultEpisodeFormat = '[{fansub}] {title} - E{ep}.{extension}';
 
