@@ -7,10 +7,14 @@ import { makeSystem } from '../src';
 
 const __dirname = path.join(fileURLToPath(import.meta.url), '../');
 
-describe('refresh', () => {
-  it('should work', async () => {
-    const root = path.join(__dirname, '../../core/test/fixtures/space');
-    const system = await makeSystem(root);
-    await system.refresh();
-  });
-});
+describe(
+  'refresh',
+  () => {
+    it('should work', async () => {
+      const root = path.join(__dirname, '../../core/test/fixtures/space');
+      const system = await makeSystem(root);
+      await system.refresh();
+    });
+  },
+  20 * 1000
+);

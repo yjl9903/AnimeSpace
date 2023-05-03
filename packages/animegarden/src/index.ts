@@ -67,7 +67,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
               JSON.stringify(anime.plan.keywords.include)
             )}&exclude=${encodeURI(
               JSON.stringify(anime.plan.keywords.exclude)
-            )}`
+            )}&after=${anime.plan.date.toISOString()}`
           )}`
         );
 
