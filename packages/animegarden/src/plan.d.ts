@@ -6,6 +6,6 @@ declare module '@animespace/core' {
   }
 
   interface LocalVideoSource {
-    magnet: string;
+    magnet?: string;
   }
 }

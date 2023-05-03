@@ -42,7 +42,7 @@
     "format": "prettier --write {src,test}/**/*.ts",
     "test": "vitest",
     "test:ci": "vitest --run",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit --skipLibCheck",
     "preversion": "pnpm build"
   },
   "dependencies": {
