@@ -57,7 +57,19 @@ export class Anime {
       if (await fs.exists(libPath)) {
         const libContent = await fs.readFile(libPath, 'utf-8');
         const lib = parse(libContent) as LocalLibrary;
-        return (this._dirty = false), (this._lib = lib);
+
+        if (lib.title !== this.plan.title || lib.bgmId !== this.plan.bgmId) {
+          this._dirty = true;
+        } else {
+          this._dirty = false;
+        }
+
+        return (this._lib = {
+          ...lib,
+          title: this.plan.title,
+          bgmId: this.plan.bgmId,
+          videos: lib?.videos ?? []
+        });
       } else {
         const lib: LocalLibrary = {
           title: this.plan.title,
