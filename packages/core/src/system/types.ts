@@ -9,6 +9,8 @@ export interface AnimeSystem {
 
   logger: ConsolaInstance;
 
+  printSpace(): void;
+
   /**
    * Load animes from plans or introspect result
    */

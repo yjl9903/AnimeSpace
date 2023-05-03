@@ -8,7 +8,7 @@ import { Anime, LocalFile, LocalVideo } from './anime';
 
 export async function introspect(system: AnimeSystem) {
   const logger = system.logger.withTag('introspect');
-  logger.info(`Introspect Anime Space ${system.space.storage}`);
+  logger.info(`Introspect Anime Space`);
 
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.prepare?.(system);
@@ -56,14 +56,20 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
 
   // Handle video in metadata.yaml, but not in directory
   for (const video of unknownVideos) {
+    let found = false;
     for (const plugin of system.space.plugins) {
       const handleUnknownVideo = plugin.introspect?.handleUnknownVideo;
       if (handleUnknownVideo) {
         const res = await handleUnknownVideo(system, anime, video);
         if (res) {
+          found = true;
           break;
         }
       }
+    }
+    // Found dangling video in metadata.yaml, remove it
+    if (!found) {
+      await anime.removeVideo(video);
     }
   }
   // Handle video in directory, but not in metdata.yaml

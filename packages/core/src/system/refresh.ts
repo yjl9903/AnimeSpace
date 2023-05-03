@@ -2,7 +2,7 @@ import type { AnimeSystem } from './types';
 
 export async function refresh(system: AnimeSystem) {
   const logger = system.logger.withTag('refresh');
-  logger.info(`Refresh Anime Space ${system.space.storage}`);
+  logger.info(`Refresh Anime Space`);
 
   for (const plugin of system.space.plugins) {
     await plugin.refresh?.prepare?.(system);

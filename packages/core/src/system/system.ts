@@ -1,3 +1,4 @@
+import { dim } from '@breadc/color';
 import { createConsola } from 'consola';
 
 import type { AnimeSpace } from '../space';
@@ -19,6 +20,11 @@ export async function createAnimeSystem(
   const system: AnimeSystem = {
     space,
     logger,
+    printSpace() {
+      logger.info(`${dim('Space')}    ${space.root}`);
+      logger.info(`${dim('Storage')}  ${space.storage}`);
+      logger.log('');
+    },
     async animes() {
       if (animes !== undefined) {
         return animes;

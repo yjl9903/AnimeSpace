@@ -32,6 +32,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .command('refresh', 'Refresh the local anime system')
     .option('-i, --introspect')
     .action(async (options) => {
+      system.printSpace();
       if (options.introspect) {
         await system.introspect();
       }
@@ -43,6 +44,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   app
     .command('introspect', 'Introspect the local anime system')
     .action(async () => {
+      system.printSpace();
       const animes = await system.introspect();
       await system.writeBack();
       return animes;

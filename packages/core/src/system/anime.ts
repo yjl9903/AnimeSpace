@@ -147,6 +147,27 @@ export class Anime {
     }
   }
 
+  public async removeVideo(target: LocalVideo) {
+    const remove = () => {
+      const idx = lib.videos.findIndex((v) => v === target);
+      lib.videos.splice(idx, 1);
+    };
+
+    const lib = await this.library();
+    const videoPath = path.join(this.directory, target.filename);
+    if (await fs.exists(videoPath)) {
+      try {
+        // TODO: not delete it, but move to another temp dir
+        await fs.remove(videoPath);
+        remove();
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      remove();
+    }
+  }
+
   public async writeLibrary(): Promise<void> {
     if (this._lib && this._dirty) {
       const libPath = path.join(this.directory, MetadataFilename);
