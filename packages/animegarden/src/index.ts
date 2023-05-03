@@ -63,10 +63,15 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         logger.info(
           `Found ${lightGreen('' + resources.length)} resources from ${link(
             'AnimeGarden',
-            'https://garden.onekuma.cn/'
+            `https://garden.onekuma.cn/resources/1?include=${encodeURI(
+              JSON.stringify(anime.plan.keywords.include)
+            )}&exclude=${encodeURI(
+              JSON.stringify(anime.plan.keywords.exclude)
+            )}`
           )}`
         );
 
+        // --- Util functions ---
         function printKeywords() {
           if (anime.plan.keywords.include.length === 1) {
             const first = anime.plan.keywords.include[0];
