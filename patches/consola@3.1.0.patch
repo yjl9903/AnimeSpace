@@ -1,0 +1,42 @@
+diff --git a/dist/shared/consola.57b2ba78.cjs b/dist/shared/consola.57b2ba78.cjs
+index 3b814b91d57a11e74c8a48655f641780c262dc91..ac9e163ecf0ad335d94bab83ad5b8b443b629473 100644
+--- a/dist/shared/consola.57b2ba78.cjs
++++ b/dist/shared/consola.57b2ba78.cjs
+@@ -4,6 +4,7 @@ const consola$1 = require('./consola.46fcabd7.cjs');
+ const basic = require('./consola.2a5d2813.cjs');
+ const process$1 = require('node:process');
+ const tty = require('tty');
++const os = require('os');
+ 
+ function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e.default : e; }
+ 
+@@ -727,7 +728,7 @@ const TYPE_ICONS = {
+   fatal: s("\u2716", "\xD7"),
+   ready: s("\u2714", "\u221A"),
+   warn: s("\u26A0", "\u203C"),
+-  info: s("\u2139", "i"),
++  info: os.platform() === 'win32' ? 'Info' : s("\u2139", "i"),
+   success: s("\u2714", "\u221A"),
+   debug: s("\u2699", "D"),
+   trace: s("\u2192", "\u2192"),
+diff --git a/dist/shared/consola.67a659fb.mjs b/dist/shared/consola.67a659fb.mjs
+index 25bdd4021beb9135a495d47c9057a602ed9f6da3..ef18c838c0e8e6de59f73e0a9b7e797e772ace65 100644
+--- a/dist/shared/consola.67a659fb.mjs
++++ b/dist/shared/consola.67a659fb.mjs
+@@ -2,6 +2,7 @@ import { c as createConsola$1, L as LogLevels } from './consola.ce5c7a59.mjs';
+ import { B as BasicReporter, p as parseStack } from './consola.3c86be48.mjs';
+ import process$1 from 'node:process';
+ import * as tty from 'tty';
++import * as os from 'os';
+ 
+ const providers = [
+   ["APPVEYOR"],
+@@ -708,7 +709,7 @@ const TYPE_ICONS = {
+   fatal: s("\u2716", "\xD7"),
+   ready: s("\u2714", "\u221A"),
+   warn: s("\u26A0", "\u203C"),
+-  info: s("\u2139", "i"),
++  info: os.platform() === 'win32' ? 'Info' : s("\u2139", "i"),
+   success: s("\u2714", "\u221A"),
+   debug: s("\u2699", "D"),
+   trace: s("\u2192", "\u2192"),

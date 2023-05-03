@@ -29,5 +29,10 @@
   "packageManager": "pnpm@8.4.0",
   "engines": {
     "node": ">=v16.0.0"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "consola@3.1.0": "patches/consola@3.1.0.patch"
+    }
   }
 }

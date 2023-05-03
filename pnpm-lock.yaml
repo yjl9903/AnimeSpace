@@ -1,5 +1,10 @@
 lockfileVersion: '6.0'
 
+patchedDependencies:
+  consola@3.1.0:
+    hash: iqaq4digjxx6k3cxicvnsylzsa
+    path: patches/consola@3.1.0.patch
+
 importers:
 
   .:
@@ -173,7 +178,7 @@ importers:
         version: 0.9.3
       consola:
         specifier: ^3.1.0
-        version: 3.1.0
+        version: 3.1.0(patch_hash=iqaq4digjxx6k3cxicvnsylzsa)
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -2263,7 +2268,7 @@ packages:
       cac: 6.7.14
       chokidar: 3.5.3
       colorette: 2.0.19
-      consola: 3.1.0
+      consola: 3.1.0(patch_hash=iqaq4digjxx6k3cxicvnsylzsa)
       fast-glob: 3.2.12
       magic-string: 0.30.0
       pathe: 1.1.0
@@ -3379,8 +3384,9 @@ packages:
       well-known-symbols: 2.0.0
     dev: true
 
-  /consola@3.1.0:
+  /consola@3.1.0(patch_hash=iqaq4digjxx6k3cxicvnsylzsa):
     resolution: {integrity: sha512-rrrJE6rP0qzl/Srg+C9x/AE5Kxfux7reVm1Wh0wCjuXvih6DqZgqDZe8auTD28fzJ9TF0mHlSDrPpWlujQRo1Q==}
+    patched: true
 
   /content-disposition@0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
@@ -6463,7 +6469,7 @@ packages:
       '@rollup/plugin-replace': 5.0.2(rollup@3.20.2)
       '@rollup/pluginutils': 5.0.2(rollup@3.20.2)
       chalk: 5.2.0
-      consola: 3.1.0
+      consola: 3.1.0(patch_hash=iqaq4digjxx6k3cxicvnsylzsa)
       defu: 6.1.2
       esbuild: 0.17.16
       globby: 13.1.4
