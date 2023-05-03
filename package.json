@@ -1,14 +1,14 @@
 {
-  "name": "@animepaste/monorepo",
+  "name": "@animespace/monorepo",
   "version": "0.0.7",
   "private": true,
   "scripts": {
     "anime": "tsx packages/cli/src/cli.ts",
     "build": "turbo run build --filter !docs",
     "build:all": "turbo run build",
-    "build:cli": "turbo run build --filter animepaste...",
+    "build:cli": "turbo run build --filter animespace...",
     "build:docs": "turbo run build --filter docs",
-    "dev:cli": "pnpm -C packages/cli dev",
+    "dev:cli": "turbo run dev --filter animespace...",
     "dev:docs": "pnpm -C docs dev",
     "format": "turbo run format",
     "release": "bumpp package.json docs/package.json packages/*/package.json --commit --push --tag && pnpm -r publish --access public",
