@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "build": "unbuild",
+    "bundle": "rimraf bin && ncc build src/cli.ts -m -o bin && node scripts/sea.mjs",
     "dev": "unbuild --stub",
     "format": "prettier --write {src,test}/**/*.ts",
     "test": "vitest",
@@ -70,9 +71,10 @@
     "@types/fs-extra": "^11.0.1",
     "@types/prompts": "^2.4.4",
     "@types/webtorrent": "^0.109.3",
+    "@vercel/ncc": "^0.36.1",
     "bangumi-data": "^0.3.115",
     "unbuild": "^1.2.1",
-    "unbuild-sea": "^0.0.5"
+    "unbuild-sea": "^0.0.7"
   },
   "engines": {
     "node": ">=v16.0.0"

@@ -1,4 +1,3 @@
-import { Sea } from 'unbuild-sea';
 import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
@@ -7,6 +6,5 @@ export default defineBuildConfig({
   clean: true,
   rollup: {
     emitCJS: true
-  },
-  preset: Sea()
+  }
 });

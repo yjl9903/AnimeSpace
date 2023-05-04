@@ -18,6 +18,9 @@ importers:
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
+      rimraf:
+        specifier: ^5.0.0
+        version: 5.0.0
       turbo:
         specifier: ^1.9.3
         version: 1.9.3
@@ -164,6 +167,9 @@ importers:
       '@types/webtorrent':
         specifier: ^0.109.3
         version: 0.109.3
+      '@vercel/ncc':
+        specifier: ^0.36.1
+        version: 0.36.1
       bangumi-data:
         specifier: ^0.3.115
         version: 0.3.115
@@ -171,8 +177,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       unbuild-sea:
-        specifier: ^0.0.5
-        version: 0.0.5(unbuild@1.2.1)
+        specifier: ^0.0.7
+        version: 0.0.7(unbuild@1.2.1)
 
   packages/core:
     dependencies:
@@ -188,12 +194,12 @@ importers:
       defu:
         specifier: ^6.1.2
         version: 6.1.2
+      fast-glob:
+        specifier: ^3.2.12
+        version: 3.2.12
       fs-extra:
         specifier: ^11.1.1
         version: 11.1.1
-      globby:
-        specifier: ^13.1.4
-        version: 13.1.4
       yaml:
         specifier: ^2.2.2
         version: 2.2.2
@@ -2431,6 +2437,11 @@ packages:
       - rollup
     dev: true
 
+  /@vercel/ncc@0.36.1:
+    resolution: {integrity: sha512-S4cL7Taa9yb5qbv+6wLgiKVZ03Qfkc4jGRuiUQMQ8HGBD5pcNRnHeYM33zBvJE4/zJGjJJ8GScB+WmTsn9mORw==}
+    hasBin: true
+    dev: true
+
   /@vitejs/plugin-vue@4.2.1(vite@4.3.4)(vue@3.2.47):
     resolution: {integrity: sha512-ZTZjzo7bmxTRTkb8GSTwkPOYDIP7pwuyV+RV53c9PYUouwcbkIZIvWvNWlX2b1dYZqtOv7D6iUAnJLVNGcLrSw==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -3239,7 +3250,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /concordance@5.0.4:
@@ -3483,6 +3494,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       path-type: 4.0.0
+    dev: true
 
   /dom-serializer@2.0.0:
     resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
@@ -4053,6 +4065,7 @@ packages:
       ignore: 5.2.4
       merge2: 1.4.1
       slash: 4.0.0
+    dev: true
 
   /graceful-fs@4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
@@ -4209,6 +4222,7 @@ packages:
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
+    dev: true
 
   /immediate-chunk-store@2.2.0:
     resolution: {integrity: sha512-1bHBna0hCa6arRXicu91IiL9RvvkbNYLVq+mzWdaLGZC3hXvX4doh8e1dLhMKez5siu63CYgO5NrGJbRX5lbPA==}
@@ -5137,6 +5151,7 @@ packages:
   /path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
+    dev: true
 
   /pathe@1.1.0:
     resolution: {integrity: sha512-ODbEPR0KKHqECXW1GoxdDb+AZvULmXjVPy4rt+pGo2+TnjJTIPJQSVS6N63n8T2Ip+syHhbn52OewKicV0373w==}
@@ -5671,6 +5686,7 @@ packages:
   /slash@4.0.0:
     resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
     engines: {node: '>=12'}
+    dev: true
 
   /smart-buffer@4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
@@ -6111,8 +6127,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unbuild-sea@0.0.5(unbuild@1.2.1):
-    resolution: {integrity: sha512-DJ7X80w2mC20zHNwsIOkj7m/1AniLNk8yuQ4Byolr7P1NrxkSTE4l5Qeme4G0EmmZoG5IaMWvSW8SemieCOYnw==}
+  /unbuild-sea@0.0.7(unbuild@1.2.1):
+    resolution: {integrity: sha512-JaD9L8NMIvRKWlgHhcZdEaOR9C7ytxLa5/Kkq4qAf3GaqcXL5iIG8tCf413723N+pcr3CMLgC4+jLHq2HO1Ucg==}
     engines: {node: '>=v20.0.0'}
     peerDependencies:
       unbuild: ^1.2.1
