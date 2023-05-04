@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bundle:
+    name: Bundle on ${{ matrix.target }}
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: linux
+            os: ubuntu-latest
+            binary: ./packages/cli/bin/anime
+          - target: macos
+            os: macos-latest
+            binary: ./packages/cli/bin/anime
+          - target: windows
+            os: windows-latest
+            binary: .\packages\cli\bin\anime.exe
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test Binary
+        run: |
+          ${{ matrix.binary }} --help
+          ${{ matrix.binary }} space
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: anime-${{ matrix.target }}
+          path: ${{ matrix.binary }}

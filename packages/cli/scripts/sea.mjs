@@ -8,4 +8,4 @@ const content = await fs.readFile(main, 'utf-8');
 const patched = content.replace(/require\("node:(\w+)"\)/g, `require("$1")`);
 await fs.writeFile(main, patched, 'utf-8');
 
-await bundle(process.cwd(), { main, outDir: './bin' });
+await bundle(process.cwd(), { main, outDir: './bin', sign: true });
