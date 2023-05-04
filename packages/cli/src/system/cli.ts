@@ -21,7 +21,11 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .action(async (options) => {
       const root = options.storage ? system.space.storage : system.space.root;
       if (options.open) {
-        openEditor([root]);
+        try {
+          openEditor([root]);
+        } catch (error) {
+          console.log(root);
+        }
       } else {
         console.log(root);
       }
