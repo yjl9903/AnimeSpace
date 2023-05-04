@@ -41,6 +41,13 @@ export async function generatePlan(
   writeln(``);
   writeln(`onair:`);
   for (const anime of collections) {
+    const begin = anime.subject?.date
+      ? new Date(anime.subject.date)
+      : undefined;
+    if (begin && begin.getTime() < date.getTime()) {
+      continue;
+    }
+
     if (options.create) {
       system.logger.info(
         `${lightBlue('Searching')} ${bold(
@@ -49,13 +56,6 @@ export async function generatePlan(
             `Bangumi ${anime.subject_id}`
         )}`
       );
-    }
-
-    const begin = anime.subject?.date
-      ? new Date(anime.subject.date)
-      : undefined;
-    if (begin && begin.getTime() < date.getTime()) {
-      continue;
     }
 
     try {
