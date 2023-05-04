@@ -1,16 +1,20 @@
+import type { ConsolaInstance } from 'consola';
 import {
+  type Anime,
   type Plugin,
   type PluginEntry,
+  loadAnime,
   formatStringArray
 } from '@animespace/core';
 import { fetchResources } from 'animegarden';
 import {
-  bold,
   dim,
+  link,
+  bold,
+  underline,
   lightBlue,
   lightGreen,
-  link,
-  underline
+  lightYellow
 } from '@breadc/color';
 
 import './plan.d';
@@ -38,7 +42,80 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         }
       }
     },
-    command(system, cli) {},
+    command(system, cli) {
+      cli
+        .command(
+          'garden list [keyword]',
+          'List videos of anime from AnimeGarden'
+        )
+        .action(async (keyword) => {
+          const logger = system.logger.withTag('animegarden');
+          const animes = await filterAnimes(keyword);
+
+          for (const anime of animes) {
+            const animegardenURL = formatAnimeGardenSearchURL(anime);
+            logger.info(
+              `${bold(anime.plan.title)}  (${link(
+                `Bangumi: ${anime.plan.bgmId}`,
+                `https://bangumi.tv/subject/${anime.plan.bgmId}`
+              )}, ${link('AnimeGarden', animegardenURL)})`
+            );
+            printKeywords(anime, logger);
+            printFansubs(anime, logger);
+
+            const resources = await fetchAnimeResources(anime);
+            const videos = await generateDownloadTask(
+              system,
+              anime,
+              resources,
+              true
+            );
+            const lib = await anime.library();
+
+            for (const video of videos) {
+              const detailURL = `https://garden.onekuma.cn/resource/${video.source
+                .magnet!.split('/')
+                .at(-1)}`;
+
+              let extra = '';
+              if (
+                !lib.videos.find(
+                  (v) => v.source.magnet === video.source.magnet!
+                )
+              ) {
+                const aliasVideo = lib.videos.find(
+                  (v) =>
+                    v.source.type !== ANIMEGARDEN && v.episode === video.episode
+                );
+                if (aliasVideo) {
+                  extra = `overwritten by ${bold(aliasVideo.filename)}`;
+                } else {
+                  extra = lightYellow('Not yet downloaded');
+                }
+              }
+
+              logger.info(
+                `  ${DOT} ${link(video.filename, detailURL)}  ${
+                  extra ? `(${extra})` : ''
+                }`
+              );
+            }
+            logger.log('');
+          }
+        });
+
+      // --- Util functions ---
+      async function filterAnimes(keyword: string | undefined) {
+        return (await loadAnime(system, true)).filter(
+          (a) =>
+            !keyword ||
+            a.plan.title.includes(keyword) ||
+            Object.values(a.plan.translations)
+              .flat()
+              .some((t) => t.includes(keyword))
+        );
+      }
+    },
     introspect: {
       async handleUnknownVideo(system, anime, video) {
         if (video.source.type === ANIMEGARDEN) {
@@ -60,42 +137,22 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             `https://bangumi.tv/subject/${anime.plan.bgmId}`
           )})`
         );
-        printKeywords();
+        printKeywords(anime, logger);
+        printFansubs(anime, logger);
 
-        const { resources } = await fetchResources(ufetch, {
-          type: '動畫',
-          after: anime.plan.date,
-          search: {
-            include: anime.plan.keywords.include,
-            exclude: anime.plan.keywords.exclude
-          },
-          retry: 10,
-          count: -1,
-          progress(res, { url, page }) {}
-        });
-
+        const animegardenURL = formatAnimeGardenSearchURL(anime);
+        const resources = await fetchAnimeResources(anime);
         const newVideos = await generateDownloadTask(system, anime, resources);
+
         if (newVideos.length === 0) {
           logger.info(
             `${lightGreen('Found ' + resources.length + ' resources')} ${dim(
               'from'
-            )} ${link(
-              'AnimeGarden',
-              `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
-                JSON.stringify(anime.plan.keywords.include)
-              )}&exclude=${encodeURIComponent(
-                JSON.stringify(anime.plan.keywords.exclude)
-              )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`
-            )}`
+            )} ${link('AnimeGarden', animegardenURL)}`
           );
           return;
         }
 
-        const animegardenURL = `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
-          JSON.stringify(anime.plan.keywords.include)
-        )}&exclude=${encodeURIComponent(
-          JSON.stringify(anime.plan.keywords.exclude)
-        )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
         logger.info(
           `${lightBlue(`Downloading`)} ${lightGreen(
             newVideos.length + ' resources'
@@ -107,33 +164,67 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             .at(-1)}`;
           logger.info(`  ${DOT} ${link(video.filename, detailURL)}`);
         }
-
-        // --- Util functions ---
-        function printKeywords() {
-          if (anime.plan.keywords.include.length === 1) {
-            const first = anime.plan.keywords.include[0];
-            logger.info(
-              `${dim('Include keywords')}  ${first
-                .map((t) => underline(t))
-                .join(dim(' | '))}`
-            );
-          } else {
-            logger.info(dim(`Include keywords:`));
-            for (const include of anime.plan.keywords.include) {
-              logger.info(
-                `  ${DOT} ${include.map((t) => underline(t)).join(' | ')}`
-              );
-            }
-          }
-          if (anime.plan.keywords.exclude.length > 0) {
-            logger.info(
-              `${dim(`Exclude keywords`)}  [ ${anime.plan.keywords.exclude
-                .map((t) => underline(t))
-                .join(' , ')} ]`
-            );
-          }
-        }
       }
     }
   };
+}
+
+async function fetchAnimeResources(anime: Anime) {
+  const { resources } = await fetchResources(ufetch, {
+    type: '動畫',
+    after: anime.plan.date,
+    search: {
+      include: anime.plan.keywords.include,
+      exclude: anime.plan.keywords.exclude
+    },
+    retry: 10,
+    count: -1,
+    progress(res, { url, page }) {}
+  });
+  return resources;
+}
+
+function formatAnimeGardenSearchURL(anime: Anime) {
+  return `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
+    JSON.stringify(anime.plan.keywords.include)
+  )}&exclude=${encodeURIComponent(
+    JSON.stringify(anime.plan.keywords.exclude)
+  )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
+}
+
+function printKeywords(anime: Anime, logger: ConsolaInstance) {
+  if (anime.plan.keywords.include.length === 1) {
+    const first = anime.plan.keywords.include[0];
+    logger.info(
+      `${dim('Include keywords')}  ${first
+        .map((t) => underline(t))
+        .join(dim(' | '))}`
+    );
+  } else {
+    logger.info(dim(`Include keywords:`));
+    for (const include of anime.plan.keywords.include) {
+      logger.info(`  ${DOT} ${include.map((t) => underline(t)).join(' | ')}`);
+    }
+  }
+  if (anime.plan.keywords.exclude.length > 0) {
+    logger.info(
+      `${dim(`Exclude keywords`)}  [ ${anime.plan.keywords.exclude
+        .map((t) => underline(t))
+        .join(' , ')} ]`
+    );
+  }
+}
+
+function printFansubs(anime: Anime, logger: ConsolaInstance) {
+  const fansubs = anime.plan.fansub;
+  logger.info(
+    `${dim('Prefer fansubs')}    ${
+      fansubs.length === 0
+        ? `See ${link(
+            'AnimeGarden',
+            formatAnimeGardenSearchURL(anime)
+          )} to select some fansubs`
+        : fansubs.join(dim(' > '))
+    }`
+  );
 }

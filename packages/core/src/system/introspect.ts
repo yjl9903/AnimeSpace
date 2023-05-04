@@ -14,7 +14,7 @@ export async function introspect(system: AnimeSystem) {
     await plugin.introspect?.prepare?.(system);
   }
 
-  const animes = await loadAnime(system);
+  const animes = await loadAnime(system, false);
   for (const anime of animes) {
     await introspectAnime(system, anime);
   }
@@ -95,8 +95,10 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
   }
 }
 
-export async function loadAnime(system: AnimeSystem) {
-  const plans = (await system.space.plans()).filter((p) => p.state === 'onair');
+export async function loadAnime(system: AnimeSystem, all: boolean = false) {
+  const plans = (await system.space.plans()).filter(
+    (p) => all || p.state === 'onair'
+  );
   const animePlans = flatAnimePlan(plans);
   const animes = animePlans.map((ap) => new Anime(system.space, ap));
   // Parallel list directory and get metadata

@@ -10,7 +10,8 @@ import { lightYellow } from '@breadc/color';
 export async function generateDownloadTask(
   system: AnimeSystem,
   anime: Anime,
-  resources: Resource[]
+  resources: Resource[],
+  force = false
 ) {
   const ordered = groupResources(system, anime, resources);
   const videos: LocalVideo[] = [];
@@ -43,6 +44,7 @@ export async function generateDownloadTask(
 
     const res = resources[0];
     if (
+      force ||
       !(await anime.library()).videos.find((r) => r.source.magnet === res.href)
     ) {
       videos.push({

@@ -31,7 +31,7 @@ export async function createAnimeSystem(
       if (animes !== undefined) {
         return animes;
       } else {
-        return (animes = await loadAnime(system));
+        return (animes = await loadAnime(system, false));
       }
     },
     async refresh() {
