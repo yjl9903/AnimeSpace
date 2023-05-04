@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import fg from 'fast-glob';
-import path from 'node:path';
+import path from 'path';
 import { parse } from 'yaml';
 
 import { formatStringArray } from '../utils';
