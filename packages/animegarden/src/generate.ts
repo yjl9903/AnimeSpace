@@ -3,11 +3,12 @@ import fs from 'fs-extra';
 
 import type { AnimeSystem } from '@animespace/core';
 
-import { BgmClient, type BGMCollection } from 'bgmc';
+import { fetchResources } from 'animegarden';
+import { lightBlue, bold, lightRed } from '@breadc/color';
 import { format, getYear, subMonths } from 'date-fns';
+import { BgmClient, type BGMCollection } from 'bgmc';
 
 import { ufetch } from './ufetch';
-import { fetchResources } from 'animegarden';
 
 type Item<T> = T extends Array<infer R> ? R : never;
 
@@ -40,6 +41,16 @@ export async function generatePlan(
   writeln(``);
   writeln(`onair:`);
   for (const anime of collections) {
+    if (options.create) {
+      system.logger.info(
+        `${lightBlue('Searching')} ${bold(
+          anime.subject?.name_cn ??
+            anime.subject?.name ??
+            `Bangumi ${anime.subject_id}`
+        )}`
+      );
+    }
+
     const begin = anime.subject?.date
       ? new Date(anime.subject.date)
       : undefined;
@@ -47,48 +58,63 @@ export async function generatePlan(
       continue;
     }
 
-    const item = await client.subject(anime.subject_id);
-    const alias = item.infobox?.find((box) => box.key === '别名');
-    const title = item.name_cn || item.name;
-    const translations =
-      (alias?.value.map((v) => v?.v).filter(Boolean) as string[]) ?? [];
-    if (item.name && item.name !== title) {
-      translations.unshift(item.name);
-    }
-    const plan = {
-      title,
-      bgmId: '' + anime.subject_id,
-      translations
-    };
-    const fansub = await getFansub([plan.title, ...plan.translations]);
+    try {
+      const item = await client.subject(anime.subject_id);
 
-    writeln(`  - title: ${plan.title}`);
-    writeln(`    translations:`);
-    for (const t of plan.translations ?? []) {
-      writeln(`      - '${t}'`);
-    }
-    writeln(`    bgmId: '${plan.bgmId}'`);
-    writeln(`    fansub:`);
-    if (fansub.length === 0) {
+      const alias = item.infobox?.find((box) => box.key === '别名');
+      const title = item.name_cn || item.name;
+      const translations =
+        (alias?.value.map((v) => v?.v).filter(Boolean) as string[]) ?? [];
+      if (item.name && item.name !== title) {
+        translations.unshift(item.name);
+      }
+      const plan = {
+        title,
+        bgmId: '' + anime.subject_id,
+        translations
+      };
+      const fansub = await getFansub([plan.title, ...plan.translations]);
+
+      writeln(`  - title: ${plan.title}`);
+      writeln(`    translations:`);
+      for (const t of plan.translations ?? []) {
+        writeln(`      - '${t}'`);
+      }
+      writeln(`    bgmId: '${plan.bgmId}'`);
+      writeln(`    fansub:`);
+      if (fansub.length === 0) {
+        writeln(
+          `      # No fansub found, please check the translations or search keywords`
+        );
+      }
+      for (const f of fansub) {
+        writeln(`      - ${f}`);
+      }
+      const includeURL = JSON.stringify([[title, ...translations]])
+        .replace(/\[/g, '%5B')
+        .replace(/\]/g, '%5D')
+        .replace(/,/g, '%2C')
+        .replace(/"/g, '%22')
+        .replace(/ /g, '%20');
       writeln(
-        `      # No fansub found, please check the translations or search keywords`
+        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${encodeURIComponent(
+          date.toISOString()
+        )}`
+      );
+      writeln(``);
+
+      if (fansub.length === 0 && options.create) {
+        system.logger.warn(`No fansub found for ${title}`);
+      }
+    } catch (error) {
+      system.logger.error(
+        `${lightRed('Failed to search')} ${bold(
+          anime.subject?.name_cn ??
+            anime.subject?.name ??
+            `Bangumi ${anime.subject_id}`
+        )}`
       );
     }
-    for (const f of fansub) {
-      writeln(`      - ${f}`);
-    }
-    const includeURL = JSON.stringify([[title, ...translations]])
-      .replace(/\[/g, '%5B')
-      .replace(/\]/g, '%5D')
-      .replace(/,/g, '%2C')
-      .replace(/"/g, '%22')
-      .replace(/ /g, '%20');
-    writeln(
-      `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${encodeURIComponent(
-        date.toISOString()
-      )}`
-    );
-    writeln(``);
   }
 
   if (options.create) {
