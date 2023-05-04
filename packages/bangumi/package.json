@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@animespace/core": "workspace:*",
-    "bgmc": "^0.0.1",
+    "bgmc": "^0.0.2",
     "undici": "^5.22.0"
   },
   "engines": {

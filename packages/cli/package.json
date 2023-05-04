@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "@animespace/animegarden": "workspace:*",
+    "@animespace/bangumi": "workspace:*",
     "@animespace/core": "workspace:*",
     "@animespace/download": "workspace:*",
     "@breadc/color": "^0.9.3",

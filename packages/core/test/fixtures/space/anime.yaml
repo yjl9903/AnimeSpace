@@ -26,3 +26,5 @@ plugins:
   - name: animegarden
   - name: download
     directory: ./download
+  - name: bangumi
+    username: '603937'

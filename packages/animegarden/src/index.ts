@@ -21,6 +21,7 @@ import './plan.d';
 
 import { DOT } from './constant';
 import { ufetch } from './ufetch';
+import { generatePlan } from './generate';
 import { DownloadProviders } from './download';
 import { generateDownloadTask } from './task';
 
@@ -35,6 +36,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
 
   return {
     name: 'animegarden',
+    options,
     async preparePlans(_space, plans) {
       for (const plan of plans) {
         for (const onair of plan.onair) {
@@ -102,6 +104,26 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             }
             logger.log('');
           }
+        });
+
+      cli
+        .command('generate', 'Generate Plan from your bangumi collections')
+        .option('--username <username>', 'Bangumi username')
+        .action(async (options) => {
+          const bangumiPlugin = system.space.plugins.find(
+            (p) => p.name === 'bangumi'
+          );
+          const username =
+            options.username ??
+            (bangumiPlugin?.options?.username as string) ??
+            '';
+          if (!username) {
+            system.logger.error(
+              'You should provide your bangumi username with --username <username>'
+            );
+          }
+
+          return await generatePlan(username);
         });
 
       // --- Util functions ---

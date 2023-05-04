@@ -1,7 +1,7 @@
 import type { Breadc } from 'breadc';
 
 import type { AnimeSystem } from './system/types';
-import type { AnimeSpace, Plan } from './space/types';
+import type { AnimeSpace, Plan, PluginEntry } from './space/types';
 import type { Anime, LocalFile, LocalVideo } from './system/anime';
 
 type MayPromise<T> = T | Promise<T>;
@@ -11,6 +11,11 @@ export interface Plugin {
    * The name of your plugin
    */
   name: string;
+
+  /**
+   * Options to create this plugin
+   */
+  options: PluginEntry;
 
   /**
    * Prepare anime space configurations

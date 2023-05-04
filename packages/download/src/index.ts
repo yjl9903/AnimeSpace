@@ -26,6 +26,7 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
 
   return {
     name: 'download',
+    options,
     introspect: {
       async handleUnknownFile(system, anime, file) {
         const logger = createLogger(system);

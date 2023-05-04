@@ -19,6 +19,9 @@
       "@animespace/animegarden": [
         "./packages/animegarden/src/index.ts"
       ],
+      "@animespace/bangumi": [
+        "./packages/bangumi/src/index.ts"
+      ],
       "@animespace/download": [
         "./packages/download/src/index.ts"
       ],

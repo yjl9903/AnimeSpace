@@ -1,6 +1,7 @@
 import os from 'node:os';
 import path from 'node:path';
 
+import { Bangumi } from '@animespace/bangumi';
 import { Download } from '@animespace/download';
 import { AnimeGarden } from '@animespace/animegarden';
 import { loadSpace, createAnimeSystem, PluginLoader } from '@animespace/core';
@@ -8,6 +9,9 @@ import { loadSpace, createAnimeSystem, PluginLoader } from '@animespace/core';
 const pluginLoader: PluginLoader = {
   async animegarden(entry) {
     return AnimeGarden(entry);
+  },
+  async bangumi(entry) {
+    return Bangumi(entry);
   },
   async download(entry) {
     return Download(entry);
