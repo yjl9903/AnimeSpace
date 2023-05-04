@@ -1,3 +1,4 @@
+import openEditor from 'open-editor';
 import { type Breadc, breadc } from 'breadc';
 import { AnimeSystem } from '@animespace/core';
 
@@ -20,7 +21,6 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .action(async (options) => {
       const root = options.storage ? system.space.storage : system.space.root;
       if (options.open) {
-        const openEditor = (await import('open-editor')).default;
         openEditor([root]);
       } else {
         console.log(root);
