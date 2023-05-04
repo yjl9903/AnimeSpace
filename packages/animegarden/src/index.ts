@@ -6,9 +6,8 @@ import {
 import { fetchResources } from 'animegarden';
 import { bold, dim, lightGreen, link, underline } from '@breadc/color';
 
-import fs from 'fs';
-
 import './plan.d';
+
 import { ufetch } from './ufetch';
 import { DownloadProviders } from './download';
 
