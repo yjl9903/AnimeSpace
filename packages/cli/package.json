@@ -50,7 +50,7 @@
     "@animespace/core": "workspace:*",
     "@animespace/download": "workspace:*",
     "@breadc/color": "^0.9.3",
-    "@onekuma/map": "^0.1.9",
+    "@onekuma/map": "^0.1.10",
     "breadc": "^0.9.3",
     "cli-progress": "^3.12.0",
     "date-fns": "^2.30.0",
