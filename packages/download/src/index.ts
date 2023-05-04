@@ -9,7 +9,7 @@ import {
 } from '@animespace/core';
 
 import { parse } from 'anitomy';
-import { dim, lightYellow } from '@breadc/color';
+import { dim, bold, lightYellow, lightGreen } from '@breadc/color';
 
 const DOT = dim('•');
 
@@ -86,7 +86,9 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
               }
             };
             logger.info(
-              `Moving downloaded file ${file.filename} to ${video.filename}`
+              `${lightGreen('Moving downloaded file')} ${bold(
+                file.filename
+              )} to ${bold(video.filename)}`
             );
             await anime.addVideo(file, video);
           } else {
