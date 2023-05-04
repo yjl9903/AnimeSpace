@@ -222,11 +222,19 @@ function formatAnimeGardenSearchURL(anime: Anime) {
 function printKeywords(anime: Anime, logger: ConsolaInstance) {
   if (anime.plan.keywords.include.length === 1) {
     const first = anime.plan.keywords.include[0];
-    logger.info(
-      `${dim('Include keywords')}  ${first
-        .map((t) => underline(t))
-        .join(dim(' | '))}`
-    );
+    const sum = first.reduce((acc, t) => acc + t.length, 0);
+    if (sum > 80) {
+      logger.info(dim('Include keywords  | ') + underline(first[0]));
+      for (const t of first.slice(1)) {
+        logger.info(`                  ${dim('|')} ${underline(t)}`);
+      }
+    } else {
+      logger.info(
+        `${dim('Include keywords')}  ${first
+          .map((t) => underline(t))
+          .join(dim(' | '))}`
+      );
+    }
   } else {
     logger.info(dim(`Include keywords:`));
     for (const include of anime.plan.keywords.include) {
