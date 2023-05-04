@@ -2,7 +2,7 @@ lockfileVersion: '6.0'
 
 patchedDependencies:
   consola@3.1.0:
-    hash: dlknvsja6ephrnzommeaxldidy
+    hash: 3us7dz5jtvuqlpxuvndonkmwhe
     path: patches/consola@3.1.0.patch
 
 importers:
@@ -91,7 +91,13 @@ importers:
       '@breadc/color':
         specifier: ^0.9.3
         version: 0.9.3
+      '@onekuma/map':
+        specifier: ^0.1.10
+        version: 0.1.10
       animegarden:
+        specifier: ^0.0.13
+        version: 0.0.13
+      anitomy:
         specifier: ^0.0.13
         version: 0.0.13
       undici:
@@ -199,7 +205,7 @@ importers:
         version: 0.9.3
       consola:
         specifier: ^3.1.0
-        version: 3.1.0(patch_hash=dlknvsja6ephrnzommeaxldidy)
+        version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -1908,6 +1914,13 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
 
+  /@onekuma/map@0.1.10:
+    resolution: {integrity: sha512-Qqqp7Us1Dn5hlTmfRk2UXK9GLcvX4dq2HPB1IxVn1YcFwoUdJBOZKMF5YEP6oC3gR8RqkuTINtoyEq86FCA7Yw==}
+    engines: {node: '>=v18.15.0'}
+    dependencies:
+      '@onekuma/seq': 0.1.10
+    dev: false
+
   /@onekuma/map@0.1.9:
     resolution: {integrity: sha512-Gwg6GpENSnO7+IoHQjmd3OdpIoKkmc+Y7U+FBit9A4WK1DPlhf+eOgenO+gnBU6iY0jEXdVvPPhFRtjf4fAaxw==}
     engines: {node: '>=v16.19.0'}
@@ -1915,9 +1928,21 @@ packages:
       '@onekuma/seq': 0.1.9
     dev: false
 
+  /@onekuma/option@0.1.10:
+    resolution: {integrity: sha512-JMQjvGyCcjn6ShBFkaN29+kWD5dAjqnNxNIHfxxuMP0644FdZxuxRMEdhQWbqqxsWqU08fIsWcFlq/IB0jkk1A==}
+    engines: {node: '>=v18.15.0'}
+    dev: false
+
   /@onekuma/option@0.1.9:
     resolution: {integrity: sha512-lTdmVj1KOe8OBAOTd4wbl5xtfg9jabkkqqxAkouBuWouaqtLcVohVKtuq7nV9IJMS7VvKIorPscid632UUsBkA==}
     engines: {node: '>=v16.19.0'}
+    dev: false
+
+  /@onekuma/seq@0.1.10:
+    resolution: {integrity: sha512-Wg/ZnGsKFTx8FlCD1fbpOD9L92x9EJ02I7f5FjPwFMGI7JjUrY2UnHgdn5sL1JC9FND4EqAmno8aSzJYfNkmOg==}
+    engines: {node: '>=v18.15.0'}
+    dependencies:
+      '@onekuma/option': 0.1.10
     dev: false
 
   /@onekuma/seq@0.1.9:
@@ -2284,7 +2309,7 @@ packages:
       cac: 6.7.14
       chokidar: 3.5.3
       colorette: 2.0.19
-      consola: 3.1.0(patch_hash=dlknvsja6ephrnzommeaxldidy)
+      consola: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
       fast-glob: 3.2.12
       magic-string: 0.30.0
       pathe: 1.1.0
@@ -3284,7 +3309,7 @@ packages:
       well-known-symbols: 2.0.0
     dev: true
 
-  /consola@3.1.0(patch_hash=dlknvsja6ephrnzommeaxldidy):
+  /consola@3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe):
     resolution: {integrity: sha512-rrrJE6rP0qzl/Srg+C9x/AE5Kxfux7reVm1Wh0wCjuXvih6DqZgqDZe8auTD28fzJ9TF0mHlSDrPpWlujQRo1Q==}
     patched: true
 
@@ -6167,7 +6192,7 @@ packages:
       '@rollup/plugin-replace': 5.0.2(rollup@3.20.2)
       '@rollup/pluginutils': 5.0.2(rollup@3.20.2)
       chalk: 5.2.0
-      consola: 3.1.0(patch_hash=dlknvsja6ephrnzommeaxldidy)
+      consola: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
       defu: 6.1.2
       esbuild: 0.17.16
       globby: 13.1.4

@@ -117,14 +117,18 @@ export class Anime {
     });
   }
 
-  public formatFilename(meta: AnitomyResult) {
+  public formatFilename(meta: {
+    episode?: number;
+    fansub?: string;
+    extension?: string;
+  }) {
     return formatTitle(this.format, {
       title: this.plan.title,
       yyyy: '' + this.plan.date.getFullYear(),
       mm: '' + (this.plan.date.getMonth() + 1),
-      ep: meta.episode.number ? String(meta.episode.number) : '{ep}',
-      extension: meta.file.extension ?? 'mp4',
-      fansub: meta.release.group ?? 'fansub'
+      ep: meta.episode ? String(meta.episode) : '{ep}',
+      extension: meta.extension?.toLowerCase() ?? 'mp4',
+      fansub: meta.fansub ?? 'fansub'
     });
   }
 

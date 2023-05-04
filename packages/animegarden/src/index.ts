@@ -4,14 +4,21 @@ import {
   formatStringArray
 } from '@animespace/core';
 import { fetchResources } from 'animegarden';
-import { bold, dim, lightGreen, link, underline } from '@breadc/color';
+import {
+  bold,
+  dim,
+  lightBlue,
+  lightGreen,
+  link,
+  underline
+} from '@breadc/color';
 
 import './plan.d';
 
+import { DOT } from './constant';
 import { ufetch } from './ufetch';
 import { DownloadProviders } from './download';
-
-const DOT = dim('•');
+import { generateDownloadTask } from './task';
 
 const ANIMEGARDEN = 'AnimeGarden';
 
@@ -43,8 +50,12 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
     refresh: {
       async refresh(system, anime) {
         const logger = system.logger.withTag('animegarden');
+        logger.log('');
+
         logger.info(
-          `Fetching resources of ${bold(anime.plan.title)}  (${link(
+          `${lightBlue('Fetching resources')} of ${bold(
+            anime.plan.title
+          )}  (${link(
             `Bangumi: ${anime.plan.bgmId}`,
             `https://bangumi.tv/subject/${anime.plan.bgmId}`
           )})`
@@ -63,16 +74,39 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           progress(res, { url, page }) {}
         });
 
+        const newVideos = await generateDownloadTask(system, anime, resources);
+        if (newVideos.length === 0) {
+          logger.info(
+            `${lightGreen('Found ' + resources.length + ' resources')} ${dim(
+              'from'
+            )} ${link(
+              'AnimeGarden',
+              `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
+                JSON.stringify(anime.plan.keywords.include)
+              )}&exclude=${encodeURIComponent(
+                JSON.stringify(anime.plan.keywords.exclude)
+              )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`
+            )}`
+          );
+          return;
+        }
+
+        const animegardenURL = `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
+          JSON.stringify(anime.plan.keywords.include)
+        )}&exclude=${encodeURIComponent(
+          JSON.stringify(anime.plan.keywords.exclude)
+        )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
         logger.info(
-          `Found ${lightGreen('' + resources.length)} resources from ${link(
-            'AnimeGarden',
-            `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
-              JSON.stringify(anime.plan.keywords.include)
-            )}&exclude=${encodeURIComponent(
-              JSON.stringify(anime.plan.keywords.exclude)
-            )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`
-          )}`
+          `${lightBlue(`Downloading`)} ${lightGreen(
+            newVideos.length + ' resources'
+          )} ${dim('from')} ${link('AnimeGarden', animegardenURL)}`
         );
+        for (const video of newVideos) {
+          const detailURL = `https://garden.onekuma.cn/resource/${video.source
+            .magnet!.split('/')
+            .at(-1)}`;
+          logger.info(`  ${DOT} ${link(video.filename, detailURL)}`);
+        }
 
         // --- Util functions ---
         function printKeywords() {

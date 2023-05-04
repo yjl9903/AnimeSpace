@@ -1,5 +1,5 @@
 import { dim } from '@breadc/color';
-import { createConsola } from 'consola/core';
+import { createConsola } from 'consola';
 
 import type { AnimeSpace } from '../space';
 
@@ -12,7 +12,9 @@ import { introspect, loadAnime } from './introspect';
 export async function createAnimeSystem(
   space: AnimeSpace
 ): Promise<AnimeSystem> {
-  const logger = createConsola();
+  const logger = createConsola({
+    formatOptions: { columns: process.stdout.getWindowSize()[0] }
+  });
 
   // Cache animes
   let animes: Anime[] | undefined = undefined;

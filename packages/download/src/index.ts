@@ -32,7 +32,11 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
         const result = parse(file.filename);
         if (result) {
           const video: LocalVideo = {
-            filename: anime.formatFilename(result),
+            filename: anime.formatFilename({
+              fansub: result.release.group,
+              episode: result.episode.number,
+              extension: result.file.extension
+            }),
             fansub: result.release.group,
             episode: result.episode.number,
             source: {
@@ -79,7 +83,11 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
           const result = parse(file.filename);
           if (result) {
             const video: LocalVideo = {
-              filename: anime.formatFilename(result),
+              filename: anime.formatFilename({
+                fansub: result.release.group,
+                episode: result.episode.number,
+                extension: result.file.extension
+              }),
               fansub: result.release.group,
               episode: result.episode.number,
               source: {
