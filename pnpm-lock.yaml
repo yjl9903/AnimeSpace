@@ -103,9 +103,15 @@ importers:
       bgmc:
         specifier: ^0.0.2
         version: 0.0.2
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
       undici:
         specifier: ^5.22.0
         version: 5.22.0
+      yaml:
+        specifier: ^2.2.2
+        version: 2.2.2
 
   packages/bangumi:
     dependencies:

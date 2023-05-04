@@ -109,6 +109,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
       cli
         .command('generate', 'Generate Plan from your bangumi collections')
         .option('--username <username>', 'Bangumi username')
+        .option('--create <filename>', 'Create plan file in the space directory')
         .action(async (options) => {
           const bangumiPlugin = system.space.plugins.find(
             (p) => p.name === 'bangumi'
@@ -123,7 +124,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             );
           }
 
-          return await generatePlan(username);
+          return await generatePlan(username, options);
         });
 
       // --- Util functions ---
