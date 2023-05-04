@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { describe, it, expect } from 'vitest';
