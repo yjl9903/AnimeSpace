@@ -45,13 +45,13 @@ describe('Load Space', () => {
       {
         date: new Date('2023-04-01 13:00:00 UTC'),
         name: '2023-04-04 新番放送计划',
-        state: 'onair',
+        status: 'onair',
         onair: [
           {
             title: '熊熊勇闯异世界 Punch!',
             translations: {},
             type: '番剧',
-            state: 'onair',
+            status: 'onair',
             season: 2,
             bgmId: '323651',
             fansub: ['Lilith-Raws', 'ANi'],
@@ -67,7 +67,7 @@ describe('Load Space', () => {
               unknown: ['Tengoku Daimakyou']
             },
             type: '番剧',
-            state: 'onair',
+            status: 'onair',
             season: 1,
             bgmId: '404804',
             fansub: 'SweetSub',
@@ -81,7 +81,7 @@ describe('Load Space', () => {
             title: '偶像大师 灰姑娘女孩 U149',
             translations: {},
             type: '番剧',
-            state: 'onair',
+            status: 'onair',
             season: 1,
             bgmId: '376703',
             fansub: '喵萌奶茶屋',

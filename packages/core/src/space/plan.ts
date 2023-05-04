@@ -14,9 +14,9 @@ export async function loadPlan(cwd: string, patterns: string[]) {
       const content = await fs.readFile(path.resolve(cwd, file), 'utf-8');
       const plan = parse(content);
 
-      const state =
-        plan.state === 'onair' || plan.state === 'finish'
-          ? plan.state
+      const status =
+        plan.status === 'onair' || plan.status === 'finish'
+          ? plan.status
           : 'onair';
       const date = new Date(plan.date);
 
@@ -24,11 +24,11 @@ export async function loadPlan(cwd: string, patterns: string[]) {
         ...plan,
         name: plan.name ?? 'unknown',
         date,
-        state,
+        status,
         onair: formatStringArray(plan.onair).map((o: any) => {
           const title = String(o.title);
-          const oState =
-            o.state === 'onair' || o.state === 'finish' ? o.state : state;
+          const oStatus =
+            o.status === 'onair' || o.status === 'finish' ? o.status : status;
           const type = ['番剧', '电影', 'OVA'].includes(o.type)
             ? o.type
             : '番剧';
@@ -40,7 +40,7 @@ export async function loadPlan(cwd: string, patterns: string[]) {
             translations,
             bgmId: String(o.bgmId),
             type,
-            state: oState,
+            status: oStatus,
             season: o.season ? +o.season : 1,
             date: o.date ? new Date(o.date) : date,
             keywords: formatKeywordsArray(title, translations, o.keywords)

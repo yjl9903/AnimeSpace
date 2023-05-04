@@ -97,7 +97,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
 
 export async function loadAnime(system: AnimeSystem, all: boolean = false) {
   const plans = (await system.space.plans()).filter(
-    (p) => all || p.state === 'onair'
+    (p) => all || p.status === 'onair'
   );
   const animePlans = flatAnimePlan(plans);
   const animes = animePlans.map((ap) => new Anime(system.space, ap));

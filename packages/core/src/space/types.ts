@@ -51,7 +51,7 @@ export interface PluginEntry extends Record<string, any> {
   name: string;
 }
 
-export type PlanState = 'onair' | 'finish';
+export type PlanStatus = 'onair' | 'finish';
 
 export type AnimePlanType = '番剧' | '电影' | 'OVA';
 
@@ -60,7 +60,7 @@ export interface Plan {
 
   readonly date: Date;
 
-  readonly state: PlanState;
+  readonly status: PlanStatus;
 
   readonly onair: AnimePlan[];
 }
@@ -72,7 +72,7 @@ export interface AnimePlan {
 
   readonly type: AnimePlanType;
 
-  readonly state: PlanState;
+  readonly status: PlanStatus;
 
   readonly bgmId: string;
 

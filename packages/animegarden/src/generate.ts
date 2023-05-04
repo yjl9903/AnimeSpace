@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { BgmClient, BGMCollection } from 'bgmc';
+import { BgmClient, type BGMCollection } from 'bgmc';
 
 import { ufetch } from './ufetch';
 

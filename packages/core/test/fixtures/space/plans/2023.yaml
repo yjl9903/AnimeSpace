@@ -2,7 +2,7 @@ name: 2023-04-04 新番放送计划
 
 date: 2023-04-01 21:00
 
-state: onair
+status: onair
 
 onair:
   - title: '熊熊勇闯异世界 Punch!'

@@ -101,8 +101,8 @@ importers:
         specifier: ^0.0.13
         version: 0.0.13
       bgmc:
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.4
+        version: 0.0.4
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -119,8 +119,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       bgmc:
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.4
+        version: 0.0.4
       undici:
         specifier: ^5.22.0
         version: 5.22.0
@@ -2866,16 +2866,11 @@ packages:
     engines: {node: '>=12.20.0'}
     dev: false
 
-  /bgm-types@3.1.1:
-    resolution: {integrity: sha512-sR+W10xnSKlDaANEhcorxGLJXjDm6giCqKFepN80YHwMJQkQICX/W5RSy5jfVLRIkyBLS1YxaQeoPgwgFOKr6Q==}
-    dev: false
-
-  /bgmc@0.0.2:
-    resolution: {integrity: sha512-juJpQnbmsZPfkWg3TG+rVe6Ft8gnnYGKxX+myXX743KLzD4mb7pXwtXRGNCPl+T1K5+zKg4OmhIYjYXxukrGGQ==}
+  /bgmc@0.0.4:
+    resolution: {integrity: sha512-kmec2dt7bknkEQU6pHrpYbQRxgxQmwbnRMW1gVIt8Hs3DH6arWDikBJulyRV8fDYGTY4gMkVvaAcjJsn2p3bMg==}
     engines: {node: '>=v18.15.0'}
     hasBin: true
     dependencies:
-      bgm-types: 3.1.1
       breadc: 0.9.3
       ofetch: 1.0.1
     dev: false

@@ -25,7 +25,7 @@ describe('system', () => {
               include: [['熊熊勇闯异世界 Punch!']]
             },
             season: 2,
-            state: 'onair',
+            status: 'onair',
             title: '熊熊勇闯异世界 Punch!',
             translations: {},
             type: '番剧'
@@ -39,7 +39,7 @@ describe('system', () => {
               include: [['天国大魔境', 'Tengoku Daimakyou']]
             },
             season: 1,
-            state: 'onair',
+            status: 'onair',
             title: '天国大魔境',
             translations: {
               unknown: ['Tengoku Daimakyou']
@@ -55,13 +55,13 @@ describe('system', () => {
               include: [['偶像大师', 'iDOLM@STER'], ['灰姑娘女孩'], ['U149']]
             },
             season: 1,
-            state: 'onair',
+            status: 'onair',
             title: '偶像大师 灰姑娘女孩 U149',
             translations: {},
             type: '番剧'
           }
         ],
-        state: 'onair'
+        status: 'onair'
       }
     ]);
   });
