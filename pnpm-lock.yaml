@@ -164,8 +164,8 @@ importers:
         specifier: ^5.22.0
         version: 5.22.0
       webtorrent:
-        specifier: ^2.0.16
-        version: 2.0.16
+        specifier: ^2.0.17
+        version: 2.0.17
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.0
@@ -3292,7 +3292,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /concordance@5.0.4:
@@ -6672,8 +6672,8 @@ packages:
     resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
     dev: true
 
-  /webtorrent@2.0.16:
-    resolution: {integrity: sha512-IAGllCejxZZrkzW3rDp9hCZkyf7Qh8+lucfsZgzMx0ygtEyshdJ8zoYf19ZscON8cS7CFwx+sLgszKq2QL1jaw==}
+  /webtorrent@2.0.17:
+    resolution: {integrity: sha512-8n5G86LxcrvAdhAYTFwMKD9CgFJXCQL6aYy1ULNff3yqMMf0FWo+SKd5kO93sJ30cGJpOIXuNbAZrdhhBpqDSg==}
     engines: {node: '>=14'}
     dependencies:
       '@webtorrent/http-node': 1.3.0
