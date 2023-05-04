@@ -1,5 +1,5 @@
 import { dim } from '@breadc/color';
-import { createConsola } from 'consola';
+import { createConsola } from 'consola/core';
 
 import type { AnimeSpace } from '../space';
 

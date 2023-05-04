@@ -1,15 +1,15 @@
 import os from 'node:os';
 import path from 'node:path';
 
+import { Download } from '@animespace/download';
+import { AnimeGarden } from '@animespace/animegarden';
 import { loadSpace, createAnimeSystem, PluginLoader } from '@animespace/core';
 
 const pluginLoader: PluginLoader = {
   async animegarden(entry) {
-    const { AnimeGarden } = await import('@animespace/animegarden');
     return AnimeGarden(entry);
   },
   async download(entry) {
-    const { Download } = await import('@animespace/download');
     return Download(entry);
   }
 };
