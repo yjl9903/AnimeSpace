@@ -98,6 +98,18 @@ importers:
         specifier: ^5.22.0
         version: 5.22.0
 
+  packages/bangumi:
+    dependencies:
+      '@animespace/core':
+        specifier: workspace:*
+        version: link:../core
+      bgmc:
+        specifier: ^0.0.1
+        version: 0.0.1
+      undici:
+        specifier: ^5.22.0
+        version: 5.22.0
+
   packages/cli:
     dependencies:
       '@animespace/animegarden':
@@ -2815,6 +2827,11 @@ packages:
   /bep53-range@2.0.0:
     resolution: {integrity: sha512-sMm2sV5PRs0YOVk0LTKtjuIprVzxgTQUsrGX/7Yph2Rm4FO2Fqqtq7hNjsOB5xezM4v4+5rljCgK++UeQJZguA==}
     engines: {node: '>=12.20.0'}
+    dev: false
+
+  /bgmc@0.0.1:
+    resolution: {integrity: sha512-e7h3xaVp0EjKR6thjnRAE1IlbRmpCoEs2JQ+gkr8baiNRNO6bqiCYeuuygFq5rBAWeyeTsfd1EAfH8ydqljG0A==}
+    engines: {node: '>=v18.15.0'}
     dev: false
 
   /binary-extensions@2.2.0:
