@@ -45,19 +45,12 @@
     "typecheck": "tsc --noEmit --skipLibCheck",
     "preversion": "pnpm build"
   },
-  "devDependencies": {
+  "dependencies": {
     "@animespace/animegarden": "workspace:*",
     "@animespace/core": "workspace:*",
     "@animespace/download": "workspace:*",
     "@breadc/color": "^0.9.3",
     "@onekuma/map": "^0.1.9",
-    "@types/cli-progress": "^3.11.0",
-    "@types/death": "^1.1.2",
-    "@types/debug": "^4.1.7",
-    "@types/fs-extra": "^11.0.1",
-    "@types/prompts": "^2.4.4",
-    "@types/webtorrent": "^0.109.3",
-    "bangumi-data": "^0.3.115",
     "breadc": "^0.9.3",
     "cli-progress": "^3.12.0",
     "date-fns": "^2.30.0",
@@ -67,10 +60,19 @@
     "fs-extra": "^11.1.1",
     "open-editor": "^4.0.0",
     "prompts": "^2.4.2",
-    "unbuild": "^1.2.1",
-    "unbuild-sea": "^0.0.6",
     "undici": "^5.22.0",
     "webtorrent": "^2.0.16"
+  },
+  "devDependencies": {
+    "@types/cli-progress": "^3.11.0",
+    "@types/death": "^1.1.2",
+    "@types/debug": "^4.1.7",
+    "@types/fs-extra": "^11.0.1",
+    "@types/prompts": "^2.4.4",
+    "@types/webtorrent": "^0.109.3",
+    "bangumi-data": "^0.3.115",
+    "unbuild": "^1.2.1",
+    "unbuild-sea": "^0.0.5"
   },
   "engines": {
     "node": ">=v16.0.0"
