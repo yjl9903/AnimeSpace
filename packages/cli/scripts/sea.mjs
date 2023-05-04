@@ -1,3 +1,3 @@
 import { bundle } from 'unbuild-sea';
 
-await bundle(process.cwd(), { main: './bin/index.cjs', outDir: './bin' });
+await bundle(process.cwd(), { main: './bin/index.js', outDir: './bin' });

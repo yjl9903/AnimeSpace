@@ -18,7 +18,6 @@
   "license": "AGPL-3.0",
   "author": "XLor",
   "sideEffects": false,
-  "type": "module",
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
@@ -38,7 +37,7 @@
   ],
   "scripts": {
     "build": "unbuild && pnpm bundle",
-    "bundle": "rimraf bin && ncc build dist/cli.cjs -m -o bin && node scripts/sea.mjs",
+    "bundle": "rimraf bin && ncc build src/cli.ts -m -o bin && node scripts/sea.mjs",
     "dev": "unbuild --stub",
     "format": "prettier --write {src,test}/**/*.ts",
     "test": "vitest",
