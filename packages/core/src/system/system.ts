@@ -13,7 +13,7 @@ export async function createAnimeSystem(
   space: AnimeSpace
 ): Promise<AnimeSystem> {
   const logger = createConsola({
-    formatOptions: { columns: process.stdout.getWindowSize()[0] }
+    formatOptions: { columns: process.stdout.getWindowSize?.()[0] }
   });
 
   // Cache animes
