@@ -39,4 +39,7 @@ jobs:
         run: pnpm build:all
 
       - name: Test
-        run: pnpm test:ci
+        run: |
+          pnpm test:ci
+          ./packages/cli/dist/anime -h
+          ./packages/cli/dist/anime space
