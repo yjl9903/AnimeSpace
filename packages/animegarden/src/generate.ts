@@ -51,8 +51,8 @@ export async function generatePlan(
     if (options.create) {
       system.logger.info(
         `${lightBlue('Searching')} ${bold(
-          anime.subject?.name_cn ??
-            anime.subject?.name ??
+          anime.subject?.name_cn ||
+            anime.subject?.name ||
             `Bangumi ${anime.subject_id}`
         )}`
       );
@@ -109,8 +109,8 @@ export async function generatePlan(
     } catch (error) {
       system.logger.error(
         `${lightRed('Failed to search')} ${bold(
-          anime.subject?.name_cn ??
-            anime.subject?.name ??
+          anime.subject?.name_cn ||
+            anime.subject?.name ||
             `Bangumi ${anime.subject_id}`
         )}`
       );
