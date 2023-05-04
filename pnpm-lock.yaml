@@ -89,8 +89,8 @@ importers:
         specifier: ^0.9.3
         version: 0.9.3
       animegarden:
-        specifier: ^0.0.12
-        version: 0.0.12
+        specifier: ^0.0.13
+        version: 0.0.13
       undici:
         specifier: ^5.22.0
         version: 5.22.0
@@ -2646,8 +2646,8 @@ packages:
       '@algolia/transporter': 4.14.1
     dev: true
 
-  /animegarden@0.0.12:
-    resolution: {integrity: sha512-QYJ3jjLwfNndaScm9YVLTm8rbzq+SKVfvinFIfa1Y346mN54UvJEUNKHJQm6y55QsjVE8/vqLOuZHEUu62iVGQ==}
+  /animegarden@0.0.13:
+    resolution: {integrity: sha512-QBkVoWvPtyv2UrqN4nY/a/bi1xMnCyNRKNYMTDLiOGObSXJsHKSQXa2IIsJ1/9o/dcw8/Ex10r/ljtRwG+epdA==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
@@ -3239,7 +3239,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /concordance@5.0.4:
