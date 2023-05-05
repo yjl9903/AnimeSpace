@@ -203,6 +203,18 @@ export class Anime {
     }
   }
 
+  public async sortVideos() {
+    const lib = await this.library();
+    const src = lib.videos.map((v) => v.filename);
+    lib.videos.sort((lhs, rhs) => {
+      const el = lhs.episode ?? -1;
+      const er = rhs.episode ?? -1;
+      return el - er;
+    });
+    const dst = lib.videos.map((v) => v.filename);
+    this._dirty ||= lib.videos.some((_el, idx) => src[idx] !== dst[idx]);
+  }
+
   public async writeLibrary(): Promise<void> {
     if (this._lib && this._dirty) {
       const libPath = path.join(this.directory, MetadataFilename);
