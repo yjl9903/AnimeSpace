@@ -1,4 +1,3 @@
-import { logger } from './../../../cli/src/logger/index';
 import fs from 'fs-extra';
 import path from 'path';
 import { spawn } from 'node:child_process';
@@ -6,6 +5,7 @@ import { spawn } from 'node:child_process';
 import type { ConsolaInstance } from 'consola';
 import { AnimeSystem, formatStringArray } from '@animespace/core';
 
+import { dim } from '@breadc/color';
 import { defu } from 'defu';
 import { WebSocket } from 'libaria2';
 import { MutableMap } from '@onekuma/map';
@@ -17,8 +17,6 @@ import { DownloadClient, DownloadOptions, DownloadState } from './base';
 
 interface Aria2Options {
   directory: string;
-
-  port: number;
 
   secret: string;
 
@@ -53,7 +51,6 @@ export class Aria2Client extends DownloadClient {
     this.consola = system.logger.withTag('aria2');
     this.options = defu(options, {
       directory: './download',
-      port: 6800,
       secret: 'animespace',
       args: [],
       proxy: false,
@@ -379,14 +376,19 @@ export class Aria2Client extends DownloadClient {
     this.started = true;
 
     if (this.options.debug.log) {
-      await fs.ensureDir(path.dirname(this.options.debug.log));
-      if (await fs.exists(this.options.debug.log)) {
-        await fs.rm(this.options.debug.log);
-      }
-      this.system.logger.info(
-        `Write aria2 debug logs to ${this.options.debug.log}`
-      );
+      try {
+        await fs.ensureDir(path.dirname(this.options.debug.log));
+        if (await fs.exists(this.options.debug.log)) {
+          await fs.rm(this.options.debug.log);
+        }
+        this.system.logger.info(
+          dim(`Write aria2 debug logs to ${this.options.debug.log}`)
+        );
+      } catch {}
     }
+
+    // Random a new port
+    const port = 16800 + Math.round(Math.random() * 10000);
 
     const env = { ...process.env };
     delete env['all_proxy'];
@@ -401,7 +403,7 @@ export class Aria2Client extends DownloadClient {
         '--enable-rpc',
         '--rpc-listen-all',
         '--rpc-allow-origin-all',
-        `--rpc-listen-port=${this.options.port}`,
+        `--rpc-listen-port=${port}`,
         `--rpc-secret=${this.options.secret}`,
         ...(this.options.debug.log ? [`--log=${this.options.debug.log}`] : []),
         ...this.options.args
@@ -423,7 +425,7 @@ export class Aria2Client extends DownloadClient {
         this.client = new WebSocket.Client({
           protocol: 'ws',
           host: 'localhost',
-          port: this.options.port,
+          port: port,
           auth: {
             secret: this.options.secret
           }
@@ -432,7 +434,7 @@ export class Aria2Client extends DownloadClient {
 
         const version = await this.client.getVersion();
         this.version = version.version;
-        this.system.logger.info(`aria2 v${this.version} is running`);
+        this.system.logger.info(dim(`aria2 v${this.version} is running`));
         res();
       });
     });
@@ -449,7 +451,7 @@ export class Aria2Client extends DownloadClient {
         this.client = undefined;
         // @ts-ignore
         this.version = undefined;
-        this.system.logger.info(`aria2 v${version} has been closed`);
+        this.system.logger.info(dim(`aria2 v${version} has been closed`));
         this.started = false;
         return true;
       } else {

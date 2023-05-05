@@ -186,9 +186,9 @@ export async function runDownloadTask(
   const cancelDeath = onDeath(async () => {
     multibar.finish();
     await anime.writeLibrary();
-    process.exit();
   });
 
+  const systemLogger = system.logger.withTag('animegarden');
   const multibarLogger = {
     info(message: string) {
       multibar.println(`${cyan('Info')} ${message}`);
@@ -202,9 +202,20 @@ export async function runDownloadTask(
   };
   client.setLogger(multibarLogger);
 
+  process.addListener('unhandledRejection', (error) => {
+    multibar.finish();
+    // systemLogger.log('UnhandledRejection');
+    systemLogger.error(error);
+  });
+  process.addListener('uncaughtException', (error) => {
+    multibar.finish();
+    // systemLogger.log('UncaughtException');
+    systemLogger.error(error);
+  });
+
   const tasks = videos.map(async (video) => {
+    const bar = multibar.create(video.video.filename, 100);
     try {
-      const bar = multibar.create(video.video.filename, 100);
       const { files } = await client.download(
         video.video.filename,
         video.resource.magnet,
@@ -273,13 +284,26 @@ export async function runDownloadTask(
       } else {
         multibarLogger.error(defaultMessage);
       }
+    } finally {
+      bar.stop();
     }
   });
 
-  await Promise.all(tasks);
-  multibar.finish();
-  anime.sortVideos();
-  await anime.writeLibrary();
+  try {
+    await Promise.all(tasks);
+    multibar.finish();
+    await anime.sortVideos();
+  } catch (error) {
+    multibar.finish();
+    systemLogger.info(
+      lightRed(`Failed to downloading resources of ${bold(anime.plan.title)}`)
+    );
+    systemLogger.error(error);
+  } finally {
+    await anime.writeLibrary();
+  }
 
   cancelDeath();
+
+  await client.close();
 }

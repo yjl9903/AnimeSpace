@@ -71,7 +71,6 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   function registerDeath() {
     onDeath(async () => {
       await system.writeBack();
-      process.exit();
     });
   }
 }
