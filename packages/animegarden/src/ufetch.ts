@@ -18,7 +18,7 @@ export const ufetch = async (
   }
 };
 
-function getProxy() {
+export function getProxy() {
   const env = process?.env ?? {};
   const list = ['HTTPS_PROXY', 'https_proxy', 'HTTP_PROXY', 'http_proxy'];
   for (const l of list) {
