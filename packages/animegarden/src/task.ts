@@ -170,6 +170,9 @@ export async function runDownloadTask(
       let text = '';
       if (payload.state) {
         text += payload.state;
+        text += ` | ${Number(payload.completed)} B / ${Number(
+          payload.total
+        )} B`;
       } else {
         text += `${formatSize(Number(payload.completed))} / ${formatSize(
           Number(payload.total)
