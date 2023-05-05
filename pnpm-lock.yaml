@@ -116,8 +116,8 @@ importers:
         specifier: ^11.1.1
         version: 11.1.1
       libaria2:
-        specifier: ^1.0.94
-        version: 1.0.94
+        specifier: ^1.0.95
+        version: 1.0.95
       undici:
         specifier: ^5.22.0
         version: 5.22.0
@@ -4606,8 +4606,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /libaria2@1.0.94:
-    resolution: {integrity: sha512-enjbNIX1NYo3AJswZqB7e+pFVo0cPyWCHea1DEqFYVSX8/BwNNNEj1LXQQwfn6KkAPsN3bi2uEkrgydr3zSQ2g==}
+  /libaria2@1.0.95:
+    resolution: {integrity: sha512-nNITIUahBaZKnJHdKemzaEKGrSCvIJ/zgGrd36hw7uPTKP8igXjafVzqGHd/2/7CHyoxy0qOj+FFlRXo0G+Qgw==}
     dependencies:
       axios: 1.4.0(debug@4.3.4)
       isomorphic-ws: 5.0.0(ws@8.13.0)
