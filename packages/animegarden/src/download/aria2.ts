@@ -3,7 +3,7 @@ import { spawn } from 'node:child_process';
 import type { AnimeSystem } from '@animespace/core';
 
 import { defu } from 'defu';
-import { WebSocket } from 'libaria2-ts';
+import { WebSocket } from 'libaria2';
 
 import { DownloadClient } from './base';
 
@@ -46,11 +46,6 @@ export class Aria2Client extends DownloadClient {
 
     return new Promise((res) => {
       child.stdout.once('data', async (_chunk) => {
-        // @ts-ignore
-        // const WebSocket: typeof Aria2.WebSocket = Aria2.default
-        //   ? // @ts-ignore
-        //     Aria2.default.WebSocket
-        //   : Aria2.WebSocket;
         this.client = new WebSocket.Client({
           host: 'localhost',
           port: this.options.port,

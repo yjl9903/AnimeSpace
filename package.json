@@ -33,8 +33,7 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "consola@3.1.0": "patches/consola@3.1.0.patch",
-      "libaria2-ts@1.0.91": "patches/libaria2-ts@1.0.91.patch"
+      "consola@3.1.0": "patches/consola@3.1.0.patch"
     }
   }
 }
