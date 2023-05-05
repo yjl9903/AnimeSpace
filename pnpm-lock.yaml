@@ -4,6 +4,9 @@ patchedDependencies:
   consola@3.1.0:
     hash: 3us7dz5jtvuqlpxuvndonkmwhe
     path: patches/consola@3.1.0.patch
+  libaria2-ts@1.0.91:
+    hash: ah5c2oxatpxq7aqqjepwbvsshm
+    path: patches/libaria2-ts@1.0.91.patch
 
 importers:
 
@@ -95,26 +98,45 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.0.13
-        version: 0.0.13
+        specifier: ^0.0.14
+        version: 0.0.14
       anitomy:
-        specifier: ^0.0.13
-        version: 0.0.13
+        specifier: ^0.0.14
+        version: 0.0.14
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
+      death:
+        specifier: ^1.1.0
+        version: 1.1.0
+      defu:
+        specifier: ^6.1.2
+        version: 6.1.2
       fs-extra:
         specifier: ^11.1.1
         version: 11.1.1
       undici:
         specifier: ^5.22.0
         version: 5.22.0
+      webtorrent:
+        specifier: ^2.0.17
+        version: 2.0.17
       yaml:
         specifier: ^2.2.2
         version: 2.2.2
+    devDependencies:
+      '@types/death':
+        specifier: ^1.1.2
+        version: 1.1.2
+      '@types/webtorrent':
+        specifier: ^0.109.3
+        version: 0.109.3
+      libaria2-ts:
+        specifier: ^1.0.91
+        version: 1.0.91(patch_hash=ah5c2oxatpxq7aqqjepwbvsshm)
 
   packages/bangumi:
     dependencies:
@@ -146,26 +168,17 @@ importers:
         specifier: ^0.9.3
         version: 0.9.3
       '@onekuma/map':
-        specifier: ^0.1.9
-        version: 0.1.9
+        specifier: ^0.1.10
+        version: 0.1.10
       breadc:
         specifier: ^0.9.3
         version: 0.9.3
-      cli-progress:
-        specifier: ^3.12.0
-        version: 3.12.0
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
-      death:
-        specifier: ^1.1.0
-        version: 1.1.0
       debug:
         specifier: ^4.3.4
         version: 4.3.4
-      fastest-levenshtein:
-        specifier: ^1.0.16
-        version: 1.0.16
       fs-extra:
         specifier: ^11.1.1
         version: 11.1.1
@@ -178,16 +191,10 @@ importers:
       undici:
         specifier: ^5.22.0
         version: 5.22.0
-      webtorrent:
-        specifier: ^2.0.17
-        version: 2.0.17
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.0
         version: 3.11.0
-      '@types/death':
-        specifier: ^1.1.2
-        version: 1.1.2
       '@types/debug':
         specifier: ^4.1.7
         version: 4.1.7
@@ -197,9 +204,6 @@ importers:
       '@types/prompts':
         specifier: ^2.4.4
         version: 2.4.4
-      '@types/webtorrent':
-        specifier: ^0.109.3
-        version: 0.109.3
       '@vercel/ncc':
         specifier: ^0.36.1
         version: 0.36.1
@@ -256,8 +260,8 @@ importers:
         specifier: ^0.9.3
         version: 0.9.3
       anitomy:
-        specifier: ^0.0.13
-        version: 0.0.13
+        specifier: ^0.0.14
+        version: 0.0.14
 
 packages:
 
@@ -1936,21 +1940,9 @@ packages:
       '@onekuma/seq': 0.1.10
     dev: false
 
-  /@onekuma/map@0.1.9:
-    resolution: {integrity: sha512-Gwg6GpENSnO7+IoHQjmd3OdpIoKkmc+Y7U+FBit9A4WK1DPlhf+eOgenO+gnBU6iY0jEXdVvPPhFRtjf4fAaxw==}
-    engines: {node: '>=v16.19.0'}
-    dependencies:
-      '@onekuma/seq': 0.1.9
-    dev: false
-
   /@onekuma/option@0.1.10:
     resolution: {integrity: sha512-JMQjvGyCcjn6ShBFkaN29+kWD5dAjqnNxNIHfxxuMP0644FdZxuxRMEdhQWbqqxsWqU08fIsWcFlq/IB0jkk1A==}
     engines: {node: '>=v18.15.0'}
-    dev: false
-
-  /@onekuma/option@0.1.9:
-    resolution: {integrity: sha512-lTdmVj1KOe8OBAOTd4wbl5xtfg9jabkkqqxAkouBuWouaqtLcVohVKtuq7nV9IJMS7VvKIorPscid632UUsBkA==}
-    engines: {node: '>=v16.19.0'}
     dev: false
 
   /@onekuma/seq@0.1.10:
@@ -1958,13 +1950,6 @@ packages:
     engines: {node: '>=v18.15.0'}
     dependencies:
       '@onekuma/option': 0.1.10
-    dev: false
-
-  /@onekuma/seq@0.1.9:
-    resolution: {integrity: sha512-w+l3xS+wI1reubjDJuGOl9PklBlsrtPp48DRhCgcORMFu8vLTM8/LzS/bi90xRVaeG/bqH0sFx7eY6iTMRUbiA==}
-    engines: {node: '>=v16.19.0'}
-    dependencies:
-      '@onekuma/option': 0.1.9
     dev: false
 
   /@pkgjs/parseargs@0.11.0:
@@ -2709,8 +2694,8 @@ packages:
       '@algolia/transporter': 4.14.1
     dev: true
 
-  /animegarden@0.0.13:
-    resolution: {integrity: sha512-QBkVoWvPtyv2UrqN4nY/a/bi1xMnCyNRKNYMTDLiOGObSXJsHKSQXa2IIsJ1/9o/dcw8/Ex10r/ljtRwG+epdA==}
+  /animegarden@0.0.14:
+    resolution: {integrity: sha512-kyGp3ikgSc9RoZ9zaYFKzo6DVCOt9R6MbM/LrEHsmzxFze55PzYssvoUNoO5ikWrzPWUZm40Sapv6uPeX0bzGA==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
@@ -2719,10 +2704,17 @@ packages:
   /anitomy@0.0.13:
     resolution: {integrity: sha512-fRx/auum+N01wTaKFShwM0YIBn5Kx23qGSO4FKh/m97NRqH8V3eg3I+qwckBCC+77ALN7LFwWVuxxe47JvxFRw==}
     engines: {node: '>=v18.16.0'}
+    dev: true
+
+  /anitomy@0.0.14:
+    resolution: {integrity: sha512-9jhDrG8nE3bAyJpJVOrLQqcxoPte4izSpy1sQAbpFbDByPnXYmMCQPFPohXnuc3gMQlfmWacLC28CqFUdPmUSA==}
+    engines: {node: '>=v18.16.0'}
+    dev: false
 
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
+    dev: true
 
   /ansi-sequence-parser@1.1.0:
     resolution: {integrity: sha512-lEm8mt52to2fT8GhciPCGeCXACSz2UwIN4X2e2LJSnZ5uAbn2/dsYdOmUXq0AtWS5cpAupysIneExOgH0Vd2TQ==}
@@ -3062,7 +3054,6 @@ packages:
     requiresBuild: true
     dependencies:
       node-gyp-build: 4.5.0
-    dev: false
 
   /builtin-modules@3.3.0:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
@@ -3210,13 +3201,6 @@ packages:
     resolution: {integrity: sha512-JcSaB5h3wQstQKnaJi8sET40f0m+6Kh4mhKIr05lrWKi+EiQzn6XUoi6LipgRGMqXWNZZJaMz2tH4aeg4ptBDA==}
     dependencies:
       block-iterator: 1.1.1
-    dev: false
-
-  /cli-progress@3.12.0:
-    resolution: {integrity: sha512-tRkV3HJ1ASwm19THiiLIXLO7Im7wlTuKnvkYaTkyoAPefqjNg7W7DHKUlGRxy9vxDvbyCYQkQozvptuMkGCg8A==}
-    engines: {node: '>=4'}
-    dependencies:
-      string-width: 4.2.3
     dev: false
 
   /cliui@7.0.4:
@@ -3605,6 +3589,7 @@ packages:
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
+    dev: true
 
   /encodeurl@1.0.2:
     resolution: {integrity: sha512-TPJXq8JqFaVYm2CWmPvnP2Iyo4ZSM7/QKcSmuMLDObfpH5fi7RUGmd/rTDf+rut/saiDiQEeVTNgAmJEdAOx0w==}
@@ -3835,11 +3820,6 @@ packages:
 
   /fast-readable-async-iterator@1.1.1:
     resolution: {integrity: sha512-xEHkLUEmStETI+15zhglJLO9TjXxNkkp2ldEfYVZdcqxFhM172EfGl1irI6mVlTxXspYKH1/kjevnt/XSsPeFA==}
-    dev: false
-
-  /fastest-levenshtein@1.0.16:
-    resolution: {integrity: sha512-eRnCtTTtGZFpQCwhJiUOuxPQWRXVKYDn0b2PeHfXL6/Zi53SLAzAHfVhVWK2AryC/WH05kGfxhFIPvTF0SXQzg==}
-    engines: {node: '>= 4.9.1'}
     dev: false
 
   /fastq@1.13.0:
@@ -4392,6 +4372,7 @@ packages:
   /is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
+    dev: true
 
   /is-glob@4.0.3:
     resolution: {integrity: sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg==}
@@ -4624,6 +4605,16 @@ packages:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
     dev: true
+
+  /libaria2-ts@1.0.91(patch_hash=ah5c2oxatpxq7aqqjepwbvsshm):
+    resolution: {integrity: sha512-dRgfW5TuIhc3cKhWZFnLrkok1xyGe7a27a2skHbgbWYyvGEMG53ahaASNsD3TfAEpN/5M0bXw8efGaL1Cs/e7g==}
+    dependencies:
+      ws: 8.13.0(bufferutil@4.0.6)(utf-8-validate@5.0.9)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: true
+    patched: true
 
   /limiter@1.1.5:
     resolution: {integrity: sha512-FWWMIEOxz3GwUI4Ts/IvgVy6LPvoMPgjMdQ185nN6psJyBJ4yOpzqm695/h5umdLJg2vW3GR5iG11MAkR2AzJA==}
@@ -4971,7 +4962,6 @@ packages:
   /node-gyp-build@4.5.0:
     resolution: {integrity: sha512-2iGbaQBV+ITgCz76ZEjmhUKAKVf7xfY1sRl4UiKQspfZMH2h06SyhNsnSVy50cwkFQDGLyif6m/6uFXHkOZ6rg==}
     hasBin: true
-    dev: false
 
   /node-releases@2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
@@ -5857,6 +5847,7 @@ packages:
       emoji-regex: 8.0.0
       is-fullwidth-code-point: 3.0.0
       strip-ansi: 6.0.1
+    dev: true
 
   /string.prototype.matchall@4.0.7:
     resolution: {integrity: sha512-f48okCX7JiwVi1NXCVWcFnZgADDC/n2vePlQ/KUCNqCikLLilQvwjMO8+BHVKvgzH0JB0J9LEPgxOGT02RoETg==}
@@ -5920,6 +5911,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       ansi-regex: 5.0.1
+    dev: true
 
   /strip-comments@2.0.1:
     resolution: {integrity: sha512-ZprKx+bBLXv067WTCALv8SSz5l2+XhpYCsVtSqlMnkAXMWDq+/ekVbl1ghqP9rUHTzv6sm/DwCOiYutU/yp1fw==}
@@ -6431,7 +6423,6 @@ packages:
     requiresBuild: true
     dependencies:
       node-gyp-build: 4.5.0
-    dev: false
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -6964,7 +6955,6 @@ packages:
     dependencies:
       bufferutil: 4.0.6
       utf-8-validate: 5.0.9
-    dev: false
 
   /yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}

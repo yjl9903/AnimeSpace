@@ -22,7 +22,7 @@ import './plan.d';
 import { DOT } from './constant';
 import { ufetch } from './ufetch';
 import { generatePlan } from './generate';
-import { DownloadProviders } from './download';
+import { DownloadProviders, makeClient } from './download';
 import { generateDownloadTask } from './task';
 
 const ANIMEGARDEN = 'AnimeGarden';
@@ -191,6 +191,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             .at(-1)}`;
           logger.info(`  ${DOT} ${link(video.filename, detailURL)}`);
         }
+
+        const client = makeClient(provider, system, options);
       }
     }
   };

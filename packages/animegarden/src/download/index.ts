@@ -1,18 +1,22 @@
-import { download as webtorrentDownload } from './webtorrent';
+import type { AnimeSystem } from '@animespace/core';
+
+import { Aria2Client } from './aria2';
+import { DownloadClient } from './base';
+import { WebtorrentClient } from './webtorrent';
 
 export type DownloadProviders = 'webtorrent' | 'aria2' | 'qbittorrent';
 
-export async function download(
+export function makeClient(
   provider: DownloadProviders,
-  magnet: string,
-  dist: string,
+  system: AnimeSystem,
   options: any
-) {
+): DownloadClient {
   switch (provider) {
     case 'aria2':
+      return new Aria2Client(system, options);
     case 'qbittorrent':
     case 'webtorrent':
     default:
-      return webtorrentDownload(magnet, dist);
+      return new WebtorrentClient(system);
   }
 }
