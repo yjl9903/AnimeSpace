@@ -68,7 +68,7 @@ export class Aria2Client extends DownloadClient {
     key: string,
     magnet: string,
     options: DownloadOptions = {}
-  ): Promise<void> {
+  ): Promise<{ files: string[] }> {
     await this.start();
 
     const proxy =
@@ -110,7 +110,17 @@ export class Aria2Client extends DownloadClient {
           const status = await client.tellStatus(gid);
           await that.updateStatus(task, status);
           if (task.state === 'complete') {
-            res();
+            const statuses = await Promise.all(
+              [...task.gids.files].map((gid) => client.tellStatus(gid))
+            );
+            const files = [];
+            for (const status of statuses) {
+              for (const f of status.files) {
+                files.push(f.path);
+              }
+            }
+
+            res({ files });
           }
         }
       };
@@ -317,7 +327,6 @@ export class Aria2Client extends DownloadClient {
         if (progress.state === 'active') {
           await task.options.onProgress?.(payload);
         } else if (progress.state === 'complete') {
-          this.gids.delete(gid);
           if (active) {
             await task.options.onProgress?.(payload);
           } else {

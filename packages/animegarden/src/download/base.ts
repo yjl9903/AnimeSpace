@@ -11,7 +11,7 @@ export abstract class DownloadClient {
     key: string,
     magnet: string,
     options?: DownloadOptions
-  ): Promise<void>;
+  ): Promise<{ files: string[] }>;
 
   public abstract start(): Promise<void>;
 
