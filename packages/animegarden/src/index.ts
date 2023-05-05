@@ -3,6 +3,7 @@ import {
   type Anime,
   type Plugin,
   type PluginEntry,
+  type AnimeSystem,
   loadAnime,
   formatStringArray
 } from '@animespace/core';
@@ -22,7 +23,7 @@ import './plan.d';
 import { DOT } from './constant';
 import { ufetch } from './ufetch';
 import { generatePlan } from './generate';
-import { DownloadProviders, makeClient } from './download';
+import { DownloadClient, DownloadProviders, makeClient } from './download';
 import { generateDownloadTask, runDownloadTask } from './task';
 
 const ANIMEGARDEN = 'AnimeGarden';
@@ -33,6 +34,9 @@ export interface AnimeGardenOptions extends PluginEntry {
 
 export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   const provider = options.provider ?? 'webtorrent';
+  const getClient = useSingleton((system: AnimeSystem) =>
+    makeClient(provider, system, options)
+  );
 
   return {
     name: 'animegarden',
@@ -192,8 +196,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           logger.info(`  ${DOT} ${link(video.filename, detailURL)}`);
         }
 
-        const client = makeClient(provider, system, options);
-        await runDownloadTask(system, anime, newVideos, client);
+        await runDownloadTask(system, anime, newVideos, getClient(system));
       }
     }
   };
@@ -265,4 +268,21 @@ function printFansubs(anime: Anime, logger: ConsolaInstance) {
         : fansubs.join(dim(' > '))
     }`
   );
+}
+
+function useSingleton<T extends unknown, F extends (...args: any[]) => T>(
+  fn: F
+): F {
+  let flag = false;
+  let cache: T | undefined = undefined;
+  // @ts-ignore
+  return (...args: any[]) => {
+    if (flag) {
+      return cache;
+    } else {
+      cache = fn(...args);
+      flag = true;
+      return cache;
+    }
+  };
 }

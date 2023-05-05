@@ -240,6 +240,6 @@ export async function runDownloadTask(
 
   await Promise.all(tasks);
   multibar.finish();
-
+  anime.sortVideos();
   await anime.writeLibrary();
 }
