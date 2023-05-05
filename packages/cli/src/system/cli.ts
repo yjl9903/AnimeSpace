@@ -1,7 +1,6 @@
-import death from 'death';
 import openEditor from 'open-editor';
 import { type Breadc, breadc } from 'breadc';
-import { AnimeSystem } from '@animespace/core';
+import { AnimeSystem, onDeath } from '@animespace/core';
 
 import { version, description } from '../../package.json';
 
@@ -70,8 +69,9 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     });
 
   function registerDeath() {
-    death(async () => {
+    onDeath(async () => {
       await system.writeBack();
+      process.exit();
     });
   }
 }

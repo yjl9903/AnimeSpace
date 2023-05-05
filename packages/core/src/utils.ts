@@ -1,5 +1,7 @@
 import fs from 'fs-extra';
+import os from 'node:os';
 import path from 'node:path';
+import { createInterface } from 'node:readline';
 
 import type { AnimeSpace } from './space';
 
@@ -39,4 +41,11 @@ export function formatTitle(template: string, data: Record<string, string>) {
     template = template.replace(new RegExp(`{${key}}`, 'g'), value);
   }
   return template;
+}
+
+export function onDeath(fn: () => void | Promise<void>) {
+  process.on('SIGINT', fn);
+  return () => {
+    process.removeListener('SIGINT', fn);
+  };
 }
