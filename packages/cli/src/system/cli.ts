@@ -1,3 +1,4 @@
+import death from 'death';
 import openEditor from 'open-editor';
 import { type Breadc, breadc } from 'breadc';
 import { AnimeSystem } from '@animespace/core';
@@ -36,21 +37,41 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .command('refresh', 'Refresh the local anime system')
     .option('-i, --introspect')
     .action(async (options) => {
+      registerDeath();
+
       system.printSpace();
-      if (options.introspect) {
-        await system.introspect();
+      try {
+        if (options.introspect) {
+          await system.introspect();
+        }
+        const animes = await system.refresh();
+        return animes;
+      } catch (error) {
+        throw error;
+      } finally {
+        await system.writeBack();
       }
-      const animes = await system.refresh();
-      await system.writeBack();
-      return animes;
     });
 
   app
     .command('introspect', 'Introspect the local anime system')
     .action(async () => {
+      registerDeath();
+
       system.printSpace();
-      const animes = await system.introspect();
-      await system.writeBack();
-      return animes;
+      try {
+        const animes = await system.introspect();
+        return animes;
+      } catch (error) {
+        throw error;
+      } finally {
+        await system.writeBack();
+      }
     });
+
+  function registerDeath() {
+    death(async () => {
+      await system.writeBack();
+    });
+  }
 }

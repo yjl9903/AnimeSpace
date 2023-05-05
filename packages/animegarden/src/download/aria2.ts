@@ -238,11 +238,12 @@ export class Aria2Client extends DownloadClient {
             task.state = 'downloading';
           } else {
             this.logger.error(`Unexpected previous task state`);
+            process.exit(1);
           }
 
           break;
         case 'paused':
-          this.logger.warn(`Download task ${task.key} was unexpectedly paused`);
+          // this.logger.warn(`Download task ${task.key} was unexpectedly paused`);
           break;
         case 'waiting':
         default:
@@ -276,9 +277,10 @@ export class Aria2Client extends DownloadClient {
           code: status.errorCode
         });
       } else {
-        this.logger.warn(
+        this.logger.error(
           `Download task ${task.key} entered unexpectedly state`
         );
+        process.exit(1);
       }
     } else {
       switch (status.status) {
@@ -299,7 +301,7 @@ export class Aria2Client extends DownloadClient {
           updateProgress();
           break;
         case 'paused':
-          this.logger.warn(`Download task ${task.key} was unexpectedly paused`);
+          // this.logger.warn(`Download task ${task.key} was unexpectedly paused`);
           break;
         case 'waiting':
         default:

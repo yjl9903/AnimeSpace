@@ -207,7 +207,7 @@ export async function runDownloadTask(
 
     if (files.length === 1) {
       const file = files[0];
-      await anime.addVideo(file, video.video, { copy: true });
+      await anime.addVideo(file, video.video, { copy: false });
       multibar.println(
         `${lightBlue(`Info`)} Download ${video.video.filename} OK`
       );
@@ -223,4 +223,6 @@ export async function runDownloadTask(
 
   await Promise.all(tasks);
   multibar.finish();
+
+  await anime.writeLibrary();
 }
