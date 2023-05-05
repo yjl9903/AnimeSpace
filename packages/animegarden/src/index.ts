@@ -23,7 +23,7 @@ import { DOT } from './constant';
 import { ufetch } from './ufetch';
 import { generatePlan } from './generate';
 import { DownloadProviders, makeClient } from './download';
-import { generateDownloadTask } from './task';
+import { generateDownloadTask, runDownloadTask } from './task';
 
 const ANIMEGARDEN = 'AnimeGarden';
 
@@ -193,6 +193,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         }
 
         const client = makeClient(provider, system, options);
+        await runDownloadTask(system, anime, newVideos, client);
       }
     }
   };

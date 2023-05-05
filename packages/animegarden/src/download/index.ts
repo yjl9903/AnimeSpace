@@ -4,6 +4,8 @@ import { Aria2Client } from './aria2';
 import { DownloadClient } from './base';
 import { WebtorrentClient } from './webtorrent';
 
+export { DownloadClient } from './base';
+
 export type DownloadProviders = 'webtorrent' | 'aria2' | 'qbittorrent';
 
 export function makeClient(

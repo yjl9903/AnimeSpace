@@ -7,6 +7,8 @@ import { parse } from 'anitomy';
 import { LocalVideo } from '@animespace/core';
 import { lightYellow } from '@breadc/color';
 
+import { DownloadClient } from './download';
+
 export async function generateDownloadTask(
   system: AnimeSystem,
   anime: Anime,
@@ -120,3 +122,10 @@ function groupResources(
 
   return ordered;
 }
+
+export async function runDownloadTask(
+  system: AnimeSystem,
+  anime: Anime,
+  videos: LocalVideo[],
+  client: DownloadClient
+) {}

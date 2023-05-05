@@ -5,7 +5,7 @@ export class WebtorrentClient extends DownloadClient {
     magnet: string,
     outDir: string,
     options?: DownloadOptions | undefined
-  ): Promise<void> {
+  ): Promise<{ files: string[] }> {
     throw new Error('Method not implemented.');
   }
 
