@@ -1,10 +1,22 @@
 import type { AnimeSystem } from '@animespace/core';
 
+interface DownloadLogger {
+  info: (message: string) => void;
+  warn: (message: string) => void;
+  error: (message: string) => void;
+}
+
 export abstract class DownloadClient {
   protected system: AnimeSystem;
 
+  protected logger?: DownloadLogger;
+
   public constructor(system: AnimeSystem) {
     this.system = system;
+  }
+
+  public setLogger(logger: DownloadLogger) {
+    this.logger = logger;
   }
 
   public abstract download(

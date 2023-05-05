@@ -35,7 +35,7 @@ interface Aria2Options {
 export class Aria2Client extends DownloadClient {
   private options: Aria2Options;
 
-  private logger: ConsolaInstance;
+  private consola: ConsolaInstance;
 
   private started = false;
 
@@ -49,7 +49,7 @@ export class Aria2Client extends DownloadClient {
 
   public constructor(system: AnimeSystem, options: Partial<Aria2Options> = {}) {
     super(system);
-    this.logger = system.logger.withTag('aria2');
+    this.consola = system.logger.withTag('aria2');
     this.options = defu(options, {
       directory: './download',
       port: 6800,
@@ -237,13 +237,17 @@ export class Aria2Client extends DownloadClient {
           if (task.state === 'metadata' || task.state === 'waiting') {
             task.state = 'downloading';
           } else {
-            this.logger.error(`Unexpected previous task state`);
+            (this.logger ?? this.consola).error(
+              `Unexpected previous task state ${task.state}`
+            );
             process.exit(1);
           }
 
           break;
         case 'paused':
-          // this.logger.warn(`Download task ${task.key} was unexpectedly paused`);
+          (this.logger ?? this.consola).warn(
+            `Download task ${task.key} was unexpectedly paused`
+          );
           break;
         case 'waiting':
         default:
@@ -277,8 +281,8 @@ export class Aria2Client extends DownloadClient {
           code: status.errorCode
         });
       } else {
-        this.logger.error(
-          `Download task ${task.key} entered unexpectedly state`
+        (this.logger ?? this.consola).error(
+          `Download task ${task.key} entered unexpectedly state ${task.state}`
         );
         process.exit(1);
       }
@@ -301,7 +305,9 @@ export class Aria2Client extends DownloadClient {
           updateProgress();
           break;
         case 'paused':
-          // this.logger.warn(`Download task ${task.key} was unexpectedly paused`);
+          (this.logger ?? this.consola).warn(
+            `Download task ${task.key} was unexpectedly paused`
+          );
           break;
         case 'waiting':
         default:

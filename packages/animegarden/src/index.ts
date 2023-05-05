@@ -227,9 +227,9 @@ function printKeywords(anime: Anime, logger: ConsolaInstance) {
     const first = anime.plan.keywords.include[0];
     const sum = first.reduce((acc, t) => acc + t.length, 0);
     if (sum > 80) {
-      logger.info(dim('Include keywords  |  ') + underline(first[0]));
+      logger.info(dim('Include keywords  | ') + underline(first[0]));
       for (const t of first.slice(1)) {
-        logger.info(`                  ${dim('|')} ${underline(t)}`);
+        logger.info(`                 ${dim('|')} ${underline(t)}`);
       }
     } else {
       logger.info(

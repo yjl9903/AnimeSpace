@@ -1,11 +1,11 @@
 import type { Resource } from 'animegarden';
 import type { AnimeSystem, Anime } from '@animespace/core';
 
-import { MutableMap } from '@onekuma/map';
+import path from 'node:path';
 import { Parser } from 'anitomy';
-
+import { MutableMap } from '@onekuma/map';
 import { LocalVideo } from '@animespace/core';
-import { lightBlue, lightYellow, link } from '@breadc/color';
+import { cyan, lightRed, lightYellow, link } from '@breadc/color';
 
 import { DownloadClient } from './download';
 import { createProgressBar } from './logger';
@@ -169,6 +169,19 @@ export async function runDownloadTask(
     }
   });
 
+  const multibarLogger = {
+    info(message: string) {
+      multibar.println(`${cyan('Info')} ${message}`);
+    },
+    warn(message: string) {
+      multibar.println(`${lightYellow('Warn')} ${message}`);
+    },
+    error(message: string) {
+      multibar.println(`${lightRed('Error')} ${message}`);
+    }
+  };
+  client.setLogger(multibarLogger);
+
   const tasks = videos.map(async (video) => {
     const bar = multibar.create(video.video.filename, 100);
     const { files } = await client.download(
@@ -207,10 +220,14 @@ export async function runDownloadTask(
 
     if (files.length === 1) {
       const file = files[0];
-      await anime.addVideo(file, video.video, { copy: false });
-      multibar.println(
-        `${lightBlue(`Info`)} Download ${video.video.filename} OK`
-      );
+      // Hack: update filename extension
+      video.video.filename = anime.formatFilename({
+        fansub: video.video.fansub,
+        episode: video.video.episode,
+        extension: path.extname(file).slice(1) || 'mp4'
+      });
+      await anime.addVideo(file, video.video, { copy: true });
+      multibar.println(`${cyan(`Info`)} Download ${video.video.filename} OK`);
     } else {
       multibar.println(
         `${lightYellow(`Warn`)} Resource ${link(
