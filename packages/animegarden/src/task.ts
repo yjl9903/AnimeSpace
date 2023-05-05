@@ -263,12 +263,14 @@ export async function runDownloadTask(
         );
       }
     } catch (error) {
+      const defaultMessage = `Download ${link(
+        video.resource.title,
+        video.resource.href
+      )} failed`;
       if (error instanceof Error && error?.message) {
-        multibarLogger.error(error.message ?? 'unknown');
+        multibarLogger.error(error.message ?? defaultMessage);
       } else {
-        multibarLogger.error(
-          `Download ${link(video.resource.title, video.resource.href)} failed`
-        );
+        multibarLogger.error(defaultMessage);
       }
     }
   });
