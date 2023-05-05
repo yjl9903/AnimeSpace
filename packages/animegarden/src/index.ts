@@ -15,7 +15,8 @@ import {
   underline,
   lightBlue,
   lightGreen,
-  lightYellow
+  lightYellow,
+  lightRed
 } from '@breadc/color';
 
 import './plan.d';
@@ -23,7 +24,7 @@ import './plan.d';
 import { DOT } from './constant';
 import { ufetch } from './ufetch';
 import { generatePlan } from './generate';
-import { DownloadClient, DownloadProviders, makeClient } from './download';
+import { DownloadProviders, makeClient } from './download';
 import { generateDownloadTask, runDownloadTask } from './task';
 
 const ANIMEGARDEN = 'AnimeGarden';
@@ -172,7 +173,19 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         printFansubs(anime, logger);
 
         const animegardenURL = formatAnimeGardenSearchURL(anime);
-        const resources = await fetchAnimeResources(anime);
+        const resources = await fetchAnimeResources(anime).catch(
+          () => undefined
+        );
+        if (resources === undefined) {
+          logger.info(
+            `${lightRed('Found resources')} ${dim('from')} ${link(
+              'AnimeGarden',
+              animegardenURL
+            )} ${lightRed('failed')}`
+          );
+          return;
+        }
+
         const newVideos = await generateDownloadTask(system, anime, resources);
 
         if (newVideos.length === 0) {
@@ -196,7 +209,11 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           logger.info(`  ${DOT} ${link(video.filename, detailURL)}`);
         }
 
-        await runDownloadTask(system, anime, newVideos, getClient(system));
+        try {
+          await runDownloadTask(system, anime, newVideos, getClient(system));
+        } catch (error) {
+          logger.error(error);
+        }
       }
     }
   };
