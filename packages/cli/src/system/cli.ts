@@ -4,6 +4,16 @@ import { AnimeSystem, onDeath } from '@animespace/core';
 
 import { version, description } from '../../package.json';
 
+process.addListener('unhandledRejection', (error) => {
+  // console.log('UnhandledRejection');
+  console.error(error);
+});
+
+process.addListener('uncaughtException', (error) => {
+  // systemLogger.log('UncaughtException');
+  console.error(error);
+});
+
 export async function makeCliApp(system: AnimeSystem) {
   const app = breadc('anime', { version, description });
   registerApp(system, app);

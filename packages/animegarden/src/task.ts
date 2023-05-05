@@ -202,15 +202,11 @@ export async function runDownloadTask(
   };
   client.setLogger(multibarLogger);
 
-  process.addListener('unhandledRejection', (error) => {
+  process.addListener('unhandledRejection', () => {
     multibar.finish();
-    // systemLogger.log('UnhandledRejection');
-    systemLogger.error(error);
   });
-  process.addListener('uncaughtException', (error) => {
+  process.addListener('uncaughtException', () => {
     multibar.finish();
-    // systemLogger.log('UncaughtException');
-    systemLogger.error(error);
   });
 
   const tasks = videos.map(async (video) => {
