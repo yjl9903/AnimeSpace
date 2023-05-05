@@ -2,6 +2,7 @@ import type { Resource } from 'animegarden';
 import type { AnimeSystem, Anime } from '@animespace/core';
 
 import path from 'node:path';
+import onDeath from 'death';
 import { Parser } from 'anitomy';
 import { MutableMap } from '@onekuma/map';
 import { LocalVideo } from '@animespace/core';
@@ -140,6 +141,10 @@ export async function runDownloadTask(
 ) {
   await client.start();
 
+  const cancelDeath = onDeath(async () => {
+    await anime.writeLibrary();
+  });
+
   const multibar = createProgressBar<{
     speed: number;
     connections: number;
@@ -242,4 +247,6 @@ export async function runDownloadTask(
   multibar.finish();
   anime.sortVideos();
   await anime.writeLibrary();
+
+  cancelDeath();
 }
