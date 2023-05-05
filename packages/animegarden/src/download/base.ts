@@ -8,8 +8,8 @@ export abstract class DownloadClient {
   }
 
   public abstract download(
+    key: string,
     magnet: string,
-    outDir: string,
     options?: DownloadOptions
   ): Promise<void>;
 
@@ -18,4 +18,35 @@ export abstract class DownloadClient {
   public abstract close(): Promise<boolean>;
 }
 
-export interface DownloadOptions {}
+type MayPromise<T> = T | Promise<T>;
+
+export type DownloadState =
+  | 'waiting'
+  | 'metadata'
+  | 'downloading'
+  | 'complete'
+  | 'error';
+
+export interface DownloadProgress {
+  total: bigint;
+
+  completed: bigint;
+
+  connections: number;
+
+  speed: number;
+}
+
+export interface DownloadOptions {
+  onStart?: () => MayPromise<void>;
+
+  onMetadataProgress?: (payload: DownloadProgress) => MayPromise<void>;
+
+  onMetadataComplete?: (payload: DownloadProgress) => MayPromise<void>;
+
+  onProgress?: (payload: DownloadProgress) => MayPromise<void>;
+
+  onComplete?: (payload: DownloadProgress) => MayPromise<void>;
+
+  onError?: (error: { message?: string; code?: number }) => MayPromise<void>;
+}
