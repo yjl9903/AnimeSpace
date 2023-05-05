@@ -2,12 +2,17 @@ import type { Resource } from 'animegarden';
 import type { AnimeSystem, Anime } from '@animespace/core';
 
 import { MutableMap } from '@onekuma/map';
-import { parse } from 'anitomy';
+import { Parser } from 'anitomy';
 
 import { LocalVideo } from '@animespace/core';
-import { lightYellow } from '@breadc/color';
+import { lightBlue, lightYellow, link } from '@breadc/color';
 
 import { DownloadClient } from './download';
+import { createProgressBar } from './logger';
+
+const parser = new Parser();
+
+type Task = { video: LocalVideo; resource: Resource };
 
 export async function generateDownloadTask(
   system: AnimeSystem,
@@ -16,7 +21,8 @@ export async function generateDownloadTask(
   force = false
 ) {
   const ordered = groupResources(system, anime, resources);
-  const videos: LocalVideo[] = [];
+  const videos: Task[] = [];
+
   for (const [ep, { fansub, resources }] of ordered) {
     resources.sort((lhs, rhs) => {
       const tl = lhs.title;
@@ -50,22 +56,25 @@ export async function generateDownloadTask(
       !(await anime.library()).videos.find((r) => r.source.magnet === res.href)
     ) {
       videos.push({
-        filename: anime.formatFilename({
-          fansub,
+        video: {
+          filename: anime.formatFilename({
+            fansub,
+            episode: ep,
+            extension: parser.parse(res.title)!.file.extension
+          }),
+          fansub: fansub,
           episode: ep,
-          extension: parse(res.title)!.file.extension
-        }),
-        fansub: fansub,
-        episode: ep,
-        source: {
-          type: 'AnimeGarden',
-          magnet: res.href
-        }
+          source: {
+            type: 'AnimeGarden',
+            magnet: res.href
+          }
+        },
+        resource: res
       });
     }
   }
 
-  videos.sort((lhs, rhs) => lhs.episode! - rhs.episode!);
+  videos.sort((lhs, rhs) => lhs.video.episode! - rhs.video.episode!);
 
   return videos;
 }
@@ -85,7 +94,7 @@ function groupResources(
     if (ban) continue;
     if (r.fansub && !anime.plan.fansub.includes(r.fansub.name)) continue;
 
-    const info = parse(r.title);
+    const info = parser.parse(r.title);
     if (info && info.episode.number !== undefined) {
       const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
       if (anime.plan.fansub.includes(fansub)) {
@@ -126,6 +135,92 @@ function groupResources(
 export async function runDownloadTask(
   system: AnimeSystem,
   anime: Anime,
-  videos: LocalVideo[],
+  videos: Task[],
   client: DownloadClient
-) {}
+) {
+  await client.start();
+
+  const multibar = createProgressBar<{
+    speed: number;
+    connections: number;
+    state: string;
+    completed: bigint;
+    total: bigint;
+  }>({
+    suffix(value, total, payload) {
+      const formatSize = (size: number) =>
+        (size / 1024 / 1024).toFixed(1) + ' MB';
+
+      let text = '';
+      if (payload.state) {
+        text += payload.state;
+      } else {
+        text += `${formatSize(Number(payload.completed))} / ${formatSize(
+          Number(payload.total)
+        )}`;
+        if (payload.speed) {
+          text += ` | Speed: ${formatSize(payload.speed)}/s`;
+        }
+      }
+      if (payload.connections) {
+        text += ` | Connections: ${payload.connections}`;
+      }
+      return text;
+    }
+  });
+
+  const tasks = videos.map(async (video) => {
+    const bar = multibar.create(video.video.filename, 100);
+    const { files } = await client.download(
+      video.video.filename,
+      video.resource.magnet,
+      {
+        onStart() {
+          bar.update(0, {
+            speed: 0,
+            connections: 0,
+            completed: BigInt(0),
+            total: BigInt(0),
+            state: 'Downloading metadata'
+          });
+        },
+        onMetadataProgress(progress) {
+          bar.update(0, {
+            ...progress,
+            state: 'Downloading metadata'
+          });
+        },
+        onProgress(payload) {
+          const completed = Number(payload.completed);
+          const total = Number(payload.total);
+          const value =
+            payload.total > 0
+              ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1)
+              : 0;
+          bar.update(value, { ...payload, state: '' });
+        },
+        onComplete() {
+          bar.stop();
+        }
+      }
+    );
+
+    if (files.length === 1) {
+      const file = files[0];
+      await anime.addVideo(file, video.video, { copy: true });
+      multibar.println(
+        `${lightBlue(`Info`)} Download ${video.video.filename} OK`
+      );
+    } else {
+      multibar.println(
+        `${lightYellow(`Warn`)} Resource ${link(
+          video.resource.title,
+          video.resource.href
+        )} has multiple files`
+      );
+    }
+  });
+
+  await Promise.all(tasks);
+  multibar.finish();
+}

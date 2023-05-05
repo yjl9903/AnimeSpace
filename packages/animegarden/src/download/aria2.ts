@@ -51,7 +51,7 @@ export class Aria2Client extends DownloadClient {
     super(system);
     this.logger = system.logger.withTag('aria2');
     this.options = defu(options, {
-      directory: './temp',
+      directory: './download',
       port: 6800,
       secret: 'animespace',
       args: [],
@@ -75,6 +75,7 @@ export class Aria2Client extends DownloadClient {
       typeof this.options.proxy === 'string' ? this.options.proxy : getProxy();
     const gid = await this.client.addUri([magnet], {
       dir: this.options.directory,
+      'bt-save-metadata': true,
       'bt-tracker': Aria2Trackers,
       'no-proxy': this.options.proxy === false ? true : false,
       'all-proxy': this.options.proxy !== false ? proxy : undefined

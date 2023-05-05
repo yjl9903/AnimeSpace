@@ -133,15 +133,25 @@ export class Anime {
   }
 
   // --- mutation ---
-  public async addVideo(file: LocalFile, video: LocalVideo): Promise<void> {
+  public async addVideo(
+    file: string,
+    video: LocalVideo,
+    { copy = false }: { copy?: boolean } = {}
+  ): Promise<void> {
     await this.library();
     try {
-      const src = file.path;
+      const src = file;
       const dst = path.join(this.directory, video.filename);
       if (src !== dst) {
-        await fs.move(file.path, dst, {
-          overwrite: true
-        });
+        if (copy) {
+          await fs.copy(file, dst, {
+            overwrite: true
+          });
+        } else {
+          await fs.move(file, dst, {
+            overwrite: true
+          });
+        }
       }
       this._dirty = true;
       this._lib!.videos.push(video);

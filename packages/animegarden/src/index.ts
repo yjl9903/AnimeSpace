@@ -74,7 +74,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             );
             const lib = await anime.library();
 
-            for (const video of videos) {
+            for (const { video } of videos) {
               const detailURL = `https://garden.onekuma.cn/resource/${video.source
                 .magnet!.split('/')
                 .at(-1)}`;
@@ -157,7 +157,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         logger.log('');
 
         logger.info(
-          `${lightBlue('Fetching resources')} of ${bold(
+          `${lightBlue('Fetching resources')} ${bold(
             anime.plan.title
           )}  (${link(
             `Bangumi: ${anime.plan.bgmId}`,
@@ -185,7 +185,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             newVideos.length + ' resources'
           )} ${dim('from')} ${link('AnimeGarden', animegardenURL)}`
         );
-        for (const video of newVideos) {
+        for (const { video } of newVideos) {
           const detailURL = `https://garden.onekuma.cn/resource/${video.source
             .magnet!.split('/')
             .at(-1)}`;
@@ -227,13 +227,13 @@ function printKeywords(anime: Anime, logger: ConsolaInstance) {
     const first = anime.plan.keywords.include[0];
     const sum = first.reduce((acc, t) => acc + t.length, 0);
     if (sum > 80) {
-      logger.info(dim('Include keywords  | ') + underline(first[0]));
+      logger.info(dim('Include keywords  |  ') + underline(first[0]));
       for (const t of first.slice(1)) {
         logger.info(`                  ${dim('|')} ${underline(t)}`);
       }
     } else {
       logger.info(
-        `${dim('Include keywords')}  ${first
+        `${dim('Include keywords')}   ${first
           .map((t) => underline(t))
           .join(dim(' | '))}`
       );
@@ -246,7 +246,7 @@ function printKeywords(anime: Anime, logger: ConsolaInstance) {
   }
   if (anime.plan.keywords.exclude.length > 0) {
     logger.info(
-      `${dim(`Exclude keywords`)}  [ ${anime.plan.keywords.exclude
+      `${dim(`Exclude keywords`)}   [ ${anime.plan.keywords.exclude
         .map((t) => underline(t))
         .join(' , ')} ]`
     );
@@ -256,7 +256,7 @@ function printKeywords(anime: Anime, logger: ConsolaInstance) {
 function printFansubs(anime: Anime, logger: ConsolaInstance) {
   const fansubs = anime.plan.fansub;
   logger.info(
-    `${dim('Prefer fansubs')}    ${
+    `${dim('Prefer fansubs')}     ${
       fansubs.length === 0
         ? `See ${link(
             'AnimeGarden',

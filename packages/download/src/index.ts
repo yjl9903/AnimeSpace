@@ -50,7 +50,7 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
               file.filename
             )} to ${bold(video.filename)}`
           );
-          await anime.addVideo(file, video);
+          await anime.addVideo(file.path, video);
           return video;
         }
         return undefined;
@@ -101,7 +101,7 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
                 file.filename
               )} to ${bold(video.filename)}`
             );
-            await anime.addVideo(file, video);
+            await anime.addVideo(file.path, video);
           } else {
             logger.info(lightYellow(`Parse "${bold(file.filename)}" failed`));
           }
