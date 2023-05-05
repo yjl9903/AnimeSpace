@@ -6,7 +6,14 @@ import onDeath from 'death';
 import { Parser } from 'anitomy';
 import { MutableMap } from '@onekuma/map';
 import { LocalVideo } from '@animespace/core';
-import { cyan, lightRed, lightYellow, link } from '@breadc/color';
+import {
+  bold,
+  cyan,
+  lightGreen,
+  lightRed,
+  lightYellow,
+  link
+} from '@breadc/color';
 
 import { DownloadClient } from './download';
 import { createProgressBar } from './logger';
@@ -153,6 +160,10 @@ export async function runDownloadTask(
     total: bigint;
   }>({
     suffix(value, total, payload) {
+      if (value >= 100) {
+        return 'OK';
+      }
+
       const formatSize = (size: number) =>
         (size / 1024 / 1024).toFixed(1) + ' MB';
 
@@ -188,58 +199,74 @@ export async function runDownloadTask(
   client.setLogger(multibarLogger);
 
   const tasks = videos.map(async (video) => {
-    const bar = multibar.create(video.video.filename, 100);
-    const { files } = await client.download(
-      video.video.filename,
-      video.resource.magnet,
-      {
-        onStart() {
-          bar.update(0, {
-            speed: 0,
-            connections: 0,
-            completed: BigInt(0),
-            total: BigInt(0),
-            state: 'Downloading metadata'
-          });
-        },
-        onMetadataProgress(progress) {
-          bar.update(0, {
-            ...progress,
-            state: 'Downloading metadata'
-          });
-        },
-        onProgress(payload) {
-          const completed = Number(payload.completed);
-          const total = Number(payload.total);
-          const value =
-            payload.total > 0
-              ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1)
-              : 0;
-          bar.update(value, { ...payload, state: '' });
-        },
-        onComplete() {
-          bar.stop();
+    try {
+      const bar = multibar.create(video.video.filename, 100);
+      const { files } = await client.download(
+        video.video.filename,
+        video.resource.magnet,
+        {
+          onStart() {
+            bar.update(0, {
+              speed: 0,
+              connections: 0,
+              completed: BigInt(0),
+              total: BigInt(0),
+              state: 'Downloading metadata'
+            });
+          },
+          onMetadataProgress(progress) {
+            bar.update(0, {
+              ...progress,
+              state: 'Downloading metadata'
+            });
+          },
+          onProgress(payload) {
+            const completed = Number(payload.completed);
+            const total = Number(payload.total);
+            const value =
+              payload.total > 0
+                ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1)
+                : 0;
+            bar.update(value, { ...payload, state: '' });
+          },
+          onComplete() {
+            bar.update(100);
+          }
         }
-      }
-    );
-
-    if (files.length === 1) {
-      const file = files[0];
-      // Hack: update filename extension
-      video.video.filename = anime.formatFilename({
-        fansub: video.video.fansub,
-        episode: video.video.episode,
-        extension: path.extname(file).slice(1) || 'mp4'
-      });
-      await anime.addVideo(file, video.video, { copy: true });
-      multibar.println(`${cyan(`Info`)} Download ${video.video.filename} OK`);
-    } else {
-      multibar.println(
-        `${lightYellow(`Warn`)} Resource ${link(
-          video.resource.title,
-          video.resource.href
-        )} has multiple files`
       );
+      bar.update(100);
+      bar.stop();
+
+      if (files.length === 1) {
+        const file = files[0];
+        // Hack: update filename extension
+        video.video.filename = anime.formatFilename({
+          fansub: video.video.fansub,
+          episode: video.video.episode,
+          extension: path.extname(file).slice(1) || 'mp4'
+        });
+        await anime.addVideo(file, video.video, { copy: true });
+        multibar.println(
+          `${cyan(`Info`)} ${lightGreen('Download')} ${bold(
+            video.video.filename
+          )} ${lightGreen('OK')}`
+        );
+      } else {
+        multibar.println(
+          `${lightYellow(`Warn`)} Resource ${link(
+            video.resource.title,
+            video.resource.href
+          )} has multiple files`
+        );
+      }
+    } catch (error) {
+      if (error instanceof Error && error?.message) {
+        multibarLogger.error(error.message ?? 'unknown');
+      } else {
+        multibarLogger.error(
+          `Download ${link(video.resource.title, video.resource.href)} failed`
+        );
+      }
     }
   });
 

@@ -1,3 +1,4 @@
+import { logger } from './../../../cli/src/logger/index';
 import fs from 'fs-extra';
 import path from 'path';
 import { spawn } from 'node:child_process';
@@ -104,7 +105,19 @@ export class Aria2Client extends DownloadClient {
           const status = await client.tellStatus(gid);
           await that.updateStatus(task, status);
           if (task.state === 'error') {
-            rej(new Error(status.errorMessage));
+            if (
+              status.errorMessage &&
+              /File (.*) exists, but a control file\(\*.aria2\) does not exist/.test(
+                status.errorMessage
+              )
+            ) {
+              // Hack: handle file exists
+              const files = status.files.map((f) => f.path);
+              res({ files });
+            } else {
+              that.consola.error('Match error');
+              rej(new Error(status.errorMessage));
+            }
           }
         },
         async onBtDownloadComplete(gid) {
