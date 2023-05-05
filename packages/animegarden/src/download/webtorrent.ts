@@ -1,9 +1,17 @@
-import { DownloadClient } from './base';
+import { DownloadClient, DownloadOptions } from './base';
 
 export class WebtorrentClient extends DownloadClient {
-  async start() {}
+  public async download(
+    magnet: string,
+    outDir: string,
+    options?: DownloadOptions | undefined
+  ): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 
-  async close() {
+  public async start() {}
+
+  public async close() {
     return true;
   }
 }

@@ -7,7 +7,15 @@ export abstract class DownloadClient {
     this.system = system;
   }
 
+  public abstract download(
+    magnet: string,
+    outDir: string,
+    options?: DownloadOptions
+  ): Promise<void>;
+
   public abstract start(): Promise<void>;
 
   public abstract close(): Promise<boolean>;
 }
+
+export interface DownloadOptions {}

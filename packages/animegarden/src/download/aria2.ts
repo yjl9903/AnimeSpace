@@ -5,7 +5,7 @@ import type { AnimeSystem } from '@animespace/core';
 import { defu } from 'defu';
 import { WebSocket } from 'libaria2';
 
-import { DownloadClient } from './base';
+import { DownloadClient, DownloadOptions } from './base';
 
 interface Aria2Options {
   port: number;
@@ -17,6 +17,8 @@ interface Aria2Options {
 
 export class Aria2Client extends DownloadClient {
   private options: Aria2Options;
+
+  private started = false;
 
   private client!: WebSocket.Client;
 
@@ -31,7 +33,18 @@ export class Aria2Client extends DownloadClient {
     });
   }
 
+  public async download(
+    magnet: string,
+    outDir: string,
+    options: DownloadOptions = {}
+  ) {
+    await this.start();
+  }
+
   public async start(): Promise<void> {
+    if (this.started || this.client || this.version) return;
+    this.started = true;
+
     const child = spawn(
       '/usr/local/bin/aria2c',
       [
@@ -62,10 +75,16 @@ export class Aria2Client extends DownloadClient {
   }
 
   public async close() {
+    const version = this.version;
     const res = await this.client.shutdown();
     await this.client.close();
     if (res === 'OK') {
-      this.system.logger.info(`aria2 v${this.version} has been closed`);
+      // @ts-ignore
+      this.client = undefined;
+      // @ts-ignore
+      this.version = undefined;
+      this.system.logger.info(`aria2 v${version} has been closed`);
+      this.started = false;
       return true;
     } else {
       return false;
