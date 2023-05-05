@@ -99,16 +99,20 @@ export class Aria2Client extends DownloadClient {
           await that.updateStatus(task, status);
         },
         async onDownloadError(gid) {
+          that.gids.delete(gid);
           const status = await client.tellStatus(gid);
           await that.updateStatus(task, status);
           if (task.state === 'error') {
             rej(new Error(status.errorMessage));
           }
         },
-        async onDownloadComplete(gid) {},
         async onBtDownloadComplete(gid) {
+          that.gids.delete(gid);
           const status = await client.tellStatus(gid);
-          await that.updateStatus(task, status);
+
+          // Force set the state of gid to complete, for it is still seeding
+          await that.updateStatus(task, status, 'complete');
+
           if (task.state === 'complete') {
             const statuses = await Promise.all(
               [...task.gids.files].map((gid) => client.tellStatus(gid))
@@ -119,7 +123,6 @@ export class Aria2Client extends DownloadClient {
                 files.push(f.path);
               }
             }
-
             res({ files });
           }
         }
@@ -141,14 +144,6 @@ export class Aria2Client extends DownloadClient {
     this.client.addListener('aria2.onDownloadError', async ({ gid }) => {
       if (this.gids.has(gid)) {
         await this.gids.get(gid)!.onDownloadError(gid);
-        this.gids.delete(gid);
-      }
-    });
-
-    // Download and seed complete
-    this.client.addListener('aria2.onDownloadComplete', async ({ gid }) => {
-      if (this.gids.has(gid)) {
-        await this.gids.get(gid)!.onDownloadComplete(gid);
       }
     });
 
@@ -156,7 +151,6 @@ export class Aria2Client extends DownloadClient {
     this.client.addListener('aria2.onBtDownloadComplete', async ({ gid }) => {
       if (this.gids.has(gid)) {
         await this.gids.get(gid)!.onBtDownloadComplete(gid);
-        this.gids.delete(gid);
       }
     });
 
@@ -176,7 +170,11 @@ export class Aria2Client extends DownloadClient {
     }, 500);
   }
 
-  private async updateStatus(task: Task, status: IAria2DownloadStatus) {
+  private async updateStatus(
+    task: Task,
+    status: IAria2DownloadStatus,
+    nextState?: GidState
+  ) {
     const oldState = task.state;
     const gid = status.gid;
 
@@ -221,6 +219,8 @@ export class Aria2Client extends DownloadClient {
           updateProgress();
           break;
         case 'complete':
+          // Delete metadata gid
+          this.gids.delete(gid);
           // Force set complete state
           progress.state = 'complete';
           updateProgress();
@@ -235,6 +235,8 @@ export class Aria2Client extends DownloadClient {
           // Metadata ok, transfer to downloading state
           if (task.state === 'metadata' || task.state === 'waiting') {
             task.state = 'downloading';
+          } else {
+            this.logger.error(`Unexpected previous task state`);
           }
 
           break;
@@ -253,29 +255,29 @@ export class Aria2Client extends DownloadClient {
         connections,
         speed
       };
-      if (
+      const dirty =
         force ||
         oldState !== task.state ||
         oldProgress.state !== progress.state ||
         oldProgress.completed !== progress.completed ||
         oldProgress.total !== progress.total ||
         oldProgress.connections !== progress.connections ||
-        oldProgress.speed !== progress.speed
-      ) {
-        if (task.state === 'metadata') {
+        oldProgress.speed !== progress.speed;
+      if (task.state === 'metadata') {
+        if (dirty) {
           await task.options.onMetadataProgress?.(payload);
-        } else if (task.state === 'downloading') {
-          await task.options.onMetadataComplete?.(payload);
-        } else if (task.state === 'error') {
-          await task.options.onError?.({
-            message: status.errorMessage,
-            code: status.errorCode
-          });
-        } else {
-          this.logger.warn(
-            `Download task ${task.key} entered unexpectedly state`
-          );
         }
+      } else if (task.state === 'downloading') {
+        await task.options.onMetadataComplete?.(payload);
+      } else if (task.state === 'error') {
+        await task.options.onError?.({
+          message: status.errorMessage,
+          code: status.errorCode
+        });
+      } else {
+        this.logger.warn(
+          `Download task ${task.key} entered unexpectedly state`
+        );
       }
     } else {
       switch (status.status) {
@@ -303,43 +305,49 @@ export class Aria2Client extends DownloadClient {
           break;
       }
 
-      if (
+      if (nextState) {
+        progress.state = nextState;
+      }
+
+      let active = false;
+      let completed = BigInt(0),
+        total = BigInt(0);
+      for (const p of task.progress.values()) {
+        completed += p.completed;
+        total += p.total;
+        if (p.state === 'active') {
+          active = true;
+        }
+      }
+
+      const dirty =
         force ||
         oldState !== task.state ||
         oldProgress.state !== progress.state ||
         oldProgress.completed !== progress.completed ||
         oldProgress.total !== progress.total ||
         oldProgress.connections !== progress.connections ||
-        oldProgress.speed !== progress.speed
-      ) {
-        let active = false;
-        let completed = BigInt(0),
-          total = BigInt(0);
-        for (const p of task.progress.values()) {
-          completed += p.completed;
-          total += p.total;
-          if (p.state === 'active') {
-            active = true;
-          }
-        }
-
-        const payload = { completed, total, connections, speed };
-        if (progress.state === 'active') {
+        oldProgress.speed !== progress.speed;
+      const payload = { completed, total, connections, speed };
+      if (progress.state === 'active') {
+        if (dirty) {
           await task.options.onProgress?.(payload);
-        } else if (progress.state === 'complete') {
-          if (active) {
-            await task.options.onProgress?.(payload);
-          } else {
-            // Finish all the download
-            task.state = 'complete';
-            await task.options.onComplete?.(payload);
-          }
-        } else if (progress.state === 'error') {
-          await task.options.onError?.({
-            message: status.errorMessage,
-            code: status.errorCode
-          });
         }
+      } else if (progress.state === 'complete') {
+        if (active) {
+          if (dirty) {
+            await task.options.onProgress?.(payload);
+          }
+        } else {
+          // Finish all the download
+          task.state = 'complete';
+          await task.options.onComplete?.(payload);
+        }
+      } else if (progress.state === 'error') {
+        await task.options.onError?.({
+          message: status.errorMessage,
+          code: status.errorCode
+        });
       }
     }
   }
@@ -431,6 +439,8 @@ export class Aria2Client extends DownloadClient {
   }
 }
 
+type GidState = 'active' | 'error' | 'complete';
+
 interface Task {
   key: string;
 
@@ -447,7 +457,7 @@ interface Task {
   progress: MutableMap<
     string,
     {
-      state: 'active' | 'error' | 'complete';
+      state: GidState;
       total: bigint;
       completed: bigint;
       connections: number;
@@ -460,8 +470,6 @@ interface Task {
   onDownloadStart: (gid: string) => Promise<void>;
 
   onDownloadError: (gid: string) => Promise<void>;
-
-  onDownloadComplete: (gid: string) => Promise<void>;
 
   onBtDownloadComplete: (gid: string) => Promise<void>;
 }
