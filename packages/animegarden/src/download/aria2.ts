@@ -69,6 +69,11 @@ export class Aria2Client extends DownloadClient {
   ): Promise<{ files: string[] }> {
     await this.start();
 
+    // Double check aria2c is started
+    if (!this.started || !this.client) {
+      throw new Error('aria2 has not started');
+    }
+
     const proxy =
       typeof this.options.proxy === 'string' ? this.options.proxy : getProxy();
     const gid = await this.client.addUri([magnet], {
@@ -112,7 +117,6 @@ export class Aria2Client extends DownloadClient {
               const files = status.files.map((f) => f.path);
               res({ files });
             } else {
-              that.consola.error('Match error');
               rej(new Error(status.errorMessage));
             }
           }
@@ -371,8 +375,10 @@ export class Aria2Client extends DownloadClient {
     }
   }
 
-  public async start(): Promise<void> {
-    if (this.started || this.client || this.version) return;
+  public async start(force: boolean = false): Promise<void> {
+    if (!force) {
+      if (this.started || this.client || this.version) return;
+    }
     this.started = true;
 
     if (this.options.debug.log) {
@@ -437,6 +443,19 @@ export class Aria2Client extends DownloadClient {
         this.system.logger.info(dim(`aria2 v${this.version} is running`));
         res();
       });
+
+      child.addListener('error', () => {
+        this.system.logger.error(dim(`Some error happened in aria2`));
+      });
+
+      child.addListener('exit', async () => {
+        await this.close().catch(() => {});
+        // @ts-ignore
+        this.client = undefined;
+        // @ts-ignore
+        this.version = undefined;
+        this.started = false;
+      });
     });
   }
 
@@ -444,8 +463,8 @@ export class Aria2Client extends DownloadClient {
     clearInterval(this.heartbeat);
     if (this.client) {
       const version = this.version;
-      const res = await this.client.shutdown();
-      await this.client.close();
+      const res = await this.client.shutdown().catch(() => 'OK');
+      await this.client.close().catch(() => {});
       if (res === 'OK') {
         // @ts-ignore
         this.client = undefined;
