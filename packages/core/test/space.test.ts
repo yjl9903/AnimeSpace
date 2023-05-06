@@ -53,7 +53,7 @@ describe('Load Space', () => {
             type: '番剧',
             status: 'onair',
             season: 2,
-            bgmId: '323651',
+            bgm: '323651',
             fansub: ['Lilith-Raws', 'ANi'],
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
@@ -69,7 +69,7 @@ describe('Load Space', () => {
             type: '番剧',
             status: 'onair',
             season: 1,
-            bgmId: '404804',
+            bgm: '404804',
             fansub: 'SweetSub',
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
@@ -83,7 +83,7 @@ describe('Load Space', () => {
             type: '番剧',
             status: 'onair',
             season: 1,
-            bgmId: '376703',
+            bgm: '376703',
             fansub: '喵萌奶茶屋',
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {

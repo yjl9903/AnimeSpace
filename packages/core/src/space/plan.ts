@@ -38,7 +38,7 @@ export async function loadPlan(cwd: string, patterns: string[]) {
             ...o,
             title,
             translations,
-            bgmId: String(o.bgmId),
+            bgm: String(o.bgm),
             type,
             status: oStatus,
             season: o.season ? +o.season : 1,

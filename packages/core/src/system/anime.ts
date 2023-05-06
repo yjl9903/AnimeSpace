@@ -62,7 +62,7 @@ export class Anime {
         const libContent = await fs.readFile(libPath, 'utf-8');
         const lib = parse(libContent) as LocalLibrary;
 
-        if (lib.title !== this.plan.title || lib.bgmId !== this.plan.bgmId) {
+        if (lib.title !== this.plan.title || lib.bgm !== this.plan.bgm) {
           this._dirty = true;
         } else {
           this._dirty = false;
@@ -71,13 +71,13 @@ export class Anime {
         return (this._lib = {
           ...lib,
           title: this.plan.title,
-          bgmId: this.plan.bgmId,
+          bgm: this.plan.bgm,
           videos: lib?.videos ?? []
         });
       } else {
         const lib: LocalLibrary = {
           title: this.plan.title,
-          bgmId: this.plan.bgmId,
+          bgm: this.plan.bgm,
           videos: []
         };
         await fs.writeFile(libPath, stringify(lib), 'utf-8');
@@ -239,7 +239,7 @@ export class Anime {
 export interface LocalLibrary {
   title: string;
 
-  bgmId: string;
+  bgm: string;
 
   videos: LocalVideo[];
 }

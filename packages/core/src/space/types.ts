@@ -74,7 +74,7 @@ export interface AnimePlan {
 
   readonly status: PlanStatus;
 
-  readonly bgmId: string;
+  readonly bgm: string;
 
   readonly season: number;
 

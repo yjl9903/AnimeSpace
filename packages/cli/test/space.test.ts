@@ -17,7 +17,7 @@ describe('system', () => {
         name: '2023-04-04 新番放送计划',
         onair: [
           {
-            bgmId: '323651',
+            bgm: '323651',
             date: new Date('2023-04-01T13:00:00.000Z'),
             fansub: ['Lilith-Raws', 'ANi'],
             keywords: {
@@ -31,7 +31,7 @@ describe('system', () => {
             type: '番剧'
           },
           {
-            bgmId: '404804',
+            bgm: '404804',
             date: new Date('2023-04-01T13:00:00.000Z'),
             fansub: ['SweetSub'],
             keywords: {
@@ -47,7 +47,7 @@ describe('system', () => {
             type: '番剧'
           },
           {
-            bgmId: '376703',
+            bgm: '376703',
             date: new Date('2023-04-01T13:00:00.000Z'),
             fansub: ['喵萌奶茶屋'],
             keywords: {

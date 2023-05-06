@@ -103,8 +103,8 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
 
   function registerDeath(system: AnimeSystem) {
     return onDeath(async () => {
+      system.logger.info(lightRed('Process is being killed'));
       if (system.isChanged()) {
-        system.logger.info(lightRed('Process is being killed'));
         await system.writeBack();
         system.logger.info(
           lightGreen('Anime libraries have been written back')

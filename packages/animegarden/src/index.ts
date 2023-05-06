@@ -88,8 +88,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             const animegardenURL = formatAnimeGardenSearchURL(anime);
             logger.info(
               `${bold(anime.plan.title)}  (${link(
-                `Bangumi: ${anime.plan.bgmId}`,
-                `https://bangumi.tv/subject/${anime.plan.bgmId}`
+                `Bangumi: ${anime.plan.bgm}`,
+                `https://bangumi.tv/subject/${anime.plan.bgm}`
               )}, ${link('AnimeGarden', animegardenURL)})`
             );
             printKeywords(anime, logger);
@@ -177,8 +177,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           `${lightBlue('Fetching resources')} ${bold(
             anime.plan.title
           )}  (${link(
-            `Bangumi: ${anime.plan.bgmId}`,
-            `https://bangumi.tv/subject/${anime.plan.bgmId}`
+            `Bangumi: ${anime.plan.bgm}`,
+            `https://bangumi.tv/subject/${anime.plan.bgm}`
           )})`
         );
         printKeywords(anime, logger);

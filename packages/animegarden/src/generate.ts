@@ -70,7 +70,7 @@ export async function generatePlan(
       }
       const plan = {
         title,
-        bgmId: '' + anime.subject_id,
+        bgm: '' + anime.subject_id,
         translations
       };
       const fansub = await getFansub([plan.title, ...plan.translations]);
@@ -80,7 +80,7 @@ export async function generatePlan(
       for (const t of plan.translations ?? []) {
         writeln(`      - '${t}'`);
       }
-      writeln(`    bgmId: '${plan.bgmId}'`);
+      writeln(`    bgm: '${plan.bgm}'`);
       writeln(`    fansub:`);
       if (fansub.length === 0) {
         writeln(

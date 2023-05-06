@@ -3,17 +3,17 @@
 exports[`Introspect > should work 1`] = `
 [
   {
-    "bgmId": "323651",
+    "bgm": "323651",
     "title": "熊熊勇闯异世界 Punch!",
     "videos": [],
   },
   {
-    "bgmId": "404804",
+    "bgm": "404804",
     "title": "天国大魔境",
     "videos": [],
   },
   {
-    "bgmId": "376703",
+    "bgm": "376703",
     "title": "偶像大师 灰姑娘女孩 U149",
     "videos": [],
   },
