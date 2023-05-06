@@ -1,0 +1,30 @@
+storage: ./anime
+
+preference:
+  format:
+    anime: '{title}'
+    episode: '[{fansub}] {title} - E{ep}.{extension}'
+    film: '[{fansub}] {title}.{extension}'
+    ova: '[{fansub}] {title}.{extension}'
+  extension:
+    include: [mp4, mkv]
+    exclude: []
+  keyword:
+    order:
+      format: [mp4, mkv]
+      resolution: ['1080', '720']
+      language: ['简', '繁']
+    exclude: []
+  fansub:
+    order: []
+    exclude: []
+
+plans:
+  - ./plans/*.yaml
+
+plugins:
+  - name: animegarden
+  - name: download
+    directory: ./download
+  - name: bangumi
+    username: '603937'

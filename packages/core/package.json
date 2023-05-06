@@ -1,0 +1,60 @@
+{
+  "name": "@animespace/core",
+  "version": "0.0.7",
+  "description": "Create your own Anime Space",
+  "keywords": [
+    "anime",
+    "animespace",
+    "cli"
+  ],
+  "homepage": "https://anime.docs.xlorpaste.cn/",
+  "bugs": {
+    "url": "https://github.com/XLorPaste/AnimePaste/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XLorPaste/AnimePaste.git"
+  },
+  "license": "AGPL-3.0",
+  "author": "XLor",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "*.mjs"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "format": "prettier --write src/**/*.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@breadc/color": "^0.9.3",
+    "consola": "^3.1.0",
+    "date-fns": "^2.30.0",
+    "defu": "^6.1.2",
+    "fast-glob": "^3.2.12",
+    "fs-extra": "^11.1.1",
+    "yaml": "^2.2.2"
+  },
+  "devDependencies": {
+    "anitomy": "^0.0.14",
+    "breadc": "^0.9.3",
+    "rimraf": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=v16.0.0"
+  }
+}

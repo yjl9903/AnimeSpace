@@ -1,14 +1,13 @@
-import type { BaseBangumi, ExtendBangumi } from './core/types';
+import { type Plugin, type PluginEntry } from '@animespace/core';
 
-import { load } from './core/load';
+export interface BangumiOptions extends PluginEntry {
+  username?: string;
+}
 
-export * from './core/types';
-
-export type DefaultBangumi = BaseBangumi &
-  Pick<ExtendBangumi, 'titleCN' | 'begin'>;
-
-const data = load('data.json');
-
-export const bangumis = data.bangumis;
-
-export { load };
+export function Bangumi(options: BangumiOptions): Plugin {
+  return {
+    name: 'bangumi',
+    options,
+    command(system, cli) {}
+  };
+}

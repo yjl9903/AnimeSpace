@@ -5,17 +5,22 @@ on:
     branches:
       - main
       - next
+      - ng
       - dev/*
   pull_request:
     branches:
       - main
       - next
+      - ng
       - dev/*
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Set Timezone
+        run: sudo timedatectl set-timezone "Asia/Shanghai"
+
       - uses: actions/checkout@v3
 
       - name: Setup pnpm
@@ -24,7 +29,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 20.x
           cache: pnpm
 
       - name: Install
@@ -35,5 +40,7 @@ jobs:
 
       - name: Test
         run: |
-          pnpm typecheck
-          pnpm test
+          pnpm test:ci
+          ./packages/cli/bin/anime --version
+          ./packages/cli/bin/anime --help
+          ./packages/cli/bin/anime space

@@ -1,0 +1,82 @@
+diff --git a/dist/shared/consola.57b2ba78.cjs b/dist/shared/consola.57b2ba78.cjs
+index 3b814b91d57a11e74c8a48655f641780c262dc91..05ae41ce1721ed3f784b98775fe13afa638f969d 100644
+--- a/dist/shared/consola.57b2ba78.cjs
++++ b/dist/shared/consola.57b2ba78.cjs
+@@ -4,6 +4,7 @@ const consola$1 = require('./consola.46fcabd7.cjs');
+ const basic = require('./consola.2a5d2813.cjs');
+ const process$1 = require('node:process');
+ const tty = require('tty');
++const os = require('os');
+ 
+ function _interopDefaultCompat (e) { return e && typeof e === 'object' && 'default' in e ? e.default : e; }
+ 
+@@ -727,7 +728,7 @@ const TYPE_ICONS = {
+   fatal: s("\u2716", "\xD7"),
+   ready: s("\u2714", "\u221A"),
+   warn: s("\u26A0", "\u203C"),
+-  info: s("\u2139", "i"),
++  info: os.platform() === 'win32' ? 'Info' : s("\u2139", "i"),
+   success: s("\u2714", "\u221A"),
+   debug: s("\u2699", "D"),
+   trace: s("\u2192", "\u2192"),
+@@ -763,7 +764,7 @@ class FancyReporter extends basic.BasicReporter {
+     let line;
+     const left = this.filterAndJoin([type, highlightBackticks(message)]);
+     const right = this.filterAndJoin(opts.columns ? [tag, coloredDate] : [tag]);
+-    const space = (opts.columns || 0) - stringWidth(left) - stringWidth(right) - 2;
++    const space = (opts.columns || 0) - stringWidth(escapeColor(left)) - stringWidth(escapeColor(right)) - 2;
+     line = space > 0 && (opts.columns || 0) >= 80 ? left + " ".repeat(space) + right : (right ? `${gray(`[${right}]`)} ` : "") + left;
+     line += highlightBackticks(
+       additional.length > 0 ? "\n" + additional.join("\n") : ""
+@@ -775,6 +776,10 @@ class FancyReporter extends basic.BasicReporter {
+     return isBadge ? "\n" + line + "\n" : line;
+   }
+ }
++function escapeColor(text) {
++	text = text.replace(/\x1b\[[0-9;]+m/g, "").replace(/\x1b\]8;;.*?\x07(.*?)\x1b\]8;;\x07/g, (_, group) => group);
++	return text.replace(/\u001B]8;;(.+)\u0007(.+)\u001B]8;;\u0007/g, '$2')
++}
+ function highlightBackticks(str) {
+   return str.replace(/`([^`]+)`/gm, (_, m) => cyan(m));
+ }
+diff --git a/dist/shared/consola.67a659fb.mjs b/dist/shared/consola.67a659fb.mjs
+index 25bdd4021beb9135a495d47c9057a602ed9f6da3..b2b0b9fdaf17678e3abb9d2e4ef738b1e6508a57 100644
+--- a/dist/shared/consola.67a659fb.mjs
++++ b/dist/shared/consola.67a659fb.mjs
+@@ -2,6 +2,7 @@ import { c as createConsola$1, L as LogLevels } from './consola.ce5c7a59.mjs';
+ import { B as BasicReporter, p as parseStack } from './consola.3c86be48.mjs';
+ import process$1 from 'node:process';
+ import * as tty from 'tty';
++import * as os from 'os';
+ 
+ const providers = [
+   ["APPVEYOR"],
+@@ -708,7 +709,7 @@ const TYPE_ICONS = {
+   fatal: s("\u2716", "\xD7"),
+   ready: s("\u2714", "\u221A"),
+   warn: s("\u26A0", "\u203C"),
+-  info: s("\u2139", "i"),
++  info: os.platform() === 'win32' ? 'Info' : s("\u2139", "i"),
+   success: s("\u2714", "\u221A"),
+   debug: s("\u2699", "D"),
+   trace: s("\u2192", "\u2192"),
+@@ -744,7 +745,7 @@ class FancyReporter extends BasicReporter {
+     let line;
+     const left = this.filterAndJoin([type, highlightBackticks(message)]);
+     const right = this.filterAndJoin(opts.columns ? [tag, coloredDate] : [tag]);
+-    const space = (opts.columns || 0) - stringWidth(left) - stringWidth(right) - 2;
++    const space = (opts.columns || 0) - stringWidth(escapeColor(left)) - stringWidth(escapeColor(right)) - 2;
+     line = space > 0 && (opts.columns || 0) >= 80 ? left + " ".repeat(space) + right : (right ? `${gray(`[${right}]`)} ` : "") + left;
+     line += highlightBackticks(
+       additional.length > 0 ? "\n" + additional.join("\n") : ""
+@@ -756,6 +757,10 @@ class FancyReporter extends BasicReporter {
+     return isBadge ? "\n" + line + "\n" : line;
+   }
+ }
++function escapeColor(text) {
++	text = text.replace(/\x1b\[[0-9;]+m/g, "").replace(/\x1b\]8;;.*?\x07(.*?)\x1b\]8;;\x07/g, (_, group) => group);
++	return text.replace(/\u001B]8;;(.+)\u0007(.+)\u001B]8;;\u0007/g, '$2')
++}
+ function highlightBackticks(str) {
+   return str.replace(/`([^`]+)`/gm, (_, m) => cyan(m));
+ }

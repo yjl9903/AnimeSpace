@@ -1,6 +1,6 @@
 {
   "name": "@animepaste/docs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "scripts": {
     "build": "vitepress build",
@@ -8,22 +8,22 @@
     "serve": "vitepress serve"
   },
   "dependencies": {
-    "@vueuse/core": "^10.1.0",
+    "@vueuse/core": "^10.1.2",
     "vue": "^3.2.47"
   },
   "devDependencies": {
     "@algolia/client-search": "^4.17.0",
     "@iconify-json/carbon": "^1.1.16",
-    "@types/node": "^18.15.13",
-    "@unocss/reset": "^0.51.6",
-    "@vitejs/plugin-vue": "^4.1.0",
+    "@types/node": "^18.16.5",
+    "@unocss/reset": "^0.51.12",
+    "@vitejs/plugin-vue": "^4.2.1",
     "fast-glob": "^3.2.12",
     "https-localhost": "^4.7.1",
-    "unocss": "^0.51.6",
+    "unocss": "^0.51.12",
     "unplugin-vue-components": "^0.24.1",
-    "vite": "^4.2.2",
+    "vite": "^4.3.5",
     "vite-plugin-pwa": "^0.14.7",
-    "vitepress": "^1.0.0-alpha.73",
+    "vitepress": "1.0.0-alpha.75",
     "workbox-window": "^6.5.4"
   }
 }

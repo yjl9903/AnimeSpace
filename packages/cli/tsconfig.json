@@ -1,20 +1,11 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "es2017",
-    "module": "esnext",
-    "lib": ["esnext"],
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "paths": {
-      "@animepaste/bangumi": ["../bangumi/src/index.ts"],
-      "@animepaste/bangumi/*": ["../bangumi/src/*"],
-      "@animepaste/database": ["../database/src/index.ts"],
-    }
+    "lib": [
+      "DOM"
+    ]
   },
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts"
+  ],
 }
