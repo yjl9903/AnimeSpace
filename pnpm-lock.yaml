@@ -53,8 +53,8 @@ importers:
         specifier: ^18.16.5
         version: 18.16.5
       '@unocss/reset':
-        specifier: ^0.51.8
-        version: 0.51.8
+        specifier: ^0.51.12
+        version: 0.51.12
       '@vitejs/plugin-vue':
         specifier: ^4.2.1
         version: 4.2.1(vite@4.3.5)(vue@3.2.47)
@@ -2400,6 +2400,10 @@ packages:
     dependencies:
       '@unocss/core': 0.51.8
       '@unocss/preset-mini': 0.51.8
+    dev: true
+
+  /@unocss/reset@0.51.12:
+    resolution: {integrity: sha512-VWcudNyGPGU/C+Jrfzbx8BqhFh/QENfUPkKcC8hpqxC4b5PsTJcF8zLu6KgabM0X0CzVouIvVcdZIcUCUEH77Q==}
     dev: true
 
   /@unocss/reset@0.51.8:
