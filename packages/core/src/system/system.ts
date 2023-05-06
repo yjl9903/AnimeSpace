@@ -53,6 +53,13 @@ export async function createAnimeSystem(
       await Promise.all(animes.map((a) => a.writeLibrary()));
       logger.restoreConsole();
       return animes;
+    },
+    isChanged() {
+      if (animes) {
+        return animes.some((a) => a.dirty());
+      } else {
+        return false;
+      }
     }
   };
   return system;

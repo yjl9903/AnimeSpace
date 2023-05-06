@@ -43,11 +43,10 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     })
     .option('-i, --introspect', 'Introspect library before refreshing')
     .action(async (options) => {
-      registerDeath();
-
       // Refresh system
       let sys = system;
       const refresh = async () => {
+        const cancell = registerDeath(sys);
         try {
           sys.printSpace();
           if (options.introspect) {
@@ -60,6 +59,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           await sys.writeBack();
           sys = await makeSystem();
           sys.logger.log('');
+          cancell();
         }
       };
       await loop(refresh, options.duration);
@@ -69,7 +69,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .command('refresh', 'Refresh the local anime system')
     .option('-i, --introspect', 'Introspect library before refreshing')
     .action(async (options) => {
-      registerDeath();
+      registerDeath(system);
 
       system.printSpace();
       try {
@@ -88,7 +88,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   app
     .command('introspect', 'Introspect the local anime system')
     .action(async () => {
-      registerDeath();
+      registerDeath(system);
 
       system.printSpace();
       try {
@@ -101,11 +101,15 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       }
     });
 
-  function registerDeath() {
-    onDeath(async () => {
-      system.logger.info(lightRed('Process is being killed'));
-      await system.writeBack();
-      system.logger.info(lightGreen('Anime library has been written back'));
+  function registerDeath(system: AnimeSystem) {
+    return onDeath(async () => {
+      if (system.isChanged()) {
+        system.logger.info(lightRed('Process is being killed'));
+        await system.writeBack();
+        system.logger.info(
+          lightGreen('Anime libraries have been written back')
+        );
+      }
       process.exit();
     });
   }

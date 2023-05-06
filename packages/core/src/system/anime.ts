@@ -36,6 +36,10 @@ export class Anime {
     this.directory = path.join(space.storage, dirname);
   }
 
+  public dirty() {
+    return this._dirty;
+  }
+
   public matchKeywords(text: string): boolean {
     for (const ban of this.plan.keywords.exclude) {
       if (text.includes(ban)) {

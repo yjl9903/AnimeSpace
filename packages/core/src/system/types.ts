@@ -30,4 +30,9 @@ export interface AnimeSystem {
    * Write back the modified anime library
    */
   writeBack(): Promise<Anime[]>;
+
+  /**
+   * Sync return any library is changed
+   */
+  isChanged(): boolean;
 }
