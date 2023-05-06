@@ -185,7 +185,6 @@ export async function runDownloadTask(
 
   const cancelDeath = onDeath(async () => {
     multibar.finish();
-    await anime.writeLibrary();
   });
 
   const systemLogger = system.logger.withTag('animegarden');

@@ -29,7 +29,6 @@ export async function bootstrap() {
 
     const app = await makeCliApp(system);
     await app.run(process.argv.slice(2));
-    process.exit(0);
   } catch (error: unknown) {
     handle(error);
     process.exit(1);
