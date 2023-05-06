@@ -53,9 +53,12 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
 
       // Refresh system
       let sys = system;
+      let isRuuning = false;
       sys.printSpace();
       const duration = parseDuration(options.duration);
       const refresh = async () => {
+        if (isRuuning) return;
+        isRuuning = true;
         try {
           if (options.introspect) {
             await sys.introspect();
@@ -68,6 +71,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           sys = await makeSystem();
           sys.logger.log('');
         }
+        isRuuning = false;
       };
 
       await refresh();
