@@ -52,7 +52,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           if (options.introspect) {
             await sys.introspect();
           }
-          // await sys.refresh();
+          await sys.refresh();
         } catch (error) {
           sys.logger.error(error);
         } finally {
