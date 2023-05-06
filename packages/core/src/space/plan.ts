@@ -32,7 +32,7 @@ export async function loadPlan(cwd: string, patterns: string[]) {
           const type = ['番剧', '电影', 'OVA'].includes(o.type)
             ? o.type
             : '番剧';
-          const translations = formatTranslations(o.translations);
+          const translations = resolveTranslations(o.translations);
 
           return {
             ...o,
@@ -43,7 +43,7 @@ export async function loadPlan(cwd: string, patterns: string[]) {
             status: oStatus,
             season: o.season ? +o.season : 1,
             date: o.date ? new Date(o.date) : date,
-            keywords: formatKeywordsArray(title, translations, o.keywords)
+            keywords: resolveKeywordsArray(title, translations, o.keywords)
           };
         })
       };
@@ -52,7 +52,7 @@ export async function loadPlan(cwd: string, patterns: string[]) {
   return plans;
 }
 
-function formatTranslations(trans: unknown) {
+function resolveTranslations(trans: unknown) {
   if (trans !== undefined && trans !== null) {
     if (typeof trans === 'string') {
       return {
@@ -75,7 +75,7 @@ function formatTranslations(trans: unknown) {
   return {};
 }
 
-function formatKeywordsArray(
+function resolveKeywordsArray(
   title: string,
   translations: Record<string, string[]>,
   keywords: any

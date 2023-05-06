@@ -202,8 +202,8 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     },
     plans: ['./plans/*.yaml'],
     plugins: [
-      { name: 'animegarden' },
-      { name: 'download', directory: './download' },
+      { name: 'animegarden', provider: 'aria2', directory: './download' },
+      { name: 'download', directory: './local' },
       { name: 'bangumi', username: '' }
     ]
   };
@@ -218,6 +218,9 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     fs
       .mkdir(path.join(space.root, './download'), { recursive: true })
       .catch(() => {}),
+    fs
+      .mkdir(path.join(space.root, './local'), { recursive: true })
+      .catch(() => {}),
     fs.writeFile(
       path.join(space.root, configFilename),
       stringify({
@@ -229,7 +232,7 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     ),
     fs.writeFile(
       path.join(space.root, '.gitignore'),
-      `temp\n*.mp4\n*.mkv\n`,
+      ['*.mp4', '*.mkv', '*.aria2'].join('\n'),
       'utf-8'
     ),
     fs.writeFile(path.join(space.root, 'README.md'), `# AnimeSpace\n`, 'utf-8')
