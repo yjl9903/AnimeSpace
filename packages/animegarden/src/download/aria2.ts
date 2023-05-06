@@ -102,6 +102,9 @@ export class Aria2Client extends DownloadClient {
           const status = await client.tellStatus(gid);
           await that.updateStatus(task, status);
         },
+        async onError() {
+          rej(new Error('aria2c is stopped'));
+        },
         async onDownloadError(gid) {
           that.gids.delete(gid);
           const status = await client.tellStatus(gid);
@@ -171,17 +174,29 @@ export class Aria2Client extends DownloadClient {
 
     // Hearbeat to monitor download status
     this.heartbeat = setInterval(async () => {
-      await Promise.all(
-        [...this.gids].map(async ([gid, task]) => {
-          const status = await this.client.tellStatus(gid);
-          await this.updateStatus(task, status);
-          if (task.state === 'complete') {
-            await task.onBtDownloadComplete(gid);
-          } else if (task.state === 'error') {
-            await task.onDownloadError(gid);
-          }
-        })
-      );
+      if (this.client && (await this.client.getVersion().catch(() => false))) {
+        // Status OK
+        await Promise.all(
+          [...this.gids].map(async ([gid, task]) => {
+            const status = await this.client.tellStatus(gid);
+            await this.updateStatus(task, status);
+            if (task.state === 'complete') {
+              await task.onBtDownloadComplete(gid);
+            } else if (task.state === 'error') {
+              await task.onDownloadError(gid);
+            }
+          })
+        );
+      } else {
+        const map = new MutableMap<string, Task>();
+        for (const task of this.gids.values()) {
+          map.set(task.key, task);
+        }
+        for (const task of map.values()) {
+          await task.onError();
+        }
+        await this.close();
+      }
     }, 500);
   }
 
@@ -436,6 +451,7 @@ export class Aria2Client extends DownloadClient {
             secret: this.options.secret
           }
         });
+        this.gids.clear();
         this.registerCallback();
 
         const version = await this.client.getVersion();
@@ -444,17 +460,13 @@ export class Aria2Client extends DownloadClient {
         res();
       });
 
-      child.addListener('error', () => {
+      child.addListener('error', async () => {
         this.system.logger.error(dim(`Some error happened in aria2`));
+        await this.close().catch(() => {});
       });
 
       child.addListener('exit', async () => {
         await this.close().catch(() => {});
-        // @ts-ignore
-        this.client = undefined;
-        // @ts-ignore
-        this.version = undefined;
-        this.started = false;
       });
     });
   }
@@ -465,18 +477,24 @@ export class Aria2Client extends DownloadClient {
       const version = this.version;
       const res = await this.client.shutdown().catch(() => 'OK');
       await this.client.close().catch(() => {});
+
+      // @ts-ignore
+      this.client = undefined;
+      // @ts-ignore
+      this.version = undefined;
+      this.started = false;
       if (res === 'OK') {
-        // @ts-ignore
-        this.client = undefined;
-        // @ts-ignore
-        this.version = undefined;
         this.system.logger.info(dim(`aria2 v${version} has been closed`));
-        this.started = false;
         return true;
       } else {
         return false;
       }
     } else {
+      // @ts-ignore
+      this.client = undefined;
+      // @ts-ignore
+      this.version = undefined;
+      this.started = false;
       return false;
     }
   }
@@ -525,6 +543,8 @@ interface Task {
   >;
 
   options: DownloadOptions;
+
+  onError: () => Promise<void>;
 
   onDownloadStart: (gid: string) => Promise<void>;
 
