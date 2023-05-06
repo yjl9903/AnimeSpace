@@ -55,7 +55,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       let sys = system;
       sys.printSpace();
       const duration = parseDuration(options.duration);
-      setInterval(async () => {
+      const refresh = async () => {
         try {
           if (options.introspect) {
             await sys.introspect();
@@ -68,7 +68,10 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           sys = await makeSystem();
           sys.logger.log('');
         }
-      }, duration);
+      };
+
+      await refresh();
+      setInterval(refresh, duration);
     });
 
   app
