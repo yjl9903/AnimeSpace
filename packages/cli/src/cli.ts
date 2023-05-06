@@ -19,13 +19,14 @@ export async function bootstrap() {
     debug(error);
   };
 
-  process.setMaxListeners(256);
-  onUnhandledRejection((error) => {
-    debug(error);
-  })
-
   try {
     const system = await makeSystem();
+    process.setMaxListeners(256);
+    onUnhandledRejection((error) => {
+      system.logger.error(error);
+      debug(error);
+    });
+
     const app = await makeCliApp(system);
     await app.run(process.argv.slice(2));
     process.exit(0);
