@@ -46,24 +46,23 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
 
   app
     .command('watch', 'Watch anime system update')
-    .option('--duration <time>', '', { default: '10m' })
+    .option('-d, --duration <time>', 'Refresh time interval', {
+      default: '10m'
+    })
     .option('-i, --introspect', 'Introspect library before refreshing')
     .action(async (options) => {
       registerDeath();
 
       // Refresh system
       let sys = system;
-      let isRuuning = false;
       sys.printSpace();
       const duration = parseDuration(options.duration);
       const refresh = async () => {
-        if (isRuuning) return;
-        isRuuning = true;
         try {
           if (options.introspect) {
             await sys.introspect();
           }
-          await sys.refresh();
+          // await sys.refresh();
         } catch (error) {
           sys.logger.error(error);
         } finally {
@@ -71,11 +70,10 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           sys = await makeSystem();
           sys.logger.log('');
         }
-        isRuuning = false;
+        setTimeout(refresh, duration);
       };
 
       await refresh();
-      setInterval(refresh, duration);
     });
 
   app
