@@ -4,6 +4,7 @@ import { AnimeSystem, onDeath } from '@animespace/core';
 
 import { version, description } from '../../package.json';
 
+import { loop } from './utils';
 import { makeSystem } from './system';
 
 export async function makeCliApp(system: AnimeSystem) {
@@ -45,10 +46,9 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
 
       // Refresh system
       let sys = system;
-      sys.printSpace();
-      const duration = parseDuration(options.duration);
       const refresh = async () => {
         try {
+          sys.printSpace();
           if (options.introspect) {
             await sys.introspect();
           }
@@ -59,11 +59,9 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           await sys.writeBack();
           sys = await makeSystem();
           sys.logger.log('');
-          setTimeout(refresh, duration);
         }
       };
-
-      await refresh();
+      await loop(refresh, options.duration);
     });
 
   app
@@ -107,20 +105,4 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       await system.writeBack();
     });
   }
-}
-
-function parseDuration(text: string) {
-  const s = /^(\d+)s$/.exec(text);
-  if (s) {
-    return +s[1] * 1000;
-  }
-  const m = /^(\d+)m$/.exec(text);
-  if (m) {
-    return +m[1] * 60 * 1000;
-  }
-  const h = /^(\d+)h$/.exec(text);
-  if (h) {
-    return +h[1] * 60 * 60 * 1000;
-  }
-  return 10 * 60 * 1000;
 }
