@@ -59,8 +59,8 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           await sys.writeBack();
           sys = await makeSystem();
           sys.logger.log('');
+          setTimeout(refresh, duration);
         }
-        setTimeout(refresh, duration);
       };
 
       await refresh();
