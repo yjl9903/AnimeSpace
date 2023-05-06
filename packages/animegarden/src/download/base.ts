@@ -28,6 +28,8 @@ export abstract class DownloadClient {
   public abstract start(): Promise<void>;
 
   public abstract close(): Promise<boolean>;
+
+  public async clean(extensions: string[] = ['.mp4', '.mkv']) {}
 }
 
 type MayPromise<T> = T | Promise<T>;

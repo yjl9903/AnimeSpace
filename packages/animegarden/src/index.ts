@@ -51,6 +51,31 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
     },
     command(system, cli) {
       cli
+        .command('generate', 'Generate Plan from your bangumi collections')
+        .option('--username <username>', 'Bangumi username')
+        .option(
+          '--create <filename>',
+          'Create plan file in the space directory'
+        )
+        .option('--date <date>', 'Specify the onair begin date')
+        .action(async (options) => {
+          const bangumiPlugin = system.space.plugins.find(
+            (p) => p.name === 'bangumi'
+          );
+          const username =
+            options.username ??
+            (bangumiPlugin?.options?.username as string) ??
+            '';
+          if (!username) {
+            system.logger.error(
+              'You should provide your bangumi username with --username <username>'
+            );
+          }
+
+          return await generatePlan(system, username, options);
+        });
+
+      cli
         .command(
           'garden list [keyword]',
           'List videos of anime from AnimeGarden'
@@ -112,28 +137,15 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         });
 
       cli
-        .command('generate', 'Generate Plan from your bangumi collections')
-        .option('--username <username>', 'Bangumi username')
-        .option(
-          '--create <filename>',
-          'Create plan file in the space directory'
-        )
-        .option('--date <date>', 'Specify the onair begin date')
-        .action(async (options) => {
-          const bangumiPlugin = system.space.plugins.find(
-            (p) => p.name === 'bangumi'
-          );
-          const username =
-            options.username ??
-            (bangumiPlugin?.options?.username as string) ??
-            '';
-          if (!username) {
-            system.logger.error(
-              'You should provide your bangumi username with --username <username>'
-            );
+        .command('garden clean [...extensions]', 'Clean download cache')
+        .option('-y, --yes')
+        .action(async (extensions, options) => {
+          const client = getClient(system);
+          if (extensions.length === 0) {
+            extensions.push('.mp4', '.mkv', '.aria2');
           }
-
-          return await generatePlan(system, username, options);
+          const exts = extensions.map((e) => (e.startsWith('.') ? e : '.' + e));
+          await client.clean(exts);
         });
 
       // --- Util functions ---

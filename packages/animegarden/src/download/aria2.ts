@@ -480,6 +480,22 @@ export class Aria2Client extends DownloadClient {
       return false;
     }
   }
+
+  public async clean(extensions: string[] = []) {
+    const files = await fs.readdir(this.options.directory).catch(() => []);
+    await Promise.all(
+      files.map(async (file) => {
+        if (extensions.includes(path.extname(file).toLowerCase())) {
+          const p = path.join(this.options.directory, file);
+          try {
+            await fs.remove(p);
+          } catch (error) {
+            this.consola.error(error);
+          }
+        }
+      })
+    );
+  }
 }
 
 type GidState = 'active' | 'error' | 'complete';
