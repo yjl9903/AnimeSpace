@@ -1,5 +1,5 @@
 import type { Resource } from 'animegarden';
-import type { AnimeSystem, Anime } from '@animespace/core';
+import { AnimeSystem, Anime, onUnhandledRejection } from '@animespace/core';
 
 import path from 'node:path';
 import { Parser } from 'anitomy';
@@ -201,11 +201,7 @@ export async function runDownloadTask(
     }
   };
   client.setLogger(multibarLogger);
-
-  process.addListener('unhandledRejection', () => {
-    multibar.finish();
-  });
-  process.addListener('uncaughtException', () => {
+  const cancelUnhandledRej = onUnhandledRejection(() => {
     multibar.finish();
   });
 
@@ -300,6 +296,7 @@ export async function runDownloadTask(
   }
 
   cancelDeath();
+  cancelUnhandledRej();
 
   await client.close();
 }

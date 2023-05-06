@@ -109,9 +109,6 @@ importers:
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
-      death:
-        specifier: ^1.1.0
-        version: 1.1.0
       defu:
         specifier: ^6.1.2
         version: 6.1.2
@@ -127,13 +124,7 @@ importers:
       webtorrent:
         specifier: ^2.0.17
         version: 2.0.17
-      yaml:
-        specifier: ^2.2.2
-        version: 2.2.2
     devDependencies:
-      '@types/death':
-        specifier: ^1.1.2
-        version: 1.1.2
       '@types/webtorrent':
         specifier: ^0.109.3
         version: 0.109.3
@@ -176,9 +167,6 @@ importers:
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
-      death:
-        specifier: ^1.1.0
-        version: 1.1.0
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -2190,10 +2178,6 @@ packages:
       '@types/node': 18.16.5
     dev: true
 
-  /@types/death@1.1.2:
-    resolution: {integrity: sha512-Rr5NV/H/zj6zgbh6TCwMEe0NhCVS2QbAor0pikvzGx5fh+xsnmV3KUEq2Vb4vgi9ytBHorva+ryQmij2rrstTQ==}
-    dev: true
-
   /@types/debug@4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -3296,7 +3280,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /concordance@5.0.4:
@@ -3450,10 +3434,6 @@ packages:
     dependencies:
       time-zone: 1.0.0
     dev: true
-
-  /death@1.1.0:
-    resolution: {integrity: sha512-vsV6S4KVHvTGxbEcij7hkWRv0It+sGGWVOM67dQde/o5Xjnr+KmLjxWJii2uEObIrt1CcM9w0Yaovx+iOlIL+w==}
-    dev: false
 
   /debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}

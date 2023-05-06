@@ -43,6 +43,15 @@ export function formatTitle(template: string, data: Record<string, string>) {
   return template;
 }
 
+export function onUnhandledRejection(
+  fn: (error: Error) => void | Promise<void>
+) {
+  process.on('unhandledRejection', fn);
+  return () => {
+    process.removeListener('unhandledRejection', fn);
+  };
+}
+
 export function onDeath(fn: () => void | Promise<void>) {
   process.on('SIGINT', fn);
   return () => {

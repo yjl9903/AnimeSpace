@@ -54,7 +54,6 @@
     "@onekuma/map": "^0.1.10",
     "breadc": "^0.9.3",
     "date-fns": "^2.30.0",
-    "death": "^1.1.0",
     "debug": "^4.3.4",
     "fs-extra": "^11.1.1",
     "open-editor": "^4.0.0",

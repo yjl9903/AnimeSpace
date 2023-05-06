@@ -1,7 +1,7 @@
 import createDebug from 'debug';
 import { lightRed } from '@breadc/color';
 
-import { AnimeSystemError } from '@animespace/core';
+import { AnimeSystemError, onUnhandledRejection } from '@animespace/core';
 
 import { makeSystem, makeCliApp } from './system';
 
@@ -20,9 +20,9 @@ export async function bootstrap() {
   };
 
   process.setMaxListeners(256);
-  process.on('unhandledRejection', (error) => {
+  onUnhandledRejection((error) => {
     debug(error);
-  });
+  })
 
   try {
     const system = await makeSystem();
