@@ -4,6 +4,8 @@ import { AnimeSystem, onDeath } from '@animespace/core';
 
 import { version, description } from '../../package.json';
 
+import { makeSystem } from './system';
+
 process.addListener('unhandledRejection', (error) => {
   // console.log('UnhandledRejection');
   console.error(error);
@@ -43,8 +45,35 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     });
 
   app
+    .command('watch', 'Watch anime system update')
+    .option('--duration <time>', '', { default: '10m' })
+    .option('-i, --introspect', 'Introspect library before refreshing')
+    .action(async (options) => {
+      registerDeath();
+
+      // Refresh system
+      let sys = system;
+      sys.printSpace();
+      const duration = parseDuration(options.duration);
+      setInterval(async () => {
+        try {
+          if (options.introspect) {
+            await sys.introspect();
+          }
+          await sys.refresh();
+        } catch (error) {
+          sys.logger.error(error);
+        } finally {
+          await sys.writeBack();
+          sys = await makeSystem();
+          sys.logger.log('');
+        }
+      }, duration);
+    });
+
+  app
     .command('refresh', 'Refresh the local anime system')
-    .option('-i, --introspect')
+    .option('-i, --introspect', 'Introspect library before refreshing')
     .action(async (options) => {
       registerDeath();
 
@@ -83,4 +112,20 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       await system.writeBack();
     });
   }
+}
+
+function parseDuration(text: string) {
+  const s = /^(\d+)s$/.exec(text);
+  if (s) {
+    return +s[1] * 1000;
+  }
+  const m = /^(\d+)m$/.exec(text);
+  if (m) {
+    return +m[1] * 60 * 1000;
+  }
+  const h = /^(\d+)h$/.exec(text);
+  if (h) {
+    return +h[1] * 60 * 60 * 1000;
+  }
+  return 10 * 60 * 1000;
 }
