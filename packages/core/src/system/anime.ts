@@ -1,11 +1,13 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
+import { z } from 'zod';
 import { format } from 'date-fns';
 import { parse, stringify } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
+import { AnimeSystemError } from '../error';
 
 const MetadataFilename = 'metadata.yaml';
 
@@ -58,22 +60,44 @@ export class Anime {
     if (this._lib === undefined || force) {
       await fs.ensureDir(this.directory);
       const libPath = path.join(this.directory, MetadataFilename);
+
+      const defaultLib: LocalLibrary = {
+        title: this.plan.title,
+        season: this.plan.season,
+        date: this.plan.date,
+        videos: []
+      };
+
       if (await fs.exists(libPath)) {
         const libContent = await fs.readFile(libPath, 'utf-8');
-        const lib = parse(libContent) as LocalLibrary;
+        const lib = parse(libContent);
 
-        return (this._lib = {
-          ...lib,
-          title: this.plan.title,
-          videos: lib?.videos ?? []
-        });
+        const schema = z
+          .object({
+            title: z.string().default(this.plan.title).catch(this.plan.title),
+            season: z.coerce
+              .number()
+              .default(this.plan.season)
+              .catch(this.plan.season),
+            date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
+            videos: z.array(z.any()).catch([])
+          })
+          .passthrough();
+
+        const parsed = schema.safeParse(lib);
+        if (parsed.success) {
+          return (this._lib = <LocalLibrary>{
+            ...parsed.data,
+            videos: lib?.videos ?? []
+          });
+        } else {
+          throw new AnimeSystemError(
+            `解析 ${this.plan.title} 的 metadata.yml 失败`
+          );
+        }
       } else {
-        const lib: LocalLibrary = {
-          title: this.plan.title,
-          videos: []
-        };
-        await fs.writeFile(libPath, stringify(lib), 'utf-8');
-        return (this._dirty = false), (this._lib = lib);
+        await fs.writeFile(libPath, stringify(defaultLib), 'utf-8');
+        return (this._dirty = false), (this._lib = defaultLib);
       }
     } else {
       return this._lib;
@@ -254,6 +278,10 @@ export class Anime {
 
 export interface LocalLibrary {
   title: string;
+
+  date: Date;
+
+  season: number;
 
   videos: LocalVideo[];
 }
