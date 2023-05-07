@@ -50,7 +50,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
               file.filename
             )} to ${bold(video.filename)}`
           );
-          await anime.addVideo(file.path, video);
+          await anime.addVideoByMove(file.path, video);
           return video;
         }
         return undefined;
@@ -101,7 +101,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
                 file.filename
               )} to ${bold(video.filename)}`
             );
-            await anime.addVideo(file.path, video);
+            await anime.addVideoByMove(file.path, video);
           } else {
             logger.info(lightYellow(`Parse "${bold(file.filename)}" failed`));
           }

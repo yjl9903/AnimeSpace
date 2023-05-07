@@ -251,7 +251,7 @@ export async function runDownloadTask(
           episode: video.video.episode,
           extension: path.extname(file).slice(1) || 'mp4'
         });
-        await anime.addVideo(file, video.video, { copy: true });
+        await anime.addVideoByCopy(file, video.video);
         multibar.println(
           `${cyan(`Info`)} ${lightGreen('Download')} ${bold(
             video.video.filename

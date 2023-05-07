@@ -132,31 +132,52 @@ export class Anime {
   }
 
   // --- mutation ---
-  public async addVideo(
-    file: string,
-    video: LocalVideo,
+  private async addVideo(
+    src: string,
+    newVideo: LocalVideo,
     { copy = false }: { copy?: boolean } = {}
   ): Promise<void> {
     await this.library();
     try {
-      const src = file;
-      const dst = path.join(this.directory, video.filename);
+      const dst = path.join(this.directory, newVideo.filename);
       if (src !== dst) {
         if (copy) {
-          await fs.copy(file, dst, {
+          await fs.copy(src, dst, {
             overwrite: true
           });
         } else {
-          await fs.move(file, dst, {
+          await fs.move(src, dst, {
             overwrite: true
           });
         }
       }
       this._dirty = true;
-      this._lib!.videos.push(video);
+      this._lib!.videos.push(newVideo);
     } catch (error) {
       console.error(error);
     }
+  }
+
+  /**
+   * Copy a video outside into this library
+   *
+   * @param src The absolute path of src video
+   * @param video The stored video data
+   * @returns
+   */
+  public async addVideoByCopy(src: string, video: LocalVideo): Promise<void> {
+    return this.addVideo(src, video, { copy: true });
+  }
+
+  /**
+   * Move a video outside into this library
+   *
+   * @param src The absolute path of src video
+   * @param video The stored video data
+   * @returns
+   */
+  public async addVideoByMove(src: string, video: LocalVideo): Promise<void> {
+    return this.addVideo(src, video, { copy: false });
   }
 
   public async moveVideo(src: LocalVideo, dst: string): Promise<void> {
