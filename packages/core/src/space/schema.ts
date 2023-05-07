@@ -17,7 +17,9 @@ export type StringArray = z.infer<typeof StringArray>;
 
 export const PluginEntry = z.object({ name: z.string() });
 
-export type PluginEntry = z.infer<typeof PluginEntry>;
+export interface PluginEntry extends Record<string, any> {
+  name: string;
+}
 
 export const Preference = z.object({
   format: z.object({
