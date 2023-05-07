@@ -234,6 +234,11 @@ export class Aria2Client extends DownloadClient {
 
     if (task.gids.metadata === gid) {
       switch (status.status) {
+        case 'waiting':
+          if (oldProgress.state === 'active') {
+            updateProgress();
+          }
+          break;
         case 'active':
           if (oldProgress.state === 'active') {
             updateProgress();
@@ -269,7 +274,6 @@ export class Aria2Client extends DownloadClient {
             (this.logger ?? this.consola).error(
               `Unexpected previous task state ${task.state}`
             );
-            process.exit(1);
           }
 
           break;
@@ -278,7 +282,6 @@ export class Aria2Client extends DownloadClient {
             `Download task ${task.key} was unexpectedly paused`
           );
           break;
-        case 'waiting':
         default:
           break;
       }
@@ -298,7 +301,8 @@ export class Aria2Client extends DownloadClient {
         oldProgress.total !== progress.total ||
         oldProgress.connections !== progress.connections ||
         oldProgress.speed !== progress.speed;
-      if (task.state === 'metadata') {
+
+      if (task.state === 'waiting' || task.state === 'metadata') {
         if (dirty) {
           await task.options.onMetadataProgress?.(payload);
         }
@@ -313,10 +317,10 @@ export class Aria2Client extends DownloadClient {
         (this.logger ?? this.consola).error(
           `Download task ${task.key} entered unexpectedly state ${task.state}`
         );
-        process.exit(1);
       }
     } else {
       switch (status.status) {
+        case 'waiting':
         case 'active':
           if (oldProgress.state === 'active') {
             updateProgress();
@@ -338,7 +342,6 @@ export class Aria2Client extends DownloadClient {
             `Download task ${task.key} was unexpectedly paused`
           );
           break;
-        case 'waiting':
         default:
           break;
       }
@@ -358,6 +361,7 @@ export class Aria2Client extends DownloadClient {
         }
       }
 
+      const payload = { completed, total, connections, speed };
       const dirty =
         force ||
         oldState !== task.state ||
@@ -366,7 +370,7 @@ export class Aria2Client extends DownloadClient {
         oldProgress.total !== progress.total ||
         oldProgress.connections !== progress.connections ||
         oldProgress.speed !== progress.speed;
-      const payload = { completed, total, connections, speed };
+
       if (progress.state === 'active') {
         if (dirty) {
           await task.options.onProgress?.(payload);
@@ -460,7 +464,7 @@ export class Aria2Client extends DownloadClient {
         res();
       });
 
-      child.addListener('error', async () => {
+      child.addListener('error', async (error) => {
         this.system.logger.error(dim(`Some error happened in aria2`));
         await this.close().catch(() => {});
       });

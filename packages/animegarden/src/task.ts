@@ -296,6 +296,4 @@ export async function runDownloadTask(
 
   cancelDeath();
   cancelUnhandledRej();
-
-  await client.close();
 }
