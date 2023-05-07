@@ -127,11 +127,14 @@ export class Anime {
   }
 
   public reformatVideoFilename(video: LocalVideo) {
+    const title = this._lib?.title ?? this.plan.title;
+    const date = this._lib?.date ?? this.plan.date;
+    const season = this._lib?.season ?? this.plan.season;
     return formatTitle(this.format, {
-      title: this.plan.title,
-      yyyy: format(this.plan.date, 'yyyy'),
-      MM: format(this.plan.date, 'MM'),
-      season: formatEpisode(this.plan.season),
+      title,
+      yyyy: format(date, 'yyyy'),
+      MM: format(date, 'MM'),
+      season: formatEpisode(season),
       ep: video.episode ? formatEpisode(video.episode) : '{ep}',
       extension: path.extname(video.filename).slice(1) ?? 'mp4',
       fansub: video.fansub ?? 'fansub'
@@ -144,11 +147,14 @@ export class Anime {
     fansub?: string;
     extension?: string;
   }) {
+    const title = this._lib?.title ?? this.plan.title;
+    const date = this._lib?.date ?? this.plan.date;
+    const season = meta.season ?? this._lib?.season ?? this.plan.season;
     return formatTitle(this.format, {
-      title: this.plan.title,
-      yyyy: '' + this.plan.date.getFullYear(),
-      mm: '' + (this.plan.date.getMonth() + 1),
-      season: formatEpisode(meta.season ? meta.season : this.plan.season),
+      title,
+      yyyy: format(date, 'yyyy'),
+      mm: format(date, 'MM'),
+      season: formatEpisode(season),
       ep: meta.episode ? formatEpisode(meta.episode) : '{ep}',
       extension: meta.extension?.toLowerCase() ?? 'mp4',
       fansub: meta.fansub ?? 'fansub'
