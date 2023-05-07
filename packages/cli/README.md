@@ -27,7 +27,7 @@ All the bangumi resource is automatically fetched from [動漫花園](https://sh
 ## Directory structure
 
 ```text
-~/.animepaste/
+~/.animespace/
   ├── plans/                     # Plans folder
   │   ├─ 2022-04.yml
   │   └─ 2022-07.yml
@@ -39,8 +39,7 @@ All the bangumi resource is automatically fetched from [動漫花園](https://sh
   ├── cache/                     # Videos cache
   │   ├─ xxx.mp4
   │   └─ yyy.mp4
-  ├── config.yaml                # AnimePaste config file
-  └── anime.db                   # SQLite database file
+  └── anime.yaml                # AnimeSpace config file
 ```
 
 ### Config
@@ -48,16 +47,9 @@ All the bangumi resource is automatically fetched from [動漫花園](https://sh
 Global config:
 
 ```yaml
-# ~/.animepaste/config.yaml
+# ~/.animespace/config.yaml
 
-plans:
-  - ./plans/2022-7.yaml
-
-sync:
-  local: true
-  # remote:
-  #   baseURL: http://localhost:8788/
-  #   token: ''
+plans: ./plans/*.yaml
 
 store:
   local: # Local anime store
@@ -72,7 +64,7 @@ store:
 Plan config:
 
 ```yaml
-# ~/.animepaste/plans/2022-4.yaml
+# ~/.animespace/plans/2022-04.yaml
 
 name: '2022 年 4 月新番'
 

@@ -1,4 +1,4 @@
-# @animepaste/download
+# @animespace/download
 
 ## License
 

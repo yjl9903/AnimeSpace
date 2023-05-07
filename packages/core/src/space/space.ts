@@ -139,7 +139,7 @@ async function validateSpace(space: RawAnimeSpace) {
   try {
     await fs.access(space.root, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
-    throw new AnimeSystemError(`Can not access AnimePaste space directory`);
+    throw new AnimeSystemError(`Can not access anime space directory`);
   }
 
   try {

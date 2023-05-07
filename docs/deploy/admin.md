@@ -9,9 +9,9 @@
 ## 从 npm 上全局安装
 
 ```bash
-npm i -g animepaste
+npm i -g animespace
 # or
-pnpm i -g animepaste
+pnpm i -g animespace
 ```
 
 ## 手动安装

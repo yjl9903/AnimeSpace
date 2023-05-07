@@ -1,6 +1,6 @@
 # 配置
 
-Anime Paste 默认使用 `~/.animepaste/` （或者 `ANIMEPASTE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
+Anime Paste 默认使用 `~/.animespace/` （或者 `ANIMEPASTE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
 
 安装完成后，你必须运行
 
@@ -13,7 +13,7 @@ anime space
 ## 目录结构
 
 ```text
-~/.animepaste/
+~/.animespace/
   ├── plans/                     # Plans folder
   │   ├─ 2022-04.yml
   │   └─ 2022-07.yml
@@ -25,13 +25,12 @@ anime space
   ├── cache/                     # Videos cache
   │   ├─ xxx.mp4
   │   └─ yyy.mp4
-  ├── config.yaml                # AnimePaste config file
-  └── anime.db                   # SQLite database file
+  └── anime.yaml                # AnimeSpace config file
 ```
 
 ## 根配置文件
 
-该文件位于：`~/.animepaste/config.yaml`。
+该文件位于：`~/.animespace/anime.yaml`。
 
 ```yaml
 plans:

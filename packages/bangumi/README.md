@@ -1,4 +1,4 @@
-# @animepaste/bangumi
+# @animespace/bangumi
 
 ## License
 

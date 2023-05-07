@@ -11,7 +11,7 @@ hero:
   tagline: 你所热爱的就是你的动画
   image:
     src: /favicon.svg
-    alt: AnimePaste
+    alt: AnimeSpace Favicon
   actions:
     - theme: brand
       text: 开始
