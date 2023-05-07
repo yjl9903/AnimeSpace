@@ -1,9 +1,17 @@
+import { onDeath } from '@animespace/core';
+
 export async function loop(fn: () => void | Promise<void>, duration: string) {
+  let timestamp: NodeJS.Timeout;
+  onDeath(() => {
+    clearTimeout(timestamp);
+  });
+
   const time = parseDuration(duration);
+
   return new Promise(() => {
     const wrapper = async () => {
       await fn();
-      setTimeout(wrapper, time);
+      timestamp = setTimeout(wrapper, time);
     };
     wrapper();
   });
