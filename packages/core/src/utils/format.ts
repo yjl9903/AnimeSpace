@@ -6,7 +6,7 @@ export const StringArray = z.union([
   z.null().transform(() => [])
 ]);
 
-export function formatStringArray(arr: string | string[] | undefined | null) {
+export function resolveStringArray(arr: string | string[] | undefined | null) {
   const parsed = StringArray.safeParse(arr);
   if (parsed.success) {
     return parsed.data;

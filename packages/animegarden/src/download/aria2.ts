@@ -8,7 +8,7 @@ import { dim } from '@breadc/color';
 import { defu } from 'defu';
 import { WebSocket } from 'libaria2';
 import { MutableMap } from '@onekuma/map';
-import { AnimeSystem, formatStringArray } from '@animespace/core';
+import { AnimeSystem, resolveStringArray } from '@animespace/core';
 
 import { getProxy } from '../ufetch';
 
@@ -256,7 +256,7 @@ export class Aria2Client extends DownloadClient {
           updateProgress();
 
           // Add followed files to current task
-          const followed = formatStringArray(status.followedBy);
+          const followed = resolveStringArray(status.followedBy);
           for (const f of followed) {
             task.gids.files.add(f);
             this.gids.set(f, task);
