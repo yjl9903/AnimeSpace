@@ -1,19 +1,26 @@
-import type { Resource } from 'animegarden';
-import { AnimeSystem, Anime, onUnhandledRejection } from '@animespace/core';
-
 import path from 'node:path';
+
+import type { Resource } from 'animegarden';
+
+import {
+  Anime,
+  LocalVideo,
+  AnimeSystem,
+  onDeath,
+  onUnhandledRejection
+} from '@animespace/core';
 import { Parser } from 'anitomy';
 import { MutableMap } from '@onekuma/map';
-import { LocalVideo, onDeath } from '@animespace/core';
 import {
+  link,
   bold,
   cyan,
-  lightGreen,
   lightRed,
-  lightYellow,
-  link
+  lightGreen,
+  lightYellow
 } from '@breadc/color';
 
+import { ANIMEGARDEN } from './constant';
 import { DownloadClient } from './download';
 import { createProgressBar } from './logger';
 
@@ -202,11 +209,9 @@ export async function runDownloadTask(
 
   const cancelDeath = onDeath(async () => {
     multibar.finish();
-    console.log();
   });
   const cancelUnhandledRej = onUnhandledRejection(() => {
     multibar.finish();
-    console.log();
   });
 
   const tasks = videos.map(async (video) => {
@@ -256,11 +261,29 @@ export async function runDownloadTask(
           episode: video.video.episode,
           extension: path.extname(file).slice(1) || 'mp4'
         });
+
+        // Remove old animegarden video to keep storage clean
+        {
+          const library = (await anime.library()).videos;
+          const oldVideo = library.find(
+            (v) =>
+              v.source.type === ANIMEGARDEN && v.episode === video.video.episode
+          );
+          if (oldVideo) {
+            multibarLogger.info(
+              `${lightRed('Removing')} ${bold(oldVideo.filename)}`
+            );
+            await anime.removeVideo(oldVideo);
+          }
+        }
+
+        // Copy video to storage
         await anime.addVideoByCopy(file, video.video);
-        multibar.println(
-          `${cyan(`Info`)} ${lightGreen('Download')} ${bold(
-            video.video.filename
-          )} ${lightGreen('OK')}`
+
+        multibarLogger.info(
+          `${lightGreen('Download')} ${bold(video.video.filename)} ${lightGreen(
+            'OK'
+          )}`
         );
       } else {
         multibar.println(

@@ -24,13 +24,11 @@ import {
 
 import './plan.d';
 
-import { DOT } from './constant';
 import { ufetch } from './ufetch';
 import { generatePlan } from './generate';
+import { ANIMEGARDEN, DOT } from './constant';
 import { DownloadProviders, makeClient } from './download';
 import { generateDownloadTask, runDownloadTask } from './task';
-
-const ANIMEGARDEN = 'AnimeGarden';
 
 export interface AnimeGardenOptions extends PluginEntry {
   provider?: DownloadProviders;
