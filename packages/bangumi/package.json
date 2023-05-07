@@ -10,11 +10,11 @@
   ],
   "homepage": "https://anime.docs.xlorpaste.cn/",
   "bugs": {
-    "url": "https://github.com/XLorPaste/AnimePaste/issues"
+    "url": "https://github.com/yjl9903/AnimeSpace/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/XLorPaste/AnimePaste.git"
+    "url": "git+https://github.com/yjl9903/AnimeSpace.git"
   },
   "license": "AGPL-3.0",
   "author": "XLor",

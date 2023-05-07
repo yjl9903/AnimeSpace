@@ -6,7 +6,7 @@ AnimePaste Web 应用是基于 [Cloudflare Pages](https://pages.cloudflare.com/)
 >
 > 你需要注册好 [GitHub](https://github.com/) 和 [Cloudflare](https://dash.cloudflare.com/) 账号。
 
-首先，fork AnimePaste 的 [仓库](https://github.com/XLorPaste/AnimePaste) 并且在 Cloudflare Pages 面板上创建新项目（选择：连接到 Git），选择刚才 fork 的新仓库。
+首先，fork AnimePaste 的 [仓库](https://github.com/yjl9903/AnimeSpace) 并且在 Cloudflare Pages 面板上创建新项目（选择：连接到 Git），选择刚才 fork 的新仓库。
 
 然后，设置构建命令是 `npm install -g pnpm && pnpm i && pnpm build:app`，构建输出目录是 `/packages/app/dist`。并且设置环境变量：
 

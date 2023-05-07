@@ -12,15 +12,15 @@ export default defineConfig({
   themeConfig: {
     logo: '/favicon.svg',
     editLink: {
-      pattern: 'https://github.com/XLorPaste/AnimePaste/tree/main/docs/:path',
+      pattern: 'https://github.com/yjl9903/AnimeSpace/tree/main/docs/:path',
       text: '反馈修改建议'
     },
     footer: {
       message: 'Released under the AGPL-3.0 License.',
-      copyright: 'Copyright © 2021-PRESENT XLor'
+      copyright: 'Copyright © 2023-PRESENT XLor'
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/XLorPaste/AnimePaste' }
+      { icon: 'github', link: 'https://github.com/yjl9903/AnimeSpace' }
     ],
     algolia: {
       appId: 'FGCMJD7ZM9',

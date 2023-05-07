@@ -2,7 +2,7 @@
 
 <p align="center">「 你所热爱的就是你的动画 」</p>
 
-[![version](https://img.shields.io/npm/v/animepaste?color=rgb%2850%2C203%2C86%29&label=AnimePaste)](https://www.npmjs.com/package/animepaste) [![CI](https://github.com/XLorPaste/AnimePaste/actions/workflows/ci.yml/badge.svg)](https://github.com/XLorPaste/AnimePaste/actions/workflows/ci.yml) [![Demo](https://img.shields.io/badge/AnimePaste-Demo-brightgreen)](https://anime.xlorpaste.cn/) [![license](https://img.shields.io/github/license/XLorPaste/AnimePaste)](./LICENSE)
+[![version](https://img.shields.io/npm/v/animepaste?color=rgb%2850%2C203%2C86%29&label=AnimePaste)](https://www.npmjs.com/package/animepaste) [![CI](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml/badge.svg)](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml) [![Demo](https://img.shields.io/badge/AnimePaste-Demo-brightgreen)](https://anime.xlorpaste.cn/) [![license](https://img.shields.io/github/license/yjl9903/AnimeSpace)](./LICENSE)
 
 Paste your favourite anime online.
 

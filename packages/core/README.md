@@ -1,6 +1,6 @@
 # AnimeSpace Core Package
 
-It provides internal abstraction for [AnimeSpace](https://github.com/XLorPaste/AnimePaste).
+It provides internal abstraction for [AnimeSpace](https://github.com/yjl9903/AnimeSpace).
 
 ## Usage
 

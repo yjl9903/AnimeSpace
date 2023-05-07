@@ -21,7 +21,7 @@ hero:
       link: https://anime.xlorpaste.cn
     - theme: alt
       text: GitHub
-      link: https://github.com/XLorPaste/AnimePaste
+      link: https://github.com/yjl9903/AnimeSpace
 
 features:
   - title: 自动化

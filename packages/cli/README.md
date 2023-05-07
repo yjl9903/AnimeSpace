@@ -8,7 +8,7 @@ Paste your favourite anime online.
 
 AnimeSpace is yet another solution for automatically downloading bangumis.
 
-This is the command line application package for managing [AnimeSpace](https://github.com/XLorPaste/AnimePaste).
+This is the command line application package for managing [AnimeSpace](https://github.com/yjl9903/AnimeSpace).
 
 AnimeSpace includes **an admin command-line application** to config what bangumis and how to download and **a builtin web application** to view bangumis which can also be deployed on [Cloudflare Pages](https://pages.cloudflare.com/). It also support download resource for the media library software like [Jellyfin](https://github.com/jellyfin/jellyfin) and so on.
 
