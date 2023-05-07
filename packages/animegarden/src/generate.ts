@@ -71,6 +71,7 @@ export async function generatePlan(
       const plan = {
         title,
         bgm: '' + anime.subject_id,
+        season: inferSeason(title, ...translations),
         translations
       };
       const fansub = await getFansub([plan.title, ...plan.translations]);
@@ -79,6 +80,9 @@ export async function generatePlan(
       writeln(`    translations:`);
       for (const t of plan.translations ?? []) {
         writeln(`      - '${t}'`);
+      }
+      if (plan.season !== 1) {
+        writeln(`    season: ${plan.season}`);
       }
       writeln(`    bgm: '${plan.bgm}'`);
       writeln(`    fansub:`);
@@ -153,6 +157,33 @@ export async function generatePlan(
       (r) => r.fansub!.name
     ).map((r) => r.fansub!.name);
   }
+}
+
+function inferSeason(...titles: string[]) {
+  for (const title of titles) {
+    {
+      const match = /Season\s*(\d+)/.exec(title);
+      if (match) {
+        return +match[1];
+      }
+    }
+    {
+      const match = /第\s*(\d+)\s*(季|期)/.exec(title);
+      if (match) {
+        return +match[1];
+      }
+    }
+    if (title.includes('第二季')) return 2;
+    if (title.includes('第三季')) return 3;
+    if (title.includes('第四季')) return 4;
+    if (title.includes('第五季')) return 5;
+    if (title.includes('第六季')) return 6;
+    if (title.includes('第七季')) return 7;
+    if (title.includes('第八季')) return 8;
+    if (title.includes('第九季')) return 9;
+    if (title.includes('第十季')) return 10;
+  }
+  return 1;
 }
 
 function inferDate(now: string | undefined) {
