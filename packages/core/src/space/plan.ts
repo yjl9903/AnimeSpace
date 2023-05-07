@@ -58,7 +58,6 @@ export async function loadPlan(
         };
         return plan;
       } else {
-        console.log(parsed.error.errors);
         throw new AnimeSystemError('Failed to parse plan');
       }
     })
