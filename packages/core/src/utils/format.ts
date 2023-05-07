@@ -21,3 +21,11 @@ export function formatTitle(template: string, data: Record<string, string>) {
   }
   return template;
 }
+
+export function formatEpisode(ep: number) {
+  if (0 <= ep && ep < 10) {
+    return '0' + ep;
+  } else {
+    return '' + ep;
+  }
+}

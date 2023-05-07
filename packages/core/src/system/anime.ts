@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import { parse, stringify } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
-import { formatTitle, listIncludeFiles } from '../utils';
+import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
 
 const MetadataFilename = 'metadata.yaml';
 
@@ -107,8 +107,8 @@ export class Anime {
       title: this.plan.title,
       yyyy: format(this.plan.date, 'yyyy'),
       MM: format(this.plan.date, 'MM'),
-      season: String(this.plan.season),
-      ep: video.episode ? String(video.episode) : '{ep}',
+      season: formatEpisode(this.plan.season),
+      ep: video.episode ? formatEpisode(video.episode) : '{ep}',
       extension: path.extname(video.filename).slice(1) ?? 'mp4',
       fansub: video.fansub ?? 'fansub'
     });
@@ -124,8 +124,8 @@ export class Anime {
       title: this.plan.title,
       yyyy: '' + this.plan.date.getFullYear(),
       mm: '' + (this.plan.date.getMonth() + 1),
-      season: meta.season ? String(meta.season) : String(this.plan.season),
-      ep: meta.episode ? String(meta.episode) : '{ep}',
+      season: formatEpisode(meta.season ? meta.season : this.plan.season),
+      ep: meta.episode ? formatEpisode(meta.episode) : '{ep}',
       extension: meta.extension?.toLowerCase() ?? 'mp4',
       fansub: meta.fansub ?? 'fansub'
     });
