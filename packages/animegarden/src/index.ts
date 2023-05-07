@@ -7,6 +7,7 @@ import {
   type Plugin,
   type PluginEntry,
   type AnimeSystem,
+  onDeath,
   loadAnime,
   StringArray
 } from '@animespace/core';
@@ -37,9 +38,13 @@ export interface AnimeGardenOptions extends PluginEntry {
 
 export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   const provider = options.provider ?? 'webtorrent';
-  const getClient = useSingleton((system: AnimeSystem) =>
-    makeClient(provider, system, options)
-  );
+  const getClient = useSingleton((system: AnimeSystem) => {
+    const client = makeClient(provider, system, options);
+    onDeath(async () => {
+      await client.close();
+    });
+    return client;
+  });
 
   return {
     name: 'animegarden',
