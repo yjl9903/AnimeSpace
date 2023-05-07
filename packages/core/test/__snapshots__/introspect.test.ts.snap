@@ -13,7 +13,7 @@ exports[`Introspect > should work 1`] = `
     "videos": [],
   },
   {
-    "bgm": "376703",
+    "bgm": 376703,
     "title": "偶像大师 灰姑娘女孩 U149",
     "videos": [],
   },

@@ -1,19 +1,15 @@
 import { z } from 'zod';
 
 import type { Plugin } from '../plugin';
+
+import { StringArray } from '../utils';
+
 import {
   DefaultAnimeFormat,
   DefaultEpisodeFormat,
   DefaultFilmFormat,
   DefaultStorageDirectory
 } from './constant';
-
-export const StringArray = z.union([
-  z.string().transform((s) => [s]),
-  z.string().array()
-]);
-
-export type StringArray = z.infer<typeof StringArray>;
 
 export const PluginEntry = z.object({ name: z.string() }).passthrough();
 
@@ -60,9 +56,9 @@ export interface AnimeSpace {
 
   readonly preference: Preference;
 
-  readonly plans: () => Promise<Plan[]>;
-
   readonly plugins: Plugin[];
+
+  readonly plans: () => Promise<Plan[]>;
 
   readonly resolvePath: (...d: string[]) => string;
 }
@@ -70,6 +66,31 @@ export interface AnimeSpace {
 export type PlanStatus = 'onair' | 'finish';
 
 export type AnimePlanType = '番剧' | '电影' | 'OVA';
+
+export const AnimePlanSchema = z
+  .object({
+    title: z.string(),
+    translations: z
+      .union([
+        z.string().transform((s) => ({ unknown: [s] })),
+        z.array(z.string()).transform((arr) => ({ unknown: arr })),
+        z.record(z.string(), StringArray)
+      ])
+      .default({}),
+    type: z.enum(['番剧', '电影', 'OVA']).default('番剧'),
+    status: z.enum(['onair', 'finish']).optional(),
+    season: z.coerce.number().default(1),
+    date: z.coerce.date().optional(),
+    keywords: z.any()
+  })
+  .passthrough();
+
+export const PlanSchema = z.object({
+  name: z.string().default('unknown'),
+  date: z.coerce.date(),
+  status: z.enum(['onair', 'finish']).default('onair'),
+  onair: z.array(AnimePlanSchema).default([])
+});
 
 export interface Plan {
   readonly name: string;
@@ -89,8 +110,6 @@ export interface AnimePlan {
   readonly type: AnimePlanType;
 
   readonly status: PlanStatus;
-
-  readonly bgm: string;
 
   readonly season: number;
 

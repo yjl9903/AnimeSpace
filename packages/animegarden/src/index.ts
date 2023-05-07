@@ -1,22 +1,25 @@
 import type { ConsolaInstance } from 'consola';
+
+import { z } from 'zod';
+import { fetchResources } from 'animegarden';
 import {
   type Anime,
   type Plugin,
   type PluginEntry,
   type AnimeSystem,
   loadAnime,
+  StringArray,
   formatStringArray
 } from '@animespace/core';
-import { fetchResources } from 'animegarden';
 import {
   dim,
   link,
   bold,
   underline,
+  lightRed,
   lightBlue,
   lightGreen,
-  lightYellow,
-  lightRed
+  lightYellow
 } from '@breadc/color';
 
 import './plan.d';
@@ -50,6 +53,9 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           }
         }
       }
+    },
+    schema: {
+      plan: z.object({ bgm: z.coerce.string(), fansub: StringArray })
     },
     command(system, cli) {
       cli

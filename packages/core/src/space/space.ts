@@ -44,7 +44,7 @@ export async function loadSpace(
   // Merge plugin schema
   const schema = plugins.reduce(
     (acc: AnyZodObject, plugin) =>
-      plugin?.schema?.space ? acc.merge(plugin?.schema?.space!) : acc,
+      plugin?.schema?.space ? acc.merge(plugin?.schema?.space) : acc,
     RawAnimeSpaceSchema.extend({
       storage: z
         .string()
@@ -60,7 +60,7 @@ export async function loadSpace(
     await validateSpace(root, space);
 
     const plans = useAsyncSingleton(async () => {
-      const plans = await loadPlan(root, space.plans);
+      const plans = await loadPlan(root, space.plans, plugins);
       for (const plugin of resolved.plugins) {
         await plugin.prepare?.plans?.(resolved, plans);
       }

@@ -3,12 +3,12 @@ import path from 'path';
 import { spawn } from 'node:child_process';
 
 import type { ConsolaInstance } from 'consola';
-import { AnimeSystem, formatStringArray } from '@animespace/core';
 
 import { dim } from '@breadc/color';
 import { defu } from 'defu';
 import { WebSocket } from 'libaria2';
 import { MutableMap } from '@onekuma/map';
+import { AnimeSystem, formatStringArray } from '@animespace/core';
 
 import { getProxy } from '../ufetch';
 

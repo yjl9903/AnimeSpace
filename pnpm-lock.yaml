@@ -124,6 +124,9 @@ importers:
       webtorrent:
         specifier: ^2.0.18
         version: 2.0.18
+      zod:
+        specifier: ^3.21.4
+        version: 3.21.4
     devDependencies:
       '@types/webtorrent':
         specifier: ^0.109.3

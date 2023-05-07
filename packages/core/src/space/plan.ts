@@ -2,77 +2,68 @@ import fs from 'fs-extra';
 import fg from 'fast-glob';
 import path from 'node:path';
 import { parse } from 'yaml';
+import { z, AnyZodObject } from 'zod';
 
-import { formatStringArray } from '../utils';
+import type { Plugin } from '../plugin';
 
-import type { KeywordsParams, Plan } from './schema';
+import { AnimeSystemError } from '../error';
 
-export async function loadPlan(cwd: string, patterns: string[]) {
+import {
+  AnimePlan,
+  AnimePlanSchema,
+  KeywordsParams,
+  Plan,
+  PlanSchema
+} from './schema';
+
+export async function loadPlan(
+  cwd: string,
+  patterns: string[],
+  plugins: Plugin[]
+): Promise<Plan[]> {
+  const animePlanSchema = plugins.reduce(
+    (acc: AnyZodObject, plugin) =>
+      plugin?.schema?.plan ? acc.merge(plugin?.schema?.plan) : acc,
+    AnimePlanSchema
+  ) as typeof AnimePlanSchema;
+  const Schema = PlanSchema.extend({
+    onair: z.array(animePlanSchema).default([])
+  });
+
   const files = await fg(patterns, { cwd, dot: true });
+
   const plans = await Promise.all(
     files.map(async (file) => {
       const content = await fs.readFile(path.resolve(cwd, file), 'utf-8');
-      const plan = parse(content);
-
-      const status =
-        plan.status === 'onair' || plan.status === 'finish'
-          ? plan.status
-          : 'onair';
-      const date = new Date(plan.date);
-
-      return <Plan>{
-        ...plan,
-        name: plan.name ?? 'unknown',
-        date,
-        status,
-        onair: formatStringArray(plan.onair).map((o: any) => {
-          const title = String(o.title);
-          const oStatus =
-            o.status === 'onair' || o.status === 'finish' ? o.status : status;
-          const type = ['番剧', '电影', 'OVA'].includes(o.type)
-            ? o.type
-            : '番剧';
-          const translations = resolveTranslations(o.translations);
-
-          return {
-            ...o,
-            title,
-            translations,
-            bgm: String(o.bgm),
-            type,
-            status: oStatus,
-            season: o.season ? +o.season : 1,
-            date: o.date ? new Date(o.date) : date,
-            keywords: resolveKeywordsArray(title, translations, o.keywords)
-          };
-        })
-      };
+      const parsed = Schema.safeParse(parse(content));
+      if (parsed.success) {
+        const plan: Plan = {
+          ...parsed.data,
+          onair: parsed.data.onair.map(
+            (o: z.infer<typeof AnimePlanSchema>) =>
+              ({
+                ...o,
+                // Inherit plan status
+                status: o.status ? o.status : parsed.data.status,
+                // Inherit plan date
+                date: o.date ? o.date : parsed.data.date,
+                // Manually resolve keywords
+                keywords: resolveKeywordsArray(
+                  o.title,
+                  o.translations,
+                  o.keywords
+                )
+              } as AnimePlan)
+          )
+        };
+        return plan;
+      } else {
+        console.log(parsed.error.errors);
+        throw new AnimeSystemError('Failed to parse plan');
+      }
     })
   );
   return plans;
-}
-
-function resolveTranslations(trans: unknown) {
-  if (trans !== undefined && trans !== null) {
-    if (typeof trans === 'string') {
-      return {
-        unknown: [trans]
-      };
-    } else if (Array.isArray(trans)) {
-      return {
-        unknown: trans
-      };
-    } else if (typeof trans === 'object') {
-      const entries = Object.entries(trans as any);
-      return Object.fromEntries(
-        entries.map(([key, value]) => {
-          const arr = formatStringArray(value as any);
-          return [key, arr];
-        })
-      );
-    }
-  }
-  return {};
 }
 
 function resolveKeywordsArray(

@@ -1,12 +1,17 @@
+import { z } from 'zod';
+
+export const StringArray = z.union([
+  z.string().transform((s) => [s]),
+  z.string().array()
+]);
+
 export function formatStringArray(arr: string | string[] | undefined | null) {
-  if (arr !== undefined && arr !== null) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else {
-      return [arr];
-    }
+  const parsed = StringArray.safeParse(arr);
+  if (parsed.success) {
+    return parsed.data;
+  } else {
+    return [];
   }
-  return [];
 }
 
 export function formatTitle(template: string, data: Record<string, string>) {
