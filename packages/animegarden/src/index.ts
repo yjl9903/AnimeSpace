@@ -18,6 +18,7 @@ import {
   underline,
   lightRed,
   lightBlue,
+  lightCyan,
   lightGreen,
   lightYellow
 } from '@breadc/color';
@@ -206,7 +207,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
 
         if (newVideos.length === 0) {
           logger.info(
-            `${lightGreen('Found ' + resources.length + ' resources')} ${dim(
+            `${lightCyan('Found ' + resources.length + ' resources')} ${dim(
               'from'
             )} ${link('AnimeGarden', animegardenURL)}`
           );
