@@ -2,6 +2,8 @@ import { bold } from '@breadc/color';
 
 import type { Plan } from '../space';
 
+import { AnimeSystemError } from '../error';
+
 import type { AnimeSystem } from './types';
 
 import { Anime, LocalFile, LocalVideo } from './anime';
@@ -103,6 +105,20 @@ export async function loadAnime(system: AnimeSystem, all: boolean = false) {
   );
   const animePlans = flatAnimePlan(plans);
   const animes = animePlans.map((ap) => new Anime(system.space, ap));
+
+  {
+    const set = new Set();
+    for (const anime of animes) {
+      if (!set.has(anime.directory)) {
+        set.add(anime.directory);
+      } else {
+        throw new AnimeSystemError(
+          `发现文件夹重名的动画 ${anime.plan.title} (Season ${anime.plan.season})`
+        );
+      }
+    }
+  }
+
   // Parallel list directory and get metadata
   await Promise.all(animes.flatMap((a) => [a.library(), a.list()]));
   return animes;

@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 
-import type { AnimeSystem } from '@animespace/core';
+import { AnimeSystem, uniqBy } from '@animespace/core';
 
 import { fetchResources } from 'animegarden';
 import { lightBlue, bold, lightRed } from '@breadc/color';
@@ -153,19 +153,6 @@ export async function generatePlan(
       (r) => r.fansub!.name
     ).map((r) => r.fansub!.name);
   }
-}
-
-function uniqBy<T>(arr: T[], map: (el: T) => string): T[] {
-  const set = new Set();
-  const list: T[] = [];
-  for (const item of arr) {
-    const key = map(item);
-    if (!set.has(key)) {
-      set.add(key);
-      list.push(item);
-    }
-  }
-  return list;
 }
 
 function inferDate(now: string | undefined) {
