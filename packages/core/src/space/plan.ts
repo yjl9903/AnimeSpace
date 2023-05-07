@@ -5,7 +5,7 @@ import { parse } from 'yaml';
 
 import { formatStringArray } from '../utils';
 
-import type { KeywordsParams, Plan } from './types';
+import type { KeywordsParams, Plan } from './schema';
 
 export async function loadPlan(cwd: string, patterns: string[]) {
   const files = await fg(patterns, { cwd, dot: true });
