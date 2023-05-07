@@ -77,6 +77,7 @@ export const AnimePlanSchema = z
         z.record(z.string(), StringArray)
       ])
       .default({}),
+    directory: z.string().optional(),
     type: z.enum(['番剧', '电影', 'OVA']).default('番剧'),
     status: z.enum(['onair', 'finish']).optional(),
     season: z.coerce.number().default(1),
@@ -106,6 +107,8 @@ export interface AnimePlan {
   readonly title: string;
 
   readonly translations: Record<string, string[]>;
+
+  readonly directory?: string;
 
   readonly type: AnimePlanType;
 

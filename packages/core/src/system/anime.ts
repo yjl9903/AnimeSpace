@@ -1,8 +1,6 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
-import type { AnitomyResult } from 'anitomy';
-
 import { format } from 'date-fns';
 import { parse, stringify } from 'yaml';
 
@@ -33,7 +31,9 @@ export class Anime {
       yyyy: format(plan.date, 'yyyy'),
       MM: format(plan.date, 'MM')
     });
-    this.directory = path.join(space.storage, dirname);
+    this.directory = plan.directory
+      ? path.resolve(space.storage, plan.directory)
+      : path.join(space.storage, dirname);
   }
 
   public dirty() {
