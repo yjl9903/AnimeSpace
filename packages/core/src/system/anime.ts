@@ -1,13 +1,13 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
-import type { AnitomyResult } from 'anitomy';
-
+import { z } from 'zod';
 import { format } from 'date-fns';
 import { parse, stringify } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
+import { AnimeSystemError } from '../error';
 
 const MetadataFilename = 'metadata.yaml';
 
@@ -33,7 +33,9 @@ export class Anime {
       yyyy: format(plan.date, 'yyyy'),
       MM: format(plan.date, 'MM')
     });
-    this.directory = path.join(space.storage, dirname);
+    this.directory = plan.directory
+      ? path.resolve(space.storage, plan.directory)
+      : path.join(space.storage, dirname);
   }
 
   public dirty() {
@@ -58,22 +60,44 @@ export class Anime {
     if (this._lib === undefined || force) {
       await fs.ensureDir(this.directory);
       const libPath = path.join(this.directory, MetadataFilename);
+
+      const defaultLib: LocalLibrary = {
+        title: this.plan.title,
+        season: this.plan.season,
+        date: this.plan.date,
+        videos: []
+      };
+
       if (await fs.exists(libPath)) {
         const libContent = await fs.readFile(libPath, 'utf-8');
-        const lib = parse(libContent) as LocalLibrary;
+        const lib = parse(libContent);
 
-        return (this._lib = {
-          ...lib,
-          title: this.plan.title,
-          videos: lib?.videos ?? []
-        });
+        const schema = z
+          .object({
+            title: z.string().default(this.plan.title).catch(this.plan.title),
+            season: z.coerce
+              .number()
+              .default(this.plan.season)
+              .catch(this.plan.season),
+            date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
+            videos: z.array(z.any()).catch([])
+          })
+          .passthrough();
+
+        const parsed = schema.safeParse(lib);
+        if (parsed.success) {
+          return (this._lib = <LocalLibrary>{
+            ...parsed.data,
+            videos: lib?.videos ?? []
+          });
+        } else {
+          throw new AnimeSystemError(
+            `解析 ${this.plan.title} 的 metadata.yml 失败`
+          );
+        }
       } else {
-        const lib: LocalLibrary = {
-          title: this.plan.title,
-          videos: []
-        };
-        await fs.writeFile(libPath, stringify(lib), 'utf-8');
-        return (this._dirty = false), (this._lib = lib);
+        await fs.writeFile(libPath, stringify(defaultLib), 'utf-8');
+        return (this._dirty = false), (this._lib = defaultLib);
       }
     } else {
       return this._lib;
@@ -103,11 +127,14 @@ export class Anime {
   }
 
   public reformatVideoFilename(video: LocalVideo) {
+    const title = this._lib?.title ?? this.plan.title;
+    const date = this._lib?.date ?? this.plan.date;
+    const season = this._lib?.season ?? this.plan.season;
     return formatTitle(this.format, {
-      title: this.plan.title,
-      yyyy: format(this.plan.date, 'yyyy'),
-      MM: format(this.plan.date, 'MM'),
-      season: formatEpisode(this.plan.season),
+      title,
+      yyyy: format(date, 'yyyy'),
+      MM: format(date, 'MM'),
+      season: formatEpisode(season),
       ep: video.episode ? formatEpisode(video.episode) : '{ep}',
       extension: path.extname(video.filename).slice(1) ?? 'mp4',
       fansub: video.fansub ?? 'fansub'
@@ -120,11 +147,14 @@ export class Anime {
     fansub?: string;
     extension?: string;
   }) {
+    const title = this._lib?.title ?? this.plan.title;
+    const date = this._lib?.date ?? this.plan.date;
+    const season = meta.season ?? this._lib?.season ?? this.plan.season;
     return formatTitle(this.format, {
-      title: this.plan.title,
-      yyyy: '' + this.plan.date.getFullYear(),
-      mm: '' + (this.plan.date.getMonth() + 1),
-      season: formatEpisode(meta.season ? meta.season : this.plan.season),
+      title,
+      yyyy: format(date, 'yyyy'),
+      mm: format(date, 'MM'),
+      season: formatEpisode(season),
       ep: meta.episode ? formatEpisode(meta.episode) : '{ep}',
       extension: meta.extension?.toLowerCase() ?? 'mp4',
       fansub: meta.fansub ?? 'fansub'
@@ -254,6 +284,10 @@ export class Anime {
 
 export interface LocalLibrary {
   title: string;
+
+  date: Date;
+
+  season: number;
 
   videos: LocalVideo[];
 }

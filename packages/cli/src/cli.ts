@@ -1,7 +1,11 @@
 import createDebug from 'debug';
 import { lightRed } from '@breadc/color';
 
-import { AnimeSystemError, onUnhandledRejection } from '@animespace/core';
+import {
+  AnimeSystemError,
+  onUncaughtException,
+  onUnhandledRejection
+} from '@animespace/core';
 
 import { makeSystem, makeCliApp } from './system';
 
@@ -10,23 +14,21 @@ const debug = createDebug('anime:cli');
 export async function bootstrap() {
   const handle = (error: unknown) => {
     if (error instanceof AnimeSystemError) {
-      console.error(lightRed('Anime System Error ') + error.detail);
+      console.error(lightRed('Anime System ') + error.detail);
     } else if (error instanceof Error) {
-      console.error(lightRed('Unknown Error ') + error.message);
+      console.error(lightRed('Unknown ') + error.message);
     } else {
       console.error(error);
     }
     debug(error);
   };
 
+  process.setMaxListeners(256);
+  onUncaughtException(handle);
+  onUnhandledRejection(handle);
+
   try {
     const system = await makeSystem();
-    process.setMaxListeners(256);
-    onUnhandledRejection((error) => {
-      system.logger.error(error);
-      debug(error);
-    });
-
     const app = await makeCliApp(system);
     await app.run(process.argv.slice(2));
   } catch (error: unknown) {
