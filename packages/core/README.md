@@ -11,9 +11,9 @@ import { type Plugin, type PluginEntry } from '@animespace/core';
 
 export interface CustomPluginOptions extends PluginEntry {}
 
-export function CustromPlugin(options: CustomPluginOptions): Plugin {
+export function CustomPlugin(options: CustomPluginOptions): Plugin {
   return {
-    name: 'CustromPlugin'
+    name: 'CustomPlugin'
   };
 }
 ```
