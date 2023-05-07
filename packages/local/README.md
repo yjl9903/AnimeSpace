@@ -1,4 +1,4 @@
-# @animespace/download
+# @animespace/local
 
 ## License
 

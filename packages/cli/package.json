@@ -50,7 +50,7 @@
     "@animespace/animegarden": "workspace:*",
     "@animespace/bangumi": "workspace:*",
     "@animespace/core": "workspace:*",
-    "@animespace/download": "workspace:*",
+    "@animespace/local": "workspace:*",
     "@breadc/color": "^0.9.3",
     "@onekuma/map": "^0.1.10",
     "breadc": "^0.9.3",

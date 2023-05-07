@@ -13,19 +13,19 @@ import { dim, bold, lightYellow, lightGreen } from '@breadc/color';
 
 const DOT = dim('•');
 
-export const DOWNLOAD = 'Download';
+export const LOCAL = 'Local';
 
-export interface DownloadOptions extends PluginEntry {
+export interface LocalOptions extends PluginEntry {
   directory?: string;
 }
 
-export async function Download(options: DownloadOptions): Promise<Plugin> {
+export async function Local(options: LocalOptions): Promise<Plugin> {
   let _logger: ConsolaInstance | undefined = undefined;
   const relDir = options.directory ?? './download';
   const files: LocalFile[] = [];
 
   return {
-    name: 'download',
+    name: 'local',
     options,
     introspect: {
       async handleUnknownFile(system, anime, file) {
@@ -41,7 +41,7 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
             fansub: result.release.group,
             episode: result.episode.number,
             source: {
-              type: DOWNLOAD,
+              type: LOCAL,
               from: file.filename
             }
           };
@@ -92,7 +92,7 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
               fansub: result.release.group,
               episode: result.episode.number,
               source: {
-                type: DOWNLOAD,
+                type: LOCAL,
                 from: file.filename
               }
             };
@@ -127,7 +127,7 @@ export async function Download(options: DownloadOptions): Promise<Plugin> {
     if (_logger) {
       return _logger;
     } else {
-      return (_logger = system.logger.withTag(DOWNLOAD));
+      return (_logger = system.logger.withTag(LOCAL));
     }
   }
 }

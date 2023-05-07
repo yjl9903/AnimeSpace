@@ -152,9 +152,9 @@ importers:
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
-      '@animespace/download':
+      '@animespace/local':
         specifier: workspace:*
-        version: link:../download
+        version: link:../local
       '@breadc/color':
         specifier: ^0.9.3
         version: 0.9.3
@@ -242,7 +242,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
 
-  packages/download:
+  packages/local:
     dependencies:
       '@animespace/core':
         specifier: workspace:*
@@ -3280,7 +3280,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /concordance@5.0.4:

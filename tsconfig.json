@@ -13,17 +13,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "paths": {
-      "@animespace/core": [
-        "./packages/core/src/index.ts"
-      ],
       "@animespace/animegarden": [
         "./packages/animegarden/src/index.ts"
       ],
       "@animespace/bangumi": [
         "./packages/bangumi/src/index.ts"
       ],
-      "@animespace/download": [
-        "./packages/download/src/index.ts"
+      "@animespace/core": [
+        "./packages/core/src/index.ts"
+      ],
+      "@animespace/local": [
+        "./packages/local/src/index.ts"
       ],
     }
   },
