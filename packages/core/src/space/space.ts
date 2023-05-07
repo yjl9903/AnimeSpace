@@ -189,7 +189,7 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     plans: ['./plans/*.yaml'],
     plugins: [
       { name: 'animegarden', provider: 'aria2', directory: './download' },
-      { name: 'download', directory: './local' },
+      { name: 'local', directory: './local' },
       { name: 'bangumi', username: '' }
     ]
   };
