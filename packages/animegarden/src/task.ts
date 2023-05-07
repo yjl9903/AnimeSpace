@@ -95,21 +95,24 @@ function groupResources(
   const map = new MutableMap<number, MutableMap<string, Resource[]>>([]);
 
   for (const r of resources) {
-    const ban = system.space.preference.keyword.exclude.some(
-      (k) => r.title.indexOf(k) !== -1
-    );
-    if (ban) continue;
+    // Resource title should not have exclude keywords
+    if (
+      system.space.preference.keyword.exclude.some(
+        (k) => r.title.indexOf(k) !== -1
+      )
+    ) {
+      continue;
+    }
+    // Resource fansub shoulde be included
     if (r.fansub && !anime.plan.fansub.includes(r.fansub.name)) continue;
 
     const info = parser.parse(r.title);
     if (info && info.episode.number !== undefined) {
       const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
-      if (anime.plan.fansub.includes(fansub)) {
-        map
-          .getOrPut(info.episode.number, () => new MutableMap([]))
-          .getOrPut(fansub, () => [])
-          .push(r);
-      }
+      map
+        .getOrPut(info.episode.number, () => new MutableMap([]))
+        .getOrPut(fansub, () => [])
+        .push(r);
     } else {
       logger.warn(`${lightYellow('Parse Error')}  ${r.title}`);
     }
