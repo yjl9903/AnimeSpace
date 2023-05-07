@@ -21,4 +21,4 @@ AnimePaste Web 应用是基于 [Cloudflare Pages](https://pages.cloudflare.com/)
 
 最后，前往你配置 Pages 页面，输入你刚刚生成密钥字符串登录，Web 应用部署完成。
 
-![Anime Paste](/animepaste.png)
+![AnimeSpace](/animepaste.png)

@@ -2,11 +2,11 @@
 title: 介绍
 ---
 
-# Anime Paste
+# AnimeSpace
 
 Paste your favourite anime online.
 
-Anime Paste 是另一个全自动追番工具。
+AnimeSpace 是另一个全自动追番工具。
 
 它包含一个用于管理追番计划、自动获取和下载番剧的命令行程序，一个内置可以部署到 [Cloudflare Pages](https://pages.cloudflare.com/) 上的 Web UI。除此以外，命令行程序支持结合 [Jellyfin](https://github.com/jellyfin/jellyfin) 等媒体库软件。
 

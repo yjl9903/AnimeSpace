@@ -1,6 +1,6 @@
 # 安装管理后台 CLI
 
-为了给 Anime Paste 添加动画资源，你需要使用配套的[管理后台命令行程序](https://github.com/XLorPaste/AnimePaste/tree/main/packages/cli)。
+为了给 AnimeSpace 添加动画资源，你需要使用配套的[管理后台命令行程序](https://github.com/XLorPaste/AnimePaste/tree/main/packages/cli)。
 
 > **环境准备**
 >

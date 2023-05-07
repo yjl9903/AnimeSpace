@@ -1,4 +1,4 @@
-# :tv: Anime Paste
+# :tv: AnimeSpace
 
 <p align="center">「 你所热爱的就是你的动画 」</p>
 
@@ -6,7 +6,7 @@
 
 Paste your favourite anime online.
 
-Anime Paste is yet another solution for automatically downloading bangumis.
+AnimeSpace is yet another solution for automatically downloading bangumis.
 
 It includes **an admin command-line application** to config what bangumis and how to download and **a builtin web application** to view bangumis which can also be deployed on [Cloudflare Pages](https://pages.cloudflare.com/). It also support download resource for the media library software like [Jellyfin](https://github.com/jellyfin/jellyfin) and so on.
 
@@ -21,7 +21,7 @@ All the bangumi resource is automatically fetched from [動漫花園](https://sh
 + :cloud: **Serverless**
 + :film_strip: **Support [Jellyfin](https://github.com/jellyfin/jellyfin) and so on**
 
-![Anime Paste](./docs/public/animepaste.png)
+![AnimeSpace](./docs/public/animepaste.png)
 
 ![Jellyfin](./docs/public/Jellyfin.jpeg)
 
@@ -31,7 +31,7 @@ All the bangumi resource is automatically fetched from [動漫花園](https://sh
 >
 > Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
 
-See [部署 | Anime Paste](https://anime.docs.xlorpaste.cn/deploy/) and [安装 CLI | Anime Paste](https://anime.docs.xlorpaste.cn/admin/).
+See [部署 | AnimeSpace](https://anime.docs.xlorpaste.cn/deploy/) and [安装 CLI | AnimeSpace](https://anime.docs.xlorpaste.cn/admin/).
 
 ## Credits
 

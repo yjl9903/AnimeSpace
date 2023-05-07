@@ -1,6 +1,6 @@
 # 配置
 
-Anime Paste 默认使用 `~/.animespace/` （或者 `ANIMEPASTE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
+AnimeSpace 默认使用 `~/.animespace/` （或者 `ANIMEPASTE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
 
 安装完成后，你必须运行
 

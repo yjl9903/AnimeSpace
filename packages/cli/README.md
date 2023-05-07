@@ -1,4 +1,4 @@
-# Anime Paste CLI
+# AnimeSpace CLI
 
 <p align="center">「 你所热爱的就是你的动画 」</p>
 
@@ -6,11 +6,11 @@
 
 Paste your favourite anime online.
 
-Anime Paste is yet another solution for automatically downloading bangumis.
+AnimeSpace is yet another solution for automatically downloading bangumis.
 
-This is the command line application package for managing [Anime Paste](https://github.com/XLorPaste/AnimePaste).
+This is the command line application package for managing [AnimeSpace](https://github.com/XLorPaste/AnimePaste).
 
-Anime Paste includes **an admin command-line application** to config what bangumis and how to download and **a builtin web application** to view bangumis which can also be deployed on [Cloudflare Pages](https://pages.cloudflare.com/). It also support download resource for the media library software like [Jellyfin](https://github.com/jellyfin/jellyfin) and so on.
+AnimeSpace includes **an admin command-line application** to config what bangumis and how to download and **a builtin web application** to view bangumis which can also be deployed on [Cloudflare Pages](https://pages.cloudflare.com/). It also support download resource for the media library software like [Jellyfin](https://github.com/jellyfin/jellyfin) and so on.
 
 All the bangumi resource is automatically fetched from [動漫花園](https://share.dmhy.org/). Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.
 

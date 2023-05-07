@@ -2,11 +2,11 @@
 layout: home
 sidebar: false
 
-title: Anime Paste
+title: AnimeSpace
 titleTemplate: Paste your favourite anime online
 
 hero:
-  name: Anime Paste
+  name: AnimeSpace
   text: Paste your favourite anime online
   tagline: 你所热爱的就是你的动画
   image:

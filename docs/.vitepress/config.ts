@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'Anime Paste',
+  title: 'AnimeSpace',
   description: '你所热爱的就是你的动画',
   head: [
     ['meta', { name: 'theme-color', content: '#ffffff' }],
@@ -35,7 +35,7 @@ export default defineConfig({
     sidebar: {
       '/': [
         {
-          text: 'Anime Paste',
+          text: 'AnimeSpace',
           items: [{ text: '介绍', link: '/intro/' }]
         },
         {
