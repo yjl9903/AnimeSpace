@@ -9,15 +9,13 @@ import type { Plugin } from '../plugin';
 import { isSubDir, useAsyncSingleton } from '../utils';
 import { AnimeSystemError } from '../error';
 
+import { loadPlan } from './plan';
 import {
-  Plan,
   AnimeSpace,
   PluginEntry,
   RawAnimeSpace,
   RawAnimeSpaceSchema
 } from './schema';
-
-import { loadPlan } from './plan';
 import {
   DefaultAnimeFormat,
   DefaultConfigFilename,
