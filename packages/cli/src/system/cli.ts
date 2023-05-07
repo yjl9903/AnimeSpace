@@ -110,7 +110,6 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           lightGreen('Anime libraries have been written back')
         );
       }
-      process.exit();
     });
   }
 }

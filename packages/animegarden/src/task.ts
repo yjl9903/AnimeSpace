@@ -183,10 +183,6 @@ export async function runDownloadTask(
     }
   });
 
-  const cancelDeath = onDeath(async () => {
-    multibar.finish();
-  });
-
   const systemLogger = system.logger.withTag('animegarden');
   const multibarLogger = {
     info(message: string) {
@@ -200,8 +196,14 @@ export async function runDownloadTask(
     }
   };
   client.setLogger(multibarLogger);
+
+  const cancelDeath = onDeath(async () => {
+    multibar.finish();
+    console.log();
+  });
   const cancelUnhandledRej = onUnhandledRejection(() => {
     multibar.finish();
+    console.log();
   });
 
   const tasks = videos.map(async (video) => {
