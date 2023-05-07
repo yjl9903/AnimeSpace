@@ -15,7 +15,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yjl9903/AnimeSpace.git"
+    "url": "git+https://github.com/yjl9903/AnimeSpace.git",
+    "directory": "packages/animegarden"
   },
   "license": "AGPL-3.0",
   "author": "XLor",
