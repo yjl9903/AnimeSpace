@@ -42,10 +42,12 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   return {
     name: 'animegarden',
     options,
-    async preparePlans(_space, plans) {
-      for (const plan of plans) {
-        for (const onair of plan.onair) {
-          onair.fansub = formatStringArray(onair.fansub);
+    prepare: {
+      async plans(_space, plans) {
+        for (const plan of plans) {
+          for (const onair of plan.onair) {
+            onair.fansub = formatStringArray(onair.fansub);
+          }
         }
       }
     },
