@@ -2,7 +2,7 @@
 
 <p align="center">「 你所热爱的就是你的动画 」</p>
 
-[![version](https://img.shields.io/npm/v/animepaste?color=rgb%2850%2C203%2C86%29&label=AnimePaste)](https://www.npmjs.com/package/animepaste) [![CI](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml/badge.svg)](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml) [![Demo](https://img.shields.io/badge/AnimePaste-Demo-brightgreen)](https://anime.xlorpaste.cn/) [![license](https://img.shields.io/github/license/yjl9903/AnimeSpace)](./LICENSE)
+[![version](https://img.shields.io/npm/v/animespace?color=rgb%2850%2C203%2C86%29&label=AnimePaste)](https://www.npmjs.com/package/animespace) [![CI](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml/badge.svg)](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml) [![Docs](https://img.shields.io/badge/AnimeSpace-Demo-brightgreen)](https://anime.docs.xlorpaste.cn/) [![license](https://img.shields.io/github/license/yjl9903/AnimeSpace)](./LICENSE)
 
 Paste your favourite anime online.
 
@@ -12,8 +12,8 @@ It includes **an admin command-line application** to config what bangumis and ho
 
 All the bangumi resource is automatically fetched from [動漫花園](https://share.dmhy.org/). Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.
 
-+ 📺 [Online Demo | 在线 Demo](https://anime.xlorpaste.cn/)
-+ 📖 [Document | 文档](https://anime.docs.xlorpaste.cn/)
++ 📖 [中文文档](https://anime.docs.xlorpaste.cn/)
++ 📚 [部署博客](https://blog.onekuma.cn/alidriver-alist-rclone-animepaste)
 
 ## Features
 
