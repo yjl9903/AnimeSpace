@@ -116,10 +116,12 @@ function groupResources(
     const info = parser.parse(r.title);
     if (info && info.episode.number !== undefined) {
       const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
-      map
-        .getOrPut(info.episode.number, () => new MutableMap([]))
-        .getOrPut(fansub, () => [])
-        .push(r);
+      if (anime.plan.fansub.includes(fansub)) {
+        map
+          .getOrPut(info.episode.number, () => new MutableMap([]))
+          .getOrPut(fansub, () => [])
+          .push(r);
+      }
     } else {
       logger.warn(`${lightYellow('Parse Error')}  ${r.title}`);
     }
