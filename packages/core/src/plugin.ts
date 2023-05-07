@@ -32,6 +32,8 @@ export interface Plugin {
 
   schema?: {
     space?: AnyZodObject;
+
+    plan?: AnyZodObject;
   };
 
   /**
