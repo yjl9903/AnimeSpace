@@ -1,6 +1,6 @@
 import type { ConsolaInstance } from 'consola';
 
-import type { AnimeSpace } from '../space/types';
+import type { AnimeSpace } from '../space/schema';
 
 import type { Anime } from './anime';
 

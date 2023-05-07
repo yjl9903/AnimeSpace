@@ -1,35 +1,30 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
-import { createDefu } from 'defu';
+import { z } from 'zod';
 import { parse, stringify } from 'yaml';
 
 import type { Plugin } from '../plugin';
 
+import { isSubDir } from '../utils';
 import { AnimeSystemError } from '../error';
-import { formatStringArray, isSubDir } from '../utils';
 
-import type { Plan, AnimeSpace, PluginEntry, RawAnimeSpace } from './types';
+import {
+  Plan,
+  AnimeSpace,
+  PluginEntry,
+  RawAnimeSpace,
+  RawAnimeSpaceSchema
+} from './schema';
 
 import { loadPlan } from './plan';
-
-const defu = createDefu((obj, key, value) => {
-  if (key === 'include' && Array.isArray(obj[key]) && Array.isArray(value)) {
-    // @ts-ignore
-    obj[key] = [...new Set([...value, ...obj[key]])];
-    return true;
-  }
-});
-
-const configFilename = `./anime.yaml`;
-
-const DefaultStorageDirectory = `./animes`;
-
-const DefaultAnimeFormat = '{title}';
-
-const DefaultEpisodeFormat = '[{fansub}] {title} - E{ep}.{extension}';
-
-const DefaultFilmFormat = '[{fansub}] {title}.{extension}';
+import {
+  DefaultAnimeFormat,
+  DefaultConfigFilename,
+  DefaultEpisodeFormat,
+  DefaultFilmFormat,
+  DefaultStorageDirectory
+} from './constant';
 
 export type PluginLoaderFn = (
   entry: PluginEntry
@@ -43,59 +38,36 @@ export async function loadSpace(
 ): Promise<AnimeSpace> {
   const root = path.resolve(_root);
 
-  const configPath = path.join(root, configFilename);
+  const configPath = path.join(root, DefaultConfigFilename);
   if ((await fs.exists(root)) && (await fs.exists(configPath))) {
     // Load space directory
     const configContent = await fs.readFile(configPath, 'utf-8');
     const config = parse(configContent);
 
-    const storageDirectory: string = config.storage ?? DefaultStorageDirectory;
-    const plans = formatStringArray(config.plans); // normalize to absolute path when loading
-
-    const space: RawAnimeSpace = defu(
-      {
-        root,
-        storage: path.resolve(root, storageDirectory),
-        preference: config.preference,
-        plans,
-        plugins: config.plugins
-      },
-      {
-        preference: {
-          format: {
-            anime: DefaultAnimeFormat,
-            episode: DefaultEpisodeFormat
-          },
-          extension: {
-            include: ['mp4'],
-            exclude: []
-          },
-          keyword: {
-            order: {},
-            exclude: []
-          },
-          fansub: {
-            order: [],
-            exclude: []
-          }
-        },
-        plans: [],
-        plugins: []
-      }
+    const schema = RawAnimeSpaceSchema.merge(
+      z.object({ root: z.literal(root).default(root) })
     );
+    const parsed = schema.safeParse(config);
 
-    // Validate space directory
-    await validateSpace(space);
-    return load(space);
+    if (parsed.success) {
+      const space = parsed.data;
+      space.storage = path.resolve(root, space.storage);
+      // Validate space directory
+      await validateSpace(root, space);
+      return load(root, space);
+    } else {
+      throw new AnimeSystemError(`Failed to parse anime space config`);
+    }
   } else {
     // Create new space directory
     const space = await makeNewSpace(root);
-    return load(space);
+    return load(root, space);
   }
 
-  async function load(space: RawAnimeSpace) {
+  async function load(root: string, space: RawAnimeSpace) {
     let plans: Plan[] | undefined = undefined;
     const resolved: AnimeSpace = {
+      root,
       ...space,
       resolvePath(...d) {
         return path.resolve(resolved.root, ...d);
@@ -104,7 +76,7 @@ export async function loadSpace(
         if (plans !== undefined) {
           return plans;
         } else {
-          plans = await loadPlan(space.root, space.plans);
+          plans = await loadPlan(root, space.plans);
           for (const plugin of resolved.plugins) {
             await plugin.preparePlans?.(resolved, plans);
           }
@@ -135,9 +107,9 @@ export async function loadSpace(
   }
 }
 
-async function validateSpace(space: RawAnimeSpace) {
+async function validateSpace(root: string, space: RawAnimeSpace) {
   try {
-    await fs.access(space.root, fs.constants.R_OK | fs.constants.W_OK);
+    await fs.access(root, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
     throw new AnimeSystemError(`Can not access anime space directory`);
   }
@@ -157,9 +129,9 @@ async function validateSpace(space: RawAnimeSpace) {
   // Create a symlin from the outside storage dir to the local dir
   // Make it easy to edit the storage dir
   try {
-    if (!isSubDir(space.root, space.storage)) {
+    if (!isSubDir(root, space.storage)) {
       const dirname = path.basename(space.storage);
-      const target = path.join(space.root, dirname);
+      const target = path.join(root, dirname);
       if (
         !(await fs.pathExists(target)) ||
         (await fs.readdir(target)).length === 0
@@ -174,7 +146,6 @@ async function validateSpace(space: RawAnimeSpace) {
 
 async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
   const space: RawAnimeSpace = {
-    root,
     storage: path.join(root, DefaultStorageDirectory),
     preference: {
       format: {
@@ -208,21 +179,17 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     ]
   };
 
-  await fs.mkdir(space.root, { recursive: true }).catch(() => {});
+  await fs.mkdir(root, { recursive: true }).catch(() => {});
 
   await Promise.all([
     fs.mkdir(space.storage, { recursive: true }).catch(() => {}),
+    fs.mkdir(path.join(root, './plans'), { recursive: true }).catch(() => {}),
     fs
-      .mkdir(path.join(space.root, './plans'), { recursive: true })
+      .mkdir(path.join(root, './download'), { recursive: true })
       .catch(() => {}),
-    fs
-      .mkdir(path.join(space.root, './download'), { recursive: true })
-      .catch(() => {}),
-    fs
-      .mkdir(path.join(space.root, './local'), { recursive: true })
-      .catch(() => {}),
+    fs.mkdir(path.join(root, './local'), { recursive: true }).catch(() => {}),
     fs.writeFile(
-      path.join(space.root, configFilename),
+      path.join(root, DefaultConfigFilename),
       stringify({
         ...space,
         root: undefined,
@@ -231,11 +198,11 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
       'utf-8'
     ),
     fs.writeFile(
-      path.join(space.root, '.gitignore'),
+      path.join(root, '.gitignore'),
       ['*.mp4', '*.mkv', '*.aria2'].join('\n'),
       'utf-8'
     ),
-    fs.writeFile(path.join(space.root, 'README.md'), `# AnimeSpace\n`, 'utf-8')
+    fs.writeFile(path.join(root, 'README.md'), `# AnimeSpace\n`, 'utf-8')
   ]);
 
   return space;

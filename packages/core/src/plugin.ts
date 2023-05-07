@@ -1,7 +1,7 @@
 import type { Breadc } from 'breadc';
 
 import type { AnimeSystem } from './system/types';
-import type { AnimeSpace, Plan, PluginEntry } from './space/types';
+import type { AnimeSpace, Plan, PluginEntry } from './space/schema';
 import type { Anime, LocalFile, LocalVideo } from './system/anime';
 
 type MayPromise<T> = T | Promise<T>;
