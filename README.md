@@ -21,8 +21,6 @@ All the bangumi resource is automatically fetched from [動漫花園](https://sh
 + :cloud: **Serverless**
 + :film_strip: **Support [Jellyfin](https://github.com/jellyfin/jellyfin) and so on**
 
-![AnimeSpace](./docs/public/animepaste.png)
-
 ![Jellyfin](./docs/public/Jellyfin.jpeg)
 
 ## Installation and Deploy
