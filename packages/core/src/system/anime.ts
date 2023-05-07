@@ -107,6 +107,7 @@ export class Anime {
       title: this.plan.title,
       yyyy: format(this.plan.date, 'yyyy'),
       MM: format(this.plan.date, 'MM'),
+      season: String(this.plan.season),
       ep: video.episode ? String(video.episode) : '{ep}',
       extension: path.extname(video.filename).slice(1) ?? 'mp4',
       fansub: video.fansub ?? 'fansub'
@@ -114,6 +115,7 @@ export class Anime {
   }
 
   public formatFilename(meta: {
+    season?: number;
     episode?: number;
     fansub?: string;
     extension?: string;
@@ -122,6 +124,7 @@ export class Anime {
       title: this.plan.title,
       yyyy: '' + this.plan.date.getFullYear(),
       mm: '' + (this.plan.date.getMonth() + 1),
+      season: meta.season ? String(meta.season) : String(this.plan.season),
       ep: meta.episode ? String(meta.episode) : '{ep}',
       extension: meta.extension?.toLowerCase() ?? 'mp4',
       fansub: meta.fansub ?? 'fansub'
