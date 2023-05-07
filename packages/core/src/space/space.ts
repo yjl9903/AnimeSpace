@@ -6,7 +6,7 @@ import { parse, stringify } from 'yaml';
 
 import type { Plugin } from '../plugin';
 
-import { isSubDir } from '../utils';
+import { isSubDir, useAsyncSingleton } from '../utils';
 import { AnimeSystemError } from '../error';
 
 import {
@@ -102,25 +102,21 @@ export async function loadSpace(
   }
 
   async function load(root: string, space: RawAnimeSpace) {
-    let plans: Plan[] | undefined = undefined;
+    const plans = useAsyncSingleton(async () => {
+      const plans = await loadPlan(root, space.plans);
+      for (const plugin of resolved.plugins) {
+        await plugin.prepare?.plans?.(resolved, plans);
+      }
+      return plans;
+    });
     const resolved: AnimeSpace = {
       root,
       ...space,
       resolvePath(...d) {
         return path.resolve(resolved.root, ...d);
       },
-      async plans() {
-        if (plans !== undefined) {
-          return plans;
-        } else {
-          plans = await loadPlan(root, space.plans);
-          for (const plugin of resolved.plugins) {
-            await plugin.prepare?.plans?.(resolved, plans);
-          }
-          return plans;
-        }
-      },
-      plugins: []
+      plans,
+      plugins
     };
     for (const plugin of resolved.plugins) {
       await plugin.prepare?.space?.(resolved);
