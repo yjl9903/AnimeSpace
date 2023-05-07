@@ -1,4 +1,5 @@
 import type { Breadc } from 'breadc';
+import type { AnyZodObject } from 'zod';
 
 import type { AnimeSystem } from './system/types';
 import type { AnimeSpace, Plan, PluginEntry } from './space/schema';
@@ -17,15 +18,21 @@ export interface Plugin {
    */
   options: PluginEntry;
 
-  /**
-   * Prepare anime space configurations
-   */
-  prepare?: (space: AnimeSpace) => MayPromise<void>;
+  prepare?: {
+    /**
+     * Prepare anime space configurations
+     */
+    space?: (space: AnimeSpace) => MayPromise<void>;
 
-  /**
-   * Prepare anime space plans
-   */
-  preparePlans?: (space: AnimeSpace, plans: Plan[]) => MayPromise<void>;
+    /**
+     * Prepare anime space plans
+     */
+    plans?: (space: AnimeSpace, plans: Plan[]) => MayPromise<void>;
+  };
+
+  schema?: {
+    space?: AnyZodObject;
+  };
 
   /**
    * Extend command line interface

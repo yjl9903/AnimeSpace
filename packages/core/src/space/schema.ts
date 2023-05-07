@@ -15,7 +15,7 @@ export const StringArray = z.union([
 
 export type StringArray = z.infer<typeof StringArray>;
 
-export const PluginEntry = z.object({ name: z.string() });
+export const PluginEntry = z.object({ name: z.string() }).passthrough();
 
 export interface PluginEntry extends Record<string, any> {
   name: string;
@@ -48,7 +48,7 @@ export const RawAnimeSpaceSchema = z.object({
   storage: z.string().default(DefaultStorageDirectory),
   preference: Preference.passthrough(),
   plans: StringArray,
-  plugins: z.array(PluginEntry.passthrough())
+  plugins: z.array(PluginEntry)
 });
 
 export type RawAnimeSpace = z.infer<typeof RawAnimeSpaceSchema>;

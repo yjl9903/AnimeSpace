@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
-import { z } from 'zod';
+import { z, AnyZodObject } from 'zod';
 import { parse, stringify } from 'yaml';
 
 import type { Plugin } from '../plugin';
@@ -38,30 +38,67 @@ export async function loadSpace(
 ): Promise<AnimeSpace> {
   const root = path.resolve(_root);
 
-  const configPath = path.join(root, DefaultConfigFilename);
-  if ((await fs.exists(root)) && (await fs.exists(configPath))) {
-    // Load space directory
-    const configContent = await fs.readFile(configPath, 'utf-8');
-    const config = parse(configContent);
+  const config = await loadSpace();
+  const plugins = await loadPlugins(config.plugins);
 
-    const schema = RawAnimeSpaceSchema.merge(
-      z.object({ root: z.literal(root).default(root) })
-    );
-    const parsed = schema.safeParse(config);
+  // Merge plugin schema
+  const schema = plugins.reduce(
+    (acc: AnyZodObject, plugin) =>
+      plugin?.schema?.space ? acc.merge(plugin?.schema?.space!) : acc,
+    RawAnimeSpaceSchema.extend({
+      storage: z
+        .string()
+        .default(DefaultStorageDirectory)
+        .transform((s) => path.resolve(root, s))
+    })
+  );
+  const parsed = schema.safeParse(config);
 
-    if (parsed.success) {
-      const space = parsed.data;
-      space.storage = path.resolve(root, space.storage);
-      // Validate space directory
-      await validateSpace(root, space);
-      return load(root, space);
-    } else {
-      throw new AnimeSystemError(`Failed to parse anime space config`);
-    }
-  } else {
-    // Create new space directory
-    const space = await makeNewSpace(root);
+  if (parsed.success) {
+    const space = parsed.data as RawAnimeSpace;
+    // Validate space directory
+    await validateSpace(root, space);
     return load(root, space);
+  } else {
+    throw new AnimeSystemError(`Failed to parse anime space config`);
+  }
+
+  async function loadPlugins(entries: unknown) {
+    if (importPlugin) {
+      const parsed = z.array(PluginEntry).safeParse(entries);
+      if (parsed.success) {
+        const entries = parsed.data;
+        return (await Promise.all(entries.map((p) => resolvePlugin(p)))).filter(
+          Boolean
+        ) as Plugin[];
+      } else {
+        throw new AnimeSystemError(`Failed to parse anime space plugin config`);
+      }
+    }
+    return [];
+
+    async function resolvePlugin(p: PluginEntry) {
+      if (!!importPlugin) {
+        if (typeof importPlugin === 'function') {
+          return importPlugin(p);
+        } else if (typeof importPlugin === 'object') {
+          return importPlugin[p.name]?.(p);
+        }
+      }
+      return undefined;
+    }
+  }
+
+  async function loadSpace() {
+    const configPath = path.join(root, DefaultConfigFilename);
+    if ((await fs.exists(root)) && (await fs.exists(configPath))) {
+      // Load space directory
+      const configContent = await fs.readFile(configPath, 'utf-8');
+      return parse(configContent);
+    } else {
+      // Create new space directory
+      return await makeNewSpace(root);
+    }
   }
 
   async function load(root: string, space: RawAnimeSpace) {
@@ -78,32 +115,17 @@ export async function loadSpace(
         } else {
           plans = await loadPlan(root, space.plans);
           for (const plugin of resolved.plugins) {
-            await plugin.preparePlans?.(resolved, plans);
+            await plugin.prepare?.plans?.(resolved, plans);
           }
           return plans;
         }
       },
-      plugins: importPlugin
-        ? ((
-            await Promise.all(space.plugins.map((p) => resolvePlugin(p)))
-          ).filter(Boolean) as Plugin[])
-        : []
+      plugins: []
     };
     for (const plugin of resolved.plugins) {
-      await plugin.prepare?.(resolved);
+      await plugin.prepare?.space?.(resolved);
     }
     return resolved;
-  }
-
-  async function resolvePlugin(p: PluginEntry) {
-    if (!!importPlugin) {
-      if (typeof importPlugin === 'function') {
-        return importPlugin(p);
-      } else if (typeof importPlugin === 'object') {
-        return importPlugin[p.name]?.(p);
-      }
-    }
-    return undefined;
   }
 }
 
