@@ -8,8 +8,7 @@ import {
   type PluginEntry,
   type AnimeSystem,
   loadAnime,
-  StringArray,
-  formatStringArray
+  StringArray
 } from '@animespace/core';
 import {
   dim,
@@ -45,17 +44,11 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   return {
     name: 'animegarden',
     options,
-    prepare: {
-      async plans(_space, plans) {
-        for (const plan of plans) {
-          for (const onair of plan.onair) {
-            onair.fansub = formatStringArray(onair.fansub);
-          }
-        }
-      }
-    },
     schema: {
-      plan: z.object({ bgm: z.coerce.string(), fansub: StringArray })
+      plan: z.object({
+        bgm: z.coerce.string(),
+        fansub: StringArray
+      })
     },
     command(system, cli) {
       cli

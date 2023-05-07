@@ -80,6 +80,7 @@ export async function loadSpace(
 
     return resolved;
   } else {
+    console.error(`Failed parsing anime space config`);
     throw new AnimeSystemError(`Failed to parse anime space config`);
   }
 

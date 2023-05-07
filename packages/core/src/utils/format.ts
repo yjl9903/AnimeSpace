@@ -2,7 +2,8 @@ import { z } from 'zod';
 
 export const StringArray = z.union([
   z.string().transform((s) => [s]),
-  z.string().array()
+  z.array(z.string()),
+  z.null().transform(() => [])
 ]);
 
 export function formatStringArray(arr: string | string[] | undefined | null) {
