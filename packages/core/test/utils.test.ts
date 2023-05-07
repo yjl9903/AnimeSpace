@@ -55,7 +55,7 @@ describe('useAsyncSingleton', () => {
   it('should handle call during running', async () => {
     let count = 0;
     const value = useAsyncSingleton(async () => {
-      await sleep(100);
+      await sleep(10);
       return count++;
     });
     const task1 = value();
@@ -69,23 +69,28 @@ describe('useAsyncSingleton', () => {
 
   it('should handle error', async () => {
     let count = 0;
-    const value = useAsyncSingleton(async () => {
-      await sleep(100);
-      if (count++ < 2) {
-        throw new Error('count < 2');
-      }
-      return 2;
-    });
+    const value = useAsyncSingleton(
+      async () => {
+        await sleep(10);
+        if (count++ < 2) {
+          throw new Error('count < 2');
+        }
+        return 2;
+      },
+      { retry: true }
+    );
     const task1 = value();
     const task2 = value();
     const task3 = value();
+    const task4 = value();
     expect(() => task1).rejects.toThrowErrorMatchingInlineSnapshot(
       '"count < 2"'
     );
     expect(() => task2).rejects.toThrowErrorMatchingInlineSnapshot(
       '"count < 2"'
     );
-    // expect(await task3).toBe(2);
+    expect(await task3).toBe(2);
+    expect(await task4).toBe(2);
   });
 });
 

@@ -17,7 +17,7 @@ export function useSingleton<T extends unknown, F extends () => T>(fn: F): F {
 export function useAsyncSingleton<
   T extends unknown,
   F extends () => Promise<T>
->(fn: F): F {
+>(fn: F, options: { retry?: boolean } = {}): F {
   let cache: T;
   let initialized = false;
 
@@ -43,26 +43,32 @@ export function useAsyncSingleton<
         running = true;
         cache = await fn();
         initialized = true;
+        running = false;
         for (const res of resolves) {
           res.res(cache);
         }
         resolves.clear();
         return cache;
       } catch (error) {
-        const entry = resolves.entries().next().value;
-        if (entry) {
-          resolves.delete(entry);
-          wrapped()
-            .then((r) => {
-              entry.res?.(r);
-            })
-            .catch((e) => {
-              entry.rej?.(e);
-            });
+        if (options.retry) {
+          const [entry] = resolves.values();
+          if (entry) {
+            resolves.delete(entry);
+            running = false;
+            wrapped()
+              .then((r) => {
+                entry.res(r);
+              })
+              .catch((e) => {
+                entry.rej(e);
+              });
+          }
+        } else {
+          for (const cb of resolves) {
+            cb.rej(error);
+          }
         }
         throw error;
-      } finally {
-        running = false;
       }
     }
   };
