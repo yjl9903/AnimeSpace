@@ -131,6 +131,9 @@ importers:
       '@types/webtorrent':
         specifier: ^0.109.3
         version: 0.109.3
+      breadc:
+        specifier: ^0.9.3
+        version: 0.9.3
 
   packages/bangumi:
     dependencies:

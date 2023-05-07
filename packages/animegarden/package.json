@@ -60,6 +60,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "breadc": "^0.9.3",
     "@types/webtorrent": "^0.109.3"
   },
   "engines": {
