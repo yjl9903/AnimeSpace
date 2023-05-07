@@ -58,7 +58,29 @@ export async function loadSpace(
     const space = parsed.data as RawAnimeSpace;
     // Validate space directory
     await validateSpace(root, space);
-    return load(root, space);
+
+    const plans = useAsyncSingleton(async () => {
+      const plans = await loadPlan(root, space.plans);
+      for (const plugin of resolved.plugins) {
+        await plugin.prepare?.plans?.(resolved, plans);
+      }
+      return plans;
+    });
+    const resolved: AnimeSpace = {
+      root,
+      ...space,
+      resolvePath(...d) {
+        return path.resolve(resolved.root, ...d);
+      },
+      plans,
+      plugins
+    };
+    // Plugin init
+    for (const plugin of resolved.plugins) {
+      await plugin.prepare?.space?.(resolved);
+    }
+
+    return resolved;
   } else {
     throw new AnimeSystemError(`Failed to parse anime space config`);
   }
@@ -99,29 +121,6 @@ export async function loadSpace(
       // Create new space directory
       return await makeNewSpace(root);
     }
-  }
-
-  async function load(root: string, space: RawAnimeSpace) {
-    const plans = useAsyncSingleton(async () => {
-      const plans = await loadPlan(root, space.plans);
-      for (const plugin of resolved.plugins) {
-        await plugin.prepare?.plans?.(resolved, plans);
-      }
-      return plans;
-    });
-    const resolved: AnimeSpace = {
-      root,
-      ...space,
-      resolvePath(...d) {
-        return path.resolve(resolved.root, ...d);
-      },
-      plans,
-      plugins
-    };
-    for (const plugin of resolved.plugins) {
-      await plugin.prepare?.space?.(resolved);
-    }
-    return resolved;
   }
 }
 
