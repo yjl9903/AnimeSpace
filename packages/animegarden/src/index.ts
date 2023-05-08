@@ -227,7 +227,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         }
 
         try {
-          await runDownloadTask(system, anime, newVideos, getClient(system));
+          const client = getClient(system);
+          await runDownloadTask(system, anime, newVideos, client);
         } catch (error) {
           logger.error(error);
         }
