@@ -172,7 +172,9 @@ export async function runDownloadTask(
       }
 
       const formatSize = (size: number) =>
-        (size / 1024 / 1024).toFixed(1) + ' MB';
+        size < 1024 * 1024
+          ? (size / 1024).toFixed(1) + ' KB'
+          : (size / 1024 / 1024).toFixed(1) + ' MB';
 
       let text = '';
       if (payload.state) {
