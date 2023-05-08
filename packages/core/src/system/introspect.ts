@@ -100,12 +100,11 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
 }
 
 export async function loadAnime(system: AnimeSystem, all: boolean = false) {
-  const plans = (await system.space.plans()).filter(
-    (p) => all || p.status === 'onair'
-  );
+  const plans = await system.space.plans();
   const animePlans = flatAnimePlan(plans);
   const animes = animePlans.map((ap) => new Anime(system.space, ap));
 
+  // Detect directory naming conflict
   {
     const set = new Set();
     for (const anime of animes) {
@@ -118,6 +117,10 @@ export async function loadAnime(system: AnimeSystem, all: boolean = false) {
       }
     }
   }
+
+  // Filter out finish animes
+  const filtered = animes.filter((p) => all || p.plan.status === 'onair');
+  animes.splice(0, animes.length, ...filtered);
 
   // Parallel list directory and get metadata
   await Promise.all(animes.flatMap((a) => [a.library(), a.list()]));
