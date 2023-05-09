@@ -47,8 +47,8 @@
     "@animespace/core": "workspace:*",
     "@breadc/color": "^0.9.3",
     "@onekuma/map": "^0.1.10",
-    "animegarden": "^0.0.14",
-    "anitomy": "^0.0.14",
+    "animegarden": "^0.0.15",
+    "anitomy": "^0.0.15",
     "bgmc": "^0.0.4",
     "cli-progress": "^3.12.0",
     "date-fns": "^2.30.0",
@@ -60,8 +60,8 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "breadc": "^0.9.3",
-    "@types/webtorrent": "^0.109.3"
+    "@types/webtorrent": "^0.109.3",
+    "breadc": "^0.9.3"
   },
   "engines": {
     "node": ">=v16.0.0"

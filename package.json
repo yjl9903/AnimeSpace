@@ -18,7 +18,7 @@
     "postversion": "pnpm build:cli"
   },
   "devDependencies": {
-    "@types/node": "^18.16.5",
+    "@types/node": "^20.1.1",
     "optc": "^0.6.2",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.0",
