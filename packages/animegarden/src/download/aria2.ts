@@ -460,12 +460,12 @@ export class Aria2Client extends DownloadClient {
 
         const version = await this.client.getVersion();
         this.version = version.version;
-        this.system.logger.info(dim(`aria2 v${this.version} is running`));
+        this.consola.info(dim(`aria2 v${this.version} is running`));
         res();
       });
 
       child.addListener('error', async (error) => {
-        this.system.logger.error(dim(`Some error happened in aria2`));
+        this.consola.error(dim(`Some error happened in aria2`));
         await this.close().catch(() => {});
       });
 
@@ -488,7 +488,7 @@ export class Aria2Client extends DownloadClient {
       this.version = undefined;
       this.started = false;
       if (res === 'OK') {
-        this.system.logger.info(dim(`aria2 v${version} has been closed`));
+        this.consola.info(dim(`aria2 v${version} has been closed`));
         return true;
       } else {
         return false;
