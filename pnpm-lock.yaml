@@ -118,6 +118,9 @@ importers:
       libaria2:
         specifier: ^1.0.95
         version: 1.0.95
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
       undici:
         specifier: ^5.22.0
         version: 5.22.0

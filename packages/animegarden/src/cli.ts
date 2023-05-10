@@ -1,11 +1,12 @@
 import type { Breadc } from 'breadc';
 
-import { type AnimeSystem, loadAnime } from '@animespace/core';
+import prompts from 'prompts';
 import { link, bold, lightYellow } from '@breadc/color';
+import { type AnimeSystem, loadAnime } from '@animespace/core';
 
 import './plan.d';
 
-import { generatePlan } from './generate';
+import { generatePlan, getCollections, searchBgm } from './generate';
 import { ANIMEGARDEN, DOT } from './constant';
 import { generateDownloadTask } from './task';
 import {
@@ -22,9 +23,35 @@ export function registerCli(
   getClient: (system: AnimeSystem) => DownloadClient
 ) {
   cli
-    .command('generate', 'Generate Plan from your bangumi collections')
+    .command('search <input>')
+    .option('--date <date>', 'Specify the onair begin date')
+    .action(async (input, options) => {
+      const bgms = await searchBgm(input);
+      const selected = await prompts({
+        type: 'multiselect',
+        name: 'bangumi',
+        message: '选择将要生成计划的动画',
+        choices: bgms.map((bgm) => ({
+          title: (bgm.name_cn || bgm.name) ?? String(bgm.id!),
+          value: bgm
+        })),
+        hint: '- 上下移动, 空格选择, 回车确认',
+        // @ts-ignore
+        instructions: false
+      });
+      console.log('');
+      await generatePlan(
+        system,
+        selected.bangumi.map((bgm: any) => bgm.id!),
+        { create: undefined, fansub: false, date: options.date }
+      );
+    });
+
+  cli
+    .command('bangumi generate', 'Generate Plan from your bangumi collections')
     .option('--username <username>', 'Bangumi username')
     .option('--create <filename>', 'Create plan file in the space directory')
+    .option('--fansub', 'Generate fansub list')
     .option('--date <date>', 'Specify the onair begin date')
     .action(async (options) => {
       const bangumiPlugin = system.space.plugins.find(
@@ -38,7 +65,8 @@ export function registerCli(
         );
       }
 
-      return await generatePlan(system, username, options);
+      const collections = await getCollections(username);
+      return await generatePlan(system, collections, options);
     });
 
   cli

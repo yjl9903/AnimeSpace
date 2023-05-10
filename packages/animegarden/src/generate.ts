@@ -14,14 +14,17 @@ type Item<T> = T extends Array<infer R> ? R : never;
 
 type CollectionItem = Item<NonNullable<BGMCollection.Information['data']>>;
 
+const client = new BgmClient(ufetch, { maxRetry: 1 });
+
 export async function generatePlan(
   system: AnimeSystem,
-  username: string,
-  options: { create: string | undefined; date: string | undefined }
+  collections: CollectionItem[] | number[],
+  options: {
+    create: string | undefined;
+    fansub: boolean;
+    date: string | undefined;
+  }
 ) {
-  const client = new BgmClient(ufetch, { maxRetry: 1 });
-  const collections = await getCollections();
-
   const output: string[] = [];
   const writeln = (text: string) => {
     if (options.create) {
@@ -41,25 +44,29 @@ export async function generatePlan(
   writeln(``);
   writeln(`onair:`);
   for (const anime of collections) {
-    const begin = anime.subject?.date
-      ? new Date(anime.subject.date)
-      : undefined;
-    if (begin && begin.getTime() < date.getTime()) {
-      continue;
-    }
+    if (typeof anime === 'object') {
+      const begin = anime.subject?.date
+        ? new Date(anime.subject.date)
+        : undefined;
+      if (begin && begin.getTime() < date.getTime()) {
+        continue;
+      }
 
-    if (options.create) {
-      system.logger.info(
-        `${lightBlue('Searching')} ${bold(
-          anime.subject?.name_cn ||
-            anime.subject?.name ||
-            `Bangumi ${anime.subject_id}`
-        )}`
-      );
+      if (options.create) {
+        system.logger.info(
+          `${lightBlue('Searching')} ${bold(
+            anime.subject?.name_cn ||
+              anime.subject?.name ||
+              `Bangumi ${anime.subject_id}`
+          )}`
+        );
+      }
     }
 
     try {
-      const item = await client.subject(anime.subject_id);
+      const item = await client.subject(
+        typeof anime === 'object' ? anime.subject_id : anime
+      );
 
       const alias = item.infobox?.find((box) => box.key === '别名');
       const title = item.name_cn || item.name;
@@ -70,11 +77,10 @@ export async function generatePlan(
       }
       const plan = {
         title,
-        bgm: '' + anime.subject_id,
+        bgm: '' + item.id,
         season: inferSeason(title, ...translations),
         translations
       };
-      const fansub = await getFansub([plan.title, ...plan.translations]);
 
       writeln(`  - title: ${plan.title}`);
       writeln(`    translations:`);
@@ -85,15 +91,23 @@ export async function generatePlan(
         writeln(`    season: ${plan.season}`);
       }
       writeln(`    bgm: '${plan.bgm}'`);
-      writeln(`    fansub:`);
-      if (fansub.length === 0) {
-        writeln(
-          `      # No fansub found, please check the translations or search keywords`
-        );
+
+      if (options.fansub) {
+        const fansub = await getFansub([plan.title, ...plan.translations]);
+        writeln(`    fansub:`);
+        if (fansub.length === 0) {
+          writeln(
+            `      # No fansub found, please check the translations or search keywords`
+          );
+        }
+        for (const f of fansub) {
+          writeln(`      - ${f}`);
+        }
+        if (fansub.length === 0 && options.create) {
+          system.logger.warn(`No fansub found for ${title}`);
+        }
       }
-      for (const f of fansub) {
-        writeln(`      - ${f}`);
-      }
+
       const includeURL = JSON.stringify([[title, ...translations]])
         .replace(/\[/g, '%5B')
         .replace(/\]/g, '%5D')
@@ -106,18 +120,18 @@ export async function generatePlan(
         )}`
       );
       writeln(``);
-
-      if (fansub.length === 0 && options.create) {
-        system.logger.warn(`No fansub found for ${title}`);
-      }
     } catch (error) {
-      system.logger.error(
-        `${lightRed('Failed to search')} ${bold(
-          anime.subject?.name_cn ||
-            anime.subject?.name ||
-            `Bangumi ${anime.subject_id}`
-        )}`
-      );
+      if (typeof anime === 'object') {
+        system.logger.error(
+          `${lightRed('Failed to search')} ${bold(
+            anime.subject?.name_cn ||
+              anime.subject?.name ||
+              `Bangumi ${anime.subject_id}`
+          )}`
+        );
+      } else {
+        system.logger.error(error);
+      }
     }
   }
 
@@ -125,38 +139,42 @@ export async function generatePlan(
     const p = path.join(system.space.resolvePath(options.create));
     await fs.writeFile(p, output.join('\n'), 'utf-8');
   }
+}
 
-  async function getCollections() {
-    const list: CollectionItem[] = [];
-    while (true) {
-      const { data } = await client.getCollections(username, {
-        subject_type: 2,
-        type: 3,
-        limit: 50,
-        offset: list.length
-      });
-      if (data && data.length > 0) {
-        list.push(...data);
-      } else {
-        break;
-      }
-    }
-    return uniqBy(list, (c) => '' + c.subject_id);
-  }
+export async function searchBgm(input: string) {
+  return (await client.search(input, { type: 2 })).list ?? [];
+}
 
-  async function getFansub(titles: string[]) {
-    const { resources } = await fetchResources(ufetch, {
-      search: {
-        include: [titles]
-      },
-      count: -1,
-      retry: 5
+export async function getCollections(username: string) {
+  const list: CollectionItem[] = [];
+  while (true) {
+    const { data } = await client.getCollections(username, {
+      subject_type: 2,
+      type: 3,
+      limit: 50,
+      offset: list.length
     });
-    return uniqBy(
-      resources.filter((r) => !!r.fansub),
-      (r) => r.fansub!.name
-    ).map((r) => r.fansub!.name);
+    if (data && data.length > 0) {
+      list.push(...data);
+    } else {
+      break;
+    }
   }
+  return uniqBy(list, (c) => '' + c.subject_id);
+}
+
+async function getFansub(titles: string[]) {
+  const { resources } = await fetchResources(ufetch, {
+    search: {
+      include: [titles]
+    },
+    count: -1,
+    retry: 5
+  });
+  return uniqBy(
+    resources.filter((r) => !!r.fansub),
+    (r) => r.fansub!.name
+  ).map((r) => r.fansub!.name);
 }
 
 function inferSeason(...titles: string[]) {

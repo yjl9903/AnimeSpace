@@ -58,6 +58,7 @@ export async function loadPlan(
         };
         return plan;
       } else {
+        console.log(parsed.error.issues);
         console.error(`Failed parsing plan ${path.basename(file)}`);
         throw new AnimeSystemError('Failed to parse plan');
       }
