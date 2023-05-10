@@ -98,8 +98,8 @@ importers:
         specifier: ^0.0.14
         version: 0.0.14
       anitomy:
-        specifier: ^0.0.14
-        version: 0.0.14
+        specifier: ^0.0.15
+        version: 0.0.15
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
@@ -233,8 +233,8 @@ importers:
         version: 2.2.2
     devDependencies:
       anitomy:
-        specifier: ^0.0.14
-        version: 0.0.14
+        specifier: ^0.0.15
+        version: 0.0.15
       breadc:
         specifier: ^0.9.3
         version: 0.9.3
@@ -251,8 +251,8 @@ importers:
         specifier: ^0.9.3
         version: 0.9.3
       anitomy:
-        specifier: ^0.0.14
-        version: 0.0.14
+        specifier: ^0.0.15
+        version: 0.0.15
 
 packages:
 
@@ -2688,8 +2688,8 @@ packages:
       cheerio: 1.0.0-rc.12
     dev: false
 
-  /anitomy@0.0.14:
-    resolution: {integrity: sha512-9jhDrG8nE3bAyJpJVOrLQqcxoPte4izSpy1sQAbpFbDByPnXYmMCQPFPohXnuc3gMQlfmWacLC28CqFUdPmUSA==}
+  /anitomy@0.0.15:
+    resolution: {integrity: sha512-Q2w9MOkFhAKsLs4ES4KkMn4ehotHPW2QkA06hsLWoFIJx3l6OUPBieIkO4gcNSou89YYgApKPEx5VHbrtyLawg==}
     engines: {node: '>=v18.16.0'}
 
   /ansi-regex@5.0.1:
