@@ -38,6 +38,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
               episode: result.episode.number,
               extension: result.file.extension
             }),
+            naming: 'auto',
             fansub: result.release.group,
             episode: result.episode.number,
             source: {
@@ -89,6 +90,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
                 episode: result.episode.number,
                 extension: result.file.extension
               }),
+              naming: 'auto',
               fansub: result.release.group,
               episode: result.episode.number,
               source: {
