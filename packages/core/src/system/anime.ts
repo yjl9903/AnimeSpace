@@ -56,7 +56,7 @@ export class Anime {
     return true;
   }
 
-  public async library(force = false) {
+  public async library(force = false): Promise<LocalLibrary> {
     if (this._lib === undefined || force) {
       await fs.ensureDir(this.directory);
       const libPath = path.join(this.directory, MetadataFilename);
