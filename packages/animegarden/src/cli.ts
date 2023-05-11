@@ -25,6 +25,7 @@ export function registerCli(
   cli
     .command('search <input>', 'Search anime from bangumi and generate plan')
     .option('--date <date>', 'Specify the onair begin date')
+    .option('--fansub', 'Generate fansub list')
     .action(async (input, options) => {
       const bgms = await searchBgm(input);
       const selected = await prompts({
@@ -43,7 +44,7 @@ export function registerCli(
       await generatePlan(
         system,
         selected.bangumi.map((bgm: any) => bgm.id!),
-        { create: undefined, fansub: false, date: options.date }
+        { create: undefined, fansub: options.fansub, date: options.date }
       );
     });
 
