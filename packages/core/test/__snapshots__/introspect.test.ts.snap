@@ -4,16 +4,22 @@ exports[`Introspect > should work 1`] = `
 [
   {
     "bgm": "323651",
+    "date": 2023-04-01T13:00:00.000Z,
+    "season": 2,
     "title": "熊熊勇闯异世界 Punch!",
     "videos": [],
   },
   {
     "bgm": "404804",
+    "date": 2023-04-01T13:00:00.000Z,
+    "season": 1,
     "title": "天国大魔境",
     "videos": [],
   },
   {
-    "bgm": 376703,
+    "bgm": "376703",
+    "date": 2023-04-01T13:00:00.000Z,
+    "season": 1,
     "title": "偶像大师 灰姑娘女孩 U149",
     "videos": [],
   },
