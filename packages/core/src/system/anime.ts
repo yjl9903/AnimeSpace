@@ -75,10 +75,13 @@ export class Anime {
         const schema = z
           .object({
             title: z.string().default(this.plan.title).catch(this.plan.title),
-            season: z.coerce
-              .number()
-              .default(this.plan.season)
-              .catch(this.plan.season),
+            season:
+              this.plan.season !== undefined
+                ? z.coerce
+                    .number()
+                    .default(this.plan.season)
+                    .catch(this.plan.season)
+                : z.coerce.number().optional(),
             date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
             videos: z
               .array(
@@ -146,8 +149,8 @@ export class Anime {
       title,
       yyyy: format(date, 'yyyy'),
       MM: format(date, 'MM'),
-      season: formatEpisode(season),
-      ep: video.episode ? formatEpisode(video.episode) : '{ep}',
+      season: season !== undefined ? formatEpisode(season) : '1',
+      ep: video.episode !== undefined ? formatEpisode(video.episode) : '{ep}',
       extension: path.extname(video.filename).slice(1) ?? 'mp4',
       fansub: video.fansub ?? 'fansub'
     });
@@ -166,8 +169,8 @@ export class Anime {
       title,
       yyyy: format(date, 'yyyy'),
       mm: format(date, 'MM'),
-      season: formatEpisode(season),
-      ep: meta.episode ? formatEpisode(meta.episode) : '{ep}',
+      season: season !== undefined ? formatEpisode(season) : '1',
+      ep: meta.episode !== undefined ? formatEpisode(meta.episode) : '{ep}',
       extension: meta.extension?.toLowerCase() ?? 'mp4',
       fansub: meta.fansub ?? 'fansub'
     });
@@ -299,7 +302,7 @@ export interface LocalLibrary {
 
   date: Date;
 
-  season: number;
+  season?: number;
 
   videos: LocalVideo[];
 }

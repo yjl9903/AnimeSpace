@@ -80,7 +80,7 @@ export const AnimePlanSchema = z
     directory: z.string().optional(),
     type: z.enum(['番剧', '电影', 'OVA']).default('番剧'),
     status: z.enum(['onair', 'finish']).optional(),
-    season: z.coerce.number().default(1),
+    season: z.coerce.number().optional(),
     date: z.coerce.date().optional(),
     keywords: z.any()
   })
@@ -124,7 +124,7 @@ export interface AnimePlan {
 
   readonly status: PlanStatus;
 
-  readonly season: number;
+  readonly season?: number;
 
   readonly date: Date;
 
