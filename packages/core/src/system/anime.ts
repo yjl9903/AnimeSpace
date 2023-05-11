@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { z } from 'zod';
 import { format } from 'date-fns';
-import { parse, stringify } from 'yaml';
+import { Document, parse, stringify, visit } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
@@ -69,7 +69,12 @@ export class Anime {
       };
 
       if (await fs.exists(libPath)) {
-        const libContent = await fs.readFile(libPath, 'utf-8');
+        // Mark as unmodified
+        this._dirty = false;
+
+        const libContent = await fs
+          .readFile(libPath, 'utf-8')
+          .catch(() => fs.readFile(libPath, 'utf-8')); // Retry at most 1 times
         const lib = parse(libContent);
 
         const schema = z
@@ -112,7 +117,7 @@ export class Anime {
         }
       } else {
         await fs.writeFile(libPath, stringify(defaultLib), 'utf-8');
-        return (this._dirty = false), (this._lib = defaultLib);
+        return (this._lib = defaultLib);
       }
     } else {
       return this._lib;
@@ -284,11 +289,7 @@ export class Anime {
     if (this._lib && this._dirty) {
       const libPath = path.join(this.directory, MetadataFilename);
       try {
-        await fs.writeFile(
-          libPath,
-          stringify(this._lib, { lineWidth: 0 }),
-          'utf-8'
-        );
+        await fs.writeFile(libPath, stringifyLocalLibrary(this._lib!), 'utf-8');
         this._dirty = false;
       } catch (error) {
         console.error(error);
@@ -329,4 +330,40 @@ export interface LocalFile {
   path: string;
 
   metadata: Record<string, string>;
+}
+
+function stringifyLocalLibrary(lib: LocalLibrary) {
+  const doc = new Document(lib);
+
+  for (const v of lib.videos) {
+    if (v.naming === 'auto') {
+      // @ts-ignore
+      v.naming = undefined;
+    }
+  }
+
+  visit(doc, {
+    Scalar(key, node) {
+      if (key === 'key') {
+        node.spaceBefore = true;
+      }
+    },
+    Seq(key, node) {
+      let first = true;
+      for (const child of node.items) {
+        if (first) {
+          first = false;
+          continue;
+        }
+        // @ts-ignore
+        child.spaceBefore = true;
+      }
+      return visit.SKIP;
+    }
+  });
+
+  return (
+    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n` +
+    doc.toString({ lineWidth: 0 })
+  );
 }
