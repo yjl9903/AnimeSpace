@@ -1,3 +1,5 @@
+export { onDeath } from '@breadc/death';
+
 export function onUncaughtException(
   fn: (error: Error) => void | Promise<void>
 ) {
@@ -13,12 +15,5 @@ export function onUnhandledRejection(
   process.on('unhandledRejection', fn);
   return () => {
     process.removeListener('unhandledRejection', fn);
-  };
-}
-
-export function onDeath(fn: () => void | Promise<void>) {
-  process.on('SIGINT', fn);
-  return () => {
-    process.removeListener('SIGINT', fn);
   };
 }

@@ -222,6 +222,9 @@ importers:
       '@breadc/color':
         specifier: ^0.9.3
         version: 0.9.3
+      '@breadc/death':
+        specifier: ^0.9.4
+        version: 0.9.4
       consola:
         specifier: ^3.1.0
         version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
@@ -1621,6 +1624,10 @@ packages:
 
   /@breadc/color@0.9.3:
     resolution: {integrity: sha512-kBrkvSm1CwrQBu4OtVPvl9qj02HRnghNiZpkr5qg0oFXtxGSf5kSPqQ5YKCP0aI+Ub1t6nWpDMtSw2mKTHqTKg==}
+
+  /@breadc/death@0.9.4:
+    resolution: {integrity: sha512-XCp8gUUIhpCSZJH0rlRCHdvFh0HeI+ZQfV6U+AIws7e05gm0c0Lg95Q7OTZzZDztJ/uA249BiyyK4C7ETqd/pQ==}
+    dev: false
 
   /@docsearch/css@3.3.4:
     resolution: {integrity: sha512-vDwCDoVXDgopw/hvr0zEADew2wWaGP8Qq0Bxhgii1Ewz2t4fQeyJwIRN/mWADeLFYPVkpz8TpEbxya/i6Tm0WA==}
