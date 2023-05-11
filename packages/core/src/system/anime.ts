@@ -80,7 +80,19 @@ export class Anime {
               .default(this.plan.season)
               .catch(this.plan.season),
             date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
-            videos: z.array(z.any()).catch([])
+            videos: z
+              .array(
+                z
+                  .object({
+                    filename: z.string(),
+                    naming: z
+                      .enum(['auto', 'manual'])
+                      .default('auto')
+                      .catch('auto')
+                  })
+                  .passthrough()
+              )
+              .catch([])
           })
           .passthrough();
 
@@ -294,6 +306,8 @@ export interface LocalLibrary {
 
 export interface LocalVideo {
   filename: string;
+
+  naming: 'auto' | 'manual';
 
   fansub?: string;
 

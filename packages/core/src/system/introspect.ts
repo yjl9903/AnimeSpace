@@ -87,8 +87,9 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
       }
     }
   }
-  // Sync episode / fansub
+  // Sync generated filename
   for (const video of videos) {
+    if (video.naming === 'manual') continue;
     const filename = anime.reformatVideoFilename(video);
     if (filename !== video.filename) {
       logger.info(`Moving "${bold(video.filename)}" to "${bold(filename)}"`);
