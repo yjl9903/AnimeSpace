@@ -38,7 +38,6 @@ describe('system', () => {
               exclude: [],
               include: [['天国大魔境', 'Tengoku Daimakyou']]
             },
-            season: 1,
             status: 'onair',
             title: '天国大魔境',
             translations: {
@@ -54,7 +53,6 @@ describe('system', () => {
               exclude: ['闪耀色彩'],
               include: [['偶像大师', 'iDOLM@STER'], ['灰姑娘女孩'], ['U149']]
             },
-            season: 1,
             status: 'onair',
             title: '偶像大师 灰姑娘女孩 U149',
             translations: {},
