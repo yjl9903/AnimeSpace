@@ -119,8 +119,8 @@ importers:
         specifier: ^1.0.95
         version: 1.0.95
       undici:
-        specifier: ^5.22.0
-        version: 5.22.0
+        specifier: ^5.22.1
+        version: 5.22.1
       webtorrent:
         specifier: ^2.0.18
         version: 2.0.18
@@ -138,8 +138,8 @@ importers:
         specifier: ^0.0.4
         version: 0.0.4
       undici:
-        specifier: ^5.22.0
-        version: 5.22.0
+        specifier: ^5.22.1
+        version: 5.22.1
 
   packages/cli:
     dependencies:
@@ -180,8 +180,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       undici:
-        specifier: ^5.22.0
-        version: 5.22.0
+        specifier: ^5.22.1
+        version: 5.22.1
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.0
@@ -6212,8 +6212,8 @@ packages:
       jiti: 1.18.2
     dev: true
 
-  /undici@5.22.0:
-    resolution: {integrity: sha512-fR9RXCc+6Dxav4P9VV/sp5w3eFiSdOjJYsbtWfd4s5L5C4ogyuVpdKIVHeW0vV1MloM65/f7W45nR9ZxwVdyiA==}
+  /undici@5.22.1:
+    resolution: {integrity: sha512-Ji2IJhFXZY0x/0tVBXeQwgPlLWw13GVzpsWPQ3rV50IFMMof2I55PZZxtm4P6iNq+L5znYN9nSTAq0ZyE6lSJw==}
     engines: {node: '>=14.0'}
     dependencies:
       busboy: 1.6.0
