@@ -162,8 +162,8 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       breadc:
-        specifier: ^0.9.3
-        version: 0.9.3
+        specifier: ^0.9.4
+        version: 0.9.4
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -236,8 +236,8 @@ importers:
         specifier: ^0.0.15
         version: 0.0.15
       breadc:
-        specifier: ^0.9.3
-        version: 0.9.3
+        specifier: ^0.9.4
+        version: 0.9.4
       rimraf:
         specifier: ^5.0.0
         version: 5.0.0
@@ -1609,6 +1609,7 @@ packages:
 
   /@breadc/color@0.9.3:
     resolution: {integrity: sha512-kBrkvSm1CwrQBu4OtVPvl9qj02HRnghNiZpkr5qg0oFXtxGSf5kSPqQ5YKCP0aI+Ub1t6nWpDMtSw2mKTHqTKg==}
+    dev: false
 
   /@breadc/color@0.9.4:
     resolution: {integrity: sha512-uaoL8JdmQhkvqO2Pr7THGke11fY1dAS4FLYwsVE0qxD7A4XDEKNQfu3zfV+mgHH3/wiNcPrLGhn3aJbZ124gIw==}
@@ -3005,6 +3006,12 @@ packages:
     resolution: {integrity: sha512-+1CqbeNNURsnoLFEgGIKIkOGPV/k3ye/MjSMEAXKw++lfM0qYxS3SN3gSFUhBujB/3U6ud+67AtAF+B0jzkTKQ==}
     dependencies:
       '@breadc/color': 0.9.3
+    dev: false
+
+  /breadc@0.9.4:
+    resolution: {integrity: sha512-X7C2lUYvN7qp8uUVZetAsrF54h5lVazJYt7soCCeqThzxkHl10V72wyselto3XvkQ4guL9UqxtArDiCVbKnfsQ==}
+    dependencies:
+      '@breadc/color': 0.9.4
 
   /browserslist@4.21.4:
     resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}
@@ -5073,7 +5080,7 @@ packages:
       '@types/fs-extra': 11.0.1
       '@types/node': 18.16.7
       axios: 1.4.0(debug@4.3.4)
-      breadc: 0.9.3
+      breadc: 0.9.4
       debug: 4.3.4
       find-up: 6.3.0
       fs-extra: 11.1.1
