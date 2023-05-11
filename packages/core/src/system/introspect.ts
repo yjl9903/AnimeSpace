@@ -1,4 +1,4 @@
-import { bold } from '@breadc/color';
+import { bold, lightBlue, lightGreen } from '@breadc/color';
 
 import type { Plan } from '../space';
 
@@ -10,7 +10,7 @@ import { Anime, LocalFile, LocalVideo } from './anime';
 
 export async function introspect(system: AnimeSystem) {
   const logger = system.logger.withTag('introspect');
-  logger.info(`Introspect Anime Space`);
+  logger.info(lightBlue(`Introspect Anime Space`));
 
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.prepare?.(system);
@@ -25,7 +25,7 @@ export async function introspect(system: AnimeSystem) {
     await plugin.introspect?.finish?.(system);
   }
 
-  logger.info(`Introspect Anime Space OK`);
+  logger.info(lightGreen(`Introspect Anime Space OK`));
   return animes;
 }
 
