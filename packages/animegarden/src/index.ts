@@ -97,12 +97,15 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
 
         const newVideos = await generateDownloadTask(system, anime, resources);
 
+        const oldVideos = (await anime.library()).videos.filter(
+          (v) => v.source.type === ANIMEGARDEN
+        );
+        logger.info(
+          `${lightCyan('Downloaded ' + oldVideos.length + ' resources')} ${dim(
+            'from'
+          )} ${link('AnimeGarden', animegardenURL)}`
+        );
         if (newVideos.length === 0) {
-          logger.info(
-            `${lightCyan('Found ' + resources.length + ' resources')} ${dim(
-              'from'
-            )} ${link('AnimeGarden', animegardenURL)}`
-          );
           return;
         }
 
