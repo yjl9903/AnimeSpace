@@ -1,5 +1,5 @@
 {
-  "baseBranches": ["ng"],
+  "baseBranches": ["next"],
   "extends": ["config:base"],
   "packageRules": [
     {
