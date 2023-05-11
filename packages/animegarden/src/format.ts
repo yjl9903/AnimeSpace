@@ -1,19 +1,9 @@
 import type { ConsolaInstance } from 'consola';
 
 import { Anime } from '@animespace/core';
-import {
-  dim,
-  link,
-  bold,
-  underline,
-  lightRed,
-  lightBlue,
-  lightCyan,
-  lightGreen,
-  lightYellow
-} from '@breadc/color';
+import { dim, link, underline } from '@breadc/color';
 
-import { ANIMEGARDEN, DOT } from './constant';
+import { DOT } from './constant';
 
 export function formatAnimeGardenSearchURL(anime: Anime) {
   return `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
@@ -27,7 +17,7 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
   if (anime.plan.keywords.include.length === 1) {
     const first = anime.plan.keywords.include[0];
     const sum = first.reduce((acc, t) => acc + t.length, 0);
-    if (sum > 80) {
+    if (sum > 60) {
       logger.info(dim('Include keywords | ') + underline(first[0]));
       for (const t of first.slice(1)) {
         logger.info(`                 ${dim('|')} ${underline(t)}`);
