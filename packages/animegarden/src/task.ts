@@ -115,11 +115,13 @@ function groupResources(
     if (r.fansub && !anime.plan.fansub.includes(r.fansub.name)) continue;
 
     const info = parser.parse(r.title);
-    if (info && info.episode.number !== undefined) {
+    // TODO: split film / OVA / anime logic
+    const episodeNumber = anime.plan.type === '电影' ? 1 : info?.episode.number;
+    if (info && episodeNumber !== undefined) {
       const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
       if (anime.plan.fansub.includes(fansub)) {
         map
-          .getOrPut(info.episode.number, () => new MutableMap([]))
+          .getOrPut(episodeNumber, () => new MutableMap([]))
           .getOrPut(fansub, () => [])
           .push(r);
       }
