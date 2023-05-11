@@ -304,6 +304,7 @@ export async function runDownloadTask(
       )} failed`;
       if (error instanceof Error && error?.message) {
         multibarLogger.error(error.message ?? defaultMessage);
+        systemLogger.error(error);
       } else {
         multibarLogger.error(defaultMessage);
       }

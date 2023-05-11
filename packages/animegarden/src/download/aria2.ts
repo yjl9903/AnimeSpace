@@ -76,13 +76,22 @@ export class Aria2Client extends DownloadClient {
 
     const proxy =
       typeof this.options.proxy === 'string' ? this.options.proxy : getProxy();
-    const gid = await this.client.addUri([magnet], {
-      dir: this.options.directory,
-      'bt-save-metadata': true,
-      'bt-tracker': Aria2Trackers,
-      'no-proxy': this.options.proxy === false ? true : false,
-      'all-proxy': this.options.proxy !== false ? proxy : undefined
-    });
+    const gid = await this.client
+      .addUri([magnet], {
+        dir: this.options.directory,
+        'bt-save-metadata': true,
+        'bt-tracker': Aria2Trackers,
+        'no-proxy': this.options.proxy === false ? true : false,
+        'all-proxy': this.options.proxy !== false ? proxy : undefined
+      })
+      .catch((error) => {
+        this.consola.error(error);
+        return undefined;
+      });
+
+    if (!gid) {
+      throw new Error('Start downloading task failed');
+    }
 
     const that = this;
     const client = this.client;
@@ -413,7 +422,8 @@ export class Aria2Client extends DownloadClient {
     }
 
     // Random a new port
-    const port = 16800 + Math.round(Math.random() * 10000);
+    const rpcPort = 16800 + Math.round(Math.random() * 10000);
+    const listenPort = 26800 + Math.round(Math.random() * 10000);
 
     const env = { ...process.env };
     delete env['all_proxy'];
@@ -425,10 +435,12 @@ export class Aria2Client extends DownloadClient {
     const child = spawn(
       'aria2c',
       [
+        `--listen-port=${listenPort}-${listenPort + 100}`,
+        `--dht-listen-port=${listenPort + 101}-${listenPort + 200}`,
         '--enable-rpc',
         '--rpc-listen-all',
         '--rpc-allow-origin-all',
-        `--rpc-listen-port=${port}`,
+        `--rpc-listen-port=${rpcPort}`,
         `--rpc-secret=${this.options.secret}`,
         ...(this.options.debug.log ? [`--log=${this.options.debug.log}`] : []),
         ...this.options.args
@@ -436,7 +448,7 @@ export class Aria2Client extends DownloadClient {
       { cwd: process.cwd(), env }
     );
 
-    return new Promise((res) => {
+    return new Promise((res, rej) => {
       if (this.options.debug.pipe) {
         child.stdout.on('data', (chunk) => {
           console.log(chunk.toString());
@@ -447,21 +459,25 @@ export class Aria2Client extends DownloadClient {
       }
 
       child.stdout.once('data', async (_chunk) => {
-        this.client = new WebSocket.Client({
-          protocol: 'ws',
-          host: 'localhost',
-          port: port,
-          auth: {
-            secret: this.options.secret
-          }
-        });
-        this.gids.clear();
-        this.registerCallback();
+        try {
+          this.client = new WebSocket.Client({
+            protocol: 'ws',
+            host: 'localhost',
+            port: rpcPort,
+            auth: {
+              secret: this.options.secret
+            }
+          });
+          this.gids.clear();
+          this.registerCallback();
 
-        const version = await this.client.getVersion();
-        this.version = version.version;
-        this.consola.info(dim(`aria2 v${this.version} is running`));
-        res();
+          const version = await this.client.getVersion();
+          this.version = version.version;
+          this.consola.info(dim(`aria2 v${this.version} is running`));
+          res();
+        } catch (error) {
+          rej(error);
+        }
       });
 
       child.addListener('error', async (error) => {
