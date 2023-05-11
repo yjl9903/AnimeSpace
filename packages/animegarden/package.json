@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@animespace/core": "workspace:*",
-    "@breadc/color": "^0.9.3",
+    "@breadc/color": "^0.9.4",
     "@onekuma/map": "^0.1.10",
     "animegarden": "^0.0.15",
     "anitomy": "^0.0.15",
@@ -56,13 +56,13 @@
     "fs-extra": "^11.1.1",
     "libaria2": "^1.0.95",
     "prompts": "^2.4.2",
-    "undici": "^5.22.0",
+    "undici": "^5.22.1",
     "webtorrent": "^2.0.18",
     "zod": "^3.21.4"
   },
   "devDependencies": {
     "@types/webtorrent": "^0.109.3",
-    "breadc": "^0.9.3"
+    "breadc": "^0.9.4"
   },
   "engines": {
     "node": ">=v16.0.0"

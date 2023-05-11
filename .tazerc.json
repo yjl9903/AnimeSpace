@@ -3,6 +3,7 @@
   "write": true,
   "recursive": true,
   "exclude": [
-    "mediainfo.js"
+    "mediainfo.js",
+    "vitepress"
   ]
 }
