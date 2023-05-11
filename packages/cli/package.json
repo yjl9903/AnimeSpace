@@ -50,7 +50,7 @@
     "@animespace/bangumi": "workspace:*",
     "@animespace/core": "workspace:*",
     "@animespace/download": "workspace:*",
-    "@breadc/color": "^0.9.3",
+    "@breadc/color": "^0.9.4",
     "@onekuma/map": "^0.1.10",
     "breadc": "^0.9.3",
     "date-fns": "^2.30.0",

@@ -89,8 +89,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@breadc/color':
-        specifier: ^0.9.3
-        version: 0.9.3
+        specifier: ^0.9.4
+        version: 0.9.4
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -156,8 +156,8 @@ importers:
         specifier: workspace:*
         version: link:../download
       '@breadc/color':
-        specifier: ^0.9.3
-        version: 0.9.3
+        specifier: ^0.9.4
+        version: 0.9.4
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -211,8 +211,8 @@ importers:
   packages/core:
     dependencies:
       '@breadc/color':
-        specifier: ^0.9.3
-        version: 0.9.3
+        specifier: ^0.9.4
+        version: 0.9.4
       consola:
         specifier: ^3.1.0
         version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
@@ -248,8 +248,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@breadc/color':
-        specifier: ^0.9.3
-        version: 0.9.3
+        specifier: ^0.9.4
+        version: 0.9.4
       anitomy:
         specifier: ^0.0.15
         version: 0.0.15
@@ -1609,6 +1609,9 @@ packages:
 
   /@breadc/color@0.9.3:
     resolution: {integrity: sha512-kBrkvSm1CwrQBu4OtVPvl9qj02HRnghNiZpkr5qg0oFXtxGSf5kSPqQ5YKCP0aI+Ub1t6nWpDMtSw2mKTHqTKg==}
+
+  /@breadc/color@0.9.4:
+    resolution: {integrity: sha512-uaoL8JdmQhkvqO2Pr7THGke11fY1dAS4FLYwsVE0qxD7A4XDEKNQfu3zfV+mgHH3/wiNcPrLGhn3aJbZ124gIw==}
 
   /@docsearch/css@3.3.4:
     resolution: {integrity: sha512-vDwCDoVXDgopw/hvr0zEADew2wWaGP8Qq0Bxhgii1Ewz2t4fQeyJwIRN/mWADeLFYPVkpz8TpEbxya/i6Tm0WA==}
@@ -6164,7 +6167,7 @@ packages:
     peerDependencies:
       unbuild: ^1.2.1
     dependencies:
-      '@breadc/color': 0.9.3
+      '@breadc/color': 0.9.4
       execa: 7.1.1
       postject: 1.0.0-alpha.5
       unbuild: 1.2.1
