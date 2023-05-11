@@ -76,6 +76,7 @@ export async function generateDownloadTask(
             episode: ep,
             extension: parser.parse(res.title)!.file.extension
           }),
+          naming: 'auto',
           fansub: fansub,
           episode: ep,
           source: {
