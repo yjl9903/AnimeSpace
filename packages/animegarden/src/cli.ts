@@ -23,7 +23,7 @@ export function registerCli(
   getClient: (system: AnimeSystem) => DownloadClient
 ) {
   cli
-    .command('search <input>')
+    .command('search <input>', 'Search anime from bangumi and generate plan')
     .option('--date <date>', 'Specify the onair begin date')
     .action(async (input, options) => {
       const bgms = await searchBgm(input);
@@ -71,9 +71,10 @@ export function registerCli(
 
   cli
     .command('garden list [keyword]', 'List videos of anime from AnimeGarden')
-    .action(async (keyword) => {
+    .option('--onair', 'Only display onair animes')
+    .action(async (keyword, options) => {
       const logger = system.logger.withTag('animegarden');
-      const animes = await filterAnimes(keyword);
+      const animes = await filterAnimes(keyword, options);
 
       for (const anime of animes) {
         const animegardenURL = formatAnimeGardenSearchURL(anime);
@@ -138,14 +139,19 @@ export function registerCli(
     });
 
   // --- Util functions ---
-  async function filterAnimes(keyword: string | undefined) {
-    return (await loadAnime(system, true)).filter(
-      (a) =>
-        !keyword ||
-        a.plan.title.includes(keyword) ||
-        Object.values(a.plan.translations)
-          .flat()
-          .some((t) => t.includes(keyword))
-    );
+  async function filterAnimes(
+    keyword: string | undefined,
+    options: { onair: boolean }
+  ) {
+    return (await loadAnime(system, true))
+      .filter((a) => (options.onair ? a.plan.status === 'onair' : true))
+      .filter(
+        (a) =>
+          !keyword ||
+          a.plan.title.includes(keyword) ||
+          Object.values(a.plan.translations)
+            .flat()
+            .some((t) => t.includes(keyword))
+      );
   }
 }
