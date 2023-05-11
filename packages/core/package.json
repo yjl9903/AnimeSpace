@@ -41,7 +41,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@breadc/color": "^0.9.3",
+    "@breadc/color": "^0.9.4",
     "consola": "^3.1.0",
     "date-fns": "^2.30.0",
     "defu": "^6.1.2",
