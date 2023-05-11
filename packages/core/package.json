@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "anitomy": "^0.0.15",
-    "breadc": "^0.9.3",
+    "breadc": "^0.9.4",
     "rimraf": "^5.0.0"
   },
   "engines": {
