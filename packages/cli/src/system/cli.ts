@@ -102,7 +102,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     });
 
   function registerDeath(system: AnimeSystem) {
-    return onDeath(async () => {
+    return onDeath(async (signal, context) => {
       system.logger.info(lightRed('Process is being killed'));
       if (system.isChanged()) {
         await system.writeBack();
@@ -110,6 +110,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           lightGreen('Anime libraries have been written back')
         );
       }
+      context.terminate = 'exit';
     });
   }
 }

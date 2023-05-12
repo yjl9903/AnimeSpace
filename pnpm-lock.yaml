@@ -89,8 +89,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@breadc/color':
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^0.9.5
+        version: 0.9.5
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -135,8 +135,8 @@ importers:
         specifier: ^0.109.3
         version: 0.109.3
       breadc:
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^0.9.5
+        version: 0.9.5
 
   packages/bangumi:
     dependencies:
@@ -165,14 +165,14 @@ importers:
         specifier: workspace:*
         version: link:../local
       '@breadc/color':
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^0.9.5
+        version: 0.9.5
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
       breadc:
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^0.9.5
+        version: 0.9.5
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -220,11 +220,11 @@ importers:
   packages/core:
     dependencies:
       '@breadc/color':
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^0.9.5
+        version: 0.9.5
       '@breadc/death':
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^0.9.5
+        version: 0.9.5
       consola:
         specifier: ^3.1.0
         version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
@@ -251,8 +251,8 @@ importers:
         specifier: ^0.0.15
         version: 0.0.15
       breadc:
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^0.9.5
+        version: 0.9.5
       rimraf:
         specifier: ^5.0.0
         version: 5.0.0
@@ -263,8 +263,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       '@breadc/color':
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^0.9.5
+        version: 0.9.5
       anitomy:
         specifier: ^0.0.15
         version: 0.0.15
@@ -1622,11 +1622,11 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@breadc/color@0.9.4:
-    resolution: {integrity: sha512-uaoL8JdmQhkvqO2Pr7THGke11fY1dAS4FLYwsVE0qxD7A4XDEKNQfu3zfV+mgHH3/wiNcPrLGhn3aJbZ124gIw==}
+  /@breadc/color@0.9.5:
+    resolution: {integrity: sha512-dcd4Nsw7E6A2dFiji3W/C+jlqaXq8W4LydGnqH9blsxUlUmFwGd1dyt9B1E/8+PEkL3L7M96YM/M9AB8fAgHcA==}
 
-  /@breadc/death@0.9.4:
-    resolution: {integrity: sha512-XCp8gUUIhpCSZJH0rlRCHdvFh0HeI+ZQfV6U+AIws7e05gm0c0Lg95Q7OTZzZDztJ/uA249BiyyK4C7ETqd/pQ==}
+  /@breadc/death@0.9.5:
+    resolution: {integrity: sha512-k6rMUHte/8VqezVwTM+74sKsW9ZDE922oyQjIL2LbcOQivsMmPBWOuPXYqUNQcfRdqJ/766wFvA7Goopv7Ev5g==}
     dev: false
 
   /@docsearch/css@3.3.4:
@@ -2866,7 +2866,7 @@ packages:
     engines: {node: '>=v18.15.0'}
     hasBin: true
     dependencies:
-      breadc: 0.9.4
+      breadc: 0.9.5
       ofetch: 1.0.1
     dev: false
 
@@ -3021,10 +3021,10 @@ packages:
     dependencies:
       fill-range: 7.0.1
 
-  /breadc@0.9.4:
-    resolution: {integrity: sha512-X7C2lUYvN7qp8uUVZetAsrF54h5lVazJYt7soCCeqThzxkHl10V72wyselto3XvkQ4guL9UqxtArDiCVbKnfsQ==}
+  /breadc@0.9.5:
+    resolution: {integrity: sha512-BtVdCTEULkeM9CYczwosUSKZHQSfTGU0oMVb+Mk3/ZRvuyIaHA29M6e1SchsQBqrrAPDwoUX8HXdKq6+3dUHpQ==}
     dependencies:
-      '@breadc/color': 0.9.4
+      '@breadc/color': 0.9.5
 
   /browserslist@4.21.4:
     resolution: {integrity: sha512-CBHJJdDmgjl3daYjN5Cp5kbTf1mUhZoS+beLklHIvkOWscs83YAhLlF3Wsh/lciQYAcbBJgTOD44VtG31ZM4Hw==}
@@ -3302,7 +3302,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /concordance@5.0.4:
@@ -5093,7 +5093,7 @@ packages:
       '@types/fs-extra': 11.0.1
       '@types/node': 18.16.5
       axios: 1.4.0(debug@4.3.4)
-      breadc: 0.9.4
+      breadc: 0.9.5
       debug: 4.3.4
       find-up: 6.3.0
       fs-extra: 11.1.1
@@ -6188,7 +6188,7 @@ packages:
     peerDependencies:
       unbuild: ^1.2.1
     dependencies:
-      '@breadc/color': 0.9.4
+      '@breadc/color': 0.9.5
       execa: 7.1.1
       postject: 1.0.0-alpha.5
       unbuild: 1.2.1
