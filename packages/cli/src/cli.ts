@@ -9,7 +9,7 @@ import {
 
 import { makeSystem, makeCliApp } from './system';
 
-const debug = createDebug('anime:cli');
+const debug = createDebug('anime');
 
 export async function bootstrap() {
   const handle = (error: unknown) => {
