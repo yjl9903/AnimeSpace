@@ -435,14 +435,20 @@ export class Aria2Client extends DownloadClient {
     const child = spawn(
       'aria2c',
       [
-        `--listen-port=${listenPort}-${listenPort + 100}`,
+        // Bittorent
+        // https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-bt-detach-seed-only
+        `--bt-detach-seed-only`,
         `--dht-listen-port=${listenPort + 101}-${listenPort + 200}`,
+        `--listen-port=${listenPort}-${listenPort + 100}`,
+        // RPC related
         '--enable-rpc',
         '--rpc-listen-all',
         '--rpc-allow-origin-all',
         `--rpc-listen-port=${rpcPort}`,
         `--rpc-secret=${this.options.secret}`,
+        // Debug log
         ...(this.options.debug.log ? [`--log=${this.options.debug.log}`] : []),
+        // Rest arguments
         ...this.options.args
       ],
       { cwd: process.cwd(), env }

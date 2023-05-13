@@ -126,7 +126,7 @@ function groupResources(
           .push(r);
       }
     } else {
-      logger.warn(`${lightYellow('Parse Error')}  ${r.title}`);
+      logger.info(`${lightYellow('Parse Error')}  ${r.title}`);
     }
   }
 
@@ -258,7 +258,13 @@ export async function runDownloadTask(
         }
       );
       bar.update(100);
-      bar.stop();
+      bar.remove();
+
+      multibarLogger.info(
+        `${lightGreen('Download')} ${bold(video.video.filename)} ${lightGreen(
+          'OK'
+        )}`
+      );
 
       if (files.length === 1) {
         const file = files[0];
@@ -288,7 +294,7 @@ export async function runDownloadTask(
         await anime.addVideoByCopy(file, video.video);
 
         multibarLogger.info(
-          `${lightGreen('Download')} ${bold(video.video.filename)} ${lightGreen(
+          `${lightGreen('Add')} ${bold(video.video.filename)} ${lightGreen(
             'OK'
           )}`
         );
