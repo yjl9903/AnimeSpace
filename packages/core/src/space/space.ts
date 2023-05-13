@@ -6,8 +6,8 @@ import { parse, stringify } from 'yaml';
 
 import type { Plugin } from '../plugin';
 
+import { debug, AnimeSystemError } from '../error';
 import { isSubDir, useAsyncSingleton } from '../utils';
-import { AnimeSystemError } from '../error';
 
 import { loadPlan } from './plan';
 import {
@@ -80,8 +80,10 @@ export async function loadSpace(
 
     return resolved;
   } else {
-    console.error(`Failed parsing anime space config`);
-    throw new AnimeSystemError(`Failed to parse anime space config`);
+    debug(parsed.error.issues);
+    throw new AnimeSystemError(
+      `解析 ${path.join(root, DefaultConfigFilename)} 失败`
+    );
   }
 
   async function loadPlugins(entries: unknown) {

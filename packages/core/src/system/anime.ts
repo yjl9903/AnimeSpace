@@ -6,8 +6,8 @@ import { format } from 'date-fns';
 import { Document, parse, stringify, visit } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
+import { debug, AnimeSystemError } from '../error';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
-import { AnimeSystemError } from '../error';
 
 const MetadataFilename = 'metadata.yaml';
 
@@ -111,6 +111,7 @@ export class Anime {
             videos: lib?.videos ?? []
           });
         } else {
+          debug(parsed.error.issues);
           throw new AnimeSystemError(
             `解析 ${this.plan.title} 的 metadata.yml 失败`
           );

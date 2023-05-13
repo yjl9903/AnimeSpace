@@ -109,6 +109,9 @@ importers:
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
+      debug:
+        specifier: ^4.3.4
+        version: 4.3.4
       defu:
         specifier: ^6.1.2
         version: 6.1.2
@@ -117,7 +120,7 @@ importers:
         version: 11.1.1
       libaria2:
         specifier: ^1.0.95
-        version: 1.0.95
+        version: 1.0.95(debug@4.3.4)
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
@@ -231,6 +234,9 @@ importers:
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
+      debug:
+        specifier: ^4.3.4
+        version: 4.3.4
       defu:
         specifier: ^6.1.2
         version: 6.1.2
@@ -4612,7 +4618,7 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /libaria2@1.0.95:
+  /libaria2@1.0.95(debug@4.3.4):
     resolution: {integrity: sha512-nNITIUahBaZKnJHdKemzaEKGrSCvIJ/zgGrd36hw7uPTKP8igXjafVzqGHd/2/7CHyoxy0qOj+FFlRXo0G+Qgw==}
     dependencies:
       axios: 1.4.0(debug@4.3.4)
