@@ -101,8 +101,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           (v) => v.source.type === ANIMEGARDEN
         );
         logger.info(
-          `${lightCyan('Downloaded ' + oldVideos.length + ' resources')} ${dim(
-            'from'
+          `${lightCyan('There are ' + oldVideos.length + ' resources')} ${dim(
+            'downloaded from'
           )} ${link('AnimeGarden', animegardenURL)}`
         );
         if (newVideos.length === 0) {
