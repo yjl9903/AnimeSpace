@@ -84,6 +84,12 @@ export function createProgressBar<T extends Record<string, any>>(
           title.stop();
           progress.stop();
         },
+        remove() {
+          this.stop();
+          multibar.remove(empty);
+          multibar.remove(title);
+          multibar.remove(progress);
+        },
         update(value: number, payload?: T) {
           empty.update(value, { title: '' });
           title.update(value, { title: bold(name) });
