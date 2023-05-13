@@ -1,7 +1,7 @@
 import openEditor from 'open-editor';
-import { lightGreen, lightRed } from '@breadc/color';
 import { type Breadc, breadc } from 'breadc';
 import { AnimeSystem, onDeath } from '@animespace/core';
+import { lightBlue, lightGreen, lightRed } from '@breadc/color';
 
 import { version, description } from '../../package.json';
 
@@ -105,6 +105,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     return onDeath(async (signal, context) => {
       system.logger.info(lightRed('Process is being killed'));
       if (system.isChanged()) {
+        system.logger.info(lightBlue('Writing back anime libraries'));
         await system.writeBack();
         system.logger.info(
           lightGreen('Anime libraries have been written back')
