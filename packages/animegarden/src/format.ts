@@ -17,7 +17,7 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
   if (anime.plan.keywords.include.length === 1) {
     const first = anime.plan.keywords.include[0];
     const sum = first.reduce((acc, t) => acc + t.length, 0);
-    if (sum > 60) {
+    if (sum > 50) {
       logger.info(dim('Include keywords | ') + underline(first[0]));
       for (const t of first.slice(1)) {
         logger.info(`                 ${dim('|')} ${underline(t)}`);
