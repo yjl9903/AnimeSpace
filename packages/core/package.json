@@ -46,6 +46,7 @@
     "@breadc/death": "^0.9.5",
     "consola": "^3.1.0",
     "date-fns": "^2.30.0",
+    "debug": "^4.3.4",
     "defu": "^6.1.2",
     "fast-glob": "^3.2.12",
     "fs-extra": "^11.1.1",

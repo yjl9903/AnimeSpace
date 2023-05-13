@@ -6,7 +6,7 @@ import { z, AnyZodObject } from 'zod';
 
 import type { Plugin } from '../plugin';
 
-import { AnimeSystemError } from '../error';
+import { debug, AnimeSystemError } from '../error';
 
 import {
   AnimePlan,
@@ -58,9 +58,8 @@ export async function loadPlan(
         };
         return plan;
       } else {
-        console.log(parsed.error.issues);
-        console.error(`Failed parsing plan ${path.basename(file)}`);
-        throw new AnimeSystemError('Failed to parse plan');
+        debug(parsed.error.issues);
+        throw new AnimeSystemError(`解析 ${path.relative(cwd, file)} 失败`);
       }
     })
   );

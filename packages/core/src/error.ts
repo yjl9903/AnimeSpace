@@ -1,3 +1,7 @@
+import createDebug from 'debug';
+
+export const debug = createDebug('animespace');
+
 export class AnimeSystemError extends Error {
   public readonly detail: string;
 
