@@ -24,7 +24,7 @@
     "rimraf": "^5.0.0",
     "turbo": "^1.9.4",
     "typescript": "^5.0.4",
-    "vite": "^4.3.5",
+    "vite": "^4.3.6",
     "vitest": "^0.31.0"
   },
   "packageManager": "pnpm@8.5.1",
