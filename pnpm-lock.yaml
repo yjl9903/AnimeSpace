@@ -53,8 +53,8 @@ importers:
         specifier: ^20.1.2
         version: 20.1.2
       '@unocss/reset':
-        specifier: ^0.51.12
-        version: 0.51.12
+        specifier: ^0.51.13
+        version: 0.51.13
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
         version: 4.2.3(vite@4.3.6)(vue@3.3.2)
@@ -2432,6 +2432,10 @@ packages:
 
   /@unocss/reset@0.51.12:
     resolution: {integrity: sha512-VWcudNyGPGU/C+Jrfzbx8BqhFh/QENfUPkKcC8hpqxC4b5PsTJcF8zLu6KgabM0X0CzVouIvVcdZIcUCUEH77Q==}
+    dev: true
+
+  /@unocss/reset@0.51.13:
+    resolution: {integrity: sha512-xwYJW6vNbHIpBtlFcW93fZxILZpWatcCc9nclSgsl0YlFUz9w4/aoV9KqwU62Y4VUteJxCZCCXa3pSiPO8h5KA==}
     dev: true
 
   /@unocss/scope@0.51.12:
