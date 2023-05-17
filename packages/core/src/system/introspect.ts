@@ -93,7 +93,11 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     if (video.naming === 'manual') continue;
     const filename = anime.reformatVideoFilename(video);
     if (filename !== video.filename) {
-      logger.info(`Moving "${bold(video.filename)}" to "${bold(filename)}"`);
+      logger.info(
+        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${bold(
+          filename
+        )}"`
+      );
       await anime.moveVideo(video, filename);
     }
   }
