@@ -19,6 +19,8 @@ export interface LocalOptions extends PluginEntry {
   directory?: string;
 
   introspect?: boolean;
+
+  refresh?: boolean;
 }
 
 export async function Local(options: LocalOptions): Promise<Plugin> {
@@ -31,6 +33,8 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
     options,
     introspect: {
       async handleUnknownFile(system, anime, file) {
+        if (options.introspect === false) return;
+
         const logger = createLogger(system);
         const result = parse(file.filename);
         if (result) {
@@ -68,7 +72,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
         );
       },
       async refresh(system, anime) {
-        if (options.introspect === false) return;
+        if (options.refresh === false) return;
 
         const logger = createLogger(system);
         const relatedFiles: LocalFile[] = [];
