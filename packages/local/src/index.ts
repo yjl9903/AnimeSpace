@@ -9,7 +9,7 @@ import {
 } from '@animespace/core';
 
 import { parse } from 'anitomy';
-import { dim, bold, lightYellow, lightGreen } from '@breadc/color';
+import { dim, bold, lightYellow, lightGreen, lightBlue } from '@breadc/color';
 
 const DOT = dim('•');
 
@@ -17,6 +17,8 @@ export const LOCAL = 'Local';
 
 export interface LocalOptions extends PluginEntry {
   directory?: string;
+
+  introspect?: boolean;
 }
 
 export async function Local(options: LocalOptions): Promise<Plugin> {
@@ -66,6 +68,8 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
         );
       },
       async refresh(system, anime) {
+        if (options.introspect === false) return;
+
         const logger = createLogger(system);
         const relatedFiles: LocalFile[] = [];
         files.splice(
@@ -99,7 +103,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
               }
             };
             logger.info(
-              `${lightGreen('Moving downloaded file')} ${bold(
+              `${lightBlue('Moving local file')} ${bold(
                 file.filename
               )} to ${bold(video.filename)}`
             );
