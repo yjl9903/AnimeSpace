@@ -12,11 +12,12 @@ export async function introspect(system: AnimeSystem) {
   const logger = system.logger.withTag('introspect');
   logger.info(lightBlue(`Introspect Anime Space`));
 
+  const animes = await system.animes();
+
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.prepare?.(system);
   }
 
-  const animes = await loadAnime(system, false);
   for (const anime of animes) {
     await introspectAnime(system, anime);
   }
