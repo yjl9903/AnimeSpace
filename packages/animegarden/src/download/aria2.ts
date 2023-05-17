@@ -415,7 +415,7 @@ export class Aria2Client extends DownloadClient {
         if (await fs.exists(this.options.debug.log)) {
           await fs.rm(this.options.debug.log);
         }
-        this.system.logger.info(
+        this.consola.info(
           dim(`Write aria2 debug logs to ${this.options.debug.log}`)
         );
       } catch {}

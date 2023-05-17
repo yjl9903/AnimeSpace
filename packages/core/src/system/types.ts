@@ -14,7 +14,7 @@ export interface AnimeSystem {
   /**
    * Load animes from plans or introspect result
    */
-  animes(): Promise<Anime[]>;
+  animes(options?: { all?: boolean }): Promise<Anime[]>;
 
   /**
    * Refresh the media library

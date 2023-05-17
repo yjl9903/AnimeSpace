@@ -56,7 +56,8 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
         } catch (error) {
           sys.logger.error(error);
         } finally {
-          await sys.writeBack();
+          await writeBack(sys);
+
           sys = await makeSystem();
           sys.logger.log('');
           cancell();
@@ -81,7 +82,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       } catch (error) {
         throw error;
       } finally {
-        await system.writeBack();
+        await writeBack(system);
       }
     });
 
@@ -97,21 +98,23 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       } catch (error) {
         throw error;
       } finally {
-        await system.writeBack();
+        await writeBack(system);
       }
     });
 
   function registerDeath(system: AnimeSystem) {
     return onDeath(async (signal, context) => {
       system.logger.info(lightRed('Process is being killed'));
-      if (system.isChanged()) {
-        system.logger.info(lightBlue('Writing back anime libraries'));
-        await system.writeBack();
-        system.logger.info(
-          lightGreen('Anime libraries have been written back')
-        );
-      }
+      await writeBack(system);
       context.terminate = 'exit';
     });
+  }
+
+  async function writeBack(system: AnimeSystem) {
+    if (system.isChanged()) {
+      system.logger.info(lightBlue('Writing back anime libraries'));
+      await system.writeBack();
+      system.logger.info(lightGreen('Anime libraries have been written back'));
+    }
   }
 }

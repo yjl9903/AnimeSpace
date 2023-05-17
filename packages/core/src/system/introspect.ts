@@ -1,4 +1,4 @@
-import { bold, lightBlue, lightGreen } from '@breadc/color';
+import { bold, lightBlue, lightGreen, lightRed } from '@breadc/color';
 
 import type { Plan } from '../space';
 
@@ -12,11 +12,12 @@ export async function introspect(system: AnimeSystem) {
   const logger = system.logger.withTag('introspect');
   logger.info(lightBlue(`Introspect Anime Space`));
 
+  const animes = await system.animes();
+
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.prepare?.(system);
   }
 
-  const animes = await loadAnime(system, false);
   for (const anime of animes) {
     await introspectAnime(system, anime);
   }
@@ -71,7 +72,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     }
     // Found dangling video in metadata.yaml, remove it
     if (!found) {
-      logger.info(`Removing "${bold(video.filename)}"`);
+      logger.info(`${lightRed('Removing')} "${bold(video.filename)}"`);
       await anime.removeVideo(video);
     }
   }
@@ -92,7 +93,11 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     if (video.naming === 'manual') continue;
     const filename = anime.reformatVideoFilename(video);
     if (filename !== video.filename) {
-      logger.info(`Moving "${bold(video.filename)}" to "${bold(filename)}"`);
+      logger.info(
+        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${bold(
+          filename
+        )}"`
+      );
       await anime.moveVideo(video, filename);
     }
   }

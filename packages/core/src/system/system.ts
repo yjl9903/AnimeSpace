@@ -27,23 +27,23 @@ export async function createAnimeSystem(
       logger.info(`${dim('Storage')}  ${space.storage}`);
       logger.log('');
     },
-    async animes() {
+    async animes(options) {
       if (animes !== undefined) {
         return animes;
       } else {
-        return (animes = await loadAnime(system, false));
+        return (animes = await loadAnime(system, options?.all ?? false));
       }
     },
     async refresh() {
       logger.wrapConsole();
-      const res = await refresh(system);
+      const animes = await refresh(system);
       logger.restoreConsole();
-      return res;
+      return animes;
     },
     async introspect() {
       logger.wrapConsole();
       // Introspect animes
-      animes = await introspect(system);
+      const animes = await introspect(system);
       logger.restoreConsole();
       return animes;
     },
