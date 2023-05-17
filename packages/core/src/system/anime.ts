@@ -334,14 +334,15 @@ export interface LocalFile {
 }
 
 function stringifyLocalLibrary(lib: LocalLibrary) {
-  const doc = new Document(lib);
-
-  for (const v of lib.videos) {
+  const copied: LocalLibrary = JSON.parse(JSON.stringify(lib));
+  for (const v of copied.videos) {
     if (v.naming === 'auto') {
       // @ts-ignore
       v.naming = undefined;
     }
   }
+
+  const doc = new Document(copied);
 
   visit(doc, {
     Scalar(key, node) {
