@@ -1,4 +1,4 @@
-import { bold, lightBlue, lightGreen } from '@breadc/color';
+import { bold, lightBlue, lightGreen, lightRed } from '@breadc/color';
 
 import type { Plan } from '../space';
 
@@ -71,7 +71,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     }
     // Found dangling video in metadata.yaml, remove it
     if (!found) {
-      logger.info(`Removing "${bold(video.filename)}"`);
+      logger.info(`${lightRed('Removing')} "${bold(video.filename)}"`);
       await anime.removeVideo(video);
     }
   }

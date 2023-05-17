@@ -110,9 +110,9 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         }
 
         logger.info(
-          `${lightBlue(`Downloading`)} ${lightGreen(
-            newVideos.length + ' resources'
-          )} ${dim('from')} ${link('AnimeGarden', animegardenURL)}`
+          `${lightBlue(`Downloading ${newVideos.length} resources`)} ${dim(
+            'from'
+          )} ${link('AnimeGarden', animegardenURL)}`
         );
         for (const { video } of newVideos) {
           const detailURL = `https://garden.onekuma.cn/resource/${video.source
