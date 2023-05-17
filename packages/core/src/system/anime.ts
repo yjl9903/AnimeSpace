@@ -305,6 +305,7 @@ export class Anime {
           'utf-8'
         );
         this._dirty = false;
+        debug(`Write anime library of ${this._lib.title} OK`);
       } catch (error) {
         console.error(error);
       }
