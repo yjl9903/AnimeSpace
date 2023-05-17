@@ -6,11 +6,12 @@ export async function refresh(system: AnimeSystem) {
   const logger = system.logger.withTag('refresh');
   logger.info(lightBlue(`Refresh Anime Space`));
 
+  const animes = await system.animes();
+
   for (const plugin of system.space.plugins) {
     await plugin.refresh?.prepare?.(system);
   }
 
-  const animes = await system.animes();
   for (const anime of animes) {
     for (const plugin of system.space.plugins) {
       await plugin.refresh?.refresh?.(system, anime);

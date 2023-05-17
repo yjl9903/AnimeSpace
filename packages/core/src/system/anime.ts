@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { z } from 'zod';
 import { format } from 'date-fns';
-import { Document, parse, stringify, visit } from 'yaml';
+import { Document, parse, visit } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
 import { debug, AnimeSystemError } from '../error';
@@ -296,6 +296,7 @@ export class Anime {
 
   public async writeLibrary(): Promise<void> {
     if (this._lib && this._dirty) {
+      debug(`Start writing anime library of ${this._lib.title}`);
       const libPath = path.join(this.directory, MetadataFilename);
       try {
         await fs.writeFile(
@@ -307,6 +308,8 @@ export class Anime {
       } catch (error) {
         console.error(error);
       }
+    } else {
+      debug(`Keep anime library of ${this.plan.title}`);
     }
   }
 }
