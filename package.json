@@ -21,7 +21,7 @@
     "@types/node": "^20.1.2",
     "optc": "^0.6.2",
     "prettier": "^2.8.8",
-    "rimraf": "^5.0.0",
+    "rimraf": "^5.0.1",
     "turbo": "^1.9.6",
     "typescript": "^5.0.4",
     "vite": "^4.3.7",
