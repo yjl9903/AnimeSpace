@@ -20,6 +20,8 @@ export class Anime {
 
   private _lib: LocalLibrary | undefined;
 
+  private _raw_lib: Partial<LocalLibrary> | undefined;
+
   private _files: LocalFile[] | undefined;
 
   private _dirty = false;
@@ -61,13 +63,6 @@ export class Anime {
       await fs.ensureDir(this.directory);
       const libPath = path.join(this.directory, MetadataFilename);
 
-      const defaultLib: LocalLibrary = {
-        title: this.plan.title,
-        season: this.plan.season,
-        date: this.plan.date,
-        videos: []
-      };
-
       if (await fs.exists(libPath)) {
         // Mark as unmodified
         this._dirty = false;
@@ -76,6 +71,7 @@ export class Anime {
           .readFile(libPath, 'utf-8')
           .catch(() => fs.readFile(libPath, 'utf-8')); // Retry at most 1 times
         const lib = parse(libContent);
+        this._raw_lib = lib;
 
         const schema = z
           .object({
@@ -117,8 +113,20 @@ export class Anime {
           );
         }
       } else {
-        await fs.writeFile(libPath, stringify(defaultLib), 'utf-8');
-        return (this._lib = defaultLib);
+        const defaultLib: LocalLibrary = {
+          title: this.plan.title,
+          season: this.plan.season,
+          date: this.plan.date,
+          videos: []
+        };
+        await fs.writeFile(
+          libPath,
+          stringifyLocalLibrary(defaultLib, { videos: [] }),
+          'utf-8'
+        );
+        this._raw_lib = {};
+        this._lib = defaultLib;
+        return defaultLib;
       }
     } else {
       return this._lib;
@@ -290,7 +298,11 @@ export class Anime {
     if (this._lib && this._dirty) {
       const libPath = path.join(this.directory, MetadataFilename);
       try {
-        await fs.writeFile(libPath, stringifyLocalLibrary(this._lib!), 'utf-8');
+        await fs.writeFile(
+          libPath,
+          stringifyLocalLibrary(this._lib!, this._raw_lib),
+          'utf-8'
+        );
         this._dirty = false;
       } catch (error) {
         console.error(error);
@@ -333,8 +345,25 @@ export interface LocalFile {
   metadata: Record<string, string>;
 }
 
-function stringifyLocalLibrary(lib: LocalLibrary) {
+function stringifyLocalLibrary(
+  lib: LocalLibrary,
+  rawLib?: Partial<LocalLibrary>
+) {
   const copied: LocalLibrary = JSON.parse(JSON.stringify(lib));
+  if (rawLib?.title === undefined) {
+    // @ts-ignore
+    copied.title = undefined;
+  }
+  if (rawLib?.date === undefined) {
+    // @ts-ignore
+    copied.date = undefined;
+  }
+  if (rawLib?.season === undefined) {
+    copied.season = undefined;
+  }
+  if (copied.videos === undefined) {
+    copied.videos = [];
+  }
   for (const v of copied.videos) {
     if (v.naming === 'auto') {
       // @ts-ignore
