@@ -1,22 +1,13 @@
 import { z } from 'zod';
 
 import {
-  type Anime,
   type AnimeSystem,
   onDeath,
   type Plugin,
   type PluginEntry,
   StringArray
 } from '@animespace/core';
-import {
-  bold,
-  dim,
-  lightBlue,
-  lightCyan,
-  lightGreen,
-  lightRed,
-  link
-} from '@breadc/color';
+import { bold, dim, lightBlue, lightCyan, lightRed, link } from '@breadc/color';
 
 import './plan.d';
 
@@ -71,11 +62,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         logger.log('');
 
         logger.info(
-          `${lightBlue('Fetching resources')} ${
-            bold(
-              anime.plan.title
-            )
-          }  (${
+          `${lightBlue('Fetching resources')} ${bold(anime.plan.title)}  (${
             link(
               `Bangumi: ${anime.plan.bgm}`,
               `https://bangumi.tv/subject/${anime.plan.bgm}`
