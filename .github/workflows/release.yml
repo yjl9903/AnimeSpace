@@ -27,3 +27,93 @@ jobs:
       - run: npx changelogithub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  binary:
+    runs-on: ${{ matrix.os }}
+
+    env:
+      binary: anime
+      archive: anime-${{ matrix.target }}.${{ matrix.archive }}
+      checksum: anime-${{ matrix.target }}-sha256sum.txt
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: linux
+            os: ubuntu-latest
+            dist: ./packages/cli/bin/anime
+            archive: tar.gz
+          - target: macos
+            os: macos-latest
+            dist: ./packages/cli/bin/anime
+            archive: zip
+          - target: windows
+            os: windows-latest
+            dist: .\packages\cli\bin\anime.exe
+            archive: zip
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test:ci
+
+      - name: Create archive (linux)
+        if: ${{ matrix.os != 'macos-latest' && matrix.os != 'windows-latest' }}
+        run: |
+          tar -czvf ${{ env.archive }} ${{ matrix.dist }}
+          sha256sum ${{ env.archive }} > ${{ env.checksum }}
+
+      - name: Create archive (macos)
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: |
+          zip ${{ env.archive }} ${{ matrix.dist }}
+          sha256sum ${{ env.archive }} > ${{ env.checksum }}
+
+      - name: Upload artifacts archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.archive }}
+          path: ${{ env.archive }}
+
+      - name: Upload artifacts checksum
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.checksum }}
+          path: ${{ env.checksum }}
+
+      - name: Upload binary to release
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          overwrite: true
+          tag: ${{ github.ref }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.archive }}
+          asset_name: ${{ env.archive }}
+
+      - name: Upload checksum to release
+        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          overwrite: true
+          tag: ${{ github.ref }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.checksum }}
+          asset_name: ${{ env.checksum }}
