@@ -4,20 +4,20 @@ import type { Resource } from 'animegarden';
 
 import {
   Anime,
-  LocalVideo,
   AnimeSystem,
+  LocalVideo,
   onDeath,
   onUnhandledRejection
 } from '@animespace/core';
 import { Parser } from 'anitomy';
 import { MutableMap } from '@onekuma/map';
 import {
-  link,
   bold,
   cyan,
-  lightRed,
   lightGreen,
-  lightYellow
+  lightRed,
+  lightYellow,
+  link
 } from '@breadc/color';
 
 import { ANIMEGARDEN } from './constant';
@@ -42,9 +42,11 @@ export async function generateDownloadTask(
       const tl = lhs.title;
       const tr = rhs.title;
 
-      for (const [_, order] of Object.entries(
-        system.space.preference.keyword.order
-      )) {
+      for (
+        const [_, order] of Object.entries(
+          system.space.preference.keyword.order
+        )
+      ) {
         for (const k of order) {
           const key = k.toLowerCase();
           const hl = tl.toLowerCase().indexOf(key) !== -1;
@@ -66,8 +68,10 @@ export async function generateDownloadTask(
 
     const res = resources[0];
     if (
-      force ||
-      !(await anime.library()).videos.find((r) => r.source.magnet === res.href)
+      force
+      || !(await anime.library()).videos.find((r) =>
+        r.source.magnet === res.href
+      )
     ) {
       videos.push({
         video: {
@@ -182,13 +186,17 @@ export async function runDownloadTask(
       let text = '';
       if (payload.state) {
         text += payload.state;
-        text += ` | ${Number(payload.completed)} B / ${Number(
-          payload.total
-        )} B`;
+        text += ` | ${Number(payload.completed)} B / ${
+          Number(
+            payload.total
+          )
+        } B`;
       } else {
-        text += `${formatSize(Number(payload.completed))} / ${formatSize(
-          Number(payload.total)
-        )}`;
+        text += `${formatSize(Number(payload.completed))} / ${
+          formatSize(
+            Number(payload.total)
+          )
+        }`;
         if (payload.speed) {
           text += ` | Speed: ${formatSize(payload.speed)}/s`;
         }
@@ -246,10 +254,9 @@ export async function runDownloadTask(
           onProgress(payload) {
             const completed = Number(payload.completed);
             const total = Number(payload.total);
-            const value =
-              payload.total > 0
-                ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1)
-                : 0;
+            const value = payload.total > 0
+              ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1)
+              : 0;
             bar.update(value, { ...payload, state: '' });
           },
           onComplete() {
@@ -261,9 +268,11 @@ export async function runDownloadTask(
       bar.remove();
 
       multibarLogger.info(
-        `${lightGreen('Download')} ${bold(video.video.filename)} ${lightGreen(
-          'OK'
-        )}`
+        `${lightGreen('Download')} ${bold(video.video.filename)} ${
+          lightGreen(
+            'OK'
+          )
+        }`
       );
 
       if (files.length === 1) {
@@ -294,23 +303,29 @@ export async function runDownloadTask(
         await anime.addVideoByCopy(file, video.video);
 
         multibarLogger.info(
-          `${lightGreen('Add')} ${bold(video.video.filename)} ${lightGreen(
-            'OK'
-          )}`
+          `${lightGreen('Add')} ${bold(video.video.filename)} ${
+            lightGreen(
+              'OK'
+            )
+          }`
         );
       } else {
         multibar.println(
-          `${lightYellow(`Warn`)} Resource ${link(
-            video.resource.title,
-            video.resource.href
-          )} has multiple files`
+          `${lightYellow(`Warn`)} Resource ${
+            link(
+              video.resource.title,
+              video.resource.href
+            )
+          } has multiple files`
         );
       }
     } catch (error) {
-      const defaultMessage = `Download ${link(
-        video.resource.title,
-        video.resource.href
-      )} failed`;
+      const defaultMessage = `Download ${
+        link(
+          video.resource.title,
+          video.resource.href
+        )
+      } failed`;
       if (error instanceof Error && error?.message) {
         multibarLogger.error(error.message ?? defaultMessage);
         systemLogger.error(error);

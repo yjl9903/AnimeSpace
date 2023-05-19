@@ -1,4 +1,4 @@
-import { dim, lightGreen, bold, lightCyan } from '@breadc/color';
+import { bold, dim, lightCyan, lightGreen } from '@breadc/color';
 
 export const DOT = dim('•');
 export const titleColor = bold;

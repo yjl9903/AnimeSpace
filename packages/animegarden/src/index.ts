@@ -2,20 +2,20 @@ import { z } from 'zod';
 
 import {
   type Anime,
-  type Plugin,
-  type PluginEntry,
   type AnimeSystem,
   onDeath,
+  type Plugin,
+  type PluginEntry,
   StringArray
 } from '@animespace/core';
 import {
-  dim,
-  link,
   bold,
-  lightRed,
+  dim,
   lightBlue,
   lightCyan,
-  lightGreen
+  lightGreen,
+  lightRed,
+  link
 } from '@breadc/color';
 
 import './plan.d';
@@ -71,12 +71,16 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         logger.log('');
 
         logger.info(
-          `${lightBlue('Fetching resources')} ${bold(
-            anime.plan.title
-          )}  (${link(
-            `Bangumi: ${anime.plan.bgm}`,
-            `https://bangumi.tv/subject/${anime.plan.bgm}`
-          )})`
+          `${lightBlue('Fetching resources')} ${
+            bold(
+              anime.plan.title
+            )
+          }  (${
+            link(
+              `Bangumi: ${anime.plan.bgm}`,
+              `https://bangumi.tv/subject/${anime.plan.bgm}`
+            )
+          })`
         );
         printKeywords(anime, logger);
         printFansubs(anime, logger);
@@ -87,10 +91,12 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         );
         if (resources === undefined) {
           logger.info(
-            `${lightRed('Found resources')} ${dim('from')} ${link(
-              'AnimeGarden',
-              animegardenURL
-            )} ${lightRed('failed')}`
+            `${lightRed('Found resources')} ${dim('from')} ${
+              link(
+                'AnimeGarden',
+                animegardenURL
+              )
+            } ${lightRed('failed')}`
           );
           return;
         }
@@ -101,23 +107,29 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           (v) => v.source.type === ANIMEGARDEN
         );
         logger.info(
-          `${lightCyan('There are ' + oldVideos.length + ' resources')} ${dim(
-            'downloaded from'
-          )} ${link('AnimeGarden', animegardenURL)}`
+          `${lightCyan('There are ' + oldVideos.length + ' resources')} ${
+            dim(
+              'downloaded from'
+            )
+          } ${link('AnimeGarden', animegardenURL)}`
         );
         if (newVideos.length === 0) {
           return;
         }
 
         logger.info(
-          `${lightBlue(`Downloading ${newVideos.length} resources`)} ${dim(
-            'from'
-          )} ${link('AnimeGarden', animegardenURL)}`
+          `${lightBlue(`Downloading ${newVideos.length} resources`)} ${
+            dim(
+              'from'
+            )
+          } ${link('AnimeGarden', animegardenURL)}`
         );
         for (const { video } of newVideos) {
-          const detailURL = `https://garden.onekuma.cn/resource/${video.source
-            .magnet!.split('/')
-            .at(-1)}`;
+          const detailURL = `https://garden.onekuma.cn/resource/${
+            video.source
+              .magnet!.split('/')
+              .at(-1)
+          }`;
           logger.info(`  ${DOT} ${link(video.filename, detailURL)}`);
         }
 

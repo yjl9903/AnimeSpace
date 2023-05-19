@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import { AnimeSystem, uniqBy } from '@animespace/core';
 
 import { fetchResources } from 'animegarden';
-import { lightBlue, bold, lightRed } from '@breadc/color';
+import { bold, lightBlue, lightRed } from '@breadc/color';
 import { format, getYear, subMonths } from 'date-fns';
 import { BgmClient, type BGMCollection } from 'bgmc';
 
@@ -54,11 +54,13 @@ export async function generatePlan(
 
       if (options.create) {
         system.logger.info(
-          `${lightBlue('Searching')} ${bold(
-            anime.subject?.name_cn ||
-              anime.subject?.name ||
-              `Bangumi ${anime.subject_id}`
-          )}`
+          `${lightBlue('Searching')} ${
+            bold(
+              anime.subject?.name_cn
+                || anime.subject?.name
+                || `Bangumi ${anime.subject_id}`
+            )
+          }`
         );
       }
     }
@@ -70,8 +72,9 @@ export async function generatePlan(
 
       const alias = item.infobox?.find((box) => box.key === '别名');
       const title = item.name_cn || item.name;
-      const translations =
-        (alias?.value.map((v) => v?.v).filter(Boolean) as string[]) ?? [];
+      const translations = (alias?.value.map((v) =>
+        v?.v
+      ).filter(Boolean) as string[]) ?? [];
       if (item.name && item.name !== title) {
         translations.unshift(item.name);
       }
@@ -115,19 +118,23 @@ export async function generatePlan(
         .replace(/"/g, '%22')
         .replace(/ /g, '%20');
       writeln(
-        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${encodeURIComponent(
-          date.toISOString()
-        )}`
+        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${
+          encodeURIComponent(
+            date.toISOString()
+          )
+        }`
       );
       writeln(``);
     } catch (error) {
       if (typeof anime === 'object') {
         system.logger.error(
-          `${lightRed('Failed to search')} ${bold(
-            anime.subject?.name_cn ||
-              anime.subject?.name ||
-              `Bangumi ${anime.subject_id}`
-          )}`
+          `${lightRed('Failed to search')} ${
+            bold(
+              anime.subject?.name_cn
+                || anime.subject?.name
+                || `Bangumi ${anime.subject_id}`
+            )
+          }`
         );
       } else {
         system.logger.error(error);

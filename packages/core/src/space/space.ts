@@ -1,12 +1,12 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
-import { z, AnyZodObject } from 'zod';
+import { AnyZodObject, z } from 'zod';
 import { parse, stringify } from 'yaml';
 
 import type { Plugin } from '../plugin';
 
-import { debug, AnimeSystemError } from '../error';
+import { AnimeSystemError, debug } from '../error';
 import { isSubDir, useAsyncSingleton } from '../utils';
 
 import { loadPlan } from './plan';
@@ -151,8 +151,8 @@ async function validateSpace(root: string, space: RawAnimeSpace) {
       const dirname = path.basename(space.storage);
       const target = path.join(root, dirname);
       if (
-        !(await fs.pathExists(target)) ||
-        (await fs.readdir(target)).length === 0
+        !(await fs.pathExists(target))
+        || (await fs.readdir(target)).length === 0
       ) {
         fs.symlink(space.storage, target);
       }

@@ -9,12 +9,6 @@
         "dist/**"
       ]
     },
-    "format": {
-      "inputs": [
-        "src/**/*.ts",
-        "test/**/*.ts"
-      ]
-    },
     "typecheck": {
       "dependsOn": [
         "build"

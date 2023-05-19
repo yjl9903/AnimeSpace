@@ -74,8 +74,9 @@ export class Aria2Client extends DownloadClient {
       throw new Error('aria2 has not started');
     }
 
-    const proxy =
-      typeof this.options.proxy === 'string' ? this.options.proxy : getProxy();
+    const proxy = typeof this.options.proxy === 'string'
+      ? this.options.proxy
+      : getProxy();
     const gid = await this.client
       .addUri([magnet], {
         dir: this.options.directory,
@@ -120,10 +121,11 @@ export class Aria2Client extends DownloadClient {
           await that.updateStatus(task, status);
           if (task.state === 'error') {
             if (
-              status.errorMessage &&
-              /File (.*) exists, but a control file\(\*.aria2\) does not exist/.test(
-                status.errorMessage
-              )
+              status.errorMessage
+              && /File (.*) exists, but a control file\(\*.aria2\) does not exist/
+                .test(
+                  status.errorMessage
+                )
             ) {
               // Hack: handle file exists
               const files = status.files.map((f) => f.path);
@@ -302,14 +304,13 @@ export class Aria2Client extends DownloadClient {
         connections,
         speed
       };
-      const dirty =
-        force ||
-        oldState !== task.state ||
-        oldProgress.state !== progress.state ||
-        oldProgress.completed !== progress.completed ||
-        oldProgress.total !== progress.total ||
-        oldProgress.connections !== progress.connections ||
-        oldProgress.speed !== progress.speed;
+      const dirty = force
+        || oldState !== task.state
+        || oldProgress.state !== progress.state
+        || oldProgress.completed !== progress.completed
+        || oldProgress.total !== progress.total
+        || oldProgress.connections !== progress.connections
+        || oldProgress.speed !== progress.speed;
 
       if (task.state === 'waiting' || task.state === 'metadata') {
         if (dirty) {
@@ -371,14 +372,13 @@ export class Aria2Client extends DownloadClient {
       }
 
       const payload = { completed, total, connections, speed };
-      const dirty =
-        force ||
-        oldState !== task.state ||
-        oldProgress.state !== progress.state ||
-        oldProgress.completed !== progress.completed ||
-        oldProgress.total !== progress.total ||
-        oldProgress.connections !== progress.connections ||
-        oldProgress.speed !== progress.speed;
+      const dirty = force
+        || oldState !== task.state
+        || oldProgress.state !== progress.state
+        || oldProgress.completed !== progress.completed
+        || oldProgress.total !== progress.total
+        || oldProgress.connections !== progress.connections
+        || oldProgress.speed !== progress.speed;
 
       if (progress.state === 'active') {
         if (dirty) {

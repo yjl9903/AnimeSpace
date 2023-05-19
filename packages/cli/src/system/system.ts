@@ -4,7 +4,7 @@ import path from 'node:path';
 import { Local } from '@animespace/local';
 import { Bangumi } from '@animespace/bangumi';
 import { AnimeGarden } from '@animespace/animegarden';
-import { loadSpace, createAnimeSystem, PluginLoader } from '@animespace/core';
+import { createAnimeSystem, loadSpace, PluginLoader } from '@animespace/core';
 
 const pluginLoader: PluginLoader = {
   async animegarden(entry) {

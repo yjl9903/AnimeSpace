@@ -2,11 +2,11 @@ import fs from 'fs-extra';
 import fg from 'fast-glob';
 import path from 'node:path';
 import { parse } from 'yaml';
-import { z, AnyZodObject } from 'zod';
+import { AnyZodObject, z } from 'zod';
 
 import type { Plugin } from '../plugin';
 
-import { debug, AnimeSystemError } from '../error';
+import { AnimeSystemError, debug } from '../error';
 
 import {
   AnimePlan,
@@ -40,20 +40,19 @@ export async function loadPlan(
         const plan: Plan = {
           ...parsed.data,
           onair: parsed.data.onair.map(
-            (o: z.infer<typeof AnimePlanSchema>) =>
-              ({
-                ...o,
-                // Inherit plan status
-                status: o.status ? o.status : parsed.data.status,
-                // Inherit plan date
-                date: o.date ? o.date : parsed.data.date,
-                // Manually resolve keywords
-                keywords: resolveKeywordsArray(
-                  o.title,
-                  o.translations,
-                  o.keywords
-                )
-              } as AnimePlan)
+            (o: z.infer<typeof AnimePlanSchema>) => ({
+              ...o,
+              // Inherit plan status
+              status: o.status ? o.status : parsed.data.status,
+              // Inherit plan date
+              date: o.date ? o.date : parsed.data.date,
+              // Manually resolve keywords
+              keywords: resolveKeywordsArray(
+                o.title,
+                o.translations,
+                o.keywords
+              )
+            } as AnimePlan)
           )
         };
         return plan;

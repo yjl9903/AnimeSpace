@@ -6,11 +6,15 @@ import { dim, link, underline } from '@breadc/color';
 import { DOT } from './constant';
 
 export function formatAnimeGardenSearchURL(anime: Anime) {
-  return `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
-    JSON.stringify(anime.plan.keywords.include)
-  )}&exclude=${encodeURIComponent(
-    JSON.stringify(anime.plan.keywords.exclude)
-  )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
+  return `https://garden.onekuma.cn/resources/1?include=${
+    encodeURIComponent(
+      JSON.stringify(anime.plan.keywords.include)
+    )
+  }&exclude=${
+    encodeURIComponent(
+      JSON.stringify(anime.plan.keywords.exclude)
+    )
+  }&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
 }
 
 export function printKeywords(anime: Anime, logger: ConsolaInstance) {
@@ -24,9 +28,11 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
       }
     } else {
       logger.info(
-        `${dim('Include keywords')}   ${first
-          .map((t) => underline(t))
-          .join(dim(' | '))}`
+        `${dim('Include keywords')}   ${
+          first
+            .map((t) => underline(t))
+            .join(dim(' | '))
+        }`
       );
     }
   } else {
@@ -37,9 +43,11 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
   }
   if (anime.plan.keywords.exclude.length > 0) {
     logger.info(
-      `${dim(`Exclude keywords`)}   [ ${anime.plan.keywords.exclude
-        .map((t) => underline(t))
-        .join(' , ')} ]`
+      `${dim(`Exclude keywords`)}   [ ${
+        anime.plan.keywords.exclude
+          .map((t) => underline(t))
+          .join(' , ')
+      } ]`
     );
   }
 }
@@ -49,10 +57,12 @@ export function printFansubs(anime: Anime, logger: ConsolaInstance) {
   logger.info(
     `${dim('Prefer fansubs')}     ${
       fansubs.length === 0
-        ? `See ${link(
+        ? `See ${
+          link(
             'AnimeGarden',
             formatAnimeGardenSearchURL(anime)
-          )} to select some fansubs`
+          )
+        } to select some fansubs`
         : fansubs.join(dim(' > '))
     }`
   );

@@ -1,7 +1,7 @@
 import type { Breadc } from 'breadc';
 
 import prompts from 'prompts';
-import { link, bold, lightYellow } from '@breadc/color';
+import { bold, lightYellow, link } from '@breadc/color';
 import { type AnimeSystem, loadAnime } from '@animespace/core';
 
 import './plan.d';
@@ -58,8 +58,8 @@ export function registerCli(
       const bangumiPlugin = system.space.plugins.find(
         (p) => p.name === 'bangumi'
       );
-      const username =
-        options.username ?? (bangumiPlugin?.options?.username as string) ?? '';
+      const username = options.username
+        ?? (bangumiPlugin?.options?.username as string) ?? '';
       if (!username) {
         system.logger.error(
           'You should provide your bangumi username with --username <username>'
@@ -80,10 +80,12 @@ export function registerCli(
       for (const anime of animes) {
         const animegardenURL = formatAnimeGardenSearchURL(anime);
         logger.info(
-          `${bold(anime.plan.title)}  (${link(
-            `Bangumi: ${anime.plan.bgm}`,
-            `https://bangumi.tv/subject/${anime.plan.bgm}`
-          )}, ${link('AnimeGarden', animegardenURL)})`
+          `${bold(anime.plan.title)}  (${
+            link(
+              `Bangumi: ${anime.plan.bgm}`,
+              `https://bangumi.tv/subject/${anime.plan.bgm}`
+            )
+          }, ${link('AnimeGarden', animegardenURL)})`
         );
         printKeywords(anime, logger);
         printFansubs(anime, logger);
@@ -98,9 +100,11 @@ export function registerCli(
         const lib = await anime.library();
 
         for (const { video } of videos) {
-          const detailURL = `https://garden.onekuma.cn/resource/${video.source
-            .magnet!.split('/')
-            .at(-1)}`;
+          const detailURL = `https://garden.onekuma.cn/resource/${
+            video.source
+              .magnet!.split('/')
+              .at(-1)
+          }`;
 
           let extra = '';
           if (
@@ -148,9 +152,9 @@ export function registerCli(
       .filter((a) => (options.onair ? a.plan.status === 'onair' : true))
       .filter(
         (a) =>
-          !keyword ||
-          a.plan.title.includes(keyword) ||
-          Object.values(a.plan.translations)
+          !keyword
+          || a.plan.title.includes(keyword)
+          || Object.values(a.plan.translations)
             .flat()
             .some((t) => t.includes(keyword))
       );
