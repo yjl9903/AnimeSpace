@@ -97,7 +97,7 @@ jobs:
       - name: Create archive (macos)
         if: ${{ matrix.os == 'macos-latest' }}
         run: |
-          zip ${{ env.archive }} ${{ matrix.dist }}
+          zip -j ${{ env.archive }} ${{ matrix.dist }}
           shasum -a 256 ${{ env.archive }} > ${{ env.checksum }}
 
       - name: Create archive (windows)
