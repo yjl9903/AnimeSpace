@@ -59,8 +59,11 @@ jobs:
             archive: zip
 
     steps:
-      - name: Set Timezone
-        run: sudo timedatectl set-timezone "Asia/Shanghai"
+      - uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: "Asia/Shanghai"
+          timezoneMacos: "Asia/Shanghai"
+          timezoneWindows: "China Standard Time"
 
       - uses: actions/checkout@v3
 
