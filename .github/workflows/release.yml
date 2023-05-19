@@ -29,6 +29,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   binary:
+    name: Bundle binary for ${{ matrix.target }}
+
     runs-on: ${{ matrix.os }}
 
     env:
@@ -38,22 +40,28 @@ jobs:
 
     strategy:
       fail-fast: false
+
       matrix:
         include:
           - target: linux
             os: ubuntu-latest
             dist: ./packages/cli/bin/anime
             archive: tar.gz
+
           - target: macos
             os: macos-latest
             dist: ./packages/cli/bin/anime
             archive: zip
+
           - target: windows
             os: windows-latest
             dist: .\packages\cli\bin\anime.exe
             archive: zip
 
     steps:
+      - name: Set Timezone
+        run: sudo timedatectl set-timezone "Asia/Shanghai"
+
       - uses: actions/checkout@v3
 
       - name: Setup pnpm
@@ -72,10 +80,13 @@ jobs:
         run: pnpm build
 
       - name: Test
-        run: pnpm test:ci
+        run: |
+          pnpm test:ci
+          ${{ matrix.dist }} --version
+          ${{ matrix.dist }} --help
 
       - name: Create archive (linux)
-        if: ${{ matrix.os != 'macos-latest' && matrix.os != 'windows-latest' }}
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
           tar -czvf ${{ env.archive }} ${{ matrix.dist }}
           sha256sum ${{ env.archive }} > ${{ env.checksum }}
