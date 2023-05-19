@@ -211,8 +211,8 @@ importers:
         specifier: ^0.36.1
         version: 0.36.1
       bangumi-data:
-        specifier: ^0.3.115
-        version: 0.3.115
+        specifier: ^0.3.116
+        version: 0.3.116
       unbuild:
         specifier: ^1.2.1
         version: 1.2.1
@@ -2888,8 +2888,8 @@ packages:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
 
-  /bangumi-data@0.3.115:
-    resolution: {integrity: sha512-BBNAiNkdf9k0E1BTeMb18wXGJp/HS3fHjZLc5YUZXQGZfZ0fZxcXA9xIwVZCtA1akB7WSSvBU6F5d4iKzIdyLg==}
+  /bangumi-data@0.3.116:
+    resolution: {integrity: sha512-8Xa8RWZXR0Q5eAmrBBFVoHI9y3a5/b0wEN4Scztwq0wpvj1LqBuilUuWXVBg0XVpatY/WSJutKVVBoDsoGUe+w==}
     dev: true
 
   /base64-arraybuffer@1.0.2:
