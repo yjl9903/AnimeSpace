@@ -217,8 +217,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       unbuild-sea:
-        specifier: ^0.0.7
-        version: 0.0.7(unbuild@1.2.1)
+        specifier: ^0.0.8
+        version: 0.0.8(unbuild@1.2.1)
 
   packages/core:
     dependencies:
@@ -6248,8 +6248,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unbuild-sea@0.0.7(unbuild@1.2.1):
-    resolution: {integrity: sha512-JaD9L8NMIvRKWlgHhcZdEaOR9C7ytxLa5/Kkq4qAf3GaqcXL5iIG8tCf413723N+pcr3CMLgC4+jLHq2HO1Ucg==}
+  /unbuild-sea@0.0.8(unbuild@1.2.1):
+    resolution: {integrity: sha512-7Qjz0SX44Rjh5Du6ia5D5t/ZmASgqwsn1Zw6eTp1FdgJzlXxeH3DmoF2bctrh2jCurvNdr2g8Z5QL4dsI51JsA==}
     engines: {node: '>=v20.0.0'}
     peerDependencies:
       unbuild: ^1.2.1
