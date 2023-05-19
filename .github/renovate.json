@@ -1,19 +1,4 @@
 {
   "baseBranches": ["next"],
-  "extends": ["config:base"],
-  "packageRules": [
-    {
-      "matchDepTypes": ["devDependencies", "packageManager"],
-      "automerge": true
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "automerge": true
-    },
-    {
-      "packageNames": ["node"],
-      "enabled": false
-    }
-  ],
-  "rangeStrategy": "bump"
+  "extends": ["github>yjl9903/renovate-config"]
 }
