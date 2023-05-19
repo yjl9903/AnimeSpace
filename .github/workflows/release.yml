@@ -91,7 +91,7 @@ jobs:
       - name: Create archive (linux)
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
-          tar -czvf ${{ env.archive }} ${{ matrix.dist }}
+          tar -czvf ${{ env.archive }} -C $(dirname ${{ matrix.dist }}) $(basename ${{ matrix.dist }})
           sha256sum ${{ env.archive }} > ${{ env.checksum }}
 
       - name: Create archive (macos)
