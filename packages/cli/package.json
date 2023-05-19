@@ -68,7 +68,7 @@
     "@vercel/ncc": "^0.36.1",
     "bangumi-data": "^0.3.115",
     "unbuild": "^1.2.1",
-    "unbuild-sea": "^0.0.7"
+    "unbuild-sea": "^0.0.9"
   },
   "engines": {
     "node": ">=v16.0.0"
