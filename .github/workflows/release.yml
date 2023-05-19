@@ -97,6 +97,12 @@ jobs:
           zip ${{ env.archive }} ${{ matrix.dist }}
           sha256sum ${{ env.archive }} > ${{ env.checksum }}
 
+      - name: Create archive (macos)
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: |
+          zip ${{ env.archive }} ${{ matrix.dist }}
+          sha256sum ${{ env.archive }} > ${{ env.checksum }}
+
       - name: Upload artifacts archive
         uses: actions/upload-artifact@v3
         with:
