@@ -3,7 +3,7 @@ import { type Breadc, breadc } from 'breadc';
 import { AnimeSystem, onDeath } from '@animespace/core';
 import { lightBlue, lightGreen, lightRed } from '@breadc/color';
 
-import { version, description } from '../../package.json';
+import { description, version } from '../../package.json';
 
 import { loop } from './utils';
 import { makeSystem } from './system';

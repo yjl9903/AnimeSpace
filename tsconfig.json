@@ -24,11 +24,11 @@
       ],
       "@animespace/local": [
         "./packages/local/src/index.ts"
-      ],
+      ]
     }
   },
   "exclude": [
     "**/dist/**",
-    "**/node_modules/**",
+    "**/node_modules/**"
   ]
 }

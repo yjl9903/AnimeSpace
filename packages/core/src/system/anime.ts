@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { Document, parse, visit } from 'yaml';
 
 import { AnimePlan, AnimeSpace } from '../space';
-import { debug, AnimeSystemError } from '../error';
+import { AnimeSystemError, debug } from '../error';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
 
 const MetadataFilename = 'metadata.yaml';
@@ -76,13 +76,12 @@ export class Anime {
         const schema = z
           .object({
             title: z.string().default(this.plan.title).catch(this.plan.title),
-            season:
-              this.plan.season !== undefined
-                ? z.coerce
-                    .number()
-                    .default(this.plan.season)
-                    .catch(this.plan.season)
-                : z.coerce.number().optional(),
+            season: this.plan.season !== undefined
+              ? z.coerce
+                .number()
+                .default(this.plan.season)
+                .catch(this.plan.season)
+              : z.coerce.number().optional(),
             date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
             videos: z
               .array(
@@ -102,7 +101,7 @@ export class Anime {
 
         const parsed = schema.safeParse(lib);
         if (parsed.success) {
-          return (this._lib = <LocalLibrary>{
+          return (this._lib = <LocalLibrary> {
             ...parsed.data,
             videos: lib?.videos ?? []
           });
@@ -398,7 +397,7 @@ function stringifyLocalLibrary(
   });
 
   return (
-    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n` +
-    doc.toString({ lineWidth: 0 })
+    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n`
+    + doc.toString({ lineWidth: 0 })
   );
 }

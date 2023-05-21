@@ -1,6 +1,6 @@
 {
   "name": "animespace",
-  "version": "0.1.0-beta.3",
+  "version": "0.1.0-beta.9",
   "description": "Create your own Anime Space",
   "keywords": [
     "anime",
@@ -40,7 +40,6 @@
     "build": "unbuild && pnpm bundle",
     "bundle": "rimraf bin && ncc build src/cli.ts -m -o bin && node scripts/sea.mjs",
     "dev": "unbuild --stub",
-    "format": "prettier --write {src,test}/**/*.ts",
     "test": "vitest",
     "test:ci": "vitest --run",
     "typecheck": "tsc --noEmit --skipLibCheck",

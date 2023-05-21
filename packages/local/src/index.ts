@@ -1,15 +1,15 @@
 import { ConsolaInstance } from 'consola';
 import {
-  type Plugin,
-  type PluginEntry,
+  type AnimeSystem,
+  listIncludeFiles,
   type LocalFile,
   type LocalVideo,
-  type AnimeSystem,
-  listIncludeFiles
+  type Plugin,
+  type PluginEntry
 } from '@animespace/core';
 
 import { parse } from 'anitomy';
-import { dim, bold, lightYellow, lightGreen, lightBlue } from '@breadc/color';
+import { bold, dim, lightBlue, lightGreen, lightYellow } from '@breadc/color';
 
 const DOT = dim('•');
 
@@ -53,9 +53,11 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
             }
           };
           logger.info(
-            `${lightGreen('Moving downloaded file')} ${bold(
-              file.filename
-            )} to ${bold(video.filename)}`
+            `${lightGreen('Moving downloaded file')} ${
+              bold(
+                file.filename
+              )
+            } to ${bold(video.filename)}`
           );
           await anime.addVideoByMove(file.path, video);
           return video;
@@ -107,9 +109,11 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
               }
             };
             logger.info(
-              `${lightBlue('Moving local file')} ${bold(
-                file.filename
-              )} to ${bold(video.filename)}`
+              `${lightBlue('Moving local file')} ${
+                bold(
+                  file.filename
+                )
+              } to ${bold(video.filename)}`
             );
             await anime.addVideoByMove(file.path, video);
           } else {
@@ -121,9 +125,11 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
         if (files.length > 0) {
           const logger = createLogger(system);
           logger.info(
-            `There are ${lightYellow(
-              `${files.length} downloaded files`
-            )} without matching animations found.`
+            `There are ${
+              lightYellow(
+                `${files.length} downloaded files`
+              )
+            } without matching animations found.`
           );
           for (const f of files) {
             logger.info(`${DOT} ${f.filename}`);

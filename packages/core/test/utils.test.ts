@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { useSingleton, useAsyncSingleton } from '../src';
+import { useAsyncSingleton, useSingleton } from '../src';
 
 describe('useSingleton', () => {
   it('should work', () => {

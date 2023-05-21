@@ -1,7 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { loadSpace, createAnimeSystem } from '@animespace/core';
+import { createAnimeSystem, loadSpace } from '@animespace/core';
 
 import { Aria2Client } from '../src/download/aria2';
 

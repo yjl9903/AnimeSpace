@@ -1,6 +1,6 @@
 {
   "name": "@animespace/monorepo",
-  "version": "0.1.0-beta.3",
+  "version": "0.1.0-beta.9",
   "private": true,
   "scripts": {
     "anime": "tsx packages/cli/src/cli.ts",
@@ -10,7 +10,7 @@
     "build:docs": "turbo run build --filter docs",
     "dev:cli": "turbo run dev --filter animespace...",
     "dev:docs": "pnpm -C docs dev",
-    "format": "turbo run format",
+    "format": "dprint fmt",
     "release": "bumpp package.json docs/package.json packages/*/package.json --commit --push --tag && pnpm -r publish --access public",
     "test:ci": "turbo run test:ci",
     "typecheck": "turbo run typecheck",
@@ -19,8 +19,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.1.2",
+    "dprint": "^0.36.1",
     "optc": "^0.6.2",
-    "prettier": "^2.8.8",
     "rimraf": "^5.0.1",
     "turbo": "^1.9.8",
     "typescript": "^5.0.4",

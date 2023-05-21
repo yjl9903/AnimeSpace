@@ -7,7 +7,7 @@ import {
   onUnhandledRejection
 } from '@animespace/core';
 
-import { makeSystem, makeCliApp } from './system';
+import { makeCliApp, makeSystem } from './system';
 
 const debug = createDebug('anime');
 

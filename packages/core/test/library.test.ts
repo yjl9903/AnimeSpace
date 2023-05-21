@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { LocalLibrary } from '../src';
 
@@ -65,7 +65,7 @@ function stringifyLocalLibrary(lib: LocalLibrary) {
   });
 
   return (
-    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n` +
-    doc.toString({ lineWidth: 0 })
+    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n`
+    + doc.toString({ lineWidth: 0 })
   );
 }
