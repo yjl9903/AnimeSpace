@@ -70,7 +70,7 @@ export class Anime {
         const libContent = await fs
           .readFile(libPath, 'utf-8')
           .catch(() => fs.readFile(libPath, 'utf-8')); // Retry at most 1 times
-        const lib = parse(libContent);
+        const lib = parse(libContent) ?? {};
         this._raw_lib = lib;
 
         const schema = z
