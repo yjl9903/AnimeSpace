@@ -70,7 +70,7 @@ export class Anime {
         const libContent = await fs
           .readFile(libPath, 'utf-8')
           .catch(() => fs.readFile(libPath, 'utf-8')); // Retry at most 1 times
-        const lib = parse(libContent);
+        const lib = parse(libContent) ?? {};
         this._raw_lib = lib;
 
         const schema = z
@@ -101,6 +101,8 @@ export class Anime {
 
         const parsed = schema.safeParse(lib);
         if (parsed.success) {
+          debug(parsed.data);
+
           return (this._lib = <LocalLibrary> {
             ...parsed.data,
             videos: lib?.videos ?? []
@@ -158,12 +160,16 @@ export class Anime {
     const title = this._lib?.title ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
     const season = this._lib?.season ?? this.plan.season;
+    const episode = video.episode !== undefined
+      ? (video.episode + (this.plan.rewrite?.episode ?? 0))
+      : undefined;
+
     return formatTitle(this.format, {
       title,
       yyyy: format(date, 'yyyy'),
       MM: format(date, 'MM'),
       season: season !== undefined ? formatEpisode(season) : '1',
-      ep: video.episode !== undefined ? formatEpisode(video.episode) : '{ep}',
+      ep: episode !== undefined ? formatEpisode(episode) : '{ep}',
       extension: path.extname(video.filename).slice(1) ?? 'mp4',
       fansub: video.fansub ?? 'fansub'
     });
@@ -178,12 +184,16 @@ export class Anime {
     const title = this._lib?.title ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
     const season = meta.season ?? this._lib?.season ?? this.plan.season;
+    const episode = meta.episode !== undefined
+      ? (meta.episode + (this.plan.rewrite?.episode ?? 0))
+      : undefined;
+
     return formatTitle(this.format, {
       title,
       yyyy: format(date, 'yyyy'),
       mm: format(date, 'MM'),
       season: season !== undefined ? formatEpisode(season) : '1',
-      ep: meta.episode !== undefined ? formatEpisode(meta.episode) : '{ep}',
+      ep: episode !== undefined ? formatEpisode(episode) : '{ep}',
       extension: meta.extension?.toLowerCase() ?? 'mp4',
       fansub: meta.fansub ?? 'fansub'
     });
