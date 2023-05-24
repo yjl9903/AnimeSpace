@@ -36,6 +36,7 @@ export async function loadPlan(
     files.map(async (file) => {
       const content = await fs.readFile(path.resolve(cwd, file), 'utf-8');
       const parsed = Schema.safeParse(parse(content));
+
       if (parsed.success) {
         const plan: Plan = {
           ...parsed.data,
@@ -55,6 +56,9 @@ export async function loadPlan(
             } as AnimePlan)
           )
         };
+
+        debug(plan);
+
         return plan;
       } else {
         debug(parsed.error.issues);

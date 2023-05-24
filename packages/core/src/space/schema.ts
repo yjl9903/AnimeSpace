@@ -82,6 +82,9 @@ export const AnimePlanSchema = z
     status: z.enum(['onair', 'finish']).optional(),
     season: z.coerce.number().optional(),
     date: z.coerce.date().optional(),
+    rewrite: z.object({
+      episode: z.number().optional()
+    }).passthrough().optional(),
     keywords: z.any()
   })
   .passthrough();
@@ -132,6 +135,13 @@ export interface AnimePlan {
    * Overwrite the generated search keywords
    */
   readonly keywords: KeywordsParams;
+
+  /**
+   * Rewrite the inferred things
+   */
+  readonly rewrite?: {
+    readonly episode?: number;
+  };
 }
 
 export interface KeywordsParams {
