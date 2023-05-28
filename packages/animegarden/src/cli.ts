@@ -32,7 +32,7 @@ export function registerCli(
         type: 'multiselect',
         name: 'bangumi',
         message: '选择将要生成计划的动画',
-        choices: bgms.map((bgm) => ({
+        choices: bgms.map(bgm => ({
           title: (bgm.name_cn || bgm.name) ?? String(bgm.id!),
           value: bgm
         })),
@@ -54,9 +54,9 @@ export function registerCli(
     .option('--create <filename>', 'Create plan file in the space directory')
     .option('--fansub', 'Generate fansub list')
     .option('--date <date>', 'Specify the onair begin date')
-    .action(async (options) => {
+    .action(async options => {
       const bangumiPlugin = system.space.plugins.find(
-        (p) => p.name === 'bangumi'
+        p => p.name === 'bangumi'
       );
       const username = options.username
         ?? (bangumiPlugin?.options?.username as string) ?? '';
@@ -107,12 +107,9 @@ export function registerCli(
           }`;
 
           let extra = '';
-          if (
-            !lib.videos.find((v) => v.source.magnet === video.source.magnet!)
-          ) {
+          if (!lib.videos.find(v => v.source.magnet === video.source.magnet!)) {
             const aliasVideo = lib.videos.find(
-              (v) =>
-                v.source.type !== ANIMEGARDEN && v.episode === video.episode
+              v => v.source.type !== ANIMEGARDEN && v.episode === video.episode
             );
             if (aliasVideo) {
               extra = `overwritten by ${bold(aliasVideo.filename)}`;
@@ -139,7 +136,7 @@ export function registerCli(
       if (extensions.length === 0) {
         extensions.push('.mp4', '.mkv', '.aria2');
       }
-      const exts = extensions.map((e) => (e.startsWith('.') ? e : '.' + e));
+      const exts = extensions.map(e => (e.startsWith('.') ? e : '.' + e));
       await client.clean(exts);
     });
 
@@ -148,15 +145,18 @@ export function registerCli(
     keyword: string | undefined,
     options: { onair: boolean }
   ) {
-    return (await loadAnime(system, true))
-      .filter((a) => (options.onair ? a.plan.status === 'onair' : true))
-      .filter(
-        (a) =>
-          !keyword
-          || a.plan.title.includes(keyword)
-          || Object.values(a.plan.translations)
-            .flat()
-            .some((t) => t.includes(keyword))
-      );
+    return (
+      await loadAnime(
+        system,
+        a => options.onair ? a.plan.status === 'onair' : true
+      )
+    ).filter(
+      a =>
+        !keyword
+        || a.plan.title.includes(keyword)
+        || Object.values(a.plan.translations)
+          .flat()
+          .some(t => t.includes(keyword))
+    );
   }
 }

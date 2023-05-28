@@ -22,7 +22,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .command('space', 'Display the space directory')
     .option('--storage', 'Display the storage directory')
     .option('--open', 'Open space in your editor')
-    .action(async (options) => {
+    .action(async options => {
       const root = options.storage ? system.space.storage : system.space.root;
       if (options.open) {
         try {
@@ -42,7 +42,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       default: '10m'
     })
     .option('-i, --introspect', 'Introspect library before refreshing')
-    .action(async (options) => {
+    .action(async options => {
       // Refresh system
       let sys = system;
       const refresh = async () => {
@@ -68,16 +68,17 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
 
   app
     .command('refresh', 'Refresh the local anime system')
+    .option('--filter <keyword>', 'Filter animes to be refreshed')
     .option('-i, --introspect', 'Introspect library before refreshing')
-    .action(async (options) => {
+    .action(async options => {
       registerDeath(system);
 
       system.printSpace();
       try {
         if (options.introspect) {
-          await system.introspect();
+          await system.introspect({ filter: options.filter });
         }
-        const animes = await system.refresh();
+        const animes = await system.refresh({ filter: options.filter });
         return animes;
       } catch (error) {
         throw error;
@@ -88,12 +89,13 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
 
   app
     .command('introspect', 'Introspect the local anime system')
-    .action(async () => {
+    .option('--filter <keyword>', 'Filter animes to be refreshed')
+    .action(async options => {
       registerDeath(system);
 
       system.printSpace();
       try {
-        const animes = await system.introspect();
+        const animes = await system.introspect({ filter: options.filter });
         return animes;
       } catch (error) {
         throw error;
