@@ -69,9 +69,7 @@ export async function generateDownloadTask(
     const res = resources[0];
     if (
       force
-      || !(await anime.library()).videos.find((r) =>
-        r.source.magnet === res.href
-      )
+      || !(await anime.library()).videos.find(r => r.source.magnet === res.href)
     ) {
       videos.push({
         video: {
@@ -110,7 +108,7 @@ function groupResources(
     // Resource title should not have exclude keywords
     if (
       system.space.preference.keyword.exclude.some(
-        (k) => r.title.indexOf(k) !== -1
+        k => r.title.indexOf(k) !== -1
       )
     ) {
       continue;
@@ -229,7 +227,7 @@ export async function runDownloadTask(
     multibar.finish();
   });
 
-  const tasks = videos.map(async (video) => {
+  const tasks = videos.map(async video => {
     const bar = multibar.create(video.video.filename, 100);
     try {
       const { files } = await client.download(
@@ -288,7 +286,7 @@ export async function runDownloadTask(
         {
           const library = (await anime.library()).videos;
           const oldVideo = library.find(
-            (v) =>
+            v =>
               v.source.type === ANIMEGARDEN && v.episode === video.video.episode
           );
           if (oldVideo) {
@@ -349,6 +347,7 @@ export async function runDownloadTask(
     systemLogger.error(error);
   } finally {
     await anime.writeLibrary();
+    systemLogger.info(lightGreen('Anime library has been written back'));
   }
 
   cancelDeath();
