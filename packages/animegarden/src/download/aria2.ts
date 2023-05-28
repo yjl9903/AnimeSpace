@@ -16,12 +16,29 @@ import { Aria2Trackers } from './trackers';
 import { DownloadClient, DownloadOptions, DownloadState } from './base';
 
 interface Aria2Options {
+  /**
+   * @default './download'
+   */
   directory: string;
 
-  secret: string;
+  /**
+   * @default 'aria2c'
+   */
+  binary: string;
 
+  /**
+   * @default []
+   */
   args: string[];
 
+  /**
+   * @default 'animespace'
+   */
+  secret: string;
+
+  /**
+   * @default false
+   */
   proxy: string | boolean;
 
   debug: {
@@ -50,6 +67,7 @@ export class Aria2Client extends DownloadClient {
     super(system);
     this.consola = system.logger.withTag('aria2');
     this.options = defu(options, {
+      binary: 'aria2c',
       directory: './download',
       secret: 'animespace',
       args: [],
@@ -85,7 +103,7 @@ export class Aria2Client extends DownloadClient {
         'no-proxy': this.options.proxy === false ? true : false,
         'all-proxy': this.options.proxy !== false ? proxy : undefined
       })
-      .catch((error) => {
+      .catch(error => {
         this.consola.error(error);
         return undefined;
       });
@@ -128,7 +146,7 @@ export class Aria2Client extends DownloadClient {
                 )
             ) {
               // Hack: handle file exists
-              const files = status.files.map((f) => f.path);
+              const files = status.files.map(f => f.path);
               res({ files });
             } else {
               rej(new Error(status.errorMessage));
@@ -144,7 +162,7 @@ export class Aria2Client extends DownloadClient {
 
           if (task.state === 'complete') {
             const statuses = await Promise.all(
-              [...task.gids.files].map((gid) => client.tellStatus(gid))
+              [...task.gids.files].map(gid => client.tellStatus(gid))
             );
             const files = [];
             for (const status of statuses) {
@@ -162,7 +180,7 @@ export class Aria2Client extends DownloadClient {
 
   private registerCallback() {
     // Download Start
-    this.client.addListener('aria2.onDownloadStart', async (event) => {
+    this.client.addListener('aria2.onDownloadStart', async event => {
       const { gid } = event;
       if (this.gids.has(gid)) {
         await this.gids.get(gid)!.onDownloadStart(gid);
@@ -416,7 +434,7 @@ export class Aria2Client extends DownloadClient {
           await fs.rm(this.options.debug.log);
         }
         this.consola.info(
-          dim(`Write aria2 debug logs to ${this.options.debug.log}`)
+          dim(`aria2 debug log will be written to ${this.options.debug.log}`)
         );
       } catch {}
     }
@@ -433,7 +451,7 @@ export class Aria2Client extends DownloadClient {
     delete env['HTTP_PROXY'];
     delete env['HTTPS_PROXY'];
     const child = spawn(
-      'aria2c',
+      this.options.binary,
       [
         // Bittorent
         // https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-bt-detach-seed-only
@@ -456,15 +474,15 @@ export class Aria2Client extends DownloadClient {
 
     return new Promise((res, rej) => {
       if (this.options.debug.pipe) {
-        child.stdout.on('data', (chunk) => {
+        child.stdout.on('data', chunk => {
           console.log(chunk.toString());
         });
-        child.stderr.on('data', (chunk) => {
+        child.stderr.on('data', chunk => {
           console.log(chunk.toString());
         });
       }
 
-      child.stdout.once('data', async (_chunk) => {
+      child.stdout.once('data', async _chunk => {
         try {
           this.client = new WebSocket.Client({
             protocol: 'ws',
@@ -486,7 +504,7 @@ export class Aria2Client extends DownloadClient {
         }
       });
 
-      child.addListener('error', async (error) => {
+      child.addListener('error', async error => {
         this.consola.error(dim(`Some error happened in aria2`));
         await this.close().catch(() => {});
       });
@@ -528,7 +546,7 @@ export class Aria2Client extends DownloadClient {
   public async clean(extensions: string[] = []) {
     const files = await fs.readdir(this.options.directory).catch(() => []);
     await Promise.all(
-      files.map(async (file) => {
+      files.map(async file => {
         if (extensions.includes(path.extname(file).toLowerCase())) {
           const p = path.join(this.options.directory, file);
           try {
