@@ -62,7 +62,11 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         logger.log('');
 
         logger.info(
-          `${lightBlue('Fetching resources')} ${bold(anime.plan.title)}  (${
+          `${lightBlue('Fetching resources')} ${
+            bold(
+              anime.plan.title
+            )
+          }  (${
             link(
               `Bangumi: ${anime.plan.bgm}`,
               `https://bangumi.tv/subject/${anime.plan.bgm}`
@@ -91,14 +95,14 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         const newVideos = await generateDownloadTask(system, anime, resources);
 
         const oldVideos = (await anime.library()).videos.filter(
-          (v) => v.source.type === ANIMEGARDEN
+          v => v.source.type === ANIMEGARDEN
         );
         logger.info(
-          `${lightCyan('There are ' + oldVideos.length + ' resources')} ${
-            dim(
-              'downloaded from'
+          `${dim('There are ')} ${
+            lightCyan(
+              oldVideos.length + ' resources'
             )
-          } ${link('AnimeGarden', animegardenURL)}`
+          } ${dim('downloaded from')} ${link('AnimeGarden', animegardenURL)}`
         );
         if (newVideos.length === 0) {
           return;

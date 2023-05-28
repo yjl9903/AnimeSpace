@@ -5,7 +5,7 @@ import { BreadcError, ParseError } from 'breadc';
 import {
   AnimeSystemError,
   onUncaughtException,
-  onUnhandledRejection,
+  onUnhandledRejection
 } from '@animespace/core';
 
 import { makeCliApp, makeSystem } from './system';
