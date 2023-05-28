@@ -27,36 +27,45 @@ export async function createAnimeSystem(
       logger.info(`${dim('Storage')}  ${space.storage}`);
       logger.log('');
     },
-    async animes(options) {
-      if (animes !== undefined) {
+    async load(options = {}) {
+      if (!options.force && animes !== undefined) {
         return animes;
+      } else if (!options?.filter) {
+        return (animes = await loadAnime(system));
       } else {
-        return (animes = await loadAnime(system, options?.all ?? false));
+        const filter = options.filter;
+        if (typeof filter === 'string') {
+          return (animes = await loadAnime(
+            system,
+            a => a.plan.title.includes(filter)
+          ));
+        } else {
+          return (animes = await loadAnime(system, filter));
+        }
       }
     },
-    async refresh() {
+    async refresh(options = {}) {
       logger.wrapConsole();
-      const animes = await refresh(system);
+      const animes = await refresh(system, options);
       logger.restoreConsole();
       return animes;
     },
-    async introspect() {
+    async introspect(options = {}) {
       logger.wrapConsole();
-      // Introspect animes
-      const animes = await introspect(system);
+      const animes = await introspect(system, options);
       logger.restoreConsole();
       return animes;
     },
     async writeBack() {
       logger.wrapConsole();
-      const animes = await system.animes();
-      await Promise.all(animes.map((a) => a.writeLibrary()));
+      const animes = await system.load();
+      await Promise.all(animes.map(a => a.writeLibrary()));
       logger.restoreConsole();
       return animes;
     },
     isChanged() {
       if (animes) {
-        return animes.some((a) => a.dirty());
+        return animes.some(a => a.dirty());
       } else {
         return false;
       }

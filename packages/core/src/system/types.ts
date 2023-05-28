@@ -4,6 +4,18 @@ import type { AnimeSpace } from '../space/schema';
 
 import type { Anime } from './anime';
 
+export interface SystemOperationOptions {
+  filter?: string | ((anime: Anime) => boolean);
+}
+
+export interface LoadOptions extends SystemOperationOptions {
+  force?: boolean;
+}
+
+export interface RefreshOptions extends SystemOperationOptions {}
+
+export interface IntrospectOptions extends SystemOperationOptions {}
+
 export interface AnimeSystem {
   space: AnimeSpace;
 
@@ -14,17 +26,17 @@ export interface AnimeSystem {
   /**
    * Load animes from plans or introspect result
    */
-  animes(options?: { all?: boolean }): Promise<Anime[]>;
+  load(options?: LoadOptions): Promise<Anime[]>;
 
   /**
    * Refresh the media library
    */
-  refresh(): Promise<Anime[]>;
+  refresh(options?: RefreshOptions): Promise<Anime[]>;
 
   /**
    * Sync with the modified anime config
    */
-  introspect(): Promise<Anime[]>;
+  introspect(options?: IntrospectOptions): Promise<Anime[]>;
 
   /**
    * Write back the modified anime library

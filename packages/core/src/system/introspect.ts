@@ -4,15 +4,18 @@ import type { Plan } from '../space';
 
 import { AnimeSystemError } from '../error';
 
-import type { AnimeSystem } from './types';
+import type { AnimeSystem, IntrospectOptions } from './types';
 
 import { Anime, LocalFile, LocalVideo } from './anime';
 
-export async function introspect(system: AnimeSystem) {
+export async function introspect(
+  system: AnimeSystem,
+  options: IntrospectOptions
+) {
   const logger = system.logger.withTag('introspect');
   logger.info(lightBlue(`Introspect Anime Space`));
 
-  const animes = await system.animes();
+  const animes = await system.load(options);
 
   for (const plugin of system.space.plugins) {
     await plugin.introspect?.prepare?.(system);
@@ -39,7 +42,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
   const unknownVideos: LocalVideo[] = [];
 
   {
-    const set = new Set(videos.map((v) => v.filename));
+    const set = new Set(videos.map(v => v.filename));
     for (const file of files) {
       if (!set.has(file.filename)) {
         unknownFiles.push(file);
@@ -47,7 +50,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     }
   }
   {
-    const set = new Set(files.map((v) => v.filename));
+    const set = new Set(files.map(v => v.filename));
     for (const video of videos) {
       if (!set.has(video.filename)) {
         unknownVideos.push(video);
@@ -107,10 +110,13 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
   await anime.sortVideos();
 }
 
-export async function loadAnime(system: AnimeSystem, all: boolean = false) {
+export async function loadAnime(
+  system: AnimeSystem,
+  filter: (anime: Anime) => boolean = p => p.plan.status === 'onair'
+) {
   const plans = await system.space.plans();
   const animePlans = flatAnimePlan(plans);
-  const animes = animePlans.map((ap) => new Anime(system.space, ap));
+  const animes = animePlans.map(ap => new Anime(system.space, ap));
 
   // Detect directory naming conflict
   {
@@ -127,14 +133,14 @@ export async function loadAnime(system: AnimeSystem, all: boolean = false) {
   }
 
   // Filter out finish animes
-  const filtered = animes.filter((p) => all || p.plan.status === 'onair');
+  const filtered = animes.filter(filter);
   animes.splice(0, animes.length, ...filtered);
 
   // Parallel list directory and get metadata
-  await Promise.all(animes.flatMap((a) => [a.library(), a.list()]));
+  await Promise.all(animes.flatMap(a => [a.library(), a.list()]));
   return animes;
 }
 
 export function flatAnimePlan(plans: Plan[]) {
-  return plans.flatMap((p) => p.onair);
+  return plans.flatMap(p => p.onair);
 }

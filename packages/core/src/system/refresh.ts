@@ -1,12 +1,12 @@
 import { lightBlue, lightGreen } from '@breadc/color';
 
-import type { AnimeSystem } from './types';
+import type { AnimeSystem, RefreshOptions } from './types';
 
-export async function refresh(system: AnimeSystem) {
+export async function refresh(system: AnimeSystem, options: RefreshOptions) {
   const logger = system.logger.withTag('refresh');
   logger.info(lightBlue(`Refresh Anime Space`));
 
-  const animes = await system.animes();
+  const animes = await system.load(options);
 
   for (const plugin of system.space.plugins) {
     await plugin.refresh?.prepare?.(system);
