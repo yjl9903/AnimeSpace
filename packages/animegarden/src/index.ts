@@ -98,7 +98,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           v => v.source.type === ANIMEGARDEN
         );
         logger.info(
-          `${dim('There are ')} ${
+          `${dim('There are')} ${
             lightCyan(
               oldVideos.length + ' resources'
             )
