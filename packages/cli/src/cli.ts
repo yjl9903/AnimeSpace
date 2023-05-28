@@ -1,20 +1,23 @@
 import createDebug from 'debug';
 import { lightRed } from '@breadc/color';
+import { BreadcError, ParseError } from 'breadc';
 
 import {
   AnimeSystemError,
   onUncaughtException,
-  onUnhandledRejection
+  onUnhandledRejection,
 } from '@animespace/core';
 
 import { makeCliApp, makeSystem } from './system';
 
-const debug = createDebug('anime');
+const debug = createDebug('animespace');
 
 export async function bootstrap() {
   const handle = (error: unknown) => {
     if (error instanceof AnimeSystemError) {
       console.error(lightRed('Anime System ') + error.detail);
+    } else if (error instanceof ParseError || error instanceof BreadcError) {
+      console.error(lightRed('CLI ') + error.message);
     } else if (error instanceof Error) {
       console.error(lightRed('Unknown ') + error.message);
     } else {
