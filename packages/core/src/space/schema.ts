@@ -72,8 +72,8 @@ export const AnimePlanSchema = z
     title: z.string(),
     translations: z
       .union([
-        z.string().transform((s) => ({ unknown: [s] })),
-        z.array(z.string()).transform((arr) => ({ unknown: arr })),
+        z.string().transform(s => ({ unknown: [s] })),
+        z.array(z.string()).transform(arr => ({ unknown: arr })),
         z.record(z.string(), StringArray)
       ])
       .default({}),
@@ -82,9 +82,12 @@ export const AnimePlanSchema = z
     status: z.enum(['onair', 'finish']).optional(),
     season: z.coerce.number().optional(),
     date: z.coerce.date().optional(),
-    rewrite: z.object({
-      episode: z.number().optional()
-    }).passthrough().optional(),
+    rewrite: z
+      .object({
+        episode: z.number().optional()
+      })
+      .passthrough()
+      .optional(),
     keywords: z.any()
   })
   .passthrough();
@@ -140,7 +143,7 @@ export interface AnimePlan {
    * Rewrite the inferred things
    */
   readonly rewrite?: {
-    readonly episode?: number;
+    readonly episode?: number | { offset: number; gte?: number; lte?: number };
   };
 }
 
