@@ -84,7 +84,20 @@ export const AnimePlanSchema = z
     date: z.coerce.date().optional(),
     rewrite: z
       .object({
-        episode: z.number().optional()
+        episode: z
+          .union([
+            z.coerce.number().transform(n => ({
+              offset: n,
+              gte: Number.MIN_SAFE_INTEGER,
+              lte: Number.MAX_SAFE_INTEGER
+            })),
+            z.object({
+              offset: z.coerce.number(),
+              gte: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
+              lte: z.coerce.number().default(Number.MAX_SAFE_INTEGER)
+            })
+          ])
+          .optional()
       })
       .passthrough()
       .optional(),
@@ -143,7 +156,7 @@ export interface AnimePlan {
    * Rewrite the inferred things
    */
   readonly rewrite?: {
-    readonly episode?: number | { offset: number; gte?: number; lte?: number };
+    readonly episode?: { offset: number; gte: number; lte: number };
   };
 }
 

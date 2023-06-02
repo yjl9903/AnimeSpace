@@ -199,24 +199,8 @@ export class Anime {
     if (episode !== undefined) {
       const overwrite = this.plan.rewrite?.episode;
       if (overwrite !== undefined) {
-        const parsed = z
-          .union([
-            z.coerce.number().transform(n => ({
-              offset: n,
-              gte: Number.MIN_SAFE_INTEGER,
-              lte: Number.MAX_SAFE_INTEGER
-            })),
-            z.object({
-              offset: z.coerce.number(),
-              gte: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
-              lte: z.coerce.number().default(Number.MAX_SAFE_INTEGER)
-            })
-          ])
-          .safeParse(overwrite);
-        if (parsed.success) {
-          if (parsed.data.gte <= episode && episode <= parsed.data.lte) {
-            return episode + parsed.data.offset;
-          }
+        if (overwrite.gte <= episode && episode <= overwrite.lte) {
+          return episode + overwrite.offset;
         }
       }
       return episode;
