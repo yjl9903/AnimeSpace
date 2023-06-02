@@ -51,7 +51,7 @@ export class Anime {
       }
     }
     for (const list of this.plan.keywords.include) {
-      if (list.every((keyword) => !text.includes(keyword))) {
+      if (list.every(keyword => !text.includes(keyword))) {
         return false;
       }
     }
@@ -160,9 +160,7 @@ export class Anime {
     const title = this._lib?.title ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
     const season = this._lib?.season ?? this.plan.season;
-    const episode = video.episode !== undefined
-      ? (video.episode + (this.plan.rewrite?.episode ?? 0))
-      : undefined;
+    const episode = this.resolveEpisode(video.episode);
 
     return formatTitle(this.format, {
       title,
@@ -184,9 +182,7 @@ export class Anime {
     const title = this._lib?.title ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
     const season = meta.season ?? this._lib?.season ?? this.plan.season;
-    const episode = meta.episode !== undefined
-      ? (meta.episode + (this.plan.rewrite?.episode ?? 0))
-      : undefined;
+    const episode = this.resolveEpisode(meta.episode);
 
     return formatTitle(this.format, {
       title,
@@ -197,6 +193,36 @@ export class Anime {
       extension: meta.extension?.toLowerCase() ?? 'mp4',
       fansub: meta.fansub ?? 'fansub'
     });
+  }
+
+  private resolveEpisode(episode: number | undefined) {
+    if (episode !== undefined) {
+      const overwrite = this.plan.rewrite?.episode;
+      if (overwrite !== undefined) {
+        const parsed = z
+          .union([
+            z.coerce.number().transform(n => ({
+              offset: n,
+              gte: Number.MIN_SAFE_INTEGER,
+              lte: Number.MAX_SAFE_INTEGER
+            })),
+            z.object({
+              offset: z.coerce.number(),
+              gte: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
+              lte: z.coerce.number().default(Number.MAX_SAFE_INTEGER)
+            })
+          ])
+          .safeParse(overwrite);
+        if (parsed.success) {
+          if (parsed.data.gte <= episode && episode <= parsed.data.lte) {
+            return episode + parsed.data.offset;
+          }
+        }
+      }
+      return episode;
+    } else {
+      return undefined;
+    }
   }
 
   // --- mutation ---
@@ -269,7 +295,7 @@ export class Anime {
 
   public async removeVideo(target: LocalVideo) {
     const remove = () => {
-      const idx = lib.videos.findIndex((v) => v === target);
+      const idx = lib.videos.findIndex(v => v === target);
       if (idx !== -1) {
         lib.videos.splice(idx, 1);
         this._dirty = true;
@@ -293,13 +319,13 @@ export class Anime {
 
   public async sortVideos() {
     const lib = await this.library();
-    const src = lib.videos.map((v) => v.filename);
+    const src = lib.videos.map(v => v.filename);
     lib.videos.sort((lhs, rhs) => {
       const el = lhs.episode ?? -1;
       const er = rhs.episode ?? -1;
       return el - er;
     });
-    const dst = lib.videos.map((v) => v.filename);
+    const dst = lib.videos.map(v => v.filename);
     this._dirty ||= lib.videos.some((_el, idx) => src[idx] !== dst[idx]);
   }
 
