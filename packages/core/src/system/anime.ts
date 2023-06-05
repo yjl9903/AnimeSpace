@@ -166,7 +166,7 @@ export class Anime {
       title,
       yyyy: format(date, 'yyyy'),
       MM: format(date, 'MM'),
-      season: season !== undefined ? formatEpisode(season) : '1',
+      season: season !== undefined ? formatEpisode(season) : '01',
       ep: episode !== undefined ? formatEpisode(episode) : '{ep}',
       extension: path.extname(video.filename).slice(1) ?? 'mp4',
       fansub: video.fansub ?? 'fansub'
@@ -188,7 +188,7 @@ export class Anime {
       title,
       yyyy: format(date, 'yyyy'),
       mm: format(date, 'MM'),
-      season: season !== undefined ? formatEpisode(season) : '1',
+      season: season !== undefined ? formatEpisode(season) : '01',
       ep: episode !== undefined ? formatEpisode(episode) : '{ep}',
       extension: meta.extension?.toLowerCase() ?? 'mp4',
       fansub: meta.fansub ?? 'fansub'
