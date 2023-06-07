@@ -2,7 +2,7 @@ import { bold, lightBlue, lightGreen, lightRed } from '@breadc/color';
 
 import type { Plan } from '../space';
 
-import { AnimeSystemError } from '../error';
+import { AnimeSystemError, debug } from '../error';
 
 import type { AnimeSystem, IntrospectOptions } from './types';
 
@@ -137,8 +137,24 @@ export async function loadAnime(
   animes.splice(0, animes.length, ...filtered);
 
   // Parallel list directory and get metadata
-  await Promise.all(animes.flatMap(a => [a.library(), a.list()]));
-  return animes;
+  const successed = await Promise.all(
+    animes.map(async a => {
+      try {
+        await a.library();
+        return a;
+      } catch (error) {
+        if (error instanceof AnimeSystemError) {
+          console.error(error.message);
+        } else {
+          debug(error);
+          console.error(`解析 ${a.plan.title} 的 metadata.yml 失败`);
+        }
+        return undefined;
+      }
+    })
+  );
+
+  return successed.filter(Boolean) as Anime[];
 }
 
 export function flatAnimePlan(plans: Plan[]) {
