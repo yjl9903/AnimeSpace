@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
 import fg from 'fast-glob';
 import path from 'node:path';
-import { parse } from 'yaml';
 import { AnyZodObject, z } from 'zod';
+import { parse, YAMLError } from 'yaml';
 
 import type { Plugin } from '../plugin';
 
@@ -33,40 +33,53 @@ export async function loadPlan(
   const files = await fg(patterns, { cwd, dot: true });
 
   const plans = await Promise.all(
-    files.map(async (file) => {
-      const content = await fs.readFile(path.resolve(cwd, file), 'utf-8');
-      const parsed = Schema.safeParse(parse(content));
+    files.map(async file => {
+      try {
+        const content = await fs.readFile(path.resolve(cwd, file), 'utf-8');
+        const yaml = parse(content);
+        const parsed = Schema.safeParse(yaml);
 
-      if (parsed.success) {
-        const plan: Plan = {
-          ...parsed.data,
-          onair: parsed.data.onair.map(
-            (o: z.infer<typeof AnimePlanSchema>) => ({
-              ...o,
-              // Inherit plan status
-              status: o.status ? o.status : parsed.data.status,
-              // Inherit plan date
-              date: o.date ? o.date : parsed.data.date,
-              // Manually resolve keywords
-              keywords: resolveKeywordsArray(
-                o.title,
-                o.translations,
-                o.keywords
-              )
-            } as AnimePlan)
-          )
-        };
+        if (parsed.success) {
+          const plan: Plan = {
+            ...parsed.data,
+            onair: parsed.data.onair.map(
+              (o: z.infer<typeof AnimePlanSchema>) => ({
+                ...o,
+                // Inherit plan status
+                status: o.status ? o.status : parsed.data.status,
+                // Inherit plan date
+                date: o.date ? o.date : parsed.data.date,
+                // Manually resolve keywords
+                keywords: resolveKeywordsArray(
+                  o.title,
+                  o.translations,
+                  o.keywords
+                )
+              } as AnimePlan)
+            )
+          };
 
-        debug(plan);
+          debug(plan);
 
-        return plan;
-      } else {
-        debug(parsed.error.issues);
-        throw new AnimeSystemError(`解析 ${path.relative(cwd, file)} 失败`);
+          return plan;
+        } else {
+          debug(parsed.error.issues);
+          throw new AnimeSystemError(`解析 ${path.relative(cwd, file)} 失败`);
+        }
+      } catch (error) {
+        if (error instanceof AnimeSystemError) {
+          console.error(error);
+        } else {
+          debug(error);
+          console.error(`解析 ${path.relative(cwd, file)} 失败`);
+        }
+
+        return undefined;
       }
     })
   );
-  return plans;
+
+  return plans.filter(Boolean) as Plan[];
 }
 
 function resolveKeywordsArray(
