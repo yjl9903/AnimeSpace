@@ -195,7 +195,10 @@ export class Anime {
     });
   }
 
-  private resolveEpisode(episode: number | undefined) {
+  public resolveEpisode(episode: number): number;
+  public resolveEpisode(episode: undefined): undefined;
+  public resolveEpisode(episode: number | undefined): number | undefined;
+  public resolveEpisode(episode: number | undefined): number | undefined {
     if (episode !== undefined) {
       const overwrite = this.plan.rewrite?.episode;
       if (overwrite !== undefined) {
