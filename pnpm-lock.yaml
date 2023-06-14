@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
 
 settings:
   autoInstallPeers: true
@@ -99,11 +99,11 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.0.15
-        version: 0.0.15
+        specifier: ^0.0.17
+        version: 0.0.17
       anitomy:
-        specifier: ^0.0.15
-        version: 0.0.15
+        specifier: ^0.0.17
+        version: 0.0.17
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
@@ -2840,16 +2840,23 @@ packages:
       '@algolia/transporter': 4.17.2
     dev: true
 
-  /animegarden@0.0.15:
-    resolution: {integrity: sha512-m6NqaBPROzsD25jq5X1BL/frNpPmCGPxrDudQTlVjm86N/5AbAoxofkHXz/2j+q1tlXZwhoxldUMT5cFdGK/Ag==}
+  /animegarden@0.0.17:
+    resolution: {integrity: sha512-4ilaIG6XPDP5W8b3i+CbJwVUlF1oJLe6HQTyx0J+jYI+3GUE1rtKlWqeSTcLtSyp4B1E6inOw8nt6zMPNH7C0A==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
+      simptrad: 0.1.0
+      zod: 3.21.4
     dev: false
 
   /anitomy@0.0.15:
     resolution: {integrity: sha512-Q2w9MOkFhAKsLs4ES4KkMn4ehotHPW2QkA06hsLWoFIJx3l6OUPBieIkO4gcNSou89YYgApKPEx5VHbrtyLawg==}
     engines: {node: '>=v18.16.0'}
+
+  /anitomy@0.0.17:
+    resolution: {integrity: sha512-kueCkJn4C/w4nsNcq9L9BVCN8UP+W2sfFhYWGUXndpGOjnM63OC37mtKtq9BcjjPaEVG85qyJGImm7MzCD0Tqw==}
+    engines: {node: '>=v18.16.0'}
+    dev: false
 
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -3434,7 +3441,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /concordance@5.0.4:
@@ -5906,6 +5913,10 @@ packages:
       decompress-response: 6.0.0
       once: 1.4.0
       simple-concat: 1.0.1
+    dev: false
+
+  /simptrad@0.1.0:
+    resolution: {integrity: sha512-sK6XU47544K8i/QVDHlm3aEx+pgvKsI5AGEuCV6vV8m2QkD/W28e7A5EWAFVhEV3ADb7E/SZ90TZE/dhg6Nhog==}
     dev: false
 
   /sirv@2.0.3:
