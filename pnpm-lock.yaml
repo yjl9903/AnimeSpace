@@ -102,8 +102,8 @@ importers:
         specifier: ^0.0.18
         version: 0.0.18
       anitomy:
-        specifier: ^0.0.17
-        version: 0.0.17
+        specifier: ^0.0.18
+        version: 0.0.18
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
@@ -258,8 +258,8 @@ importers:
         version: 3.21.4
     devDependencies:
       anitomy:
-        specifier: ^0.0.15
-        version: 0.0.15
+        specifier: ^0.0.18
+        version: 0.0.18
       breadc:
         specifier: ^0.9.5
         version: 0.9.5
@@ -276,8 +276,8 @@ importers:
         specifier: ^0.9.5
         version: 0.9.5
       anitomy:
-        specifier: ^0.0.15
-        version: 0.0.15
+        specifier: ^0.0.18
+        version: 0.0.18
 
 packages:
 
@@ -2863,14 +2863,9 @@ packages:
       zod: 3.21.4
     dev: false
 
-  /anitomy@0.0.15:
-    resolution: {integrity: sha512-Q2w9MOkFhAKsLs4ES4KkMn4ehotHPW2QkA06hsLWoFIJx3l6OUPBieIkO4gcNSou89YYgApKPEx5VHbrtyLawg==}
+  /anitomy@0.0.18:
+    resolution: {integrity: sha512-95EJElTX93cKX521vM4XYIjAlJ/gU+G+ld83GcbcUMMqpA09l9VfSvgWrS8D68WDW6P20iBvoqLJjZBtDmvnrQ==}
     engines: {node: '>=v18.16.0'}
-
-  /anitomy@0.0.17:
-    resolution: {integrity: sha512-kueCkJn4C/w4nsNcq9L9BVCN8UP+W2sfFhYWGUXndpGOjnM63OC37mtKtq9BcjjPaEVG85qyJGImm7MzCD0Tqw==}
-    engines: {node: '>=v18.16.0'}
-    dev: false
 
   /ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
