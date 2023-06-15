@@ -17,8 +17,8 @@ importers:
         specifier: ^20.1.2
         version: 20.1.2
       dprint:
-        specifier: ^0.36.1
-        version: 0.36.1
+        specifier: ^0.37.1
+        version: 0.37.1
       optc:
         specifier: ^0.6.2
         version: 0.6.2
@@ -3726,8 +3726,8 @@ packages:
       domhandler: 5.0.3
     dev: false
 
-  /dprint@0.36.1:
-    resolution: {integrity: sha512-F8TaWlieYtJc4ktqr0tjNwg/HN4wNPTU6rTq29MdoIKXi9gQmh7Ibqr0oyW1hsLpqBuAXjjwEYIos9plYkwENQ==}
+  /dprint@0.37.1:
+    resolution: {integrity: sha512-MVKIVOvk5FSiZQFFZlLv1KiB4zZXAirlZ/m8vtyKu2PTFnkD5d6jVv4aNHvd7M6f1ToganNZ/CqhSwpgadn8Ug==}
     hasBin: true
     requiresBuild: true
     dependencies:
