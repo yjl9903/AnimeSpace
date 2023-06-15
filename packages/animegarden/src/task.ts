@@ -77,7 +77,7 @@ export async function generateDownloadTask(
           }),
           naming: 'auto',
           fansub: fansub,
-          episode: ep, // Episode number after rewriting
+          episode: info.episode.number, // Raw episode number
           source: {
             type: 'AnimeGarden',
             magnet: res.href,

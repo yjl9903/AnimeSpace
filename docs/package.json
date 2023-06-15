@@ -12,8 +12,8 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@algolia/client-search": "^4.17.1",
-    "@iconify-json/carbon": "^1.1.16",
+    "@algolia/client-search": "^4.17.2",
+    "@iconify-json/carbon": "^1.1.18",
     "@types/node": "^20.1.2",
     "@unocss/reset": "^0.52.4",
     "@vitejs/plugin-vue": "^4.2.3",
@@ -23,7 +23,7 @@
     "unplugin-vue-components": "^0.24.1",
     "vite": "^4.3.9",
     "vite-plugin-pwa": "^0.15.1",
-    "vitepress": "1.0.0-beta.1",
+    "vitepress": "1.0.0-beta.2",
     "workbox-window": "^6.6.0"
   }
 }
