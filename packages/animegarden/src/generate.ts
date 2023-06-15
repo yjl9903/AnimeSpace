@@ -172,9 +172,7 @@ export async function getCollections(username: string) {
 
 async function getFansub(titles: string[]) {
   const { resources } = await fetchResources(ufetch, {
-    search: {
-      include: [titles]
-    },
+    include: [titles],
     count: -1,
     retry: 5
   });
