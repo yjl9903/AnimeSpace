@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -99,8 +99,8 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.0.17
-        version: 0.0.17
+        specifier: ^0.0.18
+        version: 0.0.18
       anitomy:
         specifier: ^0.0.17
         version: 0.0.17
@@ -2854,8 +2854,8 @@ packages:
       '@algolia/transporter': 4.17.2
     dev: true
 
-  /animegarden@0.0.17:
-    resolution: {integrity: sha512-4ilaIG6XPDP5W8b3i+CbJwVUlF1oJLe6HQTyx0J+jYI+3GUE1rtKlWqeSTcLtSyp4B1E6inOw8nt6zMPNH7C0A==}
+  /animegarden@0.0.18:
+    resolution: {integrity: sha512-cTTviyooJ/r9a4s/Ii0aqT/vV6ynDSAFhCTpxtgFdFfrn0jnPGRUrNTFq79GKkMZ0SGvkYFsE8BL/gZMRsLNqw==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
@@ -3455,7 +3455,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /concordance@5.0.4:
