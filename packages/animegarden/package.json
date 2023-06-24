@@ -57,7 +57,7 @@
     "libaria2": "^1.0.95",
     "prompts": "^2.4.2",
     "undici": "^5.22.1",
-    "webtorrent": "^2.1.9",
+    "webtorrent": "^2.1.11",
     "zod": "^3.21.4"
   },
   "devDependencies": {

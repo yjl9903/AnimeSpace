@@ -132,8 +132,8 @@ importers:
         specifier: ^5.22.1
         version: 5.22.1
       webtorrent:
-        specifier: ^2.1.9
-        version: 2.1.9
+        specifier: ^2.1.11
+        version: 2.1.11
       zod:
         specifier: ^3.21.4
         version: 3.21.4
@@ -7000,8 +7000,8 @@ packages:
     resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
     dev: true
 
-  /webtorrent@2.1.9:
-    resolution: {integrity: sha512-KOzLRWzXdXxKyfsLkrWR3JRHWSDrV0zni+Olw3rUhI3SMlAGk5Pn3D62BsZtET/d1Dvchiuf/cdYa4zFUS+mFg==}
+  /webtorrent@2.1.11:
+    resolution: {integrity: sha512-K1OMPwbZOQ+TnVhcAhfaptIbY3mH/hydZ5S30pBEwZysrjJ+7aNJKiJojh8qpsANluXRU1Xv7e0Uuys2qCyUSw==}
     engines: {node: '>=14'}
     dependencies:
       '@silentbot1/nat-api': 0.4.6
