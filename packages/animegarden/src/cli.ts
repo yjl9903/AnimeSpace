@@ -37,7 +37,7 @@ export function registerCli(
 
       const selected =
         bgms.length === 1
-          ? { bangumi: bgms[0] }
+          ? { bangumi: bgms }
           : await prompts({
               type: 'multiselect',
               name: 'bangumi',
@@ -51,7 +51,14 @@ export function registerCli(
               instructions: false,
             });
 
-      logger.log('');
+      if (!selected.bangumi) {
+        return;
+      }
+
+      if (bgms.length > 1) {
+        logger.log('');
+      }
+
       await generatePlan(
         system,
         selected.bangumi.map((bgm: any) => bgm.id!),
