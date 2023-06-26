@@ -10,9 +10,9 @@ import { generatePlan, getCollections, searchBgm } from './generate';
 import { ANIMEGARDEN, DOT } from './constant';
 import { generateDownloadTask } from './task';
 import {
-  formatAnimeGardenSearchURL,
   printFansubs,
-  printKeywords
+  printKeywords,
+  formatAnimeGardenSearchURL,
 } from './format';
 import { DownloadClient } from './download';
 import { fetchAnimeResources } from './ufetch';
@@ -22,25 +22,36 @@ export function registerCli(
   cli: Breadc<{}>,
   getClient: (system: AnimeSystem) => DownloadClient
 ) {
+  const logger = system.logger.withTag('animegarden');
+
   cli
     .command('search <input>', 'Search anime from bangumi and generate plan')
     .option('--date <date>', 'Specify the onair begin date')
     .option('--fansub', 'Generate fansub list')
     .action(async (input, options) => {
       const bgms = await searchBgm(input);
-      const selected = await prompts({
-        type: 'multiselect',
-        name: 'bangumi',
-        message: '选择将要生成计划的动画',
-        choices: bgms.map(bgm => ({
-          title: (bgm.name_cn || bgm.name) ?? String(bgm.id!),
-          value: bgm
-        })),
-        hint: '- 上下移动, 空格选择, 回车确认',
-        // @ts-ignore
-        instructions: false
-      });
-      console.log('');
+      if (bgms.length === 0) {
+        logger.warn('未找到任何动画');
+        return;
+      }
+
+      const selected =
+        bgms.length === 1
+          ? { bangumi: bgms[0] }
+          : await prompts({
+              type: 'multiselect',
+              name: 'bangumi',
+              message: '选择将要生成计划的动画',
+              choices: bgms.map(bgm => ({
+                title: (bgm.name_cn || bgm.name) ?? String(bgm.id!),
+                value: bgm,
+              })),
+              hint: '- 上下移动, 空格选择, 回车确认',
+              // @ts-ignore
+              instructions: false,
+            });
+
+      logger.log('');
       await generatePlan(
         system,
         selected.bangumi.map((bgm: any) => bgm.id!),
@@ -58,10 +69,10 @@ export function registerCli(
       const bangumiPlugin = system.space.plugins.find(
         p => p.name === 'bangumi'
       );
-      const username = options.username
-        ?? (bangumiPlugin?.options?.username as string) ?? '';
+      const username =
+        options.username ?? (bangumiPlugin?.options?.username as string) ?? '';
       if (!username) {
-        system.logger.error(
+        logger.error(
           'You should provide your bangumi username with --username <username>'
         );
       }
@@ -74,18 +85,15 @@ export function registerCli(
     .command('garden list [keyword]', 'List videos of anime from AnimeGarden')
     .option('--onair', 'Only display onair animes')
     .action(async (keyword, options) => {
-      const logger = system.logger.withTag('animegarden');
       const animes = await filterAnimes(keyword, options);
 
       for (const anime of animes) {
         const animegardenURL = formatAnimeGardenSearchURL(anime);
         logger.info(
-          `${bold(anime.plan.title)}  (${
-            link(
-              `Bangumi: ${anime.plan.bgm}`,
-              `https://bangumi.tv/subject/${anime.plan.bgm}`
-            )
-          }, ${link('AnimeGarden', animegardenURL)})`
+          `${bold(anime.plan.title)}  (${link(
+            `Bangumi: ${anime.plan.bgm}`,
+            `https://bangumi.tv/subject/${anime.plan.bgm}`
+          )}, ${link('AnimeGarden', animegardenURL)})`
         );
         printKeywords(anime, logger);
         printFansubs(anime, logger);
@@ -100,11 +108,9 @@ export function registerCli(
         const lib = await anime.library();
 
         for (const { video } of videos) {
-          const detailURL = `https://garden.onekuma.cn/resource/${
-            video.source
-              .magnet!.split('/')
-              .at(-1)
-          }`;
+          const detailURL = `https://garden.onekuma.cn/resource/${video.source
+            .magnet!.split('/')
+            .at(-1)}`;
 
           let extra = '';
           if (!lib.videos.find(v => v.source.magnet === video.source.magnet!)) {
@@ -146,15 +152,14 @@ export function registerCli(
     options: { onair: boolean }
   ) {
     return (
-      await loadAnime(
-        system,
-        a => options.onair ? a.plan.status === 'onair' : true
+      await loadAnime(system, a =>
+        options.onair ? a.plan.status === 'onair' : true
       )
     ).filter(
       a =>
-        !keyword
-        || a.plan.title.includes(keyword)
-        || Object.values(a.plan.translations)
+        !keyword ||
+        a.plan.title.includes(keyword) ||
+        Object.values(a.plan.translations)
           .flat()
           .some(t => t.includes(keyword))
     );
