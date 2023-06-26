@@ -99,11 +99,11 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.0.18
-        version: 0.0.18
+        specifier: ^0.0.19
+        version: 0.0.19
       anitomy:
-        specifier: ^0.0.18
-        version: 0.0.18
+        specifier: ^0.0.19
+        version: 0.0.19
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
@@ -258,8 +258,8 @@ importers:
         version: 3.21.4
     devDependencies:
       anitomy:
-        specifier: ^0.0.18
-        version: 0.0.18
+        specifier: ^0.0.19
+        version: 0.0.19
       breadc:
         specifier: ^0.9.5
         version: 0.9.5
@@ -2861,8 +2861,8 @@ packages:
       '@algolia/transporter': 4.18.0
     dev: true
 
-  /animegarden@0.0.18:
-    resolution: {integrity: sha512-cTTviyooJ/r9a4s/Ii0aqT/vV6ynDSAFhCTpxtgFdFfrn0jnPGRUrNTFq79GKkMZ0SGvkYFsE8BL/gZMRsLNqw==}
+  /animegarden@0.0.19:
+    resolution: {integrity: sha512-K15WR2+l/0b6aYe8066o6z2RUUOCknyMnQLe13vDuIPsxfHUTnHaPjmPFgYx9wAcJbGUuXjfUcSEcWRNBYoUcQ==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
@@ -2872,6 +2872,11 @@ packages:
 
   /anitomy@0.0.18:
     resolution: {integrity: sha512-95EJElTX93cKX521vM4XYIjAlJ/gU+G+ld83GcbcUMMqpA09l9VfSvgWrS8D68WDW6P20iBvoqLJjZBtDmvnrQ==}
+    engines: {node: '>=v18.16.0'}
+    dev: false
+
+  /anitomy@0.0.19:
+    resolution: {integrity: sha512-dF3mUVW2PjFfYvluGWKGzz9HqGnrGeLXiTqYqoCXgpqcQZ3wCKS/q6cCRNVz6+DFP3469Y3W86a/9Pb7WhIvTg==}
     engines: {node: '>=v18.16.0'}
 
   /ansi-regex@5.0.1:
@@ -3457,7 +3462,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
     dev: true
 
   /concordance@5.0.4:
