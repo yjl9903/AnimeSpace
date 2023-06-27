@@ -121,12 +121,15 @@ function groupResources(
         ? 1
         : anime.resolveEpisode(info?.episode.number);
     if (info && episodeNumber !== undefined) {
-      const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
-      if (anime.plan.fansub.includes(fansub)) {
-        map
-          .getOrPut(episodeNumber, () => new MutableMap([]))
-          .getOrPut(fansub, () => [])
-          .push(r);
+      if (info.episode.numberAlt === undefined) {
+        // Only handle Single episode
+        const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
+        if (anime.plan.fansub.includes(fansub)) {
+          map
+            .getOrPut(episodeNumber, () => new MutableMap([]))
+            .getOrPut(fansub, () => [])
+            .push(r);
+        }
       }
     } else {
       logger.info(`${lightYellow('Parse Error')}  ${r.title}`);
@@ -280,10 +283,13 @@ export async function runDownloadTask(
 
         // Remove old animegarden video to keep storage clean
         {
+          // Resolve episode number
+          const resolvedEpisode = anime.resolveEpisode(video.video.episode);
           const library = (await anime.library()).videos;
           const oldVideo = library.find(
             v =>
-              v.source.type === ANIMEGARDEN && v.episode === video.video.episode
+              v.source.type === ANIMEGARDEN &&
+              anime.resolveEpisode(v.episode) === resolvedEpisode // Find same episode after being resolved
           );
           if (oldVideo) {
             multibarLogger.info(
