@@ -53,7 +53,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "anitomy": "^0.0.19",
+    "anitomy": "^0.0.20",
     "breadc": "^0.9.5",
     "rimraf": "^5.0.1"
   },
