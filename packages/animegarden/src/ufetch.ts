@@ -10,7 +10,7 @@ export async function fetchAnimeResources(anime: Anime) {
     exclude: anime.plan.keywords.exclude,
     retry: 10,
     count: -1,
-    progress(res, { url, page }) {},
+    progress(res, { url, page }) {}
   });
   return resources;
 }
@@ -25,7 +25,7 @@ export const ufetch = async (
     // @ts-ignore
     return fetch(url, {
       ...init,
-      dispatcher: new ProxyAgent(proxy),
+      dispatcher: new ProxyAgent(proxy)
     });
   } else {
     // @ts-ignore

@@ -12,7 +12,7 @@ import { AnimeSystem, resolveStringArray } from '@animespace/core';
 
 import { getProxy } from '../ufetch';
 
-import { Aria2Trackers } from './trackers';
+import { DefaultTrackers } from './trackers';
 import { DownloadClient, DownloadOptions, DownloadState } from './base';
 
 interface Aria2Options {
@@ -99,7 +99,7 @@ export class Aria2Client extends DownloadClient {
       .addUri([magnet], {
         dir: this.options.directory,
         'bt-save-metadata': true,
-        'bt-tracker': Aria2Trackers,
+        'bt-tracker': DefaultTrackers.join(','),
         'no-proxy': this.options.proxy === false ? true : false,
         'all-proxy': this.options.proxy !== false ? proxy : undefined
       })
