@@ -121,12 +121,15 @@ function groupResources(
         ? 1
         : anime.resolveEpisode(info?.episode.number);
     if (info && episodeNumber !== undefined) {
-      const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
-      if (anime.plan.fansub.includes(fansub)) {
-        map
-          .getOrPut(episodeNumber, () => new MutableMap([]))
-          .getOrPut(fansub, () => [])
-          .push(r);
+      if (info.episode.numberAlt === undefined) {
+        // Only handle Single episode
+        const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
+        if (anime.plan.fansub.includes(fansub)) {
+          map
+            .getOrPut(episodeNumber, () => new MutableMap([]))
+            .getOrPut(fansub, () => [])
+            .push(r);
+        }
       }
     } else {
       logger.info(`${lightYellow('Parse Error')}  ${r.title}`);
