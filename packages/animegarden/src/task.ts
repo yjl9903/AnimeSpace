@@ -283,10 +283,13 @@ export async function runDownloadTask(
 
         // Remove old animegarden video to keep storage clean
         {
+          // Resolve episode number
+          const resolvedEpisode = anime.resolveEpisode(video.video.episode);
           const library = (await anime.library()).videos;
           const oldVideo = library.find(
             v =>
-              v.source.type === ANIMEGARDEN && v.episode === video.video.episode
+              v.source.type === ANIMEGARDEN &&
+              anime.resolveEpisode(v.episode) === resolvedEpisode // Find same episode after being resolved
           );
           if (oldVideo) {
             multibarLogger.info(
