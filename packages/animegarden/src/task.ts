@@ -356,7 +356,6 @@ export async function runDownloadTask(
   try {
     await Promise.all(tasks);
     multibar.finish();
-    await anime.sortVideos();
   } catch (error) {
     multibar.finish();
     systemLogger.info(
