@@ -319,7 +319,7 @@ export async function runDownloadTask(
         await anime.addVideoByCopy(file, video.video);
 
         multibarLogger.info(
-          `${lightGreen('Add')} ${bold(video.video.filename)} ${
+          `${lightGreen('Copy')} ${bold(video.video.filename)} ${
             lightGreen(
               'OK'
             )
