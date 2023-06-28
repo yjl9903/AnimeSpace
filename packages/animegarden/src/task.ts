@@ -231,6 +231,16 @@ export async function runDownloadTask(
   const cancelUnhandledRej = onUnhandledRejection(() => {
     multibar.finish();
   });
+  const cancelRefresh = loop(async () => {
+    if (anime.dirty()) {
+      await anime.writeLibrary();
+      systemLogger.info(
+        lightGreen(
+          `The library file of ${anime.plan.title} has been written back`
+        )
+      );
+    }
+  }, 10 * 60 * 1000); // 10 minutes
 
   const tasks = videos.map(async video => {
     const bar = multibar.create(video.video.filename, 100);
@@ -355,9 +365,32 @@ export async function runDownloadTask(
     systemLogger.error(error);
   } finally {
     await anime.writeLibrary();
-    systemLogger.info(lightGreen('Anime library has been written back'));
+    systemLogger.info(
+      lightGreen(
+        `The library file of ${anime.plan.title} has been written back`
+      )
+    );
   }
 
-  cancelDeath();
+  cancelRefresh();
   cancelUnhandledRej();
+  cancelDeath();
+}
+
+function loop(fn: () => Promise<void>, interval: number) {
+  let timestamp: NodeJS.Timeout;
+  const wrapper = async () => {
+    await fn();
+    timestamp = setTimeout(wrapper, interval);
+  };
+  timestamp = setTimeout(wrapper, interval);
+
+  const cancel = onDeath(() => {
+    clearTimeout(timestamp);
+  });
+
+  return () => {
+    clearTimeout(timestamp);
+    cancel();
+  };
 }

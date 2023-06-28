@@ -58,6 +58,10 @@ export class Anime {
     return true;
   }
 
+  public get libraryPath() {
+    return path.join(this.directory, MetadataFilename);
+  }
+
   public async library(force = false): Promise<LocalLibrary> {
     if (this._lib === undefined || force) {
       await fs.ensureDir(this.directory);
