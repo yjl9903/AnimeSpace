@@ -7,7 +7,7 @@ import {
   AnimeSystem,
   LocalVideo,
   onDeath,
-  onUnhandledRejection
+  onUnhandledRejection,
 } from '@animespace/core';
 import { Parser } from 'anitomy';
 import { MutableMap } from '@onekuma/map';
@@ -17,7 +17,7 @@ import {
   lightGreen,
   lightRed,
   lightYellow,
-  link
+  link,
 } from '@breadc/color';
 
 import { ANIMEGARDEN } from './constant';
@@ -43,11 +43,9 @@ export async function generateDownloadTask(
       const tl = lhs.title;
       const tr = rhs.title;
 
-      for (
-        const [_, order] of Object.entries(
-          system.space.preference.keyword.order
-        )
-      ) {
+      for (const [_, order] of Object.entries(
+        system.space.preference.keyword.order
+      )) {
         for (const k of order) {
           const key = k.toLowerCase();
           const hl = tl.toLowerCase().indexOf(key) !== -1;
@@ -75,17 +73,17 @@ export async function generateDownloadTask(
           filename: anime.formatFilename({
             fansub,
             episode: info.episode.number, // Raw episode number
-            extension: info.file.extension
+            extension: info.file.extension,
           }),
           naming: 'auto',
           fansub: fansub,
           episode: info.episode.number, // Raw episode number
           source: {
             type: 'AnimeGarden',
-            magnet: res.href
-          }
+            magnet: res.href,
+          },
         },
-        resource: res
+        resource: res,
       });
     }
   }
@@ -118,9 +116,10 @@ function groupResources(
     const info = parser.parse(r.title);
 
     // TODO: split film / OVA / anime logic
-    const episodeNumber = anime.plan.type === '电影'
-      ? 1
-      : anime.resolveEpisode(info?.episode.number);
+    const episodeNumber =
+      anime.plan.type === '电影'
+        ? 1
+        : anime.resolveEpisode(info?.episode.number);
     if (info && episodeNumber !== undefined) {
       if (info.episode.numberAlt === undefined) {
         // Only handle Single episode
@@ -152,7 +151,7 @@ function groupResources(
 
         return [
           ep,
-          { fansub: fansubs[0][0], resources: fansubs[0][1] }
+          { fansub: fansubs[0][0], resources: fansubs[0][1] },
         ] as const;
       })
       .toArray()
@@ -189,17 +188,13 @@ export async function runDownloadTask(
       let text = '';
       if (payload.state) {
         text += payload.state;
-        text += ` | ${Number(payload.completed)} B / ${
-          Number(
-            payload.total
-          )
-        } B`;
+        text += ` | ${Number(payload.completed)} B / ${Number(
+          payload.total
+        )} B`;
       } else {
-        text += `${formatSize(Number(payload.completed))} / ${
-          formatSize(
-            Number(payload.total)
-          )
-        }`;
+        text += `${formatSize(Number(payload.completed))} / ${formatSize(
+          Number(payload.total)
+        )}`;
         if (payload.speed) {
           text += ` | Speed: ${formatSize(payload.speed)}/s`;
         }
@@ -208,7 +203,7 @@ export async function runDownloadTask(
         text += ` | Connections: ${payload.connections}`;
       }
       return text;
-    }
+    },
   });
 
   const systemLogger = system.logger.withTag('animegarden');
@@ -221,7 +216,7 @@ export async function runDownloadTask(
     },
     error(message: string) {
       multibar.println(`${lightRed('Error')} ${message}`);
-    }
+    },
   };
   client.setLogger(multibarLogger);
 
@@ -235,9 +230,9 @@ export async function runDownloadTask(
     if (anime.dirty()) {
       await anime.writeLibrary();
       systemLogger.info(
-        lightGreen(
-          `The library file of ${anime.plan.title} has been written back`
-        )
+        lightGreen(`Write`) +
+          bold(` ${anime.plan.title} `) +
+          lightGreen(`library file OK`)
       );
     }
   }, 10 * 60 * 1000); // 10 minutes
@@ -255,37 +250,36 @@ export async function runDownloadTask(
               connections: 0,
               completed: BigInt(0),
               total: BigInt(0),
-              state: 'Downloading metadata'
+              state: 'Downloading metadata',
             });
           },
           onMetadataProgress(progress) {
             bar.update(0, {
               ...progress,
-              state: 'Downloading metadata'
+              state: 'Downloading metadata',
             });
           },
           onProgress(payload) {
             const completed = Number(payload.completed);
             const total = Number(payload.total);
-            const value = payload.total > 0
-              ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1)
-              : 0;
+            const value =
+              payload.total > 0
+                ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1)
+                : 0;
             bar.update(value, { ...payload, state: '' });
           },
           onComplete() {
             bar.update(100);
-          }
+          },
         }
       );
       bar.update(100);
       bar.remove();
 
       multibarLogger.info(
-        `${lightGreen('Download')} ${bold(video.video.filename)} ${
-          lightGreen(
-            'OK'
-          )
-        }`
+        `${lightGreen('Download')} ${bold(video.video.filename)} ${lightGreen(
+          'OK'
+        )}`
       );
 
       if (files.length === 1) {
@@ -294,7 +288,7 @@ export async function runDownloadTask(
         video.video.filename = anime.formatFilename({
           fansub: video.video.fansub,
           episode: video.video.episode,
-          extension: path.extname(file).slice(1) || 'mp4'
+          extension: path.extname(file).slice(1) || 'mp4',
         });
 
         // Remove old animegarden video to keep storage clean
@@ -304,8 +298,8 @@ export async function runDownloadTask(
           const library = (await anime.library()).videos;
           const oldVideo = library.find(
             v =>
-              v.source.type === ANIMEGARDEN
-              && anime.resolveEpisode(v.episode) === resolvedEpisode // Find same episode after being resolved
+              v.source.type === ANIMEGARDEN &&
+              anime.resolveEpisode(v.episode) === resolvedEpisode // Find same episode after being resolved
           );
           if (oldVideo) {
             multibarLogger.info(
@@ -319,29 +313,23 @@ export async function runDownloadTask(
         await anime.addVideoByCopy(file, video.video);
 
         multibarLogger.info(
-          `${lightGreen('Copy')} ${bold(video.video.filename)} ${
-            lightGreen(
-              'OK'
-            )
-          }`
+          `${lightGreen('Copy')} ${bold(video.video.filename)} ${lightGreen(
+            'OK'
+          )}`
         );
       } else {
         multibar.println(
-          `${lightYellow(`Warn`)} Resource ${
-            link(
-              video.resource.title,
-              video.resource.href
-            )
-          } has multiple files`
+          `${lightYellow(`Warn`)} Resource ${link(
+            video.resource.title,
+            video.resource.href
+          )} has multiple files`
         );
       }
     } catch (error) {
-      const defaultMessage = `Download ${
-        link(
-          video.resource.title,
-          video.resource.href
-        )
-      } failed`;
+      const defaultMessage = `Download ${link(
+        video.resource.title,
+        video.resource.href
+      )} failed`;
       if (error instanceof Error && error?.message) {
         multibarLogger.error(error.message ?? defaultMessage);
         systemLogger.error(error);
@@ -365,9 +353,9 @@ export async function runDownloadTask(
   } finally {
     await anime.writeLibrary();
     systemLogger.info(
-      lightGreen(
-        `The library file of ${anime.plan.title} has been written back`
-      )
+      lightGreen(`Write`) +
+        bold(` ${anime.plan.title} `) +
+        lightGreen(`library file OK`)
     );
   }
 
