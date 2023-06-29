@@ -41,8 +41,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@breadc/color": "^0.9.5",
-    "@breadc/death": "^0.9.5",
+    "@breadc/color": "^0.9.6",
+    "@breadc/death": "^0.9.6",
     "consola": "^3.1.0",
     "date-fns": "^2.30.0",
     "debug": "^4.3.4",
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "anitomy": "^0.0.20",
-    "breadc": "^0.9.5",
+    "breadc": "^0.9.6",
     "rimraf": "^5.0.1"
   },
   "engines": {

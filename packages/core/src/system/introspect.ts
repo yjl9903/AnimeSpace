@@ -106,8 +106,6 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
       await anime.moveVideo(video, filename);
     }
   }
-  // Sort video files
-  await anime.sortVideos();
 }
 
 export async function loadAnime(

@@ -58,6 +58,10 @@ export class Anime {
     return true;
   }
 
+  public get libraryPath() {
+    return path.join(this.directory, MetadataFilename);
+  }
+
   public async library(force = false): Promise<LocalLibrary> {
     if (this._lib === undefined || force) {
       await fs.ensureDir(this.directory);
@@ -317,12 +321,12 @@ export class Anime {
   }
 
   public async writeLibrary(): Promise<void> {
+    await this.sortVideos();
     if (this._lib && this._dirty) {
       debug(`Start writing anime library of ${this._lib.title}`);
-      const libPath = path.join(this.directory, MetadataFilename);
       try {
         await fs.writeFile(
-          libPath,
+          this.libraryPath,
           stringifyLocalLibrary(this._lib!, this._raw_lib),
           'utf-8'
         );
