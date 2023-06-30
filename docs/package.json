@@ -8,7 +8,7 @@
     "serve": "vitepress serve"
   },
   "dependencies": {
-    "@vueuse/core": "^10.2.0",
+    "@vueuse/core": "^10.2.1",
     "vue": "^3.3.4"
   },
   "devDependencies": {
@@ -17,7 +17,7 @@
     "@types/node": "^20.3.2",
     "@unocss/reset": "^0.53.4",
     "@vitejs/plugin-vue": "^4.2.3",
-    "fast-glob": "^3.2.12",
+    "fast-glob": "^3.3.0",
     "https-localhost": "^4.7.1",
     "unocss": "^0.53.4",
     "unplugin-vue-components": "^0.25.1",
