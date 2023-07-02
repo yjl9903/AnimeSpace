@@ -17,8 +17,8 @@ importers:
         specifier: ^20.3.3
         version: 20.3.3
       dprint:
-        specifier: ^0.38.0
-        version: 0.38.0
+        specifier: ^0.38.1
+        version: 0.38.1
       optc:
         specifier: ^0.6.2
         version: 0.6.2
@@ -1724,8 +1724,8 @@ packages:
       - search-insights
     dev: true
 
-  /@dprint/darwin-arm64@0.38.0:
-    resolution: {integrity: sha512-yS8oIYhLrOgVuBZq6qAWjaIGS1FrjwWvU+CU8rVP8r/n5xy2VPCl60zfOGpLzqT35GcdHa77FyMoZspBxRVgZA==}
+  /@dprint/darwin-arm64@0.38.1:
+    resolution: {integrity: sha512-vHaIoCzFmcvFju6mwcvBu065T5uzqyOOKISBavsMZEL4azOLGzQakawgLOjXk62lAWJMojtUll4mcgAsxjxGuQ==}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
@@ -1733,8 +1733,8 @@ packages:
     dev: true
     optional: true
 
-  /@dprint/darwin-x64@0.38.0:
-    resolution: {integrity: sha512-Hd/DOJhjfz5m0armQVAJl4b4ehqB073kvtUUyP1zo+HlG49imiTHKXc4WAtJwo5sk+k3pZKahd/oAYDA9lKTCQ==}
+  /@dprint/darwin-x64@0.38.1:
+    resolution: {integrity: sha512-E5NmrYSkk1Vu+G2HHE3NNTgM9u4yU8EnR/RArWwAJBWHv74fsSTcZvyZZtzXIU2VAmybhhywIxofK6urJ3o1wA==}
     cpu: [x64]
     os: [darwin]
     hasBin: true
@@ -1742,8 +1742,8 @@ packages:
     dev: true
     optional: true
 
-  /@dprint/linux-arm64-glibc@0.38.0:
-    resolution: {integrity: sha512-4DCgPGUaFtg7/evnuICM2oGcb0w7h1YAiocsgx44t/6141I4k8Wv2Q5n74S1hajooilO6e0D1yUNw+XWZ6dR1Q==}
+  /@dprint/linux-arm64-glibc@0.38.1:
+    resolution: {integrity: sha512-ItNacyYgA9BMbvDe2Pb+IQxy/6BrgyAjDzB7YdBumBVIKGwOwGeQqAuIli+Dudt0b5rX6Ux37j48dHZ0SjvJWQ==}
     cpu: [arm64]
     os: [linux]
     hasBin: true
@@ -1751,8 +1751,8 @@ packages:
     dev: true
     optional: true
 
-  /@dprint/linux-x64-glibc@0.38.0:
-    resolution: {integrity: sha512-TocBhu83g4XhsnIgmir2h833rdWLoBJLZW7AM8fE8JxtvG/PxF9qyqwXaEMJ4hu++cduepZM3smtMWogZ3QWxQ==}
+  /@dprint/linux-x64-glibc@0.38.1:
+    resolution: {integrity: sha512-Wg+zTd/ZOkG5G+1ZDROfSHTeuWqf0L1hQgCiZHB9jdU4vePlRbsF2U4wUlkgfY6+F2JbMHBzjQMC92VQxnymzg==}
     cpu: [x64]
     os: [linux]
     hasBin: true
@@ -1760,8 +1760,8 @@ packages:
     dev: true
     optional: true
 
-  /@dprint/linux-x64-musl@0.38.0:
-    resolution: {integrity: sha512-lRxCenDCLzdKHtxdd/z1+9M6dNzgckksF1pxqHsPZpZVEBwkkgA58FNV1I6QYdy0jPE5UrmMEtl/C47bfTJ3Hw==}
+  /@dprint/linux-x64-musl@0.38.1:
+    resolution: {integrity: sha512-KzTbzZWnJDIPenypDFeoz9HUn41FVpgaRlRWfx6CgXXRowy6L1aD8XB7J2TNUHX61D226Tm57jPrKRRSOFDo5w==}
     cpu: [x64]
     os: [linux]
     hasBin: true
@@ -1769,8 +1769,8 @@ packages:
     dev: true
     optional: true
 
-  /@dprint/win32-x64@0.38.0:
-    resolution: {integrity: sha512-iAwWDHjWbyM9WtTc35MERjoJQovExPewNlT2eAUXCxUaM74IKdE6II8p47wnRl5RMTqkkFJnByTh60AgFN0JXw==}
+  /@dprint/win32-x64@0.38.1:
+    resolution: {integrity: sha512-UinBSinuIj9mdnZCWAtbrn5BiSR22J6rz5pdkcAhGwxQZ1GpnMJjAO5nCOWizoGJGE4hZOr18xXJtCxP5HbdWw==}
     cpu: [x64]
     os: [win32]
     hasBin: true
@@ -3983,16 +3983,16 @@ packages:
       domhandler: 5.0.3
     dev: false
 
-  /dprint@0.38.0:
-    resolution: {integrity: sha512-3wRHH9aLFR34aM/vAeCi7BSKXuOXTuYKD92SPoQ6DdH7wOjJkZnmr4WQ3E5X/LXHtyowGvN60VtT8EYN3vSUiw==}
+  /dprint@0.38.1:
+    resolution: {integrity: sha512-lBfTf8GduoZqZwdpBon954lB+CPLr9mU26T2h6u1Xcu+h1iWd4SKtAOexUhpCViebH1A0563+eEdEZZySsnlEA==}
     hasBin: true
     optionalDependencies:
-      '@dprint/darwin-arm64': 0.38.0
-      '@dprint/darwin-x64': 0.38.0
-      '@dprint/linux-arm64-glibc': 0.38.0
-      '@dprint/linux-x64-glibc': 0.38.0
-      '@dprint/linux-x64-musl': 0.38.0
-      '@dprint/win32-x64': 0.38.0
+      '@dprint/darwin-arm64': 0.38.1
+      '@dprint/darwin-x64': 0.38.1
+      '@dprint/linux-arm64-glibc': 0.38.1
+      '@dprint/linux-x64-glibc': 0.38.1
+      '@dprint/linux-x64-musl': 0.38.1
+      '@dprint/win32-x64': 0.38.1
     dev: true
 
   /duplexer@0.1.2:
