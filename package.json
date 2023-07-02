@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.3.3",
-    "dprint": "^0.37.1",
+    "dprint": "^0.38.0",
     "optc": "^0.6.2",
     "rimraf": "^5.0.1",
     "turbo": "^1.10.7",
