@@ -1,9 +1,9 @@
 import type { Breadc } from 'breadc';
 import type { AnyZodObject } from 'zod';
 
-import type { AnimeSystem } from './system/types';
+import type { AnimeSystem } from './system';
+import type { Anime, LocalFile, LocalVideo } from './anime';
 import type { AnimeSpace, Plan, PluginEntry } from './space/schema';
-import type { Anime, LocalFile, LocalVideo } from './system/anime';
 
 type MayPromise<T> = T | Promise<T>;
 

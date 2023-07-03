@@ -1,9 +1,9 @@
 import { dim } from '@breadc/color';
 import { createConsola } from 'consola';
 
+import type { Anime } from '../anime';
 import type { AnimeSpace } from '../space';
 
-import type { Anime } from './anime';
 import type { AnimeSystem } from './types';
 
 import { refresh } from './refresh';
@@ -13,7 +13,7 @@ export async function createAnimeSystem(
   space: AnimeSpace
 ): Promise<AnimeSystem> {
   const logger = createConsola({
-    formatOptions: { columns: process.stdout.getWindowSize?.()[0] }
+    formatOptions: { columns: process.stdout.getWindowSize?.()[0] },
   });
 
   // Cache animes
@@ -35,9 +35,8 @@ export async function createAnimeSystem(
       } else {
         const filter = options.filter;
         if (typeof filter === 'string') {
-          return (animes = await loadAnime(
-            system,
-            a => a.plan.title.includes(filter)
+          return (animes = await loadAnime(system, a =>
+            a.plan.title.includes(filter)
           ));
         } else {
           return (animes = await loadAnime(system, filter));
@@ -69,7 +68,7 @@ export async function createAnimeSystem(
       } else {
         return false;
       }
-    }
+    },
   };
   return system;
 }

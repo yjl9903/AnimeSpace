@@ -3,10 +3,9 @@ import { bold, lightBlue, lightGreen, lightRed } from '@breadc/color';
 import type { Plan } from '../space';
 
 import { AnimeSystemError, debug } from '../error';
+import { Anime, LocalFile, LocalVideo } from '../anime';
 
 import type { AnimeSystem, IntrospectOptions } from './types';
-
-import { Anime, LocalFile, LocalVideo } from './anime';
 
 export async function introspect(
   system: AnimeSystem,
@@ -97,11 +96,9 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     const filename = anime.reformatVideoFilename(video);
     if (filename !== video.filename) {
       logger.info(
-        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${
-          bold(
-            filename
-          )
-        }"`
+        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${bold(
+          filename
+        )}"`
       );
       await anime.moveVideo(video, filename);
     }

@@ -6,8 +6,12 @@ import {
   Anime,
   AnimeSystem,
   LocalVideo,
+  parseEpisode,
+  hasEpisodeNumberAlt,
+  getEpisodeKey,
   onDeath,
   onUnhandledRejection,
+  isValidEpisode,
 } from '@animespace/core';
 import { Parser } from 'anitomy';
 import { MutableMap } from '@onekuma/map';
@@ -38,7 +42,7 @@ export async function generateDownloadTask(
   const ordered = groupResources(system, anime, resources);
   const videos: Task[] = [];
 
-  for (const [ep, { fansub, resources }] of ordered) {
+  for (const [_ep, { fansub, resources }] of ordered) {
     resources.sort((lhs, rhs) => {
       const tl = lhs.title;
       const tr = rhs.title;
@@ -99,7 +103,7 @@ function groupResources(
   resources: Resource[]
 ) {
   const logger = system.logger.withTag('animegarden');
-  const map = new MutableMap<number, MutableMap<string, Resource[]>>([]);
+  const map = new MutableMap<string, MutableMap<string, Resource[]>>([]);
 
   for (const r of resources) {
     // Resource title should not have exclude keywords
@@ -113,20 +117,19 @@ function groupResources(
     // Resource fansub shoulde be included
     if (r.fansub && !anime.plan.fansub.includes(r.fansub.name)) continue;
 
-    const info = parser.parse(r.title);
+    const episode = parseEpisode(anime, r.title, {
+      metadata: info => ({
+        fansub: r.fansub?.name ?? info.release.group ?? 'fansub',
+      }),
+    });
 
-    // TODO: split film / OVA / anime logic
-    const episodeNumber =
-      anime.plan.type === '电影'
-        ? 1
-        : anime.resolveEpisode(info?.episode.number);
-    if (info && episodeNumber !== undefined) {
-      if (info.episode.numberAlt === undefined) {
-        // Only handle Single episode
-        const fansub = r.fansub?.name ?? info.release.group ?? 'fansub';
+    if (episode && isValidEpisode(episode)) {
+      // Disable multiple files like 01-12
+      if (!hasEpisodeNumberAlt(episode)) {
+        const fansub = episode.metadata.fansub;
         if (anime.plan.fansub.includes(fansub)) {
           map
-            .getOrPut(episodeNumber, () => new MutableMap([]))
+            .getOrPut(getEpisodeKey(episode), () => new MutableMap([]))
             .getOrPut(fansub, () => [])
             .push(r);
         }

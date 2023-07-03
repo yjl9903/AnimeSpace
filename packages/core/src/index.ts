@@ -1,5 +1,7 @@
 export * from './space';
 
+export * from './anime';
+
 export * from './plugin';
 
 export * from './system';

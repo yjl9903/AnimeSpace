@@ -1,8 +1,7 @@
 import type { ConsolaInstance } from 'consola';
 
+import type { Anime } from '../anime';
 import type { AnimeSpace } from '../space/schema';
-
-import type { Anime } from './anime';
 
 export interface SystemOperationOptions {
   filter?: string | ((anime: Anime) => boolean);
