@@ -9,7 +9,12 @@ import { AnimePlan, AnimeSpace } from '../space';
 import { AnimeSystemError, debug } from '../error';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
 
-import type { LocalLibrary, LocalFile, LocalVideo } from './types';
+import type {
+  LocalFile,
+  LocalVideo,
+  LocalLibrary,
+  FormatOptions,
+} from './types';
 
 import { stringifyLocalLibrary } from './utils';
 
@@ -182,12 +187,7 @@ export class Anime {
     });
   }
 
-  public formatFilename(meta: {
-    season?: number;
-    episode?: number;
-    fansub?: string;
-    extension?: string;
-  }) {
+  public formatFilename(meta: Partial<FormatOptions>) {
     const title = this._lib?.title ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
     const season = meta.season ?? this._lib?.season ?? this.plan.season;

@@ -31,3 +31,15 @@ export interface LocalFile {
 
   metadata: Record<string, string>;
 }
+
+export interface FormatOptions {
+  type: string;
+
+  season: number;
+
+  episode: number;
+
+  fansub: string;
+
+  extension: string;
+}
