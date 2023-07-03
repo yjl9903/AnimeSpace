@@ -99,8 +99,8 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.0.23
-        version: 0.0.23
+        specifier: ^0.0.24
+        version: 0.0.24
       anitomy:
         specifier: ^0.0.23
         version: 0.0.23
@@ -2237,6 +2237,7 @@ packages:
 
   /@jridgewell/source-map@0.3.4:
     resolution: {integrity: sha512-KE/SxsDqNs3rrWwFHcRh15ZLVFrI0YoZtgAdIyIq9k5hUNmiWRXXThPomIxHuL20sLdgzbDFyvkUMna14bvtrw==}
+    deprecated: the version has a bug with typescript type resolution
     dev: true
 
   /@jridgewell/sourcemap-codec@1.4.14:
@@ -3122,8 +3123,8 @@ packages:
       '@algolia/transporter': 4.18.0
     dev: true
 
-  /animegarden@0.0.23:
-    resolution: {integrity: sha512-bJbW84lfm9PpNurE1KHg/LFqLG1u72LW4NP2tFuPcwgupQQQ2GCjnZrEw4iGibbny4Kh3W5T6flvyoNuy/1Plg==}
+  /animegarden@0.0.24:
+    resolution: {integrity: sha512-kRROXnsMpJI8PUfZpof7FVJFitH9xqQSl0HipFElObFNSNxR9/nvNwg5vrOVtWrW1vPCxNIZNR/2CAN3BMnSkg==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
@@ -3711,7 +3712,7 @@ packages:
     dev: true
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /consola@3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe):
