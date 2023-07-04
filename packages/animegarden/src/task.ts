@@ -127,7 +127,7 @@ function groupResources(
       // Disable multiple files like 01-12
       if (!hasEpisodeNumberAlt(episode)) {
         const fansub = episode.metadata.fansub;
-        if (anime.plan.fansub.includes(fansub)) {
+        if (fansub === 'fansub' || anime.plan.fansub.includes(fansub)) {
           map
             .getOrPut(getEpisodeKey(episode), () => new MutableMap([]))
             .getOrPut(fansub, () => [])
