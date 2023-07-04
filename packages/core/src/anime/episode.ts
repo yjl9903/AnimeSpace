@@ -170,7 +170,7 @@ export function parseEpisode<T = Partial<Omit<FormatOptions, 'episode'>>>(
 export function isValidEpisode<T>(
   episode: Episode<T> | PartialEpisode<T> | undefined | null
 ): episode is Episode<T> {
-  if (episode && 'type' in episode) {
+  if (episode && 'type' in episode && episode.type) {
     return true;
   } else {
     return false;
@@ -180,13 +180,23 @@ export function isValidEpisode<T>(
 export function hasEpisodeNumber<T, E extends Episode<T> = Episode<T>>(
   episode: E
 ): episode is E & { episode: number; resolvedEpisode: number } {
-  return 'episode' in episode && 'resolvedEpisode' in episode;
+  return (
+    'episode' in episode &&
+    episode.episode !== undefined &&
+    'resolvedEpisode' in episode &&
+    episode.resolvedEpisode !== undefined
+  );
 }
 
 export function hasEpisodeNumberAlt<T, E extends Episode<T> = Episode<T>>(
   episode: Episode<T>
 ): episode is E & { episodeAlt: number; resolvedEpisodeAlt: number } {
-  return 'episodeAlt' in episode && 'resolvedEpisodeAlt' in episode;
+  return (
+    'episodeAlt' in episode &&
+    episode.episodeAlt !== undefined &&
+    'resolvedEpisodeAlt' in episode &&
+    episode.resolvedEpisodeAlt !== undefined
+  );
 }
 
 export function getEpisodeKey<T>(episode: Episode<T>) {
