@@ -53,7 +53,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
             }
           };
           logger.info(
-            `${lightGreen('Moving downloaded file')} ${
+            `${lightGreen('Moving local file')} ${
               bold(
                 file.filename
               )
@@ -127,7 +127,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
           logger.info(
             `There are ${
               lightYellow(
-                `${files.length} downloaded files`
+                `${files.length} local files`
               )
             } without matching animations found.`
           );
