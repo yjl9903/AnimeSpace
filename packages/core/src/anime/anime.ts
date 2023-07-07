@@ -121,7 +121,7 @@ export class Anime {
 
           return (this._lib = <LocalLibrary> {
             ...parsed.data,
-            videos: lib?.videos ?? []
+            videos: (lib?.videos ?? []).filter(Boolean)
           });
         } else {
           debug(parsed.error.issues);
