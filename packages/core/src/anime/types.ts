@@ -15,6 +15,10 @@ export interface LocalVideo {
 
   fansub?: string;
 
+  date?: Date;
+
+  season?: number;
+
   episode?: number;
 
   source: LocalVideoSource;

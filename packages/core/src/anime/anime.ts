@@ -10,10 +10,10 @@ import { AnimeSystemError, debug } from '../error';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
 
 import type {
-  LocalFile,
-  LocalVideo,
-  LocalLibrary,
   FormatOptions,
+  LocalFile,
+  LocalLibrary,
+  LocalVideo
 } from './types';
 
 import { stringifyLocalLibrary } from './utils';
@@ -42,7 +42,7 @@ export class Anime {
     const dirname = formatTitle(space.preference.format.anime, {
       title: plan.title,
       yyyy: format(plan.date, 'yyyy'),
-      MM: format(plan.date, 'MM'),
+      MM: format(plan.date, 'MM')
     });
     this.directory = plan.directory
       ? path.resolve(space.storage, plan.directory)
@@ -89,13 +89,12 @@ export class Anime {
         const schema = z
           .object({
             title: z.string().default(this.plan.title).catch(this.plan.title),
-            season:
-              this.plan.season !== undefined
-                ? z.coerce
-                    .number()
-                    .default(this.plan.season)
-                    .catch(this.plan.season)
-                : z.coerce.number().optional(),
+            season: this.plan.season !== undefined
+              ? z.coerce
+                .number()
+                .default(this.plan.season)
+                .catch(this.plan.season)
+              : z.coerce.number().optional(),
             date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
             videos: z
               .array(
@@ -106,10 +105,13 @@ export class Anime {
                       .enum(['auto', 'manual'])
                       .default('auto')
                       .catch('auto'),
+                    date: z.coerce.date().optional(),
+                    season: z.coerce.number().optional(),
+                    episode: z.coerce.number().optional()
                   })
                   .passthrough()
               )
-              .catch([]),
+              .catch([])
           })
           .passthrough();
 
@@ -117,9 +119,9 @@ export class Anime {
         if (parsed.success) {
           debug(parsed.data);
 
-          return (this._lib = <LocalLibrary>{
+          return (this._lib = <LocalLibrary> {
             ...parsed.data,
-            videos: lib?.videos ?? [],
+            videos: (lib?.videos ?? []).filter(Boolean)
           });
         } else {
           debug(parsed.error.issues);
@@ -132,7 +134,7 @@ export class Anime {
           title: this.plan.title,
           season: this.plan.season,
           date: this.plan.date,
-          videos: [],
+          videos: []
         };
         await fs.writeFile(
           libPath,
@@ -171,20 +173,24 @@ export class Anime {
   }
 
   public reformatVideoFilename(video: LocalVideo) {
-    const title = this._lib?.title ?? this.plan.title;
-    const date = this._lib?.date ?? this.plan.date;
-    const season = this._lib?.season ?? this.plan.season;
-    const episode = this.resolveEpisode(video.episode);
+    if (video.naming === 'auto') {
+      const title = this._lib?.title ?? this.plan.title;
+      const date = video.date ?? this._lib?.date ?? this.plan.date;
+      const season = video.season ?? this._lib?.season ?? this.plan.season;
+      const episode = this.resolveEpisode(video.episode);
 
-    return formatTitle(this.format, {
-      title,
-      yyyy: format(date, 'yyyy'),
-      MM: format(date, 'MM'),
-      season: season !== undefined ? formatEpisode(season) : '01',
-      ep: episode !== undefined ? formatEpisode(episode) : '{ep}',
-      extension: path.extname(video.filename).slice(1) ?? 'mp4',
-      fansub: video.fansub ?? 'fansub',
-    });
+      return formatTitle(this.format, {
+        title,
+        yyyy: format(date, 'yyyy'),
+        MM: format(date, 'MM'),
+        season: season !== undefined ? formatEpisode(season) : '01',
+        ep: episode !== undefined ? formatEpisode(episode) : '{ep}',
+        extension: path.extname(video.filename).slice(1) ?? 'mp4',
+        fansub: video.fansub ?? 'fansub'
+      });
+    } else {
+      return video.filename;
+    }
   }
 
   public formatFilename(meta: Partial<FormatOptions>) {
@@ -200,7 +206,7 @@ export class Anime {
       season: season !== undefined ? formatEpisode(season) : '01',
       ep: episode !== undefined ? formatEpisode(episode) : '{ep}',
       extension: meta.extension?.toLowerCase() ?? 'mp4',
-      fansub: meta.fansub ?? 'fansub',
+      fansub: meta.fansub ?? 'fansub'
     });
   }
 
@@ -233,11 +239,11 @@ export class Anime {
       if (src !== dst) {
         if (copy) {
           await fs.copy(src, dst, {
-            overwrite: true,
+            overwrite: true
           });
         } else {
           await fs.move(src, dst, {
-            overwrite: true,
+            overwrite: true
           });
         }
       }

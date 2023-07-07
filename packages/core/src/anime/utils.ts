@@ -48,11 +48,11 @@ export function stringifyLocalLibrary(
         child.spaceBefore = true;
       }
       return visit.SKIP;
-    },
+    }
   });
 
   return (
-    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n` +
-    doc.toString({ lineWidth: 0 })
+    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n`
+    + doc.toString({ lineWidth: 0 })
   );
 }

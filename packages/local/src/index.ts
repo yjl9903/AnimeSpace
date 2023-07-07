@@ -25,7 +25,7 @@ export interface LocalOptions extends PluginEntry {
 
 export async function Local(options: LocalOptions): Promise<Plugin> {
   let _logger: ConsolaInstance | undefined = undefined;
-  const relDir = options.directory ?? './download';
+  const relDir = options.directory ?? './local';
   const files: LocalFile[] = [];
 
   return {
@@ -53,7 +53,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
             }
           };
           logger.info(
-            `${lightGreen('Moving downloaded file')} ${
+            `${lightGreen('Moving local file')} ${
               bold(
                 file.filename
               )
@@ -81,7 +81,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
         files.splice(
           0,
           files.length,
-          ...files.filter((f) => {
+          ...files.filter(f => {
             if (anime.matchKeywords(f.filename)) {
               relatedFiles.push(f);
               return false;
@@ -127,7 +127,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
           logger.info(
             `There are ${
               lightYellow(
-                `${files.length} downloaded files`
+                `${files.length} local files`
               )
             } without matching animations found.`
           );
