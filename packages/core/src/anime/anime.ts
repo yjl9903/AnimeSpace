@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
+import trash from 'trash';
 import { z } from 'zod';
 import { parse } from 'yaml';
 import { format } from 'date-fns';
@@ -237,6 +238,11 @@ export class Anime {
     try {
       const dst = path.join(this.directory, newVideo.filename);
       if (src !== dst) {
+        // Trash the existed destination file, not overwrite
+        if (await fs.exists(dst)) {
+          await trash(dst);
+        }
+
         if (copy) {
           await fs.copy(src, dst, {
             overwrite: true
@@ -308,8 +314,7 @@ export class Anime {
     const videoPath = path.join(this.directory, target.filename);
     if (await fs.exists(videoPath)) {
       try {
-        // TODO: not delete it, but move to another temp dir
-        await fs.remove(videoPath);
+        await trash(videoPath);
         remove();
       } catch (error) {
         console.error(error);
