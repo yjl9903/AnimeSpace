@@ -1,13 +1,17 @@
 import { ConsolaInstance } from 'consola';
 import {
   type AnimeSystem,
+  getEpisodeType,
+  isValidEpisode,
   listIncludeFiles,
   type LocalFile,
   type LocalVideo,
+  parseEpisode,
   type Plugin,
   type PluginEntry
 } from '@animespace/core';
 
+import { memo } from 'memofunc';
 import { parse } from 'anitomy';
 import { bold, dim, lightBlue, lightGreen, lightYellow } from '@breadc/color';
 
@@ -24,7 +28,10 @@ export interface LocalOptions extends PluginEntry {
 }
 
 export async function Local(options: LocalOptions): Promise<Plugin> {
-  let _logger: ConsolaInstance | undefined = undefined;
+  const createLogger = memo((system: AnimeSystem) =>
+    system.logger.withTag(LOCAL)
+  );
+
   const relDir = options.directory ?? './local';
   const files: LocalFile[] = [];
 
@@ -72,6 +79,15 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
           files.length,
           ...(await listIncludeFiles(system.space, relDir))
         );
+        if (files.length > 0) {
+          const logger = createLogger(system);
+          logger.info(
+            `There are ${lightYellow(`${files.length} local files`)} found.`
+          );
+          for (const f of files) {
+            logger.info(`${DOT} ${f.filename}`);
+          }
+        }
       },
       async refresh(system, anime) {
         if (options.refresh === false) return;
@@ -92,17 +108,24 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
         );
         // Add file to anime library
         for (const file of relatedFiles) {
-          const result = parse(file.filename);
-          if (result) {
+          const result = parseEpisode(anime, file.filename);
+          if (result && isValidEpisode(result)) {
+            const filename = anime.formatFilename({
+              type: getEpisodeType(result),
+              fansub: result.parsed.release.group,
+              episode: result.parsed.episode.number,
+              extension: result.parsed.file.extension
+            });
+            // Hack: check the format filename is valid
+            if (filename.includes('{fansub}' || '{episode}' || '{season}')) {
+              continue;
+            }
+
             const video: LocalVideo = {
-              filename: anime.formatFilename({
-                fansub: result.release.group,
-                episode: result.episode.number,
-                extension: result.file.extension
-              }),
+              filename,
               naming: 'auto',
-              fansub: result.release.group,
-              episode: result.episode.number,
+              fansub: result.parsed.release.group,
+              episode: result.parsed.episode.number,
               source: {
                 type: LOCAL,
                 from: file.filename
@@ -121,29 +144,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
           }
         }
       },
-      async finish(system) {
-        if (files.length > 0) {
-          const logger = createLogger(system);
-          logger.info(
-            `There are ${
-              lightYellow(
-                `${files.length} local files`
-              )
-            } without matching animations found.`
-          );
-          for (const f of files) {
-            logger.info(`${DOT} ${f.filename}`);
-          }
-        }
-      }
+      async finish(system) {}
     }
   };
-
-  function createLogger(system: AnimeSystem) {
-    if (_logger) {
-      return _logger;
-    } else {
-      return (_logger = system.logger.withTag(LOCAL));
-    }
-  }
 }

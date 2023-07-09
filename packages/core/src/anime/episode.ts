@@ -45,7 +45,7 @@ export interface TVEpisode<T extends { season?: number }>
 }
 
 export interface MovieEpisode<T> extends BaseEpisode<T> {
-  type: 'MOVIE';
+  type: '电影';
 }
 
 export interface SPEpisode<T> extends BaseEpisode<T> {
@@ -136,7 +136,7 @@ export function parseEpisode<
 
     return <MovieEpisode<T>> {
       anime,
-      type: 'MOVIE',
+      type: '电影',
       title,
       resolvedTitle,
       metadata,
@@ -209,6 +209,14 @@ export function hasEpisodeNumberAlt<
   );
 }
 
+export function getEpisodeType<T extends {}>(episode: Episode<T>) {
+  if (episode.type === 'TV' || episode.type === '电影') {
+    return episode.type;
+  } else {
+    return 'OVA';
+  }
+}
+
 export function getEpisodeKey<T extends {}>(episode: Episode<T>) {
   const episodeAlt = 'resolvedEpisodeAlt' in episode
     ? episode.resolvedEpisodeAlt !== undefined
@@ -222,7 +230,7 @@ export function getEpisodeKey<T extends {}>(episode: Episode<T>) {
       episode.resolvedEpisode ?? 'null'
     }${episodeAlt}`;
   }
-  if (episode.type === 'MOVIE') {
+  if (episode.type === '电影') {
     return `${episode.type}/`;
   }
   if (hasEpisodeNumber(episode)) {

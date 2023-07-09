@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { memo } from 'memofunc';
 
 import {
   type AnimeSystem,
@@ -28,7 +29,8 @@ export interface AnimeGardenOptions extends PluginEntry {
 
 export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   const provider = options.provider ?? 'webtorrent';
-  const getClient = useSingleton((system: AnimeSystem) => {
+  const getClient = memo((system: AnimeSystem) => {
+    // Memory leak here
     const client = makeClient(provider, system, options);
     onDeath(async () => {
       await client.close();
@@ -131,23 +133,6 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           logger.error(error);
         }
       }
-    }
-  };
-}
-
-function useSingleton<T extends unknown, F extends (...args: any[]) => T>(
-  fn: F
-): F {
-  let flag = false;
-  let cache: T | undefined = undefined;
-  // @ts-ignore
-  return (...args: any[]) => {
-    if (flag) {
-      return cache;
-    } else {
-      cache = fn(...args);
-      flag = true;
-      return cache;
     }
   };
 }

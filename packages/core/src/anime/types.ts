@@ -1,3 +1,5 @@
+import type { AnimePlanType } from '../space';
+
 export interface LocalLibrary {
   title: string;
 
@@ -12,6 +14,8 @@ export interface LocalVideo {
   filename: string;
 
   naming: 'auto' | 'manual';
+
+  type?: AnimePlanType;
 
   fansub?: string;
 

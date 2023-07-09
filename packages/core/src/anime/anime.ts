@@ -161,7 +161,8 @@ export class Anime {
   }
 
   // --- format ---
-  private get format() {
+  private format(type?: string) {
+    type ??= this.plan.type;
     switch (this.plan.type) {
       case '电影':
         return this.space.preference.format.film;
@@ -180,7 +181,7 @@ export class Anime {
       const season = video.season ?? this._lib?.season ?? this.plan.season;
       const episode = this.resolveEpisode(video.episode);
 
-      return formatTitle(this.format, {
+      return formatTitle(this.format(), {
         title,
         yyyy: format(date, 'yyyy'),
         MM: format(date, 'MM'),
@@ -200,7 +201,7 @@ export class Anime {
     const season = meta.season ?? this._lib?.season ?? this.plan.season;
     const episode = this.resolveEpisode(meta.episode);
 
-    return formatTitle(this.format, {
+    return formatTitle(this.format(meta.type), {
       title,
       yyyy: format(date, 'yyyy'),
       mm: format(date, 'MM'),

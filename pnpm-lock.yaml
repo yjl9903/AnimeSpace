@@ -131,6 +131,9 @@ importers:
       libaria2:
         specifier: ^1.0.95
         version: 1.0.95(debug@4.3.4)
+      memofunc:
+        specifier: ^0.0.5
+        version: 0.0.5
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
@@ -287,6 +290,9 @@ importers:
       anitomy:
         specifier: ^0.0.24
         version: 0.0.24
+      memofunc:
+        specifier: ^0.0.5
+        version: 0.0.5
 
 packages:
 
@@ -5509,6 +5515,10 @@ packages:
     resolution: {integrity: sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==}
     engines: {node: '>= 0.6'}
     dev: true
+
+  /memofunc@0.0.5:
+    resolution: {integrity: sha512-9XT4U8FRkhrmcrcmKxcVOQiNSmNfxkw2LBoltBzNGF4MgbZK4TK7YhdWkRJK6rs9bSB3+n+/t4fG9g2Jbuw+Yg==}
+    dev: false
 
   /memory-chunk-store@1.3.5:
     resolution: {integrity: sha512-E1Xc1U4ifk/FkC2ZsWhCaW1xg9HbE/OBmQTLe2Tr9c27YPSLbW7kw1cnb3kQWD1rDtErFJHa7mB9EVrs7aTx9g==}
