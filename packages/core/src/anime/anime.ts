@@ -240,7 +240,7 @@ export class Anime {
       if (src !== dst) {
         // Trash the existed destination file, not overwrite
         if (await fs.exists(dst)) {
-          await trash(dst);
+          await trash(dst).catch(() => {});
         }
 
         if (copy) {
@@ -314,7 +314,9 @@ export class Anime {
     const videoPath = path.join(this.directory, target.filename);
     if (await fs.exists(videoPath)) {
       try {
-        await trash(videoPath);
+        await trash(videoPath).catch(async err => {
+          await fs.remove(videoPath);
+        });
         remove();
       } catch (error) {
         console.error(error);
