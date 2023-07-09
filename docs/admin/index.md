@@ -1,16 +1,18 @@
 # 配置
 
-AnimeSpace 默认使用 `~/.animespace/` （或者 `ANIMEPASTE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
+AnimeSpace 默认使用 `~/.animespace/` （或者 `ANIMESPACE_ROOT` 环境变量）作为工作目录，储存所有配置文件，动画数据库和视频资源。
 
-安装完成后，你必须运行
+安装完成后，你必须运行初始化工作目录。
 
 ```bash
 anime space
 ```
 
-初始化工作目录。
+> 如果我们共享相似喜好，你可以直接使用我的[配置目录](https://github.com/yjl9903/.animespace)。
+>
+> 注意: 克隆仓库后修改动画的存储位置。
 
-## 目录结构
+## 全局配置目录
 
 ```text
 ~/.animespace/
@@ -22,9 +24,6 @@ anime space
   │      ├─ 相合之物 - S01E01.mp4
   │      ├─ 相合之物 - S01E02.mp4
   │      └─ 相合之物 - S01E03.mp4
-  ├── cache/                     # Videos cache
-  │   ├─ xxx.mp4
-  │   └─ yyy.mp4
   └── anime.yaml                # AnimeSpace config file
 ```
 
@@ -33,23 +32,42 @@ anime space
 该文件位于：`~/.animespace/anime.yaml`。
 
 ```yaml
+# ~/.animespace/anime.yaml
+
+storage: ./anime
+
+preference:
+  format:
+    anime: '{title}'
+    episode: '[{fansub}] {title} - E{ep}.{extension}'
+    film: '[{fansub}] {title}.{extension}'
+    ova: '[{fansub}] {title}.{extension}'
+  extension:
+    include: [mp4, mkv]
+    exclude: []
+  keyword:
+    order:
+      format: [mp4, mkv]
+      resolution: ['1080', '720']
+      language: ['简', '繁']
+    exclude: []
+  fansub:
+    order: []
+    exclude: []
+
 plans:
-  - ./plans/2022-7.yaml
+  - ./plans/*.yaml
 
-sync:
-  local: true
-  # remote:
-  #   baseURL: http://localhost:8788/
-  #   token: ''
+plugins:
+  - name: animegarden
+    provider: aria2
 
-store:
-  local: # Local anime store
-    anime: ./anime
-    cache: ./cache
-  ali:   # Ali OSS config
-    accessKeyId: ''
-    accessKeySecret: ''
-    regionId: 'cn-shanghai'
+  - name: local
+    introspect: true
+    refresh: true
+
+  - name: bangumi
+    username: '603937'
 ```
 
 ## 放映计划配置

@@ -21,7 +21,7 @@ All the bangumi resources are automatically collected and downloaded from [動�
 
 ![Jellyfin](./docs/public/Jellyfin.jpeg)
 
-## Installation and Deploy
+## Installation
 
 > **Prerequisite**
 >
@@ -51,6 +51,8 @@ anime bangumi generate --fansub --create "<plan filename>.yaml"
 ```
 
 See [放映计划 | AnimeSpace](https://anime.docs.xlorpaste.cn/admin/plan.html) to get more details.
+
+Alternatively, if you share similiar interests in animation with me, you can just clone my [.animespace](https://github.com/yjl9903/.animespace) config space directory.
 
 ### Download anime resources
 

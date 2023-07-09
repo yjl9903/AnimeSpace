@@ -1,75 +1,73 @@
-# AnimeSpace 命令行程序
+# :tv: AnimeSpace
 
-This is the command line application package for managing [AnimeSpace](https://github.com/yjl9903/AnimeSpace).
+<p align="center">「 你所热爱的就是你的动画 」</p>
 
-## 全局配置目录
+[![version](https://img.shields.io/npm/v/animespace?label=AnimeSpace)](https://www.npmjs.com/package/animespace) [![CI](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml/badge.svg)](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml) [![Docs](https://img.shields.io/badge/AnimeSpace-Demo-brightgreen)](https://anime.docs.xlorpaste.cn/) [![license](https://img.shields.io/github/license/yjl9903/AnimeSpace)](./LICENSE)
 
-```text
-~/.animespace/
-  ├── plans/                     # Plans folder
-  │   ├─ 2022-04.yml
-  │   └─ 2022-07.yml
-  ├── anime/                     # Anime store
-  │   └─ 相合之物
-  │      ├─ 相合之物 - S01E01.mp4
-  │      ├─ 相合之物 - S01E02.mp4
-  │      └─ 相合之物 - S01E03.mp4
-  └── anime.yaml                # AnimeSpace config file
-```
+Paste your favourite anime online.
 
-### 全局配置示例
+AnimeSpace is yet another complete **solution** for **automatically following bangumis**.
+
+All the bangumi resources are automatically collected and downloaded from [動漫花園](https://share.dmhy.org/). **Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.**
+
++ 📖 [中文文档](https://anime.docs.xlorpaste.cn/)
++ 📚 [部署博客](https://blog.onekuma.cn/alidriver-alist-rclone-animepaste)
+
+## Features
+
++ :gear: **Automatically** collect, download and organize anime resources
++ :construction_worker_man: **Scrape anime metadata** from [Bangumi 番组计划](https://bangumi.tv/) and generate NFO file (WIP)
++ :film_strip: **Support any media server** including [Infuse](https://firecore.com/infuse), [Plex](https://www.plex.tv/), [Jellyfin](https://github.com/jellyfin/jellyfin), [Kodi](https://kodi.tv/) and so on...
+
+![Jellyfin](./docs/public/Jellyfin.jpeg)
+
+## Installation and Deploy
+
+> **Prerequisite**
+>
+> Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
+
+See [部署 | AnimeSpace](https://anime.docs.xlorpaste.cn/deploy/) and [安装 CLI | AnimeSpace](https://anime.docs.xlorpaste.cn/admin/).
+
+## Usage
+
+### Prepare anime plan
+
+It supports to scrape the following list from [Bangumi 番组计划](https://bangumi.tv/).
+
+First, ensure that you can config the Bangumi ID in your `anime.yaml`.
 
 ```yaml
-# ~/.animespace/anime.yaml
-
-storage: ./anime
-
-preference:
-  format:
-    anime: '{title}'
-    episode: '[{fansub}] {title} - E{ep}.{extension}'
-    film: '[{fansub}] {title}.{extension}'
-    ova: '[{fansub}] {title}.{extension}'
-  extension:
-    include: [mp4, mkv]
-    exclude: []
-  keyword:
-    order:
-      format: [mp4, mkv]
-      resolution: ['1080', '720']
-      language: ['简', '繁']
-    exclude: []
-  fansub:
-    order: []
-    exclude: []
-
-plans:
-  - ./plans/*.yaml
-
 plugins:
-  - name: animegarden
-    provider: aria2
-
-  - name: local
-    introspect: true
-    refresh: true
-
+  # ...
   - name: bangumi
-    username: '603937'
+    username: '603937' # <- You Bangumi ID
 ```
 
-### 放映计划
+Second, just the following simple command.
 
-你需要讲所有的放映计划配置文件放置在 `./plans/` 目录下（根据上面的默认配置）。
+```bash
+anime bangumi generate --fansub --create "<plan filename>.yaml"
+```
 
-配置方式见 [放映计划](./plan)。
+See [放映计划 | AnimeSpace](https://anime.docs.xlorpaste.cn/admin/plan.html) to get more details.
 
-## 使用
+### Download anime resources
 
-Make sure you have setup above configs, and then
+Just run the following simple command.
 
 ```bash
 anime refresh
 ```
 
-It will automatically search the resources, download, and organize them based on the plan set in your config.
+## Credits
+
++ **[動漫花園](https://share.dmhy.org/) and all the fansubs**
++ [Bangumi 番组计划](https://bangumi.tv/) provides a platform for sharing anything about ACG
++ [Bangumi Data](https://github.com/bangumi-data/bangumi-data) collects the infomation of animes
++ [aria2](能干猫今天也忧郁) and [WebTorrent](https://webtorrent.io/) provide the ability to download magnet links
++ [Anime Tracker List](https://github.com/DeSireFire/animeTrackerList) collects trackers for downloading bangumi resources
+
+## License
+
+AGPL-3.0 License © 2023 [XLor](https://github.com/yjl9903)

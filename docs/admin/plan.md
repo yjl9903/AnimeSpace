@@ -1,7 +1,7 @@
 # 放映计划
 
 ```yaml
-# ~/.animepaste/plans/2022-4.yaml
+# ~/.animespace/plans/2022-4.yaml
 
 name: '2022 年 4 月新番'
 
