@@ -4,6 +4,8 @@ title: 介绍
 
 # AnimeSpace
 
+> 👷‍♂️ 文档为旧版 AnimePaste 内容，尚未更新新版文档。
+
 Paste your favourite anime online.
 
 AnimeSpace 是另一个全自动追番工具。
