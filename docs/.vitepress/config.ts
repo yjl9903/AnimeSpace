@@ -30,7 +30,7 @@ export default defineConfig({
     nav: [
       { text: '部署', link: '/deploy/' },
       { text: '管理', link: '/admin/' },
-      { text: '体验', link: 'https://anime.xlorpaste.cn' }
+      { text: '体验', link: 'https://github.com/yjl9903/AnimeSpace' }
     ],
     sidebar: {
       '/': [
@@ -52,14 +52,6 @@ export default defineConfig({
             {
               text: '集成媒体库软件',
               link: '/deploy/jellyfin'
-            },
-            {
-              text: '使用 OSS',
-              link: '/deploy/oss'
-            },
-            {
-              text: '部署 Cloudflare Pages',
-              link: '/deploy/cloudflare'
             }
           ]
         },

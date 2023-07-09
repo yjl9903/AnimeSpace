@@ -1,30 +1,8 @@
-# AnimeSpace CLI
-
-<p align="center">「 你所热爱的就是你的动画 」</p>
-
-[![version](https://img.shields.io/npm/v/animepaste?color=rgb%2850%2C203%2C86%29&label=AnimePaste)](https://www.npmjs.com/package/animepaste)
-
-Paste your favourite anime online.
-
-AnimeSpace is yet another solution for automatically downloading bangumis.
+# AnimeSpace 命令行程序
 
 This is the command line application package for managing [AnimeSpace](https://github.com/yjl9903/AnimeSpace).
 
-AnimeSpace includes **an admin command-line application** to config what bangumis and how to download and **a builtin web application** to view bangumis which can also be deployed on [Cloudflare Pages](https://pages.cloudflare.com/). It also support download resource for the media library software like [Jellyfin](https://github.com/jellyfin/jellyfin) and so on.
-
-All the bangumi resource is automatically fetched from [動漫花園](https://share.dmhy.org/). Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.
-
-+ 📺 [Online Demo | 在线 Demo](https://anime.xlorpaste.cn/)
-+ 📖 [Document | 文档](https://anime.docs.xlorpaste.cn/)
-
-## Features
-
-+ Download videos from [動漫花園](https://share.dmhy.org/).
-+ Upload videos to [阿里云 - 视频点播](https://www.aliyun.com/product/vod).
-+ Organizing your videos locally.
-+ Interact with [AnimePaste](https://anime.xlorpaste.cn).
-
-## Directory structure
+## 全局配置目录
 
 ```text
 ~/.animespace/
@@ -36,59 +14,62 @@ All the bangumi resource is automatically fetched from [動漫花園](https://sh
   │      ├─ 相合之物 - S01E01.mp4
   │      ├─ 相合之物 - S01E02.mp4
   │      └─ 相合之物 - S01E03.mp4
-  ├── cache/                     # Videos cache
-  │   ├─ xxx.mp4
-  │   └─ yyy.mp4
   └── anime.yaml                # AnimeSpace config file
 ```
 
-### Config
-
-Global config:
+### 全局配置示例
 
 ```yaml
-# ~/.animespace/config.yaml
+# ~/.animespace/anime.yaml
 
-plans: ./plans/*.yaml
+storage: ./anime
 
-store:
-  local: # Local anime store
-    anime: ./anime
-    cache: ./cache
-  ali:   # Ali OSS config
-    accessKeyId: ''
-    accessKeySecret: ''
-    regionId: 'cn-shanghai'
+preference:
+  format:
+    anime: '{title}'
+    episode: '[{fansub}] {title} - E{ep}.{extension}'
+    film: '[{fansub}] {title}.{extension}'
+    ova: '[{fansub}] {title}.{extension}'
+  extension:
+    include: [mp4, mkv]
+    exclude: []
+  keyword:
+    order:
+      format: [mp4, mkv]
+      resolution: ['1080', '720']
+      language: ['简', '繁']
+    exclude: []
+  fansub:
+    order: []
+    exclude: []
+
+plans:
+  - ./plans/*.yaml
+
+plugins:
+  - name: animegarden
+    provider: aria2
+
+  - name: local
+    introspect: true
+    refresh: true
+
+  - name: bangumi
+    username: '603937'
 ```
 
-Plan config:
+### 放映计划
 
-```yaml
-# ~/.animespace/plans/2022-04.yaml
+你需要讲所有的放映计划配置文件放置在 `./plans/` 目录下（根据上面的默认配置）。
 
-name: '2022 年 4 月新番'
+配置方式见 [放映计划](./plan)。
 
-date: '2022-04-01 00:00'
-
-status: onair
-
-onair:
-  - title: 相合之物
-    bgm: '333664'
-    fansub:
-      - Lilith-Raws
-```
-
-## Usage
+## 使用
 
 Make sure you have setup above configs, and then
 
 ```bash
-anime watch
+anime refresh
 ```
 
-It will automatically search the resources, download, and upload them to OSS based on the plan set in your config.
-
-## License
-
-AGPL-3.0 License © 2023 [XLor](https://github.com/yjl9903)
+It will automatically search the resources, download, and organize them based on the plan set in your config.
