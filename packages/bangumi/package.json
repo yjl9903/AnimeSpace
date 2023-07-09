@@ -46,6 +46,9 @@
     "bgmc": "^0.0.4",
     "undici": "^5.22.1"
   },
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  },
   "engines": {
     "node": ">=v16.0.0"
   }
