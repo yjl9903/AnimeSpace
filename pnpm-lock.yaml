@@ -87,8 +87,8 @@ importers:
         specifier: ^0.16.4
         version: 0.16.4(vite@4.4.6)(workbox-build@7.0.0)(workbox-window@7.0.0)
       vitepress:
-        specifier: 1.0.0-beta.5
-        version: 1.0.0-beta.5(@algolia/client-search@4.19.1)(@types/node@20.4.3)(search-insights@2.7.0)
+        specifier: 1.0.0-beta.6
+        version: 1.0.0-beta.6(@algolia/client-search@4.19.1)(@types/node@20.4.3)(search-insights@2.7.0)
       workbox-window:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2884,17 +2884,6 @@ packages:
   /@vercel/ncc@0.36.1:
     resolution: {integrity: sha512-S4cL7Taa9yb5qbv+6wLgiKVZ03Qfkc4jGRuiUQMQ8HGBD5pcNRnHeYM33zBvJE4/zJGjJJ8GScB+WmTsn9mORw==}
     hasBin: true
-    dev: true
-
-  /@vitejs/plugin-vue@4.2.3(vite@4.4.0-beta.3)(vue@3.3.4):
-    resolution: {integrity: sha512-R6JDUfiZbJA9cMiguQ7jxALsgiprjBeHL5ikpXfJCH62pPHtI+JdJ5xWj6Ev73yXSlYl86+blXn1kZHQ7uElxw==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    peerDependencies:
-      vite: ^4.0.0
-      vue: ^3.2.25
-    dependencies:
-      vite: 4.4.0-beta.3(@types/node@20.4.3)
-      vue: 3.3.4
     dev: true
 
   /@vitejs/plugin-vue@4.2.3(vite@4.4.6)(vue@3.3.4):
@@ -7454,42 +7443,6 @@ packages:
       - supports-color
     dev: true
 
-  /vite@4.4.0-beta.3(@types/node@20.4.3):
-    resolution: {integrity: sha512-IC/thYTvArOFRJ4qvvudnu4KKZOVc+gduS3I9OfC5SbP/Rf4kkP7z6Of2QpKeOSVqwIK24khW6VOUmVD/0yzSQ==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      lightningcss: ^1.21.0
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      lightningcss:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 20.4.3
-      esbuild: 0.18.13
-      postcss: 8.4.26
-      rollup: 3.26.2
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /vite@4.4.6(@types/node@20.4.3):
     resolution: {integrity: sha512-EY6Mm8vJ++S3D4tNAckaZfw3JwG3wa794Vt70M6cNJ6NxT87yhq7EC8Rcap3ahyHdo8AhCmV9PTk+vG1HiYn1A==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -7526,13 +7479,13 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress@1.0.0-beta.5(@algolia/client-search@4.19.1)(@types/node@20.4.3)(search-insights@2.7.0):
-    resolution: {integrity: sha512-/RjqqRsSEKkzF6HhK5e5Ij+bZ7ETb9jNCRRgIMm10gJ+ZLC3D1OqkE465lEqCeJUgt2HZ6jmWjDqIBfrJSpv7w==}
+  /vitepress@1.0.0-beta.6(@algolia/client-search@4.19.1)(@types/node@20.4.3)(search-insights@2.7.0):
+    resolution: {integrity: sha512-xK/ulKgQpKZVbvlL4+/vW49VG7ySi5nmSoKUNH1G4kM+Cj9JwYM+PDJO7jSJROv8zW99G0ise+maDYnaLlbGBQ==}
     hasBin: true
     dependencies:
       '@docsearch/css': 3.5.1
       '@docsearch/js': 3.5.1(@algolia/client-search@4.19.1)(search-insights@2.7.0)
-      '@vitejs/plugin-vue': 4.2.3(vite@4.4.0-beta.3)(vue@3.3.4)
+      '@vitejs/plugin-vue': 4.2.3(vite@4.4.6)(vue@3.3.4)
       '@vue/devtools-api': 6.5.0
       '@vueuse/core': 10.2.1(vue@3.3.4)
       '@vueuse/integrations': 10.2.1(focus-trap@7.5.2)(vue@3.3.4)
@@ -7541,7 +7494,7 @@ packages:
       mark.js: 8.11.1
       minisearch: 6.1.0
       shiki: 0.14.3
-      vite: 4.4.0-beta.3(@types/node@20.4.3)
+      vite: 4.4.6(@types/node@20.4.3)
       vue: 3.3.4
     transitivePeerDependencies:
       - '@algolia/client-search'
