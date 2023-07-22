@@ -42,6 +42,23 @@ export type Preference = z.infer<typeof Preference>;
 
 export const RawAnimeSpaceSchema = z.object({
   storage: z.string().default(DefaultStorageDirectory),
+  library: z
+    .union([
+      z
+        .string()
+        .transform(directory => ({ mode: 'embedded', directory } as const)),
+      z.object({
+        mode: z.enum(['embedded', 'external']).default('embedded'),
+        dircectory: z.string().optional()
+      })
+    ])
+    .default({ mode: 'embedded' })
+    .transform(lib => {
+      if (lib.mode === 'external' && lib.dircectory) {
+        return { mode: 'external' as const, directory: lib.dircectory };
+      }
+      return { mode: 'embedded' as const };
+    }),
   preference: Preference.passthrough(),
   plans: StringArray,
   plugins: z.array(PluginEntry)
@@ -53,6 +70,10 @@ export interface AnimeSpace {
   readonly root: string;
 
   readonly storage: string;
+
+  readonly library:
+    | { mode: 'embedded' }
+    | { mode: 'external'; directory: string };
 
   readonly preference: Preference;
 

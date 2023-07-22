@@ -19,10 +19,12 @@ import type {
 
 import { stringifyLocalLibrary } from './utils';
 
-const MetadataFilename = 'metadata.yaml';
+const LibraryFilename = 'library.yaml';
 
 export class Anime {
   public readonly directory: string;
+
+  public readonly libraryDirectory: string;
 
   public readonly plan: AnimePlan;
 
@@ -48,6 +50,11 @@ export class Anime {
     this.directory = plan.directory
       ? path.resolve(space.storage, plan.directory)
       : path.join(space.storage, dirname);
+    this.libraryDirectory = space.library.mode === 'embedded'
+      ? this.directory
+      : plan.directory
+      ? path.resolve(space.library.directory, plan.directory)
+      : path.join(space.library.directory, dirname);
   }
 
   public dirty() {
@@ -69,13 +76,13 @@ export class Anime {
   }
 
   public get libraryPath() {
-    return path.join(this.directory, MetadataFilename);
+    return path.join(this.libraryDirectory, LibraryFilename);
   }
 
   public async library(force = false): Promise<LocalLibrary> {
     if (this._lib === undefined || force) {
       await fs.ensureDir(this.directory);
-      const libPath = path.join(this.directory, MetadataFilename);
+      const libPath = this.libraryPath;
 
       if (await fs.exists(libPath)) {
         // Mark as unmodified

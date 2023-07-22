@@ -47,13 +47,23 @@ export async function loadSpace(
       storage: z
         .string()
         .default(DefaultStorageDirectory)
-        .transform((s) => path.resolve(root, s))
+        .transform(s => path.resolve(root, s))
     })
   );
-  const parsed = schema.safeParse(config);
 
+  // Parse load config
+  const parsed = schema.safeParse(config);
   if (parsed.success) {
     const space = parsed.data as RawAnimeSpace;
+
+    // Resolve directory to absolute path
+    {
+      space.storage = path.resolve(root, space.storage);
+      if (space.library.mode === 'external') {
+        space.library.directory = path.resolve(root, space.library.directory);
+      }
+    }
+
     // Validate space directory
     await validateSpace(root, space);
 
@@ -91,7 +101,7 @@ export async function loadSpace(
       const parsed = z.array(PluginEntry).safeParse(entries);
       if (parsed.success) {
         const entries = parsed.data;
-        return (await Promise.all(entries.map((p) => resolvePlugin(p)))).filter(
+        return (await Promise.all(entries.map(p => resolvePlugin(p)))).filter(
           Boolean
         ) as Plugin[];
       } else {
@@ -112,6 +122,9 @@ export async function loadSpace(
     }
   }
 
+  /**
+   * Load space from root or create a new space directory
+   */
   async function loadSpace() {
     const configPath = path.join(root, DefaultConfigFilename);
     if ((await fs.exists(root)) && (await fs.exists(configPath))) {
@@ -126,12 +139,14 @@ export async function loadSpace(
 }
 
 async function validateSpace(root: string, space: RawAnimeSpace) {
+  // Validate anime space directory
   try {
     await fs.access(root, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
-    throw new AnimeSystemError(`Can not access anime space directory`);
+    throw new AnimeSystemError(`Can not access anime space directory ${root}`);
   }
 
+  // Validate anime storage directory
   try {
     await fs.access(space.storage, fs.constants.R_OK | fs.constants.W_OK);
   } catch {
@@ -139,25 +154,52 @@ async function validateSpace(root: string, space: RawAnimeSpace) {
       await fs.mkdir(space.storage, { recursive: true });
     } catch {
       throw new AnimeSystemError(
-        `Can not access local anime storage directory`
+        `Can not access local anime storage directory ${space.storage}`
       );
     }
   }
 
-  // Create a symlin from the outside storage dir to the local dir
-  // Make it easy to edit the storage dir
+  // Create a symlink from the outside storage dir to the local dir
+  // Example: Z:/path/to/animes/ -> $ANIMESPACE_ROOT/animes/
   try {
     if (!isSubDir(root, space.storage)) {
       const dirname = path.basename(space.storage);
       const target = path.join(root, dirname);
-      if (
-        !(await fs.pathExists(target))
-        || (await fs.readdir(target)).length === 0
-      ) {
-        fs.symlink(space.storage, target);
+      if (!(await fs.pathExists(target))) {
+        // Target dir does not exist, create a new symblink
+        await fs.symlink(space.storage, target);
+      } else {
+        // Target dir is a symlink, check whether it is the wanted dir
+        const stat = await fs.lstat(target);
+        if (stat.isSymbolicLink()) {
+          const value = await fs.readlink(target);
+          if (value !== space.storage) {
+            // Recreate symlink when they are not matched
+            await fs.remove(target);
+            await fs.symlink(space.storage, target);
+          }
+        }
       }
     }
   } catch {}
+
+  if (space.library.mode === 'external') {
+    console.log('Lib', space.library);
+    try {
+      await fs.access(
+        space.library.directory,
+        fs.constants.R_OK | fs.constants.W_OK
+      );
+    } catch {
+      try {
+        await fs.mkdir(space.library.directory, { recursive: true });
+      } catch {
+        throw new AnimeSystemError(
+          `Can not access local anime external library directory ${space.library.directory}`
+        );
+      }
+    }
+  }
 
   return true;
 }
@@ -165,6 +207,7 @@ async function validateSpace(root: string, space: RawAnimeSpace) {
 async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
   const space: RawAnimeSpace = {
     storage: path.join(root, DefaultStorageDirectory),
+    library: { mode: 'embedded' },
     preference: {
       format: {
         anime: DefaultAnimeFormat,

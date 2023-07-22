@@ -39,7 +39,10 @@ describe('Load Space', () => {
         }
       },
       root,
-      storage: path.join(root, 'anime')
+      storage: path.join(root, 'anime'),
+      library: {
+        mode: 'embedded'
+      }
     });
     expect(await space.plans()).toEqual([
       {
