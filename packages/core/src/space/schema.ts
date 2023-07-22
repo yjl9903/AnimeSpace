@@ -46,16 +46,16 @@ export const RawAnimeSpaceSchema = z.object({
     .union([
       z
         .string()
-        .transform(directory => ({ mode: 'embedded', directory } as const)),
+        .transform(directory => ({ mode: 'external' as const, directory })),
       z.object({
         mode: z.enum(['embedded', 'external']).default('embedded'),
-        dircectory: z.string().optional()
+        directory: z.string().optional()
       })
     ])
     .default({ mode: 'embedded' })
     .transform(lib => {
-      if (lib.mode === 'external' && lib.dircectory) {
-        return { mode: 'external' as const, directory: lib.dircectory };
+      if (lib.mode === 'external' && lib.directory) {
+        return { mode: 'external' as const, directory: lib.directory };
       }
       return { mode: 'embedded' as const };
     }),

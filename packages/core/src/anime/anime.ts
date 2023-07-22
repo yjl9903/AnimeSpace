@@ -81,7 +81,7 @@ export class Anime {
 
   public async library(force = false): Promise<LocalLibrary> {
     if (this._lib === undefined || force) {
-      await fs.ensureDir(this.directory);
+      await fs.ensureDir(this.libraryDirectory);
       const libPath = this.libraryPath;
 
       if (await fs.exists(libPath)) {

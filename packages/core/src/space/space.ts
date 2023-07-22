@@ -184,7 +184,6 @@ async function validateSpace(root: string, space: RawAnimeSpace) {
   } catch {}
 
   if (space.library.mode === 'external') {
-    console.log('Lib', space.library);
     try {
       await fs.access(
         space.library.directory,
