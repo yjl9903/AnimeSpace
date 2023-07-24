@@ -141,8 +141,8 @@ importers:
         specifier: ^5.22.1
         version: 5.22.1
       webtorrent:
-        specifier: ^2.1.13
-        version: 2.1.13
+        specifier: ^2.1.15
+        version: 2.1.15
       zod:
         specifier: ^3.21.4
         version: 3.21.4
@@ -3423,8 +3423,8 @@ packages:
     resolution: {integrity: sha512-VyLcUjVMEOdSpHaCG/7odvCdLbAB1y3l9A2V6WIje24uV7FkJPrQrH/RrlFmKxP89pFVDEnE+YlHaFujlFIZsg==}
     dev: false
 
-  /bittorrent-protocol@4.1.7:
-    resolution: {integrity: sha512-z5JKH67pkwvjg+amwDe9cLP5kw0+bdEJqF/B95bM3Vbt+m7pE5ezXhoLAnSrYAvW2U+Q5Vd5tc2BrxakC22f/A==}
+  /bittorrent-protocol@4.1.8:
+    resolution: {integrity: sha512-zWH6KEfxXk8dYC0n4+hkA8xozWvzSwdPurHZ/huTvRml20llrpVfV6qug+v0Da9HO5kZy+eyGJ93Q8rVT+MpgQ==}
     engines: {node: '>=12.20.0'}
     dependencies:
       bencode: 3.0.3
@@ -3893,8 +3893,8 @@ packages:
     resolution: {integrity: sha512-PXHBvGLuL69u55IkLa5e5838fLhIMHxmkV4ge42a8alGyn7BtawYgI0hQ849EedvtHIOLNNH3i6eQU1BiE9SUA==}
     dev: false
 
-  /create-torrent@6.0.11:
-    resolution: {integrity: sha512-ZOme7/NFFS0b9IJRS6NkCz2BiUKjwnDPXBoxWpWjakQjzOcmBsYBlkJ7IxrfyFFpVmUK9Sew/d1ozETaye7xmw==}
+  /create-torrent@6.0.12:
+    resolution: {integrity: sha512-UlPIttGpGhcoF3rW2NeSCr/t+Qr5bfXc6Bn/fFPeks9345LTU9OEv3yevllluFkEjF5oi7Q591Hxv8kmajNEXQ==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
@@ -3903,7 +3903,7 @@ packages:
       fast-readable-async-iterator: 1.1.1
       is-file: 1.0.0
       join-async-iterator: 1.1.1
-      junk: 3.1.0
+      junk: 4.0.1
       minimist: 1.2.8
       once: 1.4.0
       piece-length: 2.0.1
@@ -5279,9 +5279,9 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /junk@3.1.0:
-    resolution: {integrity: sha512-pBxcB3LFc8QVgdggvZWyeys+hnrNWg4OcZIU/1X59k5jQdLBlCsYGRQaz234SqoRLTCgMH00fY0xRJH+F9METQ==}
-    engines: {node: '>=8'}
+  /junk@4.0.1:
+    resolution: {integrity: sha512-Qush0uP+G8ZScpGMZvHUiRfI0YBWuB3gVBYlI0v0vvOJt5FLicco+IkP0a50LqTTQhmts/m6tP5SWE+USyIvcQ==}
+    engines: {node: '>=12.20'}
     dev: false
 
   /k-bucket@5.1.0:
@@ -5703,6 +5703,7 @@ packages:
 
   /napi-macros@2.2.2:
     resolution: {integrity: sha512-hmEVtAGYzVQpCKdbQea4skABsdXW4RUh5t5mJ2zzqowJS2OyXZTU1KhDVFhx+NlWZ4ap9mqR9TcDO3LTTttd+g==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -5736,6 +5737,7 @@ packages:
   /node-gyp-build@4.6.0:
     resolution: {integrity: sha512-NTZVKn9IylLwUzaKjkas1e4u2DLNcV4rdYagA4PWdPwW87Bi7z+BznyKSRwS/761tV/lzCGXplWsiaMjLqP2zQ==}
     hasBin: true
+    requiresBuild: true
     dev: false
 
   /node-releases@2.0.13:
@@ -6768,6 +6770,7 @@ packages:
 
   /string_decoder@1.3.0:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
+    requiresBuild: true
     dependencies:
       safe-buffer: 5.2.1
 
@@ -6875,6 +6878,7 @@ packages:
 
   /timeout-refresh@1.0.3:
     resolution: {integrity: sha512-Mz0CX4vBGM5lj8ttbIFt7o4ZMxk/9rgudJRh76EvB7xXZMur7T/cjRiH2w4Fmkq0zxf2QpM8IFvOSRn8FEu3gA==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -6920,8 +6924,11 @@ packages:
       - supports-color
     dev: false
 
-  /torrent-piece@2.0.1:
-    resolution: {integrity: sha512-JLSOyvQVLI6JTWqioY4vFL0JkEUKQcaHQsU3loxkCvPTSttw8ePs2tFwsP4XIjw99Fz8EdOzt/4faykcbnPbCQ==}
+  /torrent-piece@3.0.0:
+    resolution: {integrity: sha512-j0tRX7qq22nIuVFF57Tg/wAvFq79F1eM9pcMxY+b0qCCe7yXJnIrqF+Q5YEJ94tNisDnJzcqDHNrPmD9X/yAIg==}
+    engines: {node: '>=12.20.0'}
+    dependencies:
+      uint8-util: 2.1.9
     dev: false
 
   /totalist@3.0.1:
@@ -7247,6 +7254,7 @@ packages:
 
   /unordered-set@2.0.1:
     resolution: {integrity: sha512-eUmNTPzdx+q/WvOHW0bgGYLWvWHNT3PTKEQLg0MAQhc0AHASHVHoP/9YytYd4RBVariqno/mEUhVZN98CmD7bg==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -7395,6 +7403,7 @@ packages:
 
   /uv-errors@1.0.4:
     resolution: {integrity: sha512-6hlu1s0O+t+PHEMgAIVb+JxOOIyc4RdYaKwtDNJNQp6R3uMMBjfrSYysHTVgX/o1QQ0tBucwm/pIAkiXEBLxTA==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -7643,8 +7652,8 @@ packages:
     resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
     dev: true
 
-  /webtorrent@2.1.13:
-    resolution: {integrity: sha512-cyf3hU+cU1RfIDg2lLaFAOqxgROxx24v2Ykug8WL72dMyxWcwJ+1yU6/nvsYkDYfiDEzmjvgL/TI25IE63SQ3g==}
+  /webtorrent@2.1.15:
+    resolution: {integrity: sha512-QdZgJrFbn98YYDTaXv4spL7es9MtJHamlkJsdLGoi2ZgJYVB2GBcARW/B5r1jEqDHhqW4r63MHpb0ZwYuVMYsQ==}
     engines: {node: '>=14'}
     dependencies:
       '@silentbot1/nat-api': 0.4.7
@@ -7653,11 +7662,11 @@ packages:
       addr-to-ip-port: 2.0.0
       bitfield: 4.1.0
       bittorrent-dht: 11.0.4
-      bittorrent-protocol: 4.1.7
+      bittorrent-protocol: 4.1.8
       cache-chunk-store: 3.2.2
       chunk-store-iterator: 1.0.3
       cpus: 1.0.3
-      create-torrent: 6.0.11
+      create-torrent: 6.0.12
       cross-fetch-ponyfill: 1.0.3
       debug: 4.3.4
       escape-html: 1.0.3
@@ -7681,7 +7690,7 @@ packages:
       streamx: 2.15.0
       throughput: 1.0.1
       torrent-discovery: 10.0.13
-      torrent-piece: 2.0.1
+      torrent-piece: 3.0.0
       uint8-util: 2.1.9
       unordered-array-remove: 1.0.2
       ut_metadata: 4.0.2
