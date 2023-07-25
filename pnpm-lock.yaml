@@ -14,8 +14,8 @@ importers:
   .:
     devDependencies:
       '@types/node':
-        specifier: ^20.4.4
-        version: 20.4.4
+        specifier: ^20.4.5
+        version: 20.4.5
       dprint:
         specifier: ^0.39.1
         version: 0.39.1
@@ -39,7 +39,7 @@ importers:
         version: 5.1.6
       vite:
         specifier: ^4.4.7
-        version: 4.4.7(@types/node@20.4.4)
+        version: 4.4.7(@types/node@20.4.5)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0
@@ -60,8 +60,8 @@ importers:
         specifier: ^1.1.18
         version: 1.1.18
       '@types/node':
-        specifier: ^20.4.4
-        version: 20.4.4
+        specifier: ^20.4.5
+        version: 20.4.5
       '@unocss/reset':
         specifier: ^0.53.6
         version: 0.53.6
@@ -82,13 +82,13 @@ importers:
         version: 0.25.1(rollup@2.79.1)(vue@3.3.4)
       vite:
         specifier: ^4.4.7
-        version: 4.4.7(@types/node@20.4.4)
+        version: 4.4.7(@types/node@20.4.5)
       vite-plugin-pwa:
         specifier: ^0.16.4
         version: 0.16.4(vite@4.4.7)(workbox-build@7.0.0)(workbox-window@7.0.0)
       vitepress:
         specifier: 1.0.0-beta.6
-        version: 1.0.0-beta.6(@algolia/client-search@4.19.1)(@types/node@20.4.4)(search-insights@2.7.0)
+        version: 1.0.0-beta.6(@algolia/client-search@4.19.1)(@types/node@20.4.5)(search-insights@2.7.0)
       workbox-window:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2535,7 +2535,7 @@ packages:
   /@types/bittorrent-protocol@3.1.2:
     resolution: {integrity: sha512-7k9nivNeG7Sc8wVuBs+XjBp2u7pH8tqW3BB93/SAg3xht/cZEK+Rqkj79xSyJqyj86eA0F6n85EKkkyGki8afg==}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
     dev: true
 
   /@types/chai-subset@1.3.3:
@@ -2551,7 +2551,7 @@ packages:
   /@types/cli-progress@3.11.0:
     resolution: {integrity: sha512-XhXhBv1R/q2ahF3BM7qT5HLzJNlIL0wbcGyZVjqOTqAybAnsLisd7gy1UCyIqpL+5Iv6XhlSyzjLCnI2sIdbCg==}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
     dev: true
 
   /@types/debug@4.1.8:
@@ -2572,19 +2572,19 @@ packages:
     resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
     dependencies:
       '@types/jsonfile': 6.1.1
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
     dev: true
 
   /@types/jsonfile@6.1.1:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
     dev: true
 
   /@types/magnet-uri@5.1.3:
     resolution: {integrity: sha512-FvJN1yYdLhvU6zWJ2YnWQ2GnpFLsA8bt+85WY0tLh6ehzGNrvBorjlcc53/zY43r/IKn+ctFs1nt7andwGnQCQ==}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
     dev: true
 
   /@types/ms@0.7.31:
@@ -2595,35 +2595,35 @@ packages:
     resolution: {integrity: sha512-GXZxEtOxYGFchyUzxvKI14iff9KZ2DI+A6a37o6EQevtg6uO9t+aUZKcaC1Te5Ng1OnLM7K9NVVj+FbecD9cJg==}
     dev: true
 
-  /@types/node@20.4.4:
-    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
+  /@types/node@20.4.5:
+    resolution: {integrity: sha512-rt40Nk13II9JwQBdeYqmbn2Q6IVTA5uPhvSO+JVqdXw/6/4glI6oR9ezty/A9Hg5u7JH4OmYmuQ+XvjKm0Datg==}
     dev: true
 
   /@types/parse-torrent-file@4.0.3:
     resolution: {integrity: sha512-dFkPnJPKiFWiGX+HXmyTVt2js3k0d9dThmUxX8nfGC22hbyZ5BTmetsEl45sQhHLcFo43njVrIKMXM3F1ahXRw==}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
     dev: true
 
   /@types/parse-torrent@5.8.4:
     resolution: {integrity: sha512-FdKs5yN5iYO5Cu9gVz1Zl30CbZe6HTsqloWmCf+LfbImgSzlsUkov2+npQWCQSQ3zi/a2G5C824K0UpZ2sRufA==}
     dependencies:
       '@types/magnet-uri': 5.1.3
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
       '@types/parse-torrent-file': 4.0.3
     dev: true
 
   /@types/prompts@2.4.4:
     resolution: {integrity: sha512-p5N9uoTH76lLvSAaYSZtBCdEXzpOOufsRjnhjVSrZGXikVGHX9+cc9ERtHRV4hvBKHyZb1bg4K+56Bd2TqUn4A==}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
       kleur: 3.0.3
     dev: true
 
   /@types/resolve@1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
     dev: true
 
   /@types/resolve@1.20.2:
@@ -2633,7 +2633,7 @@ packages:
   /@types/simple-peer@9.11.5:
     resolution: {integrity: sha512-haXgWcAa3Y3Sn+T8lzkE4ErQUpYzhW6Cz2lh00RhQTyWt+xZ3s87wJPztUxlqSdFRqGhe2MQIBd0XsyHP3No4w==}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
     dev: true
 
   /@types/trusted-types@2.0.3:
@@ -2647,7 +2647,7 @@ packages:
     resolution: {integrity: sha512-EJLsxMEcEjPXHcBqL6TRAbUwIpxAul5ULrXHJ0zwig7Oe70FS6dAzCWLq4MBafX3QrQG1DzGAS0fS8iJEOjD0g==}
     dependencies:
       '@types/bittorrent-protocol': 3.1.2
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
       '@types/parse-torrent': 5.8.4
       '@types/simple-peer': 9.11.5
     dev: true
@@ -2836,7 +2836,7 @@ packages:
       chokidar: 3.5.3
       fast-glob: 3.3.1
       magic-string: 0.30.1
-      vite: 4.4.7(@types/node@20.4.4)
+      vite: 4.4.7(@types/node@20.4.5)
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -2853,7 +2853,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.4.7(@types/node@20.4.4)
+      vite: 4.4.7(@types/node@20.4.5)
       vue: 3.3.4
     dev: true
 
@@ -5188,7 +5188,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: true
@@ -7383,7 +7383,7 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /vite-node@0.33.0(@types/node@20.4.4):
+  /vite-node@0.33.0(@types/node@20.4.5):
     resolution: {integrity: sha512-19FpHYbwWWxDr73ruNahC+vtEdza52kA90Qb3La98yZ0xULqV8A5JLNPUff0f5zID4984tW7l3DH2przTJUZSw==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -7393,7 +7393,7 @@ packages:
       mlly: 1.4.0
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.4.7(@types/node@20.4.4)
+      vite: 4.4.7(@types/node@20.4.5)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -7416,14 +7416,14 @@ packages:
       debug: 4.3.4
       fast-glob: 3.3.1
       pretty-bytes: 6.1.1
-      vite: 4.4.7(@types/node@20.4.4)
+      vite: 4.4.7(@types/node@20.4.5)
       workbox-build: 7.0.0
       workbox-window: 7.0.0
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite@4.4.7(@types/node@20.4.4):
+  /vite@4.4.7(@types/node@20.4.5):
     resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -7451,7 +7451,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
       esbuild: 0.18.16
       postcss: 8.4.27
       rollup: 3.26.3
@@ -7459,7 +7459,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitepress@1.0.0-beta.6(@algolia/client-search@4.19.1)(@types/node@20.4.4)(search-insights@2.7.0):
+  /vitepress@1.0.0-beta.6(@algolia/client-search@4.19.1)(@types/node@20.4.5)(search-insights@2.7.0):
     resolution: {integrity: sha512-xK/ulKgQpKZVbvlL4+/vW49VG7ySi5nmSoKUNH1G4kM+Cj9JwYM+PDJO7jSJROv8zW99G0ise+maDYnaLlbGBQ==}
     hasBin: true
     dependencies:
@@ -7474,7 +7474,7 @@ packages:
       mark.js: 8.11.1
       minisearch: 6.1.0
       shiki: 0.14.3
-      vite: 4.4.7(@types/node@20.4.4)
+      vite: 4.4.7(@types/node@20.4.5)
       vue: 3.3.4
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -7536,7 +7536,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.5
       '@types/chai-subset': 1.3.3
-      '@types/node': 20.4.4
+      '@types/node': 20.4.5
       '@vitest/expect': 0.33.0
       '@vitest/runner': 0.33.0
       '@vitest/snapshot': 0.33.0
@@ -7555,8 +7555,8 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.6.0
-      vite: 4.4.7(@types/node@20.4.4)
-      vite-node: 0.33.0(@types/node@20.4.4)
+      vite: 4.4.7(@types/node@20.4.5)
+      vite-node: 0.33.0(@types/node@20.4.5)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
