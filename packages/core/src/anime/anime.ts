@@ -127,9 +127,17 @@ export class Anime {
         if (parsed.success) {
           debug(parsed.data);
 
+          const videos = (lib?.videos ?? []).filter(Boolean);
+          // Set default naming 'auto'
+          for (const video of videos) {
+            if (!video.naming) {
+              video.naming = 'auto';
+            }
+          }
+
           return (this._lib = <LocalLibrary> {
             ...parsed.data,
-            videos: (lib?.videos ?? []).filter(Boolean)
+            videos
           });
         } else {
           debug(parsed.error.issues);
@@ -182,9 +190,8 @@ export class Anime {
   }
 
   public reformatVideoFilename(video: LocalVideo) {
-    const { naming = 'auto' } = video;
-    if (naming === 'auto') {
-      const title = this._lib?.title ?? this.plan.rewrite?.title
+    if (video.naming === 'auto') {
+      const title = this._raw_lib?.title ?? this.plan.rewrite?.title
         ?? this.plan.title;
       const date = video.date ?? this._lib?.date ?? this.plan.date;
       const season = video.season ?? this._lib?.season ?? this.plan.season;
@@ -205,7 +212,7 @@ export class Anime {
   }
 
   public formatFilename(meta: Partial<FormatOptions>) {
-    const title = this._lib?.title ?? this.plan.rewrite?.title
+    const title = this._raw_lib?.title ?? this.plan.rewrite?.title
       ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
     const season = meta.season ?? this._lib?.season ?? this.plan.season;
