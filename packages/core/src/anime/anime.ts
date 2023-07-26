@@ -182,7 +182,8 @@ export class Anime {
   }
 
   public reformatVideoFilename(video: LocalVideo) {
-    if (video.naming === 'auto') {
+    const { naming = 'auto' } = video;
+    if (naming === 'auto') {
       const title = this._lib?.title ?? this.plan.rewrite?.title
         ?? this.plan.title;
       const date = video.date ?? this._lib?.date ?? this.plan.date;

@@ -301,26 +301,25 @@ export async function runDownloadTask(
           extension: path.extname(file).slice(1) || 'mp4'
         });
 
-        // Remove old animegarden video to keep storage clean
-        {
-          // Resolve episode number
-          const resolvedEpisode = anime.resolveEpisode(video.video.episode);
-          const library = (await anime.library()).videos;
-          const oldVideo = library.find(
-            v =>
-              v.source.type === ANIMEGARDEN
-              && anime.resolveEpisode(v.episode) === resolvedEpisode // Find same episode after being resolved
-          );
-          if (oldVideo) {
-            multibarLogger.info(
-              `${lightRed('Removing')} ${bold(oldVideo.filename)}`
-            );
-            await anime.removeVideo(oldVideo);
-          }
-        }
+        // First resolve episode number
+        const resolvedEpisode = anime.resolveEpisode(video.video.episode);
+        const library = (await anime.library()).videos;
+        // Find old video to be removed
+        const oldVideo = library.find(
+          v =>
+            v.source.type === ANIMEGARDEN
+            && anime.resolveEpisode(v.episode) === resolvedEpisode // Find same episode after being resolved
+        );
 
         // Copy video to storage
         await anime.addVideoByCopy(file, video.video);
+        // Remove old animegarden video to keep storage clean
+        if (oldVideo) {
+          multibarLogger.info(
+            `${lightRed('Removing')} ${bold(oldVideo.filename)}`
+          );
+          await anime.removeVideo(oldVideo);
+        }
 
         multibarLogger.info(
           `${lightGreen('Copy')} ${bold(video.video.filename)} ${
