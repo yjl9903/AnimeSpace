@@ -105,6 +105,7 @@ export const AnimePlanSchema = z
     date: z.coerce.date().optional(),
     rewrite: z
       .object({
+        title: z.string().optional(),
         episode: z
           .union([
             z.coerce.number().transform(n => ({
@@ -177,6 +178,8 @@ export interface AnimePlan {
    * Rewrite the inferred things
    */
   readonly rewrite?: {
+    readonly title?: string;
+
     readonly episode?: { offset: number; gte: number; lte: number };
   };
 }

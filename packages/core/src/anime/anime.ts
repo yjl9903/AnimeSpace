@@ -183,7 +183,8 @@ export class Anime {
 
   public reformatVideoFilename(video: LocalVideo) {
     if (video.naming === 'auto') {
-      const title = this._lib?.title ?? this.plan.title;
+      const title = this._lib?.title ?? this.plan.rewrite?.title
+        ?? this.plan.title;
       const date = video.date ?? this._lib?.date ?? this.plan.date;
       const season = video.season ?? this._lib?.season ?? this.plan.season;
       const episode = this.resolveEpisode(video.episode);
@@ -203,7 +204,8 @@ export class Anime {
   }
 
   public formatFilename(meta: Partial<FormatOptions>) {
-    const title = this._lib?.title ?? this.plan.title;
+    const title = this._lib?.title ?? this.plan.rewrite?.title
+      ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
     const season = meta.season ?? this._lib?.season ?? this.plan.season;
     const episode = this.resolveEpisode(meta.episode);
