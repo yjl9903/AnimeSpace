@@ -26,8 +26,8 @@ importers:
         specifier: ^13.2.3
         version: 13.2.3
       optc:
-        specifier: ^0.6.2
-        version: 0.6.2
+        specifier: ^0.6.3
+        version: 0.6.3
       rimraf:
         specifier: ^5.0.1
         version: 5.0.1
@@ -2591,8 +2591,8 @@ packages:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: true
 
-  /@types/node@18.17.0:
-    resolution: {integrity: sha512-GXZxEtOxYGFchyUzxvKI14iff9KZ2DI+A6a37o6EQevtg6uO9t+aUZKcaC1Te5Ng1OnLM7K9NVVj+FbecD9cJg==}
+  /@types/node@18.17.1:
+    resolution: {integrity: sha512-xlR1jahfizdplZYRU59JlUx9uzF1ARa8jbhM11ccpCJya8kvos5jwdm2ZAgxSCwOl0fq21svP18EVwPBXMQudw==}
     dev: true
 
   /@types/node@20.4.5:
@@ -5829,8 +5829,8 @@ packages:
       is-wsl: 2.2.0
     dev: false
 
-  /optc@0.6.2:
-    resolution: {integrity: sha512-j2kENax/k8mRk/XgjAzMVP1YfxAgAPKqNvfwj574DFgseslmW10+qxPGyhOY/cM7a2mYc75ofZBOvoque/cwpw==}
+  /optc@0.6.3:
+    resolution: {integrity: sha512-HUdJ0n8HU6fQKM0v54fajp3jwqu6BQ4+8LcXBkKoGqfAwPhT/Z4vWZzDxmC2IJFBpibqozygmPc6qttOkGkETQ==}
     engines: {node: '>=v16.0.0'}
     hasBin: true
     dependencies:
@@ -5838,7 +5838,7 @@ packages:
       '@babel/plugin-transform-typescript': 7.22.9(@babel/core@7.22.9)
       '@total-typescript/ts-reset': 0.4.2
       '@types/fs-extra': 11.0.1
-      '@types/node': 18.17.0
+      '@types/node': 18.17.1
       axios: 1.4.0(debug@4.3.4)
       breadc: 0.9.6
       debug: 4.3.4
