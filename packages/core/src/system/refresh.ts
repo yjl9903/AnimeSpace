@@ -22,6 +22,8 @@ export async function refresh(system: AnimeSystem, options: RefreshOptions) {
     await plugin.refresh?.finish?.(system);
   }
 
+  logger.log('');
+  system.printDelta();
   logger.info(lightGreen(`Refresh Anime Space OK`));
   return animes;
 }

@@ -28,6 +28,8 @@ export async function introspect(
     await plugin.introspect?.finish?.(system);
   }
 
+  logger.log('');
+  system.printDelta();
   logger.info(lightGreen(`Introspect Anime Space OK`));
   return animes;
 }

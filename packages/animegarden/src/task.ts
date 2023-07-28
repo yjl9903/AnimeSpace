@@ -312,7 +312,16 @@ export async function runDownloadTask(
         );
 
         // Copy video to storage
-        await anime.addVideoByCopy(file, video.video);
+        const copyDelta = await anime.addVideoByCopy(file, video.video);
+        if (copyDelta) {
+          const detailURL = `https://garden.onekuma.cn/resource/${
+            video.video.source
+              .magnet!.split('/')
+              .at(-1)
+          }`;
+          copyDelta.log = link(video.video.filename, detailURL);
+        }
+
         // Remove old animegarden video to keep storage clean
         if (oldVideo) {
           multibarLogger.info(

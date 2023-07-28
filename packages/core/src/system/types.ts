@@ -22,6 +22,8 @@ export interface AnimeSystem {
 
   printSpace(): void;
 
+  printDelta(): void;
+
   /**
    * Load animes from plans or introspect result
    */

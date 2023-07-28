@@ -1,5 +1,5 @@
-import { dim } from '@breadc/color';
 import { createConsola } from 'consola';
+import { dim, lightCyan, lightGreen, lightRed } from '@breadc/color';
 
 import type { Anime } from '../anime';
 import type { AnimeSpace } from '../space';
@@ -29,6 +29,31 @@ export async function createAnimeSystem(
         logger.info(`${dim('Library')}  ${space.library.directory}`);
       }
       logger.log('');
+    },
+    printDelta() {
+      if (!animes) return;
+
+      const delta = animes.flatMap(anime => anime.delta());
+      if (delta.length > 0) {
+        const DOT = dim('•');
+        logger.info(
+          `${dim('There are')} ${lightCyan(delta.length + ' changes')} ${
+            dim('applied to the space')
+          }`
+        );
+        for (const d of delta) {
+          const format = {
+            copy: lightGreen('Copy'),
+            move: lightGreen('Move'),
+            remove: lightRed('Remove')
+          };
+          const op = format[d.operation];
+          logger.info(`  ${DOT} ${op} ${d.log ?? d.video.filename}`);
+        }
+        logger.log('');
+      } else {
+        logger.info(lightGreen(`Every anime is latest`));
+      }
     },
     async load(options = {}) {
       if (!options.force && animes !== undefined) {

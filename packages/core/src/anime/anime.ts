@@ -36,6 +36,14 @@ export class Anime {
 
   private _files: LocalFile[] | undefined;
 
+  /**
+   * Store all the changes made to this anime
+   */
+  private _delta: LocalVideoDelta[] = [];
+
+  /**
+   * Mark whether there is any changes made to this anime that are not writen back
+   */
   private _dirty = false;
 
   public constructor(space: AnimeSpace, plan: AnimePlan) {
@@ -55,6 +63,10 @@ export class Anime {
       : plan.directory
       ? path.resolve(space.library.directory, plan.directory)
       : path.join(space.library.directory, dirname);
+  }
+
+  public delta() {
+    return this._delta;
   }
 
   public dirty() {
@@ -251,8 +263,9 @@ export class Anime {
     src: string,
     newVideo: LocalVideo,
     { copy = false }: { copy?: boolean } = {}
-  ): Promise<void> {
+  ): Promise<LocalVideoDelta | undefined> {
     await this.library();
+    let delta: LocalVideoDelta | undefined = undefined;
     try {
       const dst = path.join(this.directory, newVideo.filename);
       if (src !== dst) {
@@ -265,16 +278,21 @@ export class Anime {
           await fs.copy(src, dst, {
             overwrite: true
           });
+          delta = { operation: 'copy', video: newVideo };
         } else {
           await fs.move(src, dst, {
             overwrite: true
           });
+          delta = { operation: 'move', video: newVideo };
         }
+        this._delta.push(delta);
       }
       this._dirty = true;
       this._lib!.videos.push(newVideo);
     } catch (error) {
       console.error(error);
+    } finally {
+      return delta;
     }
   }
 
@@ -285,7 +303,10 @@ export class Anime {
    * @param video The stored video data
    * @returns
    */
-  public async addVideoByCopy(src: string, video: LocalVideo): Promise<void> {
+  public async addVideoByCopy(
+    src: string,
+    video: LocalVideo
+  ): Promise<LocalVideoDelta | undefined> {
     return this.addVideo(src, video, { copy: true });
   }
 
@@ -296,22 +317,40 @@ export class Anime {
    * @param video The stored video data
    * @returns
    */
-  public async addVideoByMove(src: string, video: LocalVideo): Promise<void> {
+  public async addVideoByMove(
+    src: string,
+    video: LocalVideo
+  ): Promise<LocalVideoDelta | undefined> {
     return this.addVideo(src, video, { copy: false });
   }
 
-  public async moveVideo(src: LocalVideo, dst: string): Promise<void> {
+  /**
+   * Move the video to the target path
+   *
+   * @param src The video to be moved
+   * @param dst Target path
+   */
+  public async moveVideo(
+    src: LocalVideo,
+    dst: string
+  ): Promise<LocalVideoDelta | undefined> {
     await this.library();
+    // Can not move video from other anime
+    if (!this._lib!.videos.find(v => v === src)) return;
+
     const oldFilename = src.filename;
     const newFilename = dst;
-    src.filename = newFilename;
     try {
       if (oldFilename !== newFilename) {
+        this._dirty = true;
         await fs.move(
           path.join(this.directory, oldFilename),
           path.join(this.directory, newFilename)
         );
-        this._dirty = true;
+        src.filename = newFilename;
+        const delta = { operation: 'move', video: src } as const;
+        this._delta.push(delta);
+        return delta;
       }
     } catch (error) {
       src.filename = oldFilename;
@@ -319,12 +358,18 @@ export class Anime {
     }
   }
 
-  public async removeVideo(target: LocalVideo) {
+  public async removeVideo(
+    target: LocalVideo
+  ): Promise<LocalVideoDelta | undefined> {
     const remove = () => {
       const idx = lib.videos.findIndex(v => v === target);
       if (idx !== -1) {
+        const oldVideo = lib.videos[idx];
         lib.videos.splice(idx, 1);
         this._dirty = true;
+        const delta = { operation: 'remove', video: oldVideo } as const;
+        this._delta.push(delta);
+        return delta;
       }
     };
 
@@ -335,7 +380,7 @@ export class Anime {
         await trash(videoPath).catch(async err => {
           await fs.remove(videoPath);
         });
-        remove();
+        return remove();
       } catch (error) {
         console.error(error);
       }
@@ -375,4 +420,12 @@ export class Anime {
       debug(`Keep anime library of ${this.plan.title}`);
     }
   }
+}
+
+interface LocalVideoDelta {
+  operation: 'copy' | 'move' | 'remove';
+
+  video: LocalVideo;
+
+  log?: string;
 }
