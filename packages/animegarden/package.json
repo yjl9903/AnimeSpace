@@ -58,7 +58,7 @@
     "memofunc": "^0.0.5",
     "prompts": "^2.4.2",
     "undici": "^5.22.1",
-    "webtorrent": "^2.1.15",
+    "webtorrent": "^2.1.16",
     "zod": "^3.21.4"
   },
   "devDependencies": {
