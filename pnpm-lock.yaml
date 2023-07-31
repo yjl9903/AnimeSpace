@@ -141,8 +141,8 @@ importers:
         specifier: ^5.22.1
         version: 5.22.1
       webtorrent:
-        specifier: ^2.1.15
-        version: 2.1.15
+        specifier: ^2.1.16
+        version: 2.1.16
       zod:
         specifier: ^3.21.4
         version: 3.21.4
@@ -2502,7 +2502,7 @@ packages:
       get-browser-rtc: 1.1.0
       queue-microtask: 1.2.3
       streamx: 2.15.0
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2513,7 +2513,7 @@ packages:
       debug: 4.3.4
       queue-microtask: 1.2.3
       streamx: 2.15.0
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
       ws: 8.13.0(bufferutil@4.0.7)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
@@ -2525,7 +2525,7 @@ packages:
     resolution: {integrity: sha512-bD6PvWbaf53JC04O7WnGDjqZBDgja/KT2Jd/6I2vJBIy+DLmQfQJZZ/G+16nAkVq1yGTIkO4rfc4RlH0DmEEqA==}
     engines: {node: '>=0.2.6'}
     dependencies:
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
     dev: false
 
   /@total-typescript/ts-reset@0.4.2:
@@ -3352,7 +3352,7 @@ packages:
     resolution: {integrity: sha512-aP282ducX2oSLiopRaPxvO6GMOsn0teN122hvlQQXlIr0fJC+Iirea6tmOWSLWPd+GtJf2YF6+YlbF7Wz90rIA==}
     engines: {node: '>=12.20.0'}
     dependencies:
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
     dev: false
 
   /bep53-range@2.0.0:
@@ -3419,7 +3419,7 @@ packages:
       rc4: 0.1.5
       streamx: 2.15.0
       throughput: 1.0.1
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
       unordered-array-remove: 1.0.2
     transitivePeerDependencies:
       - supports-color
@@ -3449,7 +3449,7 @@ packages:
       simple-get: 4.0.1
       socks: 2.7.1
       string2compact: 2.0.1
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
       unordered-array-remove: 1.0.2
       ws: 8.13.0(bufferutil@4.0.7)(utf-8-validate@5.0.10)
     optionalDependencies:
@@ -3904,7 +3904,7 @@ packages:
       piece-length: 2.0.1
       queue-microtask: 1.2.3
       run-parallel: 1.2.0
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
     dev: false
 
   /cross-fetch-ponyfill@1.0.3:
@@ -5500,7 +5500,7 @@ packages:
     dependencies:
       '@thaunknown/thirty-two': 1.0.3
       bep53-range: 2.0.0
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
     dev: false
 
   /mark.js@8.11.1:
@@ -5938,7 +5938,7 @@ packages:
       get-stdin: 9.0.0
       magnet-uri: 7.0.5
       queue-microtask: 1.2.3
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
     dev: false
 
   /parse5-htmlparser2-tree-adapter@7.0.0:
@@ -6924,7 +6924,7 @@ packages:
     resolution: {integrity: sha512-j0tRX7qq22nIuVFF57Tg/wAvFq79F1eM9pcMxY+b0qCCe7yXJnIrqF+Q5YEJ94tNisDnJzcqDHNrPmD9X/yAIg==}
     engines: {node: '>=12.20.0'}
     dependencies:
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
     dev: false
 
   /totalist@3.0.1:
@@ -7098,8 +7098,8 @@ packages:
     hasBin: true
     dev: true
 
-  /uint8-util@2.1.9:
-    resolution: {integrity: sha512-twtktH1wpZwM8ivYXs2HL3nqHRosKGOxrPnfLxqYnzOR0RrIKbn/GrUZinXJ9n8tWzW8VIW++IpES4LYtGHSDQ==}
+  /uint8-util@2.2.2:
+    resolution: {integrity: sha512-zqDacLmV6UPJguIUKezcW8V9NzWJQxF6KX0hHiJWq2YbgHcTS8RnsfcganIRI51Pla59OIq6MjjjEMDEBnEW0A==}
     dependencies:
       base64-arraybuffer: 1.0.2
     dev: false
@@ -7348,7 +7348,7 @@ packages:
       bencode: 3.0.3
       bitfield: 4.1.0
       debug: 4.3.4
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -7648,8 +7648,8 @@ packages:
     resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
     dev: true
 
-  /webtorrent@2.1.15:
-    resolution: {integrity: sha512-QdZgJrFbn98YYDTaXv4spL7es9MtJHamlkJsdLGoi2ZgJYVB2GBcARW/B5r1jEqDHhqW4r63MHpb0ZwYuVMYsQ==}
+  /webtorrent@2.1.16:
+    resolution: {integrity: sha512-nty8vJDoWB3YFuW6ttnZjCnEy39z7PwGuKtITSoX2NwEe0GjdtWG2GYLPpoKI7jvpQHUnRReIRa2nfUhGD2ptA==}
     engines: {node: '>=14'}
     dependencies:
       '@silentbot1/nat-api': 0.4.7
@@ -7687,7 +7687,7 @@ packages:
       throughput: 1.0.1
       torrent-discovery: 10.0.13
       torrent-piece: 3.0.0
-      uint8-util: 2.1.9
+      uint8-util: 2.2.2
       unordered-array-remove: 1.0.2
       ut_metadata: 4.0.2
       ut_pex: 4.0.3
