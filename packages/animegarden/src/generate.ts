@@ -70,9 +70,9 @@ export async function generatePlan(
         typeof anime === 'object' ? anime.subject_id : anime
       );
 
-      const alias = item.infobox?.find((box) => box.key === '别名');
+      const alias = item.infobox?.find(box => box.key === '别名');
       const title = item.name_cn || item.name;
-      const translations = (alias?.value.map((v) =>
+      const translations = (alias?.value.map(v =>
         v?.v
       ).filter(Boolean) as string[]) ?? [];
       if (item.name && item.name !== title) {
@@ -82,6 +82,7 @@ export async function generatePlan(
         title,
         bgm: '' + item.id,
         season: inferSeason(title, ...translations),
+        type: inferType(item),
         translations
       };
 
@@ -94,6 +95,9 @@ export async function generatePlan(
         writeln(`    season: ${plan.season}`);
       }
       writeln(`    bgm: '${plan.bgm}'`);
+      if (plan.type) {
+        writeln(`    type: '${plan.type}'`);
+      }
 
       if (options.fansub) {
         const fansub = await getFansub([plan.title, ...plan.translations]);
@@ -167,7 +171,7 @@ export async function getCollections(username: string) {
       break;
     }
   }
-  return uniqBy(list, (c) => '' + c.subject_id);
+  return uniqBy(list, c => '' + c.subject_id);
 }
 
 async function getFansub(titles: string[]) {
@@ -177,9 +181,26 @@ async function getFansub(titles: string[]) {
     retry: 5
   });
   return uniqBy(
-    resources.filter((r) => !!r.fansub),
-    (r) => r.fansub!.name
-  ).map((r) => r.fansub!.name);
+    resources.filter(r => !!r.fansub),
+    r => r.fansub!.name
+  ).map(r => r.fansub!.name);
+}
+
+function inferType(subject: Awaited<ReturnType<BgmClient['subject']>>) {
+  const titles = [subject.name, subject.name_cn];
+
+  {
+    const FILM = ['电影', '剧场版'];
+    for (const title of titles) {
+      for (const f of FILM) {
+        if (title && title.includes(f)) {
+          return '电影';
+        }
+      }
+    }
+  }
+
+  return undefined;
 }
 
 function inferSeason(...titles: string[]) {
