@@ -116,12 +116,11 @@ function groupResources(
     ) {
       continue;
     }
-    // Resource fansub shoulde be included
-    if (r.fansub && !anime.plan.fansub.includes(r.fansub.name)) continue;
 
     const episode = parseEpisode(anime, r.title, {
       metadata: info => ({
-        fansub: r.fansub?.name ?? info.release.group ?? 'fansub'
+        fansub: r.fansub?.name ?? r.publisher.name ?? info.release.group
+          ?? 'fansub'
       })
     });
 
