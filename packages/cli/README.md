@@ -4,7 +4,7 @@
 
 [![version](https://img.shields.io/npm/v/animespace?label=AnimeSpace)](https://www.npmjs.com/package/animespace)
 [![CI](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml/badge.svg)](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml)
-[![Docs](https://img.shields.io/badge/AnimeSpace-Demo-brightgreen)](https://anime.docs.xlorpaste.cn/)
+[![Docs](https://img.shields.io/badge/AnimeSpace-Demo-brightgreen)](https://animespace.onekuma.cn/)
 [![License](https://img.shields.io/github/license/yjl9903/AnimeSpace)](./LICENSE)
 
 Paste your favourite anime online.
@@ -13,7 +13,7 @@ AnimeSpace is yet another complete **solution** for **automatically following ba
 
 All the bangumi resources are automatically collected and downloaded from [動漫花園](https://share.dmhy.org/). **Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.**
 
-+ 📖 [中文文档](https://anime.docs.xlorpaste.cn/)
++ 📖 [中文文档](https://animespace.onekuma.cn/)
 + 📚 [部署博客](https://blog.onekuma.cn/alidriver-alist-rclone-animepaste)
 
 ## Features
@@ -30,7 +30,7 @@ All the bangumi resources are automatically collected and downloaded from [動�
 >
 > Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
 
-See [部署 | AnimeSpace](https://anime.docs.xlorpaste.cn/deploy/) and [安装 CLI | AnimeSpace](https://anime.docs.xlorpaste.cn/admin/).
+See [部署 | AnimeSpace](https://animespace.onekuma.cn/deploy/) and [安装 CLI | AnimeSpace](https://animespace.onekuma.cn/admin/).
 
 ## Usage
 
@@ -53,7 +53,7 @@ Second, just the following simple command.
 anime bangumi generate --fansub --create "<plan filename>.yaml"
 ```
 
-See [放映计划 | AnimeSpace](https://anime.docs.xlorpaste.cn/admin/plan.html) to get more details.
+See [放映计划 | AnimeSpace](https://animespace.onekuma.cn/admin/plan.html) to get more details.
 
 ### Download anime resources
 
