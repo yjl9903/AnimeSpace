@@ -1,3 +1,5 @@
+import { execSync } from 'node:child_process';
+
 import openEditor from 'open-editor';
 import { type Breadc, breadc } from 'breadc';
 import { AnimeSystem, onDeath } from '@animespace/core';
@@ -24,7 +26,14 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .option('--open', 'Open space in your editor')
     .action(async options => {
       const root = options.storage ? system.space.storage : system.space.root;
-      if (options.open) {
+      const cmds = options['--'];
+      if (cmds.length > 0) {
+        const isTTY = !!process?.stdout?.isTTY;
+        if (isTTY) {
+          system.printSpace();
+        }
+        execSync(cmds.join(' '), { cwd: root, stdio: 'inherit' });
+      } else if (options.open) {
         try {
           openEditor([root]);
         } catch (error) {
