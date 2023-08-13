@@ -25,7 +25,7 @@
     "@types/node": "^20.4.10",
     "dprint": "^0.40.2",
     "husky": "^8.0.3",
-    "lint-staged": "^13.3.0",
+    "lint-staged": "^14.0.0",
     "optc": "^0.6.3",
     "rimraf": "^5.0.1",
     "turbo": "^1.10.12",
