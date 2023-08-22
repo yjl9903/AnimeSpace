@@ -57,8 +57,8 @@ importers:
         specifier: ^4.19.1
         version: 4.19.1
       '@iconify-json/carbon':
-        specifier: ^1.1.19
-        version: 1.1.19
+        specifier: ^1.1.20
+        version: 1.1.20
       '@types/node':
         specifier: ^20.4.10
         version: 20.4.10
@@ -2134,8 +2134,8 @@ packages:
     dev: true
     optional: true
 
-  /@iconify-json/carbon@1.1.19:
-    resolution: {integrity: sha512-4obFv2J5L/bIgXCKnW8Xkly47dGgPH+xbP3NZ6DRYznc8ykAo+X5z3WSAW5/ZKO9cKZzRcOnNS6DYofOZZbRCA==}
+  /@iconify-json/carbon@1.1.20:
+    resolution: {integrity: sha512-ed/3FDCjicQARWaSGIDZpaF+rWmxoSqrmHYZV2aEicufp0yciG44y9OEmArxxr/0U6bEC3zJbKMSOSw4CKeBJg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
