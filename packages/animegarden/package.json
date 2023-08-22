@@ -59,7 +59,7 @@
     "prompts": "^2.4.2",
     "undici": "^5.23.0",
     "webtorrent": "^2.1.25",
-    "zod": "^3.22.1"
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@types/webtorrent": "^0.109.3",
