@@ -319,23 +319,23 @@ export async function runDownloadTask(
               .at(-1)
           }`;
           copyDelta.log = link(video.video.filename, detailURL);
-        }
 
-        // Remove old animegarden video to keep storage clean
-        if (oldVideo) {
+          // Remove old animegarden video to keep storage clean
+          if (oldVideo) {
+            multibarLogger.info(
+              `${lightRed('Removing')} ${bold(oldVideo.filename)}`
+            );
+            await anime.removeVideo(oldVideo);
+          }
+
           multibarLogger.info(
-            `${lightRed('Removing')} ${bold(oldVideo.filename)}`
+            `${lightGreen('Copy')} ${bold(video.video.filename)} ${
+              lightGreen(
+                'OK'
+              )
+            }`
           );
-          await anime.removeVideo(oldVideo);
         }
-
-        multibarLogger.info(
-          `${lightGreen('Copy')} ${bold(video.video.filename)} ${
-            lightGreen(
-              'OK'
-            )
-          }`
-        );
       } else {
         multibar.println(
           `${lightYellow(`Warn`)} Resource ${
@@ -374,12 +374,14 @@ export async function runDownloadTask(
     );
     systemLogger.error(error);
   } finally {
-    await anime.writeLibrary();
-    systemLogger.info(
-      lightGreen(`Write`)
-        + bold(` ${anime.plan.title} `)
-        + lightGreen(`library file OK`)
-    );
+    if (anime.dirty()) {
+      await anime.writeLibrary();
+      systemLogger.info(
+        lightGreen(`Write`)
+          + bold(` ${anime.plan.title} `)
+          + lightGreen(`library file OK`)
+      );
+    }
   }
 
   cancelRefresh();

@@ -116,6 +116,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   function registerDeath(system: AnimeSystem) {
     return onDeath(async (signal, context) => {
       system.logger.info(lightRed('Process is being killed'));
+      system.printDelta();
       await writeBack(system);
       context.terminate = 'exit';
     });
