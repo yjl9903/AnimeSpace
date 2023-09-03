@@ -108,8 +108,8 @@ importers:
         specifier: ^0.0.25
         version: 0.0.25
       anitomy:
-        specifier: ^0.0.25
-        version: 0.0.25
+        specifier: ^0.0.26
+        version: 0.0.26
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
@@ -246,8 +246,8 @@ importers:
         specifier: ^0.9.6
         version: 0.9.6
       anitomy:
-        specifier: ^0.0.25
-        version: 0.0.25
+        specifier: ^0.0.26
+        version: 0.0.26
       consola:
         specifier: ^3.1.0
         version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
@@ -292,8 +292,8 @@ importers:
         specifier: ^0.9.6
         version: 0.9.6
       anitomy:
-        specifier: ^0.0.25
-        version: 0.0.25
+        specifier: ^0.0.26
+        version: 0.0.26
       memofunc:
         specifier: ^0.0.6
         version: 0.0.6
@@ -3121,8 +3121,8 @@ packages:
       zod: 3.22.2
     dev: false
 
-  /anitomy@0.0.25:
-    resolution: {integrity: sha512-LnD6dKjKWPK9pZZkv4q1ZEpIXu+OwtIyeHu77C+IVNxU3Uf0cxxwJ7X/O1D51kp46zJDU3A9R9dLhP4KlZW8aQ==}
+  /anitomy@0.0.26:
+    resolution: {integrity: sha512-6ms4UCiHfFUGfwTuB7mkskCUIQS6LanJKVlmtxxrCOsFWPb1T1vM4R/Gcp59CKUsVh9PsDr4zxMAcK4+IsA6sg==}
     engines: {node: '>=v18.16.0'}
     dev: false
 
