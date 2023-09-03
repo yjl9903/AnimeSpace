@@ -126,14 +126,17 @@ function groupResources(
 
     if (episode && isValidEpisode(episode)) {
       // Disable multiple files like 01-12
-      if (!hasEpisodeNumberAlt(episode)) {
-        const fansub = episode.metadata.fansub;
-        if (fansub === 'fansub' || anime.plan.fansub.includes(fansub)) {
-          map
-            .getOrPut(getEpisodeKey(episode), () => new MutableMap([]))
-            .getOrPut(fansub, () => [])
-            .push(r);
+      if (episode.type === 'TV') {
+        if (!hasEpisodeNumberAlt(episode)) {
+          const fansub = episode.metadata.fansub;
+          if (fansub === 'fansub' || anime.plan.fansub.includes(fansub)) {
+            map
+              .getOrPut(getEpisodeKey(episode), () => new MutableMap([]))
+              .getOrPut(fansub, () => [])
+              .push(r);
+          }
         }
+      } else if (['特别篇'].includes(episode.type)) {
       }
     } else {
       logger.info(`${lightYellow('Parse Error')}  ${r.title}`);
