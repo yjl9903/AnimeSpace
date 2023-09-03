@@ -1,3 +1,4 @@
+import { tradToSimple } from 'simptrad';
 import { AnitomyResult, Parser } from 'anitomy';
 
 import type { Anime } from './anime';
@@ -92,7 +93,7 @@ export function parseEpisode<
 
       return <SPEpisode<T>> {
         anime,
-        type: info.type,
+        type: tradToSimple(info.type),
         title,
         resolvedTitle,
         metadata,
@@ -152,7 +153,7 @@ export function parseEpisode<
 
     return <SPEpisode<T>> {
       anime,
-      type: info.type,
+      type: info.type ? tradToSimple(info.type) : 'OVA',
       title,
       resolvedTitle,
       metadata,

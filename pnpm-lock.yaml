@@ -266,6 +266,9 @@ importers:
       fs-extra:
         specifier: ^11.1.1
         version: 11.1.1
+      simptrad:
+        specifier: ^0.1.0
+        version: 0.1.0
       trash:
         specifier: ^8.1.1
         version: 8.1.1
