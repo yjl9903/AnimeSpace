@@ -35,11 +35,14 @@
   },
   "packageManager": "pnpm@8.7.4",
   "engines": {
-    "node": ">=v20.6.1"
+    "node": ">=v20.7.0"
   },
   "pnpm": {
     "patchedDependencies": {
       "consola@3.1.0": "patches/consola@3.1.0.patch"
     }
+  },
+  "volta": {
+    "node": "20.7.0"
   }
 }
