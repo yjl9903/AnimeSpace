@@ -24,7 +24,7 @@ export async function createAnimeSystem(
     logger,
     printSpace() {
       logger.info(`${dim('Space')}    ${space.root}`);
-      logger.info(`${dim('Storage')}  ${space.storage}`);
+      logger.info(`${dim('Storage')}  ${space.storage.anime.directory}`);
       if (space.storage.library.mode === 'external') {
         logger.info(`${dim('Library')}  ${space.storage.library.directory}`);
       }
