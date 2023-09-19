@@ -228,8 +228,8 @@ importers:
         specifier: ^0.38.0
         version: 0.38.0
       bangumi-data:
-        specifier: ^0.3.120
-        version: 0.3.120
+        specifier: ^0.3.121
+        version: 0.3.121
       unbuild:
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.2.2)
@@ -3332,8 +3332,8 @@ packages:
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  /bangumi-data@0.3.120:
-    resolution: {integrity: sha512-DMQ9eojwLYzI5IIQrG+OjBktsudA3ceAXuOzFJmxrog41VPCzEBGNHTQHqO6ZtR5LhYJyyrYex48GrNHMWq/8w==}
+  /bangumi-data@0.3.121:
+    resolution: {integrity: sha512-4rrLtpdZ2jEFDKpwMHZxOWsyU0TOobUmOqy8VACv/QcBh3mkQVMhjLwZ9YxB+1lyDUAO18Tt9/X8Az4mRWXwSA==}
     dev: true
 
   /base-64@1.0.0:
