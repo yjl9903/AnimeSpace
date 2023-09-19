@@ -213,8 +213,8 @@ importers:
         version: 5.23.0
     devDependencies:
       '@types/cli-progress':
-        specifier: ^3.11.1
-        version: 3.11.1
+        specifier: ^3.11.2
+        version: 3.11.2
       '@types/debug':
         specifier: ^4.1.8
         version: 4.1.8
@@ -2574,8 +2574,8 @@ packages:
     resolution: {integrity: sha512-mEo1sAde+UCE6b2hxn332f1g1E8WfYRu6p5SvTKr2ZKC1f7gFJXk4h5PyGP9Dt6gCaG8y8XhwnXWC6Iy2cmBng==}
     dev: true
 
-  /@types/cli-progress@3.11.1:
-    resolution: {integrity: sha512-d9iA+0uys9N6wV/SvZkDEWMYwv+e/mhWPLa6lncQ1ZqrC3mXHnDmidanVGoVGnmCQ3mCxyu9S09Y2s18u5wL5w==}
+  /@types/cli-progress@3.11.2:
+    resolution: {integrity: sha512-Yt/8rEJalfa9ve2SbfQnwFHrc9QF52JIZYHW3FDaTMpkCvnns26ueKiPHDxyJ0CS//IqjMINTx7R5Xa7k7uFHQ==}
     dependencies:
       '@types/node': 20.5.0
     dev: true
