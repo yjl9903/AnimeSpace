@@ -225,8 +225,8 @@ importers:
         specifier: ^2.4.4
         version: 2.4.4
       '@vercel/ncc':
-        specifier: ^0.36.1
-        version: 0.36.1
+        specifier: ^0.38.0
+        version: 0.38.0
       bangumi-data:
         specifier: ^0.3.120
         version: 0.3.120
@@ -2876,8 +2876,8 @@ packages:
       - rollup
     dev: true
 
-  /@vercel/ncc@0.36.1:
-    resolution: {integrity: sha512-S4cL7Taa9yb5qbv+6wLgiKVZ03Qfkc4jGRuiUQMQ8HGBD5pcNRnHeYM33zBvJE4/zJGjJJ8GScB+WmTsn9mORw==}
+  /@vercel/ncc@0.38.0:
+    resolution: {integrity: sha512-B4YKZMm/EqMptKSFyAq4q2SlgJe+VCmEH6Y8gf/E1pTlWbsUJpuH1ymik2Ex3aYO5mCWwV1kaSYHSQOT8+4vHA==}
     hasBin: true
     dev: true
 
