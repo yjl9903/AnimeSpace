@@ -22,10 +22,9 @@ export async function makeCliApp(system: AnimeSystem) {
 function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   app
     .command('space', 'Display the space directory')
-    .option('--storage', 'Display the storage directory')
     .option('--open', 'Open space in your editor')
     .action(async options => {
-      const root = options.storage ? system.space.storage : system.space.root;
+      const root = system.space.root;
       const cmds = options['--'];
       if (cmds.length > 0) {
         const isTTY = !!process?.stdout?.isTTY;

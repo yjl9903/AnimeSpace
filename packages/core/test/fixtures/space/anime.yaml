@@ -1,4 +1,5 @@
-storage: ./anime
+storage:
+  anime: ./anime
 
 preference:
   format:

@@ -1,6 +1,9 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
+import { BreadFS } from 'breadfs';
+import { NodeFS } from '@breadfs/node';
+import { WebDAVProvider } from '@breadfs/webdav';
 import { AnyZodObject, z } from 'zod';
 import { parse, stringify } from 'yaml';
 
@@ -43,12 +46,7 @@ export async function loadSpace(
   const schema = plugins.reduce(
     (acc: AnyZodObject, plugin) =>
       plugin?.schema?.space ? acc.merge(plugin?.schema?.space) : acc,
-    RawAnimeSpaceSchema.extend({
-      storage: z
-        .string()
-        .default(DefaultStorageDirectory)
-        .transform(s => path.resolve(root, s))
-    })
+    RawAnimeSpaceSchema
   );
 
   // Parse load config
@@ -58,9 +56,18 @@ export async function loadSpace(
 
     // Resolve directory to absolute path
     {
-      space.storage = path.resolve(root, space.storage);
-      if (space.library.mode === 'external') {
-        space.library.directory = path.resolve(root, space.library.directory);
+      if (space.storage.anime.provider === 'local') {
+        space.storage.anime.directory = path.resolve(
+          root,
+          space.storage.anime.directory
+        );
+      }
+
+      if (space.storage.library.mode === 'external') {
+        space.storage.library.directory = path.resolve(
+          root,
+          space.storage.library.directory
+        );
       }
     }
 
@@ -74,15 +81,24 @@ export async function loadSpace(
       }
       return plans;
     });
+
     const resolved: AnimeSpace = {
       root,
       ...space,
+      storage: {
+        anime: {
+          ...space.storage.anime,
+          fs: BreadFS.of(NodeFS)
+        },
+        library: space.storage.library
+      },
       resolvePath(...d) {
         return path.resolve(resolved.root, ...d);
       },
       plans,
       plugins
     };
+
     // Plugin init
     for (const plugin of resolved.plugins) {
       await plugin.prepare?.space?.(resolved);
@@ -147,54 +163,59 @@ async function validateSpace(root: string, space: RawAnimeSpace) {
   }
 
   // Validate anime storage directory
-  try {
-    await fs.access(space.storage, fs.constants.R_OK | fs.constants.W_OK);
-  } catch {
+  if (space.storage.anime.provider === 'local') {
     try {
-      await fs.mkdir(space.storage, { recursive: true });
-    } catch {
-      throw new AnimeSystemError(
-        `Can not access local anime storage directory ${space.storage}`
+      await fs.access(
+        space.storage.anime.directory,
+        fs.constants.R_OK | fs.constants.W_OK
       );
+    } catch {
+      try {
+        await fs.mkdir(space.storage.anime.directory, { recursive: true });
+      } catch {
+        throw new AnimeSystemError(
+          `Can not access local anime storage directory ${space.storage}`
+        );
+      }
     }
   }
 
   // Create a symlink from the outside storage dir to the local dir
   // Example: Z:/path/to/animes/ -> $ANIMESPACE_ROOT/animes/
-  try {
-    if (!isSubDir(root, space.storage)) {
-      const dirname = path.basename(space.storage);
-      const target = path.join(root, dirname);
-      if (!(await fs.pathExists(target))) {
-        // Target dir does not exist, create a new symblink
-        await fs.symlink(space.storage, target);
-      } else {
-        // Target dir is a symlink, check whether it is the wanted dir
-        const stat = await fs.lstat(target);
-        if (stat.isSymbolicLink()) {
-          const value = await fs.readlink(target);
-          if (value !== space.storage) {
-            // Recreate symlink when they are not matched
-            await fs.remove(target);
-            await fs.symlink(space.storage, target);
-          }
-        }
-      }
-    }
-  } catch {}
+  // try {
+  //   if (!isSubDir(root, space.storage)) {
+  //     const dirname = path.basename(space.storage);
+  //     const target = path.join(root, dirname);
+  //     if (!(await fs.pathExists(target))) {
+  //       // Target dir does not exist, create a new symblink
+  //       await fs.symlink(space.storage, target);
+  //     } else {
+  //       // Target dir is a symlink, check whether it is the wanted dir
+  //       const stat = await fs.lstat(target);
+  //       if (stat.isSymbolicLink()) {
+  //         const value = await fs.readlink(target);
+  //         if (value !== space.storage) {
+  //           // Recreate symlink when they are not matched
+  //           await fs.remove(target);
+  //           await fs.symlink(space.storage, target);
+  //         }
+  //       }
+  //     }
+  //   }
+  // } catch {}
 
-  if (space.library.mode === 'external') {
+  if (space.storage.library.mode === 'external') {
     try {
       await fs.access(
-        space.library.directory,
+        space.storage.library.directory,
         fs.constants.R_OK | fs.constants.W_OK
       );
     } catch {
       try {
-        await fs.mkdir(space.library.directory, { recursive: true });
+        await fs.mkdir(space.storage.library.directory, { recursive: true });
       } catch {
         throw new AnimeSystemError(
-          `Can not access local anime external library directory ${space.library.directory}`
+          `Can not access local anime external library directory ${space.storage.library.directory}`
         );
       }
     }
@@ -204,9 +225,14 @@ async function validateSpace(root: string, space: RawAnimeSpace) {
 }
 
 async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
-  const space: RawAnimeSpace = {
-    storage: path.join(root, DefaultStorageDirectory),
-    library: { mode: 'embedded' },
+  const space = {
+    storage: {
+      anime: {
+        provider: 'local',
+        directory: path.join(root, DefaultStorageDirectory)
+      },
+      library: { mode: 'embedded' }
+    },
     preference: {
       format: {
         anime: DefaultAnimeFormat,
@@ -237,12 +263,14 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
       { name: 'local', directory: './local' },
       { name: 'bangumi', username: '' }
     ]
-  };
+  } satisfies RawAnimeSpace;
 
   await fs.mkdir(root, { recursive: true }).catch(() => {});
 
   await Promise.all([
-    fs.mkdir(space.storage, { recursive: true }).catch(() => {}),
+    fs
+      .mkdir(space.storage.anime.directory, { recursive: true })
+      .catch(() => {}),
     fs.mkdir(path.join(root, './plans'), { recursive: true }).catch(() => {}),
     fs
       .mkdir(path.join(root, './download'), { recursive: true })
@@ -253,7 +281,13 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
       stringify({
         ...space,
         root: undefined,
-        storage: DefaultStorageDirectory
+        storage: {
+          ...space.storage,
+          anime: {
+            ...space.storage.anime,
+            directory: DefaultStorageDirectory
+          }
+        }
       }),
       'utf-8'
     ),

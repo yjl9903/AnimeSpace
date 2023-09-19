@@ -12,7 +12,13 @@ describe('Load Space', () => {
   it('should work', async () => {
     const root = path.join(__dirname, './fixtures/space');
     const space = await loadSpace(root);
+
+    // @ts-ignore
+    delete space.storage.anime['fs'];
+
     expect({ ...space, resolvePath: undefined, plans: undefined }).toEqual({
+      plans: undefined,
+      resolvePath: undefined,
       plugins: [],
       preference: {
         format: {
@@ -39,11 +45,17 @@ describe('Load Space', () => {
         }
       },
       root,
-      storage: path.join(root, 'anime'),
-      library: {
-        mode: 'embedded'
+      storage: {
+        anime: {
+          provider: 'local',
+          directory: path.join(root, 'anime')
+        },
+        library: {
+          mode: 'embedded'
+        }
       }
     });
+
     expect(await space.plans()).toEqual([
       {
         date: new Date('2023-04-01 13:00:00 UTC'),
@@ -117,7 +129,7 @@ describe('Create Space', () => {
     await rimraf(root);
   });
 
-  afterEach(async () => {
-    await rimraf(root);
-  });
+  // afterEach(async () => {
+  //   await rimraf(root);
+  // });
 });

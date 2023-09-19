@@ -55,14 +55,16 @@ export class Anime {
       yyyy: format(plan.date, 'yyyy'),
       MM: format(plan.date, 'MM')
     });
+
     this.directory = plan.directory
-      ? path.resolve(space.storage, plan.directory)
-      : path.join(space.storage, dirname);
-    this.libraryDirectory = space.library.mode === 'embedded'
+      ? path.resolve(space.storage.anime.directory, plan.directory)
+      : path.join(space.storage.anime.directory, dirname);
+
+    this.libraryDirectory = space.storage.library.mode === 'embedded'
       ? this.directory
       : plan.directory
-      ? path.resolve(space.library.directory, plan.directory)
-      : path.join(space.library.directory, dirname);
+      ? path.resolve(space.storage.library.directory, plan.directory)
+      : path.join(space.storage.library.directory, dirname);
   }
 
   public delta() {

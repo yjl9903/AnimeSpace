@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { BreadFS } from 'breadfs';
 
 import type { Plugin } from '../plugin';
 
@@ -40,13 +41,35 @@ export const Preference = z.object({
 
 export type Preference = z.infer<typeof Preference>;
 
-export const RawAnimeSpaceSchema = z.object({
-  storage: z.string().default(DefaultStorageDirectory),
-  library: z
+export const Storage = z.object({
+  anime: z
     .union([
       z
         .string()
-        .transform(directory => ({ mode: 'external' as const, directory })),
+        .transform(directory => ({ provider: 'local' as const, directory })),
+      z.object({
+        provider: z.literal('local'),
+        directory: z.string()
+      }),
+      z.object({
+        provider: z.literal('webdav'),
+        directory: z.string(),
+        url: z.string(),
+        username: z.string().optional(),
+        password: z.string().optional()
+      })
+    ])
+    .default({
+      provider: 'local' as const,
+      directory: DefaultStorageDirectory
+    }),
+
+  library: z
+    .union([
+      z.string().transform(directory => ({
+        mode: 'external' as const,
+        directory
+      })),
       z.object({
         mode: z.enum(['embedded', 'external']).default('embedded'),
         directory: z.string().optional()
@@ -55,10 +78,17 @@ export const RawAnimeSpaceSchema = z.object({
     .default({ mode: 'embedded' })
     .transform(lib => {
       if (lib.mode === 'external' && lib.directory) {
-        return { mode: 'external' as const, directory: lib.directory };
+        return {
+          mode: 'external' as const,
+          directory: lib.directory
+        };
       }
       return { mode: 'embedded' as const };
-    }),
+    })
+});
+
+export const RawAnimeSpaceSchema = z.object({
+  storage: Storage,
   preference: Preference.passthrough(),
   plans: StringArray,
   plugins: z.array(PluginEntry)
@@ -69,11 +99,23 @@ export type RawAnimeSpace = z.infer<typeof RawAnimeSpaceSchema>;
 export interface AnimeSpace {
   readonly root: string;
 
-  readonly storage: string;
+  readonly storage: {
+    readonly anime:
+      & { fs: BreadFS; directory: string }
+      & (
+        | { provider: 'local' }
+        | {
+          provider: 'webdav';
+          url: string;
+          username?: string;
+          password?: string;
+        }
+      );
 
-  readonly library:
-    | { mode: 'embedded' }
-    | { mode: 'external'; directory: string };
+    readonly library:
+      | { mode: 'embedded' }
+      | { mode: 'external'; directory: string };
+  };
 
   readonly preference: Preference;
 
@@ -186,5 +228,6 @@ export interface AnimePlan {
 
 export interface KeywordsParams {
   readonly include: string[][];
+
   readonly exclude: string[];
 }
