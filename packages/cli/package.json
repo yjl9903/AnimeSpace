@@ -63,7 +63,7 @@
   "devDependencies": {
     "@types/cli-progress": "^3.11.2",
     "@types/debug": "^4.1.8",
-    "@types/fs-extra": "^11.0.1",
+    "@types/fs-extra": "^11.0.2",
     "@types/prompts": "^2.4.4",
     "@vercel/ncc": "^0.38.0",
     "bangumi-data": "^0.3.120",
