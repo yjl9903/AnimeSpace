@@ -5,16 +5,14 @@ import { rimraf } from 'rimraf';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { loadSpace } from '../src';
+import { BreadFS, NodeFS } from 'breadfs/node';
 
 const __dirname = path.join(fileURLToPath(import.meta.url), '../');
 
-describe('Load Space', () => {
+describe.only('Load Space', () => {
   it('should work', async () => {
     const root = path.join(__dirname, './fixtures/space');
     const space = await loadSpace(root);
-
-    // @ts-ignore
-    delete space.storage.anime['fs'];
 
     expect({ ...space, resolvePath: undefined, plans: undefined }).toEqual({
       plans: undefined,
@@ -47,6 +45,7 @@ describe('Load Space', () => {
       root,
       storage: {
         anime: {
+          fs: BreadFS.of(NodeFS),
           provider: 'local',
           directory: path.join(root, 'anime')
         },
@@ -129,7 +128,7 @@ describe('Create Space', () => {
     await rimraf(root);
   });
 
-  // afterEach(async () => {
-  //   await rimraf(root);
-  // });
+  afterEach(async () => {
+    await rimraf(root);
+  });
 });
