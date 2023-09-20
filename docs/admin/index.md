@@ -14,7 +14,7 @@ anime space
 
 ## 全局配置目录
 
-```text
+```txt
 ~/.animespace/
   ├── plans/                     # Plans folder
   │   ├─ 2022-04.yml
