@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.4.10",
-    "dprint": "^0.40.2",
+    "dprint": "^0.41.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "optc": "^0.6.3",
