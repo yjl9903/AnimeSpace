@@ -24,10 +24,28 @@ export async function createAnimeSystem(
     logger,
     printSpace() {
       logger.info(`${dim('Space')}    ${space.root}`);
-      logger.info(`${dim('Storage')}  ${space.storage.anime.directory}`);
+
+      if (space.storage.anime.provider === 'local') {
+        logger.info(`${dim('Storage')}  ${space.storage.anime.directory}`);
+      } else if (space.storage.anime.provider === 'webdav') {
+        const join = (a: string, b: string) => {
+          return a.replace(/\/$/, '') + '/' + b.replace(/^\//, '');
+        };
+
+        logger.info(
+          `${dim('Storage')}  ${
+            join(
+              space.storage.anime.url,
+              space.storage.anime.directory
+            )
+          }`
+        );
+      }
+
       if (space.storage.library.mode === 'external') {
         logger.info(`${dim('Library')}  ${space.storage.library.directory}`);
       }
+
       logger.log('');
     },
     printDelta() {
@@ -38,7 +56,9 @@ export async function createAnimeSystem(
         const DOT = dim('•');
         logger.info(
           `${dim('There are')} ${lightCyan(delta.length + ' changes')} ${
-            dim('applied to the space')
+            dim(
+              'applied to the space'
+            )
           }`
         );
         for (const d of delta) {

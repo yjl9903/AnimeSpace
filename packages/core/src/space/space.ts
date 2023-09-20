@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { BreadFS } from 'breadfs';
 import { NodeFS } from '@breadfs/node';
-import { WebDAVProvider } from '@breadfs/webdav';
+import { AuthType, WebDAVProvider } from '@breadfs/webdav';
 import { AnyZodObject, z } from 'zod';
 import { parse, stringify } from 'yaml';
 
@@ -88,15 +88,17 @@ export async function loadSpace(
       storage: {
         anime: {
           ...space.storage.anime,
-          fs: BreadFS.of(NodeFS)
+          fs: createBreadFS(space.storage.anime)
         },
-        library: space.storage.library
-      },
-      resolvePath(...d) {
-        return path.resolve(resolved.root, ...d);
+        library: {
+          ...space.storage.library
+        }
       },
       plans,
-      plugins
+      plugins,
+      resolvePath(...d) {
+        return path.resolve(resolved.root, ...d);
+      }
     };
 
     // Plugin init
@@ -300,4 +302,20 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
   ]);
 
   return space;
+}
+
+function createBreadFS(storage: RawAnimeSpace['storage']['anime']) {
+  if (storage.provider === 'local') {
+    return BreadFS.of(NodeFS);
+  } else if (storage.provider === 'webdav') {
+    return BreadFS.of(
+      new WebDAVProvider(storage.url, {
+        authType: AuthType.Digest,
+        username: storage.username,
+        password: storage.password
+      })
+    );
+  } else {
+    throw new Error(`Unexpected storage provider`);
+  }
 }

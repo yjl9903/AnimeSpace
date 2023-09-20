@@ -45,19 +45,35 @@ export const Storage = z.object({
   anime: z
     .union([
       z
+        .object({
+          provider: z.enum(['local', 'webdav']),
+          directory: z.string().optional(),
+          url: z.string().optional(),
+          username: z.string().optional(),
+          password: z.string().optional()
+        })
+        .transform(storage => {
+          if (storage.provider === 'local') {
+            return {
+              provider: 'local' as const,
+              directory: storage.directory ?? DefaultStorageDirectory
+            };
+          } else if (storage.provider === 'webdav') {
+            if (storage.url) {
+              return {
+                provider: 'webdav' as const,
+                url: storage.url,
+                directory: storage.directory ?? '/',
+                username: storage.username,
+                password: storage.password
+              };
+            }
+          }
+          return z.NEVER;
+        }),
+      z
         .string()
-        .transform(directory => ({ provider: 'local' as const, directory })),
-      z.object({
-        provider: z.literal('local'),
-        directory: z.string()
-      }),
-      z.object({
-        provider: z.literal('webdav'),
-        directory: z.string(),
-        url: z.string(),
-        username: z.string().optional(),
-        password: z.string().optional()
-      })
+        .transform(directory => ({ provider: 'local' as const, directory }))
     ])
     .default({
       provider: 'local' as const,
