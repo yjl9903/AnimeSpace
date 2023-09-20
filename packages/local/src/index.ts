@@ -1,4 +1,3 @@
-import { ConsolaInstance } from 'consola';
 import {
   type AnimeSystem,
   getEpisodeType,
@@ -11,11 +10,14 @@ import {
   type PluginEntry
 } from '@animespace/core';
 
+import { BreadFS, NodeFS } from 'breadfs/node';
 import { memo } from 'memofunc';
 import { parse } from 'anitomy';
 import { bold, dim, lightBlue, lightGreen, lightYellow } from '@breadc/color';
 
 const DOT = dim('•');
+
+const LocalFS = BreadFS.of(NodeFS);
 
 export const LOCAL = 'Local';
 
@@ -32,7 +34,6 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
     system.logger.withTag(LOCAL)
   );
 
-  const relDir = options.directory ?? './local';
   const files: LocalFile[] = [];
 
   return {
@@ -66,7 +67,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
               )
             } to ${bold(video.filename)}`
           );
-          await anime.addVideoByMove(file.path, video);
+          await anime.addVideoByMove(file.path.path, video);
           return video;
         }
         return undefined;
@@ -74,11 +75,17 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
     },
     refresh: {
       async prepare(system) {
+        const relDir = LocalFS.path(
+          system.space.root,
+          options.directory ?? './local'
+        );
+
         files.splice(
           0,
           files.length,
           ...(await listIncludeFiles(system.space, relDir))
         );
+
         if (files.length > 0) {
           const logger = createLogger(system);
           logger.info(
@@ -138,7 +145,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
                 )
               } to ${bold(video.filename)}`
             );
-            await anime.addVideoByMove(file.path, video);
+            await anime.addVideoByMove(file.path.path, video);
           } else {
             logger.info(lightYellow(`Parse "${bold(file.filename)}" failed`));
           }

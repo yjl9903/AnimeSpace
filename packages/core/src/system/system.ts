@@ -36,7 +36,7 @@ export async function createAnimeSystem(
           `${dim('Storage')}  ${
             join(
               space.storage.anime.url,
-              space.storage.anime.directory
+              space.storage.anime.directory.path
             )
           }`
         );

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BreadFS } from 'breadfs';
+import { BreadFS, Path } from 'breadfs';
 
 import type { Plugin } from '../plugin';
 
@@ -117,7 +117,7 @@ export interface AnimeSpace {
 
   readonly storage: {
     readonly anime:
-      & { fs: BreadFS; directory: string }
+      & { fs: BreadFS; directory: Path }
       & (
         | { provider: 'local' }
         | {
@@ -129,8 +129,11 @@ export interface AnimeSpace {
       );
 
     readonly library:
-      | { mode: 'embedded' }
-      | { mode: 'external'; directory: string };
+      & { fs: BreadFS; directory: Path }
+      & (
+        | { mode: 'embedded' }
+        | { mode: 'external' }
+      );
   };
 
   readonly preference: Preference;

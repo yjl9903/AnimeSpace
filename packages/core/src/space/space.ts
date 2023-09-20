@@ -54,23 +54,6 @@ export async function loadSpace(
   if (parsed.success) {
     const space = parsed.data as RawAnimeSpace;
 
-    // Resolve directory to absolute path
-    {
-      if (space.storage.anime.provider === 'local') {
-        space.storage.anime.directory = path.resolve(
-          root,
-          space.storage.anime.directory
-        );
-      }
-
-      if (space.storage.library.mode === 'external') {
-        space.storage.library.directory = path.resolve(
-          root,
-          space.storage.library.directory
-        );
-      }
-    }
-
     // Validate space directory
     await validateSpace(root, space);
 
@@ -82,16 +65,18 @@ export async function loadSpace(
       return plans;
     });
 
+    const storageFS = makeBreadFS(root, space.storage);
     const resolved: AnimeSpace = {
       root,
       ...space,
       storage: {
         anime: {
           ...space.storage.anime,
-          fs: createBreadFS(space.storage.anime)
+          ...storageFS.anime
         },
         library: {
-          ...space.storage.library
+          ...space.storage.library,
+          ...storageFS.library
         }
       },
       plans,
@@ -304,18 +289,50 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
   return space;
 }
 
-function createBreadFS(storage: RawAnimeSpace['storage']['anime']) {
-  if (storage.provider === 'local') {
-    return BreadFS.of(NodeFS);
-  } else if (storage.provider === 'webdav') {
-    return BreadFS.of(
-      new WebDAVProvider(storage.url, {
-        authType: AuthType.Digest,
-        username: storage.username,
-        password: storage.password
-      })
-    );
-  } else {
-    throw new Error(`Unexpected storage provider`);
+function makeBreadFS(root: string, storage: RawAnimeSpace['storage']) {
+  const anime = makeAnime();
+  const library = makeLibrary();
+
+  return {
+    anime,
+    library
+  };
+
+  function makeAnime() {
+    if (storage.anime.provider === 'local') {
+      const fs = BreadFS.of(NodeFS);
+      return {
+        fs,
+        directory: fs.path(root).resolve(storage.anime.directory)
+      };
+    } else if (storage.anime.provider === 'webdav') {
+      const fs = BreadFS.of(
+        new WebDAVProvider(storage.anime.url, {
+          username: storage.anime.username,
+          password: storage.anime.password
+        })
+      );
+
+      return {
+        fs,
+        directory: fs.path(storage.anime.directory)
+      };
+    } else {
+      throw new Error(`Unexpected anime storage provider`);
+    }
+  }
+
+  function makeLibrary() {
+    if (storage.library.mode === 'embedded') {
+      return anime;
+    } else if (storage.library.mode === 'external') {
+      const fs = BreadFS.of(NodeFS);
+      return {
+        fs,
+        directory: fs.path(root).resolve(storage.library.directory)
+      };
+    } else {
+      throw new Error(`Unexpected library storage mode`);
+    }
   }
 }

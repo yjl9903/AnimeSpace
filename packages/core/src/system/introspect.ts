@@ -144,7 +144,7 @@ export async function loadAnime(
           console.error(error.message);
         } else {
           debug(error);
-          console.error(`解析 ${a.plan.title} 的 metadata.yml 失败`);
+          throw error;
         }
         return undefined;
       }

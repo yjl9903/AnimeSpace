@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'node:path';
+import { Path } from 'breadfs';
 
 import type { AnimeSpace } from '../space';
 
@@ -8,14 +9,15 @@ export function isSubDir(parent: string, dir: string) {
   return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
 }
 
-export async function listIncludeFiles(space: AnimeSpace, directory: string) {
+export async function listIncludeFiles(space: AnimeSpace, directory: Path) {
   try {
     const exts = new Set(space.preference.extension.include);
-    return (await fs.readdir(space.resolvePath(directory)))
-      .filter((f) => exts.has(path.extname(f).slice(1)))
-      .map((f) => ({
-        filename: f,
-        path: space.resolvePath(directory, f),
+
+    return (await directory.list())
+      .filter(f => exts.has(f.extname.slice(1)))
+      .map(f => ({
+        filename: f.basename,
+        path: f,
         metadata: {}
       }));
   } catch {

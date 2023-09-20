@@ -1,3 +1,5 @@
+import type { Path } from 'breadfs';
+
 import type { AnimePlanType } from '../space';
 
 export interface LocalLibrary {
@@ -35,7 +37,7 @@ export interface LocalVideoSource extends Record<string, any> {
 export interface LocalFile {
   filename: string;
 
-  path: string;
+  path: Path;
 
   metadata: Record<string, string>;
 }

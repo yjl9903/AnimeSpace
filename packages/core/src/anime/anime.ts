@@ -1,8 +1,10 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
-import trash from 'trash';
+// import trash from 'trash';
 import { z } from 'zod';
+import { Path } from 'breadfs';
+import { BreadFS, NodeFS } from 'breadfs/node';
 import { parse } from 'yaml';
 import { format } from 'date-fns';
 
@@ -19,12 +21,14 @@ import type {
 
 import { stringifyLocalLibrary } from './utils';
 
+const LocalFS = BreadFS.of(NodeFS);
+
 const LibraryFilename = 'library.yaml';
 
 export class Anime {
-  public readonly directory: string;
+  public readonly directory: Path;
 
-  public readonly libraryDirectory: string;
+  public readonly libraryDirectory: Path;
 
   public readonly plan: AnimePlan;
 
@@ -57,14 +61,12 @@ export class Anime {
     });
 
     this.directory = plan.directory
-      ? path.resolve(space.storage.anime.directory, plan.directory)
-      : path.join(space.storage.anime.directory, dirname);
+      ? space.storage.anime.directory.resolve(plan.directory)
+      : space.storage.anime.directory.join(dirname);
 
-    this.libraryDirectory = space.storage.library.mode === 'embedded'
-      ? this.directory
-      : plan.directory
-      ? path.resolve(space.storage.library.directory, plan.directory)
-      : path.join(space.storage.library.directory, dirname);
+    this.libraryDirectory = plan.directory
+      ? space.storage.library.directory.resolve(plan.directory)
+      : space.storage.library.directory.join(dirname);
   }
 
   public delta() {
@@ -89,22 +91,24 @@ export class Anime {
     return true;
   }
 
-  public get libraryPath() {
-    return path.join(this.libraryDirectory, LibraryFilename);
+  public get libraryPath(): Path {
+    return this.libraryDirectory.join(LibraryFilename);
   }
 
   public async library(force = false): Promise<LocalLibrary> {
     if (this._lib === undefined || force) {
-      await fs.ensureDir(this.libraryDirectory);
+      // await fs.ensureDir(this.libraryDirectory);
+      await this.libraryDirectory.ensureDir();
+
       const libPath = this.libraryPath;
 
-      if (await fs.exists(libPath)) {
+      if (await libPath.exists()) {
         // Mark as unmodified
         this._dirty = false;
 
-        const libContent = await fs
-          .readFile(libPath, 'utf-8')
-          .catch(() => fs.readFile(libPath, 'utf-8')); // Retry at most 1 times
+        const libContent = await libPath
+          .readText()
+          .catch(() => libPath.readText()); // Retry at most 1 times
         const lib = parse(libContent) ?? {};
         this._raw_lib = lib;
 
@@ -156,7 +160,7 @@ export class Anime {
         } else {
           debug(parsed.error.issues);
           throw new AnimeSystemError(
-            `解析 ${this.plan.title} 的 metadata.yml 失败`
+            `解析 ${this.plan.title} 的 ${LibraryFilename} 失败`
           );
         }
       } else {
@@ -166,11 +170,11 @@ export class Anime {
           date: this.plan.date,
           videos: []
         };
-        await fs.writeFile(
-          libPath,
-          stringifyLocalLibrary(defaultLib, { videos: [] }),
-          'utf-8'
+
+        await libPath.writeText(
+          stringifyLocalLibrary(defaultLib, { videos: [] })
         );
+
         this._raw_lib = {};
         this._lib = defaultLib;
         return defaultLib;
@@ -262,33 +266,40 @@ export class Anime {
 
   // --- mutation ---
   private async addVideo(
-    src: string,
+    localSrc: string,
     newVideo: LocalVideo,
     { copy = false }: { copy?: boolean } = {}
   ): Promise<LocalVideoDelta | undefined> {
     await this.library();
+
     let delta: LocalVideoDelta | undefined = undefined;
     try {
-      const dst = path.join(this.directory, newVideo.filename);
-      if (src !== dst) {
+      const src = LocalFS.path(localSrc);
+      const dst = this.directory.join(newVideo.filename);
+
+      if (src.path !== dst.path) {
+        // TODO: trash
         // Trash the existed destination file, not overwrite
-        if (await fs.exists(dst)) {
-          await trash(dst).catch(() => {});
-        }
+        // if (await dst.exists()) {
+        //   await trash(dst.path).catch(() => {});
+        // }
 
         if (copy) {
-          await fs.copy(src, dst, {
-            overwrite: true
-          });
+          await src.copyTo(dst, { overwrite: true });
+          // await fs.copy(src, dst, {
+          //   overwrite: true,
+          // });
           delta = { operation: 'copy', video: newVideo };
         } else {
-          await fs.move(src, dst, {
-            overwrite: true
-          });
+          await src.moveTo(dst, { overwrite: true });
+          // await fs.move(src, dst, {
+          //   overwrite: true,
+          // });
           delta = { operation: 'move', video: newVideo };
         }
         this._delta.push(delta);
       }
+
       this._dirty = true;
       this._lib!.videos.push(newVideo);
     } catch (error) {
@@ -345,10 +356,13 @@ export class Anime {
     try {
       if (oldFilename !== newFilename) {
         this._dirty = true;
-        await fs.move(
-          path.join(this.directory, oldFilename),
-          path.join(this.directory, newFilename)
-        );
+        await this.directory
+          .join(oldFilename)
+          .moveTo(this.directory.join(newFilename));
+        // await fs.move(
+        //   path.join(this.directory, oldFilename),
+        //   path.join(this.directory, newFilename)
+        // );
         src.filename = newFilename;
         const delta = { operation: 'move', video: src } as const;
         this._delta.push(delta);
@@ -376,12 +390,14 @@ export class Anime {
     };
 
     const lib = await this.library();
-    const videoPath = path.join(this.directory, target.filename);
-    if (await fs.exists(videoPath)) {
+    const video = this.directory.join(target.filename);
+    if (await video.exists()) {
       try {
-        await trash(videoPath).catch(async err => {
-          await fs.remove(videoPath);
-        });
+        // TODO: trash
+        // await trash(videoPath).catch(async err => {
+        //   await fs.remove(videoPath);
+        // });
+        await video.remove();
         return remove();
       } catch (error) {
         console.error(error);
@@ -408,10 +424,8 @@ export class Anime {
     if (this._lib && this._dirty) {
       debug(`Start writing anime library of ${this._lib.title}`);
       try {
-        await fs.writeFile(
-          this.libraryPath,
-          stringifyLocalLibrary(this._lib!, this._raw_lib),
-          'utf-8'
+        await this.libraryPath.writeText(
+          stringifyLocalLibrary(this._lib!, this._raw_lib)
         );
         this._dirty = false;
         debug(`Write anime library of ${this._lib.title} OK`);
