@@ -10,14 +10,12 @@ import {
   type PluginEntry
 } from '@animespace/core';
 
-import { BreadFS, NodeFS } from 'breadfs/node';
+import { fs as LocalFS } from 'breadfs/node';
 import { memo } from 'memofunc';
 import { parse } from 'anitomy';
 import { bold, dim, lightBlue, lightGreen, lightYellow } from '@breadc/color';
 
 const DOT = dim('•');
-
-const LocalFS = BreadFS.of(NodeFS);
 
 export const LOCAL = 'Local';
 

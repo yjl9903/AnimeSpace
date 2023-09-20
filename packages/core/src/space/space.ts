@@ -1,9 +1,9 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
+import { fs as LocalFS } from 'breadfs/node';
 import { BreadFS } from 'breadfs';
-import { NodeFS } from '@breadfs/node';
-import { AuthType, WebDAVProvider } from '@breadfs/webdav';
+import { WebDAVProvider } from 'breadfs/webdav';
 import { AnyZodObject, z } from 'zod';
 import { parse, stringify } from 'yaml';
 
@@ -300,10 +300,10 @@ function makeBreadFS(root: string, storage: RawAnimeSpace['storage']) {
 
   function makeAnime() {
     if (storage.anime.provider === 'local') {
-      const fs = BreadFS.of(NodeFS);
+      const fs = LocalFS;
       return {
         fs,
-        directory: fs.path(root).resolve(storage.anime.directory)
+        directory: LocalFS.path(root).resolve(storage.anime.directory)
       };
     } else if (storage.anime.provider === 'webdav') {
       const fs = BreadFS.of(
@@ -326,7 +326,7 @@ function makeBreadFS(root: string, storage: RawAnimeSpace['storage']) {
     if (storage.library.mode === 'embedded') {
       return anime;
     } else if (storage.library.mode === 'external') {
-      const fs = BreadFS.of(NodeFS);
+      const fs = LocalFS;
       return {
         fs,
         directory: fs.path(root).resolve(storage.library.directory)

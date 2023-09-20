@@ -1,10 +1,9 @@
-import fs from 'fs-extra';
 import path from 'node:path';
 
 // import trash from 'trash';
 import { z } from 'zod';
 import { Path } from 'breadfs';
-import { BreadFS, NodeFS } from 'breadfs/node';
+import { fs as LocalFS } from 'breadfs/node';
 import { parse } from 'yaml';
 import { format } from 'date-fns';
 
@@ -20,8 +19,6 @@ import type {
 } from './types';
 
 import { stringifyLocalLibrary } from './utils';
-
-const LocalFS = BreadFS.of(NodeFS);
 
 const LibraryFilename = 'library.yaml';
 

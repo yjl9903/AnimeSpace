@@ -43,9 +43,8 @@
   "dependencies": {
     "@animespace/core": "workspace:*",
     "@breadc/color": "^0.9.6",
-    "@breadfs/node": "^0.0.5",
     "anitomy": "^0.0.26",
-    "breadfs": "^0.0.5",
+    "breadfs": "^0.0.6",
     "memofunc": "^0.0.6"
   },
   "engines": {

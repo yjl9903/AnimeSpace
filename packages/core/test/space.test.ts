@@ -5,7 +5,7 @@ import { rimraf } from 'rimraf';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { loadSpace } from '../src';
-import { BreadFS, NodeFS } from 'breadfs/node';
+import { fs as LocalFS } from 'breadfs/node';
 
 const __dirname = path.join(fileURLToPath(import.meta.url), '../');
 
@@ -45,7 +45,7 @@ describe.only('Load Space', () => {
       root,
       storage: {
         anime: {
-          fs: BreadFS.of(NodeFS),
+          fs: LocalFS,
           provider: 'local',
           directory: path.join(root, 'anime')
         },
