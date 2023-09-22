@@ -57,7 +57,7 @@
     "libaria2": "^1.0.95",
     "memofunc": "^0.0.6",
     "prompts": "^2.4.2",
-    "undici": "^5.23.0",
+    "undici": "^5.25.2",
     "webtorrent": "^2.1.25",
     "zod": "^3.22.2"
   },

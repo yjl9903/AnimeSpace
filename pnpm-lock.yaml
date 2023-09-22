@@ -138,8 +138,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       undici:
-        specifier: ^5.23.0
-        version: 5.23.0
+        specifier: ^5.25.2
+        version: 5.25.2
       webtorrent:
         specifier: ^2.1.25
         version: 2.1.25
@@ -163,8 +163,8 @@ importers:
         specifier: ^0.0.4
         version: 0.0.4
       undici:
-        specifier: ^5.23.0
-        version: 5.23.0
+        specifier: ^5.25.2
+        version: 5.25.2
     devDependencies:
       typescript:
         specifier: ^5.2.2
@@ -209,8 +209,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       undici:
-        specifier: ^5.23.0
-        version: 5.23.0
+        specifier: ^5.25.2
+        version: 5.25.2
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.2
@@ -7304,8 +7304,8 @@ packages:
       mlly: 1.4.0
     dev: true
 
-  /undici@5.23.0:
-    resolution: {integrity: sha512-1D7w+fvRsqlQ9GscLBwcAJinqcZGHUKjbOmXdlE/v8BvEGXjeWAax+341q44EuTcHXXnfyKNbKRq4Lg7OzhMmg==}
+  /undici@5.25.2:
+    resolution: {integrity: sha512-tch8RbCfn1UUH1PeVCXva4V8gDpGAud/w0WubD6sHC46vYQ3KDxL+xv1A2UxK0N6jrVedutuPHxe1XIoqerwMw==}
     engines: {node: '>=14.0'}
     dependencies:
       busboy: 1.6.0
