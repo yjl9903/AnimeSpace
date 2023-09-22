@@ -44,7 +44,7 @@
   "dependencies": {
     "@animespace/core": "workspace:*",
     "bgmc": "^0.0.4",
-    "undici": "^5.23.0"
+    "undici": "^5.25.2"
   },
   "devDependencies": {
     "typescript": "^5.2.2"
