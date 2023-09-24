@@ -222,8 +222,8 @@ importers:
         specifier: ^11.0.2
         version: 11.0.2
       '@types/prompts':
-        specifier: ^2.4.4
-        version: 2.4.4
+        specifier: ^2.4.5
+        version: 2.4.5
       '@vercel/ncc':
         specifier: ^0.38.0
         version: 0.38.0
@@ -2708,8 +2708,8 @@ packages:
       '@types/parse-torrent-file': 4.0.3
     dev: true
 
-  /@types/prompts@2.4.4:
-    resolution: {integrity: sha512-p5N9uoTH76lLvSAaYSZtBCdEXzpOOufsRjnhjVSrZGXikVGHX9+cc9ERtHRV4hvBKHyZb1bg4K+56Bd2TqUn4A==}
+  /@types/prompts@2.4.5:
+    resolution: {integrity: sha512-TvrzGMCwARi2qqXcD7VmvMvfMP3F7JRQpeEHECK0oufRNZInoBqzd8v/1zksKFE5XW8OOGto/5FsDT8lnpvGRA==}
     dependencies:
       '@types/node': 20.5.0
       kleur: 3.0.3
