@@ -265,7 +265,7 @@ export class Anime {
   private async addVideo(
     localSrc: string,
     newVideo: LocalVideo,
-    { copy = false }: { copy?: boolean } = {}
+    { copy = false, onProgress }: { copy?: boolean } & AddVideoOptions = {}
   ): Promise<LocalVideoDelta | undefined> {
     await this.library();
 
@@ -282,16 +282,16 @@ export class Anime {
         // }
 
         if (copy) {
-          await src.copyTo(dst, { overwrite: true });
-          // await fs.copy(src, dst, {
-          //   overwrite: true,
-          // });
+          await src.copyTo(dst, {
+            overwrite: true,
+            fallback: { file: { write: { onProgress } } }
+          });
           delta = { operation: 'copy', video: newVideo };
         } else {
-          await src.moveTo(dst, { overwrite: true });
-          // await fs.move(src, dst, {
-          //   overwrite: true,
-          // });
+          await src.moveTo(dst, {
+            overwrite: true,
+            fallback: { file: { write: { onProgress } } }
+          });
           delta = { operation: 'move', video: newVideo };
         }
         this._delta.push(delta);
@@ -315,7 +315,8 @@ export class Anime {
    */
   public async addVideoByCopy(
     src: string,
-    video: LocalVideo
+    video: LocalVideo,
+    options: AddVideoOptions = {}
   ): Promise<LocalVideoDelta | undefined> {
     return this.addVideo(src, video, { copy: true });
   }
@@ -329,7 +330,8 @@ export class Anime {
    */
   public async addVideoByMove(
     src: string,
-    video: LocalVideo
+    video: LocalVideo,
+    options: AddVideoOptions = {}
   ): Promise<LocalVideoDelta | undefined> {
     return this.addVideo(src, video, { copy: false });
   }
@@ -441,4 +443,8 @@ interface LocalVideoDelta {
   video: LocalVideo;
 
   log?: string;
+}
+
+interface AddVideoOptions {
+  onProgress?: (payload: { current: number; total: number }) => void;
 }
