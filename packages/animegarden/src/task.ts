@@ -249,7 +249,8 @@ export async function runDownloadTask(
   }, 10 * 60 * 1000); // 10 minutes
 
   const tasks = videos.map(async video => {
-    const bar = multibar.create(video.video.filename, 100);
+    const bar = multibar.create(`${bold(video.video.filename)}`, 100);
+
     try {
       const { files } = await client.download(
         video.video.filename,
@@ -313,31 +314,60 @@ export async function runDownloadTask(
             && anime.resolveEpisode(v.episode) === resolvedEpisode // Find same episode after being resolved
         );
 
+        // Upload progress bar
+        const bar = multibar.create(`${bold(video.video.filename)}`, 100);
+        bar.update(0, {
+          speed: 0,
+          connections: 0,
+          completed: BigInt(0),
+          total: BigInt(0),
+          state: 'Copying'
+        });
+
         // Copy video to storage
-        const copyDelta = await anime.addVideoByCopy(file, video.video);
-        if (copyDelta) {
-          const detailURL = `https://garden.onekuma.cn/resource/${
-            video.video.source
-              .magnet!.split('/')
-              .at(-1)
-          }`;
-          copyDelta.log = link(video.video.filename, detailURL);
+        try {
+          const copyDelta = await anime.addVideoByCopy(file, video.video, {
+            onProgress({ current, total }) {
+              const value = total > 0
+                ? +(Math.ceil((1000.0 * current) / total) / 10).toFixed(1)
+                : 0;
+              bar.update(value, {
+                speed: 0,
+                connections: 0,
+                completed: BigInt(current),
+                total: BigInt(total),
+                state: 'Copying'
+              });
+            }
+          });
 
-          // Remove old animegarden video to keep storage clean
-          if (oldVideo) {
+          if (copyDelta) {
+            const detailURL = `https://garden.onekuma.cn/resource/${
+              video.video.source
+                .magnet!.split('/')
+                .at(-1)
+            }`;
+            copyDelta.log = link(video.video.filename, detailURL);
+
+            // Remove old animegarden video to keep storage clean
+            if (oldVideo) {
+              multibarLogger.info(
+                `${lightRed('Removing')} ${bold(oldVideo.filename)}`
+              );
+              await anime.removeVideo(oldVideo);
+            }
+
             multibarLogger.info(
-              `${lightRed('Removing')} ${bold(oldVideo.filename)}`
+              `${lightGreen('Copy')} ${bold(video.video.filename)} ${
+                lightGreen(
+                  'OK'
+                )
+              }`
             );
-            await anime.removeVideo(oldVideo);
           }
-
-          multibarLogger.info(
-            `${lightGreen('Copy')} ${bold(video.video.filename)} ${
-              lightGreen(
-                'OK'
-              )
-            }`
-          );
+        } finally {
+          bar.stop();
+          bar.remove();
         }
       } else {
         multibar.println(

@@ -75,7 +75,7 @@ export function createProgressBar<T extends Record<string, any>>(
       const empty = multibar.create(length, 0, {}, { title: name } as any);
       const title = multibar.create(length, 0, {}, { title: name } as any);
       const progress = multibar.create(length, 0);
-      title.update(0, { title: bold(name) });
+      title.update(0, { title: name });
       empty.update(0, { title: '' });
 
       return {
@@ -90,14 +90,17 @@ export function createProgressBar<T extends Record<string, any>>(
           multibar.remove(title);
           multibar.remove(progress);
         },
+        rename(newName: string) {
+          name = newName;
+        },
         update(value: number, payload?: T) {
           empty.update(value, { title: '' });
-          title.update(value, { title: bold(name) });
+          title.update(value, { title: name });
           progress.update(value, payload);
         },
         increment(value: number, payload?: T) {
           empty.increment(value, { title: '' });
-          title.increment(value, { title: bold(name) });
+          title.increment(value, { title: name });
           progress.increment(value, payload);
         }
       };
