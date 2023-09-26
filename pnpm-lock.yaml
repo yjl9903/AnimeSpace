@@ -29,8 +29,8 @@ importers:
         specifier: ^0.6.3
         version: 0.6.3
       rimraf:
-        specifier: ^5.0.1
-        version: 5.0.1
+        specifier: ^5.0.4
+        version: 5.0.4
       turbo:
         specifier: ^1.10.14
         version: 1.10.14
@@ -289,8 +289,8 @@ importers:
         specifier: ^0.9.6
         version: 0.9.6
       rimraf:
-        specifier: ^5.0.1
-        version: 5.0.1
+        specifier: ^5.0.4
+        version: 5.0.4
 
   packages/local:
     dependencies:
@@ -4817,8 +4817,8 @@ packages:
     dependencies:
       is-glob: 4.0.3
 
-  /glob@10.3.3:
-    resolution: {integrity: sha512-92vPiMb/iqpmEgsOoIDvTjc50wf9CCCvMzsi6W0JLPeUKE8TWP1a73PgqSrqy7iAZxaSD1YdzU7QZR5LF51MJw==}
+  /glob@10.3.7:
+    resolution: {integrity: sha512-wCMbE1m9Nx5yD9LYtgsVWq5VhHlk5WzJirw594qZR6AIvQYuHrdDtIktUVjQItalD53y7dqoedu9xP0u0WaxIQ==}
     engines: {node: '>=16 || 14 >=14.17'}
     hasBin: true
     dependencies:
@@ -6507,12 +6507,12 @@ packages:
     resolution: {integrity: sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==}
     dev: true
 
-  /rimraf@5.0.1:
-    resolution: {integrity: sha512-OfFZdwtd3lZ+XZzYP/6gTACubwFcHdLRqS9UX3UwpU2dnGQYkPFISRwvM3w9IiB2w7bW5qGo/uAwE4SmXXSKvg==}
+  /rimraf@5.0.4:
+    resolution: {integrity: sha512-rizQI/o/YAMM1us0Zyax0uRfIK39XR52EAjjOi0fzMolpGp0onj6CWzBAXuOx6+6Xi9Rgi0d9tUZojhJerLUmQ==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
-      glob: 10.3.3
+      glob: 10.3.7
     dev: true
 
   /rollup-plugin-dts@6.0.0(rollup@3.28.1)(typescript@5.2.2):
