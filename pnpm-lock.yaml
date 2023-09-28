@@ -105,8 +105,8 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.0.27
-        version: 0.0.27
+        specifier: ^0.0.28
+        version: 0.0.28
       anitomy:
         specifier: ^0.0.28
         version: 0.0.28
@@ -3242,8 +3242,8 @@ packages:
       '@algolia/transporter': 4.19.1
     dev: true
 
-  /animegarden@0.0.27:
-    resolution: {integrity: sha512-q1FaM9SvwzT+g4Em+knpSuKpIHMg9vBIpu9KkKpUC5TcowknVtIfBRGXmNI3tvDFBPGjwFDpSSWjSkn3BwbZ9Q==}
+  /animegarden@0.0.28:
+    resolution: {integrity: sha512-EKpwj9pzipBmhmlfbyHZbLs0Ez9HbJR/qXQTn9DoO6b0QReS6/XqOQ2duRT//yS35/7G+l+kdLqULlgOneR9Vg==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
