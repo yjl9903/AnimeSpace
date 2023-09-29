@@ -3,7 +3,8 @@
     "target": "ES2018",
     "module": "ESNext",
     "lib": [
-      "ESNext"
+      "ESNext",
+      "DOM"
     ],
     "moduleResolution": "node",
     "esModuleInterop": true,

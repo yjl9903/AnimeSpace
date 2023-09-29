@@ -27,6 +27,7 @@ describe('system', () => {
             season: 2,
             status: 'onair',
             title: '熊熊勇闯异世界 Punch!',
+            alias: [],
             translations: {},
             type: '番剧'
           },
@@ -40,6 +41,7 @@ describe('system', () => {
             },
             status: 'onair',
             title: '天国大魔境',
+            alias: [],
             translations: {
               unknown: ['Tengoku Daimakyou']
             },
@@ -55,6 +57,7 @@ describe('system', () => {
             },
             status: 'onair',
             title: '偶像大师 灰姑娘女孩 U149',
+            alias: [],
             translations: {},
             type: '番剧'
           }
