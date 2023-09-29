@@ -1,30 +1,30 @@
 import fs from 'fs-extra';
 import path from 'node:path';
 
-import { fs as LocalFS } from 'breadfs/node';
 import { BreadFS } from 'breadfs';
+import { fs as LocalFS } from 'breadfs/node';
 import { WebDAVProvider } from 'breadfs/webdav';
+import { memoAsync } from 'memofunc';
 import { AnyZodObject, z } from 'zod';
 import { parse, stringify } from 'yaml';
 
 import type { Plugin } from '../plugin';
 
 import { AnimeSystemError, debug } from '../error';
-import { isSubDir, useAsyncSingleton } from '../utils';
 
 import { loadPlan } from './plan';
 import {
   AnimeSpace,
   PluginEntry,
   RawAnimeSpace,
-  RawAnimeSpaceSchema
+  RawAnimeSpaceSchema,
 } from './schema';
 import {
   DefaultAnimeFormat,
   DefaultConfigFilename,
   DefaultEpisodeFormat,
   DefaultFilmFormat,
-  DefaultStorageDirectory
+  DefaultStorageDirectory,
 } from './constant';
 
 export type PluginLoaderFn = (
@@ -57,7 +57,7 @@ export async function loadSpace(
     // Validate space directory
     await validateSpace(root, space);
 
-    const plans = useAsyncSingleton(async () => {
+    const plans = memoAsync(async () => {
       const plans = await loadPlan(root, space.plans, plugins);
       for (const plugin of resolved.plugins) {
         await plugin.prepare?.plans?.(resolved, plans);
@@ -72,18 +72,18 @@ export async function loadSpace(
       storage: {
         anime: {
           ...space.storage.anime,
-          ...storageFS.anime
+          ...storageFS.anime,
         },
         library: {
           ...space.storage.library,
-          ...storageFS.library
-        }
+          ...storageFS.library,
+        },
       },
       plans,
       plugins,
       resolvePath(...d) {
         return path.resolve(resolved.root, ...d);
-      }
+      },
     };
 
     // Plugin init
@@ -216,40 +216,40 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     storage: {
       anime: {
         provider: 'local',
-        directory: path.join(root, DefaultStorageDirectory)
+        directory: path.join(root, DefaultStorageDirectory),
       },
-      library: { mode: 'embedded' }
+      library: { mode: 'embedded' },
     },
     preference: {
       format: {
         anime: DefaultAnimeFormat,
         episode: DefaultEpisodeFormat,
         film: DefaultFilmFormat,
-        ova: DefaultFilmFormat
+        ova: DefaultFilmFormat,
       },
       extension: {
         include: ['mp4', 'mkv'],
-        exclude: []
+        exclude: [],
       },
       keyword: {
         order: {
           format: ['mp4', 'mkv'],
           language: ['简', '繁'],
-          resolution: ['1080', '720']
+          resolution: ['1080', '720'],
         },
-        exclude: []
+        exclude: [],
       },
       fansub: {
         order: [],
-        exclude: []
-      }
+        exclude: [],
+      },
     },
     plans: ['./plans/*.yaml'],
     plugins: [
       { name: 'animegarden', provider: 'aria2', directory: './download' },
       { name: 'local', directory: './local' },
-      { name: 'bangumi', username: '' }
-    ]
+      { name: 'bangumi', username: '' },
+    ],
   } satisfies RawAnimeSpace;
 
   await fs.mkdir(root, { recursive: true }).catch(() => {});
@@ -272,9 +272,9 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
           ...space.storage,
           anime: {
             ...space.storage.anime,
-            directory: DefaultStorageDirectory
-          }
-        }
+            directory: DefaultStorageDirectory,
+          },
+        },
       }),
       'utf-8'
     ),
@@ -283,7 +283,7 @@ async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
       ['*.mp4', '*.mkv', '*.aria2'].join('\n'),
       'utf-8'
     ),
-    fs.writeFile(path.join(root, 'README.md'), `# AnimeSpace\n`, 'utf-8')
+    fs.writeFile(path.join(root, 'README.md'), `# AnimeSpace\n`, 'utf-8'),
   ]);
 
   return space;
@@ -295,7 +295,7 @@ function makeBreadFS(root: string, storage: RawAnimeSpace['storage']) {
 
   return {
     anime,
-    library
+    library,
   };
 
   function makeAnime() {
@@ -303,19 +303,19 @@ function makeBreadFS(root: string, storage: RawAnimeSpace['storage']) {
       const fs = LocalFS;
       return {
         fs,
-        directory: LocalFS.path(root).resolve(storage.anime.directory)
+        directory: LocalFS.path(root).resolve(storage.anime.directory),
       };
     } else if (storage.anime.provider === 'webdav') {
       const fs = BreadFS.of(
         new WebDAVProvider(storage.anime.url, {
           username: storage.anime.username,
-          password: storage.anime.password
+          password: storage.anime.password,
         })
       );
 
       return {
         fs,
-        directory: fs.path(storage.anime.directory)
+        directory: fs.path(storage.anime.directory),
       };
     } else {
       throw new Error(`Unexpected anime storage provider`);
@@ -329,7 +329,7 @@ function makeBreadFS(root: string, storage: RawAnimeSpace['storage']) {
       const fs = LocalFS;
       return {
         fs,
-        directory: fs.path(root).resolve(storage.library.directory)
+        directory: fs.path(root).resolve(storage.library.directory),
       };
     } else {
       throw new Error(`Unexpected library storage mode`);
