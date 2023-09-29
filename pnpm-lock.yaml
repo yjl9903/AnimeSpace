@@ -134,12 +134,6 @@ importers:
       memofunc:
         specifier: ^0.0.6
         version: 0.0.6
-      prompts:
-        specifier: ^2.4.2
-        version: 2.4.2
-      undici:
-        specifier: ^5.25.2
-        version: 5.25.2
       webtorrent:
         specifier: ^2.1.25
         version: 2.1.25
@@ -162,9 +156,12 @@ importers:
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
-      undici:
-        specifier: ^5.25.2
-        version: 5.25.2
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
     devDependencies:
       typescript:
         specifier: ^5.2.2
@@ -278,6 +275,9 @@ importers:
       trash:
         specifier: ^8.1.1
         version: 8.1.1
+      undici:
+        specifier: ^5.25.2
+        version: 5.25.2
       yaml:
         specifier: ^2.3.2
         version: 2.3.2

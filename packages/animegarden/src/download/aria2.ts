@@ -8,9 +8,7 @@ import { dim } from '@breadc/color';
 import { defu } from 'defu';
 import { WebSocket } from 'libaria2';
 import { MutableMap } from '@onekuma/map';
-import { AnimeSystem, resolveStringArray } from '@animespace/core';
-
-import { getProxy } from '../ufetch';
+import { AnimeSystem, resolveStringArray, getProxy } from '@animespace/core';
 
 import { DefaultTrackers } from './trackers';
 import { DownloadClient, DownloadOptions, DownloadState } from './base';

@@ -1,19 +1,4 @@
 import { fetch } from 'undici';
-import { Anime } from '@animespace/core';
-import { fetchResources } from 'animegarden';
-
-export async function fetchAnimeResources(anime: Anime) {
-  const { resources } = await fetchResources(ufetch, {
-    type: '動畫',
-    after: anime.plan.date,
-    include: anime.plan.keywords.include,
-    exclude: anime.plan.keywords.exclude,
-    retry: 10,
-    count: -1,
-    progress(res, { url, page }) {}
-  });
-  return resources;
-}
 
 export const ufetch = async (
   url: RequestInfo,
@@ -25,7 +10,7 @@ export const ufetch = async (
     // @ts-ignore
     return fetch(url, {
       ...init,
-      dispatcher: new ProxyAgent(proxy)
+      dispatcher: new ProxyAgent(proxy),
     });
   } else {
     // @ts-ignore

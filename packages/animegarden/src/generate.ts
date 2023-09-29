@@ -1,14 +1,12 @@
 import path from 'path';
 import fs from 'fs-extra';
 
-import { AnimeSystem, uniqBy } from '@animespace/core';
+import { AnimeSystem, uniqBy, ufetch } from '@animespace/core';
 
 import { fetchResources } from 'animegarden';
 import { bold, lightBlue, lightRed } from '@breadc/color';
 import { format, getYear, subMonths } from 'date-fns';
 import { BgmClient, type BGMCollection } from 'bgmc';
-
-import { ufetch } from './ufetch';
 
 type Item<T> = T extends Array<infer R> ? R : never;
 

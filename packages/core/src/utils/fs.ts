@@ -1,4 +1,3 @@
-import fs from 'fs-extra';
 import path from 'node:path';
 import { Path } from 'breadfs';
 
@@ -18,7 +17,7 @@ export async function listIncludeFiles(space: AnimeSpace, directory: Path) {
       .map(f => ({
         filename: f.basename,
         path: f,
-        metadata: {}
+        metadata: {},
       }));
   } catch {
     return [];
