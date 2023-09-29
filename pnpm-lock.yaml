@@ -110,9 +110,6 @@ importers:
       anitomy:
         specifier: ^0.0.28
         version: 0.0.28
-      bgmc:
-        specifier: ^0.0.4
-        version: 0.0.4
       cli-progress:
         specifier: ^3.12.0
         version: 3.12.0
@@ -153,12 +150,21 @@ importers:
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
+      '@breadc/color':
+        specifier: ^0.9.6
+        version: 0.9.6
+      animegarden:
+        specifier: ^0.0.28
+        version: 0.0.28
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
+      fs-extra:
+        specifier: ^11.1.1
+        version: 11.1.1
       prompts:
         specifier: ^2.4.2
         version: 2.4.2

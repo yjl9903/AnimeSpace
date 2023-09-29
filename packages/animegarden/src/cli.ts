@@ -1,12 +1,10 @@
 import type { Breadc } from 'breadc';
 
-import prompts from 'prompts';
 import { bold, lightYellow, link } from '@breadc/color';
 import { type AnimeSystem, loadAnime } from '@animespace/core';
 
 import './plan.d';
 
-import { generatePlan, getCollections, searchBgm } from './generate';
 import { ANIMEGARDEN, DOT } from './constant';
 import { generateDownloadTask } from './task';
 import {
@@ -23,76 +21,6 @@ export function registerCli(
   getClient: (system: AnimeSystem) => DownloadClient
 ) {
   const logger = system.logger.withTag('animegarden');
-
-  cli
-    .command(
-      'bangumi search <input>',
-      'Search anime from bangumi and generate plan'
-    )
-    .alias('bgm search')
-    .option('--date <date>', 'Specify the onair begin date')
-    .option('--fansub', 'Generate fansub list')
-    .action(async (input, options) => {
-      const bgms = await searchBgm(input);
-      if (bgms.length === 0) {
-        logger.warn('未找到任何动画');
-        return;
-      }
-
-      const selected =
-        bgms.length === 1
-          ? { bangumi: bgms }
-          : await prompts({
-              type: 'multiselect',
-              name: 'bangumi',
-              message: '选择将要生成计划的动画',
-              choices: bgms.map(bgm => ({
-                title: (bgm.name_cn || bgm.name) ?? String(bgm.id!),
-                value: bgm,
-              })),
-              hint: '- 上下移动, 空格选择, 回车确认',
-              // @ts-ignore
-              instructions: false,
-            });
-
-      if (!selected.bangumi) {
-        return;
-      }
-
-      if (bgms.length > 1) {
-        logger.log('');
-      }
-
-      await generatePlan(
-        system,
-        selected.bangumi.map((bgm: any) => bgm.id!),
-        { create: undefined, fansub: options.fansub, date: options.date }
-      );
-    });
-
-  cli
-    .command('bangumi generate', 'Generate Plan from your bangumi collections')
-    .alias('bgm gen')
-    .alias('bgm generate')
-    .option('--username <username>', 'Bangumi username')
-    .option('--create <filename>', 'Create plan file in the space directory')
-    .option('--fansub', 'Generate fansub list')
-    .option('--date <date>', 'Specify the onair begin date')
-    .action(async options => {
-      const bangumiPlugin = system.space.plugins.find(
-        p => p.name === 'bangumi'
-      );
-      const username =
-        options.username ?? (bangumiPlugin?.options?.username as string) ?? '';
-      if (!username) {
-        logger.error(
-          'You should provide your bangumi username with --username <username>'
-        );
-      }
-
-      const collections = await getCollections(username);
-      return await generatePlan(system, collections, options);
-    });
 
   cli
     .command('garden list [keyword]', 'List videos of anime from AnimeGarden')
