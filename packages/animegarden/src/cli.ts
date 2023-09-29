@@ -25,7 +25,8 @@ export function registerCli(
   const logger = system.logger.withTag('animegarden');
 
   cli
-    .command('search <input>', 'Search anime from bangumi and generate plan')
+    .command('bangumi search <input>', 'Search anime from bangumi and generate plan')
+    .alias('bgm search')
     .option('--date <date>', 'Specify the onair begin date')
     .option('--fansub', 'Generate fansub list')
     .action(async (input, options) => {
@@ -67,6 +68,8 @@ export function registerCli(
 
   cli
     .command('bangumi generate', 'Generate Plan from your bangumi collections')
+    .alias('bgm gen')
+    .alias('bgm generate')
     .option('--username <username>', 'Bangumi username')
     .option('--create <filename>', 'Create plan file in the space directory')
     .option('--fansub', 'Generate fansub list')
