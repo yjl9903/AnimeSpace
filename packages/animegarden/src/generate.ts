@@ -88,10 +88,12 @@ export async function generatePlan(
         translations,
       };
 
-      writeln(`  - title: ${plan.title}`);
+      const escapeString = (t: string) => t.replace(`'`, `''`);
+
+      writeln(`  - title: ${escapeString(plan.title)}`);
       writeln(`    translations:`);
       for (const t of plan.translations ?? []) {
-        writeln(`      - '${t}'`);
+        writeln(`      - '${escapeString(t)}'`);
       }
       if (plan.season !== 1) {
         writeln(`    season: ${plan.season}`);
