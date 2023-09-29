@@ -54,13 +54,11 @@ export async function generatePlan(
 
       if (options.create) {
         system.logger.info(
-          `${lightBlue('Searching')} ${
-            bold(
-              anime.subject?.name_cn
-                || anime.subject?.name
-                || `Bangumi ${anime.subject_id}`
-            )
-          }`
+          `${lightBlue('Searching')} ${bold(
+            anime.subject?.name_cn ||
+              anime.subject?.name ||
+              `Bangumi ${anime.subject_id}`
+          )}`
         );
       }
     }
@@ -70,20 +68,24 @@ export async function generatePlan(
         typeof anime === 'object' ? anime.subject_id : anime
       );
 
-      const alias = item.infobox?.find(box => box.key === '别名');
       const title = item.name_cn || item.name;
-      const translations = (alias?.value.map(v =>
-        v?.v
-      ).filter(Boolean) as string[]) ?? [];
+      const aliasBox = item.infobox?.find(box => box.key === '别名');
+      const translations = Array.isArray(aliasBox?.value)
+        ? (aliasBox?.value.map(v => v?.v).filter(Boolean) as string[]) ?? []
+        : typeof aliasBox?.value === 'string'
+        ? [aliasBox.value]
+        : [];
+
       if (item.name && item.name !== title) {
         translations.unshift(item.name);
       }
+
       const plan = {
         title,
         bgm: '' + item.id,
         season: inferSeason(title, ...translations),
         type: inferType(item),
-        translations
+        translations,
       };
 
       writeln(`  - title: ${plan.title}`);
@@ -122,23 +124,19 @@ export async function generatePlan(
         .replace(/"/g, '%22')
         .replace(/ /g, '%20');
       writeln(
-        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${
-          encodeURIComponent(
-            date.toISOString()
-          )
-        }`
+        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${encodeURIComponent(
+          date.toISOString()
+        )}`
       );
       writeln(``);
     } catch (error) {
       if (typeof anime === 'object') {
         system.logger.error(
-          `${lightRed('Failed to search')} ${
-            bold(
-              anime.subject?.name_cn
-                || anime.subject?.name
-                || `Bangumi ${anime.subject_id}`
-            )
-          }`
+          `${lightRed('Failed to search')} ${bold(
+            anime.subject?.name_cn ||
+              anime.subject?.name ||
+              `Bangumi ${anime.subject_id}`
+          )}`
         );
       } else {
         system.logger.error(error);
@@ -163,7 +161,7 @@ export async function getCollections(username: string) {
       subject_type: 2,
       type: 3,
       limit: 50,
-      offset: list.length
+      offset: list.length,
     });
     if (data && data.length > 0) {
       list.push(...data);
@@ -178,7 +176,7 @@ async function getFansub(titles: string[]) {
   const { resources } = await fetchResources(ufetch, {
     include: [titles],
     count: -1,
-    retry: 5
+    retry: 5,
   });
   return uniqBy(
     resources.filter(r => !!r.fansub),
