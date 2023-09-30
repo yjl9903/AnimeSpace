@@ -437,7 +437,7 @@ export class Aria2Client extends DownloadClient {
         if (await fs.exists(this.options.debug.log)) {
           await fs.rm(this.options.debug.log);
         }
-        this.consola.info(
+        this.consola.log(
           dim(`aria2 debug log will be written to ${this.options.debug.log}`)
         );
       } catch {}
@@ -501,7 +501,7 @@ export class Aria2Client extends DownloadClient {
 
           const version = await this.client.getVersion();
           this.version = version.version;
-          this.consola.info(dim(`aria2 v${this.version} is running`));
+          this.consola.log(dim(`aria2 v${this.version} is running`));
           res();
         } catch (error) {
           rej(error);
@@ -532,7 +532,7 @@ export class Aria2Client extends DownloadClient {
       this.version = undefined;
       this.started = false;
       if (res === 'OK') {
-        this.consola.info(dim(`aria2 v${version} has been closed`));
+        this.consola.log(dim(`aria2 v${version} has been closed`));
         return true;
       } else {
         return false;

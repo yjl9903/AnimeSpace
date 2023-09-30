@@ -23,16 +23,16 @@ export async function createAnimeSystem(
     space,
     logger,
     printSpace() {
-      logger.info(`${dim('Space')}    ${space.root}`);
+      logger.log(`${dim('Space')}    ${space.root}`);
 
       if (space.storage.anime.provider === 'local') {
-        logger.info(`${dim('Storage')}  ${space.storage.anime.directory}`);
+        logger.log(`${dim('Storage')}  ${space.storage.anime.directory}`);
       } else if (space.storage.anime.provider === 'webdav') {
         const join = (a: string, b: string) => {
           return a.replace(/\/$/, '') + '/' + b.replace(/^\//, '');
         };
 
-        logger.info(
+        logger.log(
           `${dim('Storage')}  ${
             join(
               space.storage.anime.url,
@@ -43,7 +43,7 @@ export async function createAnimeSystem(
       }
 
       if (space.storage.library.mode === 'external') {
-        logger.info(`${dim('Library')}  ${space.storage.library.directory}`);
+        logger.log(`${dim('Library')}  ${space.storage.library.directory}`);
       }
 
       logger.log('');
@@ -54,7 +54,7 @@ export async function createAnimeSystem(
       const delta = animes.flatMap(anime => anime.delta());
       if (delta.length > 0) {
         const DOT = dim('•');
-        logger.info(
+        logger.log(
           `${dim('There are')} ${lightCyan(delta.length + ' changes')} ${
             dim(
               'applied to the space'
@@ -68,11 +68,11 @@ export async function createAnimeSystem(
             remove: lightRed('Remove')
           };
           const op = format[d.operation];
-          logger.info(`  ${DOT} ${op} ${d.log ?? d.video.filename}`);
+          logger.log(`  ${DOT} ${op} ${d.log ?? d.video.filename}`);
         }
         logger.log('');
       } else {
-        logger.info(lightGreen(`Every anime is latest`));
+        logger.log(lightGreen(`Every anime is latest`));
       }
     },
     async load(options = {}) {

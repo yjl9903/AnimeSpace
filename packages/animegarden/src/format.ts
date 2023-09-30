@@ -22,12 +22,12 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
     const first = anime.plan.keywords.include[0];
     const sum = first.reduce((acc, t) => acc + t.length, 0);
     if (sum > 50) {
-      logger.info(dim('Include keywords | ') + underline(first[0]));
+      logger.log(dim('Include keywords | ') + underline(first[0]));
       for (const t of first.slice(1)) {
-        logger.info(`                 ${dim('|')} ${underline(t)}`);
+        logger.log(`                 ${dim('|')} ${underline(t)}`);
       }
     } else {
-      logger.info(
+      logger.log(
         `${dim('Include keywords')}   ${
           first
             .map((t) => underline(t))
@@ -36,13 +36,13 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
       );
     }
   } else {
-    logger.info(dim(`Include keywords:`));
+    logger.log(dim(`Include keywords:`));
     for (const include of anime.plan.keywords.include) {
-      logger.info(`  ${DOT} ${include.map((t) => underline(t)).join(' | ')}`);
+      logger.log(`  ${DOT} ${include.map((t) => underline(t)).join(' | ')}`);
     }
   }
   if (anime.plan.keywords.exclude.length > 0) {
-    logger.info(
+    logger.log(
       `${dim(`Exclude keywords`)}   [ ${
         anime.plan.keywords.exclude
           .map((t) => underline(t))
@@ -54,7 +54,7 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
 
 export function printFansubs(anime: Anime, logger: ConsolaInstance) {
   const fansubs = anime.plan.fansub;
-  logger.info(
+  logger.log(
     `${dim('Prefer fansubs')}     ${
       fansubs.length === 0
         ? `See ${

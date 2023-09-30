@@ -4,7 +4,7 @@ import type { AnimeSystem, RefreshOptions } from './types';
 
 export async function refresh(system: AnimeSystem, options: RefreshOptions) {
   const logger = system.logger.withTag('refresh');
-  logger.info(lightBlue(`Refresh Anime Space`));
+  logger.log(lightBlue(`Refresh Anime Space`));
 
   const animes = await system.load(options);
 
@@ -24,6 +24,6 @@ export async function refresh(system: AnimeSystem, options: RefreshOptions) {
 
   logger.log('');
   system.printDelta();
-  logger.info(lightGreen(`Refresh Anime Space OK`));
+  logger.log(lightGreen(`Refresh Anime Space OK`));
   return animes;
 }

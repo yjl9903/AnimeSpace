@@ -30,7 +30,7 @@ export function registerCli(
 
       for (const anime of animes) {
         const animegardenURL = formatAnimeGardenSearchURL(anime);
-        logger.info(
+        logger.log(
           `${bold(anime.plan.title)}  (${link(
             `Bangumi: ${anime.plan.bgm}`,
             `https://bangumi.tv/subject/${anime.plan.bgm}`
@@ -65,7 +65,7 @@ export function registerCli(
             }
           }
 
-          logger.info(
+          logger.log(
             `  ${DOT} ${link(video.filename, detailURL)}  ${
               extra ? `(${extra})` : ''
             }`

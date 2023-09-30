@@ -63,7 +63,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         const logger = system.logger.withTag('animegarden');
         logger.log('');
 
-        logger.info(
+        logger.log(
           `${lightBlue('Fetching resources')} ${bold(
             anime.plan.title
           )}  (${link(
@@ -79,7 +79,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           () => undefined
         );
         if (resources === undefined) {
-          logger.info(
+          logger.log(
             `${lightRed('Found resources')} ${dim('from')} ${link(
               'AnimeGarden',
               animegardenURL
@@ -93,7 +93,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         const oldVideos = (await anime.library()).videos.filter(
           v => v.source.type === ANIMEGARDEN
         );
-        logger.info(
+        logger.log(
           `${dim('There are')} ${lightCyan(
             oldVideos.length + ' resources'
           )} ${dim('downloaded from')} ${link('AnimeGarden', animegardenURL)}`
@@ -102,7 +102,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           return;
         }
 
-        logger.info(
+        logger.log(
           `${lightBlue(`Downloading ${newVideos.length} resources`)} ${dim(
             'from'
           )} ${link('AnimeGarden', animegardenURL)}`
@@ -111,7 +111,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           const detailURL = `https://garden.onekuma.cn/resource/${video.source
             .magnet!.split('/')
             .at(-1)}`;
-          logger.info(`  ${DOT} ${link(video.filename, detailURL)}`);
+          logger.log(`  ${DOT} ${link(video.filename, detailURL)}`);
         }
 
         try {

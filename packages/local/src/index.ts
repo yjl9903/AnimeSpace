@@ -58,7 +58,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
               from: file.filename
             }
           };
-          logger.info(
+          logger.log(
             `${lightGreen('Moving local file')} ${
               bold(
                 file.filename
@@ -86,11 +86,11 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
 
         if (files.length > 0) {
           const logger = createLogger(system);
-          logger.info(
+          logger.log(
             `There are ${lightYellow(`${files.length} local files`)} found.`
           );
           for (const f of files) {
-            logger.info(`${DOT} ${f.filename}`);
+            logger.log(`${DOT} ${f.filename}`);
           }
         }
       },
@@ -136,7 +136,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
                 from: file.filename
               }
             };
-            logger.info(
+            logger.log(
               `${lightBlue('Moving local file')} ${
                 bold(
                   file.filename
@@ -145,7 +145,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
             );
             await anime.addVideoByMove(file.path.path, video);
           } else {
-            logger.info(lightYellow(`Parse "${bold(file.filename)}" failed`));
+            logger.log(lightYellow(`Parse "${bold(file.filename)}" failed`));
           }
         }
       },

@@ -12,7 +12,7 @@ export async function introspect(
   options: IntrospectOptions
 ) {
   const logger = system.logger.withTag('introspect');
-  logger.info(lightBlue(`Introspect Anime Space`));
+  logger.log(lightBlue(`Introspect Anime Space`));
 
   const animes = await system.load(options);
 
@@ -28,7 +28,7 @@ export async function introspect(
     await plugin.introspect?.finish?.(system);
   }
 
-  logger.info(lightGreen(`Introspect Anime Space OK`));
+  logger.log(lightGreen(`Introspect Anime Space OK`));
   logger.log('');
   return animes;
 }
@@ -75,7 +75,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     }
     // Found dangling video in metadata.yaml, remove it
     if (!found) {
-      logger.info(`${lightRed('Removing')} "${bold(video.filename)}"`);
+      logger.log(`${lightRed('Removing')} "${bold(video.filename)}"`);
       await anime.removeVideo(video);
     }
   }
@@ -95,12 +95,10 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
   for (const video of videos) {
     const filename = anime.reformatVideoFilename(video);
     if (filename !== video.filename) {
-      logger.info(
-        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${
-          bold(
-            filename
-          )
-        }"`
+      logger.log(
+        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${bold(
+          filename
+        )}"`
       );
       await anime.moveVideo(video, filename);
     }

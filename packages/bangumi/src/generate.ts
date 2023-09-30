@@ -51,7 +51,7 @@ export async function generatePlan(
       }
 
       if (options.create) {
-        system.logger.info(
+        system.logger.log(
           `${lightBlue('Searching')} ${bold(
             anime.subject?.name_cn ||
               anime.subject?.name ||
