@@ -473,7 +473,7 @@ export class Aria2Client extends DownloadClient {
         // Rest arguments
         ...this.options.args,
       ],
-      { cwd: process.cwd(), env }
+      { cwd: this.system.space.root, env }
     );
 
     return new Promise((res, rej) => {
