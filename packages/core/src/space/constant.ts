@@ -2,6 +2,8 @@ export const DefaultConfigFilename = `./anime.yaml`;
 
 export const DefaultStorageDirectory = `./animes`;
 
+export const DefaultCacheDirectory = `./cache`;
+
 export const DefaultAnimeFormat = '{title}';
 
 export const DefaultEpisodeFormat = '[{fansub}] {title} E{ep}.{extension}';

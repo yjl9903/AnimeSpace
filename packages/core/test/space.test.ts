@@ -14,46 +14,103 @@ describe.only('Load Space', () => {
     const root = path.join(__dirname, './fixtures/space');
     const space = await loadSpace(root);
 
-    expect({ ...space, resolvePath: undefined, plans: undefined }).toEqual({
-      plans: undefined,
+    expect({
+      ...space,
       resolvePath: undefined,
-      plugins: [],
-      preference: {
-        format: {
-          anime: '{title}',
-          episode: '[{fansub}] {title} - E{ep}.{extension}',
-          film: '[{fansub}] {title}.{extension}',
-          ova: '[{fansub}] {title}.{extension}'
-        },
-        extension: {
-          include: ['mp4', 'mkv'],
-          exclude: []
-        },
-        keyword: {
-          order: {
-            format: ['mp4', 'mkv'],
-            language: ['简', '繁'],
-            resolution: ['1080', '720']
+      plans: undefined,
+    }).toMatchInlineSnapshot(`
+      {
+        "plans": undefined,
+        "plugins": [],
+        "preference": {
+          "extension": {
+            "exclude": [],
+            "include": [
+              "mp4",
+              "mkv",
+            ],
           },
-          exclude: []
+          "fansub": {
+            "exclude": [],
+            "order": [],
+          },
+          "format": {
+            "anime": "{title}",
+            "episode": "[{fansub}] {title} - E{ep}.{extension}",
+            "film": "[{fansub}] {title}.{extension}",
+            "ova": "[{fansub}] {title}.{extension}",
+          },
+          "keyword": {
+            "exclude": [],
+            "order": {
+              "format": [
+                "mp4",
+                "mkv",
+              ],
+              "language": [
+                "简",
+                "繁",
+              ],
+              "resolution": [
+                "1080",
+                "720",
+              ],
+            },
+          },
         },
-        fansub: {
-          order: [],
-          exclude: []
-        }
-      },
-      root,
-      storage: {
-        anime: {
-          fs: LocalFS,
-          provider: 'local',
-          directory: path.join(root, 'anime')
+        "resolvePath": undefined,
+        "root": "${LocalFS.path(root).toString()}",
+        "storage": {
+          "anime": {
+            "directory": Path {
+              "_fs": BreadFS {
+                "provider": NodeProvider {
+                  "name": "node",
+                },
+              },
+              "_path": "${LocalFS.path(root, 'anime').toString()}",
+            },
+            "fs": BreadFS {
+              "provider": NodeProvider {
+                "name": "node",
+              },
+            },
+            "provider": "local",
+          },
+          "cache": {
+            "directory": Path {
+              "_fs": BreadFS {
+                "provider": NodeProvider {
+                  "name": "node",
+                },
+              },
+              "_path": "${LocalFS.path(root, 'cache').toString()}",
+            },
+            "fs": BreadFS {
+              "provider": NodeProvider {
+                "name": "node",
+              },
+            },
+          },
+          "library": {
+            "directory": Path {
+              "_fs": BreadFS {
+                "provider": NodeProvider {
+                  "name": "node",
+                },
+              },
+              "_path": "${LocalFS.path(root, 'anime').toString()}",
+            },
+            "fs": BreadFS {
+              "provider": NodeProvider {
+                "name": "node",
+              },
+            },
+            "mode": "embedded",
+          },
         },
-        library: {
-          mode: 'embedded'
-        }
       }
-    });
+    `);
 
     expect(await space.plans()).toEqual([
       {
@@ -63,6 +120,7 @@ describe.only('Load Space', () => {
         onair: [
           {
             title: '熊熊勇闯异世界 Punch!',
+            alias: [],
             translations: {},
             type: '番剧',
             status: 'onair',
@@ -72,13 +130,14 @@ describe.only('Load Space', () => {
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
               include: [['熊熊勇闯异世界 Punch!']],
-              exclude: []
-            }
+              exclude: [],
+            },
           },
           {
             title: '天国大魔境',
+            alias: [],
             translations: {
-              unknown: ['Tengoku Daimakyou']
+              unknown: ['Tengoku Daimakyou'],
             },
             type: '番剧',
             status: 'onair',
@@ -88,11 +147,12 @@ describe.only('Load Space', () => {
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
               include: [['天国大魔境', 'Tengoku Daimakyou']],
-              exclude: []
-            }
+              exclude: [],
+            },
           },
           {
             title: '偶像大师 灰姑娘女孩 U149',
+            alias: [],
             translations: {},
             type: '番剧',
             status: 'onair',
@@ -102,11 +162,11 @@ describe.only('Load Space', () => {
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
               include: [['偶像大师', 'iDOLM@STER'], ['灰姑娘女孩'], ['U149']],
-              exclude: ['闪耀色彩']
-            }
-          }
-        ]
-      }
+              exclude: ['闪耀色彩'],
+            },
+          },
+        ],
+      },
     ]);
   });
 });
@@ -119,7 +179,7 @@ describe('Create Space', () => {
     expect({ ...loaded, resolvePath: undefined, plans: undefined }).toEqual({
       ...space,
       resolvePath: undefined,
-      plans: undefined
+      plans: undefined,
     });
     expect(await loaded.plans()).toEqual(await space.plans());
   });

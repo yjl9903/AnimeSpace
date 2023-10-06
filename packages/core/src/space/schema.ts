@@ -130,6 +130,8 @@ export interface AnimeSpace {
       | { mode: 'embedded' }
       | { mode: 'external' }
     );
+
+    readonly cache: { fs: BreadFS; directory: Path };
   };
 
   readonly preference: Preference;

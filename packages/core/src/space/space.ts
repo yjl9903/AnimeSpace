@@ -21,6 +21,7 @@ import {
 } from './schema';
 import {
   DefaultAnimeFormat,
+  DefaultCacheDirectory,
   DefaultConfigFilename,
   DefaultEpisodeFormat,
   DefaultFilmFormat,
@@ -77,6 +78,10 @@ export async function loadSpace(
         library: {
           ...space.storage.library,
           ...storageFS.library,
+        },
+        cache: {
+          fs: LocalFS,
+          directory: LocalFS.path(root).resolve(DefaultCacheDirectory),
         },
       },
       plans,
