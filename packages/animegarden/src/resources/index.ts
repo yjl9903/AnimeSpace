@@ -1,7 +1,11 @@
 import { fetchResources } from 'animegarden';
-import { Anime, ufetch } from '@animespace/core';
+import { Anime, AnimeSystem, ufetch } from '@animespace/core';
 
-export async function fetchAnimeResources(anime: Anime) {
+import { useResourcesCache } from './cache';
+
+export async function fetchAnimeResources(system: AnimeSystem, anime: Anime) {
+  const cache = useResourcesCache(system);
+
   const ac = new AbortController();
 
   const { resources } = await fetchResources(ufetch, {

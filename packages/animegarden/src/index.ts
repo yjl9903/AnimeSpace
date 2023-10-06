@@ -75,7 +75,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         printFansubs(anime, logger);
 
         const animegardenURL = formatAnimeGardenSearchURL(anime);
-        const resources = await fetchAnimeResources(anime).catch(
+        const resources = await fetchAnimeResources(system, anime).catch(
           () => undefined
         );
         if (resources === undefined) {

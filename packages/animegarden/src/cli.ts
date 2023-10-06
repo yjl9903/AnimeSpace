@@ -39,7 +39,7 @@ export function registerCli(
         printKeywords(anime, logger);
         printFansubs(anime, logger);
 
-        const resources = await fetchAnimeResources(anime);
+        const resources = await fetchAnimeResources(system, anime);
         const videos = await generateDownloadTask(
           system,
           anime,
