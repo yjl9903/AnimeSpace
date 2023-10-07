@@ -13,7 +13,10 @@ export interface SystemOperationOptions {
    *
    * otherwise, use a filter function
    */
-  filter?: string | ((anime: Anime) => boolean);
+  filter?:
+    | string
+    | { keyword: string; status: 'onair' | 'finish' }
+    | ((anime: Anime) => boolean);
 }
 
 export interface LoadOptions extends SystemOperationOptions {

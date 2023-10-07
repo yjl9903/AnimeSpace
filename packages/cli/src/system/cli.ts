@@ -78,6 +78,11 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   app
     .command('refresh', 'Refresh the local anime system')
     .option('--filter <keyword>', 'Filter animes to be refreshed')
+    .option('--status <status>', {
+      description: 'Filter onair / finish animes',
+      default: 'onair',
+      cast: v => (v === 'finish' ? 'finish' : 'onair')
+    })
     .option('-i, --introspect', 'Introspect library before refreshing')
     .option('-f, --force', 'Prefer not using any cache')
     .action(async options => {
@@ -85,13 +90,19 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
 
       system.printSpace();
       try {
+        const filter = options.filter
+          ? ({ keyword: options.filter, status: options.status } as const)
+          : options.status
+          ? ({ keyword: '', status: options.status } as const)
+          : undefined;
+
         if (options.introspect) {
           await system.introspect({
-            filter: options.filter
+            filter
           });
         }
         const animes = await system.refresh({
-          filter: options.filter,
+          filter,
           force: options.force
         });
         return animes;

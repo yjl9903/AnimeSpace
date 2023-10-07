@@ -87,8 +87,15 @@ export async function createAnimeSystem(
             system,
             a => a.plan.title.includes(filter)
           ));
-        } else {
+        } else if (typeof filter === 'function') {
           return (animes = await loadAnime(system, filter));
+        } else {
+          const keyword = filter.keyword;
+          const status = filter.status;
+          return (animes = await loadAnime(
+            system,
+            a => a.plan.status === status && a.plan.title.includes(keyword)
+          ));
         }
       }
     },
