@@ -107,7 +107,7 @@ export class ResourcesCache {
 
   public async finalize() {
     if (this.recentResponse) {
-      // await this.updateLatestResources(this.recentResponse);
+      await this.updateLatestResources(this.recentResponse);
     }
     this.disable();
   }
