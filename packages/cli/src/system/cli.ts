@@ -50,6 +50,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       default: '10m'
     })
     .option('-i, --introspect', 'Introspect library before refreshing')
+    .option('-f, --force', 'Prefer not using any cache')
     .action(async options => {
       // Refresh system
       let sys = system;
@@ -60,7 +61,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           if (options.introspect) {
             await sys.introspect();
           }
-          await sys.refresh();
+          await sys.refresh({ force: options.force });
         } catch (error) {
           sys.logger.error(error);
         } finally {
@@ -78,15 +79,21 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .command('refresh', 'Refresh the local anime system')
     .option('--filter <keyword>', 'Filter animes to be refreshed')
     .option('-i, --introspect', 'Introspect library before refreshing')
+    .option('-f, --force', 'Prefer not using any cache')
     .action(async options => {
       registerDeath(system);
 
       system.printSpace();
       try {
         if (options.introspect) {
-          await system.introspect({ filter: options.filter });
+          await system.introspect({
+            filter: options.filter
+          });
         }
-        const animes = await system.refresh({ filter: options.filter });
+        const animes = await system.refresh({
+          filter: options.filter,
+          force: options.force
+        });
         return animes;
       } catch (error) {
         throw error;
