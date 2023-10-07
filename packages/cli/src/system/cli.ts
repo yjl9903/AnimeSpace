@@ -92,7 +92,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       try {
         const filter = options.filter
           ? ({ keyword: options.filter, status: options.status } as const)
-          : options.status
+          : options.status === 'finish'
           ? ({ keyword: '', status: options.status } as const)
           : undefined;
 
