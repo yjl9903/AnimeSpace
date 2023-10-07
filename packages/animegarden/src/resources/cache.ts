@@ -21,6 +21,8 @@ export class ResourcesCache {
 
   private recentResources: Resource[] = [];
 
+  private errors: unknown[] = [];
+
   private recentResponse:
     | Awaited<ReturnType<typeof fetchResources>>
     | undefined = undefined;
@@ -32,10 +34,15 @@ export class ResourcesCache {
     this.resourcesRoot = this.root.join('resources');
   }
 
-  public disable() {
+  private reset() {
     this.valid = false;
     this.recentResources = [];
     this.recentResponse = undefined;
+    this.errors = [];
+  }
+
+  public disable() {
+    this.reset();
   }
 
   private async loadLatestResources(): Promise<
@@ -106,10 +113,11 @@ export class ResourcesCache {
   }
 
   public async finalize() {
-    if (this.recentResponse) {
+    // When there is no fetch error, store the latest response
+    if (this.errors.length === 0 && this.recentResponse) {
       await this.updateLatestResources(this.recentResponse);
     }
-    this.disable();
+    this.reset();
   }
 
   private async loadAnimeResources(
@@ -190,24 +198,30 @@ export class ResourcesCache {
       }
     }
 
-    const ac = new AbortController();
-    const resp = await fetchResources(ufetch, {
-      type: '動畫',
-      after: anime.plan.date,
-      include: anime.plan.keywords.include,
-      exclude: anime.plan.keywords.exclude,
-      retry: 10,
-      count: -1,
-      signal: ac.signal,
-      progress(delta) {
-        for (const item of delta) {
+    try {
+      const ac = new AbortController();
+      const resp = await fetchResources(ufetch, {
+        type: '動畫',
+        after: anime.plan.date,
+        include: anime.plan.keywords.include,
+        exclude: anime.plan.keywords.exclude,
+        retry: 10,
+        count: -1,
+        signal: ac.signal,
+        progress(delta) {
+          for (const item of delta) {
+          }
         }
-      }
-    });
+      });
 
-    await this.updateAnimeResources(anime, resp);
+      await this.updateAnimeResources(anime, resp);
 
-    return resp.resources;
+      return resp.resources;
+    } catch (error) {
+      // Record fetch error happened
+      this.errors.push(error);
+      throw error;
+    }
   }
 }
 
