@@ -108,8 +108,8 @@ importers:
         specifier: ^0.0.29
         version: 0.0.29
       anitomy:
-        specifier: ^0.0.28
-        version: 0.0.28
+        specifier: ^0.0.29
+        version: 0.0.29
       breadfs:
         specifier: ^0.0.7
         version: 0.0.7
@@ -255,8 +255,8 @@ importers:
         specifier: ^0.0.7
         version: 0.0.7
       anitomy:
-        specifier: ^0.0.28
-        version: 0.0.28
+        specifier: ^0.0.29
+        version: 0.0.29
       breadfs:
         specifier: ^0.0.7
         version: 0.0.7
@@ -313,8 +313,8 @@ importers:
         specifier: ^0.9.6
         version: 0.9.6
       anitomy:
-        specifier: ^0.0.28
-        version: 0.0.28
+        specifier: ^0.0.29
+        version: 0.0.29
       breadfs:
         specifier: ^0.0.7
         version: 0.0.7
@@ -3268,8 +3268,8 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /anitomy@0.0.28:
-    resolution: {integrity: sha512-c2h3pd/yIybbwMzeMiYZu1zrkYuOJg+dVh9mQBwE+b4BNZPPjXR+ujUcDnAKPx9xxDmlaY8W0CtDbkAi3Tlubg==}
+  /anitomy@0.0.29:
+    resolution: {integrity: sha512-5IfcMU8B4jf/hgDUlurYcuRRD+F+ycXOjAAiqboakEvCL3t+g7sXSCRf7YzatRRMjMOWKBdmQT0yEG9+tfx80g==}
     engines: {node: '>=v18.16.0'}
     dev: false
 
