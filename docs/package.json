@@ -9,7 +9,7 @@
     "serve": "vitepress serve"
   },
   "dependencies": {
-    "@vueuse/core": "^10.4.1",
+    "@vueuse/core": "^10.5.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {
