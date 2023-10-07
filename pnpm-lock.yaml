@@ -105,11 +105,11 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.0.29
-        version: 0.0.29
+        specifier: ^0.0.30
+        version: 0.0.30
       anitomy:
-        specifier: ^0.0.29
-        version: 0.0.29
+        specifier: ^0.0.30
+        version: 0.0.30
       breadfs:
         specifier: ^0.0.7
         version: 0.0.7
@@ -157,8 +157,8 @@ importers:
         specifier: ^0.9.6
         version: 0.9.6
       animegarden:
-        specifier: ^0.0.29
-        version: 0.0.29
+        specifier: ^0.0.30
+        version: 0.0.30
       bgmc:
         specifier: ^0.0.4
         version: 0.0.4
@@ -255,8 +255,8 @@ importers:
         specifier: ^0.0.7
         version: 0.0.7
       anitomy:
-        specifier: ^0.0.29
-        version: 0.0.29
+        specifier: ^0.0.30
+        version: 0.0.30
       breadfs:
         specifier: ^0.0.7
         version: 0.0.7
@@ -313,8 +313,8 @@ importers:
         specifier: ^0.9.6
         version: 0.9.6
       anitomy:
-        specifier: ^0.0.29
-        version: 0.0.29
+        specifier: ^0.0.30
+        version: 0.0.30
       breadfs:
         specifier: ^0.0.7
         version: 0.0.7
@@ -3259,8 +3259,8 @@ packages:
       '@algolia/transporter': 4.19.1
     dev: true
 
-  /animegarden@0.0.29:
-    resolution: {integrity: sha512-tqpPSARN38IvlLMSZy8+aMP7DFzYFYNpTDHdaeCcWsoxG5N5US2lsXwvxEH4AFsX+Mtsx9E5SWEnQ8YI0KOYBA==}
+  /animegarden@0.0.30:
+    resolution: {integrity: sha512-GKpOMz2a8WAHc5MxGVaxQN9mRpkH7IPKWY94KD1Ue4zJuqnYoc0/Mz3jttioRU/2fYflaD/dfWmrqnjt7lnKaw==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       cheerio: 1.0.0-rc.12
@@ -3268,8 +3268,8 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /anitomy@0.0.29:
-    resolution: {integrity: sha512-5IfcMU8B4jf/hgDUlurYcuRRD+F+ycXOjAAiqboakEvCL3t+g7sXSCRf7YzatRRMjMOWKBdmQT0yEG9+tfx80g==}
+  /anitomy@0.0.30:
+    resolution: {integrity: sha512-w5bUqW/dpDzBJrYN2MPvQZd+xYyb+o2/erh8BD0995Gl/KeC9qamMq1b3qkZmyg2PugACpNim8FoyKULESNJHg==}
     engines: {node: '>=v18.16.0'}
     dev: false
 

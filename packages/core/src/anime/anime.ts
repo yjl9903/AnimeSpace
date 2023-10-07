@@ -27,6 +27,8 @@ export class Anime {
 
   public readonly libraryDirectory: Path;
 
+  public readonly relativeDirectory: string;
+
   public readonly plan: AnimePlan;
 
   private readonly space: AnimeSpace;
@@ -64,6 +66,8 @@ export class Anime {
     this.libraryDirectory = plan.directory
       ? space.storage.library.directory.resolve(plan.directory)
       : space.storage.library.directory.join(dirname);
+
+    this.relativeDirectory = plan.directory ? plan.directory : dirname;
   }
 
   public delta() {
