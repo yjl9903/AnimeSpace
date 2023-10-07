@@ -6,7 +6,7 @@ import {
   onDeath,
   type Plugin,
   type PluginEntry,
-  StringArray,
+  StringArray
 } from '@animespace/core';
 import { bold, dim, lightBlue, lightCyan, lightRed, link } from '@breadc/color';
 
@@ -14,13 +14,13 @@ import './plan.d';
 
 import { registerCli } from './cli';
 import { ANIMEGARDEN, DOT } from './constant';
-import { fetchAnimeResources } from './resources';
 import { DownloadProviders, makeClient } from './download';
 import { generateDownloadTask, runDownloadTask } from './task';
+import { fetchAnimeResources, useResourcesCache } from './resources';
 import {
   formatAnimeGardenSearchURL,
   printFansubs,
-  printKeywords,
+  printKeywords
 } from './format';
 
 export interface AnimeGardenOptions extends PluginEntry {
@@ -44,8 +44,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
     schema: {
       plan: z.object({
         bgm: z.coerce.string(),
-        fansub: StringArray.default([]),
-      }),
+        fansub: StringArray.default([])
+      })
     },
     command(system, cli) {
       registerCli(system, cli, getClient);
@@ -56,20 +56,34 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           const magnet = video.source.magnet;
         }
         return undefined;
-      },
+      }
     },
     refresh: {
+      async prepare(system, options) {
+        const cache = await useResourcesCache(system);
+        if (options.filter !== undefined) {
+          cache.disable();
+        }
+      },
+      async finish(system) {
+        const cache = await useResourcesCache(system);
+        cache.finalize();
+      },
       async refresh(system, anime) {
         const logger = system.logger.withTag('animegarden');
         logger.log('');
 
         logger.log(
-          `${lightBlue('Fetching resources')} ${bold(
-            anime.plan.title
-          )}  (${link(
-            `Bangumi: ${anime.plan.bgm}`,
-            `https://bangumi.tv/subject/${anime.plan.bgm}`
-          )})`
+          `${lightBlue('Fetching resources')} ${
+            bold(
+              anime.plan.title
+            )
+          }  (${
+            link(
+              `Bangumi: ${anime.plan.bgm}`,
+              `https://bangumi.tv/subject/${anime.plan.bgm}`
+            )
+          })`
         );
         printKeywords(anime, logger);
         printFansubs(anime, logger);
@@ -80,10 +94,12 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         );
         if (resources === undefined) {
           logger.log(
-            `${lightRed('Found resources')} ${dim('from')} ${link(
-              'AnimeGarden',
-              animegardenURL
-            )} ${lightRed('failed')}`
+            `${lightRed('Found resources')} ${dim('from')} ${
+              link(
+                'AnimeGarden',
+                animegardenURL
+              )
+            } ${lightRed('failed')}`
           );
           return;
         }
@@ -94,23 +110,29 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           v => v.source.type === ANIMEGARDEN
         );
         logger.log(
-          `${dim('There are')} ${lightCyan(
-            oldVideos.length + ' resources'
-          )} ${dim('downloaded from')} ${link('AnimeGarden', animegardenURL)}`
+          `${dim('There are')} ${
+            lightCyan(
+              oldVideos.length + ' resources'
+            )
+          } ${dim('downloaded from')} ${link('AnimeGarden', animegardenURL)}`
         );
         if (newVideos.length === 0) {
           return;
         }
 
         logger.log(
-          `${lightBlue(`Downloading ${newVideos.length} resources`)} ${dim(
-            'from'
-          )} ${link('AnimeGarden', animegardenURL)}`
+          `${lightBlue(`Downloading ${newVideos.length} resources`)} ${
+            dim(
+              'from'
+            )
+          } ${link('AnimeGarden', animegardenURL)}`
         );
         for (const { video } of newVideos) {
-          const detailURL = `https://garden.onekuma.cn/resource/${video.source
-            .magnet!.split('/')
-            .at(-1)}`;
+          const detailURL = `https://garden.onekuma.cn/resource/${
+            video.source
+              .magnet!.split('/')
+              .at(-1)
+          }`;
           logger.log(`  ${DOT} ${link(video.filename, detailURL)}`);
         }
 
@@ -120,7 +142,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         } catch (error) {
           logger.error(error);
         }
-      },
-    },
+      }
+    }
   };
 }

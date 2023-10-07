@@ -17,15 +17,15 @@ export async function introspect(
   const animes = await system.load(options);
 
   for (const plugin of system.space.plugins) {
-    await plugin.introspect?.prepare?.(system);
+    await plugin.introspect?.prepare?.(system, options);
   }
 
   for (const anime of animes) {
-    await introspectAnime(system, anime);
+    await introspectAnime(system, anime, options);
   }
 
   for (const plugin of system.space.plugins) {
-    await plugin.introspect?.finish?.(system);
+    await plugin.introspect?.finish?.(system, options);
   }
 
   logger.log(lightGreen(`Introspect Anime Space OK`));
@@ -33,7 +33,11 @@ export async function introspect(
   return animes;
 }
 
-async function introspectAnime(system: AnimeSystem, anime: Anime) {
+async function introspectAnime(
+  system: AnimeSystem,
+  anime: Anime,
+  options: IntrospectOptions
+) {
   const lib = await anime.library();
   const videos = lib.videos;
   const files = await anime.list();
@@ -66,7 +70,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     for (const plugin of system.space.plugins) {
       const handleUnknownVideo = plugin.introspect?.handleUnknownVideo;
       if (handleUnknownVideo) {
-        const res = await handleUnknownVideo(system, anime, video);
+        const res = await handleUnknownVideo(system, anime, video, options);
         if (res) {
           found = true;
           break;
@@ -84,7 +88,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     for (const plugin of system.space.plugins) {
       const handleUnknownFile = plugin.introspect?.handleUnknownFile;
       if (handleUnknownFile) {
-        const video = await handleUnknownFile(system, anime, file);
+        const video = await handleUnknownFile(system, anime, file, options);
         if (video) {
           break;
         }
@@ -96,9 +100,11 @@ async function introspectAnime(system: AnimeSystem, anime: Anime) {
     const filename = anime.reformatVideoFilename(video);
     if (filename !== video.filename) {
       logger.log(
-        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${bold(
-          filename
-        )}"`
+        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${
+          bold(
+            filename
+          )
+        }"`
       );
       await anime.moveVideo(video, filename);
     }

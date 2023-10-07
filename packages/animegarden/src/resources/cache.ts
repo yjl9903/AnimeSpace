@@ -21,11 +21,21 @@ export class ResourcesCache {
 
   private recentResources: Resource[] = [];
 
+  private recentResponse:
+    | Awaited<ReturnType<typeof fetchResources>>
+    | undefined = undefined;
+
   constructor(system: AnimeSystem) {
     this.system = system;
     this.root = system.space.storage.cache.directory.join('animegarden');
     this.animeRoot = this.root.join('anime');
     this.resourcesRoot = this.root.join('resources');
+  }
+
+  public disable() {
+    this.valid = false;
+    this.recentResources = [];
+    this.recentResponse = undefined;
   }
 
   private async loadLatestResources(): Promise<
@@ -90,10 +100,16 @@ export class ResourcesCache {
 
     this.valid = !invalid || !resp.filter || !resp.timestamp;
 
-    const maxId = latest?.resources.reduce((mx, r) => Math.max(mx, r.id), 0)
-      ?? 0;
-    this.recentResources = resp.resources.filter(r => r.id > maxId);
-    await this.updateLatestResources(resp);
+    const oldIds = new Set(latest?.resources.map(r => r.id) ?? []);
+    this.recentResources = resp.resources.filter(r => !oldIds.has(r.id));
+    this.recentResponse = resp;
+  }
+
+  public async finalize() {
+    if (this.recentResponse) {
+      // await this.updateLatestResources(this.recentResponse);
+    }
+    this.disable();
   }
 
   private async loadAnimeResources(

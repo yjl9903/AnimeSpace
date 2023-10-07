@@ -1,9 +1,9 @@
 import type { Breadc } from 'breadc';
 import type { AnyZodObject } from 'zod';
 
-import type { AnimeSystem } from './system';
 import type { Anime, LocalFile, LocalVideo } from './anime';
 import type { AnimeSpace, Plan, PluginEntry } from './space/schema';
+import type { AnimeSystem, IntrospectOptions, RefreshOptions } from './system';
 
 type MayPromise<T> = T | Promise<T>;
 
@@ -42,28 +42,43 @@ export interface Plugin {
   command?: (system: AnimeSystem, cli: Breadc<{}>) => MayPromise<void>;
 
   introspect?: {
-    prepare?: (system: AnimeSystem) => MayPromise<void>;
+    prepare?: (
+      system: AnimeSystem,
+      options: IntrospectOptions
+    ) => MayPromise<void>;
 
     handleUnknownFile?: (
       system: AnimeSystem,
       anime: Anime,
-      file: LocalFile
+      file: LocalFile,
+      options: IntrospectOptions
     ) => MayPromise<LocalVideo | undefined>;
 
     handleUnknownVideo?: (
       system: AnimeSystem,
       anime: Anime,
-      video: LocalVideo
+      video: LocalVideo,
+      options: IntrospectOptions
     ) => MayPromise<LocalVideo | undefined>;
 
-    finish?: (system: AnimeSystem) => MayPromise<void>;
+    finish?: (
+      system: AnimeSystem,
+      options: IntrospectOptions
+    ) => MayPromise<void>;
   };
 
   refresh?: {
-    prepare?: (system: AnimeSystem) => MayPromise<void>;
+    prepare?: (
+      system: AnimeSystem,
+      options: RefreshOptions
+    ) => MayPromise<void>;
 
-    refresh?: (system: AnimeSystem, anime: Anime) => MayPromise<void>;
+    refresh?: (
+      system: AnimeSystem,
+      anime: Anime,
+      options: RefreshOptions
+    ) => MayPromise<void>;
 
-    finish?: (system: AnimeSystem) => MayPromise<void>;
+    finish?: (system: AnimeSystem, options: RefreshOptions) => MayPromise<void>;
   };
 }
