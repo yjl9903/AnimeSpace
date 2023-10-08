@@ -4,8 +4,14 @@ import { fetchResources, makeResourcesFilter, Resource } from 'animegarden';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
 
-type ResourcesCacheScehma = Required<
+type ResourcesCacheSchema = Required<
   Omit<Awaited<ReturnType<typeof fetchResources>>, 'ok' | 'complete'>
+>;
+
+type AnimeCacheSchema = Required<
+  Omit<Awaited<ReturnType<typeof fetchResources>>, 'ok' | 'complete'> & {
+    prefer: { fansub: string[] };
+  }
 >;
 
 export class ResourcesCache {
@@ -46,7 +52,7 @@ export class ResourcesCache {
   }
 
   private async loadLatestResources(): Promise<
-    ResourcesCacheScehma | undefined
+    ResourcesCacheSchema | undefined
   > {
     try {
       const content = await this.resourcesRoot.join('latest.json').readText();
@@ -122,7 +128,7 @@ export class ResourcesCache {
 
   private async loadAnimeResources(
     anime: Anime
-  ): Promise<ResourcesCacheScehma | undefined> {
+  ): Promise<AnimeCacheSchema | undefined> {
     try {
       const root = this.animeRoot.join(anime.relativeDirectory);
       await root.ensureDir();
@@ -139,7 +145,7 @@ export class ResourcesCache {
     try {
       const root = this.animeRoot.join(anime.relativeDirectory);
 
-      const copied = { ...resp };
+      const copied = { ...resp, prefer: { fansub: anime.plan.fansub } };
       Reflect.deleteProperty(copied, 'ok');
       Reflect.deleteProperty(copied, 'complete');
 
@@ -153,7 +159,7 @@ export class ResourcesCache {
     const cache = await this.loadAnimeResources(anime);
     if (this.valid && cache) {
       // Check whether there is any changes to the filter
-      const validateFilter = (cache: ResourcesCacheScehma) => {
+      const validateFilter = (cache: AnimeCacheSchema) => {
         if (
           !cache.filter.after
           || new Date(cache.filter.after).getTime()
@@ -176,6 +182,12 @@ export class ResourcesCache {
         if (
           (cache.filter.exclude ?? []).join(',')
             !== anime.plan.keywords.exclude.join(',')
+        ) {
+          return false;
+        }
+
+        if (
+          (cache.prefer?.fansub ?? []).join(',') !== anime.plan.fansub.join(',')
         ) {
           return false;
         }
