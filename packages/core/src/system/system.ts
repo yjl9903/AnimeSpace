@@ -82,19 +82,24 @@ export async function createAnimeSystem(
         return (animes = await loadAnime(system));
       } else {
         const filter = options.filter;
+        const normalize = (t: string) => t.toLowerCase();
+
         if (typeof filter === 'string') {
+          const keyword = normalize(filter);
           return (animes = await loadAnime(
             system,
-            a => a.plan.title.includes(filter)
+            a => normalize(a.plan.title).includes(keyword)
           ));
         } else if (typeof filter === 'function') {
           return (animes = await loadAnime(system, filter));
         } else {
-          const keyword = filter.keyword;
+          const keyword = normalize(filter.keyword);
           const status = filter.status;
           return (animes = await loadAnime(
             system,
-            a => a.plan.status === status && a.plan.title.includes(keyword)
+            a =>
+              a.plan.status === status
+              && normalize(a.plan.title).includes(keyword)
           ));
         }
       }
