@@ -68,6 +68,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
       async finish(system) {
         const cache = await useResourcesCache(system);
         cache.finalize();
+        useResourcesCache.clear();
       },
       async refresh(system, anime) {
         const logger = system.logger.withTag('animegarden');
