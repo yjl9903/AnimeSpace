@@ -44,7 +44,7 @@
   "dependencies": {
     "@animespace/core": "workspace:*",
     "@breadc/color": "^0.9.6",
-    "animegarden": "^0.0.30",
+    "animegarden": "^0.0.31",
     "bgmc": "^0.0.4",
     "date-fns": "^2.30.0",
     "fs-extra": "^11.1.1",
