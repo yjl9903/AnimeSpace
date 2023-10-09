@@ -8,7 +8,7 @@ import { dim } from '@breadc/color';
 import { defu } from 'defu';
 import { WebSocket } from 'libaria2';
 import { MutableMap } from '@onekuma/map';
-import { AnimeSystem, resolveStringArray, getProxy } from '@animespace/core';
+import { AnimeSystem, getProxy, resolveStringArray } from '@animespace/core';
 
 import { DefaultTrackers } from './trackers';
 import { DownloadClient, DownloadOptions, DownloadState } from './base';
@@ -76,8 +76,12 @@ export class Aria2Client extends DownloadClient {
       args: [],
       proxy: false,
       trackers: [...new Set([...(options.trackers ?? []), ...DefaultTrackers])],
-      debug: { pipe: false, log: undefined },
+      debug: { pipe: false, log: undefined }
     });
+  }
+
+  public initialize(system: AnimeSystem): void {
+    this.consola = system.logger.withTag('aria2');
     this.options.directory = system.space.resolvePath(this.options.directory);
     if (this.options.debug.log) {
       this.options.debug.log = system.space.resolvePath(this.options.debug.log);
@@ -96,15 +100,16 @@ export class Aria2Client extends DownloadClient {
       throw new Error('aria2 has not started');
     }
 
-    const proxy =
-      typeof this.options.proxy === 'string' ? this.options.proxy : getProxy();
+    const proxy = typeof this.options.proxy === 'string'
+      ? this.options.proxy
+      : getProxy();
     const gid = await this.client
       .addUri([magnet], {
         dir: this.options.directory,
         'bt-save-metadata': true,
         'bt-tracker': this.options.trackers.join(','),
         'no-proxy': this.options.proxy === false ? true : false,
-        'all-proxy': this.options.proxy !== false ? proxy : undefined,
+        'all-proxy': this.options.proxy !== false ? proxy : undefined
       })
       .catch(error => {
         this.consola.error(error);
@@ -125,7 +130,7 @@ export class Aria2Client extends DownloadClient {
         magnet,
         gids: {
           metadata: gid,
-          files: new Set(),
+          files: new Set()
         },
         progress: MutableMap.empty(),
         options,
@@ -142,10 +147,11 @@ export class Aria2Client extends DownloadClient {
           await that.updateStatus(task, status);
           if (task.state === 'error') {
             if (
-              status.errorMessage &&
-              /File (.*) exists, but a control file\(\*.aria2\) does not exist/.test(
-                status.errorMessage
-              )
+              status.errorMessage
+              && /File (.*) exists, but a control file\(\*.aria2\) does not exist/
+                .test(
+                  status.errorMessage
+                )
             ) {
               // Hack: handle file exists
               const files = status.files.map(f => f.path);
@@ -174,7 +180,7 @@ export class Aria2Client extends DownloadClient {
             }
             res({ files });
           }
-        },
+        }
       };
       this.gids.set(gid, task);
     });
@@ -253,7 +259,7 @@ export class Aria2Client extends DownloadClient {
       completed: status.completedLength,
       total: status.totalLength,
       connections,
-      speed,
+      speed
     }));
     const oldProgress = { ...progress };
     const updateProgress = () => {
@@ -322,16 +328,15 @@ export class Aria2Client extends DownloadClient {
         completed: progress.completed,
         total: progress.total,
         connections,
-        speed,
+        speed
       };
-      const dirty =
-        force ||
-        oldState !== task.state ||
-        oldProgress.state !== progress.state ||
-        oldProgress.completed !== progress.completed ||
-        oldProgress.total !== progress.total ||
-        oldProgress.connections !== progress.connections ||
-        oldProgress.speed !== progress.speed;
+      const dirty = force
+        || oldState !== task.state
+        || oldProgress.state !== progress.state
+        || oldProgress.completed !== progress.completed
+        || oldProgress.total !== progress.total
+        || oldProgress.connections !== progress.connections
+        || oldProgress.speed !== progress.speed;
 
       if (task.state === 'waiting' || task.state === 'metadata') {
         if (dirty) {
@@ -342,7 +347,7 @@ export class Aria2Client extends DownloadClient {
       } else if (task.state === 'error') {
         await task.options.onError?.({
           message: status.errorMessage,
-          code: status.errorCode,
+          code: status.errorCode
         });
       } else {
         (this.logger ?? this.consola).error(
@@ -393,14 +398,13 @@ export class Aria2Client extends DownloadClient {
       }
 
       const payload = { completed, total, connections, speed };
-      const dirty =
-        force ||
-        oldState !== task.state ||
-        oldProgress.state !== progress.state ||
-        oldProgress.completed !== progress.completed ||
-        oldProgress.total !== progress.total ||
-        oldProgress.connections !== progress.connections ||
-        oldProgress.speed !== progress.speed;
+      const dirty = force
+        || oldState !== task.state
+        || oldProgress.state !== progress.state
+        || oldProgress.completed !== progress.completed
+        || oldProgress.total !== progress.total
+        || oldProgress.connections !== progress.connections
+        || oldProgress.speed !== progress.speed;
 
       if (progress.state === 'active') {
         if (dirty) {
@@ -419,7 +423,7 @@ export class Aria2Client extends DownloadClient {
       } else if (progress.state === 'error') {
         await task.options.onError?.({
           message: status.errorMessage,
-          code: status.errorCode,
+          code: status.errorCode
         });
       }
     }
@@ -471,7 +475,7 @@ export class Aria2Client extends DownloadClient {
         // Debug log
         ...(this.options.debug.log ? [`--log=${this.options.debug.log}`] : []),
         // Rest arguments
-        ...this.options.args,
+        ...this.options.args
       ],
       { cwd: this.system.space.root, env }
     );
@@ -493,8 +497,8 @@ export class Aria2Client extends DownloadClient {
             host: 'localhost',
             port: rpcPort,
             auth: {
-              secret: this.options.secret,
-            },
+              secret: this.options.secret
+            }
           });
           this.gids.clear();
           this.registerCallback();

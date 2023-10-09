@@ -7,12 +7,21 @@ interface DownloadLogger {
 }
 
 export abstract class DownloadClient {
-  protected system: AnimeSystem;
+  private _system: AnimeSystem;
 
   protected logger?: DownloadLogger;
 
   public constructor(system: AnimeSystem) {
-    this.system = system;
+    this._system = system;
+  }
+
+  public get system() {
+    return this._system;
+  }
+
+  public set system(system: AnimeSystem) {
+    this._system = system;
+    this.initialize(system);
   }
 
   public setLogger(logger: DownloadLogger) {
@@ -24,6 +33,8 @@ export abstract class DownloadClient {
     magnet: string,
     options?: DownloadOptions
   ): Promise<{ files: string[] }>;
+
+  public abstract initialize(system: AnimeSystem): void;
 
   public abstract start(): Promise<void>;
 

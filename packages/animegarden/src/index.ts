@@ -33,14 +33,20 @@ export interface AnimeGardenOptions extends PluginEntry {
 
 export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   const provider = options.provider ?? 'webtorrent';
-  const getClient = memo((system: AnimeSystem) => {
-    // Memory leak here
-    const client = makeClient(provider, system, options);
-    onDeath(async () => {
-      await client.close();
-    });
-    return client;
-  });
+  const getClient = memo(
+    (system: AnimeSystem) => {
+      const client = makeClient(provider, system, options);
+      onDeath(async () => {
+        await client.close();
+      });
+      return client;
+    },
+    {
+      serialize(system) {
+        return [];
+      }
+    }
+  );
 
   let shouldClearCache = false;
 
@@ -155,6 +161,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
 
         try {
           const client = getClient(system);
+          client.system = system; // Ensure the system is correct
+
           await runDownloadTask(system, anime, newVideos, client);
         } catch (error) {
           logger.error(error);
