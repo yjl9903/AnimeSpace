@@ -9,7 +9,7 @@ export async function refresh(system: AnimeSystem, options: RefreshOptions) {
   const animes = await system.load(options);
 
   for (const plugin of system.space.plugins) {
-    await plugin.refresh?.prepare?.(system, options);
+    await plugin.refresh?.pre?.(system, options);
   }
 
   for (const anime of animes) {
@@ -19,7 +19,7 @@ export async function refresh(system: AnimeSystem, options: RefreshOptions) {
   }
 
   for (const plugin of system.space.plugins) {
-    await plugin.refresh?.finish?.(system, options);
+    await plugin.refresh?.post?.(system, options);
   }
 
   logger.log('');

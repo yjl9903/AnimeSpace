@@ -17,7 +17,7 @@ export async function introspect(
   const animes = await system.load(options);
 
   for (const plugin of system.space.plugins) {
-    await plugin.introspect?.prepare?.(system, options);
+    await plugin.introspect?.pre?.(system, options);
   }
 
   for (const anime of animes) {
@@ -25,7 +25,7 @@ export async function introspect(
   }
 
   for (const plugin of system.space.plugins) {
-    await plugin.introspect?.finish?.(system, options);
+    await plugin.introspect?.post?.(system, options);
   }
 
   logger.log(lightGreen(`Introspect Anime Space OK`));

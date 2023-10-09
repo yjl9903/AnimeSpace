@@ -72,7 +72,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
       }
     },
     refresh: {
-      async prepare(system) {
+      async pre(system) {
         const relDir = LocalFS.path(
           system.space.root,
           options.directory ?? './local'
@@ -149,7 +149,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
           }
         }
       },
-      async finish(system) {}
+      async post(system) {}
     }
   };
 }

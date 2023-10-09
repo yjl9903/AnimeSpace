@@ -61,7 +61,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         }
         return undefined;
       },
-      async finish(system) {
+      async post(system) {
         const animes = await system.load();
         for (const anime of animes) {
           // TODO: this logic should be added to the anime.writeBack()
@@ -72,13 +72,13 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
       }
     },
     refresh: {
-      async prepare(system, options) {
+      async pre(system, options) {
         const cache = await useResourcesCache(system);
         if (options.filter !== undefined) {
           cache.disable();
         }
       },
-      async finish(system) {
+      async post(system) {
         const cache = await useResourcesCache(system);
         cache.finalize();
         useResourcesCache.clear();

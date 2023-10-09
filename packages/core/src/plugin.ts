@@ -42,7 +42,7 @@ export interface Plugin {
   command?: (system: AnimeSystem, cli: Breadc<{}>) => MayPromise<void>;
 
   introspect?: {
-    prepare?: (
+    pre?: (
       system: AnimeSystem,
       options: IntrospectOptions
     ) => MayPromise<void>;
@@ -61,14 +61,14 @@ export interface Plugin {
       options: IntrospectOptions
     ) => MayPromise<LocalVideo | undefined>;
 
-    finish?: (
+    post?: (
       system: AnimeSystem,
       options: IntrospectOptions
     ) => MayPromise<void>;
   };
 
   refresh?: {
-    prepare?: (
+    pre?: (
       system: AnimeSystem,
       options: RefreshOptions
     ) => MayPromise<void>;
@@ -79,6 +79,12 @@ export interface Plugin {
       options: RefreshOptions
     ) => MayPromise<void>;
 
-    finish?: (system: AnimeSystem, options: RefreshOptions) => MayPromise<void>;
+    post?: (system: AnimeSystem, options: RefreshOptions) => MayPromise<void>;
+  };
+
+  writeBack?: {
+    pre?: (system: AnimeSystem, anime: Anime) => MayPromise<void>;
+
+    post?: (system: AnimeSystem, anime: Anime) => MayPromise<void>;
   };
 }
