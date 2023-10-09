@@ -16,7 +16,11 @@ import { registerCli } from './cli';
 import { ANIMEGARDEN, DOT } from './constant';
 import { DownloadProviders, makeClient } from './download';
 import { generateDownloadTask, runDownloadTask } from './task';
-import { fetchAnimeResources, useResourcesCache } from './resources';
+import {
+  clearAnimeResourcesCache,
+  fetchAnimeResources,
+  useResourcesCache
+} from './resources';
 import {
   formatAnimeGardenSearchURL,
   printFansubs,
@@ -56,6 +60,15 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           const magnet = video.source.magnet;
         }
         return undefined;
+      },
+      async finish(system) {
+        const animes = await system.load();
+        for (const anime of animes) {
+          // TODO: this logic should be added to the anime.writeBack()
+          if (anime.dirty()) {
+            clearAnimeResourcesCache(system, anime);
+          }
+        }
       }
     },
     refresh: {

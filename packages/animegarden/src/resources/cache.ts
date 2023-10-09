@@ -155,6 +155,13 @@ export class ResourcesCache {
     } catch {}
   }
 
+  public async clearAnimeResources(anime: Anime) {
+    try {
+      const root = this.animeRoot.join(anime.relativeDirectory);
+      await root.join('resources.json').remove();
+    } catch {}
+  }
+
   public async load(anime: Anime) {
     const cache = await this.loadAnimeResources(anime);
     if (this.valid && cache) {
@@ -235,6 +242,14 @@ export class ResourcesCache {
       throw error;
     }
   }
+}
+
+export async function clearAnimeResourcesCache(
+  system: AnimeSystem,
+  anime: Anime
+) {
+  const cache = new ResourcesCache(system);
+  await cache.clearAnimeResources(anime);
 }
 
 export const useResourcesCache = memoAsync(async (system: AnimeSystem) => {
