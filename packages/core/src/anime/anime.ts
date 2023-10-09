@@ -7,7 +7,9 @@ import { fs as LocalFS } from 'breadfs/node';
 import { parse } from 'yaml';
 import { format } from 'date-fns';
 
-import { AnimePlan, AnimeSpace } from '../space';
+import type { AnimeSystem } from '../system';
+import type { AnimePlan, AnimeSpace } from '../space';
+
 import { AnimeSystemError, debug } from '../error';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
 
@@ -31,7 +33,7 @@ export class Anime {
 
   public readonly plan: AnimePlan;
 
-  private readonly space: AnimeSpace;
+  private readonly system: AnimeSystem;
 
   private _lib: LocalLibrary | undefined;
 
@@ -49,10 +51,11 @@ export class Anime {
    */
   private _dirty = false;
 
-  public constructor(space: AnimeSpace, plan: AnimePlan) {
-    this.space = space;
+  public constructor(system: AnimeSystem, plan: AnimePlan) {
+    this.system = system;
     this.plan = plan;
 
+    const space = system.space;
     const dirname = formatTitle(space.preference.format.anime, {
       title: plan.title,
       yyyy: format(plan.date, 'yyyy'),
@@ -70,11 +73,15 @@ export class Anime {
     this.relativeDirectory = plan.directory ? plan.directory : dirname;
   }
 
-  public delta() {
+  public get space(): AnimeSpace {
+    return this.system.space;
+  }
+
+  public get delta(): LocalVideoDelta[] {
     return this._delta;
   }
 
-  public dirty() {
+  public get dirty(): boolean {
     return this._dirty;
   }
 
@@ -423,6 +430,10 @@ export class Anime {
   }
 
   public async writeLibrary(): Promise<void> {
+    for (const plugin of this.space.plugins) {
+      await plugin.writeLibrary?.pre?.(this.system, this);
+    }
+
     await this.sortVideos();
     if (this._lib && this._dirty) {
       debug(`Start writing anime library of ${this._lib.title}`);
@@ -431,6 +442,11 @@ export class Anime {
           stringifyLocalLibrary(this._lib!, this._raw_lib)
         );
         this._dirty = false;
+
+        for (const plugin of this.space.plugins) {
+          await plugin.writeLibrary?.post?.(this.system, this);
+        }
+
         debug(`Write anime library of ${this._lib.title} OK`);
       } catch (error) {
         console.error(error);

@@ -117,7 +117,7 @@ export async function loadAnime(
 ) {
   const plans = await system.space.plans();
   const animePlans = flatAnimePlan(plans);
-  const animes = animePlans.map(ap => new Anime(system.space, ap));
+  const animes = animePlans.map(ap => new Anime(system, ap));
 
   // Detect directory naming conflict
   {

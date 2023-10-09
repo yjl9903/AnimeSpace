@@ -51,7 +51,7 @@ export async function createAnimeSystem(
     printDelta() {
       if (!animes) return;
 
-      const delta = animes.flatMap(anime => anime.delta());
+      const delta = animes.flatMap(anime => anime.delta);
       if (delta.length > 0) {
         const DOT = dim('•');
         logger.log(
@@ -125,7 +125,7 @@ export async function createAnimeSystem(
     },
     isChanged() {
       if (animes) {
-        return animes.some(a => a.dirty());
+        return animes.some(a => a.dirty);
       } else {
         return false;
       }

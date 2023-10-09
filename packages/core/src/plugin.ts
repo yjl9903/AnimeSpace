@@ -42,10 +42,7 @@ export interface Plugin {
   command?: (system: AnimeSystem, cli: Breadc<{}>) => MayPromise<void>;
 
   introspect?: {
-    pre?: (
-      system: AnimeSystem,
-      options: IntrospectOptions
-    ) => MayPromise<void>;
+    pre?: (system: AnimeSystem, options: IntrospectOptions) => MayPromise<void>;
 
     handleUnknownFile?: (
       system: AnimeSystem,
@@ -68,10 +65,7 @@ export interface Plugin {
   };
 
   refresh?: {
-    pre?: (
-      system: AnimeSystem,
-      options: RefreshOptions
-    ) => MayPromise<void>;
+    pre?: (system: AnimeSystem, options: RefreshOptions) => MayPromise<void>;
 
     refresh?: (
       system: AnimeSystem,
@@ -82,7 +76,7 @@ export interface Plugin {
     post?: (system: AnimeSystem, options: RefreshOptions) => MayPromise<void>;
   };
 
-  writeBack?: {
+  writeLibrary?: {
     pre?: (system: AnimeSystem, anime: Anime) => MayPromise<void>;
 
     post?: (system: AnimeSystem, anime: Anime) => MayPromise<void>;

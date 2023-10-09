@@ -42,6 +42,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
     return client;
   });
 
+  let shouldClearCache = false;
+
   return {
     name: 'animegarden',
     options,
@@ -54,21 +56,22 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
     command(system, cli) {
       registerCli(system, cli, getClient);
     },
+    writeLibrary: {
+      async post(system, anime) {
+        if (shouldClearCache) {
+          clearAnimeResourcesCache(system, anime);
+        }
+      }
+    },
     introspect: {
+      async pre(system) {
+        shouldClearCache = true;
+      },
       async handleUnknownVideo(system, anime, video) {
         if (video.source.type === ANIMEGARDEN) {
           const magnet = video.source.magnet;
         }
         return undefined;
-      },
-      async post(system) {
-        const animes = await system.load();
-        for (const anime of animes) {
-          // TODO: this logic should be added to the anime.writeBack()
-          if (anime.dirty()) {
-            clearAnimeResourcesCache(system, anime);
-          }
-        }
       }
     },
     refresh: {
