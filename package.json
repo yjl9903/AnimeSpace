@@ -33,7 +33,7 @@
     "vite": "^4.4.11",
     "vitest": "^0.34.6"
   },
-  "packageManager": "pnpm@8.8.0",
+  "packageManager": "pnpm@8.9.0",
   "engines": {
     "node": ">=v20.8.0"
   },
