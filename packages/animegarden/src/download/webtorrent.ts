@@ -1,3 +1,5 @@
+import { AnimeSystem } from '@animespace/core';
+
 import { DownloadClient, DownloadOptions } from './base';
 
 export class WebtorrentClient extends DownloadClient {
@@ -8,6 +10,8 @@ export class WebtorrentClient extends DownloadClient {
   ): Promise<{ files: string[] }> {
     throw new Error('Method not implemented.');
   }
+
+  public initialize(system: AnimeSystem) {}
 
   public async start() {}
 
