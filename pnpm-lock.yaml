@@ -215,8 +215,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       undici:
-        specifier: ^5.25.4
-        version: 5.25.4
+        specifier: ^5.26.3
+        version: 5.26.3
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.3
@@ -288,8 +288,8 @@ importers:
         specifier: ^8.1.1
         version: 8.1.1
       undici:
-        specifier: ^5.25.4
-        version: 5.25.4
+        specifier: ^5.26.3
+        version: 5.26.3
       yaml:
         specifier: ^2.3.2
         version: 2.3.2
@@ -7372,8 +7372,8 @@ packages:
     resolution: {integrity: sha512-Ga1jfYwRn7+cP9v8auvEXN1rX3sWqlayd4HP7OKk4mZWylEmu3KzXDUGrQUN6Ol7qo1gPvB2e5gX6udnyEPgdA==}
     dev: true
 
-  /undici@5.25.4:
-    resolution: {integrity: sha512-450yJxT29qKMf3aoudzFpIciqpx6Pji3hEWaXqXmanbXF58LTAGCKxcJjxMXWu3iG+Mudgo3ZUfDB6YDFd/dAw==}
+  /undici@5.26.3:
+    resolution: {integrity: sha512-H7n2zmKEWgOllKkIUkLvFmsJQj062lSm3uA4EYApG8gLuiOM0/go9bIoC3HVaSnfg4xunowDE2i9p8drkXuvDw==}
     engines: {node: '>=14.0'}
     dependencies:
       '@fastify/busboy': 2.0.0
