@@ -225,8 +225,8 @@ importers:
         specifier: ^4.1.10
         version: 4.1.10
       '@types/fs-extra':
-        specifier: ^11.0.2
-        version: 11.0.2
+        specifier: ^11.0.3
+        version: 11.0.3
       '@types/prompts':
         specifier: ^2.4.7
         version: 2.4.7
@@ -2676,8 +2676,8 @@ packages:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
     dev: true
 
-  /@types/fs-extra@11.0.2:
-    resolution: {integrity: sha512-c0hrgAOVYr21EX8J0jBMXGLMgJqVf/v6yxi0dLaJboW9aQPh16Id+z6w2Tx1hm+piJOLv8xPfVKZCLfjPw/IMQ==}
+  /@types/fs-extra@11.0.3:
+    resolution: {integrity: sha512-sF59BlXtUdzEAL1u0MSvuzWd7PdZvZEtnaVkzX5mjpdWTJ8brG0jUqve3jPCzSzvAKKMHTG8F8o/WMQLtleZdQ==}
     dependencies:
       '@types/jsonfile': 6.1.1
       '@types/node': 20.8.7
@@ -6024,7 +6024,7 @@ packages:
       '@babel/core': 7.22.10
       '@babel/plugin-transform-typescript': 7.22.10(@babel/core@7.22.10)
       '@total-typescript/ts-reset': 0.4.2
-      '@types/fs-extra': 11.0.2
+      '@types/fs-extra': 11.0.3
       '@types/node': 18.17.5
       axios: 1.4.0(debug@4.3.4)
       breadc: 0.9.6
