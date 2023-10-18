@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.4",
-    "@types/debug": "^4.1.9",
+    "@types/debug": "^4.1.10",
     "@types/fs-extra": "^11.0.2",
     "@types/prompts": "^2.4.6",
     "@vercel/ncc": "^0.38.0",
