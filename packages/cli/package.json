@@ -64,7 +64,7 @@
     "@types/cli-progress": "^3.11.4",
     "@types/debug": "^4.1.10",
     "@types/fs-extra": "^11.0.2",
-    "@types/prompts": "^2.4.6",
+    "@types/prompts": "^2.4.7",
     "@vercel/ncc": "^0.38.0",
     "bangumi-data": "^0.3.124",
     "presea": "^0.0.10",
