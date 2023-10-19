@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@animespace/core": "workspace:*",
-    "@breadc/color": "^0.9.6",
+    "@breadc/color": "^0.9.7",
     "@onekuma/map": "^0.1.10",
     "animegarden": "^0.0.31",
     "anitomy": "^0.0.31",
@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@types/webtorrent": "^0.109.5",
-    "breadc": "^0.9.6"
+    "breadc": "^0.9.7"
   },
   "engines": {
     "node": ">=v20.7.0"
