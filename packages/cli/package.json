@@ -65,7 +65,7 @@
     "@types/debug": "^4.1.10",
     "@types/fs-extra": "^11.0.3",
     "@types/prompts": "^2.4.7",
-    "@vercel/ncc": "^0.38.0",
+    "@vercel/ncc": "^0.38.1",
     "bangumi-data": "^0.3.124",
     "presea": "^0.0.10",
     "unbuild": "^2.0.0"
