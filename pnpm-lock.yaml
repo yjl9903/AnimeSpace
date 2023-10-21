@@ -160,8 +160,8 @@ importers:
         specifier: ^0.0.31
         version: 0.0.31
       bgmc:
-        specifier: ^0.0.4
-        version: 0.0.4
+        specifier: ^0.0.5
+        version: 0.0.5
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -3469,13 +3469,12 @@ packages:
     engines: {node: '>=12.20.0'}
     dev: false
 
-  /bgmc@0.0.4:
-    resolution: {integrity: sha512-kmec2dt7bknkEQU6pHrpYbQRxgxQmwbnRMW1gVIt8Hs3DH6arWDikBJulyRV8fDYGTY4gMkVvaAcjJsn2p3bMg==}
-    engines: {node: '>=v18.15.0'}
+  /bgmc@0.0.5:
+    resolution: {integrity: sha512-pniFKDQ15H1owm8UNzUrBGss3Nukk2AO+riONkI4/7am2X0ldrxjHEJXsqrsDZ4HG2tdKR6XwZWY8VCm8R5VfA==}
+    engines: {node: '>=v20.8.0'}
     hasBin: true
     dependencies:
       breadc: 0.9.7
-      ofetch: 1.1.1
     dev: false
 
   /binary-extensions@2.2.0:
@@ -4144,6 +4143,7 @@ packages:
 
   /destr@2.0.1:
     resolution: {integrity: sha512-M1Ob1zPSIvlARiJUkKqvAZ3VAqQY6Jcuth/pBKQ2b1dX/Qx0OnJ8Vux6J2H5PTMQeRzWrrbTu70VxBfv/OPDJA==}
+    dev: true
 
   /destroy@1.2.0:
     resolution: {integrity: sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==}
@@ -5865,10 +5865,6 @@ packages:
     requiresBuild: true
     dev: false
 
-  /node-fetch-native@1.2.0:
-    resolution: {integrity: sha512-5IAMBTl9p6PaAjYCnMv5FmqIF6GcZnawAVnzaCG0rX2aYZJ4CxEkZNtVPuTRug7fL7wyM5BQYTlAzcyMPi6oTQ==}
-    dev: false
-
   /node-fetch-native@1.4.0:
     resolution: {integrity: sha512-F5kfEj95kX8tkDhUCYdV8dg3/8Olx/94zB8+ZNthFs6Bz31UpUi8Xh40TN3thLwXgrwXry1pEg9lJ++tLWTcqA==}
     dev: true
@@ -5950,14 +5946,6 @@ packages:
   /obuf@1.1.2:
     resolution: {integrity: sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==}
     dev: true
-
-  /ofetch@1.1.1:
-    resolution: {integrity: sha512-SSMoktrp9SNLi20BWfB/BnnKcL0RDigXThD/mZBeQxkIRv1xrd9183MtLdsqRYLYSqW0eTr5t8w8MqjNhvoOQQ==}
-    dependencies:
-      destr: 2.0.1
-      node-fetch-native: 1.2.0
-      ufo: 1.3.0
-    dev: false
 
   /ofetch@1.3.3:
     resolution: {integrity: sha512-s1ZCMmQWXy4b5K/TW9i/DtiN8Ku+xCiHcjQ6/J/nDdssirrQNOoB165Zu8EqLMA2lln1JUth9a0aW9Ap2ctrUg==}
@@ -7243,6 +7231,7 @@ packages:
 
   /ufo@1.3.0:
     resolution: {integrity: sha512-bRn3CsoojyNStCZe0BG0Mt4Nr/4KF+rhFlnNXybgqt5pXHNFRlqinSoQaTrGyzE4X8aHplSb+TorH+COin9Yxw==}
+    dev: true
 
   /uglify-js@3.17.4:
     resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
