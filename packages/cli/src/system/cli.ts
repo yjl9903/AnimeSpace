@@ -1,3 +1,5 @@
+import fs from 'fs-extra';
+import path from 'node:path';
 import { execSync } from 'node:child_process';
 
 import openEditor from 'open-editor';
@@ -20,6 +22,8 @@ export async function makeCliApp(system: AnimeSystem) {
 }
 
 function registerApp(system: AnimeSystem, app: Breadc<{}>) {
+  const isTTY = !!process?.stdout?.isTTY;
+
   app
     .command('space', 'Display the space directory')
     .option('--open', 'Open space in your editor')
@@ -27,7 +31,6 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       const root = system.space.root;
       const cmds = options['--'];
       if (cmds.length > 0) {
-        const isTTY = !!process?.stdout?.isTTY;
         if (isTTY) {
           system.printSpace();
         }
@@ -42,6 +45,44 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
         console.log(root);
       }
       return root;
+    });
+
+  app
+    .command('run <command> [...args]', 'Run command in the space directory')
+    .action(async (command, args) => {
+      const pkgJson = await fs
+        .readJSON(system.space.resolvePath('package.json'))
+        .catch(() => undefined);
+
+      const env = { ...process.env };
+      env.PATH = [
+        ...(process.env.PATH ?? '').split(path.delimiter),
+        system.space.resolvePath('node_modules/.bin')
+      ].join(path.delimiter);
+
+      if (pkgJson.scripts && command in pkgJson.scripts) {
+        const cmd = pkgJson.scripts[command] as string;
+
+        if (isTTY) {
+          system.printSpace();
+        }
+
+        execSync(cmd + ' ' + args.join(' '), {
+          cwd: system.space.root,
+          stdio: 'inherit',
+          env
+        });
+      } else {
+        if (isTTY) {
+          system.printSpace();
+        }
+
+        execSync(command + ' ' + args.join(' '), {
+          cwd: system.space.root,
+          stdio: 'inherit',
+          env
+        });
+      }
     });
 
   app
