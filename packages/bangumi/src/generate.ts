@@ -1,16 +1,16 @@
 import path from 'path';
 import fs from 'fs-extra';
 
-import { AnimeSystem, uniqBy, ufetch } from '@animespace/core';
+import { AnimeSystem, ufetch, uniqBy } from '@animespace/core';
 
 import { fetchResources } from 'animegarden';
 import { bold, lightBlue, lightRed } from '@breadc/color';
 import { format, getYear, subMonths } from 'date-fns';
-import { BgmClient, type BGMCollection } from 'bgmc';
+import { BgmClient, type CollectionInformation } from 'bgmc';
 
 type Item<T> = T extends Array<infer R> ? R : never;
 
-type CollectionItem = Item<NonNullable<BGMCollection.Information['data']>>;
+type CollectionItem = Item<NonNullable<CollectionInformation['data']>>;
 
 const client = new BgmClient(ufetch, { maxRetry: 1 });
 
@@ -52,11 +52,13 @@ export async function generatePlan(
 
       if (options.create) {
         system.logger.log(
-          `${lightBlue('Searching')} ${bold(
-            anime.subject?.name_cn ||
-              anime.subject?.name ||
-              `Bangumi ${anime.subject_id}`
-          )}`
+          `${lightBlue('Searching')} ${
+            bold(
+              anime.subject?.name_cn
+                || anime.subject?.name
+                || `Bangumi ${anime.subject_id}`
+            )
+          }`
         );
       }
     }
@@ -83,7 +85,7 @@ export async function generatePlan(
         bgm: '' + item.id,
         season: inferSeason(title, ...translations),
         type: inferType(item),
-        translations,
+        translations
       };
 
       const escapeString = (t: string) => t.replace(`'`, `''`);
@@ -124,19 +126,23 @@ export async function generatePlan(
         .replace(/"/g, '%22')
         .replace(/ /g, '%20');
       writeln(
-        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${encodeURIComponent(
-          date.toISOString()
-        )}`
+        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${
+          encodeURIComponent(
+            date.toISOString()
+          )
+        }`
       );
       writeln(``);
     } catch (error) {
       if (typeof anime === 'object') {
         system.logger.error(
-          `${lightRed('Failed to search')} ${bold(
-            anime.subject?.name_cn ||
-              anime.subject?.name ||
-              `Bangumi ${anime.subject_id}`
-          )}`
+          `${lightRed('Failed to search')} ${
+            bold(
+              anime.subject?.name_cn
+                || anime.subject?.name
+                || `Bangumi ${anime.subject_id}`
+            )
+          }`
         );
       } else {
         system.logger.error(error);
@@ -161,7 +167,7 @@ export async function getCollections(username: string) {
       subject_type: 2,
       type: 3,
       limit: 50,
-      offset: list.length,
+      offset: list.length
     });
     if (data && data.length > 0) {
       list.push(...data);
@@ -176,7 +182,7 @@ async function getFansub(titles: string[]) {
   const { resources } = await fetchResources(ufetch, {
     include: [titles],
     count: -1,
-    retry: 5,
+    retry: 5
   });
   return uniqBy(
     resources.filter(r => !!r.fansub),
