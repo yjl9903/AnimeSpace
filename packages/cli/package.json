@@ -58,7 +58,7 @@
     "fs-extra": "^11.1.1",
     "open-editor": "^4.1.1",
     "prompts": "^2.4.2",
-    "undici": "^5.26.4"
+    "undici": "^5.26.5"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.4",
