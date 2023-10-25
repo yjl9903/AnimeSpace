@@ -52,13 +52,11 @@ export async function generatePlan(
 
       if (options.create) {
         system.logger.log(
-          `${lightBlue('Searching')} ${
-            bold(
-              anime.subject?.name_cn
-                || anime.subject?.name
-                || `Bangumi ${anime.subject_id}`
-            )
-          }`
+          `${lightBlue('Searching')} ${bold(
+            anime.subject?.name_cn ||
+              anime.subject?.name ||
+              `Bangumi ${anime.subject_id}`
+          )}`
         );
       }
     }
@@ -85,7 +83,7 @@ export async function generatePlan(
         bgm: '' + item.id,
         season: inferSeason(title, ...translations),
         type: inferType(item),
-        translations
+        translations,
       };
 
       const escapeString = (t: string) => t.replace(`'`, `''`);
@@ -126,23 +124,19 @@ export async function generatePlan(
         .replace(/"/g, '%22')
         .replace(/ /g, '%20');
       writeln(
-        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${
-          encodeURIComponent(
-            date.toISOString()
-          )
-        }`
+        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${encodeURIComponent(
+          date.toISOString()
+        )}`
       );
       writeln(``);
     } catch (error) {
       if (typeof anime === 'object') {
         system.logger.error(
-          `${lightRed('Failed to search')} ${
-            bold(
-              anime.subject?.name_cn
-                || anime.subject?.name
-                || `Bangumi ${anime.subject_id}`
-            )
-          }`
+          `${lightRed('Failed to search')} ${bold(
+            anime.subject?.name_cn ||
+              anime.subject?.name ||
+              `Bangumi ${anime.subject_id}`
+          )}`
         );
       } else {
         system.logger.error(error);
@@ -167,7 +161,7 @@ export async function getCollections(username: string) {
       subject_type: 2,
       type: 3,
       limit: 50,
-      offset: list.length
+      offset: list.length,
     });
     if (data && data.length > 0) {
       list.push(...data);
@@ -182,7 +176,7 @@ async function getFansub(titles: string[]) {
   const { resources } = await fetchResources(ufetch, {
     include: [titles],
     count: -1,
-    retry: 5
+    retry: 5,
   });
   return uniqBy(
     resources.filter(r => !!r.fansub),
@@ -191,15 +185,22 @@ async function getFansub(titles: string[]) {
 }
 
 function inferType(subject: Awaited<ReturnType<BgmClient['subject']>>) {
+  const FILM = ['电影', '剧场版'];
   const titles = [subject.name, subject.name_cn];
 
   {
-    const FILM = ['电影', '剧场版'];
     for (const title of titles) {
       for (const f of FILM) {
         if (title && title.includes(f)) {
           return '电影';
         }
+      }
+    }
+  }
+  {
+    for (const tag of subject.tags) {
+      if (FILM.includes(tag.name)) {
+        return '电影';
       }
     }
   }
