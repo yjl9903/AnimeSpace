@@ -17,7 +17,7 @@ describe.only('Load Space', () => {
     expect({
       ...space,
       resolvePath: undefined,
-      plans: undefined,
+      plans: undefined
     }).toMatchInlineSnapshot(`
       {
         "plans": undefined,
@@ -130,14 +130,14 @@ describe.only('Load Space', () => {
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
               include: [['熊熊勇闯异世界 Punch!']],
-              exclude: [],
-            },
+              exclude: []
+            }
           },
           {
             title: '天国大魔境',
             alias: [],
             translations: {
-              unknown: ['Tengoku Daimakyou'],
+              unknown: ['Tengoku Daimakyou']
             },
             type: '番剧',
             status: 'onair',
@@ -147,8 +147,8 @@ describe.only('Load Space', () => {
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
               include: [['天国大魔境', 'Tengoku Daimakyou']],
-              exclude: [],
-            },
+              exclude: []
+            }
           },
           {
             title: '偶像大师 灰姑娘女孩 U149',
@@ -162,11 +162,11 @@ describe.only('Load Space', () => {
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
               include: [['偶像大师', 'iDOLM@STER'], ['灰姑娘女孩'], ['U149']],
-              exclude: ['闪耀色彩'],
-            },
-          },
-        ],
-      },
+              exclude: ['闪耀色彩']
+            }
+          }
+        ]
+      }
     ]);
   });
 });
@@ -179,7 +179,7 @@ describe('Create Space', () => {
     expect({ ...loaded, resolvePath: undefined, plans: undefined }).toEqual({
       ...space,
       resolvePath: undefined,
-      plans: undefined,
+      plans: undefined
     });
     expect(await loaded.plans()).toEqual(await space.plans());
   });

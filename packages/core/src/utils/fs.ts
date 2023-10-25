@@ -17,7 +17,7 @@ export async function listIncludeFiles(space: AnimeSpace, directory: Path) {
       .map(f => ({
         filename: f.basename,
         path: f,
-        metadata: {},
+        metadata: {}
       }));
   } catch {
     return [];

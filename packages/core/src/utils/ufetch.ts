@@ -10,7 +10,7 @@ export const ufetch = async (
     // @ts-ignore
     return fetch(url, {
       ...init,
-      dispatcher: new ProxyAgent(proxy),
+      dispatcher: new ProxyAgent(proxy)
     });
   } else {
     // @ts-ignore

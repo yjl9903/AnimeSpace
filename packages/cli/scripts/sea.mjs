@@ -13,5 +13,5 @@ await bundle(process.cwd(), {
   outDir: './bin',
   sign: true,
   useSnapshot: false,
-  useCodeCache: true,
+  useCodeCache: true
 });

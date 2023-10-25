@@ -9,7 +9,7 @@ import {
   DefaultAnimeFormat,
   DefaultEpisodeFormat,
   DefaultFilmFormat,
-  DefaultStorageDirectory,
+  DefaultStorageDirectory
 } from './constant';
 
 export const PluginEntry = z.object({ name: z.string() }).passthrough();
@@ -23,20 +23,20 @@ export const Preference = z.object({
     anime: z.string().default(DefaultAnimeFormat),
     episode: z.string().default(DefaultEpisodeFormat),
     film: z.string().default(DefaultFilmFormat),
-    ova: z.string().default(DefaultFilmFormat),
+    ova: z.string().default(DefaultFilmFormat)
   }),
   extension: z.object({
     include: z.array(z.string()).default(['mp4', 'mkv']),
-    exclude: z.array(z.string()),
+    exclude: z.array(z.string())
   }),
   keyword: z.object({
     order: z.record(z.string(), z.array(z.string())),
-    exclude: z.array(z.string()),
+    exclude: z.array(z.string())
   }),
   fansub: z.object({
     order: StringArray,
-    exclude: z.array(z.string()),
-  }),
+    exclude: z.array(z.string())
+  })
 });
 
 export type Preference = z.infer<typeof Preference>;
@@ -50,13 +50,13 @@ export const Storage = z.object({
           directory: z.string().optional(),
           url: z.string().optional(),
           username: z.string().optional(),
-          password: z.string().optional(),
+          password: z.string().optional()
         })
         .transform(storage => {
           if (storage.provider === 'local') {
             return {
               provider: 'local' as const,
-              directory: storage.directory ?? DefaultStorageDirectory,
+              directory: storage.directory ?? DefaultStorageDirectory
             };
           } else if (storage.provider === 'webdav') {
             if (storage.url) {
@@ -65,7 +65,7 @@ export const Storage = z.object({
                 url: storage.url,
                 directory: storage.directory ?? '/',
                 username: storage.username,
-                password: storage.password,
+                password: storage.password
               };
             }
           }
@@ -73,41 +73,41 @@ export const Storage = z.object({
         }),
       z
         .string()
-        .transform(directory => ({ provider: 'local' as const, directory })),
+        .transform(directory => ({ provider: 'local' as const, directory }))
     ])
     .default({
       provider: 'local' as const,
-      directory: DefaultStorageDirectory,
+      directory: DefaultStorageDirectory
     }),
 
   library: z
     .union([
       z.string().transform(directory => ({
         mode: 'external' as const,
-        directory,
+        directory
       })),
       z.object({
         mode: z.enum(['embedded', 'external']).default('embedded'),
-        directory: z.string().optional(),
-      }),
+        directory: z.string().optional()
+      })
     ])
     .default({ mode: 'embedded' })
     .transform(lib => {
       if (lib.mode === 'external' && lib.directory) {
         return {
           mode: 'external' as const,
-          directory: lib.directory,
+          directory: lib.directory
         };
       }
       return { mode: 'embedded' as const };
-    }),
+    })
 });
 
 export const RawAnimeSpaceSchema = z.object({
   storage: Storage,
   preference: Preference.passthrough(),
   plans: StringArray,
-  plugins: z.array(PluginEntry),
+  plugins: z.array(PluginEntry)
 });
 
 export type RawAnimeSpace = z.infer<typeof RawAnimeSpaceSchema>;
@@ -116,20 +116,24 @@ export interface AnimeSpace {
   readonly root: string;
 
   readonly storage: {
-    readonly anime: { fs: BreadFS; directory: Path } & (
-      | { provider: 'local' }
-      | {
+    readonly anime:
+      & { fs: BreadFS; directory: Path }
+      & (
+        | { provider: 'local' }
+        | {
           provider: 'webdav';
           url: string;
           username?: string;
           password?: string;
         }
-    );
+      );
 
-    readonly library: { fs: BreadFS; directory: Path } & (
-      | { mode: 'embedded' }
-      | { mode: 'external' }
-    );
+    readonly library:
+      & { fs: BreadFS; directory: Path }
+      & (
+        | { mode: 'embedded' }
+        | { mode: 'external' }
+      );
 
     readonly cache: { fs: BreadFS; directory: Path };
   };
@@ -155,7 +159,7 @@ export const AnimePlanSchema = z
       .union([
         z.string().transform(s => ({ unknown: [s] })),
         z.array(z.string()).transform(arr => ({ unknown: arr })),
-        z.record(z.string(), StringArray),
+        z.record(z.string(), StringArray)
       ])
       .default({}),
     directory: z.string().optional(),
@@ -171,19 +175,19 @@ export const AnimePlanSchema = z
             z.coerce.number().transform(n => ({
               offset: n,
               gte: Number.MIN_SAFE_INTEGER,
-              lte: Number.MAX_SAFE_INTEGER,
+              lte: Number.MAX_SAFE_INTEGER
             })),
             z.object({
               offset: z.coerce.number(),
               gte: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
-              lte: z.coerce.number().default(Number.MAX_SAFE_INTEGER),
-            }),
+              lte: z.coerce.number().default(Number.MAX_SAFE_INTEGER)
+            })
           ])
-          .optional(),
+          .optional()
       })
       .passthrough()
       .optional(),
-    keywords: z.any(),
+    keywords: z.any()
   })
   .passthrough();
 
@@ -191,7 +195,7 @@ export const PlanSchema = z.object({
   name: z.string().default('unknown'),
   date: z.coerce.date(),
   status: z.enum(['onair', 'finish']).default('onair'),
-  onair: z.array(AnimePlanSchema).default([]),
+  onair: z.array(AnimePlanSchema).default([])
 });
 
 export interface Plan {

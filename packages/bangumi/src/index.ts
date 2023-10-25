@@ -30,21 +30,20 @@ export function Bangumi(options: BangumiOptions): Plugin {
             return;
           }
 
-          const selected =
-            bgms.length === 1
-              ? { bangumi: bgms }
-              : await prompts({
-                  type: 'multiselect',
-                  name: 'bangumi',
-                  message: '选择将要生成计划的动画',
-                  choices: bgms.map(bgm => ({
-                    title: (bgm.name_cn || bgm.name) ?? String(bgm.id!),
-                    value: bgm,
-                  })),
-                  hint: '- 上下移动, 空格选择, 回车确认',
-                  // @ts-ignore
-                  instructions: false,
-                });
+          const selected = bgms.length === 1
+            ? { bangumi: bgms }
+            : await prompts({
+              type: 'multiselect',
+              name: 'bangumi',
+              message: '选择将要生成计划的动画',
+              choices: bgms.map(bgm => ({
+                title: (bgm.name_cn || bgm.name) ?? String(bgm.id!),
+                value: bgm
+              })),
+              hint: '- 上下移动, 空格选择, 回车确认',
+              // @ts-ignore
+              instructions: false
+            });
 
           if (!selected.bangumi) {
             return;
@@ -87,6 +86,6 @@ export function Bangumi(options: BangumiOptions): Plugin {
           const collections = await getCollections(username);
           return await generatePlan(system, collections, options);
         });
-    },
+    }
   };
 }
