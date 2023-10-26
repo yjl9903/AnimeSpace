@@ -86,31 +86,33 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           );
 
           try {
-            await client.start();
+            if (resource) {
+              await client.start();
 
-            logger.log(
-              `${lightBlue('Downloading')} ${bold(video.filename)} ${
-                dim(
-                  'from'
-                )
-              } ${link(`AnimeGarden`, video.source.magnet)}`
-            );
+              logger.log(
+                `${lightBlue('Downloading')} ${bold(video.filename)} ${
+                  dim(
+                    'from'
+                  )
+                } ${link(`AnimeGarden`, video.source.magnet)}`
+              );
 
-            await anime.removeVideo(video);
-            await runDownloadTask(
-              system,
-              anime,
-              [
-                {
-                  video,
-                  resource: {
-                    ...resource,
-                    magnet: resource.magnet.href
+              await anime.removeVideo(video);
+              await runDownloadTask(
+                system,
+                anime,
+                [
+                  {
+                    video,
+                    resource: {
+                      ...resource,
+                      magnet: resource.magnet.href
+                    }
                   }
-                }
-              ],
-              client
-            );
+                ],
+                client
+              );
+            }
           } catch (error) {
             logger.error(error);
           } finally {
