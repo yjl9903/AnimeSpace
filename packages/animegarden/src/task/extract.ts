@@ -57,7 +57,12 @@ export async function generateDownloadTask(
     });
 
     const res = resources[0];
-    if (force || !library.videos.find(r => r.source.magnet === res.href)) {
+    if (
+      force
+      || !library.videos.find(
+        r => r.source.magnet?.split('/').at(-1) === res.href.split('/').at(-1)
+      )
+    ) {
       const info = parser.parse(res.title)!;
       videos.push({
         video: {
@@ -71,7 +76,11 @@ export async function generateDownloadTask(
           episode: info.episode.number, // Raw episode number
           source: {
             type: 'AnimeGarden',
-            magnet: res.href
+            magnet: `https://garden.onekuma.cn/resource/${
+              res.href
+                .split('/')
+                .at(-1)
+            }`
           }
         },
         resource: res

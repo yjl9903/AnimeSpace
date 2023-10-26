@@ -183,7 +183,8 @@ export const AnimePlanSchema = z
               lte: z.coerce.number().default(Number.MAX_SAFE_INTEGER)
             })
           ])
-          .optional()
+          .optional(),
+        season: z.number().optional()
       })
       .passthrough()
       .optional(),

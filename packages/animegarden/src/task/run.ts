@@ -27,6 +27,8 @@ export async function runDownloadTask(
   videos: Task[],
   client: DownloadClient
 ) {
+  if (videos.length === 0) return;
+
   await client.start();
 
   const multibar = createProgressBar<{
@@ -105,13 +107,13 @@ export async function runDownloadTask(
     }
   }, 10 * 60 * 1000); // 10 minutes
 
-  const tasks = videos.map(async video => {
-    const bar = multibar.create(`${bold(video.video.filename)}`, 100);
+  const tasks = videos.map(async task => {
+    const bar = multibar.create(`${bold(task.video.filename)}`, 100);
 
     try {
       const { files } = await client.download(
-        video.video.filename,
-        video.resource.magnet,
+        task.video.filename,
+        task.resource.magnet,
         {
           onStart() {
             bar.update(0, {
@@ -145,7 +147,7 @@ export async function runDownloadTask(
       bar.remove();
 
       multibarLogger.log(
-        `${lightGreen('Download')} ${bold(video.video.filename)} ${
+        `${lightGreen('Download')} ${bold(task.video.filename)} ${
           lightGreen(
             'OK'
           )
@@ -154,25 +156,30 @@ export async function runDownloadTask(
 
       if (files.length === 1) {
         const file = files[0];
-        // Hack: update filename extension
-        video.video.filename = anime.formatFilename({
-          fansub: video.video.fansub,
-          episode: video.video.episode,
-          extension: path.extname(file).slice(1) || 'mp4'
-        });
+        if (task.video.naming === 'auto') {
+          // Hack: update filename extension when auto naming
+          task.video.filename = anime.formatFilename({
+            fansub: task.video.fansub,
+            episode: task.video.episode,
+            extension: path.extname(file).slice(1) || 'mp4'
+          });
+        }
 
         // First resolve episode number
-        const resolvedEpisode = anime.resolveEpisode(video.video.episode);
+        const resolvedEpisode = anime.resolveEpisode(task.video.episode);
+        const resolvedSeason = anime.resolveSeason(task.video.season);
         const library = (await anime.library()).videos;
+
         // Find old video to be removed
         const oldVideo = library.find(
           v =>
             v.source.type === ANIMEGARDEN
-            && anime.resolveEpisode(v.episode) === resolvedEpisode // Find same episode after being resolved
+            && anime.resolveEpisode(v.episode) === resolvedEpisode
+            && (anime.resolveSeason(v.season) ?? 1) === (resolvedSeason ?? 1) // Find same episode after being resolved
         );
 
         // Upload progress bar
-        const bar = multibar.create(`${bold(video.video.filename)}`, 100);
+        const bar = multibar.create(`${bold(task.video.filename)}`, 100);
         bar.update(0, {
           speed: 0,
           connections: 0,
@@ -183,7 +190,7 @@ export async function runDownloadTask(
 
         // Copy video to storage
         try {
-          const copyDelta = await anime.addVideoByCopy(file, video.video, {
+          const copyDelta = await anime.addVideoByCopy(file, task.video, {
             onProgress({ current, total }) {
               const value = total > 0
                 ? +(Math.ceil((1000.0 * current) / total) / 10).toFixed(1)
@@ -200,11 +207,11 @@ export async function runDownloadTask(
 
           if (copyDelta) {
             const detailURL = `https://garden.onekuma.cn/resource/${
-              video.video.source
+              task.video.source
                 .magnet!.split('/')
                 .at(-1)
             }`;
-            copyDelta.log = link(video.video.filename, detailURL);
+            copyDelta.log = link(task.video.filename, detailURL);
 
             // Remove old animegarden video to keep storage clean
             if (oldVideo) {
@@ -215,7 +222,7 @@ export async function runDownloadTask(
             }
 
             multibarLogger.log(
-              `${lightGreen('Copy')} ${bold(video.video.filename)} ${
+              `${lightGreen('Copy')} ${bold(task.video.filename)} ${
                 lightGreen(
                   'OK'
                 )
@@ -230,8 +237,8 @@ export async function runDownloadTask(
         multibar.println(
           `${lightYellow(`Warn`)} Resource ${
             link(
-              video.resource.title,
-              video.resource.href
+              task.resource.title,
+              task.resource.href
             )
           } has multiple files`
         );
@@ -239,8 +246,8 @@ export async function runDownloadTask(
     } catch (error) {
       const defaultMessage = `Download ${
         link(
-          video.resource.title,
-          video.resource.href
+          task.resource.title,
+          task.resource.href
         )
       } failed`;
       if (error instanceof Error && error?.message) {

@@ -220,7 +220,8 @@ export class Anime {
       const title = this._raw_lib?.title ?? this.plan.rewrite?.title
         ?? this.plan.title;
       const date = video.date ?? this._lib?.date ?? this.plan.date;
-      const season = video.season ?? this._lib?.season ?? this.plan.season;
+
+      const season = this.resolveSeason(video.season);
       const episode = this.resolveEpisode(video.episode);
 
       return formatTitle(this.format(), {
@@ -241,7 +242,8 @@ export class Anime {
     const title = this._raw_lib?.title ?? this.plan.rewrite?.title
       ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
-    const season = meta.season ?? this._lib?.season ?? this.plan.season;
+
+    const season = this.resolveSeason(meta.season);
     const episode = this.resolveEpisode(meta.episode);
 
     return formatTitle(this.format(meta.type), {
@@ -270,6 +272,13 @@ export class Anime {
     } else {
       return undefined;
     }
+  }
+
+  public resolveSeason(season: number): number;
+  public resolveSeason(season: undefined): undefined;
+  public resolveSeason(season: number | undefined): number | undefined;
+  public resolveSeason(season: number | undefined): number | undefined {
+    return season ?? this._lib?.season ?? this.plan.season;
   }
 
   // --- mutation ---
@@ -421,6 +430,9 @@ export class Anime {
     const lib = await this.library();
     const src = lib.videos.map(v => v.filename);
     lib.videos.sort((lhs, rhs) => {
+      const sl = lhs.season ?? 1;
+      const sr = rhs.season ?? 1;
+      if (sl !== sr) return sl - sr;
       const el = lhs.episode ?? -1;
       const er = rhs.episode ?? -1;
       return el - er;

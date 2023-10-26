@@ -1,14 +1,16 @@
 import { z } from 'zod';
 import { memo } from 'memofunc';
+import { fetchResourceDetail } from 'animegarden';
+import { bold, dim, lightBlue, lightCyan, lightRed, link } from '@breadc/color';
 
 import {
   type AnimeSystem,
   onDeath,
   type Plugin,
   type PluginEntry,
-  StringArray
+  StringArray,
+  ufetch
 } from '@animespace/core';
-import { bold, dim, lightBlue, lightCyan, lightRed, link } from '@breadc/color';
 
 import './plan.d';
 
@@ -74,9 +76,48 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         shouldClearCache = true;
       },
       async handleUnknownVideo(system, anime, video) {
-        if (video.source.type === ANIMEGARDEN) {
-          const magnet = video.source.magnet;
+        if (video.source.type === ANIMEGARDEN && video.source.magnet) {
+          const logger = system.logger.withTag('animegarden');
+          const client = getClient(system);
+
+          const resource = await fetchResourceDetail(
+            ufetch,
+            video.source.magnet.split('/').at(-1)!
+          );
+
+          try {
+            await client.start();
+
+            logger.log(
+              `${lightBlue('Downloading')} ${bold(video.filename)} ${
+                dim(
+                  'from'
+                )
+              } ${link(`AnimeGarden`, video.source.magnet)}`
+            );
+
+            await anime.removeVideo(video);
+            await runDownloadTask(
+              system,
+              anime,
+              [
+                {
+                  video,
+                  resource: {
+                    ...resource,
+                    magnet: resource.magnet.href
+                  }
+                }
+              ],
+              client
+            );
+          } catch (error) {
+            logger.error(error);
+          } finally {
+            return video;
+          }
         }
+
         return undefined;
       }
     },

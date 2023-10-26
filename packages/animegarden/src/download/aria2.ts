@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'pathe';
 import { spawn } from 'node:child_process';
 
 import type { ConsolaInstance } from 'consola';
@@ -71,7 +71,7 @@ export class Aria2Client extends DownloadClient {
     this.consola = system.logger.withTag('aria2');
     this.options = defu(options, {
       binary: 'aria2c',
-      directory: './download',
+      directory: system.space.resolvePath('./download'),
       secret: 'animespace',
       args: [],
       proxy: false,
@@ -100,12 +100,13 @@ export class Aria2Client extends DownloadClient {
       throw new Error('aria2 has not started');
     }
 
+    const directory = this.options.directory;
     const proxy = typeof this.options.proxy === 'string'
       ? this.options.proxy
       : getProxy();
     const gid = await this.client
       .addUri([magnet], {
-        dir: this.options.directory,
+        dir: directory,
         'bt-save-metadata': true,
         'bt-tracker': this.options.trackers.join(','),
         'no-proxy': this.options.proxy === false ? true : false,
