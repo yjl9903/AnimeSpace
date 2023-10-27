@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import path from 'node:path';
+import path from 'pathe';
 
 import { BreadFS } from 'breadfs';
 import { fs as LocalFS } from 'breadfs/node';

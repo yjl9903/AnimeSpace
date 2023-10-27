@@ -9,7 +9,7 @@ import { fs as LocalFS } from 'breadfs/node';
 
 const __dirname = path.join(fileURLToPath(import.meta.url), '../');
 
-describe.only('Load Space', () => {
+describe('Load Space', () => {
   it('should work', async () => {
     const root = path.join(__dirname, './fixtures/space');
     const space = await loadSpace(root);
@@ -161,7 +161,12 @@ describe.only('Load Space', () => {
             fansub: '喵萌奶茶屋',
             date: new Date('2023-04-01 13:00:00 UTC'),
             keywords: {
-              include: [['偶像大师', 'iDOLM@STER'], ['灰姑娘女孩'], ['U149']],
+              include: [
+                ['偶像大师 灰姑娘女孩 U149'],
+                ['偶像大师', 'iDOLM@STER'],
+                ['灰姑娘女孩'],
+                ['U149']
+              ],
               exclude: ['闪耀色彩']
             }
           }

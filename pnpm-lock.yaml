@@ -134,6 +134,9 @@ importers:
       memofunc:
         specifier: ^0.0.7
         version: 0.0.7
+      pathe:
+        specifier: ^1.1.1
+        version: 1.1.1
       webtorrent:
         specifier: ^2.1.27
         version: 2.1.27
@@ -281,6 +284,9 @@ importers:
       memofunc:
         specifier: ^0.0.7
         version: 0.0.7
+      pathe:
+        specifier: ^1.1.1
+        version: 1.1.1
       simptrad:
         specifier: ^0.1.0
         version: 0.1.0
