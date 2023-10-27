@@ -91,7 +91,7 @@ export async function generatePlan(
       const escapeString = (t: string) => t.replace(`'`, `''`);
 
       writeln(`  - title: ${escapeString(plan.title)}`);
-      writeln(`    translations:`);
+      writeln(`    alias:`);
       for (const t of plan.translations ?? []) {
         writeln(`      - '${escapeString(t)}'`);
       }

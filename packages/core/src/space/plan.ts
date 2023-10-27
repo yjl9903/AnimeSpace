@@ -52,6 +52,7 @@ export async function loadPlan(
                 // Manually resolve keywords
                 keywords: resolveKeywordsArray(
                   o.title,
+                  o.alias,
                   o.translations,
                   o.keywords
                 )
@@ -84,11 +85,13 @@ export async function loadPlan(
 
 function resolveKeywordsArray(
   title: string,
+  alias: string[],
   translations: Record<string, string[]>,
   keywords: any
 ): KeywordsParams {
   const titles = [
     title,
+    ...alias,
     ...Object.entries(translations).flatMap(([_key, value]) => value)
   ];
   if (keywords !== undefined && keywords !== null) {
@@ -99,7 +102,7 @@ function resolveKeywordsArray(
         return { include: [titles], exclude: [keywords.slice(1)] };
       }
     } else if (Array.isArray(keywords)) {
-      const include: string[][] = [];
+      const include: string[][] = [titles];
       const exclude: string[] = [];
       for (const keyword of keywords) {
         if (typeof keyword === 'string') {
