@@ -53,7 +53,12 @@ describe('system', () => {
             fansub: ['喵萌奶茶屋'],
             keywords: {
               exclude: ['闪耀色彩'],
-              include: [['偶像大师', 'iDOLM@STER'], ['灰姑娘女孩'], ['U149']]
+              include: [
+                ['偶像大师 灰姑娘女孩 U149'],
+                ['偶像大师', 'iDOLM@STER'],
+                ['灰姑娘女孩'],
+                ['U149']
+              ]
             },
             status: 'onair',
             title: '偶像大师 灰姑娘女孩 U149',
