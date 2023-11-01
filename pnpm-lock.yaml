@@ -102,8 +102,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       '@naria2/node':
-        specifier: ^0.0.15
-        version: 0.0.15(uuid@8.3.2)
+        specifier: ^0.0.16
+        version: 0.0.16(uuid@8.3.2)
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -2361,14 +2361,14 @@ packages:
     dev: false
     optional: true
 
-  /@naria2/node@0.0.15(uuid@8.3.2):
-    resolution: {integrity: sha512-wK4UvstrvI4htvnqJTOs2lb7QwOHmsoPZYN+Fw4Xo6fvI3xS4AoEBfx79QiyvxPuOFdPK+MyNpc4uf6WT6mpyw==}
+  /@naria2/node@0.0.16(uuid@8.3.2):
+    resolution: {integrity: sha512-iYglpLau8XRF/QXfYVVK8AujnJ9x1leRijbM6gg9k29voZPd7Ibe/xge96g6lQRWMiqarl+kLYYmUVG1EtDL0w==}
     engines: {node: '>=v20.1.0'}
     requiresBuild: true
     dependencies:
       '@breadc/color': 0.9.7
       '@breadc/death': 0.9.7
-      '@naria2/options': 0.0.15(uuid@8.3.2)(ws@8.14.2)
+      '@naria2/options': 0.0.16(uuid@8.3.2)(ws@8.14.2)
       execa: 8.0.1
       finalhandler: 1.2.0
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
@@ -2390,8 +2390,8 @@ packages:
       - uuid
     dev: false
 
-  /@naria2/options@0.0.15(uuid@8.3.2)(ws@8.14.2):
-    resolution: {integrity: sha512-MDkhkOn+NU763vSKO7GtCp6U5GHTIJ+SjHJMz9sRA10jXI7SpZvPIefpSlEXbGn9gNPpVjY5fsYrVKvkTlSi0A==}
+  /@naria2/options@0.0.16(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-xrDfgD8oFZeY9KDrsh9fLf0DiV+wgO+adnZUM+ygLO45uvT8IZJWEvGw2dqhYjI3MTQ7LgmPLDRKoXjt6paqNw==}
     engines: {node: '>=v20.1.0'}
     dependencies:
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
