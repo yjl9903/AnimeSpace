@@ -1,13 +1,15 @@
 import fs from 'fs-extra';
 import path from 'pathe';
 import { spawn } from 'node:child_process';
+import type { Server as HttpServer } from 'node:http';
 
 import type { ConsolaInstance } from 'consola';
 
-import { dim } from '@breadc/color';
+import { dim, link } from '@breadc/color';
 import { defu } from 'defu';
 import { WebSocket } from 'libaria2';
 import { MutableMap } from '@onekuma/map';
+import { launchWebUI } from '@naria2/node/ui';
 import { AnimeSystem, getProxy, resolveStringArray } from '@animespace/core';
 
 import { DefaultTrackers } from './trackers';
@@ -59,6 +61,8 @@ export class Aria2Client extends DownloadClient {
   private started = false;
 
   private client!: WebSocket.Client;
+
+  private webUI!: HttpServer;
 
   private version!: string;
 
@@ -506,7 +510,25 @@ export class Aria2Client extends DownloadClient {
 
           const version = await this.client.getVersion();
           this.version = version.version;
-          this.consola.log(dim(`aria2 v${this.version} is running`));
+
+          const webPort = 6801;
+          const webui =
+            `http://127.0.0.1:${webPort}?port=${rpcPort}&secret=${this.options.secret}`;
+          this.webUI = await launchWebUI({
+            port: webPort,
+            rpc: { port: rpcPort, secret: this.options.secret }
+          });
+
+          this.consola.log(
+            dim(
+              `aria2 v${this.version} is running on the port ${
+                link(
+                  rpcPort + '',
+                  webui
+                )
+              }`
+            )
+          );
           res();
         } catch (error) {
           rej(error);
@@ -529,10 +551,18 @@ export class Aria2Client extends DownloadClient {
     if (this.client) {
       const version = this.version;
       const res = await this.client.shutdown().catch(() => 'OK');
-      await this.client.close().catch(() => {});
+
+      await Promise.all([
+        this.client.close().catch(() => {}),
+        new Promise<void>(res => {
+          this.webUI?.close(() => res());
+        })
+      ]);
 
       // @ts-ignore
       this.client = undefined;
+      // @ts-ignore
+      this.webUI = undefined;
       // @ts-ignore
       this.version = undefined;
       this.started = false;
