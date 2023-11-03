@@ -5,9 +5,10 @@ import type { Server as HttpServer } from 'node:http';
 
 import type { ConsolaInstance } from 'consola';
 
-import { dim, link } from '@breadc/color';
 import { defu } from 'defu';
+import { getPort } from 'get-port-please';
 import { WebSocket } from 'libaria2';
+import { dim, link } from '@breadc/color';
 import { MutableMap } from '@onekuma/map';
 import { launchWebUI } from '@naria2/node/ui';
 import { AnimeSystem, getProxy, resolveStringArray } from '@animespace/core';
@@ -511,7 +512,7 @@ export class Aria2Client extends DownloadClient {
           const version = await this.client.getVersion();
           this.version = version.version;
 
-          const webPort = 6801;
+          const webPort = await getPort({ port: 6801 });
           const webui =
             `http://127.0.0.1:${webPort}?port=${rpcPort}&secret=${this.options.secret}`;
           this.webUI = await launchWebUI({
