@@ -102,8 +102,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       '@naria2/node':
-        specifier: ^0.0.22
-        version: 0.0.22(debug@4.3.4)(uuid@8.3.2)
+        specifier: ^0.0.23
+        version: 0.0.23(debug@4.3.4)(uuid@8.3.2)
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -140,6 +140,9 @@ importers:
       memofunc:
         specifier: ^0.0.7
         version: 0.0.7
+      naria2:
+        specifier: ^0.0.23
+        version: 0.0.23(@naria2/node@0.0.23)(uuid@8.3.2)(ws@8.14.2)
       pathe:
         specifier: ^1.1.1
         version: 1.1.1
@@ -2364,14 +2367,14 @@ packages:
     dev: false
     optional: true
 
-  /@naria2/node@0.0.22(debug@4.3.4)(uuid@8.3.2):
-    resolution: {integrity: sha512-R/e6IuIqKCRQXOgPLs9WFVMPeBVymCIR1N49AWHgEOK7P+mDPmkc9N7EXYSbp72nZGmE30/G57k7sJNRbTDxCQ==}
+  /@naria2/node@0.0.23(debug@4.3.4)(uuid@8.3.2):
+    resolution: {integrity: sha512-Vce5SiqA2bjEf51sM86cn/CG6aBHl8MKs3K2mxHa7wrAUtQKD7zQHargATKWSyDj10AqMSW03fm45jDT62I8Dg==}
     engines: {node: '>=v20.1.0'}
     requiresBuild: true
     dependencies:
       '@breadc/color': 0.9.7
       '@breadc/death': 0.9.7
-      '@naria2/options': 0.0.22(uuid@8.3.2)(ws@8.14.2)
+      '@naria2/options': 0.0.23(uuid@8.3.2)(ws@8.14.2)
       execa: 8.0.1
       finalhandler: 1.2.0
       http-proxy-middleware: 2.0.6(debug@4.3.4)
@@ -2397,8 +2400,8 @@ packages:
       - uuid
     dev: false
 
-  /@naria2/options@0.0.22(uuid@8.3.2)(ws@8.14.2):
-    resolution: {integrity: sha512-g54x4irOl+7VEl20dhyGjaHENXczWgYApUjzZDCHJmCgvPnB2K7bx6C5QuVcCCbD1mnqX2ncvrtymu4Mn3GCmw==}
+  /@naria2/options@0.0.23(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-oeto+JNEBeQ+QvG1kVO3Zp4/omdeYUC5bIUx3/+GobUvrbuC//K2t4X8kyF9ZegCM0L7ETX259f6qo3nkJQ72A==}
     engines: {node: '>=v20.1.0'}
     dependencies:
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
@@ -6040,6 +6043,10 @@ packages:
     resolution: {integrity: sha512-PNxA/X8pWk+TiqPbsoIYH0GQ5Di7m6326/lwU/S4mlo4wGQddIcf/V//1f9TB0V4j59b57b+HZxt8h3iMROGvg==}
     dev: true
 
+  /mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+    dev: false
+
   /mkdirp@0.5.6:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
     hasBin: true
@@ -6134,6 +6141,25 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /naria2@0.0.23(@naria2/node@0.0.23)(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-VqWANLM52HIpR8P2RMFaTUqWze4Ke+hnuBnexpJ7B+kNO6iVq26hbBSUVFVmjWBkneIEsVD52CYVsmGz0TLenw==}
+    engines: {node: '>=v20.1.0'}
+    peerDependencies:
+      '@naria2/node': 0.0.23
+    peerDependenciesMeta:
+      '@naria2/node':
+        optional: true
+    dependencies:
+      '@naria2/node': 0.0.23(debug@4.3.4)(uuid@8.3.2)
+      '@naria2/options': 0.0.23(uuid@8.3.2)(ws@8.14.2)
+      maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
+      mitt: 3.0.1
+      type-fest: 4.6.0
+    transitivePeerDependencies:
+      - uuid
+      - ws
+    dev: false
 
   /negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
