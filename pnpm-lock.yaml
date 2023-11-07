@@ -234,8 +234,8 @@ importers:
         specifier: ^3.11.5
         version: 3.11.5
       '@types/debug':
-        specifier: ^4.1.10
-        version: 4.1.10
+        specifier: ^4.1.11
+        version: 4.1.11
       '@types/fs-extra':
         specifier: ^11.0.3
         version: 11.0.3
@@ -2781,8 +2781,8 @@ packages:
       '@types/node': 20.8.10
     dev: true
 
-  /@types/debug@4.1.10:
-    resolution: {integrity: sha512-tOSCru6s732pofZ+sMv9o4o3Zc+Sa8l3bxd/tweTQudFn06vAzb13ZX46Zi6m6EJ+RUbRTHvgQJ1gBtSgkaUYA==}
+  /@types/debug@4.1.11:
+    resolution: {integrity: sha512-R2qflTjHDs4CL6D/6TkqBeIHr54WzZfIxN729xvCNlYIVp2LknlnCro5Yo3frNaX2E5gO9pZ3/QAPVdGmu+q9w==}
     dependencies:
       '@types/ms': 0.7.31
     dev: true
