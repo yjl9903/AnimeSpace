@@ -17,7 +17,7 @@
     "@iconify-json/carbon": "^1.1.21",
     "@types/node": "^20.9.0",
     "@unocss/reset": "^0.57.2",
-    "@vitejs/plugin-vue": "^4.4.0",
+    "@vitejs/plugin-vue": "^4.4.1",
     "fast-glob": "^3.3.2",
     "https-localhost": "^4.7.1",
     "unocss": "^0.57.2",
