@@ -1,6 +1,11 @@
 import { Path } from 'breadfs';
 import { memoAsync } from 'memofunc';
-import { fetchResources, makeResourcesFilter, Resource } from 'animegarden';
+import {
+  fetchResources,
+  makeResourcesFilter,
+  normalizeTitle,
+  Resource
+} from 'animegarden';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
 
@@ -175,27 +180,29 @@ export class ResourcesCache {
           return false;
         }
 
-        const stringify = (include: string[][]) => {
-          return include.map(inc => `[${inc.join(',')}]`).join(',');
+        const stringifyArray = (include: string[][]) => {
+          return include
+            .map(inc => `[${inc.map(normalizeTitle).join(',')}]`)
+            .join(',');
         };
+        const stringify = (keys?: string[]) => (keys ?? []).join(',');
+
         if (
           !cache.filter.include
-          || stringify(cache.filter.include)
-            !== stringify(anime.plan.keywords.include)
+          || stringifyArray(cache.filter.include)
+            !== stringifyArray(anime.plan.keywords.include)
         ) {
           return false;
         }
 
         if (
-          (cache.filter.exclude ?? []).join(',')
-            !== anime.plan.keywords.exclude.join(',')
+          stringify(cache.filter.exclude)
+            !== stringify(anime.plan.keywords.exclude)
         ) {
           return false;
         }
 
-        if (
-          (cache.prefer?.fansub ?? []).join(',') !== anime.plan.fansub.join(',')
-        ) {
+        if (stringify(cache.prefer.fansub) !== stringify(anime.plan.fansub)) {
           return false;
         }
 
@@ -208,10 +215,8 @@ export class ResourcesCache {
         include: anime.plan.keywords.include,
         exclude: anime.plan.keywords.exclude
       });
-      if (
-        validateFilter(cache)
-        && this.recentResources.filter(filter).length === 0
-      ) {
+      const relatedRes = this.recentResources.filter(filter);
+      if (validateFilter(cache) && relatedRes.length === 0) {
         // There is no change
         return cache.resources;
       }
