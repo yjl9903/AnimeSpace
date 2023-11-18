@@ -87,8 +87,8 @@ importers:
         specifier: ^0.16.7
         version: 0.16.7(vite@5.0.0)(workbox-build@7.0.0)(workbox-window@7.0.0)
       vitepress:
-        specifier: 1.0.0-rc.27
-        version: 1.0.0-rc.27(@algolia/client-search@4.20.0)(@types/node@20.9.1)(postcss@8.4.31)(search-insights@2.7.0)(typescript@5.2.2)
+        specifier: 1.0.0-rc.28
+        version: 1.0.0-rc.28(@algolia/client-search@4.20.0)(@types/node@20.9.1)(postcss@8.4.31)(search-insights@2.7.0)(typescript@5.2.2)
       workbox-window:
         specifier: ^7.0.0
         version: 7.0.0
@@ -8286,8 +8286,8 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitepress@1.0.0-rc.27(@algolia/client-search@4.20.0)(@types/node@20.9.1)(postcss@8.4.31)(search-insights@2.7.0)(typescript@5.2.2):
-    resolution: {integrity: sha512-1qs1a5qPQxNOJN451HmNtKewxSIOk52qv1EdWtsO6V6kvrNxF2FFR3Inhj0W56Jcs8AKIdzKDKHNYIJhcyz3AA==}
+  /vitepress@1.0.0-rc.28(@algolia/client-search@4.20.0)(@types/node@20.9.1)(postcss@8.4.31)(search-insights@2.7.0)(typescript@5.2.2):
+    resolution: {integrity: sha512-cB0DNhX1jgmyZxPSrH5E+YpgpSlLuDL4ec9UjeqTe/Si1+MEvIJRgifB0RjGfojKa+gkSo97nLO6WN+iFgtgXQ==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4.3.2
@@ -8308,6 +8308,7 @@ packages:
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 6.2.0
+      mrmime: 1.0.1
       postcss: 8.4.31
       shiki: 0.14.5
       vite: 5.0.0(@types/node@20.9.1)
