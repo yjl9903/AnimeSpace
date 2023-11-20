@@ -33,22 +33,24 @@ export interface AnimeGardenOptions extends PluginEntry {
   provider?: DownloadProviders;
 }
 
+const memoClient = memo(
+  (provider: DownloadProviders, system: AnimeSystem, options: any) => {
+    const client = makeClient(provider, system, options);
+    onDeath(async () => {
+      await client.close();
+    });
+    return client;
+  },
+  {
+    serialize() {
+      return [];
+    }
+  }
+);
+
 export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   const provider = options.provider ?? 'webtorrent';
-  const getClient = memo(
-    (system: AnimeSystem) => {
-      const client = makeClient(provider, system, options);
-      onDeath(async () => {
-        await client.close();
-      });
-      return client;
-    },
-    {
-      serialize(system) {
-        return [];
-      }
-    }
-  );
+  const getClient = (sys: AnimeSystem) => memoClient(provider, sys, options);
 
   let shouldClearCache = false;
 

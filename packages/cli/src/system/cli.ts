@@ -96,7 +96,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
       // Refresh system
       let sys = system;
       const refresh = async () => {
-        const cancell = registerDeath(sys);
+        const cancel = registerDeath(sys);
         try {
           sys.printSpace();
           if (options.introspect) {
@@ -110,7 +110,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
 
           sys = await makeSystem();
           sys.logger.log('');
-          cancell();
+          cancel();
         }
       };
       await loop(refresh, options.duration);
