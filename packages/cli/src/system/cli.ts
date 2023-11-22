@@ -119,6 +119,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
           delta.push(...animes.flatMap(a => a.delta));
 
           if (delta.length > 0) {
+            sys.logger.log('');
             sys.logger.log(
               `${dim('There are')} ${
                 lightCyan(
