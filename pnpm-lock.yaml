@@ -154,8 +154,8 @@ importers:
         version: 3.22.2
     devDependencies:
       '@types/webtorrent':
-        specifier: ^0.109.6
-        version: 0.109.6
+        specifier: ^0.109.7
+        version: 0.109.7
       breadc:
         specifier: ^0.9.7
         version: 0.9.7
@@ -3307,8 +3307,8 @@ packages:
   /@types/web-bluetooth@0.0.20:
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
 
-  /@types/webtorrent@0.109.6:
-    resolution: {integrity: sha512-Ya2cT6Nk7bG0e6i8AC4TsWuoQ1hVc2h35RL/Cloqk4auDLOs3YyZJzIGcwKEquZz6Q3gDFtIL4pDP8YidSYX4A==}
+  /@types/webtorrent@0.109.7:
+    resolution: {integrity: sha512-iDcZkXUMjWOtPpxAWXivs6rpYD++8w4vYJVqGJQKxZh1YxIXm5P3CyHGX735nJ6kFOFXLxD1O0ys/msI1nhRug==}
     dependencies:
       '@types/bittorrent-protocol': 3.1.2
       '@types/node': 20.9.4
