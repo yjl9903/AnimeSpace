@@ -128,7 +128,6 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
               } ${dim('applied to the space')}`
             );
             printDelta(sys.logger, delta);
-            sys.logger.log('');
           }
         } catch (error) {
           sys.logger.error(error);
