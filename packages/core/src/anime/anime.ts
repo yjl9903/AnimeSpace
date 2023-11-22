@@ -469,7 +469,7 @@ export class Anime {
   }
 }
 
-interface LocalVideoDelta {
+export interface LocalVideoDelta {
   operation: 'copy' | 'move' | 'remove';
 
   video: LocalVideo;
@@ -477,6 +477,6 @@ interface LocalVideoDelta {
   log?: string;
 }
 
-interface AddVideoOptions {
+export interface AddVideoOptions {
   onProgress?: (payload: { current: number; total: number }) => void;
 }

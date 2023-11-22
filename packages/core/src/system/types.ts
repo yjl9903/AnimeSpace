@@ -28,6 +28,8 @@ export interface RefreshOptions extends SystemOperationOptions {
    * Prefer not using any cache
    */
   force?: boolean;
+
+  logDelta?: boolean;
 }
 
 export interface IntrospectOptions extends SystemOperationOptions {}

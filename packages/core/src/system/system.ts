@@ -1,7 +1,7 @@
-import { createConsola } from 'consola';
+import { ConsolaInstance, createConsola } from 'consola';
 import { dim, lightCyan, lightGreen, lightRed } from '@breadc/color';
 
-import type { Anime } from '../anime';
+import type { Anime, LocalVideoDelta } from '../anime';
 import type { AnimeSpace } from '../space';
 
 import type { AnimeSystem } from './types';
@@ -23,37 +23,13 @@ export async function createAnimeSystem(
     space,
     logger,
     printSpace() {
-      logger.log(`${dim('Space')}    ${space.root}`);
-
-      if (space.storage.anime.provider === 'local') {
-        logger.log(`${dim('Storage')}  ${space.storage.anime.directory}`);
-      } else if (space.storage.anime.provider === 'webdav') {
-        const join = (a: string, b: string) => {
-          return a.replace(/\/$/, '') + '/' + b.replace(/^\//, '');
-        };
-
-        logger.log(
-          `${dim('Storage')}  ${
-            join(
-              space.storage.anime.url,
-              space.storage.anime.directory.path
-            )
-          }`
-        );
-      }
-
-      if (space.storage.library.mode === 'external') {
-        logger.log(`${dim('Library')}  ${space.storage.library.directory}`);
-      }
-
+      printSpace(logger, space);
       logger.log('');
     },
     printDelta() {
       if (!animes) return;
-
       const delta = animes.flatMap(anime => anime.delta);
       if (delta.length > 0) {
-        const DOT = dim('•');
         logger.log(
           `${dim('There are')} ${lightCyan(delta.length + ' changes')} ${
             dim(
@@ -61,15 +37,7 @@ export async function createAnimeSystem(
             )
           }`
         );
-        for (const d of delta) {
-          const format = {
-            copy: lightGreen('Copy'),
-            move: lightGreen('Move'),
-            remove: lightRed('Remove')
-          };
-          const op = format[d.operation];
-          logger.log(`  ${DOT} ${op} ${d.log ?? d.video.filename}`);
-        }
+        printDelta(logger, delta);
         logger.log('');
       } else {
         logger.log(lightGreen(`Every anime is latest`));
@@ -106,7 +74,11 @@ export async function createAnimeSystem(
     },
     async refresh(options = {}) {
       logger.wrapConsole();
-      const animes = await refresh(system, options);
+      const animes = await refresh(system, {
+        force: false,
+        logDelta: true,
+        ...options
+      });
       logger.restoreConsole();
       return animes;
     },
@@ -132,4 +104,42 @@ export async function createAnimeSystem(
     }
   };
   return system;
+}
+
+export function printSpace(logger: ConsolaInstance, space: AnimeSpace) {
+  logger.log(`${dim('Space')}    ${space.root}`);
+
+  if (space.storage.anime.provider === 'local') {
+    logger.log(`${dim('Storage')}  ${space.storage.anime.directory}`);
+  } else if (space.storage.anime.provider === 'webdav') {
+    const join = (a: string, b: string) => {
+      return a.replace(/\/$/, '') + '/' + b.replace(/^\//, '');
+    };
+
+    logger.log(
+      `${dim('Storage')}  ${
+        join(
+          space.storage.anime.url,
+          space.storage.anime.directory.path
+        )
+      }`
+    );
+  }
+
+  if (space.storage.library.mode === 'external') {
+    logger.log(`${dim('Library')}  ${space.storage.library.directory}`);
+  }
+}
+
+export function printDelta(logger: ConsolaInstance, delta: LocalVideoDelta[]) {
+  const DOT = dim('•');
+  for (const d of delta) {
+    const format = {
+      copy: lightGreen('Copy'),
+      move: lightGreen('Move'),
+      remove: lightRed('Remove')
+    };
+    const op = format[d.operation];
+    logger.log(`  ${DOT} ${op} ${d.log ?? d.video.filename}`);
+  }
 }

@@ -23,7 +23,9 @@ export async function refresh(system: AnimeSystem, options: RefreshOptions) {
   }
 
   logger.log('');
-  system.printDelta();
+  if (options.logDelta) {
+    system.printDelta();
+  }
   logger.log(lightGreen(`Refresh Anime Space OK`));
   return animes;
 }

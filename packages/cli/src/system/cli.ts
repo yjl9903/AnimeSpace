@@ -4,8 +4,13 @@ import { execSync } from 'node:child_process';
 
 import openEditor from 'open-editor';
 import { type Breadc, breadc } from 'breadc';
-import { AnimeSystem, onDeath } from '@animespace/core';
-import { lightBlue, lightGreen, lightRed } from '@breadc/color';
+import { dim, lightBlue, lightCyan, lightGreen, lightRed } from '@breadc/color';
+import {
+  AnimeSystem,
+  LocalVideoDelta,
+  onDeath,
+  printDelta
+} from '@animespace/core';
 
 import { description, version } from '../../package.json';
 
@@ -95,14 +100,35 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .action(async options => {
       // Refresh system
       let sys = system;
+
+      if (options.introspect) {
+        await sys.introspect();
+      }
+
+      const delta: LocalVideoDelta[] = [];
+
       const refresh = async () => {
         const cancel = registerDeath(sys);
         try {
           sys.printSpace();
-          if (options.introspect) {
-            await sys.introspect();
+
+          const animes = await sys.refresh({
+            force: options.force,
+            logDelta: false
+          });
+          delta.push(...animes.flatMap(a => a.delta));
+
+          if (delta.length > 0) {
+            sys.logger.log(
+              `${dim('There are')} ${
+                lightCyan(
+                  delta.length + ' changes'
+                )
+              } ${dim('applied to the space')}`
+            );
+            printDelta(sys.logger, delta);
+            sys.logger.log('');
           }
-          await sys.refresh({ force: options.force });
         } catch (error) {
           sys.logger.error(error);
         } finally {
