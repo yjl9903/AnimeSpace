@@ -141,8 +141,8 @@ importers:
         specifier: ^0.0.8
         version: 0.0.8
       naria2:
-        specifier: ^0.0.23
-        version: 0.0.23(@naria2/node@0.0.23)(uuid@8.3.2)(ws@8.14.2)
+        specifier: ^0.0.24
+        version: 0.0.24(@naria2/node@0.0.23)(uuid@8.3.2)(ws@8.14.2)
       pathe:
         specifier: ^1.1.1
         version: 1.1.1
@@ -2725,6 +2725,17 @@ packages:
     dependencies:
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
       type-fest: 4.6.0
+    transitivePeerDependencies:
+      - uuid
+      - ws
+    dev: false
+
+  /@naria2/options@0.0.24(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-8QG+VcoHIfsExDORuiBiw3UYP/eAgcQCRMc33vPSixUiy36cKJWxkUQU7VTXxi0ilF2/DII9Y0wTOi3oxDSqBg==}
+    engines: {node: '>=v20.1.0'}
+    dependencies:
+      maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
+      type-fest: 4.8.2
     transitivePeerDependencies:
       - uuid
       - ws
@@ -6742,20 +6753,20 @@ packages:
     dev: false
     optional: true
 
-  /naria2@0.0.23(@naria2/node@0.0.23)(uuid@8.3.2)(ws@8.14.2):
-    resolution: {integrity: sha512-VqWANLM52HIpR8P2RMFaTUqWze4Ke+hnuBnexpJ7B+kNO6iVq26hbBSUVFVmjWBkneIEsVD52CYVsmGz0TLenw==}
+  /naria2@0.0.24(@naria2/node@0.0.23)(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-76HJZXXW66BsYVLDEwW+M5fKP/EJzVIS3GhuFX4opnQxrPKNGsjCf/9gSMXgjCUJ3/YXW1Ceg0XfG4Vts8lp2Q==}
     engines: {node: '>=v20.1.0'}
     peerDependencies:
-      '@naria2/node': 0.0.23
+      '@naria2/node': 0.0.24
     peerDependenciesMeta:
       '@naria2/node':
         optional: true
     dependencies:
       '@naria2/node': 0.0.23(debug@4.3.4)(uuid@8.3.2)
-      '@naria2/options': 0.0.23(uuid@8.3.2)(ws@8.14.2)
+      '@naria2/options': 0.0.24(uuid@8.3.2)(ws@8.14.2)
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
       mitt: 3.0.1
-      type-fest: 4.6.0
+      type-fest: 4.8.2
     transitivePeerDependencies:
       - uuid
       - ws
@@ -8145,6 +8156,11 @@ packages:
 
   /type-fest@4.6.0:
     resolution: {integrity: sha512-rLjWJzQFOq4xw7MgJrCZ6T1jIOvvYElXT12r+y0CC6u67hegDHaxcPqb2fZHOGlqxugGQPNB1EnTezjBetkwkw==}
+    engines: {node: '>=16'}
+    dev: false
+
+  /type-fest@4.8.2:
+    resolution: {integrity: sha512-mcvrCjixA5166hSrUoJgGb9gBQN4loMYyj9zxuMs/66ibHNEFd5JXMw37YVDx58L4/QID9jIzdTBB4mDwDJ6KQ==}
     engines: {node: '>=16'}
     dev: false
 
