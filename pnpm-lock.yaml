@@ -102,8 +102,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       '@naria2/node':
-        specifier: ^0.0.23
-        version: 0.0.23(debug@4.3.4)(uuid@8.3.2)
+        specifier: ^0.0.24
+        version: 0.0.24(debug@4.3.4)(uuid@8.3.2)
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -141,8 +141,8 @@ importers:
         specifier: ^0.0.8
         version: 0.0.8
       naria2:
-        specifier: ^0.0.23
-        version: 0.0.23(@naria2/node@0.0.23)(uuid@8.3.2)(ws@8.14.2)
+        specifier: ^0.0.24
+        version: 0.0.24(@naria2/node@0.0.24)(uuid@8.3.2)(ws@8.14.2)
       pathe:
         specifier: ^1.1.1
         version: 1.1.1
@@ -2686,14 +2686,14 @@ packages:
     dev: false
     optional: true
 
-  /@naria2/node@0.0.23(debug@4.3.4)(uuid@8.3.2):
-    resolution: {integrity: sha512-Vce5SiqA2bjEf51sM86cn/CG6aBHl8MKs3K2mxHa7wrAUtQKD7zQHargATKWSyDj10AqMSW03fm45jDT62I8Dg==}
+  /@naria2/node@0.0.24(debug@4.3.4)(uuid@8.3.2):
+    resolution: {integrity: sha512-bx4pVnNFwCrGaB8EIqDFe/6c41z7m6QfhOFU1n+O8eAN1J9HG5M5PvDoRiqDJDDHM2Rs39UyxGe+Q55CVrxHDQ==}
     engines: {node: '>=v20.1.0'}
     requiresBuild: true
     dependencies:
       '@breadc/color': 0.9.7
       '@breadc/death': 0.9.7
-      '@naria2/options': 0.0.23(uuid@8.3.2)(ws@8.14.2)
+      '@naria2/options': 0.0.24(uuid@8.3.2)(ws@8.14.2)
       execa: 8.0.1
       finalhandler: 1.2.0
       http-proxy-middleware: 2.0.6(debug@4.3.4)
@@ -2701,7 +2701,7 @@ packages:
       open: 9.1.0
       portfinder: 1.0.32
       serve-static: 1.15.0
-      type-fest: 4.6.0
+      type-fest: 4.8.2
       ws: 8.14.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
     optionalDependencies:
       '@naria2/darwin-arm64': 0.1.0-beta.0
@@ -2719,12 +2719,12 @@ packages:
       - uuid
     dev: false
 
-  /@naria2/options@0.0.23(uuid@8.3.2)(ws@8.14.2):
-    resolution: {integrity: sha512-oeto+JNEBeQ+QvG1kVO3Zp4/omdeYUC5bIUx3/+GobUvrbuC//K2t4X8kyF9ZegCM0L7ETX259f6qo3nkJQ72A==}
+  /@naria2/options@0.0.24(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-8QG+VcoHIfsExDORuiBiw3UYP/eAgcQCRMc33vPSixUiy36cKJWxkUQU7VTXxi0ilF2/DII9Y0wTOi3oxDSqBg==}
     engines: {node: '>=v20.1.0'}
     dependencies:
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
-      type-fest: 4.6.0
+      type-fest: 4.8.2
     transitivePeerDependencies:
       - uuid
       - ws
@@ -6742,20 +6742,20 @@ packages:
     dev: false
     optional: true
 
-  /naria2@0.0.23(@naria2/node@0.0.23)(uuid@8.3.2)(ws@8.14.2):
-    resolution: {integrity: sha512-VqWANLM52HIpR8P2RMFaTUqWze4Ke+hnuBnexpJ7B+kNO6iVq26hbBSUVFVmjWBkneIEsVD52CYVsmGz0TLenw==}
+  /naria2@0.0.24(@naria2/node@0.0.24)(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-76HJZXXW66BsYVLDEwW+M5fKP/EJzVIS3GhuFX4opnQxrPKNGsjCf/9gSMXgjCUJ3/YXW1Ceg0XfG4Vts8lp2Q==}
     engines: {node: '>=v20.1.0'}
     peerDependencies:
-      '@naria2/node': 0.0.23
+      '@naria2/node': 0.0.24
     peerDependenciesMeta:
       '@naria2/node':
         optional: true
     dependencies:
-      '@naria2/node': 0.0.23(debug@4.3.4)(uuid@8.3.2)
-      '@naria2/options': 0.0.23(uuid@8.3.2)(ws@8.14.2)
+      '@naria2/node': 0.0.24(debug@4.3.4)(uuid@8.3.2)
+      '@naria2/options': 0.0.24(uuid@8.3.2)(ws@8.14.2)
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
       mitt: 3.0.1
-      type-fest: 4.6.0
+      type-fest: 4.8.2
     transitivePeerDependencies:
       - uuid
       - ws
@@ -8143,8 +8143,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: false
 
-  /type-fest@4.6.0:
-    resolution: {integrity: sha512-rLjWJzQFOq4xw7MgJrCZ6T1jIOvvYElXT12r+y0CC6u67hegDHaxcPqb2fZHOGlqxugGQPNB1EnTezjBetkwkw==}
+  /type-fest@4.8.2:
+    resolution: {integrity: sha512-mcvrCjixA5166hSrUoJgGb9gBQN4loMYyj9zxuMs/66ibHNEFd5JXMw37YVDx58L4/QID9jIzdTBB4mDwDJ6KQ==}
     engines: {node: '>=16'}
     dev: false
 
