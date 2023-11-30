@@ -60,7 +60,7 @@
     "memofunc": "^0.0.8",
     "naria2": "^0.0.24",
     "pathe": "^1.1.1",
-    "webtorrent": "^2.1.29",
+    "webtorrent": "^2.1.30",
     "zod": "^3.22.2"
   },
   "devDependencies": {

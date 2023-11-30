@@ -147,8 +147,8 @@ importers:
         specifier: ^1.1.1
         version: 1.1.1
       webtorrent:
-        specifier: ^2.1.29
-        version: 2.1.29
+        specifier: ^2.1.30
+        version: 2.1.30
       zod:
         specifier: ^3.22.2
         version: 3.22.2
@@ -3143,7 +3143,7 @@ packages:
       err-code: 3.0.1
       get-browser-rtc: 1.1.0
       queue-microtask: 1.2.3
-      streamx: 2.15.1
+      streamx: 2.15.5
       uint8-util: 2.2.4
     transitivePeerDependencies:
       - supports-color
@@ -3154,7 +3154,7 @@ packages:
     dependencies:
       debug: 4.3.4
       queue-microtask: 1.2.3
-      streamx: 2.15.1
+      streamx: 2.15.5
       uint8-util: 2.2.4
       ws: 8.14.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
@@ -4098,7 +4098,7 @@ packages:
       bitfield: 4.1.0
       debug: 4.3.4
       rc4: 0.1.5
-      streamx: 2.15.1
+      streamx: 2.15.5
       throughput: 1.0.1
       uint8-util: 2.2.4
       unordered-array-remove: 1.0.2
@@ -7753,7 +7753,7 @@ packages:
     resolution: {integrity: sha512-Ax+TbUOho84bWUc3AKqWtkIvAIVws7d6QI4oJkgH4yQ5Yil+lR3vjd/7qd51dHKGzS5bFxg0++QwyNRN7s6rZA==}
     dependencies:
       limiter: 1.1.5
-      streamx: 2.15.1
+      streamx: 2.15.5
     dev: false
 
   /split@1.0.1:
@@ -7774,8 +7774,8 @@ packages:
     resolution: {integrity: sha512-Rz6yejtVyWnVjC1RFvNmYL10kgjC49EOghxWn0RFqlCHGFpQx+Xe7yW3I4ceK1SGrWIGMjD5Kbue8W/udkbMJg==}
     dev: true
 
-  /streamx@2.15.1:
-    resolution: {integrity: sha512-fQMzy2O/Q47rgwErk/eGeLu/roaFWV0jVsogDmrszM9uIw8L5OA+t+V93MgYlufNptfjmYR1tOMWhei/Eh7TQA==}
+  /streamx@2.15.5:
+    resolution: {integrity: sha512-9thPGMkKC2GctCzyCUjME3yR03x2xNo0GPKGkRw2UMYN+gqWa9uqpyNWhmsNCutU5zHmkUum0LsCRQTXUgUCAg==}
     dependencies:
       fast-fifo: 1.3.0
       queue-tick: 1.0.1
@@ -8858,8 +8858,8 @@ packages:
     resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
     dev: true
 
-  /webtorrent@2.1.29:
-    resolution: {integrity: sha512-u1G4Uv+fSh0x6BNY4+HN7MnfstMu9xe1CgmN3rfU3pXtUzSd1stUC52sqi7DjKcmTwJDO1vsdHS4ptvxWTMsng==}
+  /webtorrent@2.1.30:
+    resolution: {integrity: sha512-LvtkHQeVTuQfJMt+qZbqQyX8HeZAbmuhWJETnfSF2V2syIsLvDhS6XbsLZBDO5FlMwab+4sVxlhyu9AQ8ASpbg==}
     engines: {node: '>=14'}
     dependencies:
       '@silentbot1/nat-api': 0.4.7
@@ -8893,7 +8893,7 @@ packages:
       run-parallel: 1.2.0
       run-parallel-limit: 1.1.0
       speed-limiter: 1.0.2
-      streamx: 2.15.1
+      streamx: 2.15.5
       throughput: 1.0.1
       torrent-discovery: 11.0.0
       torrent-piece: 3.0.0
