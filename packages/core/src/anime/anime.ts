@@ -301,6 +301,11 @@ export class Anime {
         //   await trash(dst.path).catch(() => {});
         // }
 
+        // Find old video with the same name
+        const oldVideoId = this._lib!.videos.findIndex(
+          v => v.filename === newVideo.filename
+        );
+
         if (copy) {
           await src.copyTo(dst, {
             overwrite: true,
@@ -314,7 +319,14 @@ export class Anime {
           });
           delta = { operation: 'move', video: newVideo };
         }
+
         this._delta.push(delta);
+
+        if (oldVideoId !== -1) {
+          const oldVideo = this._lib!.videos[oldVideoId];
+          this._delta.push({ operation: 'remove', video: oldVideo });
+          this._lib!.videos.splice(oldVideoId, 1);
+        }
       }
 
       this._dirty = true;
@@ -410,6 +422,9 @@ export class Anime {
 
     const lib = await this.library();
     const video = this.directory.join(target.filename);
+
+    if (!lib.videos.find(v => v === target)) return;
+
     if (await video.exists()) {
       try {
         // TODO: trash
