@@ -287,7 +287,7 @@ export class Anime {
     newVideo: LocalVideo,
     { copy = false, onProgress }: { copy?: boolean } & AddVideoOptions = {}
   ): Promise<LocalVideoDelta | undefined> {
-    await this.library();
+    const lib = await this.library();
 
     let delta: LocalVideoDelta | undefined = undefined;
     try {
@@ -300,11 +300,6 @@ export class Anime {
         // if (await dst.exists()) {
         //   await trash(dst.path).catch(() => {});
         // }
-
-        // Find old video with the same name
-        const oldVideoId = this._lib!.videos.findIndex(
-          v => v.filename === newVideo.filename
-        );
 
         if (copy) {
           await src.copyTo(dst, {
@@ -322,15 +317,19 @@ export class Anime {
 
         this._delta.push(delta);
 
+        // Find old video with the same name
+        const oldVideoId = lib.videos.findIndex(
+          v => v.filename === newVideo.filename
+        );
         if (oldVideoId !== -1) {
-          const oldVideo = this._lib!.videos[oldVideoId];
+          const oldVideo = lib.videos[oldVideoId];
           this._delta.push({ operation: 'remove', video: oldVideo });
           this._lib!.videos.splice(oldVideoId, 1);
         }
       }
 
       this._dirty = true;
-      this._lib!.videos.push(newVideo);
+      lib.videos.push(newVideo);
     } catch (error) {
       console.error(error);
     } finally {
