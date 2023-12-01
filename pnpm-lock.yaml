@@ -66,8 +66,8 @@ importers:
         specifier: ^0.57.7
         version: 0.57.7
       '@vitejs/plugin-vue':
-        specifier: ^4.5.0
-        version: 4.5.0(vite@5.0.4)(vue@3.3.9)
+        specifier: ^4.5.1
+        version: 4.5.1(vite@5.0.4)(vue@3.3.9)
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -3548,8 +3548,8 @@ packages:
     hasBin: true
     dev: true
 
-  /@vitejs/plugin-vue@4.5.0(vite@5.0.4)(vue@3.3.9):
-    resolution: {integrity: sha512-a2WSpP8X8HTEww/U00bU4mX1QpLINNuz/2KMNpLsdu3BzOpak3AGI1CJYBTXcc4SPhaD0eNRUp7IyQK405L5dQ==}
+  /@vitejs/plugin-vue@4.5.1(vite@5.0.4)(vue@3.3.9):
+    resolution: {integrity: sha512-DaUzYFr+2UGDG7VSSdShKa9sIWYBa1LL8KC0MNOf2H5LjcTPjob0x8LbkqXWmAtbANJCkpiQTj66UVcQkN2s3g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0 || ^5.0.0
@@ -8668,7 +8668,7 @@ packages:
       '@docsearch/css': 3.5.2
       '@docsearch/js': 3.5.2(@algolia/client-search@4.20.0)(search-insights@2.7.0)
       '@types/markdown-it': 13.0.7
-      '@vitejs/plugin-vue': 4.5.0(vite@5.0.4)(vue@3.3.9)
+      '@vitejs/plugin-vue': 4.5.1(vite@5.0.4)(vue@3.3.9)
       '@vue/devtools-api': 6.5.1
       '@vueuse/core': 10.6.1(vue@3.3.9)
       '@vueuse/integrations': 10.6.1(focus-trap@7.5.4)(vue@3.3.9)
