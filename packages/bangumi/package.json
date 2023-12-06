@@ -51,7 +51,7 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=v20.7.0"
