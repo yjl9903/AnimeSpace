@@ -46,7 +46,7 @@ jobs:
           ${{ matrix.binary }} --help
           ${{ matrix.binary }} space
       
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: anime-${{ matrix.target }}
           path: ${{ matrix.binary }}

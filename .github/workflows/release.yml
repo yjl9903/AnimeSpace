@@ -107,13 +107,13 @@ jobs:
           Get-FileHash ${{ env.archive }} -Algorithm SHA256 | Out-File ${{ env.checksum }}
 
       - name: Upload artifacts archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.archive }}
           path: ${{ env.archive }}
 
       - name: Upload artifacts checksum
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.checksum }}
           path: ${{ env.checksum }}
