@@ -30,7 +30,7 @@
     "rimraf": "^5.0.5",
     "turbo": "^1.11.2",
     "typescript": "^5.3.3",
-    "vite": "^5.0.9",
+    "vite": "^5.0.10",
     "vitest": "^1.0.4"
   },
   "packageManager": "pnpm@8.12.1",
