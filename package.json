@@ -22,7 +22,7 @@
     "*.{js,ts,json}": "dprint fmt"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.10.5",
     "dprint": "^0.43.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
