@@ -66,8 +66,8 @@ importers:
         specifier: ^0.58.2
         version: 0.58.2
       '@vitejs/plugin-vue':
-        specifier: ^5.0.1
-        version: 5.0.1(vite@5.0.10)(vue@3.3.13)
+        specifier: ^5.0.2
+        version: 5.0.2(vite@5.0.10)(vue@3.3.13)
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -3411,8 +3411,8 @@ packages:
     hasBin: true
     dev: true
 
-  /@vitejs/plugin-vue@5.0.1(vite@5.0.10)(vue@3.3.13):
-    resolution: {integrity: sha512-lwvZX5tDhJpRJEKsjoUSWgaD26Lk9X4aDYGAPpr/Q6cLTT3PC8LPu2dsnYEweAZiNgHsbyKL2Svc/CDrFOsbtw==}
+  /@vitejs/plugin-vue@5.0.2(vite@5.0.10)(vue@3.3.13):
+    resolution: {integrity: sha512-kEjJHrLb5ePBvjD0SPZwJlw1QTRcjjCA9sB5VyfonoXVBxTS7TMnqL6EkLt1Eu61RDeiuZ/WN9Hf6PxXhPI2uA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
@@ -3422,8 +3422,8 @@ packages:
       vue: 3.3.13(typescript@5.3.3)
     dev: true
 
-  /@vitejs/plugin-vue@5.0.1(vite@5.0.10)(vue@3.4.0-rc.2):
-    resolution: {integrity: sha512-lwvZX5tDhJpRJEKsjoUSWgaD26Lk9X4aDYGAPpr/Q6cLTT3PC8LPu2dsnYEweAZiNgHsbyKL2Svc/CDrFOsbtw==}
+  /@vitejs/plugin-vue@5.0.2(vite@5.0.10)(vue@3.4.0-rc.2):
+    resolution: {integrity: sha512-kEjJHrLb5ePBvjD0SPZwJlw1QTRcjjCA9sB5VyfonoXVBxTS7TMnqL6EkLt1Eu61RDeiuZ/WN9Hf6PxXhPI2uA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
@@ -8496,7 +8496,7 @@ packages:
       '@docsearch/css': 3.5.2
       '@docsearch/js': 3.5.2(@algolia/client-search@4.22.0)(search-insights@2.7.0)
       '@types/markdown-it': 13.0.7
-      '@vitejs/plugin-vue': 5.0.1(vite@5.0.10)(vue@3.4.0-rc.2)
+      '@vitejs/plugin-vue': 5.0.2(vite@5.0.10)(vue@3.4.0-rc.2)
       '@vue/devtools-api': 6.5.1
       '@vueuse/core': 10.7.0(vue@3.4.0-rc.2)
       '@vueuse/integrations': 10.7.0(focus-trap@7.5.4)(vue@3.4.0-rc.2)
