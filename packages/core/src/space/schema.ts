@@ -27,15 +27,15 @@ export const Preference = z.object({
   }),
   extension: z.object({
     include: z.array(z.string()).default(['mp4', 'mkv']),
-    exclude: z.array(z.string())
+    exclude: z.array(z.string()).default([])
   }),
   keyword: z.object({
-    order: z.record(z.string(), z.array(z.string())),
-    exclude: z.array(z.string())
+    order: z.record(z.string(), z.array(z.string())).default({}),
+    exclude: z.array(z.string()).default([])
   }),
   fansub: z.object({
     order: StringArray,
-    exclude: z.array(z.string())
+    exclude: z.array(z.string()).default([])
   })
 });
 
