@@ -11,7 +11,7 @@
     },
     "typecheck": {
       "dependsOn": [
-        "build"
+        "^build"
       ],
       "inputs": [
         "src/**/*.ts",
@@ -23,6 +23,12 @@
         "build",
         "typecheck"
       ],
+      "inputs": [
+        "src/**/*.ts",
+        "test/**/*.ts"
+      ]
+    },
+    "format": {
       "inputs": [
         "src/**/*.ts",
         "test/**/*.ts"
