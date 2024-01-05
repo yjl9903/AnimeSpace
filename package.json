@@ -38,8 +38,5 @@
     "patchedDependencies": {
       "consola@3.1.0": "patches/consola@3.1.0.patch"
     }
-  },
-  "volta": {
-    "node": "20.9.0"
   }
 }
