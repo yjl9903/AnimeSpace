@@ -4,7 +4,6 @@ import { StringArray } from '../utils';
 
 import {
   DefaultFilmFormat,
-  DefaultAnimeFormat,
   DefaultEpisodeFormat,
   DefaultCacheDirectory,
   DefaultStorageDirectory
@@ -18,34 +17,27 @@ export interface PluginEntry {
   [prop: string]: any;
 }
 
+export const FormatPreference = z.object({
+  episode: z.string().default(DefaultEpisodeFormat),
+  film: z.string().default(DefaultFilmFormat),
+  ova: z.string().default(DefaultFilmFormat)
+});
+
+export const ExtensionPreference = z.object({
+  include: z.array(z.string()).default(['mp4', 'mkv']),
+  exclude: z.array(z.string()).default([])
+});
+
+export const KeywordPreference = z.object({
+  order: z.record(z.string(), z.array(z.string())).default({}),
+  exclude: z.array(z.string()).default([])
+});
+
 export const Preference = z
   .object({
-    format: z
-      .object({
-        anime: z.string().default(DefaultAnimeFormat),
-        episode: z.string().default(DefaultEpisodeFormat),
-        film: z.string().default(DefaultFilmFormat),
-        ova: z.string().default(DefaultFilmFormat)
-      })
-      .default({}),
-    extension: z
-      .object({
-        include: z.array(z.string()).default(['mp4', 'mkv']),
-        exclude: z.array(z.string()).default([])
-      })
-      .default({}),
-    keyword: z
-      .object({
-        order: z.record(z.string(), z.array(z.string())).default({}),
-        exclude: z.array(z.string()).default([])
-      })
-      .default({}),
-    fansub: z
-      .object({
-        order: StringArray.default([]),
-        exclude: z.array(z.string()).default([])
-      })
-      .default({})
+    format: FormatPreference.default({}),
+    extension: ExtensionPreference.default({}),
+    keyword: KeywordPreference.default({})
   })
   .passthrough()
   .default({});

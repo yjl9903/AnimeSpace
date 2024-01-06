@@ -4,7 +4,6 @@ import path from 'pathe';
 import { parse } from 'yaml';
 import { AnyZodObject, z } from 'zod';
 
-import type { Plugin } from '../plugin';
 import type { AnimeSpace } from '../space';
 
 import { AnimeSystemError, debug } from '../error';
@@ -13,14 +12,15 @@ import type { AnimePlan, KeywordsParams, PlanFile } from './types';
 import { AnimePlanSchema, PlanSchema } from './schema';
 
 export async function loadPlans(space: AnimeSpace) {
-  const plans = await loadPlan(space.root.path, space.plans, space.plugins);
+  const plans = await loadPlan(space);
   for (const plugin of space.plugins) {
     await plugin.prepare?.plans?.(space, plans);
   }
   return plans;
 }
 
-async function loadPlan(cwd: string, patterns: string[], plugins: Plugin[]): Promise<PlanFile[]> {
+async function loadPlan(space: AnimeSpace): Promise<PlanFile[]> {
+  const plugins = space.plugins;
   const animePlanSchema = plugins.reduce(
     (acc: AnyZodObject, plugin) => (plugin?.schema?.plan ? acc.merge(plugin?.schema?.plan) : acc),
     AnimePlanSchema
@@ -29,18 +29,23 @@ async function loadPlan(cwd: string, patterns: string[], plugins: Plugin[]): Pro
     onair: z.array(animePlanSchema).default([])
   });
 
-  const files = await fg(patterns, { cwd, dot: true });
+  const files = await fg(space.plans, { cwd: space.root.path, dot: true });
 
   const plans = await Promise.all(
     files.map(async (file) => {
       try {
-        const content = await fs.readFile(path.resolve(cwd, file), 'utf-8');
+        const content = await fs.readFile(path.resolve(space.root.path, file), 'utf-8');
         const yaml = parse(content);
         const parsed = Schema.safeParse(yaml);
 
         if (parsed.success) {
+          const preference = {
+            ...space.preference,
+            ...parsed.data.preference
+          };
           const plan: PlanFile = {
             ...parsed.data,
+            preference,
             onair: parsed.data.onair.map(
               (o: z.infer<typeof AnimePlanSchema>) =>
                 ({
@@ -50,24 +55,29 @@ async function loadPlan(cwd: string, patterns: string[], plugins: Plugin[]): Pro
                   // Inherit plan date
                   date: o.date ? o.date : parsed.data.date,
                   // Manually resolve keywords
-                  keywords: resolveKeywordsArray(o.title, o.alias, o.translations, o.keywords)
+                  keywords: resolveKeywordsArray(o.title, o.alias, o.translations, o.keywords),
+                  // Inherit preference,
+                  preference: {
+                    ...preference,
+                    ...o.preference
+                  }
                 }) as AnimePlan
             )
           };
 
-          debug(plan);
+          // debug(plan);
 
           return plan;
         } else {
           debug(parsed.error.issues);
-          throw new AnimeSystemError(`解析 ${path.relative(cwd, file)} 失败`);
+          throw new AnimeSystemError(`解析 ${path.relative(space.root.path, file)} 失败`);
         }
       } catch (error) {
         if (error instanceof AnimeSystemError) {
           console.error(error);
         } else {
           debug(error);
-          console.error(`解析 ${path.relative(cwd, file)} 失败`);
+          console.error(`解析 ${path.relative(space.root.path, file)} 失败`);
         }
 
         return undefined;

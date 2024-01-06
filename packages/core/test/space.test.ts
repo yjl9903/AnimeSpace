@@ -30,13 +30,8 @@ describe('Load Space', () => {
               "mkv",
             ],
           },
-          "fansub": {
-            "exclude": [],
-            "order": [],
-          },
           "format": {
-            "anime": "{title}",
-            "episode": "[{fansub}] {title} - E{ep}.{extension}",
+            "episode": "[{fansub}] {title} - S{season}E{ep}.{extension}",
             "film": "[{fansub}] {title}.{extension}",
             "ova": "[{fansub}] {title}.{extension}",
           },
@@ -96,67 +91,7 @@ describe('Load Space', () => {
       }
     `);
 
-    expect(await loadPlans(space)).toEqual([
-      {
-        date: new Date('2023-04-01 13:00:00 UTC'),
-        name: '2023-04-04 新番放送计划',
-        status: 'onair',
-        onair: [
-          {
-            title: '熊熊勇闯异世界 Punch!',
-            alias: [],
-            translations: {},
-            type: '番剧',
-            status: 'onair',
-            season: 2,
-            bgm: '323651',
-            fansub: ['Lilith-Raws', 'ANi'],
-            date: new Date('2023-04-01 13:00:00 UTC'),
-            keywords: {
-              include: [['熊熊勇闯异世界 Punch!']],
-              exclude: []
-            }
-          },
-          {
-            title: '天国大魔境',
-            alias: [],
-            translations: {
-              unknown: ['Tengoku Daimakyou']
-            },
-            type: '番剧',
-            status: 'onair',
-            // season: 1,
-            bgm: '404804',
-            fansub: 'SweetSub',
-            date: new Date('2023-04-01 13:00:00 UTC'),
-            keywords: {
-              include: [['天国大魔境', 'Tengoku Daimakyou']],
-              exclude: []
-            }
-          },
-          {
-            title: '偶像大师 灰姑娘女孩 U149',
-            alias: [],
-            translations: {},
-            type: '番剧',
-            status: 'onair',
-            // season: 1,
-            bgm: 376703,
-            fansub: '喵萌奶茶屋',
-            date: new Date('2023-04-01 13:00:00 UTC'),
-            keywords: {
-              include: [
-                ['偶像大师 灰姑娘女孩 U149'],
-                ['偶像大师', 'iDOLM@STER'],
-                ['灰姑娘女孩'],
-                ['U149']
-              ],
-              exclude: ['闪耀色彩']
-            }
-          }
-        ]
-      }
-    ]);
+    expect(await loadPlans(space)).toMatchSnapshot();
   });
 });
 

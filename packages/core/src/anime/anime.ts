@@ -52,11 +52,7 @@ export class Anime {
     this.plan = plan;
 
     const space = system.space;
-    const dirname = formatTitle(space.preference.format.anime, {
-      title: plan.title,
-      yyyy: format(plan.date, 'yyyy'),
-      MM: format(plan.date, 'MM')
-    });
+    const dirname = plan.title;
 
     this.directory = plan.directory
       ? space.storage.anime.resolve(plan.directory)
@@ -179,7 +175,7 @@ export class Anime {
 
   public async list(force = false): Promise<LocalFile[]> {
     if (this._files === undefined || force) {
-      const files = await listIncludeFiles(this.space, this.directory);
+      const files = await listIncludeFiles(this.plan.preference.extension, this.directory);
       return (this._files = files);
     } else {
       return this._files;
@@ -191,12 +187,12 @@ export class Anime {
     type ??= this.plan.type;
     switch (this.plan.type) {
       case '电影':
-        return this.space.preference.format.film;
+        return this.plan.preference.format.film;
       case 'OVA':
-        return this.space.preference.format.ova;
+        return this.plan.preference.format.ova;
       case '番剧':
       default:
-        return this.space.preference.format.episode;
+        return this.plan.preference.format.episode;
     }
   }
 
@@ -242,8 +238,14 @@ export class Anime {
 
   public resolveEpisode(episode: number, fansub: string | undefined): number;
   public resolveEpisode(episode: undefined, fansub: string | undefined): undefined;
-  public resolveEpisode(episode: number | undefined, fansub: string | undefined): number | undefined;
-  public resolveEpisode(episode: number | undefined, fansub: string | undefined): number | undefined {
+  public resolveEpisode(
+    episode: number | undefined,
+    fansub: string | undefined
+  ): number | undefined;
+  public resolveEpisode(
+    episode: number | undefined,
+    fansub: string | undefined
+  ): number | undefined {
     if (episode !== undefined) {
       const overwrite = this.plan.rewrite?.episode;
       if (overwrite !== undefined) {

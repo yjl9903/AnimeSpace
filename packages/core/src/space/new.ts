@@ -4,7 +4,6 @@ import path from 'pathe';
 import { stringify } from 'yaml';
 
 import {
-  DefaultAnimeFormat,
   DefaultConfigFilename,
   DefaultEpisodeFormat,
   DefaultFilmFormat,
@@ -22,7 +21,6 @@ export async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
     },
     preference: {
       format: {
-        anime: DefaultAnimeFormat,
         episode: DefaultEpisodeFormat,
         film: DefaultFilmFormat,
         ova: DefaultFilmFormat
@@ -37,10 +35,6 @@ export async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
           language: ['简', '繁'],
           resolution: ['1080', '720']
         },
-        exclude: []
-      },
-      fansub: {
-        order: [],
         exclude: []
       }
     },

@@ -3,8 +3,7 @@ storage:
 
 preference:
   format:
-    anime: '{title}'
-    episode: '[{fansub}] {title} - E{ep}.{extension}'
+    episode: '[{fansub}] {title} - S{season}E{ep}.{extension}'
     film: '[{fansub}] {title}.{extension}'
     ova: '[{fansub}] {title}.{extension}'
   extension:
@@ -15,9 +14,6 @@ preference:
       format: [mp4, mkv]
       resolution: ['1080', '720']
       language: ['简', '繁']
-    exclude: []
-  fansub:
-    order: []
     exclude: []
 
 plans:

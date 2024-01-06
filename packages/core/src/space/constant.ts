@@ -4,8 +4,6 @@ export const DefaultStorageDirectory = `./animes`;
 
 export const DefaultCacheDirectory = `./cache`;
 
-export const DefaultAnimeFormat = '{title}';
-
-export const DefaultEpisodeFormat = '[{fansub}] {title} E{ep}.{extension}';
+export const DefaultEpisodeFormat = '[{fansub}] {title} S{season}E{ep}.{extension}';
 
 export const DefaultFilmFormat = '[{fansub}] {title}.{extension}';

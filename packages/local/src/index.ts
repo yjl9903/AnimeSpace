@@ -69,7 +69,11 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
       async pre(system) {
         const relDir = LocalFS.path(system.space.root, options.directory ?? './local');
 
-        files.splice(0, files.length, ...(await listIncludeFiles(system.space, relDir)));
+        files.splice(
+          0,
+          files.length,
+          ...(await listIncludeFiles(system.space.preference.extension, relDir))
+        );
 
         if (files.length > 0) {
           const logger = createLogger(system);

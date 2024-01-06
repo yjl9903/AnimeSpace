@@ -1,3 +1,5 @@
+import type { Preference } from '../space/schema';
+
 export type PlanStatus = 'onair' | 'finish';
 
 export type AnimePlanType = '番剧' | '电影' | 'OVA';
@@ -9,12 +11,17 @@ export interface PlanFile {
 
   readonly status: PlanStatus;
 
+  readonly preference: Preference;
+
   readonly onair: AnimePlan[];
 }
 
 export interface AnimePlan {
   readonly title: string;
 
+  /**
+   * Alias names
+   */
   readonly alias: string[];
 
   /**
@@ -35,16 +42,7 @@ export interface AnimePlan {
 
   readonly status: PlanStatus;
 
-  readonly season?: number;
-
-  readonly date: Date;
-
-  /**
-   * Overwrite the generated search keywords
-   */
-  readonly keywords: KeywordsParams;
-
-  readonly fansub: string[];
+  readonly season: number;
 
   /**
    * Rewrite the inferred things
@@ -54,6 +52,23 @@ export interface AnimePlan {
 
     readonly episode?: { offset: number; fansub?: string[] };
   };
+
+  /**
+   * Public date, which may inherit plan date
+   */
+  readonly date: Date;
+
+  /**
+   * Overwrite the generated search keywords
+   */
+  readonly keywords: KeywordsParams;
+
+  /**
+   * Prefer fansub list
+   */
+  readonly fansub: string[];
+
+  readonly preference: Preference;
 }
 
 export interface KeywordsParams {

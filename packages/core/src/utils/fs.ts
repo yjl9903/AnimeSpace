@@ -7,9 +7,12 @@ export function isSubDir(parent: string, dir: string) {
   return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
 }
 
-export async function listIncludeFiles(space: AnimeSpace, directory: StoragePath) {
+export async function listIncludeFiles(
+  extension: AnimeSpace['preference']['extension'],
+  directory: StoragePath
+) {
   try {
-    const exts = new Set(space.preference.extension.include);
+    const exts = new Set(extension.include);
 
     return (await directory.list())
       .filter((f) => exts.has(f.extname.slice(1)))

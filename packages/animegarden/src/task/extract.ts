@@ -32,7 +32,7 @@ export async function generateDownloadTask(
       const tl = lhs.title;
       const tr = rhs.title;
 
-      for (const [_, order] of Object.entries(system.space.preference.keyword.order)) {
+      for (const [_, order] of Object.entries(anime.plan.preference.keyword.order)) {
         for (const k of order) {
           const key = k.toLowerCase();
           const hl = tl.toLowerCase().indexOf(key) !== -1;
@@ -87,7 +87,7 @@ function groupResources(system: AnimeSystem, anime: Anime, resources: Resource[]
 
   for (const r of resources) {
     // Resource title should not have exclude keywords
-    if (system.space.preference.keyword.exclude.some((k) => r.title.indexOf(k) !== -1)) {
+    if (anime.plan.preference.keyword.exclude.some((k) => r.title.indexOf(k) !== -1)) {
       continue;
     }
 
@@ -104,7 +104,7 @@ function groupResources(system: AnimeSystem, anime: Anime, resources: Resource[]
           const fansub = episode.metadata.fansub;
           if (fansub === 'fansub' || anime.plan.fansub.includes(fansub)) {
             map
-              .getOrPut(getEpisodeKey(episode), () => new MutableMap([]))
+              .getOrPut(getEpisodeKey(episode), () => new MutableMap<string, Resource[]>([]))
               .getOrPut(fansub, () => [])
               .push(r);
           }
@@ -113,7 +113,7 @@ function groupResources(system: AnimeSystem, anime: Anime, resources: Resource[]
         const fansub = episode.metadata.fansub;
         if (fansub === 'fansub' || anime.plan.fansub.includes(fansub)) {
           map
-            .getOrPut(getEpisodeKey(episode), () => new MutableMap([]))
+            .getOrPut(getEpisodeKey(episode), () => new MutableMap<string, Resource[]>([]))
             .getOrPut(fansub, () => [])
             .push(r);
         }
