@@ -114,8 +114,8 @@ importers:
         specifier: ^0.0.33
         version: 0.0.33
       breadfs:
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.1.4
+        version: 0.1.4
       cli-progress:
         specifier: ^3.12.0
         version: 3.12.0
@@ -264,14 +264,14 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       '@breadfs/webdav':
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.1.4
+        version: 0.1.4
       anitomy:
         specifier: ^0.0.33
         version: 0.0.33
       breadfs:
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.1.4
+        version: 0.1.4
       consola:
         specifier: ^3.1.0
         version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
@@ -331,8 +331,8 @@ importers:
         specifier: ^0.0.33
         version: 0.0.33
       breadfs:
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.1.4
+        version: 0.1.4
       memofunc:
         specifier: ^0.0.8
         version: 0.0.8
@@ -1749,27 +1749,27 @@ packages:
     resolution: {integrity: sha512-eIWHb5Hrnd5j/RLSgbY1mtRPECMSjRbqlxZmlG+mgNi0h0YNieaS86EYsIHxnPT+J682N/OE7LoHSVDTRmp6jw==}
     dev: false
 
-  /@breadfs/core@0.1.3:
-    resolution: {integrity: sha512-slKP/AepzfH3/hPcI2I6Tkw69ydmdx1m/s8yFi3/WrqUExvM2QXfrYcafCPGPb5pr4yBeyIqjeVbL6sLzPk2yg==}
+  /@breadfs/core@0.1.4:
+    resolution: {integrity: sha512-rcnPn76BorB3OsPVS948h5S+hTP/EPxoUovHP8ZsViY75GBudoW45DtZlDVtURpmc1XBIJ1VgJoSkqCdGWGdNQ==}
     engines: {node: '>=v20.6.1'}
     dependencies:
       pathe: 1.1.1
     dev: false
 
-  /@breadfs/node@0.1.3:
-    resolution: {integrity: sha512-89Yo6iix0esx4uKPeaW/MqkhTzx4UsHfiWmQVTZNeHO0weCFucHLF4OD/Fr6mjnAYfATw1thbwUA4eTzxyKhZQ==}
+  /@breadfs/node@0.1.4:
+    resolution: {integrity: sha512-pmbqVgZzatJq06NF4/vE+YVLY8v61WFxLiqGkseJpu5VVI/3rEy+EcY6p02h9AZlx4x05vGy2QHpvLKZPziy0A==}
     engines: {node: '>=v20.6.1'}
     dependencies:
-      '@breadfs/core': 0.1.3
+      '@breadfs/core': 0.1.4
       fs-extra: 11.2.0
       pathe: 1.1.1
     dev: false
 
-  /@breadfs/webdav@0.1.3:
-    resolution: {integrity: sha512-K3GN1tD606HtY/vX2eTrdfbS1sOj3dGL/DATje/1qiie4xJDXr9uzs88I9dDZopVjbcAQMxffwo+vU34SpBtWw==}
+  /@breadfs/webdav@0.1.4:
+    resolution: {integrity: sha512-lLOZilgL26FHihA4hpCE7e1kgzLTUNLQMctPXiHWpOEG5IbfQsGUvUj0WeNXXyJuN0cQro64a8XCQx86Qfavsg==}
     engines: {node: '>=v20.6.1'}
     dependencies:
-      '@breadfs/core': 0.1.3
+      '@breadfs/core': 0.1.4
       webdav: 5.3.1
     dev: false
 
@@ -4001,14 +4001,14 @@ packages:
     dependencies:
       '@breadc/color': 0.9.7
 
-  /breadfs@0.1.3:
-    resolution: {integrity: sha512-kO8yt8hR0zS6YeML8RsdLL4A/EnNJdYUXODFdJ8KhbNLU+b1UdRItzNMj2nLbEivbS+f6uXJxsLZ0uKQYjJ5Jw==}
+  /breadfs@0.1.4:
+    resolution: {integrity: sha512-zMPWnWSI6R4a2idUCnu9ptxu98XSGpOosKGXrjZUGDXiGYbvhG3ukj+KxhigBxY54VpfUVXsTrfCXcWjQgyjzw==}
     engines: {node: '>=v20.6.1'}
     dependencies:
-      '@breadfs/core': 0.1.3
-      '@breadfs/node': 0.1.3
+      '@breadfs/core': 0.1.4
+      '@breadfs/node': 0.1.4
     optionalDependencies:
-      '@breadfs/webdav': 0.1.3
+      '@breadfs/webdav': 0.1.4
     dev: false
 
   /browserslist@4.22.2:
