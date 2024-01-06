@@ -1,5 +1,7 @@
 import type { ConsolaInstance } from 'consola';
 
+import width from 'string-width';
+
 import { Anime } from '@animespace/core';
 import { dim, link, underline } from '@breadc/color';
 
@@ -16,19 +18,23 @@ export function formatAnimeGardenSearchURL(anime: Anime) {
 export function printKeywords(anime: Anime, logger: ConsolaInstance) {
   if (anime.plan.keywords.include.length === 1) {
     const first = anime.plan.keywords.include[0];
-    const sum = first.reduce((acc, t) => acc + t.length, 0);
+    const sum = first.reduce((acc, t) => acc + width(t), 0);
     if (sum > 50) {
-      logger.log(dim('Include keywords | ') + underline(first[0]));
+      logger.log(dim('Include keywords | ') + underline(overflowText(first[0], 50)));
       for (const t of first.slice(1)) {
-        logger.log(`                 ${dim('|')} ${underline(t)}`);
+        logger.log(`                 ${dim('|')} ${underline(overflowText(t, 50))}`);
       }
     } else {
-      logger.log(`${dim('Include keywords')}   ${first.map((t) => underline(t)).join(dim(' | '))}`);
+      logger.log(
+        `${dim('Include keywords')}   ${first
+          .map((t) => underline(overflowText(t, 50)))
+          .join(dim(' | '))}`
+      );
     }
   } else {
     logger.log(dim(`Include keywords:`));
     for (const include of anime.plan.keywords.include) {
-      logger.log(`  ${DOT} ${include.map((t) => underline(t)).join(' | ')}`);
+      logger.log(`  ${DOT} ${include.map((t) => underline(overflowText(t, 50))).join(' | ')}`);
     }
   }
   if (anime.plan.keywords.exclude.length > 0) {
@@ -49,4 +55,12 @@ export function printFansubs(anime: Anime, logger: ConsolaInstance) {
         : fansubs.join(dim(' > '))
     }`
   );
+}
+
+function overflowText(text: string, length: number, rest = '...') {
+  if (width(text) <= length) {
+    return text;
+  } else {
+    return text.slice(0, length - rest.length) + rest;
+  }
 }
