@@ -25,13 +25,11 @@ export const AnimePlanSchema = z
           .union([
             z.coerce.number().transform((n) => ({
               offset: n,
-              gte: Number.MIN_SAFE_INTEGER,
-              lte: Number.MAX_SAFE_INTEGER
+              fansub: undefined
             })),
             z.object({
               offset: z.coerce.number(),
-              gte: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
-              lte: z.coerce.number().default(Number.MAX_SAFE_INTEGER)
+              fansub: StringArray.optional()
             })
           ])
           .optional(),
@@ -39,6 +37,7 @@ export const AnimePlanSchema = z
       })
       .passthrough()
       .optional(),
+    fansub: StringArray.default([]),
     keywords: z.any()
   })
   .passthrough();

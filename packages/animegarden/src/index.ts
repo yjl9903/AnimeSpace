@@ -51,8 +51,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
     options,
     schema: {
       plan: z.object({
-        bgm: z.coerce.string(),
-        fansub: StringArray.default([])
+        bgm: z.coerce.string()
       })
     },
     command(system, cli) {

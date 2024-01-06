@@ -206,7 +206,7 @@ export class Anime {
       const date = video.date ?? this._lib?.date ?? this.plan.date;
 
       const season = this.resolveSeason(video.season);
-      const episode = this.resolveEpisode(video.episode);
+      const episode = this.resolveEpisode(video.episode, video.fansub);
 
       return formatTitle(this.format(), {
         title,
@@ -227,7 +227,7 @@ export class Anime {
     const date = this._lib?.date ?? this.plan.date;
 
     const season = this.resolveSeason(meta.season);
-    const episode = this.resolveEpisode(meta.episode);
+    const episode = this.resolveEpisode(meta.episode, meta.fansub);
 
     return formatTitle(this.format(meta.type), {
       title,
@@ -240,14 +240,14 @@ export class Anime {
     });
   }
 
-  public resolveEpisode(episode: number): number;
-  public resolveEpisode(episode: undefined): undefined;
-  public resolveEpisode(episode: number | undefined): number | undefined;
-  public resolveEpisode(episode: number | undefined): number | undefined {
+  public resolveEpisode(episode: number, fansub: string | undefined): number;
+  public resolveEpisode(episode: undefined, fansub: string | undefined): undefined;
+  public resolveEpisode(episode: number | undefined, fansub: string | undefined): number | undefined;
+  public resolveEpisode(episode: number | undefined, fansub: string | undefined): number | undefined {
     if (episode !== undefined) {
       const overwrite = this.plan.rewrite?.episode;
       if (overwrite !== undefined) {
-        if (overwrite.gte <= episode && episode <= overwrite.lte) {
+        if (overwrite.fansub === undefined || (fansub && overwrite.fansub.includes(fansub))) {
           return episode + overwrite.offset;
         }
       }

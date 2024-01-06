@@ -44,13 +44,15 @@ export interface AnimePlan {
    */
   readonly keywords: KeywordsParams;
 
+  readonly fansub: string[];
+
   /**
    * Rewrite the inferred things
    */
   readonly rewrite?: {
     readonly title?: string;
 
-    readonly episode?: { offset: number; gte: number; lte: number };
+    readonly episode?: { offset: number; fansub?: string[] };
   };
 }
 

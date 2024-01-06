@@ -74,7 +74,7 @@ export function parseEpisode<T extends Partial<FormatOptions> = Partial<FormatOp
     options?.metadata instanceof Function ? options.metadata(info) : options.metadata ?? undefined;
 
   if (anime.plan.type === '番剧') {
-    const resolvedEpisode = anime.resolveEpisode(info.episode.number);
+    const resolvedEpisode = anime.resolveEpisode(info.episode.number, metadata?.fansub);
 
     if (!!info.type && info.type.toLocaleLowerCase() !== 'tv') {
       // 番剧，有特殊类型，e.g. 番外, 特别篇
@@ -94,7 +94,7 @@ export function parseEpisode<T extends Partial<FormatOptions> = Partial<FormatOp
         resolvedEpisode,
         // 范围集数
         episodeAlt: info.episode.numberAlt,
-        resolvedEpisodeAlt: anime.resolveEpisode(info.episode.numberAlt)
+        resolvedEpisodeAlt: anime.resolveEpisode(info.episode.numberAlt, metadata?.fansub)
       };
     } else if (info.episode.number !== undefined && resolvedEpisode !== undefined) {
       // 番剧，有集数
@@ -114,7 +114,7 @@ export function parseEpisode<T extends Partial<FormatOptions> = Partial<FormatOp
         resolvedEpisode,
         // 范围集数, e.g. 01-12
         episodeAlt: info.episode.numberAlt,
-        resolvedEpisodeAlt: anime.resolveEpisode(info.episode.numberAlt)
+        resolvedEpisodeAlt: anime.resolveEpisode(info.episode.numberAlt, metadata?.fansub)
       };
     }
   } else if (anime.plan.type === '电影') {
@@ -134,7 +134,7 @@ export function parseEpisode<T extends Partial<FormatOptions> = Partial<FormatOp
     };
   } else if (anime.plan.type === 'OVA') {
     // 特别篇, 番外篇等
-    const resolvedEpisode = anime.resolveEpisode(info.episode.number);
+    const resolvedEpisode = anime.resolveEpisode(info.episode.number, metadata?.fansub);
     const resolvedTitle = anime.formatFilename({
       ...metadata,
       episode: info.episode.number
@@ -151,7 +151,7 @@ export function parseEpisode<T extends Partial<FormatOptions> = Partial<FormatOp
       resolvedEpisode,
       // 范围集数
       episodeAlt: info.episode.numberAlt,
-      resolvedEpisodeAlt: anime.resolveEpisode(info.episode.numberAlt)
+      resolvedEpisodeAlt: anime.resolveEpisode(info.episode.numberAlt, metadata?.fansub)
     };
   }
 
