@@ -20,19 +20,19 @@ describe('Library', () => {
     });
     expect(content.split('\n').slice(1).join('\n')).toMatchInlineSnapshot(`
       "
-      title: \\"123\\"
+      title: "123"
 
       season: 1
 
       date: 2022-04-01T04:00:00.000Z
 
       videos:
-        - filename: \\"456\\"
+        - filename: "456"
           naming: auto
           source:
             type: Local
 
-        - filename: \\"789\\"
+        - filename: "789"
           naming: auto
           source:
             type: Local

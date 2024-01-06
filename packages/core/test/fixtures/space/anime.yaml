@@ -25,7 +25,7 @@ plans:
 
 plugins:
   - name: animegarden
-  - name: download
-    directory: ./download
+  - name: local
+    directory: ./local
   - name: bangumi
     username: '603937'

@@ -1,8 +1,9 @@
 import type { Breadc } from 'breadc';
 import type { AnyZodObject } from 'zod';
 
+import type { PlanFile } from './plan';
+import type { AnimeSpace, PluginEntry } from './space';
 import type { Anime, LocalFile, LocalVideo } from './anime';
-import type { AnimeSpace, Plan, PluginEntry } from './space/schema';
 import type { AnimeSystem, IntrospectOptions, RefreshOptions } from './system';
 
 type MayPromise<T> = T | Promise<T>;
@@ -27,7 +28,7 @@ export interface Plugin {
     /**
      * Prepare anime space plans
      */
-    plans?: (space: AnimeSpace, plans: Plan[]) => MayPromise<void>;
+    plans?: (space: AnimeSpace, plans: PlanFile[]) => MayPromise<void>;
   };
 
   schema?: {
@@ -58,20 +59,13 @@ export interface Plugin {
       options: IntrospectOptions
     ) => MayPromise<LocalVideo | undefined>;
 
-    post?: (
-      system: AnimeSystem,
-      options: IntrospectOptions
-    ) => MayPromise<void>;
+    post?: (system: AnimeSystem, options: IntrospectOptions) => MayPromise<void>;
   };
 
   refresh?: {
     pre?: (system: AnimeSystem, options: RefreshOptions) => MayPromise<void>;
 
-    refresh?: (
-      system: AnimeSystem,
-      anime: Anime,
-      options: RefreshOptions
-    ) => MayPromise<void>;
+    refresh?: (system: AnimeSystem, anime: Anime, options: RefreshOptions) => MayPromise<void>;
 
     post?: (system: AnimeSystem, options: RefreshOptions) => MayPromise<void>;
   };

@@ -1,7 +1,8 @@
 import type { ConsolaInstance } from 'consola';
 
 import type { Anime } from '../anime';
-import type { AnimeSpace } from '../space/schema';
+import type { AnimePlan, PlanFile } from '../plan';
+import type { AnimeSpace } from '../space';
 
 export interface SystemOperationOptions {
   /**
@@ -13,10 +14,7 @@ export interface SystemOperationOptions {
    *
    * otherwise, use a filter function
    */
-  filter?:
-    | string
-    | { keyword: string; status: 'onair' | 'finish' }
-    | ((anime: Anime) => boolean);
+  filter?: string | { keyword: string; status: 'onair' | 'finish' } | ((anime: Anime) => boolean);
 }
 
 export interface LoadOptions extends SystemOperationOptions {
@@ -42,6 +40,11 @@ export interface AnimeSystem {
   printSpace(): void;
 
   printDelta(): void;
+
+  /**
+   * Load all the plan files
+   */
+  plans(): Promise<PlanFile[]>;
 
   /**
    * Load animes from plans or introspect result

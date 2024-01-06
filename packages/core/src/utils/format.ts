@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const StringArray = z.union([
   z.string().transform((s) => [s]),
   z.array(z.string()),
-  z.null().transform(() => [])
+  z.null().transform(() => [] as string[])
 ]);
 
 export function resolveStringArray(arr: string | string[] | undefined | null) {

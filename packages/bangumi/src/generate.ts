@@ -43,38 +43,30 @@ export async function generatePlan(
   writeln(`onair:`);
   for (const anime of collections) {
     if (typeof anime === 'object') {
-      const begin = anime.subject?.date
-        ? new Date(anime.subject.date)
-        : undefined;
+      const begin = anime.subject?.date ? new Date(anime.subject.date) : undefined;
       if (begin && begin.getTime() < date.getTime()) {
         continue;
       }
 
       if (options.create) {
         system.logger.log(
-          `${lightBlue('Searching')} ${
-            bold(
-              anime.subject?.name_cn
-                || anime.subject?.name
-                || `Bangumi ${anime.subject_id}`
-            )
-          }`
+          `${lightBlue('Searching')} ${bold(
+            anime.subject?.name_cn || anime.subject?.name || `Bangumi ${anime.subject_id}`
+          )}`
         );
       }
     }
 
     try {
-      const item = await client.subject(
-        typeof anime === 'object' ? anime.subject_id : anime
-      );
+      const item = await client.subject(typeof anime === 'object' ? anime.subject_id : anime);
 
       const title = item.name_cn || item.name;
-      const aliasBox = item.infobox?.find(box => box.key === '别名');
+      const aliasBox = item.infobox?.find((box) => box.key === '别名');
       const translations = Array.isArray(aliasBox?.value)
-        ? (aliasBox?.value.map(v => v?.v).filter(Boolean) as string[]) ?? []
+        ? (aliasBox?.value.map((v) => v?.v).filter(Boolean) as string[]) ?? []
         : typeof aliasBox?.value === 'string'
-        ? [aliasBox.value]
-        : [];
+          ? [aliasBox.value]
+          : [];
 
       if (item.name && item.name !== title) {
         translations.unshift(item.name);
@@ -107,9 +99,7 @@ export async function generatePlan(
         const fansub = await getFansub([plan.title, ...plan.translations]);
         writeln(`    fansub:`);
         if (fansub.length === 0) {
-          writeln(
-            `      # No fansub found, please check the translations or search keywords`
-          );
+          writeln(`      # No fansub found, please check the translations or search keywords`);
         }
         for (const f of fansub) {
           writeln(`      - ${f}`);
@@ -126,23 +116,17 @@ export async function generatePlan(
         .replace(/"/g, '%22')
         .replace(/ /g, '%20');
       writeln(
-        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${
-          encodeURIComponent(
-            date.toISOString()
-          )
-        }`
+        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${encodeURIComponent(
+          date.toISOString()
+        )}`
       );
       writeln(``);
     } catch (error) {
       if (typeof anime === 'object') {
         system.logger.error(
-          `${lightRed('Failed to search')} ${
-            bold(
-              anime.subject?.name_cn
-                || anime.subject?.name
-                || `Bangumi ${anime.subject_id}`
-            )
-          }`
+          `${lightRed('Failed to search')} ${bold(
+            anime.subject?.name_cn || anime.subject?.name || `Bangumi ${anime.subject_id}`
+          )}`
         );
       } else {
         system.logger.error(error);
@@ -151,7 +135,7 @@ export async function generatePlan(
   }
 
   if (options.create) {
-    const p = path.join(system.space.resolvePath(options.create));
+    const p = path.join(system.space.root.resolve(options.create).path);
     await fs.writeFile(p, output.join('\n'), 'utf-8');
   }
 }
@@ -175,7 +159,7 @@ export async function getCollections(username: string) {
       break;
     }
   }
-  return uniqBy(list, c => '' + c.subject_id);
+  return uniqBy(list, (c) => '' + c.subject_id);
 }
 
 async function getFansub(titles: string[]) {
@@ -185,9 +169,9 @@ async function getFansub(titles: string[]) {
     retry: 5
   });
   return uniqBy(
-    resources.filter(r => !!r.fansub),
-    r => r.fansub!.name
-  ).map(r => r.fansub!.name);
+    resources.filter((r) => !!r.fansub),
+    (r) => r.fansub!.name
+  ).map((r) => r.fansub!.name);
 }
 
 function inferType(subject: Awaited<ReturnType<BgmClient['subject']>>) {

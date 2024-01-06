@@ -76,7 +76,7 @@ export class Aria2Client extends DownloadClient {
     this.consola = system.logger.withTag('aria2');
     this.options = defu(options, {
       binary: 'aria2c',
-      directory: system.space.resolvePath('./download'),
+      directory: system.space.root.resolve('./download').path,
       secret: 'animespace',
       args: [],
       proxy: false,
@@ -87,9 +87,9 @@ export class Aria2Client extends DownloadClient {
 
   public initialize(system: AnimeSystem): void {
     this.consola = system.logger.withTag('aria2');
-    this.options.directory = system.space.resolvePath(this.options.directory);
+    this.options.directory = system.space.root.resolve(this.options.directory).path;
     if (this.options.debug.log) {
-      this.options.debug.log = system.space.resolvePath(this.options.debug.log);
+      this.options.debug.log = system.space.root.resolve(this.options.debug.log).path;
     }
   }
 
@@ -106,9 +106,7 @@ export class Aria2Client extends DownloadClient {
     }
 
     const directory = this.options.directory;
-    const proxy = typeof this.options.proxy === 'string'
-      ? this.options.proxy
-      : getProxy();
+    const proxy = typeof this.options.proxy === 'string' ? this.options.proxy : getProxy();
     const gid = await this.client
       .addUri([magnet], {
         dir: directory,
@@ -117,7 +115,7 @@ export class Aria2Client extends DownloadClient {
         'no-proxy': this.options.proxy === false ? true : false,
         'all-proxy': this.options.proxy !== false ? proxy : undefined
       })
-      .catch(error => {
+      .catch((error) => {
         this.consola.error(error);
         return undefined;
       });
@@ -153,14 +151,13 @@ export class Aria2Client extends DownloadClient {
           await that.updateStatus(task, status);
           if (task.state === 'error') {
             if (
-              status.errorMessage
-              && /File (.*) exists, but a control file\(\*.aria2\) does not exist/
-                .test(
-                  status.errorMessage
-                )
+              status.errorMessage &&
+              /File (.*) exists, but a control file\(\*.aria2\) does not exist/.test(
+                status.errorMessage
+              )
             ) {
               // Hack: handle file exists
-              const files = status.files.map(f => f.path);
+              const files = status.files.map((f) => f.path);
               res({ files });
             } else {
               rej(new Error(status.errorMessage));
@@ -176,7 +173,7 @@ export class Aria2Client extends DownloadClient {
 
           if (task.state === 'complete') {
             const statuses = await Promise.all(
-              [...task.gids.files].map(gid => client.tellStatus(gid))
+              [...task.gids.files].map((gid) => client.tellStatus(gid))
             );
             const files = [];
             for (const status of statuses) {
@@ -194,7 +191,7 @@ export class Aria2Client extends DownloadClient {
 
   private registerCallback() {
     // Download Start
-    this.client.addListener('aria2.onDownloadStart', async event => {
+    this.client.addListener('aria2.onDownloadStart', async (event) => {
       const { gid } = event;
       if (this.gids.has(gid)) {
         await this.gids.get(gid)!.onDownloadStart(gid);
@@ -243,11 +240,7 @@ export class Aria2Client extends DownloadClient {
     }, 500);
   }
 
-  private async updateStatus(
-    task: Task,
-    status: IAria2DownloadStatus,
-    nextState?: GidState
-  ) {
+  private async updateStatus(task: Task, status: IAria2DownloadStatus, nextState?: GidState) {
     const oldState = task.state;
     const gid = status.gid;
 
@@ -314,16 +307,12 @@ export class Aria2Client extends DownloadClient {
           if (task.state === 'metadata' || task.state === 'waiting') {
             task.state = 'downloading';
           } else {
-            (this.logger ?? this.consola).error(
-              `Unexpected previous task state ${task.state}`
-            );
+            (this.logger ?? this.consola).error(`Unexpected previous task state ${task.state}`);
           }
 
           break;
         case 'paused':
-          (this.logger ?? this.consola).warn(
-            `Download task ${task.key} was unexpectedly paused`
-          );
+          (this.logger ?? this.consola).warn(`Download task ${task.key} was unexpectedly paused`);
           break;
         default:
           break;
@@ -336,13 +325,14 @@ export class Aria2Client extends DownloadClient {
         connections,
         speed
       };
-      const dirty = force
-        || oldState !== task.state
-        || oldProgress.state !== progress.state
-        || oldProgress.completed !== progress.completed
-        || oldProgress.total !== progress.total
-        || oldProgress.connections !== progress.connections
-        || oldProgress.speed !== progress.speed;
+      const dirty =
+        force ||
+        oldState !== task.state ||
+        oldProgress.state !== progress.state ||
+        oldProgress.completed !== progress.completed ||
+        oldProgress.total !== progress.total ||
+        oldProgress.connections !== progress.connections ||
+        oldProgress.speed !== progress.speed;
 
       if (task.state === 'waiting' || task.state === 'metadata') {
         if (dirty) {
@@ -380,9 +370,7 @@ export class Aria2Client extends DownloadClient {
           updateProgress();
           break;
         case 'paused':
-          (this.logger ?? this.consola).warn(
-            `Download task ${task.key} was unexpectedly paused`
-          );
+          (this.logger ?? this.consola).warn(`Download task ${task.key} was unexpectedly paused`);
           break;
         default:
           break;
@@ -404,13 +392,14 @@ export class Aria2Client extends DownloadClient {
       }
 
       const payload = { completed, total, connections, speed };
-      const dirty = force
-        || oldState !== task.state
-        || oldProgress.state !== progress.state
-        || oldProgress.completed !== progress.completed
-        || oldProgress.total !== progress.total
-        || oldProgress.connections !== progress.connections
-        || oldProgress.speed !== progress.speed;
+      const dirty =
+        force ||
+        oldState !== task.state ||
+        oldProgress.state !== progress.state ||
+        oldProgress.completed !== progress.completed ||
+        oldProgress.total !== progress.total ||
+        oldProgress.connections !== progress.connections ||
+        oldProgress.speed !== progress.speed;
 
       if (progress.state === 'active') {
         if (dirty) {
@@ -447,9 +436,7 @@ export class Aria2Client extends DownloadClient {
         if (await fs.exists(this.options.debug.log)) {
           await fs.rm(this.options.debug.log);
         }
-        this.consola.log(
-          dim(`aria2 debug log will be written to ${this.options.debug.log}`)
-        );
+        this.consola.log(dim(`aria2 debug log will be written to ${this.options.debug.log}`));
       } catch {}
     }
 
@@ -483,20 +470,20 @@ export class Aria2Client extends DownloadClient {
         // Rest arguments
         ...this.options.args
       ],
-      { cwd: this.system.space.root, env }
+      { cwd: this.system.space.root.path, env }
     );
 
     return new Promise((res, rej) => {
       if (this.options.debug.pipe) {
-        child.stdout.on('data', chunk => {
+        child.stdout.on('data', (chunk) => {
           console.log(chunk.toString());
         });
-        child.stderr.on('data', chunk => {
+        child.stderr.on('data', (chunk) => {
           console.log(chunk.toString());
         });
       }
 
-      child.stdout.once('data', async _chunk => {
+      child.stdout.once('data', async (_chunk) => {
         try {
           this.client = new WebSocket.Client({
             protocol: 'ws',
@@ -513,22 +500,14 @@ export class Aria2Client extends DownloadClient {
           this.version = version.version;
 
           const webPort = await getPort({ port: 6801 });
-          const webui =
-            `http://127.0.0.1:${webPort}?port=${rpcPort}&secret=${this.options.secret}`;
+          const webui = `http://127.0.0.1:${webPort}?port=${rpcPort}&secret=${this.options.secret}`;
           this.webUI = await launchWebUI({
             port: webPort,
             rpc: { port: rpcPort, secret: this.options.secret }
           });
 
           this.consola.log(
-            dim(
-              `aria2 v${this.version} is running on the port ${
-                link(
-                  rpcPort + '',
-                  webui
-                )
-              }`
-            )
+            dim(`aria2 v${this.version} is running on the port ${link(rpcPort + '', webui)}`)
           );
           res();
         } catch (error) {
@@ -536,7 +515,7 @@ export class Aria2Client extends DownloadClient {
         }
       });
 
-      child.addListener('error', async error => {
+      child.addListener('error', async (error) => {
         this.consola.error(dim(`Some error happened in aria2`));
         await this.close().catch(() => {});
       });
@@ -555,7 +534,7 @@ export class Aria2Client extends DownloadClient {
 
       await Promise.all([
         this.client.close().catch(() => {}),
-        new Promise<void>(res => {
+        new Promise<void>((res) => {
           this.webUI?.close(() => res());
         })
       ]);
@@ -586,7 +565,7 @@ export class Aria2Client extends DownloadClient {
   public async clean(extensions: string[] = []) {
     const files = await fs.readdir(this.options.directory).catch(() => []);
     await Promise.all(
-      files.map(async file => {
+      files.map(async (file) => {
         if (extensions.includes(path.extname(file).toLowerCase())) {
           const p = path.join(this.options.directory, file);
           try {

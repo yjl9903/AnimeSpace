@@ -5,25 +5,23 @@ import { AnyZodObject, z } from 'zod';
 import { parse, YAMLError } from 'yaml';
 
 import type { Plugin } from '../plugin';
+import type { AnimeSpace } from '../space';
 
 import { AnimeSystemError, debug } from '../error';
 
-import {
-  AnimePlan,
-  AnimePlanSchema,
-  KeywordsParams,
-  Plan,
-  PlanSchema
-} from './schema';
+import { AnimePlan, AnimePlanSchema, KeywordsParams, PlanFile, PlanSchema } from './types';
 
-export async function loadPlan(
-  cwd: string,
-  patterns: string[],
-  plugins: Plugin[]
-): Promise<Plan[]> {
+export async function loadPlans(space: AnimeSpace) {
+  const plans = await loadPlan(space.root.path, space.plans, space.plugins);
+  for (const plugin of space.plugins) {
+    await plugin.prepare?.plans?.(space, plans);
+  }
+  return plans;
+}
+
+async function loadPlan(cwd: string, patterns: string[], plugins: Plugin[]): Promise<PlanFile[]> {
   const animePlanSchema = plugins.reduce(
-    (acc: AnyZodObject, plugin) =>
-      plugin?.schema?.plan ? acc.merge(plugin?.schema?.plan) : acc,
+    (acc: AnyZodObject, plugin) => (plugin?.schema?.plan ? acc.merge(plugin?.schema?.plan) : acc),
     AnimePlanSchema
   ) as typeof AnimePlanSchema;
   const Schema = PlanSchema.extend({
@@ -33,30 +31,26 @@ export async function loadPlan(
   const files = await fg(patterns, { cwd, dot: true });
 
   const plans = await Promise.all(
-    files.map(async file => {
+    files.map(async (file) => {
       try {
         const content = await fs.readFile(path.resolve(cwd, file), 'utf-8');
         const yaml = parse(content);
         const parsed = Schema.safeParse(yaml);
 
         if (parsed.success) {
-          const plan: Plan = {
+          const plan: PlanFile = {
             ...parsed.data,
             onair: parsed.data.onair.map(
-              (o: z.infer<typeof AnimePlanSchema>) => ({
-                ...o,
-                // Inherit plan status
-                status: o.status ? o.status : parsed.data.status,
-                // Inherit plan date
-                date: o.date ? o.date : parsed.data.date,
-                // Manually resolve keywords
-                keywords: resolveKeywordsArray(
-                  o.title,
-                  o.alias,
-                  o.translations,
-                  o.keywords
-                )
-              } as AnimePlan)
+              (o: z.infer<typeof AnimePlanSchema>) =>
+                ({
+                  ...o,
+                  // Inherit plan status
+                  status: o.status ? o.status : parsed.data.status,
+                  // Inherit plan date
+                  date: o.date ? o.date : parsed.data.date,
+                  // Manually resolve keywords
+                  keywords: resolveKeywordsArray(o.title, o.alias, o.translations, o.keywords)
+                }) as AnimePlan
             )
           };
 
@@ -80,7 +74,7 @@ export async function loadPlan(
     })
   );
 
-  return plans.filter(Boolean) as Plan[];
+  return plans.filter(Boolean) as PlanFile[];
 }
 
 function resolveKeywordsArray(

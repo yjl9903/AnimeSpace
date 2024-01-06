@@ -1,11 +1,6 @@
 import { Path } from 'breadfs';
 import { memoAsync } from 'memofunc';
-import {
-  fetchResources,
-  makeResourcesFilter,
-  normalizeTitle,
-  Resource
-} from 'animegarden';
+import { fetchResources, makeResourcesFilter, normalizeTitle, Resource } from 'animegarden';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
 
@@ -34,13 +29,11 @@ export class ResourcesCache {
 
   private errors: unknown[] = [];
 
-  private recentResponse:
-    | Awaited<ReturnType<typeof fetchResources>>
-    | undefined = undefined;
+  private recentResponse: Awaited<ReturnType<typeof fetchResources>> | undefined = undefined;
 
   constructor(system: AnimeSystem) {
     this.system = system;
-    this.root = system.space.storage.cache.directory.join('animegarden');
+    this.root = system.space.storage.cache.join('animegarden');
     this.animeRoot = this.root.join('anime');
     this.resourcesRoot = this.root.join('resources');
   }
@@ -56,9 +49,7 @@ export class ResourcesCache {
     this.reset();
   }
 
-  private async loadLatestResources(): Promise<
-    ResourcesCacheSchema | undefined
-  > {
+  private async loadLatestResources(): Promise<ResourcesCacheSchema | undefined> {
     try {
       const content = await this.resourcesRoot.join('latest.json').readText();
       return JSON.parse(content);
@@ -75,17 +66,12 @@ export class ResourcesCache {
       Reflect.deleteProperty(copied, 'ok');
       Reflect.deleteProperty(copied, 'complete');
 
-      await this.resourcesRoot
-        .join('latest.json')
-        .writeText(JSON.stringify(copied, null, 2));
+      await this.resourcesRoot.join('latest.json').writeText(JSON.stringify(copied, null, 2));
     } catch {}
   }
 
   public async initialize() {
-    await Promise.all([
-      this.animeRoot.ensureDir(),
-      this.resourcesRoot.ensureDir()
-    ]);
+    await Promise.all([this.animeRoot.ensureDir(), this.resourcesRoot.ensureDir()]);
 
     const latest = await this.loadLatestResources();
     const timestamp = latest?.resources[0].createdAt
@@ -93,8 +79,9 @@ export class ResourcesCache {
       : undefined;
 
     // There is no cache found or the cache is old
-    const invalid = timestamp === undefined
-      || new Date().getTime() - timestamp.getTime() > 7 * 24 * 60 * 60 * 1000;
+    const invalid =
+      timestamp === undefined ||
+      new Date().getTime() - timestamp.getTime() > 7 * 24 * 60 * 60 * 1000;
 
     const ac = new AbortController();
     const resp = await fetchResources(ufetch, {
@@ -118,8 +105,8 @@ export class ResourcesCache {
 
     this.valid = !invalid || !resp.filter || !resp.timestamp;
 
-    const oldIds = new Set(latest?.resources.map(r => r.id) ?? []);
-    this.recentResources = resp.resources.filter(r => !oldIds.has(r.id));
+    const oldIds = new Set(latest?.resources.map((r) => r.id) ?? []);
+    this.recentResources = resp.resources.filter((r) => !oldIds.has(r.id));
     this.recentResponse = resp;
   }
 
@@ -131,9 +118,7 @@ export class ResourcesCache {
     this.reset();
   }
 
-  private async loadAnimeResources(
-    anime: Anime
-  ): Promise<AnimeCacheSchema | undefined> {
+  private async loadAnimeResources(anime: Anime): Promise<AnimeCacheSchema | undefined> {
     try {
       const root = this.animeRoot.join(anime.relativeDirectory);
       await root.ensureDir();
@@ -154,9 +139,7 @@ export class ResourcesCache {
       Reflect.deleteProperty(copied, 'ok');
       Reflect.deleteProperty(copied, 'complete');
 
-      await root
-        .join('resources.json')
-        .writeText(JSON.stringify(copied, null, 2));
+      await root.join('resources.json').writeText(JSON.stringify(copied, null, 2));
     } catch {}
   }
 
@@ -173,32 +156,25 @@ export class ResourcesCache {
       // Check whether there is any changes to the filter
       const validateFilter = (cache: AnimeCacheSchema) => {
         if (
-          !cache.filter.after
-          || new Date(cache.filter.after).getTime()
-            !== anime.plan.date.getTime()
+          !cache.filter.after ||
+          new Date(cache.filter.after).getTime() !== anime.plan.date.getTime()
         ) {
           return false;
         }
 
         const stringifyArray = (include: string[][]) => {
-          return include
-            .map(inc => `[${inc.map(normalizeTitle).join(',')}]`)
-            .join(',');
+          return include.map((inc) => `[${inc.map(normalizeTitle).join(',')}]`).join(',');
         };
         const stringify = (keys?: string[]) => (keys ?? []).join(',');
 
         if (
-          !cache.filter.include
-          || stringifyArray(cache.filter.include)
-            !== stringifyArray(anime.plan.keywords.include)
+          !cache.filter.include ||
+          stringifyArray(cache.filter.include) !== stringifyArray(anime.plan.keywords.include)
         ) {
           return false;
         }
 
-        if (
-          stringify(cache.filter.exclude)
-            !== stringify(anime.plan.keywords.exclude)
-        ) {
+        if (stringify(cache.filter.exclude) !== stringify(anime.plan.keywords.exclude)) {
           return false;
         }
 
@@ -249,10 +225,7 @@ export class ResourcesCache {
   }
 }
 
-export async function clearAnimeResourcesCache(
-  system: AnimeSystem,
-  anime: Anime
-) {
+export async function clearAnimeResourcesCache(system: AnimeSystem, anime: Anime) {
   const cache = new ResourcesCache(system);
   await cache.clearAnimeResources(anime);
 }

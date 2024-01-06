@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { rimraf } from 'rimraf';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
-import { loadSpace } from '../src';
+import { loadSpace, loadPlans } from '../src';
 import { fs as LocalFS } from 'breadfs/node';
 
 const __dirname = path.join(fileURLToPath(import.meta.url), '../');
@@ -59,60 +59,44 @@ describe('Load Space', () => {
           },
         },
         "resolvePath": undefined,
-        "root": "${LocalFS.path(root).toString()}",
+        "root": Path {
+          "_fs": BreadFS {
+            "provider": NodeProvider {
+              "name": "node",
+            },
+          },
+          "_path": "${LocalFS.path(root).toString()}",
+        },
         "storage": {
-          "anime": {
-            "directory": Path {
-              "_fs": BreadFS {
-                "provider": NodeProvider {
-                  "name": "node",
-                },
-              },
-              "_path": "${LocalFS.path(root, 'anime').toString()}",
-            },
-            "fs": BreadFS {
+          "anime": Path {
+            "_fs": BreadFS {
               "provider": NodeProvider {
                 "name": "node",
               },
             },
-            "provider": "local",
+            "_path": "${LocalFS.path(root, 'anime').toString()}",
           },
-          "cache": {
-            "directory": Path {
-              "_fs": BreadFS {
-                "provider": NodeProvider {
-                  "name": "node",
-                },
-              },
-              "_path": "${LocalFS.path(root, 'cache').toString()}",
-            },
-            "fs": BreadFS {
+          "cache": Path {
+            "_fs": BreadFS {
               "provider": NodeProvider {
                 "name": "node",
               },
             },
+            "_path": "${LocalFS.path(root, 'cache').toString()}",
           },
-          "library": {
-            "directory": Path {
-              "_fs": BreadFS {
-                "provider": NodeProvider {
-                  "name": "node",
-                },
-              },
-              "_path": "${LocalFS.path(root, 'anime').toString()}",
-            },
-            "fs": BreadFS {
+          "library": Path {
+            "_fs": BreadFS {
               "provider": NodeProvider {
                 "name": "node",
               },
             },
-            "mode": "embedded",
+            "_path": "${LocalFS.path(root, 'anime').toString()}",
           },
         },
       }
     `);
 
-    expect(await space.plans()).toEqual([
+    expect(await loadPlans(space)).toEqual([
       {
         date: new Date('2023-04-01 13:00:00 UTC'),
         name: '2023-04-04 新番放送计划',
@@ -186,7 +170,7 @@ describe('Create Space', () => {
       resolvePath: undefined,
       plans: undefined
     });
-    expect(await loaded.plans()).toEqual(await space.plans());
+    expect(await loadPlans(loaded)).toEqual(await loadPlans(space));
   });
 
   beforeEach(async () => {

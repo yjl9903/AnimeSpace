@@ -1,258 +1,110 @@
 import { z } from 'zod';
-import { BreadFS, Path } from 'breadfs';
-
-import type { Plugin } from '../plugin';
 
 import { StringArray } from '../utils';
 
 import {
+  DefaultFilmFormat,
   DefaultAnimeFormat,
   DefaultEpisodeFormat,
-  DefaultFilmFormat,
+  DefaultCacheDirectory,
   DefaultStorageDirectory
 } from './constant';
 
 export const PluginEntry = z.object({ name: z.string() }).passthrough();
 
-export interface PluginEntry extends Record<string, any> {
+export interface PluginEntry {
   name: string;
+
+  [prop: string]: any;
 }
 
-export const Preference = z.object({
-  format: z.object({
-    anime: z.string().default(DefaultAnimeFormat),
-    episode: z.string().default(DefaultEpisodeFormat),
-    film: z.string().default(DefaultFilmFormat),
-    ova: z.string().default(DefaultFilmFormat)
-  }),
-  extension: z.object({
-    include: z.array(z.string()).default(['mp4', 'mkv']),
-    exclude: z.array(z.string()).default([])
-  }),
-  keyword: z.object({
-    order: z.record(z.string(), z.array(z.string())).default({}),
-    exclude: z.array(z.string()).default([])
-  }),
-  fansub: z.object({
-    order: StringArray,
-    exclude: z.array(z.string()).default([])
+export const Preference = z
+  .object({
+    format: z
+      .object({
+        anime: z.string().default(DefaultAnimeFormat),
+        episode: z.string().default(DefaultEpisodeFormat),
+        film: z.string().default(DefaultFilmFormat),
+        ova: z.string().default(DefaultFilmFormat)
+      })
+      .default({}),
+    extension: z
+      .object({
+        include: z.array(z.string()).default(['mp4', 'mkv']),
+        exclude: z.array(z.string()).default([])
+      })
+      .default({}),
+    keyword: z
+      .object({
+        order: z.record(z.string(), z.array(z.string())).default({}),
+        exclude: z.array(z.string()).default([])
+      })
+      .default({}),
+    fansub: z
+      .object({
+        order: StringArray.default([]),
+        exclude: z.array(z.string()).default([])
+      })
+      .default({})
   })
-});
+  .passthrough()
+  .default({});
 
 export type Preference = z.infer<typeof Preference>;
 
-export const Storage = z.object({
-  anime: z
-    .union([
-      z
-        .object({
-          provider: z.enum(['local', 'webdav']),
-          directory: z.string().optional(),
-          url: z.string().optional(),
-          username: z.string().optional(),
-          password: z.string().optional()
-        })
-        .transform(storage => {
-          if (storage.provider === 'local') {
-            return {
-              provider: 'local' as const,
-              directory: storage.directory ?? DefaultStorageDirectory
-            };
-          } else if (storage.provider === 'webdav') {
-            if (storage.url) {
-              return {
-                provider: 'webdav' as const,
-                url: storage.url,
-                directory: storage.directory ?? '/',
-                username: storage.username,
-                password: storage.password
-              };
-            }
-          }
-          return z.NEVER;
-        }),
-      z
-        .string()
-        .transform(directory => ({ provider: 'local' as const, directory }))
-    ])
-    .default({
-      provider: 'local' as const,
-      directory: DefaultStorageDirectory
-    }),
-
-  library: z
-    .union([
-      z.string().transform(directory => ({
-        mode: 'external' as const,
-        directory
-      })),
-      z.object({
-        mode: z.enum(['embedded', 'external']).default('embedded'),
-        directory: z.string().optional()
-      })
-    ])
-    .default({ mode: 'embedded' })
-    .transform(lib => {
-      if (lib.mode === 'external' && lib.directory) {
+const StorageDef = z
+  .object({
+    provider: z.enum(['local', 'webdav']),
+    directory: z.string(),
+    url: z.string().optional(),
+    username: z.string().optional(),
+    password: z.string().optional()
+  })
+  .transform((storage) => {
+    if (storage.provider === 'local') {
+      return {
+        provider: 'local' as const,
+        directory: storage.directory
+      };
+    } else if (storage.provider === 'webdav') {
+      if (storage.url) {
         return {
-          mode: 'external' as const,
-          directory: lib.directory
+          provider: 'webdav' as const,
+          url: storage.url,
+          directory: storage.directory ?? '/',
+          username: storage.username,
+          password: storage.password
         };
       }
-      return { mode: 'embedded' as const };
-    })
-});
+    }
+    return z.NEVER;
+  });
+const StorageStr = z.string().transform((directory) => ({ provider: 'local' as const, directory }));
+const StorageRef = z
+  .object({ refer: z.string() })
+  .transform((refer) => ({ provider: 'refer' as const, refer: refer.refer }));
+
+export const Storage = z
+  .record(z.union([StorageDef, StorageStr, StorageRef]))
+  .default({})
+  .transform((storage) => {
+    if (!('anime' in storage)) {
+      storage['anime'] = { provider: 'local', directory: DefaultStorageDirectory };
+    }
+    if (!('library' in storage)) {
+      storage['library'] = { provider: 'refer', refer: 'anime' };
+    }
+    if (!('cache' in storage)) {
+      storage['cache'] = { provider: 'local', directory: DefaultCacheDirectory };
+    }
+    return storage;
+  });
 
 export const RawAnimeSpaceSchema = z.object({
   storage: Storage,
-  preference: Preference.passthrough(),
+  preference: Preference,
   plans: StringArray,
-  plugins: z.array(PluginEntry)
+  plugins: z.array(PluginEntry).default([])
 });
 
 export type RawAnimeSpace = z.infer<typeof RawAnimeSpaceSchema>;
-
-export interface AnimeSpace {
-  readonly root: string;
-
-  readonly storage: {
-    readonly anime:
-      & { fs: BreadFS; directory: Path }
-      & (
-        | { provider: 'local' }
-        | {
-          provider: 'webdav';
-          url: string;
-          username?: string;
-          password?: string;
-        }
-      );
-
-    readonly library:
-      & { fs: BreadFS; directory: Path }
-      & (
-        | { mode: 'embedded' }
-        | { mode: 'external' }
-      );
-
-    readonly cache: { fs: BreadFS; directory: Path };
-  };
-
-  readonly preference: Preference;
-
-  readonly plugins: Plugin[];
-
-  readonly plans: () => Promise<Plan[]>;
-
-  readonly resolvePath: (...d: string[]) => string;
-}
-
-export type PlanStatus = 'onair' | 'finish';
-
-export type AnimePlanType = '番剧' | '电影' | 'OVA';
-
-export const AnimePlanSchema = z
-  .object({
-    title: z.string(),
-    alias: z.array(z.string()).default([]),
-    translations: z
-      .union([
-        z.string().transform(s => ({ unknown: [s] })),
-        z.array(z.string()).transform(arr => ({ unknown: arr })),
-        z.record(z.string(), StringArray)
-      ])
-      .default({}),
-    directory: z.string().optional(),
-    type: z.enum(['番剧', '电影', 'OVA']).default('番剧'),
-    status: z.enum(['onair', 'finish']).optional(),
-    season: z.coerce.number().optional(),
-    date: z.coerce.date().optional(),
-    rewrite: z
-      .object({
-        title: z.string().optional(),
-        episode: z
-          .union([
-            z.coerce.number().transform(n => ({
-              offset: n,
-              gte: Number.MIN_SAFE_INTEGER,
-              lte: Number.MAX_SAFE_INTEGER
-            })),
-            z.object({
-              offset: z.coerce.number(),
-              gte: z.coerce.number().default(Number.MIN_SAFE_INTEGER),
-              lte: z.coerce.number().default(Number.MAX_SAFE_INTEGER)
-            })
-          ])
-          .optional(),
-        season: z.number().optional()
-      })
-      .passthrough()
-      .optional(),
-    keywords: z.any()
-  })
-  .passthrough();
-
-export const PlanSchema = z.object({
-  name: z.string().default('unknown'),
-  date: z.coerce.date(),
-  status: z.enum(['onair', 'finish']).default('onair'),
-  onair: z.array(AnimePlanSchema).default([])
-});
-
-export interface Plan {
-  readonly name: string;
-
-  readonly date: Date;
-
-  readonly status: PlanStatus;
-
-  readonly onair: AnimePlan[];
-}
-
-export interface AnimePlan {
-  readonly title: string;
-
-  readonly alias: string[];
-
-  /**
-   * Translation names, which will generate the search keywords
-   */
-  readonly translations: Record<string, string[]>;
-
-  /**
-   * The anime library directory which can overwrite the default title.
-   *
-   * It will help animes with multiple seasons.
-   *
-   * This should be relative to the storage directory
-   */
-  readonly directory?: string;
-
-  readonly type: AnimePlanType;
-
-  readonly status: PlanStatus;
-
-  readonly season?: number;
-
-  readonly date: Date;
-
-  /**
-   * Overwrite the generated search keywords
-   */
-  readonly keywords: KeywordsParams;
-
-  /**
-   * Rewrite the inferred things
-   */
-  readonly rewrite?: {
-    readonly title?: string;
-
-    readonly episode?: { offset: number; gte: number; lte: number };
-  };
-}
-
-export interface KeywordsParams {
-  readonly include: string[][];
-
-  readonly exclude: string[];
-}

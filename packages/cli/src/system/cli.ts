@@ -5,12 +5,7 @@ import { execSync } from 'node:child_process';
 import openEditor from 'open-editor';
 import { type Breadc, breadc } from 'breadc';
 import { dim, lightBlue, lightCyan, lightGreen, lightRed } from '@breadc/color';
-import {
-  AnimeSystem,
-  LocalVideoDelta,
-  onDeath,
-  printDelta
-} from '@animespace/core';
+import { AnimeSystem, LocalVideoDelta, onDeath, printDelta } from '@animespace/core';
 
 import { description, version } from '../../package.json';
 
@@ -32,17 +27,17 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   app
     .command('space', 'Display the space directory')
     .option('--open', 'Open space in your editor')
-    .action(async options => {
+    .action(async (options) => {
       const root = system.space.root;
       const cmds = options['--'];
       if (cmds.length > 0) {
         if (isTTY) {
           system.printSpace();
         }
-        execSync(cmds.join(' '), { cwd: root, stdio: 'inherit' });
+        execSync(cmds.join(' '), { cwd: root.path, stdio: 'inherit' });
       } else if (options.open) {
         try {
-          openEditor([root]);
+          openEditor([root.path]);
         } catch (error) {
           console.log(root);
         }
@@ -56,13 +51,13 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .command('run <command> [...args]', 'Run command in the space directory')
     .action(async (command, args) => {
       const pkgJson = await fs
-        .readJSON(system.space.resolvePath('package.json'))
+        .readJSON(system.space.root.resolve('package.json').path)
         .catch(() => undefined);
 
       const env = { ...process.env };
       env.PATH = [
         ...(process.env.PATH ?? '').split(path.delimiter),
-        system.space.resolvePath('node_modules/.bin')
+        system.space.root.resolve('node_modules/.bin').path
       ].join(path.delimiter);
 
       if (pkgJson.scripts && command in pkgJson.scripts) {
@@ -73,7 +68,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
         }
 
         execSync(cmd + ' ' + args.join(' '), {
-          cwd: system.space.root,
+          cwd: system.space.root.path,
           stdio: 'inherit',
           env
         });
@@ -83,7 +78,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
         }
 
         execSync(command + ' ' + args.join(' '), {
-          cwd: system.space.root,
+          cwd: system.space.root.path,
           stdio: 'inherit',
           env
         });
@@ -97,7 +92,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     })
     .option('-i, --introspect', 'Introspect library before refreshing')
     .option('-f, --force', 'Prefer not using any cache')
-    .action(async options => {
+    .action(async (options) => {
       // Refresh system
       let sys = system;
 
@@ -116,16 +111,14 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
             force: options.force,
             logDelta: false
           });
-          delta.push(...animes.flatMap(a => a.delta));
+          delta.push(...animes.flatMap((a) => a.delta));
 
           if (delta.length > 0) {
             sys.logger.log('');
             sys.logger.log(
-              `${dim('There are')} ${
-                lightCyan(
-                  delta.length + ' changes'
-                )
-              } ${dim('applied to the space')}`
+              `${dim('There are')} ${lightCyan(delta.length + ' changes')} ${dim(
+                'applied to the space'
+              )}`
             );
             printDelta(sys.logger, delta);
           }
@@ -148,11 +141,11 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
     .option('--status <status>', {
       description: 'Filter onair / finish animes',
       default: 'onair',
-      cast: v => (v === 'finish' ? 'finish' : 'onair')
+      cast: (v) => (v === 'finish' ? 'finish' : 'onair')
     })
     .option('-i, --introspect', 'Introspect library before refreshing')
     .option('-f, --force', 'Prefer not using any cache')
-    .action(async options => {
+    .action(async (options) => {
       registerDeath(system);
 
       system.printSpace();
@@ -160,8 +153,8 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
         const filter = options.filter
           ? ({ keyword: options.filter, status: options.status } as const)
           : options.status === 'finish'
-          ? ({ keyword: '', status: options.status } as const)
-          : undefined;
+            ? ({ keyword: '', status: options.status } as const)
+            : undefined;
 
         if (options.introspect) {
           await system.introspect({
@@ -183,7 +176,7 @@ function registerApp(system: AnimeSystem, app: Breadc<{}>) {
   app
     .command('introspect', 'Introspect the local anime system')
     .option('--filter <keyword>', 'Filter animes to be refreshed')
-    .action(async options => {
+    .action(async (options) => {
       registerDeath(system);
 
       system.printSpace();

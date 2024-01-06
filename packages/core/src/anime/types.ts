@@ -1,6 +1,6 @@
 import type { Path } from 'breadfs';
 
-import type { AnimePlanType } from '../space';
+import type { AnimePlanType } from '../plan';
 
 export interface LocalLibrary {
   title: string;

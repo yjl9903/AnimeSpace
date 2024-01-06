@@ -1,16 +1,13 @@
 import { bold, lightBlue, lightGreen, lightRed } from '@breadc/color';
 
-import type { Plan } from '../space';
+import type { PlanFile } from '../plan';
 
 import { AnimeSystemError, debug } from '../error';
 import { Anime, LocalFile, LocalVideo } from '../anime';
 
 import type { AnimeSystem, IntrospectOptions } from './types';
 
-export async function introspect(
-  system: AnimeSystem,
-  options: IntrospectOptions
-) {
+export async function introspect(system: AnimeSystem, options: IntrospectOptions) {
   const logger = system.logger.withTag('introspect');
   logger.log(lightBlue(`Introspect Anime Space`));
 
@@ -33,11 +30,7 @@ export async function introspect(
   return animes;
 }
 
-async function introspectAnime(
-  system: AnimeSystem,
-  anime: Anime,
-  options: IntrospectOptions
-) {
+async function introspectAnime(system: AnimeSystem, anime: Anime, options: IntrospectOptions) {
   const lib = await anime.library();
   const videos = lib.videos;
   const files = await anime.list();
@@ -46,7 +39,7 @@ async function introspectAnime(
   const unknownVideos: LocalVideo[] = [];
 
   {
-    const set = new Set(videos.map(v => v.filename));
+    const set = new Set(videos.map((v) => v.filename));
     for (const file of files) {
       if (!set.has(file.filename)) {
         unknownFiles.push(file);
@@ -54,7 +47,7 @@ async function introspectAnime(
     }
   }
   {
-    const set = new Set(files.map(v => v.filename));
+    const set = new Set(files.map((v) => v.filename));
     for (const video of videos) {
       if (!set.has(video.filename)) {
         unknownVideos.push(video);
@@ -99,13 +92,7 @@ async function introspectAnime(
   for (const video of videos) {
     const filename = anime.reformatVideoFilename(video);
     if (filename !== video.filename) {
-      logger.log(
-        `${lightBlue(`Moving`)} "${bold(video.filename)}" to "${
-          bold(
-            filename
-          )
-        }"`
-      );
+      logger.log(`${lightBlue(`Moving`)} "${bold(video.filename)}" to "${bold(filename)}"`);
       await anime.moveVideo(video, filename);
     }
   }
@@ -113,11 +100,11 @@ async function introspectAnime(
 
 export async function loadAnime(
   system: AnimeSystem,
-  filter: (anime: Anime) => boolean = p => p.plan.status === 'onair'
+  filter: (anime: Anime) => boolean = (p) => p.plan.status === 'onair'
 ) {
-  const plans = await system.space.plans();
+  const plans = await system.plans();
   const animePlans = flatAnimePlan(plans);
-  const animes = animePlans.map(ap => new Anime(system, ap));
+  const animes = animePlans.map((ap) => new Anime(system, ap));
 
   // Detect directory naming conflict
   {
@@ -139,7 +126,7 @@ export async function loadAnime(
 
   // Parallel list directory and get metadata
   const successed = await Promise.all(
-    animes.map(async a => {
+    animes.map(async (a) => {
       try {
         await a.library();
         return a;
@@ -158,6 +145,6 @@ export async function loadAnime(
   return successed.filter(Boolean) as Anime[];
 }
 
-export function flatAnimePlan(plans: Plan[]) {
-  return plans.flatMap(p => p.onair);
+export function flatAnimePlan(plans: PlanFile[]) {
+  return plans.flatMap((p) => p.onair);
 }

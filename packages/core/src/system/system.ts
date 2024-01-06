@@ -1,17 +1,18 @@
+import { BreadFS, WebDAVProvider } from 'breadfs/webdav';
 import { ConsolaInstance, createConsola } from 'consola';
 import { dim, lightCyan, lightGreen, lightRed } from '@breadc/color';
 
-import type { Anime, LocalVideoDelta } from '../anime';
 import type { AnimeSpace } from '../space';
+import type { Anime, LocalVideoDelta } from '../anime';
+
+import { loadPlans } from '../plan';
 
 import type { AnimeSystem } from './types';
 
 import { refresh } from './refresh';
 import { introspect, loadAnime } from './introspect';
 
-export async function createAnimeSystem(
-  space: AnimeSpace
-): Promise<AnimeSystem> {
+export async function createAnimeSystem(space: AnimeSpace): Promise<AnimeSystem> {
   const logger = createConsola({
     formatOptions: { columns: process.stdout.getWindowSize?.()[0] }
   });
@@ -28,20 +29,21 @@ export async function createAnimeSystem(
     },
     printDelta() {
       if (!animes) return;
-      const delta = animes.flatMap(anime => anime.delta);
+      const delta = animes.flatMap((anime) => anime.delta);
       if (delta.length > 0) {
         logger.log(
-          `${dim('There are')} ${lightCyan(delta.length + ' changes')} ${
-            dim(
-              'applied to the space'
-            )
-          }`
+          `${dim('There are')} ${lightCyan(delta.length + ' changes')} ${dim(
+            'applied to the space'
+          )}`
         );
         printDelta(logger, delta);
         logger.log('');
       } else {
         logger.log(lightGreen(`Every anime is latest`));
       }
+    },
+    async plans() {
+      return await loadPlans(space);
     },
     async load(options = {}) {
       if (!options.force && animes !== undefined) {
@@ -54,9 +56,8 @@ export async function createAnimeSystem(
 
         if (typeof filter === 'string') {
           const keyword = normalize(filter);
-          return (animes = await loadAnime(
-            system,
-            a => normalize(a.plan.title).includes(keyword)
+          return (animes = await loadAnime(system, (a) =>
+            normalize(a.plan.title).includes(keyword)
           ));
         } else if (typeof filter === 'function') {
           return (animes = await loadAnime(system, filter));
@@ -65,9 +66,7 @@ export async function createAnimeSystem(
           const status = filter.status;
           return (animes = await loadAnime(
             system,
-            a =>
-              a.plan.status === status
-              && normalize(a.plan.title).includes(keyword)
+            (a) => a.plan.status === status && normalize(a.plan.title).includes(keyword)
           ));
         }
       }
@@ -91,13 +90,13 @@ export async function createAnimeSystem(
     async writeBack() {
       logger.wrapConsole();
       const animes = await system.load();
-      await Promise.all(animes.map(a => a.writeLibrary()));
+      await Promise.all(animes.map((a) => a.writeLibrary()));
       logger.restoreConsole();
       return animes;
     },
     isChanged() {
       if (animes) {
-        return animes.some(a => a.dirty);
+        return animes.some((a) => a.dirty);
       } else {
         return false;
       }
@@ -109,25 +108,20 @@ export async function createAnimeSystem(
 export function printSpace(logger: ConsolaInstance, space: AnimeSpace) {
   logger.log(`${dim('Space')}    ${space.root}`);
 
-  if (space.storage.anime.provider === 'local') {
-    logger.log(`${dim('Storage')}  ${space.storage.anime.directory}`);
-  } else if (space.storage.anime.provider === 'webdav') {
+  if (space.storage.anime.fs.name === 'node') {
+    logger.log(`${dim('Storage')}  ${space.storage.anime.path}`);
+  } else if (space.storage.anime.fs.name === 'webdav') {
     const join = (a: string, b: string) => {
       return a.replace(/\/$/, '') + '/' + b.replace(/^\//, '');
     };
 
-    logger.log(
-      `${dim('Storage')}  ${
-        join(
-          space.storage.anime.url,
-          space.storage.anime.directory.path
-        )
-      }`
-    );
+    const webdav = space.storage.anime.fs as BreadFS<WebDAVProvider>;
+
+    logger.log(`${dim('Storage')}  ${join(webdav.provider.url, space.storage.anime.path)}`);
   }
 
-  if (space.storage.library.mode === 'external') {
-    logger.log(`${dim('Library')}  ${space.storage.library.directory}`);
+  if (space.storage.library.fs.name === 'node') {
+    logger.log(`${dim('Library')}  ${space.storage.library.path}`);
   }
 }
 

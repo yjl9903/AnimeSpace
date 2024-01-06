@@ -11,7 +11,7 @@ describe('system', () => {
   it('should load', async () => {
     const root = path.join(__dirname, '../../core/test/fixtures/space');
     const system = await makeSystem(root);
-    expect(await system.space.plans()).toEqual([
+    expect(await system.plans()).toEqual([
       {
         date: new Date('2023-04-01T13:00:00.000Z'),
         name: '2023-04-04 新番放送计划',

@@ -7,3 +7,5 @@ export * from './signal';
 export * from './ufetch';
 
 export * from './array';
+
+export * from './types';

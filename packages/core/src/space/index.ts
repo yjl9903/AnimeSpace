@@ -1,5 +1,5 @@
-export * from './schema';
-
-export * from './plan';
-
 export * from './space';
+
+export * from './types';
+
+export type { PluginEntry } from './schema';

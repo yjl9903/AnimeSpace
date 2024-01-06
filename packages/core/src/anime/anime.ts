@@ -7,27 +7,23 @@ import { fs as LocalFS } from 'breadfs/node';
 import { parse } from 'yaml';
 import { format } from 'date-fns';
 
+import type { AnimePlan } from '../plan';
 import type { AnimeSystem } from '../system';
-import type { AnimePlan, AnimeSpace } from '../space';
+import type { AnimeSpace, StoragePath } from '../space';
 
 import { AnimeSystemError, debug } from '../error';
 import { formatEpisode, formatTitle, listIncludeFiles } from '../utils';
 
-import type {
-  FormatOptions,
-  LocalFile,
-  LocalLibrary,
-  LocalVideo
-} from './types';
+import type { FormatOptions, LocalFile, LocalLibrary, LocalVideo } from './types';
 
 import { stringifyLocalLibrary } from './utils';
 
 const LibraryFilename = 'library.yaml';
 
 export class Anime {
-  public readonly directory: Path;
+  public readonly directory: StoragePath;
 
-  public readonly libraryDirectory: Path;
+  public readonly libraryDirectory: StoragePath;
 
   public readonly relativeDirectory: string;
 
@@ -63,12 +59,12 @@ export class Anime {
     });
 
     this.directory = plan.directory
-      ? space.storage.anime.directory.resolve(plan.directory)
-      : space.storage.anime.directory.join(dirname);
+      ? space.storage.anime.resolve(plan.directory)
+      : space.storage.anime.join(dirname);
 
     this.libraryDirectory = plan.directory
-      ? space.storage.library.directory.resolve(plan.directory)
-      : space.storage.library.directory.join(dirname);
+      ? space.storage.library.resolve(plan.directory)
+      : space.storage.library.join(dirname);
 
     this.relativeDirectory = plan.directory ? plan.directory : dirname;
   }
@@ -92,7 +88,7 @@ export class Anime {
       }
     }
     for (const list of this.plan.keywords.include) {
-      if (list.every(keyword => !text.includes(keyword))) {
+      if (list.every((keyword) => !text.includes(keyword))) {
         return false;
       }
     }
@@ -114,31 +110,24 @@ export class Anime {
         // Mark as unmodified
         this._dirty = false;
 
-        const libContent = await libPath
-          .readText()
-          .catch(() => libPath.readText()); // Retry at most 1 times
+        const libContent = await libPath.readText().catch(() => libPath.readText()); // Retry at most 1 times
         const lib = parse(libContent) ?? {};
         this._raw_lib = lib;
 
         const schema = z
           .object({
             title: z.string().default(this.plan.title).catch(this.plan.title),
-            season: this.plan.season !== undefined
-              ? z.coerce
-                .number()
-                .default(this.plan.season)
-                .catch(this.plan.season)
-              : z.coerce.number().optional(),
+            season:
+              this.plan.season !== undefined
+                ? z.coerce.number().default(this.plan.season).catch(this.plan.season)
+                : z.coerce.number().optional(),
             date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
             videos: z
               .array(
                 z
                   .object({
                     filename: z.string(),
-                    naming: z
-                      .enum(['auto', 'manual'])
-                      .default('auto')
-                      .catch('auto'),
+                    naming: z.enum(['auto', 'manual']).default('auto').catch('auto'),
                     date: z.coerce.date().optional(),
                     season: z.coerce.number().optional(),
                     episode: z.coerce.number().optional()
@@ -161,15 +150,13 @@ export class Anime {
             }
           }
 
-          return (this._lib = <LocalLibrary> {
+          return (this._lib = <LocalLibrary>{
             ...parsed.data,
             videos
           });
         } else {
           debug(parsed.error.issues);
-          throw new AnimeSystemError(
-            `解析 ${this.plan.title} 的 ${LibraryFilename} 失败`
-          );
+          throw new AnimeSystemError(`解析 ${this.plan.title} 的 ${LibraryFilename} 失败`);
         }
       } else {
         const defaultLib: LocalLibrary = {
@@ -179,9 +166,7 @@ export class Anime {
           videos: []
         };
 
-        await libPath.writeText(
-          stringifyLocalLibrary(defaultLib, { videos: [] })
-        );
+        await libPath.writeText(stringifyLocalLibrary(defaultLib, { videos: [] }));
 
         this._raw_lib = {};
         this._lib = defaultLib;
@@ -217,8 +202,7 @@ export class Anime {
 
   public reformatVideoFilename(video: LocalVideo) {
     if (video.naming === 'auto') {
-      const title = this._raw_lib?.title ?? this.plan.rewrite?.title
-        ?? this.plan.title;
+      const title = this._raw_lib?.title ?? this.plan.rewrite?.title ?? this.plan.title;
       const date = video.date ?? this._lib?.date ?? this.plan.date;
 
       const season = this.resolveSeason(video.season);
@@ -239,8 +223,7 @@ export class Anime {
   }
 
   public formatFilename(meta: Partial<FormatOptions>) {
-    const title = this._raw_lib?.title ?? this.plan.rewrite?.title
-      ?? this.plan.title;
+    const title = this._raw_lib?.title ?? this.plan.rewrite?.title ?? this.plan.title;
     const date = this._lib?.date ?? this.plan.date;
 
     const season = this.resolveSeason(meta.season);
@@ -318,9 +301,7 @@ export class Anime {
         this._delta.push(delta);
 
         // Find old video with the same name
-        const oldVideoId = lib.videos.findIndex(
-          v => v.filename === newVideo.filename
-        );
+        const oldVideoId = lib.videos.findIndex((v) => v.filename === newVideo.filename);
         if (oldVideoId !== -1) {
           const oldVideo = lib.videos[oldVideoId];
           this._delta.push({ operation: 'remove', video: oldVideo });
@@ -373,22 +354,17 @@ export class Anime {
    * @param src The video to be moved
    * @param dst Target path
    */
-  public async moveVideo(
-    src: LocalVideo,
-    dst: string
-  ): Promise<LocalVideoDelta | undefined> {
+  public async moveVideo(src: LocalVideo, dst: string): Promise<LocalVideoDelta | undefined> {
     await this.library();
     // Can not move video from other anime
-    if (!this._lib!.videos.find(v => v === src)) return;
+    if (!this._lib!.videos.find((v) => v === src)) return;
 
     const oldFilename = src.filename;
     const newFilename = dst;
     try {
       if (oldFilename !== newFilename) {
         this._dirty = true;
-        await this.directory
-          .join(oldFilename)
-          .moveTo(this.directory.join(newFilename));
+        await this.directory.join(oldFilename).moveTo(this.directory.join(newFilename));
         // await fs.move(
         //   path.join(this.directory, oldFilename),
         //   path.join(this.directory, newFilename)
@@ -404,11 +380,9 @@ export class Anime {
     }
   }
 
-  public async removeVideo(
-    target: LocalVideo
-  ): Promise<LocalVideoDelta | undefined> {
+  public async removeVideo(target: LocalVideo): Promise<LocalVideoDelta | undefined> {
     const remove = () => {
-      const idx = lib.videos.findIndex(v => v === target);
+      const idx = lib.videos.findIndex((v) => v === target);
       if (idx !== -1) {
         const oldVideo = lib.videos[idx];
         lib.videos.splice(idx, 1);
@@ -422,7 +396,7 @@ export class Anime {
     const lib = await this.library();
     const video = this.directory.join(target.filename);
 
-    if (!lib.videos.find(v => v === target)) return;
+    if (!lib.videos.find((v) => v === target)) return;
 
     if (await video.exists()) {
       try {
@@ -442,7 +416,7 @@ export class Anime {
 
   public async sortVideos() {
     const lib = await this.library();
-    const src = lib.videos.map(v => v.filename);
+    const src = lib.videos.map((v) => v.filename);
     lib.videos.sort((lhs, rhs) => {
       const sl = lhs.season ?? 1;
       const sr = rhs.season ?? 1;
@@ -451,7 +425,7 @@ export class Anime {
       const er = rhs.episode ?? -1;
       return el - er;
     });
-    const dst = lib.videos.map(v => v.filename);
+    const dst = lib.videos.map((v) => v.filename);
     this._dirty ||= lib.videos.some((_el, idx) => src[idx] !== dst[idx]);
   }
 
@@ -464,9 +438,7 @@ export class Anime {
     if (this._lib && this._dirty) {
       debug(`Start writing anime library of ${this._lib.title}`);
       try {
-        await this.libraryPath.writeText(
-          stringifyLocalLibrary(this._lib!, this._raw_lib)
-        );
+        await this.libraryPath.writeText(stringifyLocalLibrary(this._lib!, this._raw_lib));
         this._dirty = false;
 
         for (const plugin of this.space.plugins) {

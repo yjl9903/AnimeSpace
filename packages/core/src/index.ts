@@ -1,3 +1,5 @@
+export * from './plan';
+
 export * from './space';
 
 export * from './anime';
