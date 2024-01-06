@@ -6,15 +6,11 @@ import { dim, link, underline } from '@breadc/color';
 import { DOT } from './constant';
 
 export function formatAnimeGardenSearchURL(anime: Anime) {
-  return `https://garden.onekuma.cn/resources/1?include=${
-    encodeURIComponent(
-      JSON.stringify(anime.plan.keywords.include)
-    )
-  }&exclude=${
-    encodeURIComponent(
-      JSON.stringify(anime.plan.keywords.exclude)
-    )
-  }&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
+  return `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
+    JSON.stringify(anime.plan.keywords.include)
+  )}&exclude=${encodeURIComponent(
+    JSON.stringify(anime.plan.keywords.exclude)
+  )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
 }
 
 export function printKeywords(anime: Anime, logger: ConsolaInstance) {
@@ -27,13 +23,7 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
         logger.log(`                 ${dim('|')} ${underline(t)}`);
       }
     } else {
-      logger.log(
-        `${dim('Include keywords')}   ${
-          first
-            .map((t) => underline(t))
-            .join(dim(' | '))
-        }`
-      );
+      logger.log(`${dim('Include keywords')}   ${first.map((t) => underline(t)).join(dim(' | '))}`);
     }
   } else {
     logger.log(dim(`Include keywords:`));
@@ -43,11 +33,9 @@ export function printKeywords(anime: Anime, logger: ConsolaInstance) {
   }
   if (anime.plan.keywords.exclude.length > 0) {
     logger.log(
-      `${dim(`Exclude keywords`)}   [ ${
-        anime.plan.keywords.exclude
-          .map((t) => underline(t))
-          .join(' , ')
-      } ]`
+      `${dim(`Exclude keywords`)}   [ ${anime.plan.keywords.exclude
+        .map((t) => underline(t))
+        .join(' , ')} ]`
     );
   }
 }
@@ -57,12 +45,7 @@ export function printFansubs(anime: Anime, logger: ConsolaInstance) {
   logger.log(
     `${dim('Prefer fansubs')}     ${
       fansubs.length === 0
-        ? `See ${
-          link(
-            'AnimeGarden',
-            formatAnimeGardenSearchURL(anime)
-          )
-        } to select some fansubs`
+        ? `See ${link('AnimeGarden', formatAnimeGardenSearchURL(anime))} to select some fansubs`
         : fansubs.join(dim(' > '))
     }`
   );

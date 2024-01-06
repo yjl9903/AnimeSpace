@@ -3,10 +3,7 @@ import { Document, visit } from 'yaml';
 
 import type { LocalLibrary } from './types';
 
-export function stringifyLocalLibrary(
-  lib: LocalLibrary,
-  rawLib?: Partial<LocalLibrary>
-) {
+export function stringifyLocalLibrary(lib: LocalLibrary, rawLib?: Partial<LocalLibrary>) {
   const copied: LocalLibrary = JSON.parse(JSON.stringify(lib));
   if (rawLib?.title === undefined) {
     // @ts-ignore
@@ -52,7 +49,6 @@ export function stringifyLocalLibrary(
   });
 
   return (
-    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n`
-    + doc.toString({ lineWidth: 0 })
+    `# Generated at ${format(new Date(), 'yyyy-MM-dd hh:mm')}\n` + doc.toString({ lineWidth: 0 })
   );
 }

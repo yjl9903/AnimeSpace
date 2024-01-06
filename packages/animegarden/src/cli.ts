@@ -7,11 +7,7 @@ import './plan.d';
 
 import { ANIMEGARDEN, DOT } from './constant';
 import { generateDownloadTask } from './task';
-import {
-  formatAnimeGardenSearchURL,
-  printFansubs,
-  printKeywords
-} from './format';
+import { formatAnimeGardenSearchURL, printFansubs, printKeywords } from './format';
 import { DownloadClient } from './download';
 import { fetchAnimeResources } from './resources';
 
@@ -31,36 +27,27 @@ export function registerCli(
       for (const anime of animes) {
         const animegardenURL = formatAnimeGardenSearchURL(anime);
         logger.log(
-          `${bold(anime.plan.title)}  (${
-            link(
-              `Bangumi: ${anime.plan.bgm}`,
-              `https://bangumi.tv/subject/${anime.plan.bgm}`
-            )
-          }, ${link('AnimeGarden', animegardenURL)})`
+          `${bold(anime.plan.title)}  (${link(
+            `Bangumi: ${anime.plan.bgm}`,
+            `https://bangumi.tv/subject/${anime.plan.bgm}`
+          )}, ${link('AnimeGarden', animegardenURL)})`
         );
         printKeywords(anime, logger);
         printFansubs(anime, logger);
 
         const resources = await fetchAnimeResources(system, anime);
-        const videos = await generateDownloadTask(
-          system,
-          anime,
-          resources,
-          true
-        );
+        const videos = await generateDownloadTask(system, anime, resources, true);
         const lib = await anime.library();
 
         for (const { video } of videos) {
-          const detailURL = `https://garden.onekuma.cn/resource/${
-            video.source
-              .magnet!.split('/')
-              .at(-1)
-          }`;
+          const detailURL = `https://garden.onekuma.cn/resource/${video.source
+            .magnet!.split('/')
+            .at(-1)}`;
 
           let extra = '';
-          if (!lib.videos.find(v => v.source.magnet === video.source.magnet!)) {
+          if (!lib.videos.find((v) => v.source.magnet === video.source.magnet!)) {
             const aliasVideo = lib.videos.find(
-              v => v.source.type !== ANIMEGARDEN && v.episode === video.episode
+              (v) => v.source.type !== ANIMEGARDEN && v.episode === video.episode
             );
             if (aliasVideo) {
               extra = `overwritten by ${bold(aliasVideo.filename)}`;
@@ -69,11 +56,7 @@ export function registerCli(
             }
           }
 
-          logger.log(
-            `  ${DOT} ${link(video.filename, detailURL)}  ${
-              extra ? `(${extra})` : ''
-            }`
-          );
+          logger.log(`  ${DOT} ${link(video.filename, detailURL)}  ${extra ? `(${extra})` : ''}`);
         }
         logger.log('');
       }
@@ -86,31 +69,25 @@ export function registerCli(
       description: 'Clean downloaded files with extensions (splitted by ",")',
       default: 'mp4,mkv,aria2'
     })
-    .action(async options => {
+    .action(async (options) => {
       const client = getClient(system);
       const extensions = options.ext.split(',');
-      const exts = extensions.map(e => (e.startsWith('.') ? e : '.' + e));
+      const exts = extensions.map((e) => (e.startsWith('.') ? e : '.' + e));
 
       await client.clean(exts);
     });
 
   // --- Util functions ---
-  async function filterAnimes(
-    keyword: string | undefined,
-    options: { onair: boolean }
-  ) {
+  async function filterAnimes(keyword: string | undefined, options: { onair: boolean }) {
     return (
-      await loadAnime(
-        system,
-        a => options.onair ? a.plan.status === 'onair' : true
-      )
+      await loadAnime(system, (a) => (options.onair ? a.plan.status === 'onair' : true))
     ).filter(
-      a =>
-        !keyword
-        || a.plan.title.includes(keyword)
-        || Object.values(a.plan.translations)
+      (a) =>
+        !keyword ||
+        a.plan.title.includes(keyword) ||
+        Object.values(a.plan.translations)
           .flat()
-          .some(t => t.includes(keyword))
+          .some((t) => t.includes(keyword))
     );
   }
 }

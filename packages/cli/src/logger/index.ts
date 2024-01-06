@@ -11,8 +11,6 @@ export function calcLength(text: string) {
 }
 
 export function padRight(texts: string[], fill = ' '): string[] {
-  const length = texts
-    .map((t) => calcLength(t))
-    .reduce((max, l) => Math.max(max, l), 0);
+  const length = texts.map((t) => calcLength(t)).reduce((max, l) => Math.max(max, l), 0);
   return texts.map((t) => t + fill.repeat(length - calcLength(t)));
 }

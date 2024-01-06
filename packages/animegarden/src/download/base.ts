@@ -45,12 +45,7 @@ export abstract class DownloadClient {
 
 type MayPromise<T> = T | Promise<T>;
 
-export type DownloadState =
-  | 'waiting'
-  | 'metadata'
-  | 'downloading'
-  | 'complete'
-  | 'error';
+export type DownloadState = 'waiting' | 'metadata' | 'downloading' | 'complete' | 'error';
 
 export interface DownloadProgress {
   total: bigint;

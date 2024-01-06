@@ -1,9 +1,6 @@
 import { fetch } from 'undici';
 
-export const ufetch = async (
-  url: RequestInfo,
-  init?: RequestInit
-): Promise<Response> => {
+export const ufetch = async (url: RequestInfo, init?: RequestInit): Promise<Response> => {
   const proxy = getProxy();
   if (!!proxy) {
     const { ProxyAgent } = await import('undici');

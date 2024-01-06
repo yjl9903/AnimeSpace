@@ -2,11 +2,7 @@ import createDebug from 'debug';
 import { lightRed } from '@breadc/color';
 import { BreadcError, ParseError } from 'breadc';
 
-import {
-  AnimeSystemError,
-  onUncaughtException,
-  onUnhandledRejection
-} from '@animespace/core';
+import { AnimeSystemError, onUncaughtException, onUnhandledRejection } from '@animespace/core';
 
 import { makeCliApp, makeSystem } from './system';
 

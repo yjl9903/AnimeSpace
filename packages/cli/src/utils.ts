@@ -8,10 +8,7 @@ export function filterDef<T>(items: (T | undefined | null)[]): T[] {
   return items.filter(Boolean) as T[];
 }
 
-export function groupBy<T>(
-  items: T[],
-  fn: (arg: T) => string
-): ImmutableMap<string, T[]> {
+export function groupBy<T>(items: T[], fn: (arg: T) => string): ImmutableMap<string, T[]> {
   const map = MutableMap.empty<string, T[]>();
   for (const item of items) {
     const key = fn(item);

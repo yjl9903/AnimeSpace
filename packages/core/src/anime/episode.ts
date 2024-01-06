@@ -4,10 +4,7 @@ import { AnitomyResult, Parser } from 'anitomy';
 import type { Anime } from './anime';
 import type { FormatOptions } from './types';
 
-export type Episode<T extends {}> =
-  | TVEpisode<T>
-  | MovieEpisode<T>
-  | SPEpisode<T>;
+export type Episode<T extends {}> = TVEpisode<T> | MovieEpisode<T> | SPEpisode<T>;
 
 export interface PartialEpisode<T> {
   anime: Anime;
@@ -31,9 +28,7 @@ interface BaseEpisode<T> {
   parsed: AnitomyResult;
 }
 
-export interface TVEpisode<T extends { season?: number }>
-  extends BaseEpisode<T>
-{
+export interface TVEpisode<T extends { season?: number }> extends BaseEpisode<T> {
   type: 'TV';
 
   episode: number;
@@ -67,9 +62,7 @@ export interface ParseEpisodeOptions<T> {
   metadata: T | ((info: AnitomyResult) => T);
 }
 
-export function parseEpisode<
-  T extends Partial<FormatOptions> = Partial<FormatOptions>
->(
+export function parseEpisode<T extends Partial<FormatOptions> = Partial<FormatOptions>>(
   anime: Anime,
   title: string,
   options: Partial<ParseEpisodeOptions<T>> = {}
@@ -77,9 +70,8 @@ export function parseEpisode<
   const info = parser.parse(title);
   if (!info) return undefined;
 
-  const metadata = options?.metadata instanceof Function
-    ? options.metadata(info)
-    : options.metadata ?? undefined;
+  const metadata =
+    options?.metadata instanceof Function ? options.metadata(info) : options.metadata ?? undefined;
 
   if (anime.plan.type === '番剧') {
     const resolvedEpisode = anime.resolveEpisode(info.episode.number);
@@ -91,7 +83,7 @@ export function parseEpisode<
         episode: info.episode.number
       });
 
-      return <SPEpisode<T>> {
+      return <SPEpisode<T>>{
         anime,
         type: tradToSimple(info.type),
         title,
@@ -104,17 +96,14 @@ export function parseEpisode<
         episodeAlt: info.episode.numberAlt,
         resolvedEpisodeAlt: anime.resolveEpisode(info.episode.numberAlt)
       };
-    } else if (
-      info.episode.number !== undefined
-      && resolvedEpisode !== undefined
-    ) {
+    } else if (info.episode.number !== undefined && resolvedEpisode !== undefined) {
       // 番剧，有集数
       const resolvedTitle = anime.formatFilename({
         ...metadata,
         episode: info.episode.number
       });
 
-      return <TVEpisode<T>> {
+      return <TVEpisode<T>>{
         anime,
         type: 'TV',
         title,
@@ -135,7 +124,7 @@ export function parseEpisode<
       episode: info.episode.number
     });
 
-    return <MovieEpisode<T>> {
+    return <MovieEpisode<T>>{
       anime,
       type: '电影',
       title,
@@ -151,7 +140,7 @@ export function parseEpisode<
       episode: info.episode.number
     });
 
-    return <SPEpisode<T>> {
+    return <SPEpisode<T>>{
       anime,
       type: info.type ? tradToSimple(info.type) : 'OVA',
       title,
@@ -166,7 +155,7 @@ export function parseEpisode<
     };
   }
 
-  return <PartialEpisode<T>> {
+  return <PartialEpisode<T>>{
     anime,
     title,
     metadata,
@@ -184,29 +173,25 @@ export function isValidEpisode<T extends {}>(
   }
 }
 
-export function hasEpisodeNumber<
-  T extends {},
-  E extends Episode<T> = Episode<T>
->(episode: E): episode is E & { episode: number; resolvedEpisode: number } {
+export function hasEpisodeNumber<T extends {}, E extends Episode<T> = Episode<T>>(
+  episode: E
+): episode is E & { episode: number; resolvedEpisode: number } {
   return (
-    'episode' in episode
-    && episode.episode !== undefined
-    && 'resolvedEpisode' in episode
-    && episode.resolvedEpisode !== undefined
+    'episode' in episode &&
+    episode.episode !== undefined &&
+    'resolvedEpisode' in episode &&
+    episode.resolvedEpisode !== undefined
   );
 }
 
-export function hasEpisodeNumberAlt<
-  T extends {},
-  E extends Episode<T> = Episode<T>
->(
+export function hasEpisodeNumberAlt<T extends {}, E extends Episode<T> = Episode<T>>(
   episode: Episode<T>
 ): episode is E & { episodeAlt: number; resolvedEpisodeAlt: number } {
   return (
-    'episodeAlt' in episode
-    && episode.episodeAlt !== undefined
-    && 'resolvedEpisodeAlt' in episode
-    && episode.resolvedEpisodeAlt !== undefined
+    'episodeAlt' in episode &&
+    episode.episodeAlt !== undefined &&
+    'resolvedEpisodeAlt' in episode &&
+    episode.resolvedEpisodeAlt !== undefined
   );
 }
 
@@ -219,17 +204,16 @@ export function getEpisodeType<T extends {}>(episode: Episode<T>) {
 }
 
 export function getEpisodeKey<T extends {}>(episode: Episode<T>) {
-  const episodeAlt = 'resolvedEpisodeAlt' in episode
-    ? episode.resolvedEpisodeAlt !== undefined
-      ? `-${episode.resolvedEpisodeAlt}`
-      : ''
-    : '';
+  const episodeAlt =
+    'resolvedEpisodeAlt' in episode
+      ? episode.resolvedEpisodeAlt !== undefined
+        ? `-${episode.resolvedEpisodeAlt}`
+        : ''
+      : '';
 
   if (episode.type === 'TV') {
     const season = 'season' in episode.metadata ? episode.metadata.season : 1;
-    return `${episode.type}/S${season}/${
-      episode.resolvedEpisode ?? 'null'
-    }${episodeAlt}`;
+    return `${episode.type}/S${season}/${episode.resolvedEpisode ?? 'null'}${episodeAlt}`;
   }
   if (episode.type === '电影') {
     return `${episode.type}/`;

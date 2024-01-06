@@ -32,11 +32,7 @@ export async function generateDownloadTask(
       const tl = lhs.title;
       const tr = rhs.title;
 
-      for (
-        const [_, order] of Object.entries(
-          system.space.preference.keyword.order
-        )
-      ) {
+      for (const [_, order] of Object.entries(system.space.preference.keyword.order)) {
         for (const k of order) {
           const key = k.toLowerCase();
           const hl = tl.toLowerCase().indexOf(key) !== -1;
@@ -51,17 +47,13 @@ export async function generateDownloadTask(
         }
       }
 
-      return (
-        new Date(rhs.createdAt).getTime() - new Date(lhs.createdAt).getTime()
-      );
+      return new Date(rhs.createdAt).getTime() - new Date(lhs.createdAt).getTime();
     });
 
     const res = resources[0];
     if (
-      force
-      || !library.videos.find(
-        r => r.source.magnet?.split('/').at(-1) === res.href.split('/').at(-1)
-      )
+      force ||
+      !library.videos.find((r) => r.source.magnet?.split('/').at(-1) === res.href.split('/').at(-1))
     ) {
       const info = parser.parse(res.title)!;
       videos.push({
@@ -76,11 +68,7 @@ export async function generateDownloadTask(
           episode: info.episode.number, // Raw episode number
           source: {
             type: 'AnimeGarden',
-            magnet: `https://garden.onekuma.cn/resource/${
-              res.href
-                .split('/')
-                .at(-1)
-            }`
+            magnet: `https://garden.onekuma.cn/resource/${res.href.split('/').at(-1)}`
           }
         },
         resource: res
@@ -93,28 +81,19 @@ export async function generateDownloadTask(
   return videos;
 }
 
-function groupResources(
-  system: AnimeSystem,
-  anime: Anime,
-  resources: Resource[]
-) {
+function groupResources(system: AnimeSystem, anime: Anime, resources: Resource[]) {
   const logger = system.logger.withTag('animegarden');
   const map = new MutableMap<string, MutableMap<string, Resource[]>>([]);
 
   for (const r of resources) {
     // Resource title should not have exclude keywords
-    if (
-      system.space.preference.keyword.exclude.some(
-        k => r.title.indexOf(k) !== -1
-      )
-    ) {
+    if (system.space.preference.keyword.exclude.some((k) => r.title.indexOf(k) !== -1)) {
       continue;
     }
 
     const episode = parseEpisode(anime, r.title, {
-      metadata: info => ({
-        fansub: r.fansub?.name ?? r.publisher.name ?? info.release.group
-          ?? 'fansub'
+      metadata: (info) => ({
+        fansub: r.fansub?.name ?? r.publisher.name ?? info.release.group ?? 'fansub'
       })
     });
 
@@ -157,10 +136,7 @@ function groupResources(
           return fl - fr;
         });
 
-        return [
-          ep,
-          { fansub: fansubs[0][0], resources: fansubs[0][1] }
-        ] as const;
+        return [ep, { fansub: fansubs[0][0], resources: fansubs[0][1] }] as const;
       })
       .toArray()
   );

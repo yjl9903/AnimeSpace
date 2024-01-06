@@ -28,9 +28,7 @@ export interface LocalOptions extends PluginEntry {
 }
 
 export async function Local(options: LocalOptions): Promise<Plugin> {
-  const createLogger = memo((system: AnimeSystem) =>
-    system.logger.withTag(LOCAL)
-  );
+  const createLogger = memo((system: AnimeSystem) => system.logger.withTag(LOCAL));
 
   const files: LocalFile[] = [];
 
@@ -59,11 +57,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
             }
           };
           logger.log(
-            `${lightGreen('Moving local file')} ${
-              bold(
-                file.filename
-              )
-            } to ${bold(video.filename)}`
+            `${lightGreen('Moving local file')} ${bold(file.filename)} to ${bold(video.filename)}`
           );
           await anime.addVideoByMove(file.path.path, video);
           return video;
@@ -73,22 +67,13 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
     },
     refresh: {
       async pre(system) {
-        const relDir = LocalFS.path(
-          system.space.root,
-          options.directory ?? './local'
-        );
+        const relDir = LocalFS.path(system.space.root, options.directory ?? './local');
 
-        files.splice(
-          0,
-          files.length,
-          ...(await listIncludeFiles(system.space, relDir))
-        );
+        files.splice(0, files.length, ...(await listIncludeFiles(system.space, relDir)));
 
         if (files.length > 0) {
           const logger = createLogger(system);
-          logger.log(
-            `There are ${lightYellow(`${files.length} local files`)} found.`
-          );
+          logger.log(`There are ${lightYellow(`${files.length} local files`)} found.`);
           for (const f of files) {
             logger.log(`${DOT} ${f.filename}`);
           }
@@ -102,7 +87,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
         files.splice(
           0,
           files.length,
-          ...files.filter(f => {
+          ...files.filter((f) => {
             if (anime.matchKeywords(f.filename)) {
               relatedFiles.push(f);
               return false;
@@ -137,11 +122,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
               }
             };
             logger.log(
-              `${lightBlue('Moving local file')} ${
-                bold(
-                  file.filename
-                )
-              } to ${bold(video.filename)}`
+              `${lightBlue('Moving local file')} ${bold(file.filename)} to ${bold(video.filename)}`
             );
             await anime.addVideoByMove(file.path.path, video);
           } else {
