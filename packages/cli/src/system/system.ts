@@ -4,7 +4,7 @@ import path from 'node:path';
 import { Local } from '@animespace/local';
 import { Bangumi } from '@animespace/bangumi';
 import { AnimeGarden } from '@animespace/animegarden';
-import { createAnimeSystem, loadSpace, PluginLoader } from '@animespace/core';
+import { createSystem, loadSpace, PluginLoader } from '@animespace/core';
 
 const pluginLoader: PluginLoader = {
   async animegarden(entry) {
@@ -21,7 +21,7 @@ const pluginLoader: PluginLoader = {
 export async function makeSystem(_root?: string) {
   const root = _root ?? inferRoot();
   const space = await loadSpace(root, pluginLoader);
-  const system = createAnimeSystem(space);
+  const system = createSystem(space);
   return system;
 }
 

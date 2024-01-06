@@ -6,7 +6,7 @@ export async function refresh(system: AnimeSystem, options: RefreshOptions) {
   const logger = system.logger.withTag('refresh');
   logger.log(lightBlue(`Refresh Anime Space`));
 
-  const animes = await system.load(options);
+  const animes = await system.animes(options);
 
   for (const plugin of system.space.plugins) {
     await plugin.refresh?.pre?.(system, options);

@@ -49,7 +49,7 @@ export interface AnimeSystem {
   /**
    * Load animes from plans or introspect result
    */
-  load(options?: LoadOptions): Promise<Anime[]>;
+  animes(options?: LoadOptions): Promise<Anime[]>;
 
   /**
    * Refresh the media library

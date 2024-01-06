@@ -12,7 +12,7 @@ import type { AnimeSystem } from './types';
 import { refresh } from './refresh';
 import { introspect, loadAnime } from './introspect';
 
-export async function createAnimeSystem(space: AnimeSpace): Promise<AnimeSystem> {
+export async function createSystem(space: AnimeSpace): Promise<AnimeSystem> {
   const logger = createConsola({
     formatOptions: { columns: process.stdout.getWindowSize?.()[0] }
   });
@@ -45,7 +45,7 @@ export async function createAnimeSystem(space: AnimeSpace): Promise<AnimeSystem>
     async plans() {
       return await loadPlans(space);
     },
-    async load(options = {}) {
+    async animes(options = {}) {
       if (!options.force && animes !== undefined) {
         return animes;
       } else if (!options?.filter) {
@@ -89,7 +89,7 @@ export async function createAnimeSystem(space: AnimeSpace): Promise<AnimeSystem>
     },
     async writeBack() {
       logger.wrapConsole();
-      const animes = await system.load();
+      const animes = await system.animes();
       await Promise.all(animes.map((a) => a.writeLibrary()));
       logger.restoreConsole();
       return animes;
