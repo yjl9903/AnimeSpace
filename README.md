@@ -16,6 +16,12 @@ All the bangumi resources are automatically collected and downloaded from [動�
 + 📖 [中文文档](https://animespace.onekuma.cn/)
 + 📚 [部署博客](https://blog.onekuma.cn/alidriver-alist-rclone-animepaste)
 
+> **Notice**:
+>
+> 👷‍♂️ Still work in progress towards v0.1.0.
+>
+> More docs and out-of-the-box usage will be available in v0.1.0.
+
 ## Features
 
 + :gear: **Automatically** collect, download and organize anime resources
