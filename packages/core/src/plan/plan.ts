@@ -1,10 +1,12 @@
 import fs from 'fs-extra';
 import fg from 'fast-glob';
 import path from 'pathe';
+import defu from 'defu';
 import { parse } from 'yaml';
 import { AnyZodObject, z } from 'zod';
 
 import type { AnimeSpace } from '../space';
+import type { Preference } from '../space/schema';
 
 import { AnimeSystemError, debug } from '../error';
 
@@ -39,10 +41,8 @@ async function loadPlan(space: AnimeSpace): Promise<PlanFile[]> {
         const parsed = Schema.safeParse(yaml);
 
         if (parsed.success) {
-          const preference = {
-            ...space.preference,
-            ...parsed.data.preference
-          };
+          const preference = defu(parsed.data.preference, space.preference) as Preference;
+
           const plan: PlanFile = {
             ...parsed.data,
             preference,
@@ -57,10 +57,7 @@ async function loadPlan(space: AnimeSpace): Promise<PlanFile[]> {
                   // Manually resolve keywords
                   keywords: resolveKeywordsArray(o.title, o.alias, o.translations, o.keywords),
                   // Inherit preference,
-                  preference: {
-                    ...preference,
-                    ...o.preference
-                  }
+                  preference: defu(o.preference, preference)
                 }) as AnimePlan
             )
           };
