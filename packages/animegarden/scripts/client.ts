@@ -1,16 +1,13 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { createAnimeSystem, loadSpace } from '@animespace/core';
+import { createSystem, loadSpace } from '@animespace/core';
 
 import { Aria2Client } from '../src/download/aria2';
 
-const root = path.join(
-  fileURLToPath(import.meta.url),
-  '../../../core/test/fixtures/space'
-);
+const root = path.join(fileURLToPath(import.meta.url), '../../../core/test/fixtures/space');
 const space = await loadSpace(root);
-const system = await createAnimeSystem(space);
+const system = await createSystem(space);
 
 const client = new Aria2Client(system, {
   debug: { log: './aria2.log', pipe: false }

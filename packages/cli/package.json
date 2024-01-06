@@ -58,6 +58,7 @@
     "debug": "^4.3.4",
     "fs-extra": "^11.2.0",
     "open-editor": "^4.1.1",
+    "pathe": "^1.1.1",
     "prompts": "^2.4.2",
     "undici": "^6.2.1"
   },
@@ -67,9 +68,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/prompts": "^2.4.9",
     "@vercel/ncc": "^0.38.1",
-    "bangumi-data": "^0.3.129",
-    "presea": "^0.0.10",
-    "unbuild": "^2.0.0"
+    "bangumi-data": "^0.3.129"
   },
   "engines": {
     "node": ">=v20.7.0"

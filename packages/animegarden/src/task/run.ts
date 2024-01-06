@@ -1,19 +1,7 @@
-import path from 'node:path';
+import path from 'pathe';
 
-import {
-  Anime,
-  AnimeSystem,
-  onDeath,
-  onUnhandledRejection
-} from '@animespace/core';
-import {
-  bold,
-  cyan,
-  lightGreen,
-  lightRed,
-  lightYellow,
-  link
-} from '@breadc/color';
+import { Anime, AnimeSystem, onDeath, onUnhandledRejection } from '@animespace/core';
+import { bold, cyan, lightGreen, lightRed, lightYellow, link } from '@breadc/color';
 
 import { ANIMEGARDEN } from '../constant';
 import { DownloadClient } from '../download';
@@ -51,17 +39,9 @@ export async function runDownloadTask(
       let text = '';
       if (payload.state) {
         text += payload.state;
-        text += ` | ${Number(payload.completed)} B / ${
-          Number(
-            payload.total
-          )
-        } B`;
+        text += ` | ${Number(payload.completed)} B / ${Number(payload.total)} B`;
       } else {
-        text += `${formatSize(Number(payload.completed))} / ${
-          formatSize(
-            Number(payload.total)
-          )
-        }`;
+        text += `${formatSize(Number(payload.completed))} / ${formatSize(Number(payload.total))}`;
         if (payload.speed) {
           text += ` | Speed: ${formatSize(payload.speed)}/s`;
         }
@@ -96,62 +76,54 @@ export async function runDownloadTask(
   const cancelUnhandledRej = onUnhandledRejection(() => {
     multibar.finish();
   });
-  const cancelRefresh = loop(async () => {
-    if (anime.dirty) {
-      await anime.writeLibrary();
-      systemLogger.log(
-        lightGreen(`Write`)
-          + bold(` ${anime.plan.title} `)
-          + lightGreen(`library file OK`)
-      );
-    }
-  }, 10 * 60 * 1000); // 10 minutes
+  const cancelRefresh = loop(
+    async () => {
+      if (anime.dirty) {
+        await anime.writeLibrary();
+        systemLogger.log(
+          lightGreen(`Write`) + bold(` ${anime.plan.title} `) + lightGreen(`library file OK`)
+        );
+      }
+    },
+    10 * 60 * 1000
+  ); // 10 minutes
 
-  const tasks = videos.map(async task => {
+  const tasks = videos.map(async (task) => {
     const bar = multibar.create(`${bold(task.video.filename)}`, 100);
 
     try {
-      const { files } = await client.download(
-        task.video.filename,
-        task.resource.magnet,
-        {
-          onStart() {
-            bar.update(0, {
-              speed: 0,
-              connections: 0,
-              completed: BigInt(0),
-              total: BigInt(0),
-              state: 'Downloading metadata'
-            });
-          },
-          onMetadataProgress(progress) {
-            bar.update(0, {
-              ...progress,
-              state: 'Downloading metadata'
-            });
-          },
-          onProgress(payload) {
-            const completed = Number(payload.completed);
-            const total = Number(payload.total);
-            const value = payload.total > 0
-              ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1)
-              : 0;
-            bar.update(value, { ...payload, state: '' });
-          },
-          onComplete() {
-            bar.update(100);
-          }
+      const { files } = await client.download(task.video.filename, task.resource.magnet, {
+        onStart() {
+          bar.update(0, {
+            speed: 0,
+            connections: 0,
+            completed: BigInt(0),
+            total: BigInt(0),
+            state: 'Downloading metadata'
+          });
+        },
+        onMetadataProgress(progress) {
+          bar.update(0, {
+            ...progress,
+            state: 'Downloading metadata'
+          });
+        },
+        onProgress(payload) {
+          const completed = Number(payload.completed);
+          const total = Number(payload.total);
+          const value =
+            payload.total > 0 ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1) : 0;
+          bar.update(value, { ...payload, state: '' });
+        },
+        onComplete() {
+          bar.update(100);
         }
-      );
+      });
       bar.update(100);
       bar.remove();
 
       multibarLogger.log(
-        `${lightGreen('Download')} ${bold(task.video.filename)} ${
-          lightGreen(
-            'OK'
-          )
-        }`
+        `${lightGreen('Download')} ${bold(task.video.filename)} ${lightGreen('OK')}`
       );
 
       if (files.length === 1) {
@@ -172,10 +144,10 @@ export async function runDownloadTask(
 
         // Find old video to be removed
         const oldVideo = library.find(
-          v =>
-            v.source.type === ANIMEGARDEN
-            && anime.resolveEpisode(v.episode) === resolvedEpisode
-            && (anime.resolveSeason(v.season) ?? 1) === (resolvedSeason ?? 1) // Find same episode after being resolved
+          (v) =>
+            v.source.type === ANIMEGARDEN &&
+            anime.resolveEpisode(v.episode) === resolvedEpisode &&
+            (anime.resolveSeason(v.season) ?? 1) === (resolvedSeason ?? 1) // Find same episode after being resolved
         );
 
         // Upload progress bar
@@ -192,9 +164,8 @@ export async function runDownloadTask(
         try {
           const copyDelta = await anime.addVideoByCopy(file, task.video, {
             onProgress({ current, total }) {
-              const value = total > 0
-                ? +(Math.ceil((1000.0 * current) / total) / 10).toFixed(1)
-                : 0;
+              const value =
+                total > 0 ? +(Math.ceil((1000.0 * current) / total) / 10).toFixed(1) : 0;
               bar.update(value, {
                 speed: 0,
                 connections: 0,
@@ -206,27 +177,19 @@ export async function runDownloadTask(
           });
 
           if (copyDelta) {
-            const detailURL = `https://garden.onekuma.cn/resource/${
-              task.video.source
-                .magnet!.split('/')
-                .at(-1)
-            }`;
+            const detailURL = `https://garden.onekuma.cn/resource/${task.video.source
+              .magnet!.split('/')
+              .at(-1)}`;
             copyDelta.log = link(task.video.filename, detailURL);
 
             // Remove old animegarden video to keep storage clean
             if (oldVideo) {
-              multibarLogger.log(
-                `${lightRed('Removing')} ${bold(oldVideo.filename)}`
-              );
+              multibarLogger.log(`${lightRed('Removing')} ${bold(oldVideo.filename)}`);
               await anime.removeVideo(oldVideo);
             }
 
             multibarLogger.log(
-              `${lightGreen('Copy')} ${bold(task.video.filename)} ${
-                lightGreen(
-                  'OK'
-                )
-              }`
+              `${lightGreen('Copy')} ${bold(task.video.filename)} ${lightGreen('OK')}`
             );
           }
         } finally {
@@ -235,21 +198,14 @@ export async function runDownloadTask(
         }
       } else {
         multibar.println(
-          `${lightYellow(`Warn`)} Resource ${
-            link(
-              task.resource.title,
-              task.resource.href
-            )
-          } has multiple files`
+          `${lightYellow(`Warn`)} Resource ${link(
+            task.resource.title,
+            task.resource.href
+          )} has multiple files`
         );
       }
     } catch (error) {
-      const defaultMessage = `Download ${
-        link(
-          task.resource.title,
-          task.resource.href
-        )
-      } failed`;
+      const defaultMessage = `Download ${link(task.resource.title, task.resource.href)} failed`;
       if (error instanceof Error && error?.message) {
         multibarLogger.error(error.message ?? defaultMessage);
         systemLogger.error(error);
@@ -266,17 +222,13 @@ export async function runDownloadTask(
     multibar.finish();
   } catch (error) {
     multibar.finish();
-    systemLogger.log(
-      lightRed(`Failed to downloading resources of ${bold(anime.plan.title)}`)
-    );
+    systemLogger.log(lightRed(`Failed to downloading resources of ${bold(anime.plan.title)}`));
     systemLogger.error(error);
   } finally {
     if (anime.dirty) {
       await anime.writeLibrary();
       systemLogger.log(
-        lightGreen(`Write`)
-          + bold(` ${anime.plan.title} `)
-          + lightGreen(`library file OK`)
+        lightGreen(`Write`) + bold(` ${anime.plan.title} `) + lightGreen(`library file OK`)
       );
     }
   }

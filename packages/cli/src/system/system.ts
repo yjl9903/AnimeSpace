@@ -1,5 +1,5 @@
 import os from 'node:os';
-import path from 'node:path';
+import path from 'pathe';
 
 import { Local } from '@animespace/local';
 import { Bangumi } from '@animespace/bangumi';

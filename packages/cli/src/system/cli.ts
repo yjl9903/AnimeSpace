@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import path from 'node:path';
+import path from 'pathe';
 import { execSync } from 'node:child_process';
 
 import openEditor from 'open-editor';

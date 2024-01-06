@@ -1,15 +1,16 @@
 import fs from 'fs-extra';
 import fg from 'fast-glob';
-import path from 'node:path';
+import path from 'pathe';
+import { parse } from 'yaml';
 import { AnyZodObject, z } from 'zod';
-import { parse, YAMLError } from 'yaml';
 
 import type { Plugin } from '../plugin';
 import type { AnimeSpace } from '../space';
 
 import { AnimeSystemError, debug } from '../error';
 
-import { AnimePlan, AnimePlanSchema, KeywordsParams, PlanFile, PlanSchema } from './types';
+import type { AnimePlan, KeywordsParams, PlanFile } from './types';
+import { AnimePlanSchema, PlanSchema } from './schema';
 
 export async function loadPlans(space: AnimeSpace) {
   const plans = await loadPlan(space.root.path, space.plans, space.plugins);
