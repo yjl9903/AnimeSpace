@@ -28,112 +28,112 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  binary:
-    name: Bundle binary for ${{ matrix.target }}
+  # binary:
+  #   name: Bundle binary for ${{ matrix.target }}
 
-    runs-on: ${{ matrix.os }}
+  #   runs-on: ${{ matrix.os }}
 
-    env:
-      binary: anime
-      archive: anime-${{ matrix.target }}.${{ matrix.archive }}
-      checksum: anime-${{ matrix.target }}-sha256sum.txt
+  #   env:
+  #     binary: anime
+  #     archive: anime-${{ matrix.target }}.${{ matrix.archive }}
+  #     checksum: anime-${{ matrix.target }}-sha256sum.txt
 
-    strategy:
-      fail-fast: false
+  #   strategy:
+  #     fail-fast: false
 
-      matrix:
-        include:
-          - target: linux
-            os: ubuntu-latest
-            dist: ./packages/cli/bin/anime
-            archive: tar.gz
+  #     matrix:
+  #       include:
+  #         - target: linux
+  #           os: ubuntu-latest
+  #           dist: ./packages/cli/bin/anime
+  #           archive: tar.gz
 
-          - target: macos
-            os: macos-latest
-            dist: ./packages/cli/bin/anime
-            archive: zip
+  #         - target: macos
+  #           os: macos-latest
+  #           dist: ./packages/cli/bin/anime
+  #           archive: zip
 
-          - target: windows
-            os: windows-latest
-            dist: .\packages\cli\bin\anime.exe
-            archive: zip
+  #         - target: windows
+  #           os: windows-latest
+  #           dist: .\packages\cli\bin\anime.exe
+  #           archive: zip
 
-    steps:
-      - uses: szenius/set-timezone@v1.2
-        with:
-          timezoneLinux: "Asia/Shanghai"
-          timezoneMacos: "Asia/Shanghai"
-          timezoneWindows: "China Standard Time"
+  #   steps:
+  #     - uses: szenius/set-timezone@v1.2
+  #       with:
+  #         timezoneLinux: "Asia/Shanghai"
+  #         timezoneMacos: "Asia/Shanghai"
+  #         timezoneWindows: "China Standard Time"
 
-      - uses: actions/checkout@v4
+  #     - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.4.0
+  #     - name: Setup pnpm
+  #       uses: pnpm/action-setup@v2.4.0
 
-      - name: Setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.x
-          cache: pnpm
+  #     - name: Setup node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20.x
+  #         cache: pnpm
 
-      - name: Install
-        run: pnpm install
+  #     - name: Install
+  #       run: pnpm install
 
-      - name: Build
-        run: pnpm build
+  #     - name: Build
+  #       run: pnpm build
 
-      - name: Test
-        run: |
-          pnpm test:ci
-          ${{ matrix.dist }} --version
-          ${{ matrix.dist }} --help
+  #     - name: Test
+  #       run: |
+  #         pnpm test:ci
+  #         ${{ matrix.dist }} --version
+  #         ${{ matrix.dist }} --help
 
-      - name: Create archive (linux)
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: |
-          tar -czvf ${{ env.archive }} -C $(dirname ${{ matrix.dist }}) $(basename ${{ matrix.dist }})
-          sha256sum ${{ env.archive }} > ${{ env.checksum }}
+  #     - name: Create archive (linux)
+  #       if: ${{ matrix.os == 'ubuntu-latest' }}
+  #       run: |
+  #         tar -czvf ${{ env.archive }} -C $(dirname ${{ matrix.dist }}) $(basename ${{ matrix.dist }})
+  #         sha256sum ${{ env.archive }} > ${{ env.checksum }}
 
-      - name: Create archive (macos)
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: |
-          zip -j ${{ env.archive }} ${{ matrix.dist }}
-          shasum -a 256 ${{ env.archive }} > ${{ env.checksum }}
+  #     - name: Create archive (macos)
+  #       if: ${{ matrix.os == 'macos-latest' }}
+  #       run: |
+  #         zip -j ${{ env.archive }} ${{ matrix.dist }}
+  #         shasum -a 256 ${{ env.archive }} > ${{ env.checksum }}
 
-      - name: Create archive (windows)
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: |
-          Compress-Archive -DestinationPath ${{ env.archive }} -Path ${{ matrix.dist }}
-          Get-FileHash ${{ env.archive }} -Algorithm SHA256 | Out-File ${{ env.checksum }}
+  #     - name: Create archive (windows)
+  #       if: ${{ matrix.os == 'windows-latest' }}
+  #       run: |
+  #         Compress-Archive -DestinationPath ${{ env.archive }} -Path ${{ matrix.dist }}
+  #         Get-FileHash ${{ env.archive }} -Algorithm SHA256 | Out-File ${{ env.checksum }}
 
-      - name: Upload artifacts archive
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.archive }}
-          path: ${{ env.archive }}
+  #     - name: Upload artifacts archive
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ${{ env.archive }}
+  #         path: ${{ env.archive }}
 
-      - name: Upload artifacts checksum
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.checksum }}
-          path: ${{ env.checksum }}
+  #     - name: Upload artifacts checksum
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: ${{ env.checksum }}
+  #         path: ${{ env.checksum }}
 
-      - name: Upload binary to release
-        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
-        uses: svenstaro/upload-release-action@v2
-        with:
-          overwrite: true
-          tag: ${{ github.ref }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ env.archive }}
-          asset_name: ${{ env.archive }}
+  #     - name: Upload binary to release
+  #       if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+  #       uses: svenstaro/upload-release-action@v2
+  #       with:
+  #         overwrite: true
+  #         tag: ${{ github.ref }}
+  #         repo_token: ${{ secrets.GITHUB_TOKEN }}
+  #         file: ${{ env.archive }}
+  #         asset_name: ${{ env.archive }}
 
-      - name: Upload checksum to release
-        if: ${{ startsWith(github.ref, 'refs/tags/v') }}
-        uses: svenstaro/upload-release-action@v2
-        with:
-          overwrite: true
-          tag: ${{ github.ref }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ env.checksum }}
-          asset_name: ${{ env.checksum }}
+  #     - name: Upload checksum to release
+  #       if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+  #       uses: svenstaro/upload-release-action@v2
+  #       with:
+  #         overwrite: true
+  #         tag: ${{ github.ref }}
+  #         repo_token: ${{ secrets.GITHUB_TOKEN }}
+  #         file: ${{ env.checksum }}
+  #         asset_name: ${{ env.checksum }}
