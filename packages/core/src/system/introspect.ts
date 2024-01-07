@@ -103,8 +103,7 @@ export async function loadAnime(
   filter: (anime: Anime) => boolean = (p) => p.plan.status === 'onair'
 ) {
   const plans = await system.plans();
-  const animePlans = flatAnimePlan(plans);
-  const animes = animePlans.map((ap) => new Anime(system, ap));
+  const animes = plans.flatMap((p) => p.onair.map((ap) => new Anime(system, ap, p)));
 
   // Detect directory naming conflict
   {
@@ -143,8 +142,4 @@ export async function loadAnime(
   );
 
   return successed.filter(Boolean) as Anime[];
-}
-
-export function flatAnimePlan(plans: PlanFile[]) {
-  return plans.flatMap((p) => p.onair);
 }

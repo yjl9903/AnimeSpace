@@ -7,8 +7,8 @@ import { fs as LocalFS } from 'breadfs/node';
 import { parse } from 'yaml';
 import { format } from 'date-fns';
 
-import type { AnimePlan } from '../plan';
 import type { AnimeSystem } from '../system';
+import type { AnimePlan, PlanFile } from '../plan';
 import type { AnimeSpace, StoragePath } from '../space';
 
 import { AnimeSystemError, debug } from '../error';
@@ -25,9 +25,9 @@ export class Anime {
 
   public readonly libraryDirectory: StoragePath;
 
-  public readonly relativeDirectory: string;
-
   public readonly plan: AnimePlan;
+
+  public readonly planFile: PlanFile;
 
   private readonly system: AnimeSystem;
 
@@ -47,9 +47,10 @@ export class Anime {
    */
   private _dirty = false;
 
-  public constructor(system: AnimeSystem, plan: AnimePlan) {
+  public constructor(system: AnimeSystem, plan: AnimePlan, file: PlanFile) {
     this.system = system;
     this.plan = plan;
+    this.planFile = file;
 
     const space = system.space;
     const dirname = plan.title;
@@ -61,8 +62,6 @@ export class Anime {
     this.libraryDirectory = plan.directory
       ? space.storage.library.resolve(plan.directory)
       : space.storage.library.join(dirname);
-
-    this.relativeDirectory = plan.directory ? plan.directory : dirname;
   }
 
   public get space(): AnimeSpace {
