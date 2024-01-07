@@ -1,4 +1,4 @@
-import { StoragePath } from '../space';
+import type { StoragePath } from '../space';
 import type { Preference } from '../space/schema';
 
 export type PlanStatus = 'onair' | 'finish';
