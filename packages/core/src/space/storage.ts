@@ -35,6 +35,9 @@ export function makeBreadFS(
   if (!resolved.cache) {
     throw new Error(`Can not find cache storage`);
   }
+  if (!resolved.trash) {
+    throw new Error(`Can not find trash storage`);
+  }
 
   return resolved;
 

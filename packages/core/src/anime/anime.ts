@@ -113,6 +113,11 @@ export class Anime {
         const schema = z
           .object({
             title: z.string().default(this.plan.title).catch(this.plan.title),
+            season:
+              this.plan.season !== undefined
+                ? z.coerce.number().default(this.plan.season).catch(this.plan.season)
+                : z.coerce.number().optional(),
+            date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
             // Hack: for old data, keep this default
             storage: z.string().default('anime'),
             videos: z

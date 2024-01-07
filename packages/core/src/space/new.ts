@@ -68,7 +68,11 @@ export async function makeNewSpace(root: string): Promise<RawAnimeSpace> {
       }),
       'utf-8'
     ),
-    fs.writeFile(path.join(root, '.gitignore'), ['*.mp4', '*.mkv', '*.aria2'].join('\n'), 'utf-8'),
+    fs.writeFile(
+      path.join(root, '.gitignore'),
+      ['*.mp4', '*.mkv', '*.aria2', '.trash'].join('\n'),
+      'utf-8'
+    ),
     fs.writeFile(path.join(root, 'README.md'), `# AnimeSpace\n`, 'utf-8')
   ]);
 

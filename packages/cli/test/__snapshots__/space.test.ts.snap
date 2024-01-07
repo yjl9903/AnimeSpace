@@ -55,6 +55,10 @@ exports[`system > should load 1`] = `
         },
         "season": 2,
         "status": "onair",
+        "storage": {
+          "name": "anime",
+          "root": Path { fs: "node", path: "../core/test/fixtures/space/anime" },
+        },
         "title": "熊熊勇闯异世界 Punch!",
         "translations": {},
         "type": "番剧",
@@ -108,6 +112,10 @@ exports[`system > should load 1`] = `
         },
         "season": 1,
         "status": "onair",
+        "storage": {
+          "name": "anime",
+          "root": Path { fs: "node", path: "../core/test/fixtures/space/anime" },
+        },
         "title": "天国大魔境",
         "translations": {
           "unknown": [
@@ -176,6 +184,10 @@ exports[`system > should load 1`] = `
         },
         "season": 1,
         "status": "onair",
+        "storage": {
+          "name": "anime",
+          "root": Path { fs: "node", path: "../core/test/fixtures/space/anime" },
+        },
         "title": "偶像大师 灰姑娘女孩 U149",
         "translations": {},
         "type": "番剧",

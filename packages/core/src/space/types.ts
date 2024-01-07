@@ -29,6 +29,8 @@ export interface AnimeSpace {
       readonly library: StoragePath;
 
       readonly cache: StoragePath;
+
+      readonly trash: StoragePath;
     } & Record<string, StoragePath>
   >;
 

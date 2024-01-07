@@ -109,24 +109,28 @@ export async function validateSpace(space: AnimeSpace) {
   const root = space.root.path;
 
   // Validate anime space directory
-  try {
-    await fs.access(root, fs.constants.R_OK | fs.constants.W_OK);
-  } catch {
-    throw new AnimeSystemError(`Can not access anime space directory ${root}`);
-  }
-
-  // Validate anime storage directory
-  if (space.storage.anime.fs === LocalFS) {
+  const validateAnime = async () => {
     try {
-      await fs.access(space.storage.anime.path, fs.constants.R_OK | fs.constants.W_OK);
+      await fs.access(root, fs.constants.R_OK | fs.constants.W_OK);
     } catch {
+      throw new AnimeSystemError(`Can not access anime space directory ${root}`);
+    }
+
+    // Validate anime storage directory
+    if (space.storage.anime.fs === LocalFS) {
       try {
-        await fs.mkdir(space.storage.anime.path, { recursive: true });
+        await fs.access(space.storage.anime.path, fs.constants.R_OK | fs.constants.W_OK);
       } catch {
-        throw new AnimeSystemError(`Can not access local anime storage directory ${space.storage}`);
+        try {
+          await fs.mkdir(space.storage.anime.path, { recursive: true });
+        } catch {
+          throw new AnimeSystemError(
+            `Can not access local anime storage directory ${space.storage.anime.path}`
+          );
+        }
       }
     }
-  }
+  };
 
   // Create a symlink from the outside storage dir to the local dir
   // Example: Z:/path/to/animes/ -> $ANIMESPACE_ROOT/animes/
@@ -152,22 +156,61 @@ export async function validateSpace(space: AnimeSpace) {
   //   }
   // } catch {}
 
-  if (
-    space.storage.library.fs === LocalFS &&
-    space.storage.library.path !== space.storage.anime.path
-  ) {
-    try {
-      await fs.access(space.storage.library.path, fs.constants.R_OK | fs.constants.W_OK);
-    } catch {
+  // Validate library storage directory
+  const validateLibrary = async () => {
+    if (
+      space.storage.library.fs === LocalFS &&
+      space.storage.library.path !== space.storage.anime.path
+    ) {
       try {
-        await fs.mkdir(space.storage.library.path, { recursive: true });
+        await fs.access(space.storage.library.path, fs.constants.R_OK | fs.constants.W_OK);
       } catch {
-        throw new AnimeSystemError(
-          `Can not access local anime external library directory ${space.storage.library.path}`
-        );
+        try {
+          await fs.mkdir(space.storage.library.path, { recursive: true });
+        } catch {
+          throw new AnimeSystemError(
+            `Can not access local anime external library directory ${space.storage.library.path}`
+          );
+        }
       }
     }
-  }
+  };
+
+  // Validate cache storage directory
+  const validateCache = async () => {
+    if (space.storage.cache.fs === LocalFS) {
+      try {
+        await fs.access(space.storage.cache.path, fs.constants.R_OK | fs.constants.W_OK);
+      } catch {
+        try {
+          await fs.mkdir(space.storage.cache.path, { recursive: true });
+        } catch {
+          throw new AnimeSystemError(
+            `Can not access local cache storage directory ${space.storage.cache.path}`
+          );
+        }
+      }
+    }
+  };
+
+  // Validate trash storage directory
+  const validateTrash = async () => {
+    if (space.storage.trash.fs === LocalFS) {
+      try {
+        await fs.access(space.storage.trash.path, fs.constants.R_OK | fs.constants.W_OK);
+      } catch {
+        try {
+          await fs.mkdir(space.storage.trash.path, { recursive: true });
+        } catch {
+          throw new AnimeSystemError(
+            `Can not access local trash storage directory ${space.storage.trash.path}`
+          );
+        }
+      }
+    }
+  };
+
+  await Promise.all([validateAnime(), validateLibrary(), validateCache(), validateTrash()]);
 
   return true;
 }

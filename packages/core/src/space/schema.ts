@@ -6,7 +6,8 @@ import {
   DefaultFilmFormat,
   DefaultEpisodeFormat,
   DefaultCacheDirectory,
-  DefaultStorageDirectory
+  DefaultStorageDirectory,
+  DefaultTrashDirectory
 } from './constant';
 
 export const PluginEntry = z.object({ name: z.string() }).passthrough();
@@ -88,6 +89,9 @@ export const Storage = z
     }
     if (!('cache' in storage)) {
       storage['cache'] = { provider: 'local', directory: DefaultCacheDirectory };
+    }
+    if (!('trash' in storage)) {
+      storage['trash'] = { provider: 'local', directory: DefaultTrashDirectory };
     }
     return storage;
   });

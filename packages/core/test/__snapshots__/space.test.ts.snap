@@ -1,5 +1,99 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Create Space > should work 1`] = `
+{
+  "plans": [
+    "./plans/*.yaml",
+  ],
+  "plugins": [],
+  "preference": {
+    "extension": {
+      "exclude": [],
+      "include": [
+        "mp4",
+        "mkv",
+      ],
+    },
+    "format": {
+      "episode": "[{fansub}] {title} S{season}E{ep}.{extension}",
+      "film": "[{fansub}] {title}.{extension}",
+      "ova": "[{fansub}] {title}.{extension}",
+    },
+    "keyword": {
+      "exclude": [],
+      "order": {
+        "format": [
+          "mp4",
+          "mkv",
+        ],
+        "language": [
+          "简",
+          "繁",
+        ],
+        "resolution": [
+          "1080",
+          "720",
+        ],
+      },
+    },
+  },
+  "root": Path { fs: "node", path: "test/fixtures/temp" },
+  "storage": {
+    "anime": Path { fs: "node", path: "test/fixtures/temp/animes" },
+    "cache": Path { fs: "node", path: "test/fixtures/temp/cache" },
+    "library": Path { fs: "node", path: "test/fixtures/temp/animes" },
+    "trash": Path { fs: "node", path: "test/fixtures/temp/.trash" },
+  },
+}
+`;
+
+exports[`Load Space > should work 1`] = `
+{
+  "plans": [
+    "./plans/*.yaml",
+  ],
+  "plugins": [],
+  "preference": {
+    "extension": {
+      "exclude": [],
+      "include": [
+        "mp4",
+        "mkv",
+      ],
+    },
+    "format": {
+      "episode": "[{fansub}] {title} - S{season}E{ep}.{extension}",
+      "film": "[{fansub}] {title}.{extension}",
+      "ova": "[{fansub}] {title}.{extension}",
+    },
+    "keyword": {
+      "exclude": [],
+      "order": {
+        "format": [
+          "mp4",
+          "mkv",
+        ],
+        "language": [
+          "简",
+          "繁",
+        ],
+        "resolution": [
+          "1080",
+          "720",
+        ],
+      },
+    },
+  },
+  "root": Path { fs: "node", path: "test/fixtures/space" },
+  "storage": {
+    "anime": Path { fs: "node", path: "test/fixtures/space/anime" },
+    "cache": Path { fs: "node", path: "test/fixtures/space/cache" },
+    "library": Path { fs: "node", path: "test/fixtures/space/anime" },
+    "trash": Path { fs: "node", path: "test/fixtures/space/.trash" },
+  },
+}
+`;
+
 exports[`Load Space > should work 2`] = `
 [
   {
@@ -55,6 +149,10 @@ exports[`Load Space > should work 2`] = `
         },
         "season": 2,
         "status": "onair",
+        "storage": {
+          "name": "anime",
+          "root": Path { fs: "node", path: "test/fixtures/space/anime" },
+        },
         "title": "熊熊勇闯异世界 Punch!",
         "translations": {},
         "type": "番剧",
@@ -108,6 +206,10 @@ exports[`Load Space > should work 2`] = `
         },
         "season": 1,
         "status": "onair",
+        "storage": {
+          "name": "anime",
+          "root": Path { fs: "node", path: "test/fixtures/space/anime" },
+        },
         "title": "天国大魔境",
         "translations": {
           "unknown": [
@@ -176,6 +278,10 @@ exports[`Load Space > should work 2`] = `
         },
         "season": 1,
         "status": "onair",
+        "storage": {
+          "name": "anime",
+          "root": Path { fs: "node", path: "test/fixtures/space/anime" },
+        },
         "title": "偶像大师 灰姑娘女孩 U149",
         "translations": {},
         "type": "番剧",
