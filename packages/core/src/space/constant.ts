@@ -2,7 +2,7 @@ export const DefaultConfigFilename = `./anime.yaml`;
 
 export const DefaultStorageDirectory = `./animes`;
 
-export const DefaultCacheDirectory = `./cache`;
+export const DefaultCacheDirectory = `./.cache`;
 
 export const DefaultTrashDirectory = `./.trash`;
 

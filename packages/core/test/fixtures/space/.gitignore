@@ -1,4 +1,5 @@
 temp
 *.mp4
 *.mkv
+.cache
 .trash
