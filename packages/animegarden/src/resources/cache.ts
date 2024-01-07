@@ -120,9 +120,8 @@ export class ResourcesCache {
 
   private async loadAnimeResources(anime: Anime): Promise<AnimeCacheSchema | undefined> {
     try {
-      const root = this.animeRoot.join(anime.relativeDirectory);
-      await root.ensureDir();
-      return JSON.parse(await root.join('resources.json').readText());
+      await anime.cacheDirectory.ensureDir();
+      return JSON.parse(await anime.cacheDirectory.join('resources.json').readText());
     } catch {
       return undefined;
     }
@@ -133,20 +132,17 @@ export class ResourcesCache {
     resp: Awaited<ReturnType<typeof fetchResources>>
   ): Promise<void> {
     try {
-      const root = this.animeRoot.join(anime.relativeDirectory);
-
       const copied = { ...resp, prefer: { fansub: anime.plan.fansub } };
       Reflect.deleteProperty(copied, 'ok');
       Reflect.deleteProperty(copied, 'complete');
 
-      await root.join('resources.json').writeText(JSON.stringify(copied, null, 2));
+      await anime.cacheDirectory.join('resources.json').writeText(JSON.stringify(copied, null, 2));
     } catch {}
   }
 
   public async clearAnimeResources(anime: Anime) {
     try {
-      const root = this.animeRoot.join(anime.relativeDirectory);
-      await root.join('resources.json').remove();
+      await anime.cacheDirectory.join('resources.json').remove();
     } catch {}
   }
 

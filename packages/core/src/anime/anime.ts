@@ -25,6 +25,10 @@ export class Anime {
 
   public readonly libraryDirectory: StoragePath;
 
+  public readonly cacheDirectory: StoragePath;
+
+  public readonly trashDirectory: StoragePath;
+
   public readonly plan: AnimePlan;
 
   public readonly planFile: PlanFile;
@@ -62,6 +66,14 @@ export class Anime {
     this.libraryDirectory = plan.directory
       ? space.storage.library.resolve(plan.directory)
       : space.storage.library.join(dirname);
+
+    this.cacheDirectory = plan.directory
+      ? space.storage.cache.resolve(plan.directory)
+      : space.storage.cache.join(dirname);
+
+    this.trashDirectory = plan.directory
+      ? space.storage.trash.resolve(plan.directory)
+      : space.storage.trash.join(dirname);
   }
 
   public get space(): AnimeSpace {
