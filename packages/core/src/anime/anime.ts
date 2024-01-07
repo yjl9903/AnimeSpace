@@ -23,9 +23,9 @@ const LibraryFilename = 'library.yaml';
 export class Anime {
   public readonly directory: StoragePath;
 
-  public readonly libraryDirectory: StoragePath;
+  public readonly relativeDirectory: string;
 
-  public readonly cacheDirectory: StoragePath;
+  public readonly libraryDirectory: StoragePath;
 
   public readonly trashDirectory: StoragePath;
 
@@ -67,13 +67,11 @@ export class Anime {
       ? space.storage.library.resolve(plan.directory)
       : space.storage.library.join(dirname);
 
-    this.cacheDirectory = plan.directory
-      ? space.storage.cache.resolve(plan.directory)
-      : space.storage.cache.join(dirname);
-
     this.trashDirectory = plan.directory
       ? space.storage.trash.resolve(plan.directory)
       : space.storage.trash.join(dirname);
+
+    this.relativeDirectory = plan.directory ? plan.directory : dirname;
   }
 
   public get space(): AnimeSpace {
