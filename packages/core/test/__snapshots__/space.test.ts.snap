@@ -40,7 +40,7 @@ exports[`Create Space > should work 1`] = `
   "root": Path { fs: "node", path: "test/fixtures/temp" },
   "storage": {
     "anime": Path { fs: "node", path: "test/fixtures/temp/animes" },
-    "cache": Path { fs: "node", path: "test/fixtures/temp/cache" },
+    "cache": Path { fs: "node", path: "test/fixtures/temp/.cache" },
     "library": Path { fs: "node", path: "test/fixtures/temp/animes" },
     "trash": Path { fs: "node", path: "test/fixtures/temp/.trash" },
   },
@@ -87,7 +87,7 @@ exports[`Load Space > should work 1`] = `
   "root": Path { fs: "node", path: "test/fixtures/space" },
   "storage": {
     "anime": Path { fs: "node", path: "test/fixtures/space/anime" },
-    "cache": Path { fs: "node", path: "test/fixtures/space/cache" },
+    "cache": Path { fs: "node", path: "test/fixtures/space/.cache" },
     "library": Path { fs: "node", path: "test/fixtures/space/anime" },
     "trash": Path { fs: "node", path: "test/fixtures/space/.trash" },
   },
