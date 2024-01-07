@@ -178,8 +178,8 @@ importers:
         specifier: ^0.0.33
         version: 0.0.33
       bgmc:
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.7
+        version: 0.0.7
       date-fns:
         specifier: ^3.1.0
         version: 3.1.0
@@ -3633,8 +3633,8 @@ packages:
     engines: {node: '>=12.20.0'}
     dev: false
 
-  /bgmc@0.0.5:
-    resolution: {integrity: sha512-pniFKDQ15H1owm8UNzUrBGss3Nukk2AO+riONkI4/7am2X0ldrxjHEJXsqrsDZ4HG2tdKR6XwZWY8VCm8R5VfA==}
+  /bgmc@0.0.7:
+    resolution: {integrity: sha512-V+8C4Q9LuwVOw17Z0x8A1egZVWeoc/WtTcYVxulB6ysfCPxfX2WcBYvWwA0yt2O/xAyPtDjfO2SUNT/j0DAtvw==}
     engines: {node: '>=v20.8.0'}
     hasBin: true
     dependencies:
