@@ -1,3 +1,4 @@
+import { StoragePath } from '../space';
 import type { Preference } from '../space/schema';
 
 export type PlanStatus = 'onair' | 'finish';
@@ -37,6 +38,15 @@ export interface AnimePlan {
    * This should be relative to the storage directory
    */
   readonly directory?: string;
+
+  /**
+   * The storage file system root
+   */
+  readonly storage: {
+    name: string;
+
+    root: StoragePath;
+  };
 
   readonly type: AnimePlanType;
 

@@ -15,6 +15,7 @@ export const AnimePlanSchema = z
       ])
       .default({}),
     directory: z.string().optional(),
+    storage: z.string().default('anime'),
     type: z.enum(['番剧', '电影', 'OVA']).default('番剧'),
     status: z.enum(['onair', 'finish']).optional(),
     season: z.coerce.number().default(1),

@@ -55,8 +55,8 @@ export class Anime {
     const dirname = plan.title;
 
     this.directory = plan.directory
-      ? space.storage.anime.resolve(plan.directory)
-      : space.storage.anime.join(dirname);
+      ? plan.storage.root.resolve(plan.directory)
+      : plan.storage.root.join(dirname);
 
     this.libraryDirectory = plan.directory
       ? space.storage.library.resolve(plan.directory)
@@ -113,11 +113,8 @@ export class Anime {
         const schema = z
           .object({
             title: z.string().default(this.plan.title).catch(this.plan.title),
-            season:
-              this.plan.season !== undefined
-                ? z.coerce.number().default(this.plan.season).catch(this.plan.season)
-                : z.coerce.number().optional(),
-            date: z.coerce.date().default(this.plan.date).catch(this.plan.date),
+            // Hack: for old data, keep this default
+            storage: z.string().default('anime'),
             videos: z
               .array(
                 z
@@ -138,7 +135,7 @@ export class Anime {
         if (parsed.success) {
           debug(parsed.data);
 
-          const videos = (lib?.videos ?? []).filter(Boolean);
+          const videos: LocalVideo[] = (lib?.videos ?? []).filter(Boolean);
           // Set default naming 'auto'
           for (const video of videos) {
             if (!video.naming) {
@@ -146,10 +143,19 @@ export class Anime {
             }
           }
 
-          return (this._lib = <LocalLibrary>{
+          // TODO: not clear previous storage
+          if (this.plan.storage.name !== parsed.data.storage) {
+            videos.splice(0, videos.length);
+            this._dirty = true;
+            parsed.data.storage = this.plan.storage.name;
+          }
+
+          this._lib = <LocalLibrary>{
             ...parsed.data,
             videos
-          });
+          };
+
+          return this._lib;
         } else {
           debug(parsed.error.issues);
           throw new AnimeSystemError(`解析 ${this.plan.title} 的 ${LibraryFilename} 失败`);
@@ -157,8 +163,7 @@ export class Anime {
       } else {
         const defaultLib: LocalLibrary = {
           title: this.plan.title,
-          season: this.plan.season,
-          date: this.plan.date,
+          storage: this.plan.storage.name,
           videos: []
         };
 
@@ -199,7 +204,7 @@ export class Anime {
   public reformatVideoFilename(video: LocalVideo) {
     if (video.naming === 'auto') {
       const title = this._raw_lib?.title ?? this.plan.rewrite?.title ?? this.plan.title;
-      const date = video.date ?? this._lib?.date ?? this.plan.date;
+      const date = video.date ?? this.plan.date;
 
       const season = this.resolveSeason(video.season);
       const episode = this.resolveEpisode(video.episode, video.fansub);
@@ -220,7 +225,7 @@ export class Anime {
 
   public formatFilename(meta: Partial<FormatOptions>) {
     const title = this._raw_lib?.title ?? this.plan.rewrite?.title ?? this.plan.title;
-    const date = this._lib?.date ?? this.plan.date;
+    const date = this.plan.date;
 
     const season = this.resolveSeason(meta.season);
     const episode = this.resolveEpisode(meta.episode, meta.fansub);
@@ -263,7 +268,7 @@ export class Anime {
   public resolveSeason(season: undefined): undefined;
   public resolveSeason(season: number | undefined): number | undefined;
   public resolveSeason(season: number | undefined): number | undefined {
-    return season ?? this._lib?.season ?? this.plan.season;
+    return season ?? this.plan.season;
   }
 
   // --- mutation ---

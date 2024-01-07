@@ -5,9 +5,7 @@ import type { AnimePlanType } from '../plan';
 export interface LocalLibrary {
   title: string;
 
-  date: Date;
-
-  season?: number;
+  storage: string;
 
   videos: LocalVideo[];
 }

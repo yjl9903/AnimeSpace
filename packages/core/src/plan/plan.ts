@@ -46,20 +46,27 @@ async function loadPlan(space: AnimeSpace): Promise<PlanFile[]> {
           const plan: PlanFile = {
             ...parsed.data,
             preference,
-            onair: parsed.data.onair.map(
-              (o: z.infer<typeof AnimePlanSchema>) =>
-                ({
-                  ...o,
-                  // Inherit plan status
-                  status: o.status ? o.status : parsed.data.status,
-                  // Inherit plan date
-                  date: o.date ? o.date : parsed.data.date,
-                  // Manually resolve keywords
-                  keywords: resolveKeywordsArray(o.title, o.alias, o.translations, o.keywords),
-                  // Inherit preference,
-                  preference: defu(o.preference, preference)
-                }) as AnimePlan
-            )
+            onair: parsed.data.onair.map((o: z.infer<typeof AnimePlanSchema>) => {
+              if (!space.storage[o.storage]) {
+                throw new AnimeSystemError(`Storage ${o.storage} 不存在`);
+              }
+
+              return {
+                ...o,
+                storage: {
+                  name: o.storage,
+                  root: space.storage[o.storage]
+                },
+                // Inherit plan status
+                status: o.status ? o.status : parsed.data.status,
+                // Inherit plan date
+                date: o.date ? o.date : parsed.data.date,
+                // Manually resolve keywords
+                keywords: resolveKeywordsArray(o.title, o.alias, o.translations, o.keywords),
+                // Inherit preference,
+                preference: defu(o.preference, preference)
+              } as AnimePlan;
+            })
           };
 
           // debug(plan);

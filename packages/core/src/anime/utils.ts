@@ -9,13 +9,13 @@ export function stringifyLocalLibrary(lib: LocalLibrary, rawLib?: Partial<LocalL
     // @ts-ignore
     copied.title = undefined;
   }
-  if (rawLib?.date === undefined) {
-    // @ts-ignore
-    copied.date = undefined;
-  }
-  if (rawLib?.season === undefined) {
-    copied.season = undefined;
-  }
+  // if (rawLib?.date === undefined) {
+  //   // @ts-ignore
+  //   copied.date = undefined;
+  // }
+  // if (rawLib?.season === undefined) {
+  //   copied.season = undefined;
+  // }
   if (copied.videos === undefined) {
     copied.videos = [];
   }
