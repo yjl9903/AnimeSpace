@@ -63,6 +63,16 @@ Just run the following simple command.
 anime refresh
 ```
 
+## Related Projects
+
++ [AnimeGarden](https://github.com/yjl9903/AnimeGarden): 動漫花園 3-rd party [mirror site](https://garden.onekuma.cn/) and API endpoint
++ [bgmc](https://github.com/yjl9903/bgmc): Bangumi Data / API Clients
++ [nfo.js](https://github.com/yjl9903/nfo.js): Parse and stringify nfo files
++ [naria2](https://github.com/yjl9903/naria2): Convenient BitTorrent Client based on the aria2 JSON-RPC
++ [BreadFS](https://github.com/yjl9903/BreadFS): Unified File System Abstraction
++ [Breadc](https://github.com/yjl9903/Breadc): Yet another Command Line Application Framework with fully TypeScript support
++ [memofunc](https://github.com/yjl9903/memofunc): Memorize your function call automatically
+
 ## Credits
 
 + **[動漫花園](https://share.dmhy.org/) and all the fansubs**
