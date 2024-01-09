@@ -56,7 +56,7 @@
     "debug": "^4.3.4",
     "defu": "^6.1.4",
     "fs-extra": "^11.2.0",
-    "get-port-please": "^3.1.1",
+    "get-port-please": "^3.1.2",
     "libaria2": "^1.0.95",
     "memofunc": "^0.0.8",
     "naria2": "^0.0.24",
