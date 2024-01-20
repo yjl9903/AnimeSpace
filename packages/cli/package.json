@@ -54,7 +54,7 @@
     "@breadc/color": "^0.9.7",
     "@onekuma/map": "^0.1.10",
     "breadc": "^0.9.7",
-    "date-fns": "^3.2.0",
+    "date-fns": "^3.3.0",
     "debug": "^4.3.4",
     "fs-extra": "^11.2.0",
     "open-editor": "^4.1.1",
