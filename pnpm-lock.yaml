@@ -105,8 +105,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       '@naria2/node':
-        specifier: ^0.0.24
-        version: 0.0.24(debug@4.3.4)(uuid@8.3.2)
+        specifier: ^0.0.25
+        version: 0.0.25(debug@4.3.4)(uuid@8.3.2)
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -144,8 +144,8 @@ importers:
         specifier: ^0.0.8
         version: 0.0.8
       naria2:
-        specifier: ^0.0.24
-        version: 0.0.24(@naria2/node@0.0.24)(uuid@8.3.2)(ws@8.14.2)
+        specifier: ^0.0.25
+        version: 0.0.25(@naria2/node@0.0.25)(uuid@8.3.2)(ws@8.14.2)
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
@@ -2342,23 +2342,23 @@ packages:
     dev: false
     optional: true
 
-  /@naria2/node@0.0.24(debug@4.3.4)(uuid@8.3.2):
-    resolution: {integrity: sha512-bx4pVnNFwCrGaB8EIqDFe/6c41z7m6QfhOFU1n+O8eAN1J9HG5M5PvDoRiqDJDDHM2Rs39UyxGe+Q55CVrxHDQ==}
-    engines: {node: '>=v20.1.0'}
+  /@naria2/node@0.0.25(debug@4.3.4)(uuid@8.3.2):
+    resolution: {integrity: sha512-xtQi1xUv5kgS57SojLuzNygjtYkAL56cfi1XjteVh9lY/WbFyTRUBOyZWh/zAXxBY88B29nAHBWnzmmBp9wrIw==}
+    engines: {node: '>=v18.0.0'}
     requiresBuild: true
     dependencies:
       '@breadc/color': 0.9.7
       '@breadc/death': 0.9.7
-      '@naria2/options': 0.0.24(uuid@8.3.2)(ws@8.14.2)
+      '@naria2/options': 0.0.25(uuid@8.3.2)(ws@8.16.0)
       execa: 8.0.1
       finalhandler: 1.2.0
       http-proxy-middleware: 2.0.6(debug@4.3.4)
-      maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
-      open: 9.1.0
+      maria2: 0.3.2(uuid@8.3.2)(ws@8.16.0)
+      open: 10.0.3
       portfinder: 1.0.32
       serve-static: 1.15.0
-      type-fest: 4.8.2
-      ws: 8.14.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      type-fest: 4.9.0
+      ws: 8.16.0
     optionalDependencies:
       '@naria2/darwin-arm64': 0.1.0-beta.0
       '@naria2/darwin-x64': 0.1.0-beta.0
@@ -2375,12 +2375,23 @@ packages:
       - uuid
     dev: false
 
-  /@naria2/options@0.0.24(uuid@8.3.2)(ws@8.14.2):
-    resolution: {integrity: sha512-8QG+VcoHIfsExDORuiBiw3UYP/eAgcQCRMc33vPSixUiy36cKJWxkUQU7VTXxi0ilF2/DII9Y0wTOi3oxDSqBg==}
-    engines: {node: '>=v20.1.0'}
+  /@naria2/options@0.0.25(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-CPh6z8qzT44noTdTmAJiioZRPhhDFBv+ZmU+UbeabERDt2SO9UsHafb9vCQIhTF4XmqOAnlhuUJXF0fSCfr2VQ==}
+    engines: {node: '>=v18.0.0'}
     dependencies:
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
-      type-fest: 4.8.2
+      type-fest: 4.9.0
+    transitivePeerDependencies:
+      - uuid
+      - ws
+    dev: false
+
+  /@naria2/options@0.0.25(uuid@8.3.2)(ws@8.16.0):
+    resolution: {integrity: sha512-CPh6z8qzT44noTdTmAJiioZRPhhDFBv+ZmU+UbeabERDt2SO9UsHafb9vCQIhTF4XmqOAnlhuUJXF0fSCfr2VQ==}
+    engines: {node: '>=v18.0.0'}
+    dependencies:
+      maria2: 0.3.2(uuid@8.3.2)(ws@8.16.0)
+      type-fest: 4.9.0
     transitivePeerDependencies:
       - uuid
       - ws
@@ -3637,11 +3648,6 @@ packages:
       breadc: 0.9.7
     dev: false
 
-  /big-integer@1.6.51:
-    resolution: {integrity: sha512-GPEid2Y9QU1Exl1rpO9B2IPJGHPSupF5GnVIP0blYvNOMer2bTvSWs1jGOUg04hTmu67nmLsQ9TBo1puaotBHg==}
-    engines: {node: '>=0.6'}
-    dev: false
-
   /binary-extensions@2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
@@ -3760,13 +3766,6 @@ packages:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
     dev: false
 
-  /bplist-parser@0.2.0:
-    resolution: {integrity: sha512-z0M+byMThzQmD9NILRniCUXYsYpjwnlO8N5uCFaCqIOpqRsJCrQL9NK3JsD67CN5a08nF5oIL2bD6loTdHOuKw==}
-    engines: {node: '>= 5.10.0'}
-    dependencies:
-      big-integer: 1.6.51
-    dev: false
-
   /brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
     dependencies:
@@ -3840,11 +3839,11 @@ packages:
       semver: 7.5.4
     dev: true
 
-  /bundle-name@3.0.0:
-    resolution: {integrity: sha512-PKA4BeSvBpQKQ8iPOGCSiell+N8P+Tf1DlwqmYhpe2gAhKPHn8EYOxVT+ShuGmhg8lN8XiSlS80yiExKXrURlw==}
-    engines: {node: '>=12'}
+  /bundle-name@4.1.0:
+    resolution: {integrity: sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q==}
+    engines: {node: '>=18'}
     dependencies:
-      run-applescript: 5.0.0
+      run-applescript: 7.0.0
     dev: false
 
   /byte-length@1.0.2:
@@ -4312,22 +4311,17 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /default-browser-id@3.0.0:
-    resolution: {integrity: sha512-OZ1y3y0SqSICtE8DE4S8YOE9UZOJ8wO16fKWVP5J1Qz42kV9jcnMVFrEE/noXb/ss3Q4pZIH79kxofzyNNtUNA==}
-    engines: {node: '>=12'}
-    dependencies:
-      bplist-parser: 0.2.0
-      untildify: 4.0.0
+  /default-browser-id@5.0.0:
+    resolution: {integrity: sha512-A6p/pu/6fyBcA1TRz/GqWYPViplrftcW2gZC9q79ngNCKAeR/X3gcEdXQHl4KNXV+3wgIJ1CPkJQ3IHM6lcsyA==}
+    engines: {node: '>=18'}
     dev: false
 
-  /default-browser@4.0.0:
-    resolution: {integrity: sha512-wX5pXO1+BrhMkSbROFsyxUm0i/cJEScyNhA4PPxc41ICuv05ZZB/MX28s8aZx6xjmatvebIapF6hLEKEcpneUA==}
-    engines: {node: '>=14.16'}
+  /default-browser@5.2.1:
+    resolution: {integrity: sha512-WY/3TUME0x3KPYdRRxEJJvXRHV4PyPoUsxtZa78lwItwRQRHhd2U9xOscaT/YTf8uCXIAjeJOFBVEh/7FtD8Xg==}
+    engines: {node: '>=18'}
     dependencies:
-      bundle-name: 3.0.0
-      default-browser-id: 3.0.0
-      execa: 7.2.0
-      titleize: 3.0.0
+      bundle-name: 4.1.0
+      default-browser-id: 5.0.0
     dev: false
 
   /default-gateway@6.0.3:
@@ -4692,21 +4686,6 @@ packages:
       onetime: 5.1.2
       signal-exit: 3.0.7
       strip-final-newline: 2.0.0
-
-  /execa@7.2.0:
-    resolution: {integrity: sha512-UduyVP7TLB5IcAQl+OzLyLcS/l32W/GLg+AhHJ+ow40FOk2U3SAllPwR44v4vmdFwIWqpdwxxpQbF1n5ta9seA==}
-    engines: {node: ^14.18.0 || ^16.14.0 || >=18.0.0}
-    dependencies:
-      cross-spawn: 7.0.3
-      get-stream: 6.0.1
-      human-signals: 4.3.1
-      is-stream: 3.0.0
-      merge-stream: 2.0.0
-      npm-run-path: 5.1.0
-      onetime: 6.0.0
-      signal-exit: 3.0.7
-      strip-final-newline: 3.0.0
-    dev: false
 
   /execa@8.0.1:
     resolution: {integrity: sha512-VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==}
@@ -5326,11 +5305,6 @@ packages:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
 
-  /human-signals@4.3.1:
-    resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
-    engines: {node: '>=14.18.0'}
-    dev: false
-
   /human-signals@5.0.0:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
@@ -5617,6 +5591,13 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       is-docker: 2.2.1
+    dev: false
+
+  /is-wsl@3.1.0:
+    resolution: {integrity: sha512-UcVfVfaK4Sc4m7X3dUSoHoozQGBEFeDC+zVo06t98xe8CzHSZZBekNXH+tu0NalHolcJ/QAGqS46Hef7QXBIMw==}
+    engines: {node: '>=16'}
+    dependencies:
+      is-inside-container: 1.0.0
     dev: false
 
   /isarray@1.0.0:
@@ -5924,6 +5905,17 @@ packages:
       ws: 8.14.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
     dev: false
 
+  /maria2@0.3.2(uuid@8.3.2)(ws@8.16.0):
+    resolution: {integrity: sha512-PspS1gxdZeRLBmelwC78dsUxM8bb7pHCairIOzfVAIPrpJw0u0dYAx7X+4Ahm+QE9p7YDZ8TuOGA4ewXcVTvTw==}
+    engines: {node: '>= 14.8.0'}
+    peerDependencies:
+      uuid: '*'
+      ws: '*'
+    dependencies:
+      uuid: 8.3.2
+      ws: 8.16.0
+    dev: false
+
   /mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
     dev: true
@@ -6166,20 +6158,20 @@ packages:
     dev: false
     optional: true
 
-  /naria2@0.0.24(@naria2/node@0.0.24)(uuid@8.3.2)(ws@8.14.2):
-    resolution: {integrity: sha512-76HJZXXW66BsYVLDEwW+M5fKP/EJzVIS3GhuFX4opnQxrPKNGsjCf/9gSMXgjCUJ3/YXW1Ceg0XfG4Vts8lp2Q==}
-    engines: {node: '>=v20.1.0'}
+  /naria2@0.0.25(@naria2/node@0.0.25)(uuid@8.3.2)(ws@8.14.2):
+    resolution: {integrity: sha512-VkowqttOmD/1B7XcEvaR+zsXbmZ3vtD6UmFLDyDtRJjsJQbBdbEN2tsj4tgvhTr7HcOJD4ffew+w2gxoGx4qaA==}
+    engines: {node: '>=v18.0.0'}
     peerDependencies:
-      '@naria2/node': 0.0.24
+      '@naria2/node': 0.0.25
     peerDependenciesMeta:
       '@naria2/node':
         optional: true
     dependencies:
-      '@naria2/node': 0.0.24(debug@4.3.4)(uuid@8.3.2)
-      '@naria2/options': 0.0.24(uuid@8.3.2)(ws@8.14.2)
+      '@naria2/node': 0.0.25(debug@4.3.4)(uuid@8.3.2)
+      '@naria2/options': 0.0.25(uuid@8.3.2)(ws@8.14.2)
       maria2: 0.3.2(uuid@8.3.2)(ws@8.14.2)
       mitt: 3.0.1
-      type-fest: 4.8.2
+      type-fest: 4.9.0
     transitivePeerDependencies:
       - uuid
       - ws
@@ -6351,22 +6343,22 @@ packages:
       open: 8.4.2
     dev: false
 
+  /open@10.0.3:
+    resolution: {integrity: sha512-dtbI5oW7987hwC9qjJTyABldTaa19SuyJse1QboWv3b0qCcrrLNVDqBx1XgELAjh9QTVQaP/C5b1nhQebd1H2A==}
+    engines: {node: '>=18'}
+    dependencies:
+      default-browser: 5.2.1
+      define-lazy-prop: 3.0.0
+      is-inside-container: 1.0.0
+      is-wsl: 3.1.0
+    dev: false
+
   /open@8.4.2:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
     dependencies:
       define-lazy-prop: 2.0.0
       is-docker: 2.2.1
-      is-wsl: 2.2.0
-    dev: false
-
-  /open@9.1.0:
-    resolution: {integrity: sha512-OS+QTnw1/4vrf+9hh1jc1jnYjzSG4ttTBB8UxOwAnInG3Uo4ssetzC1ihqaIHjLJnA5GGlRl6QlZXOTQhRBUvg==}
-    engines: {node: '>=14.16'}
-    dependencies:
-      default-browser: 4.0.0
-      define-lazy-prop: 3.0.0
-      is-inside-container: 1.0.0
       is-wsl: 2.2.0
     dev: false
 
@@ -6938,11 +6930,9 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /run-applescript@5.0.0:
-    resolution: {integrity: sha512-XcT5rBksx1QdIhlFOCtgZkB99ZEouFZ1E2Kc2LHqNW13U3/74YGdkQRmThTwxy4QIyookibDKYZOPqX//6BlAg==}
-    engines: {node: '>=12'}
-    dependencies:
-      execa: 5.1.1
+  /run-applescript@7.0.0:
+    resolution: {integrity: sha512-9by4Ij99JUr/MCFBUkDKLWK3G9HVXmabKz9U5MlIAIuvuzkiOicRYs8XJLxX+xahD+mLiiCYDqF9dKAgtzKP1A==}
+    engines: {node: '>=18'}
     dev: false
 
   /run-parallel-limit@1.1.0:
@@ -7461,11 +7451,6 @@ packages:
     engines: {node: '>=14.0.0'}
     dev: true
 
-  /titleize@3.0.0:
-    resolution: {integrity: sha512-KxVu8EYHDPBdUYdKZdKtU2aj2XfEx9AfjXxE/Aj0vT06w2icA09Vus1rh6eSu1y01akYg6BjIK/hxyLJINoMLQ==}
-    engines: {node: '>=12'}
-    dev: false
-
   /to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
@@ -7600,8 +7585,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: false
 
-  /type-fest@4.8.2:
-    resolution: {integrity: sha512-mcvrCjixA5166hSrUoJgGb9gBQN4loMYyj9zxuMs/66ibHNEFd5JXMw37YVDx58L4/QID9jIzdTBB4mDwDJ6KQ==}
+  /type-fest@4.9.0:
+    resolution: {integrity: sha512-KS/6lh/ynPGiHD/LnAobrEFq3Ad4pBzOlJ1wAnJx9N4EYoqFhMfLIBjUT2UEx4wg5ZE+cC1ob6DCSpppVo+rtg==}
     engines: {node: '>=16'}
     dev: false
 
@@ -7872,11 +7857,6 @@ packages:
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.5.0
     dev: true
-
-  /untildify@4.0.0:
-    resolution: {integrity: sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==}
-    engines: {node: '>=8'}
-    dev: false
 
   /untyped@1.4.0:
     resolution: {integrity: sha512-Egkr/s4zcMTEuulcIb7dgURS6QpN7DyqQYdf+jBtiaJvQ+eRsrtWUoX84SbvQWuLkXsOjM+8sJC9u6KoMK/U7Q==}
@@ -8544,6 +8524,19 @@ packages:
     dependencies:
       bufferutil: 4.0.7
       utf-8-validate: 5.0.10
+    dev: false
+
+  /ws@8.16.0:
+    resolution: {integrity: sha512-HS0c//TP7Ina87TfiPUz1rQzMhHrl/SG2guqRcTOIUYD2q8uhUdNHZYJUaQ8aTGPzCh+c6oawMKW35nFl1dxyQ==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
     dev: false
 
   /xdg-basedir@4.0.0:
