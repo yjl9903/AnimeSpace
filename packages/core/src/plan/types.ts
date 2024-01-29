@@ -82,7 +82,7 @@ export interface AnimePlan {
 }
 
 export interface KeywordsParams {
-  readonly include: string[][];
+  readonly include: string[];
 
   readonly exclude: string[];
 }

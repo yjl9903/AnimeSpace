@@ -106,26 +106,24 @@ function resolveKeywordsArray(
   if (keywords !== undefined && keywords !== null) {
     if (typeof keywords === 'string') {
       if (!keywords.startsWith('!')) {
-        return { include: [titles, [keywords]], exclude: [] };
+        return { include: [...titles, keywords], exclude: [] };
       } else {
-        return { include: [titles], exclude: [keywords.slice(1)] };
+        return { include: titles, exclude: [keywords.slice(1)] };
       }
     } else if (Array.isArray(keywords)) {
-      const include: string[][] = [titles];
+      const include: string[] = [];
       const exclude: string[] = [];
       for (const keyword of keywords) {
         if (typeof keyword === 'string') {
           if (!keyword.startsWith('!')) {
-            include.push([keyword]);
+            include.push(keyword);
           } else {
             exclude.push(keyword.slice(1));
           }
-        } else if (Array.isArray(keyword)) {
-          include.push(keyword);
         }
       }
       return { include, exclude };
     }
   }
-  return { include: [titles], exclude: [] };
+  return { include: titles, exclude: [] };
 }

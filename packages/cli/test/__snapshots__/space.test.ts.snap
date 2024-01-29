@@ -17,9 +17,7 @@ exports[`system > should load 1`] = `
         "keywords": {
           "exclude": [],
           "include": [
-            [
-              "熊熊勇闯异世界 Punch!",
-            ],
+            "熊熊勇闯异世界 Punch!",
           ],
         },
         "preference": {
@@ -73,10 +71,8 @@ exports[`system > should load 1`] = `
         "keywords": {
           "exclude": [],
           "include": [
-            [
-              "天国大魔境",
-              "Tengoku Daimakyou",
-            ],
+            "天国大魔境",
+            "Tengoku Daimakyou",
           ],
         },
         "preference": {
@@ -136,19 +132,7 @@ exports[`system > should load 1`] = `
             "闪耀色彩",
           ],
           "include": [
-            [
-              "偶像大师 灰姑娘女孩 U149",
-            ],
-            [
-              "偶像大师",
-              "iDOLM@STER",
-            ],
-            [
-              "灰姑娘女孩",
-            ],
-            [
-              "U149",
-            ],
+            "偶像大师 灰姑娘女孩 U149",
           ],
         },
         "preference": {

@@ -75,6 +75,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
 
           const resource = await fetchResourceDetail(
             ufetch,
+            'dmhy',
             video.source.magnet.split('/').at(-1)!
           );
 

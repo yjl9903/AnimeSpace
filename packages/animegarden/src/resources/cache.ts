@@ -162,14 +162,11 @@ export class ResourcesCache {
           return false;
         }
 
-        const stringifyArray = (include: string[][]) => {
-          return include.map((inc) => `[${inc.map(normalizeTitle).join(',')}]`).join(',');
-        };
         const stringify = (keys?: string[]) => (keys ?? []).join(',');
 
         if (
           !cache.filter.include ||
-          stringifyArray(cache.filter.include) !== stringifyArray(anime.plan.keywords.include)
+          stringify(cache.filter.include) !== stringify(anime.plan.keywords.include)
         ) {
           return false;
         }

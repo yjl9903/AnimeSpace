@@ -16,27 +16,21 @@ export function formatAnimeGardenSearchURL(anime: Anime) {
 }
 
 export function printKeywords(anime: Anime, logger: ConsolaInstance) {
-  if (anime.plan.keywords.include.length === 1) {
-    const first = anime.plan.keywords.include[0];
-    const sum = first.reduce((acc, t) => acc + width(t), 0);
-    if (sum > 50) {
-      logger.log(dim('Include keywords | ') + underline(overflowText(first[0], 50)));
-      for (const t of first.slice(1)) {
-        logger.log(`                 ${dim('|')} ${underline(overflowText(t, 50))}`);
-      }
-    } else {
-      logger.log(
-        `${dim('Include keywords')}   ${first
-          .map((t) => underline(overflowText(t, 50)))
-          .join(dim(' | '))}`
-      );
+  const include = anime.plan.keywords.include;
+  const sum = include.reduce((acc, t) => acc + width(t), 0);
+  if (sum > 50) {
+    logger.log(dim('Include keywords | ') + underline(overflowText(include[0], 50)));
+    for (const t of include.slice(1)) {
+      logger.log(`                 ${dim('|')} ${underline(overflowText(t, 50))}`);
     }
   } else {
-    logger.log(dim(`Include keywords:`));
-    for (const include of anime.plan.keywords.include) {
-      logger.log(`  ${DOT} ${include.map((t) => underline(overflowText(t, 50))).join(' | ')}`);
-    }
+    logger.log(
+      `${dim('Include keywords')}   ${include
+        .map((t) => underline(overflowText(t, 50)))
+        .join(dim(' | '))}`
+    );
   }
+
   if (anime.plan.keywords.exclude.length > 0) {
     logger.log(
       `${dim(`Exclude keywords`)}   [ ${anime.plan.keywords.exclude

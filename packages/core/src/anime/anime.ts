@@ -92,9 +92,9 @@ export class Anime {
         return false;
       }
     }
-    for (const list of this.plan.keywords.include) {
-      if (list.every((keyword) => !text.includes(keyword))) {
-        return false;
+    for (const key of this.plan.keywords.include) {
+      if (text.includes(key)) {
+        return true;
       }
     }
     return true;
