@@ -251,8 +251,8 @@ importers:
         specifier: ^0.38.1
         version: 0.38.1
       bangumi-data:
-        specifier: ^0.3.130
-        version: 0.3.130
+        specifier: ^0.3.131
+        version: 0.3.131
 
   packages/core:
     dependencies:
@@ -3744,8 +3744,8 @@ packages:
   /balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  /bangumi-data@0.3.130:
-    resolution: {integrity: sha512-oTpuOOdM4i3EOWir86nrF7oSOfZt8RLq0IJE7C/aoOhC51kuxmVcbvHXcCRKcyteGnkkSAuX8stOq8xjGaI5IA==}
+  /bangumi-data@0.3.131:
+    resolution: {integrity: sha512-9l7Aqte7agMp9lRf+gQgfgcdVU1jZtPG3McFcipWF2Ok00brL3B0VhNbmX/28DtiidPuQKeN5JYHVgaN0ZjXFg==}
     dev: true
 
   /base-64@1.0.0:
