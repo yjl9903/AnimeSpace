@@ -111,8 +111,8 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.1.1
+        version: 0.1.1
       anitomy:
         specifier: ^0.0.34
         version: 0.0.34
@@ -175,8 +175,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       animegarden:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.1.1
+        version: 0.1.1
       bgmc:
         specifier: ^0.0.10
         version: 0.0.10
@@ -3594,8 +3594,8 @@ packages:
       '@algolia/transporter': 4.19.1
     dev: true
 
-  /animegarden@0.1.0:
-    resolution: {integrity: sha512-+sDh0OFk3VdjlLiQr4rb1zynnT42X6b1WZ7hBiQ0mLoiJXRwMBUxpGDEUZsNw5RSfhBu7PuYaJ1f2OcfelHF7w==}
+  /animegarden@0.1.1:
+    resolution: {integrity: sha512-nhLlnSNKIWWpNA9S8zqO2fpuY5dOqJuXHIvK4zMhSf5js5tnYUyMugQVT+MJBK+NrPr3j78XVPZT+Qaoh+41nQ==}
     engines: {node: '>=v18.16.0'}
     dependencies:
       simptrad: 0.1.0

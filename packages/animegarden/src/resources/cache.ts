@@ -89,6 +89,9 @@ export class ResourcesCache {
       retry: 10,
       count: -1,
       signal: ac.signal,
+      headers: {
+        'Cache-Control': 'no-store'
+      },
       progress(delta) {
         if (invalid) {
           ac.abort();
