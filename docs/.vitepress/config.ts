@@ -19,64 +19,90 @@ export default defineConfig({
       message: 'Released under the AGPL-3.0 License.',
       copyright: 'Copyright © 2023-PRESENT XLor'
     },
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/yjl9903/AnimeSpace' }
-    ],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/yjl9903/AnimeSpace' }],
     algolia: {
       appId: 'FGCMJD7ZM9',
       apiKey: 'dad73f46ec1ba55810109fb2fa7a472b',
       indexName: 'docs'
     },
     nav: [
-      { text: 'AnimeSpace', link: '/admin/' },
+      { text: 'AnimeSpace', link: '/animespace/' },
       { text: 'AnimeGarden', link: '/animegarden/' },
+      {
+        text: '生态系统',
+        items: [
+          { text: 'AnimeSpace', link: '/animespace/' },
+          { text: 'AnimeGarden', link: '/animegarden/' },
+          { text: 'Anitomy', link: '/anitomy/' },
+          { text: 'bgmd', link: '/bgmd/' },
+          { text: 'bgmc', link: '/bgmc/' },
+          { text: 'tmdbc', link: '/tmdbc/' },
+          { text: 'nfo.js', link: '/nfo.js/' }
+        ]
+      }
     ],
     sidebar: {
       '/': [
         {
-          text: 'AnimeSpace',
-          items: [{ text: '介绍', link: '/intro/' }]
-        },
-        {
-          text: '部署',
+          text: '开始',
           items: [
             {
+              text: 'AnimeSpace',
+              link: '/animespace/'
+            },
+            {
               text: '开始',
-              link: '/deploy/'
+              link: '/animespace/installation/'
             },
             {
               text: '安装 CLI',
-              link: '/deploy/admin'
+              link: '/animespace/installation/admin'
             },
             {
               text: '集成媒体库软件',
-              link: '/deploy/jellyfin'
+              link: '/animespace/installation/jellyfin'
             }
           ]
         },
         {
-          text: '管理',
+          text: '配置',
           items: [
             {
               text: '配置',
-              link: '/admin/'
+              link: '/animespace/config/'
             },
             {
               text: '放映计划',
-              link: '/admin/plan'
-            },
+              link: '/animespace/config/plan'
+            }
+          ]
+        },
+        {
+          text: '命令行程序',
+          items: [
             {
               text: '使用 CLI',
-              link: '/admin/usage'
+              link: '/animespace/cli/'
             }
+          ]
+        },
+        {
+          text: '生态系统',
+          items: [
+            { text: 'AnimeGarden', link: '/animegarden/' },
+            { text: 'Anitomy', link: '/anitomy/' },
+            { text: 'bgmd', link: '/bgmd/' },
+            { text: 'bgmc', link: '/bgmc/' },
+            { text: 'tmdbc', link: '/tmdbc/' },
+            { text: 'nfo.js', link: '/nfo.js/' }
           ]
         }
       ],
       '/animegarden/': [
-        {text: 'AnimeGarden', link: '/animegarden/'},
-        {text: '高级搜索', link: '/animegarden/search'},
-        {text: '收藏夹管理', link: '/animegarden/collection'},
-        {text: 'RSS 订阅', link: '/animegarden/rss'},
+        { text: 'AnimeGarden', link: '/animegarden/' },
+        { text: '高级搜索', link: '/animegarden/search' },
+        { text: '收藏夹管理', link: '/animegarden/collection' },
+        { text: 'RSS 订阅', link: '/animegarden/rss' }
       ]
     }
   }

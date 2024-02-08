@@ -15,7 +15,7 @@ hero:
   actions:
     - theme: brand
       text: 开始
-      link: /intro/
+      link: /animespace/
     - theme: alt
       text: Anime Garden
       link: /animegarden/
