@@ -51,16 +51,8 @@ export default defineConfig({
               link: '/animespace/'
             },
             {
-              text: '开始',
-              link: '/animespace/installation/'
-            },
-            {
               text: '安装 CLI',
-              link: '/animespace/installation/admin'
-            },
-            {
-              text: '集成媒体库软件',
-              link: '/animespace/installation/jellyfin'
+              link: '/animespace/installation/'
             }
           ]
         },
@@ -68,12 +60,16 @@ export default defineConfig({
           text: '配置',
           items: [
             {
-              text: '配置',
+              text: '配置根目录',
               link: '/animespace/config/'
             },
             {
               text: '放映计划',
               link: '/animespace/config/plan'
+            },
+            {
+              text: '集成媒体库软件',
+              link: '/animespace/config/jellyfin'
             }
           ]
         },

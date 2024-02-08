@@ -8,9 +8,15 @@ AnimeSpace 默认使用 `~/.animespace/` （或者 `ANIMESPACE_ROOT` 环境变�
 anime space
 ```
 
-> 如果我们共享相似喜好，你可以直接使用我的[配置目录](https://github.com/yjl9903/.animespace)。
->
-> 注意: 克隆仓库后修改动画的存储位置。
+## 直接使用现成的配置目录
+
+如果我们共享相似喜好，你可以直接使用我的[配置目录](https://github.com/yjl9903/.animespace)。
+
+```bash
+gh repo clone yjl9903/.animespace ~/.animespace
+```
+
+**注意**: 克隆仓库后，记得修改动画的存储位置。
 
 ## 全局配置目录
 
@@ -24,7 +30,7 @@ anime space
   │      ├─ 相合之物 - S01E01.mp4
   │      ├─ 相合之物 - S01E02.mp4
   │      └─ 相合之物 - S01E03.mp4
-  └── anime.yaml                # AnimeSpace config file
+  └── anime.yaml                 # AnimeSpace config file
 ```
 
 ## 根配置文件
@@ -76,4 +82,4 @@ plugins:
 
 推荐在工作目录下创建一个 `plans` 文件夹，用于储存所有的放映计划配置文件。
 
-详细配置见 [放映计划](./plan.md)。
+详细配置见 [放映计划](/animespace/config/plan)。
