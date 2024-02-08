@@ -28,9 +28,8 @@ export default defineConfig({
       indexName: 'docs'
     },
     nav: [
-      { text: '部署', link: '/deploy/' },
-      { text: '管理', link: '/admin/' },
-      { text: '体验', link: 'https://github.com/yjl9903/AnimeSpace' }
+      { text: 'AnimeSpace', link: '/admin/' },
+      { text: 'AnimeGarden', link: '/animegarden/' },
     ],
     sidebar: {
       '/': [
@@ -72,6 +71,12 @@ export default defineConfig({
             }
           ]
         }
+      ],
+      '/animegarden/': [
+        {text: 'AnimeGarden', link: '/animegarden/'},
+        {text: '高级搜索', link: '/animegarden/search'},
+        {text: '收藏夹管理', link: '/animegarden/collection'},
+        {text: 'RSS 订阅', link: '/animegarden/rss'},
       ]
     }
   }
