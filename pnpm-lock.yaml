@@ -72,8 +72,8 @@ importers:
         specifier: ^0.58.5
         version: 0.58.5
       '@vitejs/plugin-vue':
-        specifier: ^5.0.3
-        version: 5.0.3(vite@5.1.1)(vue@3.4.15)
+        specifier: ^5.0.4
+        version: 5.0.4(vite@5.1.1)(vue@3.4.15)
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -3264,8 +3264,8 @@ packages:
     hasBin: true
     dev: true
 
-  /@vitejs/plugin-vue@5.0.3(vite@5.1.1)(vue@3.4.15):
-    resolution: {integrity: sha512-b8S5dVS40rgHdDrw+DQi/xOM9ed+kSRZzfm1T74bMmBDCd8XO87NKlFYInzCtwvtWwXZvo1QxE2OSspTATWrbA==}
+  /@vitejs/plugin-vue@5.0.4(vite@5.1.1)(vue@3.4.15):
+    resolution: {integrity: sha512-WS3hevEszI6CEVEx28F8RjTX97k3KsrcY6kvTg7+Whm5y3oYvcqzVeGCU3hxSAn4uY2CLCkeokkGKpoctccilQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
@@ -8093,7 +8093,7 @@ packages:
       '@shikijs/core': 1.0.0-rc.0
       '@shikijs/transformers': 1.0.0-rc.0
       '@types/markdown-it': 13.0.7
-      '@vitejs/plugin-vue': 5.0.3(vite@5.1.1)(vue@3.4.15)
+      '@vitejs/plugin-vue': 5.0.4(vite@5.1.1)(vue@3.4.15)
       '@vue/devtools-api': 7.0.14
       '@vueuse/core': 10.7.2(vue@3.4.15)
       '@vueuse/integrations': 10.7.2(focus-trap@7.5.4)(vue@3.4.15)
