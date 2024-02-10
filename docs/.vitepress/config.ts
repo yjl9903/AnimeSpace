@@ -20,11 +20,14 @@ export default defineConfig({
       copyright: 'Copyright © 2023-PRESENT XLor'
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/yjl9903/AnimeSpace' }],
-    algolia: {
-      appId: 'FGCMJD7ZM9',
-      apiKey: 'dad73f46ec1ba55810109fb2fa7a472b',
-      indexName: 'docs'
+    search: {
+      provider: 'local'
     },
+    // algolia: {
+    //   appId: 'FGCMJD7ZM9',
+    //   apiKey: 'dad73f46ec1ba55810109fb2fa7a472b',
+    //   indexName: 'docs'
+    // },
     nav: [
       { text: 'AnimeSpace', link: '/animespace/' },
       { text: 'AnimeGarden', link: '/animegarden/' },
