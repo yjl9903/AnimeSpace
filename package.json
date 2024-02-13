@@ -31,7 +31,7 @@
     "vitepress": "1.0.0-rc.42",
     "vitest": "^1.2.2"
   },
-  "packageManager": "pnpm@8.15.1",
+  "packageManager": "pnpm@8.15.2",
   "engines": {
     "node": ">=v20.8.0"
   },
