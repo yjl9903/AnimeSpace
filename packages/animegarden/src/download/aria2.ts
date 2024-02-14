@@ -152,9 +152,10 @@ export class Aria2Client extends DownloadClient {
           if (task.state === 'error') {
             if (
               status.errorMessage &&
-              /File (.*) exists, but a control file\(\*.aria2\) does not exist/.test(
+              (/File (.*) exists, but a control file\(\*.aria2\) does not exist/.test(
                 status.errorMessage
-              )
+              ) ||
+                /文件 (.*) 已存在，但是控制文件 \(\*.aria2\) 不存在/.test(status.errorMessage))
             ) {
               // Hack: handle file exists
               const files = status.files.map((f) => f.path);
