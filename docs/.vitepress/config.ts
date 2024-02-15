@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress';
 
+const APP_HOST = `https://animespace.onekuma.cn/`;
+
 export default defineConfig({
   lang: 'zh-CN',
   title: 'AnimeSpace',
@@ -9,6 +11,9 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }]
   ],
   lastUpdated: true,
+  sitemap: {
+    hostname: APP_HOST
+  },
   themeConfig: {
     logo: '/favicon.svg',
     editLink: {
