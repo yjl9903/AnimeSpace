@@ -83,6 +83,9 @@ importers:
       unocss:
         specifier: ^0.58.5
         version: 0.58.5(postcss@8.4.35)(rollup@2.79.1)(vite@5.1.4)
+      unplugin-analytics:
+        specifier: ^0.0.7
+        version: 0.0.7(rollup@2.79.1)(vite@5.1.4)
       unplugin-vue-components:
         specifier: ^0.26.0
         version: 0.26.0(rollup@2.79.1)(vue@3.4.19)
@@ -3249,6 +3252,11 @@ packages:
       vite: 5.1.4(@types/node@20.11.20)
     transitivePeerDependencies:
       - rollup
+    dev: true
+
+  /@unplugin-analytics/core@0.0.7:
+    resolution: {integrity: sha512-2KLcBprOJnlbK0P9tXjuxmjcVyMPJmKWtlJqiZR6cH18Tlpr7IP8diUPCMC9uMeiNihorgiIPjORZ4tqoaEyRg==}
+    engines: {node: '>=v20.10.0'}
     dev: true
 
   /@vercel/ncc@0.38.1:
@@ -7043,6 +7051,10 @@ packages:
     resolution: {integrity: sha512-sHtm/SsIK9BUBI3EFT/Gnp9VoKfY6QLvlkvAE6YK7454IF8FSgJEAnJpVdSC7K5/pjI5NfxhzBLW2JAfYA/shQ==}
     dev: true
 
+  /scule@1.3.0:
+    resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
+    dev: true
+
   /search-insights@2.7.0:
     resolution: {integrity: sha512-GLbVaGgzYEKMvuJbHRhLi1qoBFnjXZGZ6l4LxOYPCp4lI2jDRB3jPU9/XNhMwv6kvnA9slTreq6pvK+b3o3aqg==}
     engines: {node: '>=8.16.0'}
@@ -7867,6 +7879,38 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
+  /unplugin-analytics@0.0.7(rollup@2.79.1)(vite@5.1.4):
+    resolution: {integrity: sha512-aExD6G7sjjVH5mPGvAZzlHEoBXzjrF7QO2IYhKWu5gKgCNTizoZCsMQanHBSIVn9oUnlsLzOqlVQhQm7WsPvEA==}
+    engines: {node: '>=v20.10.0'}
+    peerDependencies:
+      '@nuxt/kit': ^3
+      '@nuxt/schema': ^3
+      esbuild: '*'
+      rollup: ^2 || ^3 || ^4
+      vite: '>=3.2.7'
+      webpack: ^4 || ^5
+    peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      '@nuxt/schema':
+        optional: true
+      esbuild:
+        optional: true
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      '@unplugin-analytics/core': 0.0.7
+      defu: 6.1.4
+      rollup: 2.79.1
+      scule: 1.3.0
+      unplugin: 1.7.1
+      vite: 5.1.4(@types/node@20.11.20)
+    dev: true
+
   /unplugin-vue-components@0.26.0(rollup@2.79.1)(vue@3.4.19):
     resolution: {integrity: sha512-s7IdPDlnOvPamjunVxw8kNgKNK8A5KM1YpK5j/p97jEKTjlPNrA0nZBiSfAKKlK1gWZuyWXlKL5dk3EDw874LQ==}
     engines: {node: '>=14'}
@@ -7903,6 +7947,15 @@ packages:
       chokidar: 3.5.3
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.5.0
+    dev: true
+
+  /unplugin@1.7.1:
+    resolution: {integrity: sha512-JqzORDAPxxs8ErLV4x+LL7bk5pk3YlcWqpSNsIkAZj972KzFZLClc/ekppahKkOczGkwIG6ElFgdOgOlK4tXZw==}
+    dependencies:
+      acorn: 8.11.3
+      chokidar: 3.5.3
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.6.1
     dev: true
 
   /untyped@1.4.0:
@@ -8301,6 +8354,10 @@ packages:
     resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
     dev: true
 
+  /webpack-virtual-modules@0.6.1:
+    resolution: {integrity: sha512-poXpCylU7ExuvZK8z+On3kX+S8o/2dQ/SVYueKA0D4WEMXROXgY8Ez50/bQEUmvoSMMrWcrJqCHuhAbsiwg7Dg==}
+    dev: true
+
   /webtorrent@2.1.36:
     resolution: {integrity: sha512-bjJqzF8+Kjl6Y9Lz5la6jHX1PO1ZPEDAqhq/r7KJvxhCVbourhLx4cJoaIgetvRvj4Kq6lvQzXutlF3eV/q8JQ==}
     engines: {node: '>=14'}
@@ -8473,7 +8530,6 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
-    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0

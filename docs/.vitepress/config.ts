@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress';
 
+import { injectScriptTags } from 'unplugin-analytics/vitepress';
+
 const APP_HOST = `https://animespace.onekuma.cn/`;
 
 export default defineConfig({
@@ -13,6 +15,14 @@ export default defineConfig({
   lastUpdated: true,
   sitemap: {
     hostname: APP_HOST
+  },
+  async transformHead(context) {
+    injectScriptTags({
+      umami: {
+        src: `umami.onekuma.cn`,
+        id: `49015651-4aac-417b-9cc8-9bbf1a88b1f3`
+      }
+    })(context);
   },
   themeConfig: {
     logo: '/favicon.svg',
