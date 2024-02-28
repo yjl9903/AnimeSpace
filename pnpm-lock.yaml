@@ -123,8 +123,8 @@ importers:
         specifier: ^0.0.34
         version: 0.0.34
       breadfs:
-        specifier: ^0.1.7
-        version: 0.1.7
+        specifier: ^0.1.8
+        version: 0.1.8
       cli-progress:
         specifier: ^3.12.0
         version: 3.12.0
@@ -269,14 +269,14 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       '@breadfs/webdav':
-        specifier: ^0.1.7
-        version: 0.1.7
+        specifier: ^0.1.8
+        version: 0.1.8
       anitomy:
         specifier: ^0.0.34
         version: 0.0.34
       breadfs:
-        specifier: ^0.1.7
-        version: 0.1.7
+        specifier: ^0.1.8
+        version: 0.1.8
       consola:
         specifier: ^3.1.0
         version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
@@ -336,8 +336,8 @@ importers:
         specifier: ^0.0.34
         version: 0.0.34
       breadfs:
-        specifier: ^0.1.7
-        version: 0.1.7
+        specifier: ^0.1.8
+        version: 0.1.8
       memofunc:
         specifier: ^0.0.8
         version: 0.0.8
@@ -1844,32 +1844,32 @@ packages:
     resolution: {integrity: sha512-eIWHb5Hrnd5j/RLSgbY1mtRPECMSjRbqlxZmlG+mgNi0h0YNieaS86EYsIHxnPT+J682N/OE7LoHSVDTRmp6jw==}
     dev: false
 
-  /@breadfs/core@0.1.7:
-    resolution: {integrity: sha512-HUFuPF4OulGxt4LcIfUvqFWLfnYACExwMZQk2q04E0m1ueVv5qludi0/6YdjYA0d1ZvdcOXzgOScW52fNM+ZrQ==}
+  /@breadfs/core@0.1.8:
+    resolution: {integrity: sha512-AP9y5vzW1DmotwDk8zaZxpEM2wWhodJcOm9xAi2WgSjoAwl29TYniSVzizdEClsyEor5dil4ycFjm7OawR1xmg==}
     engines: {node: '>=v20.6.1'}
     dependencies:
       pathe: 1.1.2
     dev: false
 
-  /@breadfs/node@0.1.7:
-    resolution: {integrity: sha512-KfMJm+Wf3aXQ8iWlN1ncOqoGPajck9fqSmmrlgW2pdv9GvdLVBWperJFEqnt+fCD50ASl0lkyxZoIr6OyKlqrg==}
+  /@breadfs/node@0.1.8:
+    resolution: {integrity: sha512-iZUAnDvTA70fLcb6tkOvRx9t4926XxWOYD60Fc3eEtfeICQV7t/4KeymAjB4irtUJ5UhAOUGk9BEv6E+oel7lg==}
     engines: {node: '>=v20.6.1'}
     dependencies:
-      '@breadfs/core': 0.1.7
+      '@breadfs/core': 0.1.8
       fs-extra: 11.2.0
       pathe: 1.1.2
     dev: false
 
-  /@breadfs/webdav@0.1.7:
-    resolution: {integrity: sha512-My40obqlMFQ2+ieNPRN0kRRMq5tLhHJwfVATl7tR4l+E9qAkVb7MP80vswp5bLzcR7PCh0S2+efibKi7jkECWA==}
+  /@breadfs/webdav@0.1.8:
+    resolution: {integrity: sha512-hNDHwHsH58r9QV3BhSAPswXFG05s7I9JA3UZ4F9TTZt5ui/8pL/H3Yj+YceRCU1qkAlfRf7RjNB78cNrTblN9A==}
     engines: {node: '>=v20.6.1'}
     dependencies:
-      '@breadfs/core': 0.1.7
-      webdav: 5.3.1
+      '@breadfs/core': 0.1.8
+      webdav: 5.4.0
     dev: false
 
-  /@buttercup/fetch@0.1.2:
-    resolution: {integrity: sha512-mDBtsysQ0Gnrp4FamlRJGpu7HUHwbyLC4uUav1I7QAqThFAa/4d1cdZCxrV5gKvh6zO1fu95bILNJi4Y2hALhQ==}
+  /@buttercup/fetch@0.2.1:
+    resolution: {integrity: sha512-sCgECOx8wiqY8NN1xN22BqqKzXYIG2AicNLlakOAI4f0WgyLVUbAigMf8CZhBtJxdudTcB1gD5lciqi44jwJvg==}
     optionalDependencies:
       node-fetch: 3.3.2
     dev: false
@@ -3938,14 +3938,14 @@ packages:
     dependencies:
       '@breadc/color': 0.9.7
 
-  /breadfs@0.1.7:
-    resolution: {integrity: sha512-jtRG08b6Ip/izTPCGoXlCrV/+9M0ZefS27bhbZdG560jWOUx8LO2gijVwjzwBe7i3zcXJ2bhQgCKlv2oaOB6vQ==}
+  /breadfs@0.1.8:
+    resolution: {integrity: sha512-bAB5pF9gue+WnjJ8r68sPHQkJ74rS2W7QguGepy7G8W4ATOWOm+LxT3iQqYpUjQnryQVc0qz+n6XGC7z+x+tHg==}
     engines: {node: '>=v20.6.1'}
     dependencies:
-      '@breadfs/core': 0.1.7
-      '@breadfs/node': 0.1.7
+      '@breadfs/core': 0.1.8
+      '@breadfs/node': 0.1.8
     optionalDependencies:
-      '@breadfs/webdav': 0.1.7
+      '@breadfs/webdav': 0.1.8
     dev: false
 
   /browserslist@4.22.2:
@@ -8322,11 +8322,11 @@ packages:
     requiresBuild: true
     dev: false
 
-  /webdav@5.3.1:
-    resolution: {integrity: sha512-wzZdTHtMuSIXqHGBznc8FM2L94Mc/17Tbn9ppoMybRO0bjWOSIeScdVXWX5qqHsg00EjfiOcwMqGFx6ghIhccQ==}
+  /webdav@5.4.0:
+    resolution: {integrity: sha512-QCvHbzDvr1NKldx0lUHo2Z8Hc+dgvfORNP+a7Da8TRXVJXYTMIa3UKEwXIgkl8iVQUl4cJvU5EaT8hQ5HlfgPQ==}
     engines: {node: '>=14'}
     dependencies:
-      '@buttercup/fetch': 0.1.2
+      '@buttercup/fetch': 0.2.1
       base-64: 1.0.0
       byte-length: 1.0.2
       fast-xml-parser: 4.2.7

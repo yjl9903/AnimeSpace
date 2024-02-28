@@ -308,13 +308,25 @@ export class Anime {
         if (copy) {
           await src.copyTo(dst, {
             overwrite: true,
-            fallback: { file: { write: { onProgress } } }
+            fallback: {
+              stream: {
+                contentLength: true,
+                onProgress
+              },
+              file: { write: { onProgress } }
+            }
           });
           delta = { operation: 'copy', video: newVideo };
         } else {
           await src.moveTo(dst, {
             overwrite: true,
-            fallback: { file: { write: { onProgress } } }
+            fallback: {
+              stream: {
+                contentLength: true,
+                onProgress
+              },
+              file: { write: { onProgress } }
+            }
           });
           delta = { operation: 'move', video: newVideo };
         }
@@ -485,5 +497,5 @@ export interface LocalVideoDelta {
 }
 
 export interface AddVideoOptions {
-  onProgress?: (payload: { current: number; total: number }) => void;
+  onProgress?: (payload: { current: number; total: number | undefined }) => void;
 }

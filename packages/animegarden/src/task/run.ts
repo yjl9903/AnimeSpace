@@ -163,7 +163,8 @@ export async function runDownloadTask(
         // Copy video to storage
         try {
           const copyDelta = await anime.addVideoByCopy(file, task.video, {
-            onProgress({ current, total }) {
+            onProgress({ current, total: _total }) {
+              const total = _total ?? current;
               const value =
                 total > 0 ? +(Math.ceil((1000.0 * current) / total) / 10).toFixed(1) : 0;
               bar.update(value, {
