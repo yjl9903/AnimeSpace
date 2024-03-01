@@ -5,7 +5,7 @@ import { execSync } from 'node:child_process';
 import openEditor from 'open-editor';
 import { type Breadc, breadc } from 'breadc';
 import { dim, lightBlue, lightCyan, lightGreen, lightRed } from '@breadc/color';
-import { AnimeSystem, LocalVideoDelta, onDeath, printDelta } from '@animespace/core';
+import { AnimeSystem, LocalVideoDelta, onDeath, printDelta, proxy } from '@animespace/core';
 
 import { description, version } from '../../package.json';
 
@@ -13,7 +13,22 @@ import { loop } from './utils';
 import { makeSystem } from './system';
 
 export async function makeCliApp(system: AnimeSystem) {
-  const app = breadc('anime', { version, description });
+  const app = breadc('anime', {
+    version,
+    description,
+    plugins: [
+      {
+        onPreCommand(parsed) {
+          if (parsed.options?.proxy) {
+            proxy.enable = true;
+          }
+        }
+      }
+    ]
+  }).option('--proxy', {
+    description: 'Enable HTTP/HTTPS proxy'
+  });
+
   registerApp(system, app);
   for (const plugin of system.space.plugins) {
     await plugin.command?.(system, app);

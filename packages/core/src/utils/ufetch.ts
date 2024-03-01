@@ -15,7 +15,19 @@ export const ufetch = async (url: RequestInfo, init?: RequestInit): Promise<Resp
   }
 };
 
+export const proxy = {
+  enable: false,
+  url: undefined as string | undefined
+};
+
 export function getProxy() {
+  if (!proxy.enable) {
+    return undefined;
+  }
+  if (proxy.url) {
+    return proxy.url;
+  }
+
   const env = process?.env ?? {};
   const list = ['HTTPS_PROXY', 'https_proxy', 'HTTP_PROXY', 'http_proxy'];
   for (const l of list) {
