@@ -24,7 +24,7 @@ importers:
         version: 0.6.4
       presea:
         specifier: ^0.0.10
-        version: 0.0.10(typescript@5.3.3)
+        version: 0.0.10(typescript@5.4.2)
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -35,17 +35,17 @@ importers:
         specifier: ^1.12.5
         version: 1.12.5
       typescript:
-        specifier: ^5.3.3
-        version: 5.3.3
+        specifier: ^5.4.2
+        version: 5.4.2
       unbuild:
         specifier: ^2.0.0
-        version: 2.0.0(typescript@5.3.3)
+        version: 2.0.0(typescript@5.4.2)
       vite:
         specifier: ^5.1.5
         version: 5.1.5(@types/node@20.11.25)
       vitepress:
         specifier: 1.0.0-rc.45
-        version: 1.0.0-rc.45(@algolia/client-search@4.22.1)(@types/node@20.11.25)(postcss@8.4.35)(search-insights@2.7.0)(typescript@5.3.3)
+        version: 1.0.0-rc.45(@algolia/client-search@4.22.1)(@types/node@20.11.25)(postcss@8.4.35)(search-insights@2.7.0)(typescript@5.4.2)
       vitest:
         specifier: ^1.3.1
         version: 1.3.1(@types/node@20.11.25)
@@ -57,7 +57,7 @@ importers:
         version: 10.9.0(vue@3.4.21)
       vue:
         specifier: ^3.4.21
-        version: 3.4.21(typescript@5.3.3)
+        version: 3.4.21(typescript@5.4.2)
     devDependencies:
       '@algolia/client-search':
         specifier: ^4.22.1
@@ -97,7 +97,7 @@ importers:
         version: 0.19.2(vite@5.1.5)(workbox-build@7.0.0)(workbox-window@7.0.0)
       vitepress:
         specifier: 1.0.0-rc.45
-        version: 1.0.0-rc.45(@algolia/client-search@4.22.1)(@types/node@20.11.25)(postcss@8.4.35)(search-insights@2.7.0)(typescript@5.3.3)
+        version: 1.0.0-rc.45(@algolia/client-search@4.22.1)(@types/node@20.11.25)(postcss@8.4.35)(search-insights@2.7.0)(typescript@5.4.2)
       workbox-window:
         specifier: ^7.0.0
         version: 7.0.0
@@ -3272,7 +3272,7 @@ packages:
       vue: ^3.2.25
     dependencies:
       vite: 5.1.5(@types/node@20.11.25)
-      vue: 3.4.21(typescript@5.3.3)
+      vue: 3.4.21(typescript@5.4.2)
     dev: true
 
   /@vitest/expect@1.3.1:
@@ -3400,7 +3400,7 @@ packages:
     dependencies:
       '@vue/compiler-ssr': 3.4.21
       '@vue/shared': 3.4.21
-      vue: 3.4.21(typescript@5.3.3)
+      vue: 3.4.21(typescript@5.4.2)
 
   /@vue/shared@3.4.21:
     resolution: {integrity: sha512-PuJe7vDIi6VYSinuEbUIQgMIRZGgM8e4R+G+/dQTk0X1NEdvgvvgv7m+rfmDH1gZzyA1OjjoWskvHlfRNfQf3g==}
@@ -6160,7 +6160,7 @@ packages:
     hasBin: true
     dev: true
 
-  /mkdist@1.3.0(typescript@5.3.3):
+  /mkdist@1.3.0(typescript@5.4.2):
     resolution: {integrity: sha512-ZQrUvcL7LkRdzMREpDyg9AT18N9Tl5jc2qeKAUeEw0KGsgykbHbuRvysGAzTuGtwuSg0WQyNit5jh/k+Er3JEg==}
     hasBin: true
     peerDependencies:
@@ -6181,7 +6181,7 @@ packages:
       mlly: 1.4.2
       mri: 1.2.0
       pathe: 1.1.2
-      typescript: 5.3.3
+      typescript: 5.4.2
     dev: true
 
   /mlly@1.4.2:
@@ -6675,7 +6675,7 @@ packages:
     resolution: {integrity: sha512-XTSj3dJ4roKIC93pald6rWuB2qQJO9gO2iLLyTe87MrjQN+HklueLsmskbywEWqCHlclgz3/M4YLL2iBr9UmMA==}
     dev: true
 
-  /presea@0.0.10(typescript@5.3.3):
+  /presea@0.0.10(typescript@5.4.2):
     resolution: {integrity: sha512-jMb0DA+8+4gqVNB2TGnI/thfOecU/LbRvU57f9VLWj8HwZpMeZJVDW+pxiQ1W9+zsajcgjWBV20+b+LGa7e5DA==}
     engines: {node: '>=v20.7.0'}
     dependencies:
@@ -6683,7 +6683,7 @@ packages:
       execa: 8.0.1
       postject: 1.0.0-alpha.6
     optionalDependencies:
-      unbuild: 2.0.0(typescript@5.3.3)
+      unbuild: 2.0.0(typescript@5.4.2)
     transitivePeerDependencies:
       - sass
       - supports-color
@@ -6938,7 +6938,7 @@ packages:
       glob: 10.3.7
     dev: true
 
-  /rollup-plugin-dts@6.0.0(rollup@3.28.1)(typescript@5.3.3):
+  /rollup-plugin-dts@6.0.0(rollup@3.28.1)(typescript@5.4.2):
     resolution: {integrity: sha512-A996xSZDAqnx/KfFttzC8mDEuyMjsRpiLCrlGc8effhK8KhE3AG0g1woQiITgFc5HSE8HWU7ccR9CiQ3vXgUlQ==}
     engines: {node: '>=v18.17.1'}
     peerDependencies:
@@ -6947,7 +6947,7 @@ packages:
     dependencies:
       magic-string: 0.30.6
       rollup: 3.28.1
-      typescript: 5.3.3
+      typescript: 5.4.2
     optionalDependencies:
       '@babel/code-frame': 7.23.5
     dev: true
@@ -7706,8 +7706,8 @@ packages:
       is-typed-array: 1.1.12
     dev: true
 
-  /typescript@5.3.3:
-    resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
+  /typescript@5.4.2:
+    resolution: {integrity: sha512-+2/g0Fds1ERlP6JsakQQDXjZdZMM+rqpamFZJEKh4kwTIn3iDkgKtby0CeNd5ATNZ4Ry1ax15TMx0W2V+miizQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -7736,7 +7736,7 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unbuild@2.0.0(typescript@5.3.3):
+  /unbuild@2.0.0(typescript@5.4.2):
     resolution: {integrity: sha512-JWCUYx3Oxdzvw2J9kTAp+DKE8df/BnH/JTSj6JyA4SH40ECdFu7FoJJcrm8G92B7TjofQ6GZGjJs50TRxoH6Wg==}
     hasBin: true
     peerDependencies:
@@ -7760,15 +7760,15 @@ packages:
       hookable: 5.5.3
       jiti: 1.21.0
       magic-string: 0.30.5
-      mkdist: 1.3.0(typescript@5.3.3)
+      mkdist: 1.3.0(typescript@5.4.2)
       mlly: 1.4.2
       pathe: 1.1.2
       pkg-types: 1.0.3
       pretty-bytes: 6.1.1
       rollup: 3.28.1
-      rollup-plugin-dts: 6.0.0(rollup@3.28.1)(typescript@5.3.3)
+      rollup-plugin-dts: 6.0.0(rollup@3.28.1)(typescript@5.4.2)
       scule: 1.1.1
-      typescript: 5.3.3
+      typescript: 5.4.2
       untyped: 1.4.0
     transitivePeerDependencies:
       - sass
@@ -7941,7 +7941,7 @@ packages:
       minimatch: 9.0.3
       resolve: 1.22.4
       unplugin: 1.4.0
-      vue: 3.4.21(typescript@5.3.3)
+      vue: 3.4.21(typescript@5.4.2)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -8161,7 +8161,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vitepress@1.0.0-rc.45(@algolia/client-search@4.22.1)(@types/node@20.11.25)(postcss@8.4.35)(search-insights@2.7.0)(typescript@5.3.3):
+  /vitepress@1.0.0-rc.45(@algolia/client-search@4.22.1)(@types/node@20.11.25)(postcss@8.4.35)(search-insights@2.7.0)(typescript@5.4.2):
     resolution: {integrity: sha512-/OiYsu5UKpQKA2c0BAZkfyywjfauDjvXyv6Mo4Ra57m5n4Bxg1HgUGoth1CLH2vwUbR/BHvDA9zOM0RDvgeSVQ==}
     hasBin: true
     peerDependencies:
@@ -8188,7 +8188,7 @@ packages:
       postcss: 8.4.35
       shiki: 1.1.5
       vite: 5.1.5(@types/node@20.11.25)
-      vue: 3.4.21(typescript@5.3.3)
+      vue: 3.4.21(typescript@5.4.2)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -8285,9 +8285,9 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      vue: 3.4.21(typescript@5.3.3)
+      vue: 3.4.21(typescript@5.4.2)
 
-  /vue@3.4.21(typescript@5.3.3):
+  /vue@3.4.21(typescript@5.4.2):
     resolution: {integrity: sha512-5hjyV/jLEIKD/jYl4cavMcnzKwjMKohureP8ejn3hhEjwhWIhWeuzL2kJAjzl/WyVsgPY56Sy4Z40C3lVshxXA==}
     peerDependencies:
       typescript: '*'
@@ -8300,7 +8300,7 @@ packages:
       '@vue/runtime-dom': 3.4.21
       '@vue/server-renderer': 3.4.21(vue@3.4.21)
       '@vue/shared': 3.4.21
-      typescript: 5.3.3
+      typescript: 5.4.2
 
   /wbuf@1.7.3:
     resolution: {integrity: sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==}
