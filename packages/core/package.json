@@ -53,7 +53,7 @@
     "defu": "^6.1.4",
     "fast-glob": "^3.3.2",
     "fs-extra": "^11.2.0",
-    "memofunc": "^0.0.8",
+    "memofunc": "^0.1.5",
     "pathe": "^1.1.2",
     "simptrad": "^0.1.0",
     "trash": "^8.1.1",
