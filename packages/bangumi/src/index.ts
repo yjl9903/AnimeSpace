@@ -9,6 +9,8 @@ export interface BangumiOptions extends PluginEntry {
 }
 
 export function Bangumi(options: BangumiOptions): Plugin {
+  const defaultUsername = options.username;
+
   return {
     name: 'bangumi',
     options,
@@ -67,7 +69,7 @@ export function Bangumi(options: BangumiOptions): Plugin {
         .option('--fansub', 'Generate fansub list')
         .option('--date <date>', 'Specify the onair begin date')
         .action(async (options) => {
-          const username = options.username ?? '';
+          const username = options.username ?? defaultUsername ?? '';
 
           if (!username) {
             logger.error('You should provide your bangumi username with --username <username>');
