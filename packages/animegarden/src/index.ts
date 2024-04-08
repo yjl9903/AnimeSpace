@@ -108,6 +108,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             }
           } catch (error) {
             logger.error(error);
+            // should not clear video library
+            return video;
           } finally {
             return video;
           }

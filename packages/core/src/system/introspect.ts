@@ -70,7 +70,7 @@ async function introspectAnime(system: AnimeSystem, anime: Anime, options: Intro
         }
       }
     }
-    // Found dangling video in metadata.yaml, remove it
+    // Found dangling video in library.yaml, remove it
     if (!found) {
       logger.log(`${lightRed('Removing')} "${bold(video.filename)}"`);
       await anime.removeVideo(video);
