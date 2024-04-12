@@ -80,6 +80,7 @@ export function parseEpisode<T extends Partial<FormatOptions> = Partial<FormatOp
       // 番剧，有特殊类型，e.g. 番外, 特别篇
       const resolvedTitle = anime.formatFilename({
         ...metadata,
+        season: 0,
         episode: info.episode.number
       });
 

@@ -269,7 +269,8 @@ export class Anime {
       const overwrite = this.plan.rewrite?.episode;
       if (overwrite !== undefined) {
         if (overwrite.fansub === undefined || (fansub && overwrite.fansub.includes(fansub))) {
-          return episode + overwrite.offset;
+          const overwriten = episode + overwrite.offset;
+          return overwriten > 0 && !Number.isNaN(overwriten) ? overwriten : episode;
         }
       }
       return episode;
