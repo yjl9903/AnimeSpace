@@ -93,8 +93,8 @@ importers:
         specifier: ^5.1.5
         version: 5.1.7(@types/node@20.11.25)
       vite-plugin-pwa:
-        specifier: ^0.19.2
-        version: 0.19.2(vite@5.1.7)(workbox-build@7.0.0)(workbox-window@7.0.0)
+        specifier: ^0.19.8
+        version: 0.19.8(vite@5.1.7)(workbox-build@7.0.0)(workbox-window@7.0.0)
       vitepress:
         specifier: 1.0.0-rc.45
         version: 1.0.0-rc.45(@algolia/client-search@4.22.1)(@types/node@20.11.25)(postcss@8.4.38)(search-insights@2.13.0)(typescript@5.4.5)
@@ -8966,8 +8966,8 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-pwa@0.19.2(vite@5.1.7)(workbox-build@7.0.0)(workbox-window@7.0.0):
-    resolution: {integrity: sha512-LSQJFPxCAQYbRuSyc9EbRLRqLpaBA9onIZuQFomfUYjWSgHuQLonahetDlPSC9zsxmkSEhQH8dXZN8yL978h3w==}
+  /vite-plugin-pwa@0.19.8(vite@5.1.7)(workbox-build@7.0.0)(workbox-window@7.0.0):
+    resolution: {integrity: sha512-e1oK0dfhzhDhY3VBuML6c0h8Xfx6EkOVYqolj7g+u8eRfdauZe5RLteCIA/c5gH0CBQ0CNFAuv/AFTx4Z7IXTw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@vite-pwa/assets-generator': ^0.2.4
