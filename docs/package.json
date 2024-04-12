@@ -21,7 +21,7 @@
     "fast-glob": "^3.3.2",
     "https-localhost": "^4.7.1",
     "unocss": "^0.58.5",
-    "unplugin-analytics": "^0.0.8",
+    "unplugin-analytics": "^0.0.11",
     "unplugin-vue-components": "^0.26.0",
     "vite": "^5.1.5",
     "vite-plugin-pwa": "^0.19.2",
