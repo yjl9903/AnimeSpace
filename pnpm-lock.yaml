@@ -129,8 +129,8 @@ importers:
         specifier: ^3.12.0
         version: 3.12.0
       date-fns:
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: ^3.6.0
+        version: 3.6.0
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -187,8 +187,8 @@ importers:
         specifier: ^0.0.10
         version: 0.0.10
       date-fns:
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: ^3.6.0
+        version: 3.6.0
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -220,8 +220,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       date-fns:
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: ^3.6.0
+        version: 3.6.0
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -281,8 +281,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
       date-fns:
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: ^3.6.0
+        version: 3.6.0
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -4871,8 +4871,8 @@ packages:
       is-data-view: 1.0.1
     dev: true
 
-  /date-fns@3.3.1:
-    resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
+  /date-fns@3.6.0:
+    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
     dev: false
 
   /debug@2.6.9:
