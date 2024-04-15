@@ -74,7 +74,7 @@ export class ResourcesCache {
     await Promise.all([this.animeRoot.ensureDir(), this.resourcesRoot.ensureDir()]);
 
     const latest = await this.loadLatestResources();
-    const timestamp = latest?.resources[0].createdAt
+    const timestamp = latest?.resources[0]?.createdAt
       ? new Date(latest.resources[0].createdAt)
       : undefined;
 
