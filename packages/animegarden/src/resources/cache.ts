@@ -155,7 +155,7 @@ export class ResourcesCache {
 
   public async load(anime: Anime) {
     const cache = await this.loadAnimeResources(anime);
-    if (this.valid && cache) {
+    if (this.valid && cache?.filter) {
       // Check whether there is any changes to the filter
       const validateFilter = (cache: AnimeCacheSchema) => {
         if (
