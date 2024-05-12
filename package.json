@@ -23,7 +23,7 @@
     "optc": "^0.6.4",
     "presea": "^0.0.10",
     "prettier": "^3.2.5",
-    "rimraf": "^5.0.6",
+    "rimraf": "^5.0.7",
     "turbo": "^1.13.3",
     "typescript": "^5.4.5",
     "unbuild": "^2.0.0",
