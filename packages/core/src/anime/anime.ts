@@ -204,10 +204,11 @@ export class Anime {
   // --- format ---
   private format(type?: string) {
     type ??= this.plan.type;
-    switch (this.plan.type) {
+    switch (type) {
       case '电影':
         return this.plan.preference.format.film;
       case 'OVA':
+      case '特别篇':
         return this.plan.preference.format.ova;
       case '番剧':
       default:
@@ -220,7 +221,7 @@ export class Anime {
       const title = this._raw_lib?.title ?? this.plan.rewrite?.title ?? this.plan.title;
       const date = video.date ?? this.plan.date;
 
-      const season = this.resolveSeason(video.season);
+      const season = this.resolveSeason(video.type, video.season);
       const episode = this.resolveEpisode(video.episode, video.fansub);
 
       return formatTitle(this.format(), {
@@ -241,7 +242,7 @@ export class Anime {
     const title = this._raw_lib?.title ?? this.plan.rewrite?.title ?? this.plan.title;
     const date = this.plan.date;
 
-    const season = this.resolveSeason(meta.season);
+    const season = this.resolveSeason(meta.type, meta.season);
     const episode = this.resolveEpisode(meta.episode, meta.fansub);
 
     return formatTitle(this.format(meta.type), {
@@ -279,10 +280,11 @@ export class Anime {
     }
   }
 
-  public resolveSeason(season: number): number;
-  public resolveSeason(season: undefined): undefined;
-  public resolveSeason(season: number | undefined): number | undefined;
-  public resolveSeason(season: number | undefined): number | undefined {
+  public resolveSeason(type: string | undefined, season: number): number;
+  public resolveSeason(type: string | undefined, season: undefined): undefined;
+  public resolveSeason(type: string | undefined, season: number | undefined): number | undefined;
+  public resolveSeason(type: string | undefined, season: number | undefined): number | undefined {
+    if (type === '特别篇' || type === '特別篇') return 0;
     return season ?? this.plan.season;
   }
 

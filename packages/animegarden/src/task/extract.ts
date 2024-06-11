@@ -8,14 +8,11 @@ import {
   isValidEpisode,
   parseEpisode
 } from '@animespace/core';
-import { Parser } from 'anitomy';
 import { MutableMap } from '@onekuma/map';
 
 import { lightYellow } from '@breadc/color';
 
 import type { Task } from './types';
-
-const parser = new Parser();
 
 export async function generateDownloadTask(
   system: AnimeSystem,
@@ -55,24 +52,32 @@ export async function generateDownloadTask(
       force ||
       !library.videos.find((r) => r.source.magnet?.split('/').at(-1) === res.href.split('/').at(-1))
     ) {
-      const info = parser.parse(res.title)!;
-      videos.push({
-        video: {
-          filename: anime.formatFilename({
-            fansub,
-            episode: info.episode.number, // Raw episode number
-            extension: info.file.extension
-          }),
-          naming: 'auto',
-          fansub: fansub,
-          episode: info.episode.number, // Raw episode number
-          source: {
-            type: 'AnimeGarden',
-            magnet: `https://garden.onekuma.cn/resource/${res.href.split('/').at(-1)}`
-          }
-        },
-        resource: res
+      const info = parseEpisode(anime, res.title, {
+        metadata: (info) => ({
+          fansub: res.fansub?.name ?? res.publisher.name ?? info.release.group ?? 'fansub'
+        })
       });
+
+      if (isValidEpisode(info)) {
+        videos.push({
+          video: {
+            filename: anime.formatFilename({
+              type: info.type,
+              fansub,
+              episode: info.parsed.episode.number, // Raw episode number
+              extension: info.parsed.file.extension
+            }),
+            naming: 'auto',
+            fansub: fansub,
+            episode: info.parsed.episode.number, // Raw episode number
+            source: {
+              type: 'AnimeGarden',
+              magnet: `https://garden.onekuma.cn/resource/${res.href.split('/').at(-1)}`
+            }
+          },
+          resource: res
+        });
+      }
     }
   }
 
