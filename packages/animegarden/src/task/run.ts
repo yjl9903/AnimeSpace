@@ -139,7 +139,7 @@ export async function runDownloadTask(
 
         // First resolve episode number
         const resolvedEpisode = anime.resolveEpisode(task.video.episode, task.video.fansub);
-        const resolvedSeason = anime.resolveSeason(task.video.season);
+        const resolvedSeason = anime.resolveSeason(task.video.type, task.video.season);
         const library = (await anime.library()).videos;
 
         // Find old video to be removed
@@ -147,7 +147,7 @@ export async function runDownloadTask(
           (v) =>
             v.source.type === ANIMEGARDEN &&
             anime.resolveEpisode(v.episode, v.fansub) === resolvedEpisode &&
-            (anime.resolveSeason(v.season) ?? 1) === (resolvedSeason ?? 1) // Find same episode after being resolved
+            (anime.resolveSeason(v.type, v.season) ?? 1) === (resolvedSeason ?? 1) // Find same episode after being resolved
         );
 
         // Upload progress bar

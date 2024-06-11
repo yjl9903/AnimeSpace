@@ -69,6 +69,7 @@ export async function generateDownloadTask(
             }),
             naming: 'auto',
             fansub: fansub,
+            season: info.parsed.season ? +info.parsed.season : undefined,
             episode: info.parsed.episode.number, // Raw episode number
             source: {
               type: 'AnimeGarden',
@@ -81,7 +82,11 @@ export async function generateDownloadTask(
     }
   }
 
-  videos.sort((lhs, rhs) => lhs.video.episode! - rhs.video.episode!);
+  videos.sort((lhs, rhs) => {
+    const ds = (lhs.video.season ?? 1) - (rhs.video.season ?? 1);
+    if (ds !== 0) return ds;
+    return lhs.video.episode! - rhs.video.episode!;
+  });
 
   return videos;
 }
