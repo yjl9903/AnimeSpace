@@ -2,6 +2,7 @@ import type { Resource } from 'animegarden';
 
 import {
   Anime,
+  AnimePlanType,
   AnimeSystem,
   getEpisodeKey,
   hasEpisodeNumberAlt,
@@ -69,6 +70,7 @@ export async function generateDownloadTask(
             }),
             naming: 'auto',
             fansub: fansub,
+            type: unifyType(info.type),
             season: info.parsed.season ? +info.parsed.season : undefined,
             episode: info.parsed.episode.number, // Raw episode number
             source: {
@@ -152,4 +154,18 @@ function groupResources(system: AnimeSystem, anime: Anime, resources: Resource[]
   );
 
   return ordered;
+}
+
+function unifyType(type: string): AnimePlanType {
+  switch (type) {
+    case '番剧':
+    case 'TV':
+      return '番剧';
+    case '电影':
+      return '电影';
+    case '特别篇':
+      return 'OVA';
+    default:
+      return '番剧';
+  }
 }

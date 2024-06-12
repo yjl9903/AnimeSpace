@@ -44,6 +44,7 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
         if (result) {
           const video: LocalVideo = {
             filename: anime.formatFilename({
+              type: result.type,
               fansub: result.release.group,
               episode: result.episode.number,
               extension: result.file.extension

@@ -131,6 +131,7 @@ export async function runDownloadTask(
         if (task.video.naming === 'auto') {
           // Hack: update filename extension when auto naming
           task.video.filename = anime.formatFilename({
+            type: task.video.type,
             fansub: task.video.fansub,
             episode: task.video.episode,
             extension: path.extname(file).slice(1) || 'mp4'
