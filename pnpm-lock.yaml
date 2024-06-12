@@ -14,7 +14,7 @@ importers:
   .:
     devDependencies:
       '@types/node':
-        specifier: ^20.13.0
+        specifier: ^20.14.2
         version: 20.14.2
       bumpp:
         specifier: latest
@@ -66,7 +66,7 @@ importers:
         specifier: ^1.1.35
         version: 1.1.35
       '@types/node':
-        specifier: ^20.13.0
+        specifier: ^20.14.2
         version: 20.14.2
       '@unocss/reset':
         specifier: ^0.60.4
