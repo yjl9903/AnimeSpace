@@ -32,7 +32,7 @@ importers:
         specifier: ^5.0.7
         version: 5.0.7
       turbo:
-        specifier: ^1.13.3
+        specifier: ^1.13.4
         version: 1.13.4
       typescript:
         specifier: ^5.4.5
