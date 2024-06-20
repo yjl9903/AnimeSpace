@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "anime": "tsx packages/cli/src/cli.ts",
-    "build": "turbo run build --filter !docs",
+    "build": "turbo run build --filter !@animespace/docs",
     "build:all": "turbo run build",
     "build:cli": "turbo run build --filter animespace...",
-    "build:docs": "turbo run build --filter docs",
+    "build:docs": "turbo run build --filter @animespace/docs",
     "dev:cli": "turbo run dev --filter animespace...",
     "dev:docs": "pnpm -C docs dev",
     "format": "turbo run format --parallel",
