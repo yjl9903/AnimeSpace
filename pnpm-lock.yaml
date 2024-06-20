@@ -238,7 +238,7 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       undici:
-        specifier: ^6.18.2
+        specifier: ^6.19.2
         version: 6.19.2
     devDependencies:
       '@types/cli-progress':
@@ -308,7 +308,7 @@ importers:
         specifier: ^8.1.1
         version: 8.1.1
       undici:
-        specifier: ^6.18.2
+        specifier: ^6.19.2
         version: 6.19.2
       yaml:
         specifier: ^2.4.5
