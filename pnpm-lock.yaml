@@ -56,7 +56,7 @@ importers:
         specifier: ^10.11.0
         version: 10.11.0(vue@3.4.30(typescript@5.5.2))
       vue:
-        specifier: ^3.4.29
+        specifier: ^3.4.30
         version: 3.4.30(typescript@5.5.2)
     devDependencies:
       '@algolia/client-search':
