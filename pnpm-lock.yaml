@@ -48,7 +48,7 @@ importers:
         version: 1.2.3(@algolia/client-search@4.23.3)(@types/node@20.14.8)(axios@1.7.2)(postcss@8.4.38)(search-insights@2.14.0)(terser@5.31.1)(typescript@5.5.2)
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.14.8)
+        version: 1.6.0(@types/node@20.14.8)(terser@5.31.1)
 
   docs:
     dependencies:
@@ -73,7 +73,7 @@ importers:
         version: 0.61.0
       '@vitejs/plugin-vue':
         specifier: ^5.0.5
-        version: 5.0.5(vite@5.3.1(@types/node@20.14.8))(vue@3.4.30(typescript@5.5.2))
+        version: 5.0.5(vite@5.3.1(@types/node@20.14.8)(terser@5.31.1))(vue@3.4.30(typescript@5.5.2))
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -159,7 +159,7 @@ importers:
         specifier: ^7.1.0
         version: 7.1.0
       webtorrent:
-        specifier: ^2.4.1
+        specifier: ^2.4.2
         version: 2.4.2
       zod:
         specifier: ^3.23.8
@@ -6899,7 +6899,7 @@ snapshots:
 
   '@vercel/ncc@0.38.1': {}
 
-  '@vitejs/plugin-vue@5.0.5(vite@5.3.1(@types/node@20.14.8))(vue@3.4.30(typescript@5.5.2))':
+  '@vitejs/plugin-vue@5.0.5(vite@5.3.1(@types/node@20.14.8)(terser@5.31.1))(vue@3.4.30(typescript@5.5.2))':
     dependencies:
       vite: 5.3.1(@types/node@20.14.8)(terser@5.31.1)
       vue: 3.4.30(typescript@5.5.2)
@@ -10342,7 +10342,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite-node@1.6.0(@types/node@20.14.8):
+  vite-node@1.6.0(@types/node@20.14.8)(terser@5.31.1):
     dependencies:
       cac: 6.7.14
       debug: 4.3.5
@@ -10387,7 +10387,7 @@ snapshots:
       '@shikijs/core': 1.9.0
       '@shikijs/transformers': 1.9.0
       '@types/markdown-it': 14.1.1
-      '@vitejs/plugin-vue': 5.0.5(vite@5.3.1(@types/node@20.14.8))(vue@3.4.30(typescript@5.5.2))
+      '@vitejs/plugin-vue': 5.0.5(vite@5.3.1(@types/node@20.14.8)(terser@5.31.1))(vue@3.4.30(typescript@5.5.2))
       '@vue/devtools-api': 7.3.4
       '@vue/shared': 3.4.30
       '@vueuse/core': 10.11.0(vue@3.4.30(typescript@5.5.2))
@@ -10427,7 +10427,7 @@ snapshots:
       - typescript
       - universal-cookie
 
-  vitest@1.6.0(@types/node@20.14.8):
+  vitest@1.6.0(@types/node@20.14.8)(terser@5.31.1):
     dependencies:
       '@vitest/expect': 1.6.0
       '@vitest/runner': 1.6.0
@@ -10447,7 +10447,7 @@ snapshots:
       tinybench: 2.8.0
       tinypool: 0.8.4
       vite: 5.3.1(@types/node@20.14.8)(terser@5.31.1)
-      vite-node: 1.6.0(@types/node@20.14.8)
+      vite-node: 1.6.0(@types/node@20.14.8)(terser@5.31.1)
       why-is-node-running: 2.2.2
     optionalDependencies:
       '@types/node': 20.14.8
