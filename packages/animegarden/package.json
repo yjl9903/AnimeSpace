@@ -61,7 +61,7 @@
     "memofunc": "^0.1.6",
     "naria2": "^0.0.25",
     "pathe": "^1.1.2",
-    "string-width": "^7.1.0",
+    "string-width": "^7.2.0",
     "webtorrent": "^2.4.11",
     "zod": "^3.23.8"
   },
