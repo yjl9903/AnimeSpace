@@ -6,7 +6,10 @@ import { FormatPreference, ExtensionPreference, KeywordPreference } from '../spa
 export const AnimePlanSchema = z
   .object({
     title: z.string(),
-    alias: z.array(z.string()).default([]),
+    alias: z
+      .array(z.string())
+      .nullish()
+      .transform((v) => v ?? []),
     translations: z
       .union([
         z.string().transform((s) => ({ unknown: [s] })),
