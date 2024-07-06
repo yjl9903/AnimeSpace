@@ -242,8 +242,8 @@ importers:
         version: 6.19.2
     devDependencies:
       '@types/cli-progress':
-        specifier: ^3.11.5
-        version: 3.11.5
+        specifier: ^3.11.6
+        version: 3.11.6
       '@types/debug':
         specifier: ^4.1.12
         version: 4.1.12
@@ -1684,8 +1684,8 @@ packages:
   '@types/bittorrent-protocol@3.1.6':
     resolution: {integrity: sha512-hqiRctJX9t9kknr6nn0q7UlcWHKvw2gSnPc/4jxt7Q/T0RP9txNv27Djue9ZjCNlAJ+irqAnCxtb+TcSpMyhtA==}
 
-  '@types/cli-progress@3.11.5':
-    resolution: {integrity: sha512-D4PbNRbviKyppS5ivBGyFO29POlySLmA2HyUFE4p5QGazAMM3CwkKWcvTl8gvElSuxRh6FPKL8XmidX873ou4g==}
+  '@types/cli-progress@3.11.6':
+    resolution: {integrity: sha512-cE3+jb9WRlu+uOSAugewNpITJDt1VF8dHOopPO4IABFc3SXYL5WE/+PTz/FCdZRRfIujiWW3n3aMbv1eIGVRWA==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -6662,7 +6662,7 @@ snapshots:
     dependencies:
       '@types/node': 20.14.10
 
-  '@types/cli-progress@3.11.5':
+  '@types/cli-progress@3.11.6':
     dependencies:
       '@types/node': 20.14.10
 
