@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "breadc": "^0.9.7",
-    "rimraf": "^5.0.8"
+    "rimraf": "^5.0.9"
   },
   "engines": {
     "node": ">=v20.7.0"
