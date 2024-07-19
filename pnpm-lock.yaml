@@ -120,8 +120,8 @@ importers:
         specifier: ^0.1.1
         version: 0.1.1
       anitomy:
-        specifier: ^0.0.34
-        version: 0.0.34
+        specifier: ^0.0.35
+        version: 0.0.35
       breadfs:
         specifier: ^0.1.8
         version: 0.1.8
@@ -269,8 +269,8 @@ importers:
         specifier: ^0.1.8
         version: 0.1.8
       anitomy:
-        specifier: ^0.0.34
-        version: 0.0.34
+        specifier: ^0.0.35
+        version: 0.0.35
       breadfs:
         specifier: ^0.1.8
         version: 0.1.8
@@ -330,8 +330,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       anitomy:
-        specifier: ^0.0.34
-        version: 0.0.34
+        specifier: ^0.0.35
+        version: 0.0.35
       breadfs:
         specifier: ^0.1.8
         version: 0.1.8
@@ -2023,8 +2023,8 @@ packages:
     resolution: {integrity: sha512-nhLlnSNKIWWpNA9S8zqO2fpuY5dOqJuXHIvK4zMhSf5js5tnYUyMugQVT+MJBK+NrPr3j78XVPZT+Qaoh+41nQ==}
     engines: {node: '>=v18.16.0'}
 
-  anitomy@0.0.34:
-    resolution: {integrity: sha512-K6SZ6HskNBaIqVCOu9e4M6/qsa1Omr70STMmzQ8PkLtp2MkTYkKluBYuFRC1+wqJMDl464WMScPQDgYgILNsVg==}
+  anitomy@0.0.35:
+    resolution: {integrity: sha512-lwTWQAWKrgvQhlTssPDqz+1BVYJ7EqNVo7OTsqyND0SoVehOgdIdDZKeaAXI+D8z7xAV/fABWBZsVpbURF1MBg==}
     engines: {node: '>=v18.16.0'}
 
   ansi-regex@5.0.1:
@@ -7236,7 +7236,7 @@ snapshots:
       simptrad: 0.1.0
       zod: 3.23.8
 
-  anitomy@0.0.34: {}
+  anitomy@0.0.35: {}
 
   ansi-regex@5.0.1: {}
 
