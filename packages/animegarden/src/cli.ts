@@ -40,7 +40,7 @@ export function registerCli(
         const lib = await anime.library();
 
         for (const { video } of videos) {
-          const detailURL = `https://garden.onekuma.cn/resource/${video.source
+          const detailURL = `https://garden.breadio.wiki/resource/${video.source
             .magnet!.split('/')
             .at(-1)}`;
 

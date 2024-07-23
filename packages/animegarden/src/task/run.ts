@@ -179,7 +179,7 @@ export async function runDownloadTask(
           });
 
           if (copyDelta) {
-            const detailURL = `https://garden.onekuma.cn/resource/${task.video.source
+            const detailURL = `https://garden.breadio.wiki/resource/${task.video.source
               .magnet!.split('/')
               .at(-1)}`;
             copyDelta.log = link(task.video.filename, detailURL);

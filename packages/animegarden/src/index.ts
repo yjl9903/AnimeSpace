@@ -176,7 +176,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           )}`
         );
         for (const { video } of newVideos) {
-          const detailURL = `https://garden.onekuma.cn/resource/${video.source
+          const detailURL = `https://garden.breadio.wiki/resource/${video.source
             .magnet!.split('/')
             .at(-1)}`;
           logger.log(`  ${DOT} ${link(video.filename, detailURL)}`);

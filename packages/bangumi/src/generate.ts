@@ -63,7 +63,7 @@ export async function generatePlan(
       const title = item.name_cn || item.name;
       const aliasBox = item.infobox?.find((box) => box.key === '别名');
       const translations = Array.isArray(aliasBox?.value)
-        ? (aliasBox?.value.map((v) => v?.v).filter(Boolean) as string[]) ?? []
+        ? ((aliasBox?.value.map((v) => v?.v).filter(Boolean) as string[]) ?? [])
         : typeof aliasBox?.value === 'string'
           ? [aliasBox.value]
           : [];
@@ -116,7 +116,7 @@ export async function generatePlan(
         .replace(/"/g, '%22')
         .replace(/ /g, '%20');
       writeln(
-        `    # https://garden.onekuma.cn/resources/1?include=${includeURL}&after=${encodeURIComponent(
+        `    # https://garden.breadio.wiki/resources/1?include=${includeURL}&after=${encodeURIComponent(
           date.toISOString()
         )}`
       );

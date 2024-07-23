@@ -26,6 +26,6 @@ anime refresh
 
 此时，AnimeSpace 会读取你的配置文件，开始运行：
 
-1. 根据放送配置, 从 [AnimeGarden](https://garden.onekuma.cn) 上获取最新的动画资源；
+1. 根据放送配置, 从 [AnimeGarden](https://garden.breadio.wiki) 上获取最新的动画资源；
 2. 将缺失的动画下载到本地的临时目录；
 3. 将动画重命名为恰当的形式，复制到配置的动画目录中。

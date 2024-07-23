@@ -73,7 +73,7 @@ anime refresh
 
 ## Related Projects
 
-+ [AnimeGarden](https://github.com/yjl9903/AnimeGarden): 動漫花園 3-rd party [mirror site](https://garden.onekuma.cn/) and API endpoint
++ [AnimeGarden](https://github.com/yjl9903/AnimeGarden): 動漫花園 3-rd party [mirror site](https://garden.breadio.wiki/) and API endpoint
 + [bgmc](https://github.com/yjl9903/bgmc): Bangumi Data / API Clients
 + [nfo.js](https://github.com/yjl9903/nfo.js): Parse and stringify nfo files
 + [naria2](https://github.com/yjl9903/naria2): Convenient BitTorrent Client based on the aria2 JSON-RPC

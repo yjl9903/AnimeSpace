@@ -8,7 +8,7 @@ import { dim, link, underline } from '@breadc/color';
 import { DOT } from './constant';
 
 export function formatAnimeGardenSearchURL(anime: Anime) {
-  return `https://garden.onekuma.cn/resources/1?include=${encodeURIComponent(
+  return `https://garden.breadio.wiki/resources/1?include=${encodeURIComponent(
     JSON.stringify(anime.plan.keywords.include)
   )}&exclude=${encodeURIComponent(
     JSON.stringify(anime.plan.keywords.exclude)
