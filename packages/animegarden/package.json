@@ -48,7 +48,7 @@
     "@breadc/color": "^0.9.7",
     "@naria2/node": "^0.0.25",
     "@onekuma/map": "^0.1.10",
-    "animegarden": "^0.1.1",
+    "animegarden": "^0.1.3",
     "anitomy": "^0.0.35",
     "breadfs": "^0.1.8",
     "cli-progress": "^3.12.0",
