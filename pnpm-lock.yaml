@@ -117,8 +117,8 @@ importers:
         specifier: ^0.1.10
         version: 0.1.10
       animegarden:
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.2.0
+        version: 0.2.0
       anitomy:
         specifier: ^0.0.35
         version: 0.0.35
@@ -178,8 +178,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       animegarden:
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.2.0
+        version: 0.2.0
       bgmc:
         specifier: ^0.0.10
         version: 0.0.10
@@ -2113,8 +2113,8 @@ packages:
   algoliasearch@4.24.0:
     resolution: {integrity: sha512-bf0QV/9jVejssFBmz2HQLxUadxk574t4iwjCKp5E7NBzwKkrDEhKPISIIjAU/p6K5qDx3qoeh4+26zWN1jmw3g==}
 
-  animegarden@0.1.3:
-    resolution: {integrity: sha512-VDifGAXjgaxJzo7UQzNyoJiXfmHObRl/smvX/2h/2ESkELJEkCm3yT38dWEyBnLT4atut5dmRQKbKGpvKqHHWw==}
+  animegarden@0.2.0:
+    resolution: {integrity: sha512-E3iztaQobVqm818HTsdeuS+yU7kIA5Et//KteXy9C+Ak1ad3Hqpnf5/CAsAj9fHxl3kCbjfGDIrLuw9W7iR9TA==}
     engines: {node: '>=v18.16.0'}
 
   anitomy@0.0.35:
@@ -7283,7 +7283,7 @@ snapshots:
       '@algolia/requester-node-http': 4.24.0
       '@algolia/transporter': 4.24.0
 
-  animegarden@0.1.3:
+  animegarden@0.2.0:
     dependencies:
       simptrad: 0.1.0
       zod: 3.23.8
