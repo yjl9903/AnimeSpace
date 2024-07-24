@@ -18,7 +18,7 @@ import type { Task } from './types';
 export async function generateDownloadTask(
   system: AnimeSystem,
   anime: Anime,
-  resources: Resource[],
+  resources: Resource<{ magnet: string }>[],
   force = false
 ) {
   const library = await anime.library();
@@ -93,9 +93,13 @@ export async function generateDownloadTask(
   return videos;
 }
 
-function groupResources(system: AnimeSystem, anime: Anime, resources: Resource[]) {
+function groupResources(
+  system: AnimeSystem,
+  anime: Anime,
+  resources: Resource<{ magnet: string }>[]
+) {
   const logger = system.logger.withTag('animegarden');
-  const map = new MutableMap<string, MutableMap<string, Resource[]>>([]);
+  const map = new MutableMap<string, MutableMap<string, Resource<{ magnet: string }>[]>>([]);
 
   for (const r of resources) {
     // Resource title should not have exclude keywords
@@ -116,7 +120,10 @@ function groupResources(system: AnimeSystem, anime: Anime, resources: Resource[]
           const fansub = episode.metadata.fansub;
           if (fansub === 'fansub' || anime.plan.fansub.includes(fansub)) {
             map
-              .getOrPut(getEpisodeKey(episode), () => new MutableMap<string, Resource[]>([]))
+              .getOrPut(
+                getEpisodeKey(episode),
+                () => new MutableMap<string, Resource<{ magnet: string }>[]>([])
+              )
               .getOrPut(fansub, () => [])
               .push(r);
           }
@@ -125,7 +132,10 @@ function groupResources(system: AnimeSystem, anime: Anime, resources: Resource[]
         const fansub = episode.metadata.fansub;
         if (fansub === 'fansub' || anime.plan.fansub.includes(fansub)) {
           map
-            .getOrPut(getEpisodeKey(episode), () => new MutableMap<string, Resource[]>([]))
+            .getOrPut(
+              getEpisodeKey(episode),
+              () => new MutableMap<string, Resource<{ magnet: string }>[]>([])
+            )
             .getOrPut(fansub, () => [])
             .push(r);
         }

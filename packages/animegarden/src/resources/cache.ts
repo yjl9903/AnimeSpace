@@ -1,6 +1,6 @@
 import { Path } from 'breadfs';
 import { memoAsync } from 'memofunc';
-import { fetchResources, makeResourcesFilter, normalizeTitle, Resource } from 'animegarden';
+import { fetchResources, makeResourcesFilter, type Resource } from 'animegarden';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
 
@@ -89,6 +89,7 @@ export class ResourcesCache {
       retry: 10,
       count: -1,
       signal: ac.signal,
+      magnet: true,
       headers: {
         'Cache-Control': 'no-store'
       },
@@ -133,7 +134,7 @@ export class ResourcesCache {
 
   private async updateAnimeResources(
     anime: Anime,
-    resp: Awaited<ReturnType<typeof fetchResources>>
+    resp: Awaited<ReturnType<typeof fetchResources> & { magnet: string }>
   ): Promise<void> {
     try {
       const root = this.animeRoot.join(anime.relativeDirectory);
@@ -205,6 +206,7 @@ export class ResourcesCache {
         after: anime.plan.date,
         include: anime.plan.keywords.include,
         exclude: anime.plan.keywords.exclude,
+        magnet: true,
         retry: 10,
         count: -1,
         signal: ac.signal,
