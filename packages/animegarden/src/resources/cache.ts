@@ -206,7 +206,7 @@ export class ResourcesCache {
         after: anime.plan.date,
         include: anime.plan.keywords.include,
         exclude: anime.plan.keywords.exclude,
-        magnet: true,
+        tracker: true,
         retry: 10,
         count: -1,
         signal: ac.signal,

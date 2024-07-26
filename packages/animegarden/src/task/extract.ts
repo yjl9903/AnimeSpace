@@ -18,7 +18,7 @@ import type { Task } from './types';
 export async function generateDownloadTask(
   system: AnimeSystem,
   anime: Anime,
-  resources: Resource<{ magnet: string }>[],
+  resources: Resource<{ tracker: true }>[],
   force = false
 ) {
   const library = await anime.library();
@@ -96,10 +96,10 @@ export async function generateDownloadTask(
 function groupResources(
   system: AnimeSystem,
   anime: Anime,
-  resources: Resource<{ magnet: string }>[]
+  resources: Resource<{ tracker: true }>[]
 ) {
   const logger = system.logger.withTag('animegarden');
-  const map = new MutableMap<string, MutableMap<string, Resource<{ magnet: string }>[]>>([]);
+  const map = new MutableMap<string, MutableMap<string, Resource<{ tracker: true }>[]>>([]);
 
   for (const r of resources) {
     // Resource title should not have exclude keywords
@@ -122,7 +122,7 @@ function groupResources(
             map
               .getOrPut(
                 getEpisodeKey(episode),
-                () => new MutableMap<string, Resource<{ magnet: string }>[]>([])
+                () => new MutableMap<string, Resource<{ tracker: true }>[]>([])
               )
               .getOrPut(fansub, () => [])
               .push(r);
@@ -134,7 +134,7 @@ function groupResources(
           map
             .getOrPut(
               getEpisodeKey(episode),
-              () => new MutableMap<string, Resource<{ magnet: string }>[]>([])
+              () => new MutableMap<string, Resource<{ tracker: true }>[]>([])
             )
             .getOrPut(fansub, () => [])
             .push(r);

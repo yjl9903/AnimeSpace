@@ -5,7 +5,7 @@ import type { LocalVideo } from '@animespace/core';
 export type Task = {
   video: LocalVideo;
   resource: Pick<
-    Resource<{ magnet: string }>,
-    'title' | 'magnet' | 'href' | 'provider' | 'providerId'
+    Resource<{ tracker: true }>,
+    'title' | 'magnet' | 'tracker' | 'href' | 'provider' | 'providerId'
   >;
 };

@@ -99,7 +99,9 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
                     video,
                     resource: {
                       ...resource,
-                      magnet: resource.magnet.href
+                      // This should have tracker
+                      magnet: resource.magnet.href,
+                      tracker: ''
                     }
                   }
                 ],

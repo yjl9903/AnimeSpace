@@ -92,33 +92,37 @@ export async function runDownloadTask(
     const bar = multibar.create(`${bold(task.video.filename)}`, 100);
 
     try {
-      const { files } = await client.download(task.video.filename, task.resource.magnet, {
-        onStart() {
-          bar.update(0, {
-            speed: 0,
-            connections: 0,
-            completed: BigInt(0),
-            total: BigInt(0),
-            state: 'Downloading metadata'
-          });
-        },
-        onMetadataProgress(progress) {
-          bar.update(0, {
-            ...progress,
-            state: 'Downloading metadata'
-          });
-        },
-        onProgress(payload) {
-          const completed = Number(payload.completed);
-          const total = Number(payload.total);
-          const value =
-            payload.total > 0 ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1) : 0;
-          bar.update(value, { ...payload, state: '' });
-        },
-        onComplete() {
-          bar.update(100);
+      const { files } = await client.download(
+        task.video.filename,
+        task.resource.magnet + task.resource.tracker,
+        {
+          onStart() {
+            bar.update(0, {
+              speed: 0,
+              connections: 0,
+              completed: BigInt(0),
+              total: BigInt(0),
+              state: 'Downloading metadata'
+            });
+          },
+          onMetadataProgress(progress) {
+            bar.update(0, {
+              ...progress,
+              state: 'Downloading metadata'
+            });
+          },
+          onProgress(payload) {
+            const completed = Number(payload.completed);
+            const total = Number(payload.total);
+            const value =
+              payload.total > 0 ? +(Math.ceil((1000.0 * completed) / total) / 10).toFixed(1) : 0;
+            bar.update(value, { ...payload, state: '' });
+          },
+          onComplete() {
+            bar.update(100);
+          }
         }
-      });
+      );
       bar.update(100);
       bar.remove();
 
