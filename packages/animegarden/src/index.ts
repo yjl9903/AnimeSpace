@@ -175,10 +175,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
             animegardenURL
           )}`
         );
-        for (const { video } of newVideos) {
-          const detailURL = `https://garden.breadio.wiki/resource/${video.source
-            .magnet!.split('/')
-            .at(-1)}`;
+        for (const { video, resource } of newVideos) {
+          const detailURL = `https://garden.breadio.wiki/detail/${resource.provider}/${resource.providerId}`;
           logger.log(`  ${DOT} ${link(video.filename, detailURL)}`);
         }
 
