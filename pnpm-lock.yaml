@@ -112,7 +112,7 @@ importers:
         version: 0.9.7
       '@naria2/node':
         specifier: ^0.0.25
-        version: 0.0.25(bufferutil@4.0.8)(debug@4.3.5)(utf-8-validate@6.0.4)
+        version: 0.0.25(bufferutil@4.0.8)(debug@4.3.6)(utf-8-validate@6.0.4)
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -132,8 +132,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       debug:
-        specifier: ^4.3.5
-        version: 4.3.5
+        specifier: ^4.3.6
+        version: 4.3.6
       defu:
         specifier: ^6.1.4
         version: 6.1.4
@@ -145,13 +145,13 @@ importers:
         version: 3.1.2
       libaria2:
         specifier: ^1.0.95
-        version: 1.0.95(bufferutil@4.0.8)(debug@4.3.5)(utf-8-validate@6.0.4)
+        version: 1.0.95(bufferutil@4.0.8)(debug@4.3.6)(utf-8-validate@6.0.4)
       memofunc:
         specifier: ^0.1.6
         version: 0.1.6
       naria2:
         specifier: ^0.0.25
-        version: 0.0.25(@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.5)(utf-8-validate@6.0.4))(bufferutil@4.0.8)(utf-8-validate@6.0.4)
+        version: 0.0.25(@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.6)(utf-8-validate@6.0.4))(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
@@ -220,8 +220,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       debug:
-        specifier: ^4.3.5
-        version: 4.3.5
+        specifier: ^4.3.6
+        version: 4.3.6
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -281,8 +281,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       debug:
-        specifier: ^4.3.5
-        version: 4.3.5
+        specifier: ^4.3.6
+        version: 4.3.6
       defu:
         specifier: ^6.1.4
         version: 6.1.4
@@ -5510,7 +5510,7 @@ snapshots:
       '@babel/traverse': 7.24.8
       '@babel/types': 7.24.9
       convert-source-map: 2.0.0
-      debug: 4.3.5
+      debug: 4.3.6
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -5570,7 +5570,7 @@ snapshots:
       '@babel/core': 7.24.9
       '@babel/helper-compilation-targets': 7.24.8
       '@babel/helper-plugin-utils': 7.24.8
-      debug: 4.3.5
+      debug: 4.3.6
       lodash.debounce: 4.0.8
       resolve: 1.22.8
     transitivePeerDependencies:
@@ -6280,7 +6280,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.24.7
       '@babel/parser': 7.24.8
       '@babel/types': 7.24.9
-      debug: 4.3.5
+      debug: 4.3.6
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -6559,7 +6559,7 @@ snapshots:
       '@antfu/install-pkg': 0.1.1
       '@antfu/utils': 0.7.10
       '@iconify/types': 2.0.0
-      debug: 4.3.5
+      debug: 4.3.6
       kolorist: 1.8.0
       local-pkg: 0.5.0
       mlly: 1.7.1
@@ -6616,14 +6616,14 @@ snapshots:
   '@naria2/linux-x64@0.1.0-beta.0':
     optional: true
 
-  '@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.5)(utf-8-validate@6.0.4)':
+  '@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.6)(utf-8-validate@6.0.4)':
     dependencies:
       '@breadc/color': 0.9.7
       '@breadc/death': 0.9.7
       '@naria2/options': 0.0.25(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       execa: 8.0.1
       finalhandler: 1.2.0
-      http-proxy-middleware: 2.0.6(debug@4.3.5)
+      http-proxy-middleware: 2.0.6(debug@4.3.6)
       maria2: 0.3.3(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       open: 10.1.0
       portfinder: 1.0.32
@@ -7250,7 +7250,7 @@ snapshots:
       '@vueuse/shared': 10.11.0(vue@3.4.34(typescript@5.5.4))
       vue-demi: 0.14.8(vue@3.4.34(typescript@5.5.4))
     optionalDependencies:
-      axios: 1.7.2(debug@4.3.5)
+      axios: 1.7.2(debug@4.3.6)
       focus-trap: 7.5.4
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -7393,9 +7393,9 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.0.0
 
-  axios@1.7.2(debug@4.3.5):
+  axios@1.7.2(debug@4.3.6):
     dependencies:
-      follow-redirects: 1.15.6(debug@4.3.5)
+      follow-redirects: 1.15.6(debug@4.3.6)
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -8424,9 +8424,9 @@ snapshots:
     dependencies:
       tabbable: 6.2.0
 
-  follow-redirects@1.15.6(debug@4.3.5):
+  follow-redirects@1.15.6(debug@4.3.6):
     optionalDependencies:
-      debug: 4.3.5
+      debug: 4.3.6
 
   for-each@0.3.3:
     dependencies:
@@ -8681,20 +8681,20 @@ snapshots:
 
   http-parser-js@0.4.13: {}
 
-  http-proxy-middleware@2.0.6(debug@4.3.5):
+  http-proxy-middleware@2.0.6(debug@4.3.6):
     dependencies:
       '@types/http-proxy': 1.17.14
-      http-proxy: 1.18.1(debug@4.3.5)
+      http-proxy: 1.18.1(debug@4.3.6)
       is-glob: 4.0.3
       is-plain-obj: 3.0.0
       micromatch: 4.0.7
     transitivePeerDependencies:
       - debug
 
-  http-proxy@1.18.1(debug@4.3.5):
+  http-proxy@1.18.1(debug@4.3.6):
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.6(debug@4.3.5)
+      follow-redirects: 1.15.6(debug@4.3.6)
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -8972,9 +8972,9 @@ snapshots:
 
   leven@3.1.0: {}
 
-  libaria2@1.0.95(bufferutil@4.0.8)(debug@4.3.5)(utf-8-validate@6.0.4):
+  libaria2@1.0.95(bufferutil@4.0.8)(debug@4.3.6)(utf-8-validate@6.0.4):
     dependencies:
-      axios: 1.7.2(debug@4.3.5)
+      axios: 1.7.2(debug@4.3.6)
       isomorphic-ws: 5.0.0(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))
       ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
     transitivePeerDependencies:
@@ -9217,14 +9217,14 @@ snapshots:
   napi-macros@2.2.2:
     optional: true
 
-  naria2@0.0.25(@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.5)(utf-8-validate@6.0.4))(bufferutil@4.0.8)(utf-8-validate@6.0.4):
+  naria2@0.0.25(@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.6)(utf-8-validate@6.0.4))(bufferutil@4.0.8)(utf-8-validate@6.0.4):
     dependencies:
       '@naria2/options': 0.0.25(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       maria2: 0.3.3(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       mitt: 3.0.1
       type-fest: 4.22.1
     optionalDependencies:
-      '@naria2/node': 0.0.25(bufferutil@4.0.8)(debug@4.3.5)(utf-8-validate@6.0.4)
+      '@naria2/node': 0.0.25(bufferutil@4.0.8)(debug@4.3.6)(utf-8-validate@6.0.4)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -9352,9 +9352,9 @@ snapshots:
       '@total-typescript/ts-reset': 0.5.1
       '@types/fs-extra': 11.0.4
       '@types/node': 20.14.13
-      axios: 1.7.2(debug@4.3.5)
+      axios: 1.7.2(debug@4.3.6)
       breadc: 0.9.7
-      debug: 4.3.5
+      debug: 4.3.6
       find-up: 7.0.0
       fs-extra: 11.2.0
       globby: 14.0.2
@@ -10035,7 +10035,7 @@ snapshots:
 
   spdy-transport@3.0.0:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.6
       detect-node: 2.1.0
       hpack.js: 2.1.6
       obuf: 1.1.2
@@ -10046,7 +10046,7 @@ snapshots:
 
   spdy@4.0.2:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.6
       handle-thing: 2.0.1
       http-deceiver: 1.2.7
       select-hose: 2.0.0
@@ -10619,7 +10619,7 @@ snapshots:
   vite-node@2.0.4(@types/node@20.14.13)(terser@5.31.3):
     dependencies:
       cac: 6.7.14
-      debug: 4.3.5
+      debug: 4.3.6
       pathe: 1.1.2
       tinyrainbow: 1.2.0
       vite: 5.3.5(@types/node@20.14.13)(terser@5.31.3)
@@ -10711,7 +10711,7 @@ snapshots:
       '@vitest/spy': 2.0.4
       '@vitest/utils': 2.0.4
       chai: 5.1.1
-      debug: 4.3.5
+      debug: 4.3.6
       execa: 8.0.1
       magic-string: 0.30.10
       pathe: 1.1.2
