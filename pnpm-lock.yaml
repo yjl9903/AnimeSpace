@@ -72,8 +72,8 @@ importers:
         specifier: ^0.61.9
         version: 0.61.9
       '@vitejs/plugin-vue':
-        specifier: ^5.1.1
-        version: 5.1.1(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))(vue@3.4.35(typescript@5.5.4))
+        specifier: ^5.1.2
+        version: 5.1.2(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))(vue@3.4.35(typescript@5.5.4))
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -2013,8 +2013,8 @@ packages:
     resolution: {integrity: sha512-IBBb+iI2NLu4VQn3Vwldyi2QwaXt5+hTyh58ggAMoCGE6DJmPvwL3KPBWcJl1m9LYPChBLE980Jw+CS4Wokqxw==}
     hasBin: true
 
-  '@vitejs/plugin-vue@5.1.1':
-    resolution: {integrity: sha512-sDckXxlHpMsjRQbAH9WanangrfrblsOd3pNifePs+FOHjJg1jfWq5L/P0PsBRndEt3nmdUnmvieP8ULDeX5AvA==}
+  '@vitejs/plugin-vue@5.1.2':
+    resolution: {integrity: sha512-nY9IwH12qeiJqumTCLJLE7IiNx7HZ39cbHaysEUd+Myvbz9KAqd2yq+U01Kab1R/H1BmiyM2ShTYlNH32Fzo3A==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
@@ -7317,7 +7317,7 @@ snapshots:
 
   '@vercel/ncc@0.38.1': {}
 
-  '@vitejs/plugin-vue@5.1.1(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))(vue@3.4.35(typescript@5.5.4))':
+  '@vitejs/plugin-vue@5.1.2(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))(vue@3.4.35(typescript@5.5.4))':
     dependencies:
       vite: 5.3.5(@types/node@20.14.13)(terser@5.31.3)
       vue: 3.4.35(typescript@5.5.4)
@@ -10885,7 +10885,7 @@ snapshots:
       '@shikijs/core': 1.11.0
       '@shikijs/transformers': 1.11.0
       '@types/markdown-it': 14.1.1
-      '@vitejs/plugin-vue': 5.1.1(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))(vue@3.4.35(typescript@5.5.4))
+      '@vitejs/plugin-vue': 5.1.2(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))(vue@3.4.35(typescript@5.5.4))
       '@vue/devtools-api': 7.3.6
       '@vue/shared': 3.4.33
       '@vueuse/core': 10.11.0(vue@3.4.35(typescript@5.5.4))
@@ -10932,7 +10932,7 @@ snapshots:
       '@shikijs/core': 1.11.0
       '@shikijs/transformers': 1.11.0
       '@types/markdown-it': 14.1.1
-      '@vitejs/plugin-vue': 5.1.1(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))(vue@3.4.35(typescript@5.5.4))
+      '@vitejs/plugin-vue': 5.1.2(vite@5.3.5(@types/node@20.14.13)(terser@5.31.3))(vue@3.4.35(typescript@5.5.4))
       '@vue/devtools-api': 7.3.6
       '@vue/shared': 3.4.33
       '@vueuse/core': 10.11.0(vue@3.4.35(typescript@5.5.4))
