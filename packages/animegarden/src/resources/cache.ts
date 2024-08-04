@@ -74,8 +74,8 @@ export class ResourcesCache {
     await Promise.all([this.animeRoot.ensureDir(), this.resourcesRoot.ensureDir()]);
 
     const latest = await this.loadLatestResources();
-    const timestamp = latest?.resources[0]?.createdAt
-      ? new Date(latest.resources[0].createdAt)
+    const timestamp = latest?.resources[0]?.fetchedAt
+      ? new Date(latest.resources[0].fetchedAt)
       : undefined;
 
     // There is no cache found or the cache is old
@@ -89,7 +89,7 @@ export class ResourcesCache {
       retry: 10,
       count: -1,
       signal: ac.signal,
-      magnet: true,
+      tracker: true,
       headers: {
         'Cache-Control': 'no-store'
       },
@@ -99,10 +99,11 @@ export class ResourcesCache {
           return;
         }
 
-        for (const item of delta) {
-          if (new Date(item.createdAt).getTime() < timestamp.getTime()) {
-            ac.abort();
-          }
+        const newItems = delta.filter(
+          (item) => new Date(item.fetchedAt).getTime() > timestamp.getTime()
+        );
+        if (newItems.length === 0) {
+          ac.abort();
         }
       }
     });
