@@ -150,7 +150,7 @@ export class Aria2Client extends DownloadClient {
           const status = await client.tellStatus(gid);
           await that.updateStatus(task, status);
           if (task.state === 'error') {
-            if (status.errorMessage) {
+            if (status.errorMessage && status.errorMessage.indexOf('[METADATA]') === -1) {
               const REs = [
                 /File (.*) exists, but a control file\(\*.aria2\) does not exist/,
                 /文件 (.*) 已存在，但是控制文件 \(\*.aria2\) 不存在/,
