@@ -235,8 +235,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       undici:
-        specifier: ^6.19.7
-        version: 6.19.7
+        specifier: ^6.19.8
+        version: 6.19.8
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.6
@@ -305,8 +305,8 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0
       undici:
-        specifier: ^6.19.7
-        version: 6.19.7
+        specifier: ^6.19.8
+        version: 6.19.8
       yaml:
         specifier: ^2.5.0
         version: 2.5.0
@@ -4963,8 +4963,8 @@ packages:
   undici-types@6.19.6:
     resolution: {integrity: sha512-e/vggGopEfTKSvj4ihnOLTsqhrKRN3LeO6qSN/GxohhuRv8qH9bNQ4B8W7e/vFL+0XTnmHPB4/kegunZGA4Org==}
 
-  undici@6.19.7:
-    resolution: {integrity: sha512-HR3W/bMGPSr90i8AAp2C4DM3wChFdJPLrWYpIS++LxS8K+W535qftjt+4MyjNYHeWabMj1nvtmLIi7l++iq91A==}
+  undici@6.19.8:
+    resolution: {integrity: sha512-U8uCCl2x9TK3WANvmBavymRzxbfFYG+tAu+fgx3zxQy3qdagQqBLwJVrdyO1TBfUXvfKveMKJZhpvUYoOjM+4g==}
     engines: {node: '>=18.17'}
 
   unicode-canonical-property-names-ecmascript@2.0.0:
@@ -10511,7 +10511,7 @@ snapshots:
 
   undici-types@6.19.6: {}
 
-  undici@6.19.7: {}
+  undici@6.19.8: {}
 
   unicode-canonical-property-names-ecmascript@2.0.0: {}
 
