@@ -18,7 +18,7 @@ importers:
         version: 20.16.1
       bumpp:
         specifier: latest
-        version: 9.5.1
+        version: 9.5.2
       optc:
         specifier: ^0.6.4
         version: 0.6.4
@@ -44,8 +44,8 @@ importers:
         specifier: ^5.4.2
         version: 5.4.2(@types/node@20.16.1)(terser@5.31.6)
       vitepress:
-        specifier: 1.3.3
-        version: 1.3.3(@algolia/client-search@5.1.1)(@types/node@20.16.1)(axios@1.7.4)(postcss@8.4.41)(search-insights@2.16.3)(terser@5.31.6)(typescript@5.5.4)
+        specifier: 1.3.4
+        version: 1.3.4(@algolia/client-search@5.1.1)(@types/node@20.16.1)(axios@1.7.4)(postcss@8.4.41)(search-insights@2.16.3)(terser@5.31.6)(typescript@5.5.4)
       vitest:
         specifier: ^2.0.5
         version: 2.0.5(@types/node@20.16.1)(terser@5.31.6)
@@ -96,8 +96,8 @@ importers:
         specifier: ^0.20.1
         version: 0.20.1(vite@5.4.2(@types/node@20.16.1)(terser@5.31.6))(workbox-build@7.1.1)(workbox-window@7.1.0)
       vitepress:
-        specifier: 1.3.3
-        version: 1.3.3(@algolia/client-search@5.1.1)(@types/node@20.16.1)(axios@1.7.4)(postcss@8.4.41)(search-insights@2.16.3)(terser@5.31.6)(typescript@5.5.4)
+        specifier: 1.3.4
+        version: 1.3.4(@algolia/client-search@5.1.1)(@types/node@20.16.1)(axios@1.7.4)(postcss@8.4.41)(search-insights@2.16.3)(terser@5.31.6)(typescript@5.5.4)
       workbox-window:
         specifier: ^7.1.0
         version: 7.1.0
@@ -2360,8 +2360,8 @@ packages:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==}
     engines: {node: '>=6'}
 
-  bumpp@9.5.1:
-    resolution: {integrity: sha512-crWpuPh5/SO84HTsIIQbwFpjwg8Zadm3udyj2YfnSSijCvjxwdtmXy2vQh6GLMWJ5LgKwmmMIn85qJ4AIHKlhg==}
+  bumpp@9.5.2:
+    resolution: {integrity: sha512-L0awRXkMY4MLasVy3dyfM+2aU2Q4tyCDU45O7hxiB2SHZF8jurw3nmyifrtFJ4cI/JZIvu5ChCtf0i8yLfnohQ==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -5163,8 +5163,8 @@ packages:
       terser:
         optional: true
 
-  vitepress@1.3.3:
-    resolution: {integrity: sha512-6UzEw/wZ41S/CATby7ea7UlffvRER/uekxgN6hbEvSys9ukmLOKsz87Ehq9yOx1Rwiw+Sj97yjpivP8w1sUmng==}
+  vitepress@1.3.4:
+    resolution: {integrity: sha512-I1/F6OW1xl3kW4PaIMC6snxjWgf3qfziq2aqsDoFc/Gt41WbcRv++z8zjw8qGRIJ+I4bUW7ZcKFDHHN/jkH9DQ==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4
@@ -7654,7 +7654,7 @@ snapshots:
 
   builtin-modules@3.3.0: {}
 
-  bumpp@9.5.1:
+  bumpp@9.5.2:
     dependencies:
       '@jsdevtools/ez-spawn': 3.0.4
       c12: 1.11.1
@@ -10712,7 +10712,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.31.6
 
-  vitepress@1.3.3(@algolia/client-search@5.1.1)(@types/node@20.16.1)(axios@1.7.4)(postcss@8.4.41)(search-insights@2.16.3)(terser@5.31.6)(typescript@5.5.4):
+  vitepress@1.3.4(@algolia/client-search@5.1.1)(@types/node@20.16.1)(axios@1.7.4)(postcss@8.4.41)(search-insights@2.16.3)(terser@5.31.6)(typescript@5.5.4):
     dependencies:
       '@docsearch/css': 3.6.1
       '@docsearch/js': 3.6.1(@algolia/client-search@5.1.1)(search-insights@2.16.3)
