@@ -93,8 +93,8 @@ importers:
         specifier: ^5.4.2
         version: 5.4.2(@types/node@20.16.3)(terser@5.31.6)
       vite-plugin-pwa:
-        specifier: ^0.20.2
-        version: 0.20.2(vite@5.4.2(@types/node@20.16.3)(terser@5.31.6))(workbox-build@7.1.1)(workbox-window@7.1.0)
+        specifier: ^0.20.3
+        version: 0.20.3(vite@5.4.2(@types/node@20.16.3)(terser@5.31.6))(workbox-build@7.1.1)(workbox-window@7.1.0)
       vitepress:
         specifier: 1.3.4
         version: 1.3.4(@algolia/client-search@5.2.4)(@types/node@20.16.3)(axios@1.7.7)(postcss@8.4.43)(search-insights@2.17.0)(terser@5.31.6)(typescript@5.5.4)
@@ -5100,8 +5100,8 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
-  vite-plugin-pwa@0.20.2:
-    resolution: {integrity: sha512-9wLqHt/NjP7YKj6CCEKS5+Fhffo6tHGrAa+wvoqCG59oZkmpX5lBBl38MVjLaO4ELrLqjdtUhILJDwZu+q/hGQ==}
+  vite-plugin-pwa@0.20.3:
+    resolution: {integrity: sha512-aqCOWWSwfX4o6H+6NyEvhzFs3eENBqYFKUK4FYx5OZ3jGio73BE189bPz9+BBgjHBLozldQVSmZTHySVC2zNkg==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       '@vite-pwa/assets-generator': ^0.2.4
@@ -10635,7 +10635,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-pwa@0.20.2(vite@5.4.2(@types/node@20.16.3)(terser@5.31.6))(workbox-build@7.1.1)(workbox-window@7.1.0):
+  vite-plugin-pwa@0.20.3(vite@5.4.2(@types/node@20.16.3)(terser@5.31.6))(workbox-build@7.1.1)(workbox-window@7.1.0):
     dependencies:
       debug: 4.3.6
       pretty-bytes: 6.1.1
