@@ -159,8 +159,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       webtorrent:
-        specifier: ^2.5.0
-        version: 2.5.0
+        specifier: ^2.5.1
+        version: 2.5.1
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -5240,8 +5240,8 @@ packages:
     resolution: {integrity: sha512-ms2rE5MEg1KXQX45sjl2QaIIevhpPogqoFz7Z1MAJYxWUuxFfI3L0SoiifrTNrWJiJiuFn/Dsf5OIGUWJFdU5g==}
     engines: {node: '>=16.0.0'}
 
-  webtorrent@2.5.0:
-    resolution: {integrity: sha512-7ijwyHeQSQB4C9f7FV1K9hbNnxPcjKYES/7zz6GDeHXL9qJyR3ceb7/ZRH1QhrnOPhTspmS0HXOh6El7tQBJFg==}
+  webtorrent@2.5.1:
+    resolution: {integrity: sha512-2cRka7Azd4jbLVQ0GZJF1jAOZbBrTQGdWAqkL+5y/jfh/ETC63r9Je6gmVDZRPdLpNEgqN2sdryRaFbWgGCqPw==}
     engines: {node: '>=16'}
 
   whatwg-url@7.1.0:
@@ -6899,7 +6899,7 @@ snapshots:
     dependencies:
       debug: 4.3.7
       err-code: 3.0.1
-      streamx: 2.17.0
+      streamx: 2.20.0
       uint8-util: 2.2.5
       webrtc-polyfill: 1.1.8
     transitivePeerDependencies:
@@ -6909,7 +6909,7 @@ snapshots:
     dependencies:
       debug: 4.3.7
       queue-microtask: 1.2.3
-      streamx: 2.17.0
+      streamx: 2.20.0
       uint8-util: 2.2.5
       ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
     transitivePeerDependencies:
@@ -7524,7 +7524,7 @@ snapshots:
       bitfield: 4.2.0
       debug: 4.3.7
       rc4: 0.1.5
-      streamx: 2.17.0
+      streamx: 2.20.0
       throughput: 1.0.1
       uint8-util: 2.2.5
       unordered-array-remove: 1.0.2
@@ -10079,7 +10079,7 @@ snapshots:
   speed-limiter@1.0.2:
     dependencies:
       limiter: 1.1.5
-      streamx: 2.17.0
+      streamx: 2.20.0
 
   split@1.0.1:
     dependencies:
@@ -10107,7 +10107,6 @@ snapshots:
       text-decoder: 1.1.1
     optionalDependencies:
       bare-events: 2.4.2
-    optional: true
 
   string-argv@0.3.2: {}
 
@@ -10277,7 +10276,6 @@ snapshots:
   text-decoder@1.1.1:
     dependencies:
       b4a: 1.6.6
-    optional: true
 
   through@2.3.8: {}
 
@@ -10861,7 +10859,7 @@ snapshots:
       node-datachannel: 0.10.1
       node-domexception: 1.0.0
 
-  webtorrent@2.5.0:
+  webtorrent@2.5.1:
     dependencies:
       '@silentbot1/nat-api': 0.4.7
       '@thaunknown/simple-peer': 10.0.10
