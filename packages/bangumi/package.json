@@ -47,7 +47,7 @@
     "@breadc/color": "^0.9.7",
     "animegarden": "^0.3.0",
     "bgmc": "^0.0.10",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.1.0",
     "fs-extra": "^11.2.0",
     "prompts": "^2.4.2"
   },
