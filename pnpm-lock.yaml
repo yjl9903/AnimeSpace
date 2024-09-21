@@ -53,8 +53,8 @@ importers:
   docs:
     dependencies:
       '@vueuse/core':
-        specifier: ^11.0.3
-        version: 11.0.3(vue@3.5.7(typescript@5.5.4))
+        specifier: ^11.1.0
+        version: 11.1.0(vue@3.5.7(typescript@5.5.4))
       vue:
         specifier: ^3.5.7
         version: 3.5.7(typescript@5.5.4)
@@ -2049,6 +2049,9 @@ packages:
   '@vueuse/core@11.0.3':
     resolution: {integrity: sha512-RENlh64+SYA9XMExmmH1a3TPqeIuJBNNB/63GT35MZI+zpru3oMRUA6cEFr9HmGqEgUisurwGwnIieF6qu3aXw==}
 
+  '@vueuse/core@11.1.0':
+    resolution: {integrity: sha512-P6dk79QYA6sKQnghrUz/1tHi0n9mrb/iO1WTMk/ElLmTyNqgDeSZ3wcDf6fRBGzRJbeG1dxzEOvLENMjr+E3fg==}
+
   '@vueuse/integrations@11.0.3':
     resolution: {integrity: sha512-w6CDisaxs19S5Fd+NPPLFaA3GoX5gxuxrbTTBu0EYap7oH13w75L6C/+7e9mcoF9akhcR6GyYajwVMQEjdapJg==}
     peerDependencies:
@@ -2093,8 +2096,14 @@ packages:
   '@vueuse/metadata@11.0.3':
     resolution: {integrity: sha512-+FtbO4SD5WpsOcQTcC0hAhNlOid6QNLzqedtquTtQ+CRNBoAt9GuV07c6KNHK1wCmlq8DFPwgiLF2rXwgSHX5Q==}
 
+  '@vueuse/metadata@11.1.0':
+    resolution: {integrity: sha512-l9Q502TBTaPYGanl1G+hPgd3QX5s4CGnpXriVBR5fEZ/goI6fvDaVmIl3Td8oKFurOxTmbXvBPSsgrd6eu6HYg==}
+
   '@vueuse/shared@11.0.3':
     resolution: {integrity: sha512-0rY2m6HS5t27n/Vp5cTDsKTlNnimCqsbh/fmT2LgE+aaU42EMfXo8+bNX91W9I7DDmxfuACXMmrd7d79JxkqWA==}
+
+  '@vueuse/shared@11.1.0':
+    resolution: {integrity: sha512-YUtIpY122q7osj+zsNMFAfMTubGz0sn5QzE5gPzAIiCmtt2ha3uQUY1+JPyL4gRCTsLPX82Y9brNbo/aqlA91w==}
 
   '@webtorrent/http-node@1.3.0':
     resolution: {integrity: sha512-GWZQKroPES4z91Ijx6zsOsb7+USOxjy66s8AoTWg0HiBBdfnbtf9aeh3Uav0MgYn4BL8Q7tVSUpd0gGpngKGEQ==}
@@ -7237,6 +7246,16 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
+  '@vueuse/core@11.1.0(vue@3.5.7(typescript@5.5.4))':
+    dependencies:
+      '@types/web-bluetooth': 0.0.20
+      '@vueuse/metadata': 11.1.0
+      '@vueuse/shared': 11.1.0(vue@3.5.7(typescript@5.5.4))
+      vue-demi: 0.14.10(vue@3.5.7(typescript@5.5.4))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
   '@vueuse/integrations@11.0.3(axios@1.7.7)(focus-trap@7.5.4)(vue@3.5.7(typescript@5.5.4))':
     dependencies:
       '@vueuse/core': 11.0.3(vue@3.5.7(typescript@5.5.4))
@@ -7251,7 +7270,16 @@ snapshots:
 
   '@vueuse/metadata@11.0.3': {}
 
+  '@vueuse/metadata@11.1.0': {}
+
   '@vueuse/shared@11.0.3(vue@3.5.7(typescript@5.5.4))':
+    dependencies:
+      vue-demi: 0.14.10(vue@3.5.7(typescript@5.5.4))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
+  '@vueuse/shared@11.1.0(vue@3.5.7(typescript@5.5.4))':
     dependencies:
       vue-demi: 0.14.10(vue@3.5.7(typescript@5.5.4))
     transitivePeerDependencies:
@@ -10662,7 +10690,7 @@ snapshots:
       '@vitejs/plugin-vue': 5.1.4(vite@5.4.7(@types/node@20.16.5)(terser@5.31.6))(vue@3.5.7(typescript@5.5.4))
       '@vue/devtools-api': 7.4.4
       '@vue/shared': 3.5.3
-      '@vueuse/core': 11.0.3(vue@3.5.7(typescript@5.5.4))
+      '@vueuse/core': 11.1.0(vue@3.5.7(typescript@5.5.4))
       '@vueuse/integrations': 11.0.3(axios@1.7.7)(focus-trap@7.5.4)(vue@3.5.7(typescript@5.5.4))
       focus-trap: 7.5.4
       mark.js: 8.11.1
