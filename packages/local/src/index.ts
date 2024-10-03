@@ -112,7 +112,11 @@ export async function Local(options: LocalOptions): Promise<Plugin> {
               extension: result.parsed.file.extension
             });
             // Hack: check the format filename is valid
-            if (filename.includes('{fansub}' || '{episode}' || '{season}')) {
+            if (
+              filename.includes('{fansub}') ||
+              filename.includes('{episode}') ||
+              filename.includes('{season}')
+            ) {
               continue;
             }
 
