@@ -111,8 +111,8 @@ importers:
         specifier: ^0.9.7
         version: 0.9.7
       '@naria2/node':
-        specifier: ^0.0.25
-        version: 0.0.25(bufferutil@4.0.8)(debug@4.3.7)(utf-8-validate@6.0.4)
+        specifier: ^0.1.0
+        version: 0.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
@@ -150,8 +150,8 @@ importers:
         specifier: ^0.1.6
         version: 0.1.6
       naria2:
-        specifier: ^0.0.25
-        version: 0.0.25(@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.7)(utf-8-validate@6.0.4))(bufferutil@4.0.8)(utf-8-validate@6.0.4)
+        specifier: ^0.1.0
+        version: 0.1.0(@naria2/node@0.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       pathe:
         specifier: ^1.1.2
         version: 1.1.2
@@ -1552,21 +1552,21 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@naria2/node@0.0.25':
-    resolution: {integrity: sha512-xtQi1xUv5kgS57SojLuzNygjtYkAL56cfi1XjteVh9lY/WbFyTRUBOyZWh/zAXxBY88B29nAHBWnzmmBp9wrIw==}
+  '@naria2/node@0.1.0':
+    resolution: {integrity: sha512-G3BIsKIG0yJyrugh1agfmXMu0Y7WPY9th+oEqJLtb/4Z7gvRKAMGojMxEUQl3ECVGx8F79gR3iuH9CjjFUuE/A==}
     engines: {node: '>=v18.0.0'}
 
-  '@naria2/options@0.0.25':
-    resolution: {integrity: sha512-CPh6z8qzT44noTdTmAJiioZRPhhDFBv+ZmU+UbeabERDt2SO9UsHafb9vCQIhTF4XmqOAnlhuUJXF0fSCfr2VQ==}
+  '@naria2/options@0.1.0':
+    resolution: {integrity: sha512-ks3708f9hN+O0+0mgw2r0xtHnSWdqRBa27Xqid8sIOGEvWxQ6Eh0HtH5E+XDOaXSl/Z7qjmfZu20Ye9eVao8zw==}
     engines: {node: '>=v18.0.0'}
 
-  '@naria2/win32-ia32@0.1.0-beta.0':
-    resolution: {integrity: sha512-AKOzpUk4sC994vCA4jfX9hj+dbLD9uN6tgM6VJX46OkjA7rkVbPDq8fGnU0irYM0DqZRNxMmM6P2VL+DpWsDYw==}
+  '@naria2/win32-ia32@1.37.0-beta.0':
+    resolution: {integrity: sha512-/3Q3blR2H64F4FlBXa2V9pj+qA6ZCcu9Fe47sIahqqoK+HrHW7l/ReLyQslBAXchd/bdWMH3N8G/fv83pk4Pyg==}
     cpu: [ia32]
     os: [win32]
 
-  '@naria2/win32-x64@0.1.0-beta.0':
-    resolution: {integrity: sha512-xyzT5JMgrjW0hMZs29vvXxgRpiMvwr2hU6rGME/UdPCRax2lD3k87u7rMnVH6j1jlLnZLXyhPTFyuaiqTUiVOQ==}
+  '@naria2/win32-x64@1.37.0-beta.0':
+    resolution: {integrity: sha512-G8Wb1psV9I4eEEz9xcnlKaVFOrqyZ46EehLBjr6yU5fm6U1scRt9D0bSTrPy+rr3AfTTBEyuwFzXAuYh2iWudg==}
     cpu: [x64]
     os: [win32]
 
@@ -2192,9 +2192,6 @@ packages:
     resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==}
     engines: {node: '>=12'}
 
-  async@2.6.4:
-    resolution: {integrity: sha512-mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==}
-
   async@3.2.6:
     resolution: {integrity: sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==}
 
@@ -2668,14 +2665,6 @@ packages:
       supports-color:
         optional: true
 
-  debug@3.2.7:
-    resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   debug@4.3.7:
     resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
     engines: {node: '>=6.0'}
@@ -2803,6 +2792,10 @@ packages:
 
   encodeurl@1.0.2:
     resolution: {integrity: sha512-TPJXq8JqFaVYm2CWmPvnP2Iyo4ZSM7/QKcSmuMLDObfpH5fi7RUGmd/rTDf+rut/saiDiQEeVTNgAmJEdAOx0w==}
+    engines: {node: '>= 0.8'}
+
+  encodeurl@2.0.0:
+    resolution: {integrity: sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==}
     engines: {node: '>= 0.8'}
 
   end-of-stream@1.4.4:
@@ -2978,8 +2971,8 @@ packages:
     resolution: {integrity: sha512-5uXcUVftlQMFnWC9qu/svkWv3GTd2PfUhK/3PLkYNAe7FbqJMt3515HaxE6eRL74GdsriiwujiawdaB1BpEISg==}
     engines: {node: '>= 0.8'}
 
-  finalhandler@1.3.0:
-    resolution: {integrity: sha512-bmwQPHFq/qiWp9CbNbCQU73klT+i5qwP/0tah3MGHp26vUt2YV4WkdtXRqOZo+H+4m38k8epFHOvO4BRuAuohw==}
+  finalhandler@1.3.1:
+    resolution: {integrity: sha512-6BN9trH7bp3qvnrRyzsBz+g3lZxTNZTbVO2EV1CS0WIcDbawYVdYvGflME/9QP0h0pYlCDBCTjYa9nZzMDpyxQ==}
     engines: {node: '>= 0.8'}
 
   find-up@7.0.0:
@@ -3090,6 +3083,10 @@ packages:
 
   get-port-please@3.1.2:
     resolution: {integrity: sha512-Gxc29eLs1fbn6LQ4jSU4vXjlwyZhF5HsGuMAa7gqBP4Rw4yxxltyDUuF5MBclFzDTXO+ACchGQoeela4DSfzdQ==}
+
+  get-port@7.1.0:
+    resolution: {integrity: sha512-QB9NKEeDg3xxVwCCwJQ9+xycaz6pBB6iQ76wiWMl1927n0Kir6alPiP+yuiICLLU4jpMe08dXfpebuQppFA2zw==}
+    engines: {node: '>=16'}
 
   get-stdin@9.0.0:
     resolution: {integrity: sha512-dVKBjfWisLAicarI2Sf+JuBE/DghV4UzNAVe9yhEJuzeREd3JhOTE9cUaJTeSa77fsbQUK3pcOpJfM59+VKZaA==}
@@ -3225,14 +3222,9 @@ packages:
   http-parser-js@0.4.13:
     resolution: {integrity: sha512-u8u5ZaG0Tr/VvHlucK2ufMuOp4/5bvwgneXle+y228K5rMbJOlVjThONcaAw3ikAy8b2OO9RfEucdMHFz3UWMA==}
 
-  http-proxy-middleware@2.0.6:
-    resolution: {integrity: sha512-ya/UeJ6HVBYxrgYotAZo1KvPWlgB48kUJLDePFeneHsVujFaW5WNj2NgWCAE//B1Dl02BIfYlpNgBy8Kf8Rjmw==}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      '@types/express': ^4.17.13
-    peerDependenciesMeta:
-      '@types/express':
-        optional: true
+  http-proxy-middleware@3.0.2:
+    resolution: {integrity: sha512-fBLFpmvDzlxdckwZRjM0wWtwDZ4KBtQ8NFqhrFKoEtK4myzuiumBuNTxD+F4cVbXfOZljIbrynmvByofDzT7Ag==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
   http-proxy@1.18.1:
     resolution: {integrity: sha512-7mz/721AbnJwIVbnaSv1Cz3Am0ZLT/UBwkC92VlxhXv/k/BBQfM2fXElQNC27BVGr0uwUpplYPQM9LnaBMR5NQ==}
@@ -3398,13 +3390,13 @@ packages:
     resolution: {integrity: sha512-lJJV/5dYS+RcL8uQdBDW9c9uWFLLBNRyFhnAKXw5tVqLlKZ4RMGZKv+YQ/IA3OhD+RpbJa1LLFM1FQPGyIXvOA==}
     engines: {node: '>=12'}
 
-  is-plain-obj@3.0.0:
-    resolution: {integrity: sha512-gwsOE28k+23GP1B6vFl1oVh/WOzmawBrKwo5Ev6wMKzPkaXaCDIQKzLnvsA42DRlbVTWorkgTKIviAKCWkfUwA==}
-    engines: {node: '>=10'}
-
   is-plain-obj@4.1.0:
     resolution: {integrity: sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==}
     engines: {node: '>=12'}
+
+  is-plain-object@5.0.0:
+    resolution: {integrity: sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==}
+    engines: {node: '>=0.10.0'}
 
   is-reference@1.2.1:
     resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
@@ -3761,10 +3753,6 @@ packages:
   mkdirp-classic@0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
 
-  mkdirp@0.5.6:
-    resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
-    hasBin: true
-
   mkdirp@1.0.4:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
@@ -3821,11 +3809,11 @@ packages:
   napi-macros@2.2.2:
     resolution: {integrity: sha512-hmEVtAGYzVQpCKdbQea4skABsdXW4RUh5t5mJ2zzqowJS2OyXZTU1KhDVFhx+NlWZ4ap9mqR9TcDO3LTTttd+g==}
 
-  naria2@0.0.25:
-    resolution: {integrity: sha512-VkowqttOmD/1B7XcEvaR+zsXbmZ3vtD6UmFLDyDtRJjsJQbBdbEN2tsj4tgvhTr7HcOJD4ffew+w2gxoGx4qaA==}
+  naria2@0.1.0:
+    resolution: {integrity: sha512-d0Re2xFAV54UPJ9AD+wJJV9Bm7JFjwkjiFjUhhDmqaCvkj4hFflIX7eyScsfEoYQCZWY1I7nPxjVLDJNfiPT/w==}
     engines: {node: '>=v18.0.0'}
     peerDependencies:
-      '@naria2/node': 0.0.25
+      '@naria2/node': 0.1.0
     peerDependenciesMeta:
       '@naria2/node':
         optional: true
@@ -4078,10 +4066,6 @@ packages:
 
   pkg-types@1.2.0:
     resolution: {integrity: sha512-+ifYuSSqOQ8CqP4MbZA5hDpb97n3E8SVWdJe+Wms9kj745lmd3b7EZJiqvmLwAlmRfjrI7Hi5z3kdBJ93lFNPA==}
-
-  portfinder@1.0.32:
-    resolution: {integrity: sha512-on2ZJVVDXRADWE6jnQaX0ioEylzgBpQk8r55NE4wjXW1ZxO+BgDlY6DXwj20i0V8eB4SenDQ00WEaxfiIQPcxg==}
-    engines: {node: '>= 0.12.0'}
 
   possible-typed-array-names@1.0.0:
     resolution: {integrity: sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==}
@@ -4507,11 +4491,19 @@ packages:
     resolution: {integrity: sha512-qqWzuOjSFOuqPjFe4NOsMLafToQQwBSOEpS+FwEt3A2V3vKubTquT3vmLTQpFgMXp8AlFWFuP1qKaJZOtPpVXg==}
     engines: {node: '>= 0.8.0'}
 
+  send@0.19.0:
+    resolution: {integrity: sha512-dW41u5VfLXu8SJh5bwRmyYUbAoSB3c9uQh6L8h/KtsFREPWpbX1lrljJo186Jc4nmci/sGUZ9a0a0J2zgfq2hw==}
+    engines: {node: '>= 0.8.0'}
+
   serialize-javascript@6.0.2:
     resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
 
   serve-static@1.15.0:
     resolution: {integrity: sha512-XGuRDNjXUijsUL0vl6nSD7cwURuzEgglbOaFuZM9g3kwDXOWVTck0jLzjPzGD+TazWbboZYu52/9/XPdUgne9g==}
+    engines: {node: '>= 0.8.0'}
+
+  serve-static@1.16.2:
+    resolution: {integrity: sha512-VqpjJZKadQB/PEbEwvFdO43Ax5dFBZ2UECszz8bQ7pi7wt//PWe1P6MN7eCnjsatYtBT6EuiClbjSWP2WrIoTw==}
     engines: {node: '>= 0.8.0'}
 
   set-function-length@1.2.2:
@@ -6620,18 +6612,18 @@ snapshots:
   '@naria2/linux-x64@0.1.0-beta.0':
     optional: true
 
-  '@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.7)(utf-8-validate@6.0.4)':
+  '@naria2/node@0.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)':
     dependencies:
       '@breadc/color': 0.9.7
       '@breadc/death': 0.9.7
-      '@naria2/options': 0.0.25(bufferutil@4.0.8)(utf-8-validate@6.0.4)
-      execa: 8.0.1
-      finalhandler: 1.3.0
-      http-proxy-middleware: 2.0.6(debug@4.3.7)
+      '@naria2/options': 0.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
+      execa: 9.3.1
+      finalhandler: 1.3.1
+      get-port: 7.1.0
+      http-proxy-middleware: 3.0.2
       maria2: 0.3.4(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       open: 10.1.0
-      portfinder: 1.0.32
-      serve-static: 1.15.0
+      serve-static: 1.16.2
       type-fest: 4.26.1
       ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
     optionalDependencies:
@@ -6639,16 +6631,14 @@ snapshots:
       '@naria2/darwin-x64': 0.1.0-beta.0
       '@naria2/linux-arm64': 0.1.0-beta.0
       '@naria2/linux-x64': 0.1.0-beta.0
-      '@naria2/win32-ia32': 0.1.0-beta.0
-      '@naria2/win32-x64': 0.1.0-beta.0
+      '@naria2/win32-ia32': 1.37.0-beta.0
+      '@naria2/win32-x64': 1.37.0-beta.0
     transitivePeerDependencies:
-      - '@types/express'
       - bufferutil
-      - debug
       - supports-color
       - utf-8-validate
 
-  '@naria2/options@0.0.25(bufferutil@4.0.8)(utf-8-validate@6.0.4)':
+  '@naria2/options@0.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)':
     dependencies:
       maria2: 0.3.4(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       type-fest: 4.26.1
@@ -6656,10 +6646,10 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@naria2/win32-ia32@0.1.0-beta.0':
+  '@naria2/win32-ia32@1.37.0-beta.0':
     optional: true
 
-  '@naria2/win32-x64@0.1.0-beta.0':
+  '@naria2/win32-x64@1.37.0-beta.0':
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -7385,10 +7375,6 @@ snapshots:
 
   assertion-error@2.0.1: {}
 
-  async@2.6.4:
-    dependencies:
-      lodash: 4.17.21
-
   async@3.2.6: {}
 
   asynckit@0.4.0: {}
@@ -7985,10 +7971,6 @@ snapshots:
     dependencies:
       ms: 2.0.0
 
-  debug@3.2.7:
-    dependencies:
-      ms: 2.1.3
-
   debug@4.3.7:
     dependencies:
       ms: 2.1.3
@@ -8089,6 +8071,8 @@ snapshots:
   emoji-regex@9.2.2: {}
 
   encodeurl@1.0.2: {}
+
+  encodeurl@2.0.0: {}
 
   end-of-stream@1.4.4:
     dependencies:
@@ -8424,10 +8408,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  finalhandler@1.3.0:
+  finalhandler@1.3.1:
     dependencies:
       debug: 2.6.9
-      encodeurl: 1.0.2
+      encodeurl: 2.0.0
       escape-html: 1.0.3
       on-finished: 2.4.1
       parseurl: 1.3.3
@@ -8548,6 +8532,8 @@ snapshots:
   get-own-enumerable-property-symbols@3.0.2: {}
 
   get-port-please@3.1.2: {}
+
+  get-port@7.1.0: {}
 
   get-stdin@9.0.0: {}
 
@@ -8707,15 +8693,16 @@ snapshots:
 
   http-parser-js@0.4.13: {}
 
-  http-proxy-middleware@2.0.6(debug@4.3.7):
+  http-proxy-middleware@3.0.2:
     dependencies:
       '@types/http-proxy': 1.17.15
+      debug: 4.3.7
       http-proxy: 1.18.1(debug@4.3.7)
       is-glob: 4.0.3
-      is-plain-obj: 3.0.0
+      is-plain-object: 5.0.0
       micromatch: 4.0.8
     transitivePeerDependencies:
-      - debug
+      - supports-color
 
   http-proxy@1.18.1(debug@4.3.7):
     dependencies:
@@ -8870,9 +8857,9 @@ snapshots:
 
   is-path-inside@4.0.0: {}
 
-  is-plain-obj@3.0.0: {}
-
   is-plain-obj@4.1.0: {}
+
+  is-plain-object@5.0.0: {}
 
   is-reference@1.2.1:
     dependencies:
@@ -9186,10 +9173,6 @@ snapshots:
 
   mkdirp-classic@0.5.3: {}
 
-  mkdirp@0.5.6:
-    dependencies:
-      minimist: 1.2.8
-
   mkdirp@1.0.4: {}
 
   mkdist@1.5.6(typescript@5.5.4):
@@ -9242,14 +9225,14 @@ snapshots:
   napi-macros@2.2.2:
     optional: true
 
-  naria2@0.0.25(@naria2/node@0.0.25(bufferutil@4.0.8)(debug@4.3.7)(utf-8-validate@6.0.4))(bufferutil@4.0.8)(utf-8-validate@6.0.4):
+  naria2@0.1.0(@naria2/node@0.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4))(bufferutil@4.0.8)(utf-8-validate@6.0.4):
     dependencies:
-      '@naria2/options': 0.0.25(bufferutil@4.0.8)(utf-8-validate@6.0.4)
+      '@naria2/options': 0.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       maria2: 0.3.4(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       mitt: 3.0.1
       type-fest: 4.26.1
     optionalDependencies:
-      '@naria2/node': 0.0.25(bufferutil@4.0.8)(debug@4.3.7)(utf-8-validate@6.0.4)
+      '@naria2/node': 0.1.0(bufferutil@4.0.8)(utf-8-validate@6.0.4)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -9476,14 +9459,6 @@ snapshots:
       confbox: 0.1.7
       mlly: 1.7.1
       pathe: 1.1.2
-
-  portfinder@1.0.32:
-    dependencies:
-      async: 2.6.4
-      debug: 3.2.7
-      mkdirp: 0.5.6
-    transitivePeerDependencies:
-      - supports-color
 
   possible-typed-array-names@1.0.0: {}
 
@@ -9947,6 +9922,24 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  send@0.19.0:
+    dependencies:
+      debug: 2.6.9
+      depd: 2.0.0
+      destroy: 1.2.0
+      encodeurl: 1.0.2
+      escape-html: 1.0.3
+      etag: 1.8.1
+      fresh: 0.5.2
+      http-errors: 2.0.0
+      mime: 1.6.0
+      ms: 2.1.3
+      on-finished: 2.4.1
+      range-parser: 1.2.1
+      statuses: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
+
   serialize-javascript@6.0.2:
     dependencies:
       randombytes: 2.1.0
@@ -9957,6 +9950,15 @@ snapshots:
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.18.0
+    transitivePeerDependencies:
+      - supports-color
+
+  serve-static@1.16.2:
+    dependencies:
+      encodeurl: 2.0.0
+      escape-html: 1.0.3
+      parseurl: 1.3.3
+      send: 0.19.0
     transitivePeerDependencies:
       - supports-color
 

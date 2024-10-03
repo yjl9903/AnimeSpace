@@ -63,7 +63,7 @@ export class Aria2Client extends DownloadClient {
 
   private client!: WebSocket.Client;
 
-  private webUI!: HttpServer;
+  private webUI!: Awaited<ReturnType<typeof launchWebUI>>;
 
   private version!: string;
 
@@ -503,15 +503,14 @@ export class Aria2Client extends DownloadClient {
           const version = await this.client.getVersion();
           this.version = version.version;
 
-          const webPort = await getPort({ port: 6801 });
-          const webui = `http://127.0.0.1:${webPort}?port=${rpcPort}&secret=${this.options.secret}`;
           this.webUI = await launchWebUI({
-            port: webPort,
             rpc: { port: rpcPort, secret: this.options.secret }
           });
 
           this.consola.log(
-            dim(`aria2 v${this.version} is running on the port ${link(rpcPort + '', webui)}`)
+            dim(
+              `aria2 v${this.version} is running on the port ${link(rpcPort + '', this.webUI.url)}`
+            )
           );
           res();
         } catch (error) {
@@ -539,7 +538,11 @@ export class Aria2Client extends DownloadClient {
       await Promise.all([
         this.client.close().catch(() => {}),
         new Promise<void>((res) => {
-          this.webUI?.close(() => res());
+          if (this.webUI.server) {
+            this.webUI.server.close(() => res());
+          } else {
+            res();
+          }
         })
       ]);
 
