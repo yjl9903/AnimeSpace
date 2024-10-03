@@ -251,8 +251,8 @@ importers:
         specifier: ^2.4.9
         version: 2.4.9
       '@vercel/ncc':
-        specifier: ^0.38.1
-        version: 0.38.1
+        specifier: ^0.38.2
+        version: 0.38.2
       bangumi-data:
         specifier: ^0.3.152
         version: 0.3.152
@@ -1964,8 +1964,8 @@ packages:
     resolution: {integrity: sha512-JnIUr0iEHqJBtNC6Ht2tNYxyivLu2XKM7ykELLHHjeNuLy1wEJBHiftoUHJQsSuE7kkg+tc8xZMjJolWWqt8cQ==}
     engines: {node: '>=v20.10.0'}
 
-  '@vercel/ncc@0.38.1':
-    resolution: {integrity: sha512-IBBb+iI2NLu4VQn3Vwldyi2QwaXt5+hTyh58ggAMoCGE6DJmPvwL3KPBWcJl1m9LYPChBLE980Jw+CS4Wokqxw==}
+  '@vercel/ncc@0.38.2':
+    resolution: {integrity: sha512-3yel3jaxUg9pHBv4+KeC9qlbdZPug+UMtUOlhvpDYCMSgcNSrS2Hv1LoqMsOV7hf2lYscx+BESfJOIla1WsmMQ==}
     hasBin: true
 
   '@vitejs/plugin-vue@5.1.4':
@@ -7105,7 +7105,7 @@ snapshots:
 
   '@unplugin-analytics/core@0.0.11': {}
 
-  '@vercel/ncc@0.38.1': {}
+  '@vercel/ncc@0.38.2': {}
 
   '@vitejs/plugin-vue@5.1.4(vite@5.4.7(@types/node@20.16.10)(terser@5.31.6))(vue@3.5.7(typescript@5.6.2))':
     dependencies:
