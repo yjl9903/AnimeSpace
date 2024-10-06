@@ -538,7 +538,7 @@ export class Aria2Client extends DownloadClient {
       await Promise.all([
         this.client.close().catch(() => {}),
         new Promise<void>((res) => {
-          if (this.webUI.server) {
+          if (this.webUI?.server) {
             this.webUI.server.close(() => res());
           } else {
             res();
