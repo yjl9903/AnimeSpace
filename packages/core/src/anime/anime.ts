@@ -285,6 +285,9 @@ export class Anime {
   public resolveSeason(type: string | undefined, season: number | undefined): number | undefined;
   public resolveSeason(type: string | undefined, season: number | undefined): number | undefined {
     if (type === 'OVA' || type === '特别篇' || type === '特別篇') return 0;
+    if (this.plan.rewrite?.season !== undefined) {
+      return this.plan.rewrite.season;
+    }
     return season ?? this.plan.season;
   }
 

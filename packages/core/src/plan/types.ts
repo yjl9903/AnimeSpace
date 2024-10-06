@@ -61,6 +61,8 @@ export interface AnimePlan {
     readonly title?: string;
 
     readonly episode?: { offset: number; fansub?: string[] };
+
+    readonly season?: number;
   };
 
   /**
