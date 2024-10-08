@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@algolia/client-search": "^5.8.0",
-    "@iconify-json/carbon": "^1.2.1",
+    "@iconify-json/carbon": "^1.2.2",
     "@types/node": "^20.16.11",
     "@unocss/reset": "^0.63.4",
     "@vitejs/plugin-vue": "^5.1.4",
