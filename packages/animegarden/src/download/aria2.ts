@@ -154,7 +154,6 @@ export class Aria2Client extends DownloadClient {
               const REs = [
                 /File (.*) exists, but a control file\(\*.aria2\) does not exist/,
                 /文件 (.*) 已存在，但是控制文件 \(\*.aria2\) 不存在/,
-                /InfoHash (\w+) is already registered/
               ];
               for (const RE of REs) {
                 if (RE.test(status.errorMessage)) {
