@@ -72,8 +72,8 @@ importers:
         specifier: ^0.64.0
         version: 0.64.0
       '@vitejs/plugin-vue':
-        specifier: ^5.1.4
-        version: 5.1.4(vite@5.4.10(@types/node@22.9.0)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))
+        specifier: ^5.1.5
+        version: 5.1.5(vite@5.4.10(@types/node@22.9.0)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -2073,8 +2073,8 @@ packages:
     resolution: {integrity: sha512-3yel3jaxUg9pHBv4+KeC9qlbdZPug+UMtUOlhvpDYCMSgcNSrS2Hv1LoqMsOV7hf2lYscx+BESfJOIla1WsmMQ==}
     hasBin: true
 
-  '@vitejs/plugin-vue@5.1.4':
-    resolution: {integrity: sha512-N2XSI2n3sQqp5w7Y/AN/L2XDjBIRGqXko+eDp42sydYSBeJuSm5a1sLf8zakmo8u7tA8NmBgoDLA1HeOESjp9A==}
+  '@vitejs/plugin-vue@5.1.5':
+    resolution: {integrity: sha512-dlnib73G05CDBAUR/YpuZcQQ47fpjihnnNouAAqN62z+oqSsWJ+kh52GRzIxpkgFG3q11eXK7Di7RMmoCwISZA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       vite: ^5.0.0
@@ -7280,7 +7280,7 @@ snapshots:
 
   '@vercel/ncc@0.38.2': {}
 
-  '@vitejs/plugin-vue@5.1.4(vite@5.4.10(@types/node@22.9.0)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))':
+  '@vitejs/plugin-vue@5.1.5(vite@5.4.10(@types/node@22.9.0)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       vite: 5.4.10(@types/node@22.9.0)(terser@5.36.0)
       vue: 3.5.12(typescript@5.6.3)
@@ -10923,7 +10923,7 @@ snapshots:
       '@shikijs/transformers': 1.22.2
       '@shikijs/types': 1.22.2
       '@types/markdown-it': 14.1.2
-      '@vitejs/plugin-vue': 5.1.4(vite@5.4.10(@types/node@22.9.0)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))
+      '@vitejs/plugin-vue': 5.1.5(vite@5.4.10(@types/node@22.9.0)(terser@5.36.0))(vue@3.5.12(typescript@5.6.3))
       '@vue/devtools-api': 7.6.2
       '@vue/shared': 3.5.12
       '@vueuse/core': 11.2.0(vue@3.5.12(typescript@5.6.3))
