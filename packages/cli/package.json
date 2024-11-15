@@ -67,7 +67,7 @@
     "@types/debug": "^4.1.12",
     "@types/fs-extra": "^11.0.4",
     "@types/prompts": "^2.4.9",
-    "@vercel/ncc": "^0.38.2",
+    "@vercel/ncc": "^0.38.3",
     "bangumi-data": "^0.3.155"
   },
   "engines": {
