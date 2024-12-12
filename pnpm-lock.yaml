@@ -132,8 +132,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       debug:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^4.4.0
+        version: 4.4.0
       defu:
         specifier: ^6.1.4
         version: 6.1.4
@@ -145,7 +145,7 @@ importers:
         version: 3.1.2
       libaria2:
         specifier: ^1.0.95
-        version: 1.0.95(bufferutil@4.0.8)(debug@4.3.7)(utf-8-validate@6.0.5)
+        version: 1.0.95(bufferutil@4.0.8)(debug@4.4.0)(utf-8-validate@6.0.5)
       memofunc:
         specifier: ^0.1.6
         version: 0.1.6
@@ -220,8 +220,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       debug:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^4.4.0
+        version: 4.4.0
       fs-extra:
         specifier: ^11.2.0
         version: 11.2.0
@@ -281,8 +281,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       debug:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^4.4.0
+        version: 4.4.0
       defu:
         specifier: ^6.1.4
         version: 6.1.4
@@ -2750,15 +2750,6 @@ packages:
 
   debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
-  debug@4.3.7:
-    resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
-    engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
     peerDependenciesMeta:
@@ -7434,7 +7425,7 @@ snapshots:
       '@vueuse/shared': 11.2.0(vue@3.5.13(typescript@5.7.2))
       vue-demi: 0.14.10(vue@3.5.13(typescript@5.7.2))
     optionalDependencies:
-      axios: 1.7.7(debug@4.3.7)
+      axios: 1.7.7(debug@4.4.0)
       focus-trap: 7.6.1
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -7571,9 +7562,9 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.0.0
 
-  axios@1.7.7(debug@4.3.7):
+  axios@1.7.7(debug@4.4.0):
     dependencies:
-      follow-redirects: 1.15.9(debug@4.3.7)
+      follow-redirects: 1.15.9(debug@4.4.0)
       form-data: 4.0.1
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -8145,10 +8136,6 @@ snapshots:
     dependencies:
       ms: 2.0.0
 
-  debug@4.3.7:
-    dependencies:
-      ms: 2.1.3
-
   debug@4.4.0:
     dependencies:
       ms: 2.1.3
@@ -8630,10 +8617,6 @@ snapshots:
   focus-trap@7.6.1:
     dependencies:
       tabbable: 6.2.0
-
-  follow-redirects@1.15.9(debug@4.3.7):
-    optionalDependencies:
-      debug: 4.3.7
 
   follow-redirects@1.15.9(debug@4.4.0):
     optionalDependencies:
@@ -9205,9 +9188,9 @@ snapshots:
 
   leven@3.1.0: {}
 
-  libaria2@1.0.95(bufferutil@4.0.8)(debug@4.3.7)(utf-8-validate@6.0.5):
+  libaria2@1.0.95(bufferutil@4.0.8)(debug@4.4.0)(utf-8-validate@6.0.5):
     dependencies:
-      axios: 1.7.7(debug@4.3.7)
+      axios: 1.7.7(debug@4.4.0)
       isomorphic-ws: 5.0.0(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.5))
       ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@6.0.5)
     transitivePeerDependencies:
@@ -9624,9 +9607,9 @@ snapshots:
       '@total-typescript/ts-reset': 0.5.1
       '@types/fs-extra': 11.0.4
       '@types/node': 20.17.6
-      axios: 1.7.7(debug@4.3.7)
+      axios: 1.7.7(debug@4.4.0)
       breadc: 0.9.7
-      debug: 4.3.7
+      debug: 4.4.0
       find-up: 7.0.0
       fs-extra: 11.2.0
       globby: 14.0.2
