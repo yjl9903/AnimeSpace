@@ -13,7 +13,7 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@algolia/client-search": "^5.17.0",
+    "@algolia/client-search": "^5.17.1",
     "@iconify-json/carbon": "^1.2.5",
     "@types/node": "^22.10.2",
     "@unocss/reset": "^0.65.1",
