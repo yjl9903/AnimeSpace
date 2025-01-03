@@ -159,8 +159,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       webtorrent:
-        specifier: ^2.5.10
-        version: 2.5.10
+        specifier: ^2.5.11
+        version: 2.5.11
       zod:
         specifier: ^3.24.1
         version: 3.24.1
@@ -2440,8 +2440,8 @@ packages:
     resolution: {integrity: sha512-93t8h77uAyD8BGSpBo8SqxYyKBA/xgv9N8+WghnXpH2I+JmlmJmddUt8nugPRgj/LNuL1VrWJ26jhYhiVWpRaQ==}
     engines: {node: '>=12.20.0'}
 
-  bittorrent-tracker@11.1.2:
-    resolution: {integrity: sha512-mzINNIJ3FjNBcqQPKPQoxpNzzqEVfbBohwdVxblaOKGQVxagMzipCWwbxiAt+J35WC3xs1wFeCDUXpzQ3TBA+A==}
+  bittorrent-tracker@11.2.0:
+    resolution: {integrity: sha512-OldLpVVevCCgPzarDOHB7jc3Au/NApNCXyFluQM4P0B3xZgyNUZtTDrnpge6u4LV5g6pvIFahDuIdk4sP1U+Hg==}
     engines: {node: '>=16.0.0'}
     hasBin: true
 
@@ -5026,8 +5026,8 @@ packages:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
 
-  torrent-discovery@11.0.13:
-    resolution: {integrity: sha512-DfMArZvTISNs8dLyh8wSW8uOK1WHwkrXxMDx3eC8lfGj6PemEfinqagaDAJ2y4SV77w9mmEnp9rnwd23GnAMXw==}
+  torrent-discovery@11.0.14:
+    resolution: {integrity: sha512-qkSRkV7y5SsaYS2dQ/qVXXaaPWO6A8t96SOpcZr1OA/cefVodmwSQNVqYKYzMIQ2RA7Mbxr7A5RF/A6Lp2roTQ==}
     engines: {node: '>=16.0.0'}
 
   torrent-piece@3.0.0:
@@ -5524,8 +5524,8 @@ packages:
     resolution: {integrity: sha512-sOn0bj3/noUdzQX7rvk0jFbBurqWDGGo2ipl+WfgoOe/x3cxbGLk/ZUY+WHCISSlLaIeBumi1X3wxQZnUESExQ==}
     engines: {node: '>=16.0.0'}
 
-  webtorrent@2.5.10:
-    resolution: {integrity: sha512-+RaOjZ11gOSN6p/uf2ICvnEbwMQ4xxVOhZjiFQeC1o7p0HfymC5xGigB0R1kQW07xVMsIqKbfg50ecX7dbeHbg==}
+  webtorrent@2.5.11:
+    resolution: {integrity: sha512-Yg1uTpabopjH9zk/pAsapDgPA3aaVT5+u0AK02Jfvz3ILvO9GFfDzG4ty1X5+ZDs9mJZZwCm96bDBDiMjfdwrw==}
     engines: {node: '>=16'}
 
   whatwg-url@7.1.0:
@@ -7898,7 +7898,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  bittorrent-tracker@11.1.2:
+  bittorrent-tracker@11.2.0:
     dependencies:
       '@thaunknown/simple-peer': 10.0.11
       '@thaunknown/simple-websocket': 9.1.3(bufferutil@4.0.8)(utf-8-validate@6.0.5)
@@ -10807,11 +10807,11 @@ snapshots:
 
   toidentifier@1.0.1: {}
 
-  torrent-discovery@11.0.13:
+  torrent-discovery@11.0.14:
     dependencies:
       bittorrent-dht: 11.0.9
       bittorrent-lsd: 2.0.0
-      bittorrent-tracker: 11.1.2
+      bittorrent-tracker: 11.2.0
       debug: 4.4.0
       run-parallel: 1.2.0
     transitivePeerDependencies:
@@ -11404,7 +11404,7 @@ snapshots:
       node-datachannel: 0.12.0
       node-domexception: 1.0.0
 
-  webtorrent@2.5.10:
+  webtorrent@2.5.11:
     dependencies:
       '@silentbot1/nat-api': 0.4.7
       '@thaunknown/simple-peer': 10.0.11
@@ -11439,7 +11439,7 @@ snapshots:
       speed-limiter: 1.0.2
       streamx: 2.20.2
       throughput: 1.0.1
-      torrent-discovery: 11.0.13
+      torrent-discovery: 11.0.14
       torrent-piece: 3.0.0
       uint8-util: 2.2.5
       unordered-array-remove: 1.0.2
