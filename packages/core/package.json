@@ -58,7 +58,7 @@
     "simptrad": "^0.1.0",
     "trash": "^9.0.0",
     "undici": "^7.2.0",
-    "yaml": "^2.6.1",
+    "yaml": "^2.7.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
