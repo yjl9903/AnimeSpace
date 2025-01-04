@@ -60,7 +60,7 @@
     "libaria2": "^1.0.95",
     "memofunc": "^0.1.6",
     "naria2": "^0.1.2",
-    "pathe": "^1.1.2",
+    "pathe": "^2.0.0",
     "string-width": "^7.2.0",
     "webtorrent": "^2.5.11",
     "zod": "^3.24.1"
