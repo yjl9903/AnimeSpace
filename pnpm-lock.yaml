@@ -18,7 +18,7 @@ importers:
         version: 22.10.5
       bumpp:
         specifier: latest
-        version: 9.9.2
+        version: 9.9.3
       optc:
         specifier: ^0.6.4
         version: 0.6.4
@@ -87,8 +87,8 @@ importers:
         specifier: ^0.0.12
         version: 0.0.12(esbuild@0.24.2)(rollup@2.79.2)(vite@6.0.7(@types/node@22.10.5)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0))
       unplugin-vue-components:
-        specifier: ^0.28.0
-        version: 0.28.0(@babel/parser@7.26.3)(rollup@2.79.2)(vue@3.5.13(typescript@5.7.2))
+        specifier: ^28.0.0
+        version: 28.0.0(@babel/parser@7.26.3)(rollup@2.79.2)(vue@3.5.13(typescript@5.7.2))
       vite:
         specifier: ^6.0.7
         version: 6.0.7(@types/node@22.10.5)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0)
@@ -2483,8 +2483,8 @@ packages:
     resolution: {integrity: sha512-WDtdLmJvAuNNPzByAYpRo2rF1Mmradw6gvWsQKf63476DDXmomT9zUiGypLcG4ibIM67vhAj8jJRdbmEws2Aqw==}
     engines: {node: '>=6.14.2'}
 
-  bumpp@9.9.2:
-    resolution: {integrity: sha512-ggRxRV1rWHEyWXnf55UqYzGvttS/Vpkl1zxcNdE5xoYMTHlSgRA0Td4nKn3ckCcMuC+MTgaGQrbKBeyr0V9+Hg==}
+  bumpp@9.9.3:
+    resolution: {integrity: sha512-fEX4zIuFuDLCFaQtBFaiNtlUgYbDjd9fUbJqlDfER7Wz+KUOkEXeDs5qScsHX+jKYvTgD5xdOA4ZYYMAo5rC9A==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -5339,8 +5339,8 @@ packages:
       webpack:
         optional: true
 
-  unplugin-vue-components@0.28.0:
-    resolution: {integrity: sha512-jiTGtJ3JsRFBjgvyilfrX7yUoGKScFgbdNw+6p6kEXU+Spf/rhxzgvdfuMcvhCcLmflB/dY3pGQshYBVGOUx7Q==}
+  unplugin-vue-components@28.0.0:
+    resolution: {integrity: sha512-vYe0wSyqTVhyNFIad1iiGyQGhG++tDOMgohqenMDOAooMJP9vvzCdXTqCVx20A0rCQXFNjgoRbSeDAioLPH36Q==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -8033,7 +8033,7 @@ snapshots:
       node-gyp-build: 4.8.4
     optional: true
 
-  bumpp@9.9.2:
+  bumpp@9.9.3:
     dependencies:
       c12: 2.0.1
       cac: 6.7.14
@@ -11283,7 +11283,7 @@ snapshots:
       rollup: 2.79.2
       vite: 6.0.7(@types/node@22.10.5)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0)
 
-  unplugin-vue-components@0.28.0(@babel/parser@7.26.3)(rollup@2.79.2)(vue@3.5.13(typescript@5.7.2)):
+  unplugin-vue-components@28.0.0(@babel/parser@7.26.3)(rollup@2.79.2)(vue@3.5.13(typescript@5.7.2)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.4(rollup@2.79.2)
