@@ -153,8 +153,8 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2(@naria2/node@0.1.2(bufferutil@4.0.9)(utf-8-validate@6.0.5))(bufferutil@4.0.9)(utf-8-validate@6.0.5)
       pathe:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.0.1
+        version: 2.0.1
       string-width:
         specifier: ^7.2.0
         version: 7.2.0
@@ -229,8 +229,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       pathe:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.0.1
+        version: 2.0.1
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
@@ -296,8 +296,8 @@ importers:
         specifier: ^0.1.6
         version: 0.1.6
       pathe:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^2.0.1
+        version: 2.0.1
       simptrad:
         specifier: ^0.1.0
         version: 0.1.0
@@ -4267,8 +4267,8 @@ packages:
   pathe@1.1.2:
     resolution: {integrity: sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==}
 
-  pathe@2.0.0:
-    resolution: {integrity: sha512-G7n4uhtk9qJt2hlD+UFfsIGY854wpF+zs2bUbQ3CQEUTcn7v25LRsrmurOxTo4bJgjE4qkyshd9ldsEuY9M6xg==}
+  pathe@2.0.1:
+    resolution: {integrity: sha512-6jpjMpOth5S9ITVu5clZ7NOgHNsv5vRQdheL9ztp2vZmM6fRbLvyua1tiBIL4lk8SAe3ARzeXEly6siXCjDHDw==}
 
   pathval@2.0.0:
     resolution: {integrity: sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==}
@@ -10033,7 +10033,7 @@ snapshots:
 
   pathe@1.1.2: {}
 
-  pathe@2.0.0: {}
+  pathe@2.0.1: {}
 
   pathval@2.0.0: {}
 
