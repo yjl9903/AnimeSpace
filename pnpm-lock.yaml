@@ -18,7 +18,7 @@ importers:
         version: 22.10.5
       bumpp:
         specifier: latest
-        version: 9.9.3
+        version: 9.10.0
       optc:
         specifier: ^0.6.4
         version: 0.6.4
@@ -235,8 +235,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       undici:
-        specifier: ^7.2.0
-        version: 7.2.0
+        specifier: ^7.2.1
+        version: 7.2.1
     devDependencies:
       '@types/cli-progress':
         specifier: ^3.11.6
@@ -305,8 +305,8 @@ importers:
         specifier: ^9.0.0
         version: 9.0.0
       undici:
-        specifier: ^7.2.0
-        version: 7.2.0
+        specifier: ^7.2.1
+        version: 7.2.1
       yaml:
         specifier: ^2.7.0
         version: 2.7.0
@@ -2483,8 +2483,8 @@ packages:
     resolution: {integrity: sha512-WDtdLmJvAuNNPzByAYpRo2rF1Mmradw6gvWsQKf63476DDXmomT9zUiGypLcG4ibIM67vhAj8jJRdbmEws2Aqw==}
     engines: {node: '>=6.14.2'}
 
-  bumpp@9.9.3:
-    resolution: {integrity: sha512-fEX4zIuFuDLCFaQtBFaiNtlUgYbDjd9fUbJqlDfER7Wz+KUOkEXeDs5qScsHX+jKYvTgD5xdOA4ZYYMAo5rC9A==}
+  bumpp@9.10.0:
+    resolution: {integrity: sha512-gNY3tYEGKyqW8+qtpeLQ2UfQW7G81d/vhCWNGrMlvy0Toq1LZPRs8wk9woAw8o9Tzv7pvjaF/Gno+UN3qiqNxA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -5242,8 +5242,8 @@ packages:
   undici-types@6.20.0:
     resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
-  undici@7.2.0:
-    resolution: {integrity: sha512-klt+0S55GBViA9nsq48/NSCo4YX5mjydjypxD7UmHh/brMu8h/Mhd/F7qAeoH2NOO8SDTk6kjnTFc4WpzmfYpQ==}
+  undici@7.2.1:
+    resolution: {integrity: sha512-U2k0XHLJfaciARRxDcqTk2AZQsGXerHzdvfCZcy1hNhSf5KCAF4jIQQxL+apQviOekhRFPqED6Of5/+LcUSLzQ==}
     engines: {node: '>=20.18.1'}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
@@ -8034,13 +8034,14 @@ snapshots:
       node-gyp-build: 4.8.4
     optional: true
 
-  bumpp@9.9.3:
+  bumpp@9.10.0:
     dependencies:
       c12: 2.0.1
       cac: 6.7.14
       escalade: 3.2.0
       js-yaml: 4.1.0
       jsonc-parser: 3.3.1
+      package-manager-detector: 0.2.8
       prompts: 2.4.2
       semver: 7.6.3
       tinyexec: 0.3.2
@@ -11193,7 +11194,7 @@ snapshots:
 
   undici-types@6.20.0: {}
 
-  undici@7.2.0: {}
+  undici@7.2.1: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
