@@ -299,8 +299,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       simptrad:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.0
+        version: 0.2.0
       trash:
         specifier: ^9.0.0
         version: 9.0.0
@@ -4839,6 +4839,9 @@ packages:
 
   simptrad@0.1.0:
     resolution: {integrity: sha512-sK6XU47544K8i/QVDHlm3aEx+pgvKsI5AGEuCV6vV8m2QkD/W28e7A5EWAFVhEV3ADb7E/SZ90TZE/dhg6Nhog==}
+
+  simptrad@0.2.0:
+    resolution: {integrity: sha512-SADENHX3KNuTLThG/LQCZvIywDOwCFTC2aLufwmSgjVbHUEZKIjRzleb28J856kL4ozkKptv08eR3GyJFRCnMg==}
 
   sirv@3.0.0:
     resolution: {integrity: sha512-BPwJGUeDaDCHihkORDchNyyTvWFhcusy1XMmhEVTQTwGeybFbp8YEmB+njbPnth1FibULBSBVwCQni25XlCUDg==}
@@ -10682,6 +10685,8 @@ snapshots:
       simple-concat: 1.0.1
 
   simptrad@0.1.0: {}
+
+  simptrad@0.2.0: {}
 
   sirv@3.0.0:
     dependencies:
