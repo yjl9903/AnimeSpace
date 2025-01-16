@@ -153,7 +153,7 @@ export class Aria2Client extends DownloadClient {
             if (status.errorMessage && status.errorMessage.indexOf('[METADATA]') === -1) {
               const REs = [
                 /File (.*) exists, but a control file\(\*.aria2\) does not exist/,
-                /文件 (.*) 已存在，但是控制文件 \(\*.aria2\) 不存在/,
+                /文件 (.*) 已存在，但是控制文件 \(\*.aria2\) 不存在/
               ];
               for (const RE of REs) {
                 if (RE.test(status.errorMessage)) {

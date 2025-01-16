@@ -71,7 +71,9 @@ export function parseEpisode<T extends Partial<FormatOptions> = Partial<FormatOp
   if (!info) return undefined;
 
   const metadata =
-    options?.metadata instanceof Function ? options.metadata(info) : options.metadata ?? undefined;
+    options?.metadata instanceof Function
+      ? options.metadata(info)
+      : (options.metadata ?? undefined);
 
   if (anime.plan.type === '番剧') {
     const resolvedEpisode = anime.resolveEpisode(info.episode.number, metadata?.fansub);

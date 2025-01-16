@@ -1,6 +1,11 @@
 import { Path } from 'breadfs';
 import { memoAsync } from 'memofunc';
-import { fetchResources, makeResourcesFilter, type Resource } from 'animegarden';
+import {
+  fetchResources,
+  FetchResourcesOptions,
+  makeResourcesFilter,
+  type Resource
+} from 'animegarden';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
 
@@ -17,6 +22,8 @@ type AnimeCacheSchema = Required<
 export class ResourcesCache {
   private readonly system: AnimeSystem;
 
+  private readonly options: FetchResourcesOptions;
+
   private readonly root: Path;
 
   private readonly animeRoot: Path;
@@ -31,8 +38,9 @@ export class ResourcesCache {
 
   private recentResponse: Awaited<ReturnType<typeof fetchResources>> | undefined = undefined;
 
-  constructor(system: AnimeSystem) {
+  constructor(system: AnimeSystem, options: Pick<FetchResourcesOptions, 'baseURL'> = {}) {
     this.system = system;
+    this.options = options;
     this.root = system.space.storage.cache.join('animegarden');
     this.animeRoot = this.root.join('anime');
     this.resourcesRoot = this.root.join('resources');
@@ -85,6 +93,7 @@ export class ResourcesCache {
 
     const ac = new AbortController();
     const resp = await fetchResources(ufetch, {
+      baseURL: this.options.baseURL,
       type: '動畫',
       retry: 10,
       count: -1,
@@ -203,6 +212,7 @@ export class ResourcesCache {
     try {
       const ac = new AbortController();
       const resp = await fetchResources(ufetch, {
+        baseURL: this.options.baseURL,
         type: '動畫',
         after: anime.plan.date,
         include: anime.plan.keywords.include,
@@ -233,8 +243,10 @@ export async function clearAnimeResourcesCache(system: AnimeSystem, anime: Anime
   await cache.clearAnimeResources(anime);
 }
 
-export const useResourcesCache = memoAsync(async (system: AnimeSystem) => {
-  const cache = new ResourcesCache(system);
-  await cache.initialize();
-  return cache;
-});
+export const useResourcesCache = memoAsync(
+  async (system: AnimeSystem, options?: Pick<FetchResourcesOptions, 'baseURL'>) => {
+    const cache = new ResourcesCache(system, options);
+    await cache.initialize();
+    return cache;
+  }
+);

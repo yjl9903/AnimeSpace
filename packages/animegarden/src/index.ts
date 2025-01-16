@@ -3,14 +3,7 @@ import { memo } from 'memofunc';
 import { fetchResourceDetail } from 'animegarden';
 import { bold, dim, lightBlue, lightCyan, lightRed, link } from '@breadc/color';
 
-import {
-  type AnimeSystem,
-  onDeath,
-  type Plugin,
-  type PluginEntry,
-  StringArray,
-  ufetch
-} from '@animespace/core';
+import { type AnimeSystem, type Plugin, type PluginEntry, onDeath, ufetch } from '@animespace/core';
 
 import './plan.d';
 
@@ -18,10 +11,12 @@ import { registerCli } from './cli';
 import { ANIMEGARDEN, DOT } from './constant';
 import { DownloadProviders, makeClient } from './download';
 import { generateDownloadTask, runDownloadTask } from './task';
-import { clearAnimeResourcesCache, fetchAnimeResources, useResourcesCache } from './resources';
 import { formatAnimeGardenSearchURL, printFansubs, printKeywords } from './format';
+import { clearAnimeResourcesCache, fetchAnimeResources, useResourcesCache } from './resources';
 
 export interface AnimeGardenOptions extends PluginEntry {
+  api?: string;
+
   provider?: DownloadProviders;
 }
 
@@ -42,6 +37,7 @@ const memoClient = memo(
 
 export function AnimeGarden(options: AnimeGardenOptions): Plugin {
   const provider = options.provider ?? 'webtorrent';
+  const config = { baseURL: options.api };
   const getClient = (sys: AnimeSystem) => memoClient(provider, sys, options);
 
   let shouldClearCache = false;
@@ -76,7 +72,8 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           const resource = await fetchResourceDetail(
             ufetch,
             'dmhy',
-            video.source.magnet.split('/').at(-1)!
+            video.source.magnet.split('/').at(-1)!,
+            { baseURL: options.api }
           );
 
           try {
@@ -122,13 +119,13 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
     },
     refresh: {
       async pre(system, options) {
-        const cache = await useResourcesCache(system);
+        const cache = await useResourcesCache(system, config);
         if (options.filter !== undefined) {
           cache.disable();
         }
       },
       async post(system) {
-        const cache = await useResourcesCache(system);
+        const cache = await useResourcesCache(system, config);
         cache.finalize();
         useResourcesCache.clear();
       },
@@ -146,7 +143,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
         printFansubs(anime, logger);
 
         const animegardenURL = formatAnimeGardenSearchURL(anime);
-        const resources = await fetchAnimeResources(system, anime).catch(() => undefined);
+        const resources = await fetchAnimeResources(system, anime, config).catch(() => undefined);
         if (resources === undefined) {
           logger.log(
             `${lightRed('Found resources')} ${dim('from')} ${link(
