@@ -138,8 +138,8 @@ importers:
         specifier: ^6.1.4
         version: 6.1.4
       fs-extra:
-        specifier: ^11.2.0
-        version: 11.2.0
+        specifier: ^11.3.0
+        version: 11.3.0
       get-port-please:
         specifier: ^3.1.2
         version: 3.1.2
@@ -187,8 +187,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       fs-extra:
-        specifier: ^11.2.0
-        version: 11.2.0
+        specifier: ^11.3.0
+        version: 11.3.0
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
@@ -223,8 +223,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       fs-extra:
-        specifier: ^11.2.0
-        version: 11.2.0
+        specifier: ^11.3.0
+        version: 11.3.0
       open-editor:
         specifier: ^5.1.0
         version: 5.1.0
@@ -290,8 +290,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       fs-extra:
-        specifier: ^11.2.0
-        version: 11.2.0
+        specifier: ^11.3.0
+        version: 11.3.0
       memofunc:
         specifier: ^0.1.6
         version: 0.1.6
@@ -3158,8 +3158,8 @@ packages:
   fs-constants@1.0.0:
     resolution: {integrity: sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==}
 
-  fs-extra@11.2.0:
-    resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
+  fs-extra@11.3.0:
+    resolution: {integrity: sha512-Z4XaCL6dUDHfP/jT25jJKMmtxvuwbkrD1vNSMFlo9lNLY2c5FHYSQgHPRZUjAB26TpDEoW9HCOgplrdbaPV/ew==}
     engines: {node: '>=14.14'}
 
   fs-extra@9.1.0:
@@ -6519,7 +6519,7 @@ snapshots:
   '@breadfs/node@0.1.8':
     dependencies:
       '@breadfs/core': 0.1.8
-      fs-extra: 11.2.0
+      fs-extra: 11.3.0
       pathe: 1.1.2
 
   '@breadfs/webdav@0.1.8':
@@ -8902,7 +8902,7 @@ snapshots:
 
   fs-constants@1.0.0: {}
 
-  fs-extra@11.2.0:
+  fs-extra@11.3.0:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
@@ -9920,7 +9920,7 @@ snapshots:
       breadc: 0.9.7
       debug: 4.4.0
       find-up: 7.0.0
-      fs-extra: 11.2.0
+      fs-extra: 11.3.0
       globby: 14.0.2
       jiti: 1.21.7
       kolorist: 1.8.0
