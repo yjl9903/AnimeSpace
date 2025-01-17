@@ -55,7 +55,7 @@
     "date-fns": "^4.1.0",
     "debug": "^4.4.0",
     "defu": "^6.1.4",
-    "fs-extra": "^11.2.0",
+    "fs-extra": "^11.3.0",
     "get-port-please": "^3.1.2",
     "libaria2": "^1.0.95",
     "memofunc": "^0.1.6",
