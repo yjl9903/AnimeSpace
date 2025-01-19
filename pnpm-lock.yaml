@@ -254,8 +254,8 @@ importers:
         specifier: ^0.38.3
         version: 0.38.3
       bangumi-data:
-        specifier: ^0.3.160
-        version: 0.3.160
+        specifier: ^0.3.161
+        version: 0.3.161
 
   packages/core:
     dependencies:
@@ -2341,8 +2341,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  bangumi-data@0.3.160:
-    resolution: {integrity: sha512-4ryQ+AxOkmsQyx+5xmSAUsd6aEFIyryp9g33hhqKYsrhdcZQldHK3TJc3fb9iQnqgASpOppqtIvWRw7qWjdUhA==}
+  bangumi-data@0.3.161:
+    resolution: {integrity: sha512-nUgCtHHnzkjIgtqUxRuZYZIQzAmrScHmWxH+c9btIKHFYfnv8kjiRB65IX9cq+gOw00ijrAOervbHt/9749x2Q==}
 
   bare-events@2.5.4:
     resolution: {integrity: sha512-+gFfDkR8pj4/TrWCGUGWmJIkBwuxPS5F+a5yWjOHQt2hHvNZd5YLzadjmDUtFmMM4y429bnKLa8bYBMHcYdnQA==}
@@ -7536,13 +7536,13 @@ snapshots:
   '@vitest/runner@3.0.2':
     dependencies:
       '@vitest/utils': 3.0.2
-      pathe: 2.0.1
+      pathe: 2.0.2
 
   '@vitest/snapshot@3.0.2':
     dependencies:
       '@vitest/pretty-format': 3.0.2
       magic-string: 0.30.17
-      pathe: 2.0.1
+      pathe: 2.0.2
 
   '@vitest/spy@3.0.2':
     dependencies:
@@ -7822,7 +7822,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  bangumi-data@0.3.160: {}
+  bangumi-data@0.3.161: {}
 
   bare-events@2.5.4: {}
 
@@ -11367,7 +11367,7 @@ snapshots:
       cac: 6.7.14
       debug: 4.4.0
       es-module-lexer: 1.6.0
-      pathe: 2.0.1
+      pathe: 2.0.2
       vite: 6.0.7(@types/node@22.10.7)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@types/node'
@@ -11480,7 +11480,7 @@ snapshots:
       debug: 4.4.0
       expect-type: 1.1.0
       magic-string: 0.30.17
-      pathe: 2.0.1
+      pathe: 2.0.2
       std-env: 3.8.0
       tinybench: 2.9.0
       tinyexec: 0.3.2
