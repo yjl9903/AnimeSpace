@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   consola@3.1.0:
-    hash: 3us7dz5jtvuqlpxuvndonkmwhe
+    hash: 71a34e1242cd9ec9b24c14ec63a49670adb88c297411522a5dfecdbe4e7c14a7
     path: patches/consola@3.1.0.patch
 
 importers:
@@ -276,7 +276,7 @@ importers:
         version: 0.1.8
       consola:
         specifier: 3.1.0
-        version: 3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe)
+        version: 3.1.0(patch_hash=71a34e1242cd9ec9b24c14ec63a49670adb88c297411522a5dfecdbe4e7c14a7)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -8178,7 +8178,7 @@ snapshots:
 
   confbox@0.1.8: {}
 
-  consola@3.1.0(patch_hash=3us7dz5jtvuqlpxuvndonkmwhe): {}
+  consola@3.1.0(patch_hash=71a34e1242cd9ec9b24c14ec63a49670adb88c297411522a5dfecdbe4e7c14a7): {}
 
   consola@3.4.0: {}
 
