@@ -53,7 +53,7 @@ importers:
   docs:
     dependencies:
       '@vueuse/core':
-        specifier: ^12.5.0
+        specifier: ^12.8.2
         version: 12.8.2(typescript@5.8.2)
       vue:
         specifier: ^3.5.13
