@@ -308,7 +308,7 @@ importers:
         specifier: ^7.6.0
         version: 7.6.0
       yaml:
-        specifier: ^2.7.0
+        specifier: ^2.7.1
         version: 2.7.1
       zod:
         specifier: ^3.24.2
