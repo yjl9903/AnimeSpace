@@ -159,8 +159,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       webtorrent:
-        specifier: ^2.5.19
-        version: 2.5.19
+        specifier: ^2.6.0
+        version: 2.6.0
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -2641,8 +2641,8 @@ packages:
   chrome-net@3.3.4:
     resolution: {integrity: sha512-Jzy2EnzmE+ligqIZUsmWnck9RBXLuUy6CaKyuNMtowFG3ZvLt8d+WBJCTPEludV0DHpIKjAOlwjFmTaEdfdWCw==}
 
-  chunk-store-iterator@1.0.3:
-    resolution: {integrity: sha512-JcSaB5h3wQstQKnaJi8sET40f0m+6Kh4mhKIr05lrWKi+EiQzn6XUoi6LipgRGMqXWNZZJaMz2tH4aeg4ptBDA==}
+  chunk-store-iterator@1.0.4:
+    resolution: {integrity: sha512-LGjzJNmk7W1mrdaBoJNztPumT2ACmgjHmI1AMm8aeGYOl4+LKaYC/yfnx27i++LiAtoe/dR+3jC8HRzb6gW4/A==}
 
   citty@0.1.6:
     resolution: {integrity: sha512-tskPPKEs8D2KPafUypv2gxwJP8h/OaJmC82QQGGDQcHvXX43xF2VDACcJVmZ0EuSxkpO9Kc4MlrA3q0+FG58AQ==}
@@ -5624,8 +5624,8 @@ packages:
     resolution: {integrity: sha512-sOn0bj3/noUdzQX7rvk0jFbBurqWDGGo2ipl+WfgoOe/x3cxbGLk/ZUY+WHCISSlLaIeBumi1X3wxQZnUESExQ==}
     engines: {node: '>=16.0.0'}
 
-  webtorrent@2.5.19:
-    resolution: {integrity: sha512-5SW5xGlBPIlP7m3f6gecJ83H2BSvoan5gzaAyMnDiQfXxxt5Ja5FAfZ16n1rdnD1WL/Iz+y4fE7or/a9egoF9A==}
+  webtorrent@2.6.0:
+    resolution: {integrity: sha512-+JmlCkYnJAE+vnXq5GdGtjVVdtFGlshcila9OvmJpPsU/SYae9lURR+UHZezG0eppH/meLG8QIaNqju32/RmhA==}
     engines: {node: '>=16'}
 
   whatwg-url@7.1.0:
@@ -8214,7 +8214,7 @@ snapshots:
     dependencies:
       inherits: 2.0.4
 
-  chunk-store-iterator@1.0.3:
+  chunk-store-iterator@1.0.4:
     dependencies:
       block-iterator: 1.1.1
 
@@ -11607,7 +11607,7 @@ snapshots:
       node-datachannel: 0.12.0
       node-domexception: 1.0.0
 
-  webtorrent@2.5.19:
+  webtorrent@2.6.0:
     dependencies:
       '@silentbot1/nat-api': 0.4.7
       '@thaunknown/simple-peer': 10.0.11
@@ -11617,7 +11617,7 @@ snapshots:
       bittorrent-dht: 11.0.9
       bittorrent-protocol: 4.1.16
       cache-chunk-store: 3.2.2
-      chunk-store-iterator: 1.0.3
+      chunk-store-iterator: 1.0.4
       cpus: 1.0.3
       create-torrent: 6.1.0
       cross-fetch-ponyfill: 1.0.3
