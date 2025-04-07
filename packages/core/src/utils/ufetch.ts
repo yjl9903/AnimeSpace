@@ -1,5 +1,11 @@
 import { fetch } from 'undici';
 
+export function sleep(timeout: number = 0) {
+  return new Promise<void>((res) => {
+    setTimeout(() => res(), timeout);
+  });
+}
+
 export const ufetch = async (url: RequestInfo, init?: RequestInit): Promise<Response> => {
   const proxy = getProxy();
   if (!!proxy) {

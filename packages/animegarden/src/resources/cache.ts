@@ -91,7 +91,13 @@ export class ResourcesCache {
       timestamp === undefined ||
       new Date().getTime() - timestamp.getTime() > 7 * 24 * 60 * 60 * 1000;
 
+    let timeout = false;
     const ac = new AbortController();
+    const stamp = setTimeout(() => {
+      timeout = true;
+      ac.abort();
+    }, 60 * 1000);
+
     const resp = await fetchResources(ufetch, {
       baseURL: this.options.baseURL,
       type: '動畫',
@@ -117,7 +123,9 @@ export class ResourcesCache {
       }
     });
 
-    this.valid = !invalid || !resp.filter || !resp.timestamp;
+    clearTimeout(stamp);
+
+    this.valid = timeout || !invalid || !resp.filter || !resp.timestamp;
 
     const oldIds = new Set(latest?.resources.map((r) => r.id) ?? []);
     this.recentResources = resp.resources.filter((r) => !oldIds.has(r.id));

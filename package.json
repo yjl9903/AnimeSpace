@@ -38,6 +38,14 @@
   "pnpm": {
     "patchedDependencies": {
       "consola@3.1.0": "patches/consola@3.1.0.patch"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@naria2/node",
+      "bufferutil",
+      "esbuild",
+      "node-datachannel",
+      "utf-8-validate",
+      "utp-native"
+    ]
   }
 }

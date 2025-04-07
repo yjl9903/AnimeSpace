@@ -119,6 +119,7 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
     },
     refresh: {
       async pre(system, options) {
+        useResourcesCache.clear();
         const cache = await useResourcesCache(system, config);
         if (options.filter !== undefined) {
           cache.disable();
