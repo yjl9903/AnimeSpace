@@ -75,7 +75,7 @@ export async function generateDownloadTask(
             episode: info.parsed.episode.number, // Raw episode number
             source: {
               type: 'AnimeGarden',
-              magnet: `https://garden.breadio.wiki/detail/${res.provider}/${res.href.split('/').at(-1)}`
+              magnet: `https://animes.garden/detail/${res.provider}/${res.href.split('/').at(-1)}`
             }
           },
           resource: res

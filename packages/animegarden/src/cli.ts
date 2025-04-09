@@ -40,7 +40,7 @@ export function registerCli(
         const lib = await anime.library();
 
         for (const { video, resource } of videos) {
-          const detailURL = `https://garden.breadio.wiki/detail/${resource.provider}/${resource.providerId}`;
+          const detailURL = `https://animes.garden/api/detail/${resource.provider}/${resource.providerId}`;
 
           let extra = '';
           if (!lib.videos.find((v) => v.source.magnet === video.source.magnet!)) {

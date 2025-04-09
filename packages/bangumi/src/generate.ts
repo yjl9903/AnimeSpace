@@ -116,7 +116,7 @@ export async function generatePlan(
         .replace(/"/g, '%22')
         .replace(/ /g, '%20');
       writeln(
-        `    # https://garden.breadio.wiki/resources/1?include=${includeURL}&after=${encodeURIComponent(
+        `    # https://animes.garden/resources/1?include=${includeURL}&after=${encodeURIComponent(
           date.toISOString()
         )}`
       );

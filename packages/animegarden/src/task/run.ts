@@ -183,7 +183,7 @@ export async function runDownloadTask(
           });
 
           if (copyDelta) {
-            const detailURL = `https://garden.breadio.wiki/detail/${task.resource.provider}/${task.resource.providerId}`;
+            const detailURL = `https://animes.garden/detail/${task.resource.provider}/${task.resource.providerId}`;
             copyDelta.log = link(task.video.filename, detailURL);
 
             // Remove old animegarden video to keep storage clean
