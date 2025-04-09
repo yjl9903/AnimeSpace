@@ -1,4 +1,4 @@
-import type { FetchResourcesOptions } from 'animegarden';
+import type { FetchResourcesOptions } from '@animegarden/client';
 
 import { Anime, AnimeSystem } from '@animespace/core';
 

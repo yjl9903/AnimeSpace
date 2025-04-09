@@ -5,7 +5,7 @@ import {
   FetchResourcesOptions,
   makeResourcesFilter,
   type Resource
-} from 'animegarden';
+} from '@animegarden/client';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
 
@@ -98,9 +98,10 @@ export class ResourcesCache {
       ac.abort();
     }, 60 * 1000);
 
-    const resp = await fetchResources(ufetch, {
+    const resp = await fetchResources({
+      fetch: ufetch,
       baseURL: this.options.baseURL,
-      type: '動畫',
+      type: '动画',
       retry: 10,
       count: -1,
       signal: ac.signal,
@@ -178,7 +179,7 @@ export class ResourcesCache {
       // Check whether there is any changes to the filter
       const validateFilter = (cache: AnimeCacheSchema) => {
         if (
-          !cache.filter.after ||
+          !cache.filter?.after ||
           new Date(cache.filter.after).getTime() !== anime.plan.date.getTime()
         ) {
           return false;
@@ -187,7 +188,7 @@ export class ResourcesCache {
         const stringify = (keys?: string[]) => (keys ?? []).join(',');
 
         if (
-          !cache.filter.include ||
+          !cache.filter?.include ||
           stringify(cache.filter.include) !== stringify(anime.plan.keywords.include)
         ) {
           return false;
@@ -205,7 +206,7 @@ export class ResourcesCache {
       };
 
       const filter = makeResourcesFilter({
-        type: '動畫',
+        types: ['动画'],
         after: anime.plan.date,
         include: anime.plan.keywords.include,
         exclude: anime.plan.keywords.exclude
@@ -219,9 +220,10 @@ export class ResourcesCache {
 
     try {
       const ac = new AbortController();
-      const resp = await fetchResources(ufetch, {
+      const resp = await fetchResources({
+        fetch: ufetch,
         baseURL: this.options.baseURL,
-        type: '動畫',
+        type: '动画',
         after: anime.plan.date,
         include: anime.plan.keywords.include,
         exclude: anime.plan.keywords.exclude,

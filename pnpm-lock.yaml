@@ -104,6 +104,9 @@ importers:
 
   packages/animegarden:
     dependencies:
+      '@animegarden/client':
+        specifier: ^0.4.0
+        version: 0.4.0
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
@@ -116,9 +119,6 @@ importers:
       '@onekuma/map':
         specifier: ^0.1.10
         version: 0.1.10
-      animegarden:
-        specifier: ^0.3.0
-        version: 0.3.0
       anitomy:
         specifier: ^0.0.35
         version: 0.0.35
@@ -171,15 +171,15 @@ importers:
 
   packages/bangumi:
     dependencies:
+      '@animegarden/client':
+        specifier: ^0.4.0
+        version: 0.4.0
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
       '@breadc/color':
         specifier: ^0.9.7
         version: 0.9.7
-      animegarden:
-        specifier: ^0.3.0
-        version: 0.3.0
       bgmc:
         specifier: ^0.0.10
         version: 0.0.10
@@ -436,6 +436,10 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@animegarden/client@0.4.0':
+    resolution: {integrity: sha512-cD6jxQk1qtlKpAOc6nBiF8Nq+Gyi0vhIEGum6CQUcXswQ5fHzWOo/aYc+f64ngCbJw92PVeCJxccBl2f+iX1UQ==}
+    engines: {node: '>=v18.16.0'}
 
   '@antfu/install-pkg@1.0.0':
     resolution: {integrity: sha512-xvX6P/lo1B3ej0OsaErAjqgFYzYVcJpamjLAFLYh9vRJngBrMoUG7aVnrGTeqM7yxbyTD5p3F2+0/QUEh8Vzhw==}
@@ -2277,8 +2281,8 @@ packages:
     resolution: {integrity: sha512-IhKP22Czzg8Y9HaF6aIb5aAHK2HBj4VAzLLnKEPUnxqDwxpryH9sXbm0NkeY7Cby9GlF81wF+AG/VulKDFBphg==}
     engines: {node: '>= 14.0.0'}
 
-  animegarden@0.3.0:
-    resolution: {integrity: sha512-EnXC+B9rw+x3Uep/xCWIW2L/y/N1Mu6BZ/djCFGm0H+stqaOmbzDxREGXpFjq2yw4KBA33j/sUSglRi/6rlYVA==}
+  anipar@0.3.0:
+    resolution: {integrity: sha512-r5E6S6dYCwhQy6EEpV4TimMbGgaCCy0K6T1m7tkXzWvZXBtCnCV5xysfBmDRKs6v2R8PjO1/V3Ackl2deS7rhw==}
     engines: {node: '>=v18.16.0'}
 
   anitomy@0.0.35:
@@ -4175,6 +4179,9 @@ packages:
   ofetch@1.4.1:
     resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
 
+  ohash@1.1.6:
+    resolution: {integrity: sha512-TBu7PtV8YkAZn0tSxobKY2n2aAQva936lhRrj6957aDaCf9IEtqsKbgMzXE/F/sjqYOwmrukeORHNLe5glk7Cg==}
+
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
 
@@ -4879,9 +4886,6 @@ packages:
 
   simple-get@4.0.1:
     resolution: {integrity: sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==}
-
-  simptrad@0.1.0:
-    resolution: {integrity: sha512-sK6XU47544K8i/QVDHlm3aEx+pgvKsI5AGEuCV6vV8m2QkD/W28e7A5EWAFVhEV3ADb7E/SZ90TZE/dhg6Nhog==}
 
   simptrad@0.2.0:
     resolution: {integrity: sha512-SADENHX3KNuTLThG/LQCZvIywDOwCFTC2aLufwmSgjVbHUEZKIjRzleb28J856kL4ozkKptv08eR3GyJFRCnMg==}
@@ -5905,6 +5909,13 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@animegarden/client@0.4.0':
+    dependencies:
+      anipar: 0.3.0
+      ohash: 1.1.6
+      simptrad: 0.2.0
+      zod: 3.24.2
 
   '@antfu/install-pkg@1.0.0':
     dependencies:
@@ -7774,10 +7785,7 @@ snapshots:
       '@algolia/requester-fetch': 5.23.2
       '@algolia/requester-node-http': 5.23.2
 
-  animegarden@0.3.0:
-    dependencies:
-      simptrad: 0.1.0
-      zod: 3.24.2
+  anipar@0.3.0: {}
 
   anitomy@0.0.35: {}
 
@@ -9934,6 +9942,8 @@ snapshots:
       node-fetch-native: 1.6.6
       ufo: 1.5.4
 
+  ohash@1.1.6: {}
+
   ohash@2.0.11: {}
 
   on-finished@2.4.1:
@@ -10725,8 +10735,6 @@ snapshots:
       decompress-response: 6.0.0
       once: 1.4.0
       simple-concat: 1.0.1
-
-  simptrad@0.1.0: {}
 
   simptrad@0.2.0: {}
 

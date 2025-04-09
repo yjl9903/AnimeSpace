@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 
 import { AnimeSystem, ufetch, uniqBy } from '@animespace/core';
 
-import { fetchResources } from 'animegarden';
+import { fetchResources } from '@animegarden/client';
 import { bold, lightBlue, lightRed } from '@breadc/color';
 import { format, getYear, subMonths } from 'date-fns';
 import { BgmClient, type CollectionInformation } from 'bgmc';
@@ -163,7 +163,8 @@ export async function getCollections(username: string) {
 }
 
 async function getFansub(titles: string[]) {
-  const { resources } = await fetchResources(ufetch, {
+  const { resources } = await fetchResources({
+    fetch: ufetch,
     include: titles,
     count: -1,
     retry: 5

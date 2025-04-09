@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { memo } from 'memofunc';
-import { fetchResourceDetail } from 'animegarden';
+import { fetchResourceDetail } from '@animegarden/client';
 import { bold, dim, lightBlue, lightCyan, lightRed, link } from '@breadc/color';
 
 import { type AnimeSystem, type Plugin, type PluginEntry, onDeath, ufetch } from '@animespace/core';
@@ -70,14 +70,18 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
           const client = getClient(system);
 
           const resource = await fetchResourceDetail(
-            ufetch,
             'dmhy',
             video.source.magnet.split('/').at(-1)!,
-            { baseURL: options.api }
+            { fetch: ufetch, baseURL: options.api }
           );
 
           try {
-            if (resource) {
+            if (
+              resource &&
+              resource.resource &&
+              resource.detail &&
+              resource.detail.magnets.length > 0
+            ) {
               await client.start();
 
               logger.log(
@@ -95,9 +99,9 @@ export function AnimeGarden(options: AnimeGardenOptions): Plugin {
                   {
                     video,
                     resource: {
-                      ...resource,
+                      ...resource.resource,
                       // This should have tracker
-                      magnet: resource.magnet.href,
+                      magnet: resource.detail?.magnets[0].url,
                       tracker: ''
                     }
                   }

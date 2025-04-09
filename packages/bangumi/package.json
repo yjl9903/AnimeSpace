@@ -23,9 +23,9 @@
   "type": "module",
   "exports": {
     ".": {
-      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "main": "dist/index.cjs",
@@ -43,9 +43,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@animegarden/client": "^0.4.0",
     "@animespace/core": "workspace:*",
     "@breadc/color": "^0.9.7",
-    "animegarden": "^0.3.0",
     "bgmc": "^0.0.10",
     "date-fns": "^4.1.0",
     "fs-extra": "^11.3.0",
