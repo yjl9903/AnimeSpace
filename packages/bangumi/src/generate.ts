@@ -109,14 +109,19 @@ export async function generatePlan(
         }
       }
 
-      const includeURL = JSON.stringify([[title, ...translations]])
-        .replace(/\[/g, '%5B')
-        .replace(/\]/g, '%5D')
-        .replace(/,/g, '%2C')
-        .replace(/"/g, '%22')
-        .replace(/ /g, '%20');
+      const includeURL = [title, ...translations]
+        .map((t) =>
+          t
+            .replace(/\[/g, '%5B')
+            .replace(/\]/g, '%5D')
+            .replace(/,/g, '%2C')
+            .replace(/"/g, '%22')
+            .replace(/ /g, '%20')
+        )
+        .map((v) => 'include=' + v);
+
       writeln(
-        `    # https://animes.garden/resources/1?include=${includeURL}&after=${encodeURIComponent(
+        `    # https://animes.garden/resources/1?${includeURL.join('&')}&after=${encodeURIComponent(
           date.toISOString()
         )}`
       );

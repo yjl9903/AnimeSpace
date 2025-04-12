@@ -5,14 +5,11 @@ import width from 'string-width';
 import { Anime } from '@animespace/core';
 import { dim, link, underline } from '@breadc/color';
 
-import { DOT } from './constant';
-
 export function formatAnimeGardenSearchURL(anime: Anime) {
-  return `https://animes.garden/resources/1?include=${encodeURIComponent(
-    JSON.stringify(anime.plan.keywords.include)
-  )}&exclude=${encodeURIComponent(
-    JSON.stringify(anime.plan.keywords.exclude)
-  )}&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
+  const include = anime.plan.keywords.include.map((v) => 'include=' + v);
+  const exclude = anime.plan.keywords.exclude.map((v) => 'exclude=' + v);
+
+  return `https://animes.garden/resources/1?${include.join('&')}&${exclude.join('&')}&after=${encodeURIComponent(anime.plan.date.toISOString())}`;
 }
 
 export function printKeywords(anime: Anime, logger: ConsolaInstance) {
