@@ -105,8 +105,8 @@ importers:
   packages/animegarden:
     dependencies:
       '@animegarden/client':
-        specifier: ^0.4.0
-        version: 0.4.0
+        specifier: ^0.5.0
+        version: 0.5.0
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
@@ -172,8 +172,8 @@ importers:
   packages/bangumi:
     dependencies:
       '@animegarden/client':
-        specifier: ^0.4.0
-        version: 0.4.0
+        specifier: ^0.5.0
+        version: 0.5.0
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
@@ -437,8 +437,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@animegarden/client@0.4.0':
-    resolution: {integrity: sha512-cD6jxQk1qtlKpAOc6nBiF8Nq+Gyi0vhIEGum6CQUcXswQ5fHzWOo/aYc+f64ngCbJw92PVeCJxccBl2f+iX1UQ==}
+  '@animegarden/client@0.5.0':
+    resolution: {integrity: sha512-bGCvEHPTB+dCMFNvs5GgZLSxjc9qQ3S9FlppHIyIMZ+sQxVicv+jz48BCXJG1yTzSIqesEFaUoxZkDWVGDRFFQ==}
     engines: {node: '>=v18.16.0'}
 
   '@antfu/install-pkg@1.0.0':
@@ -2281,8 +2281,8 @@ packages:
     resolution: {integrity: sha512-IhKP22Czzg8Y9HaF6aIb5aAHK2HBj4VAzLLnKEPUnxqDwxpryH9sXbm0NkeY7Cby9GlF81wF+AG/VulKDFBphg==}
     engines: {node: '>= 14.0.0'}
 
-  anipar@0.3.0:
-    resolution: {integrity: sha512-r5E6S6dYCwhQy6EEpV4TimMbGgaCCy0K6T1m7tkXzWvZXBtCnCV5xysfBmDRKs6v2R8PjO1/V3Ackl2deS7rhw==}
+  anipar@0.5.0:
+    resolution: {integrity: sha512-De+PWQpd2Q8nlwraqWB0f9mRUNfsmNtheUxHBJGGswq0oDcq+awqLbCeIUopC/Im4JaBMDzRKOxBeNJF7zejfA==}
     engines: {node: '>=v18.16.0'}
 
   anitomy@0.0.35:
@@ -4179,9 +4179,6 @@ packages:
   ofetch@1.4.1:
     resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
 
-  ohash@1.1.6:
-    resolution: {integrity: sha512-TBu7PtV8YkAZn0tSxobKY2n2aAQva936lhRrj6957aDaCf9IEtqsKbgMzXE/F/sjqYOwmrukeORHNLe5glk7Cg==}
-
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
 
@@ -5910,10 +5907,10 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@animegarden/client@0.4.0':
+  '@animegarden/client@0.5.0':
     dependencies:
-      anipar: 0.3.0
-      ohash: 1.1.6
+      anipar: 0.5.0
+      ohash: 2.0.11
       simptrad: 0.2.0
       zod: 3.24.2
 
@@ -7785,7 +7782,7 @@ snapshots:
       '@algolia/requester-fetch': 5.23.2
       '@algolia/requester-node-http': 5.23.2
 
-  anipar@0.3.0: {}
+  anipar@0.5.0: {}
 
   anitomy@0.0.35: {}
 
@@ -9941,8 +9938,6 @@ snapshots:
       destr: 2.0.5
       node-fetch-native: 1.6.6
       ufo: 1.5.4
-
-  ohash@1.1.6: {}
 
   ohash@2.0.11: {}
 

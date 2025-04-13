@@ -9,6 +9,8 @@ import {
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
 
+import { debug } from '../constant';
+
 type ResourcesCacheSchema = Required<
   Omit<Awaited<ReturnType<typeof fetchResources>>, 'ok' | 'complete'>
 >;
@@ -91,12 +93,7 @@ export class ResourcesCache {
       timestamp === undefined ||
       new Date().getTime() - timestamp.getTime() > 7 * 24 * 60 * 60 * 1000;
 
-    let timeout = false;
     const ac = new AbortController();
-    const stamp = setTimeout(() => {
-      timeout = true;
-      ac.abort();
-    }, 60 * 1000);
 
     const resp = await fetchResources({
       fetch: ufetch,
@@ -105,6 +102,7 @@ export class ResourcesCache {
       retry: 10,
       count: -1,
       signal: ac.signal,
+      timeout: 60 * 1000,
       tracker: true,
       headers: {
         'Cache-Control': 'no-store'
@@ -124,9 +122,8 @@ export class ResourcesCache {
       }
     });
 
-    clearTimeout(stamp);
-
-    this.valid = timeout || !invalid || !resp.filter || !resp.timestamp;
+    this.valid =
+      resp.resources.length > 0 || !resp.ok || !invalid || !resp.filter || !resp.timestamp;
 
     const oldIds = new Set(latest?.resources.map((r) => r.id) ?? []);
     this.recentResources = resp.resources.filter((r) => !oldIds.has(r.id));
@@ -220,6 +217,7 @@ export class ResourcesCache {
 
     try {
       const ac = new AbortController();
+
       const resp = await fetchResources({
         fetch: ufetch,
         baseURL: this.options.baseURL,
@@ -231,9 +229,9 @@ export class ResourcesCache {
         retry: 10,
         count: -1,
         signal: ac.signal,
-        progress(delta) {
-          for (const item of delta) {
-          }
+        progress(delta, props) {
+          // for (const item of delta) {
+          // }
         }
       });
 
@@ -241,6 +239,7 @@ export class ResourcesCache {
 
       return resp.resources;
     } catch (error) {
+      debug(error);
       // Record fetch error happened
       this.errors.push(error);
       throw error;
