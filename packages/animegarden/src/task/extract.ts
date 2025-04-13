@@ -45,7 +45,12 @@ export async function generateDownloadTask(
         }
       }
 
-      return new Date(rhs.createdAt).getTime() - new Date(lhs.createdAt).getTime();
+      const createdAt = new Date(rhs.createdAt).getTime() - new Date(lhs.createdAt).getTime();
+      if (createdAt) {
+        return createdAt;
+      }
+
+      return new Date(rhs.fetchedAt).getTime() - new Date(lhs.fetchedAt).getTime();
     });
 
     const res = resources[0];
