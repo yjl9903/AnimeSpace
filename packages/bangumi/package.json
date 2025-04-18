@@ -43,7 +43,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@animegarden/client": "^0.5.0",
+    "@animegarden/client": "^0.5.1",
     "@animespace/core": "workspace:*",
     "@breadc/color": "^0.9.7",
     "bgmc": "^0.0.10",

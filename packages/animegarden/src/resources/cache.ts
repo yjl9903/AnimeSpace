@@ -1,10 +1,10 @@
 import { Path } from 'breadfs';
 import { memoAsync } from 'memofunc';
 import {
+  type FetchResourcesOptions,
+  type Resource,
   fetchResources,
-  FetchResourcesOptions,
   makeResourcesFilter,
-  type Resource
 } from '@animegarden/client';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
