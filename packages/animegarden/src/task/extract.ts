@@ -56,7 +56,7 @@ export async function generateDownloadTask(
     const res = resources[0];
     if (
       force ||
-      !library.videos.find((r) => r.source.magnet?.split('/').at(-1) === res.href.split('/').at(-1))
+      !library.videos.find((r) => r.source.magnet?.split('/').at(-1) === res.providerId)
     ) {
       const info = parseEpisode(anime, res.title, {
         metadata: (info) => ({
@@ -80,7 +80,7 @@ export async function generateDownloadTask(
             episode: info.parsed.episode.number, // Raw episode number
             source: {
               type: 'AnimeGarden',
-              magnet: `https://animes.garden/detail/${res.provider}/${res.href.split('/').at(-1)}`
+              magnet: `https://animes.garden/detail/${res.provider}/${res.providerId}`
             }
           },
           resource: res
