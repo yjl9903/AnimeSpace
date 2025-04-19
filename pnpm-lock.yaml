@@ -159,8 +159,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       webtorrent:
-        specifier: ^2.6.0
-        version: 2.6.0
+        specifier: ^2.6.3
+        version: 2.6.3
       zod:
         specifier: ^3.24.3
         version: 3.24.3
@@ -1915,8 +1915,8 @@ packages:
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
 
-  '@silentbot1/nat-api@0.4.7':
-    resolution: {integrity: sha512-6aKXUf4AY6ETBdwjswQOekY6HGj3eZTAUhJx1oYicBqpMJcsphIydEQKp/Hooz6Y070MOI6tD/oT1MgS7bP3Vg==}
+  '@silentbot1/nat-api@0.4.8':
+    resolution: {integrity: sha512-DBz/1gGzaYIbUdGTBQ7l4NrI7a+DFZgdZShmjmBGgJR4PvQ64wKNMwle2rrW8pdiOesN+DV6/8ZN/PLuksNyTg==}
     engines: {node: '>=10.0.0'}
 
   '@sindresorhus/chunkify@1.0.0':
@@ -2889,9 +2889,9 @@ packages:
     resolution: {integrity: sha512-WY/3TUME0x3KPYdRRxEJJvXRHV4PyPoUsxtZa78lwItwRQRHhd2U9xOscaT/YTf8uCXIAjeJOFBVEh/7FtD8Xg==}
     engines: {node: '>=18'}
 
-  default-gateway@6.0.3:
-    resolution: {integrity: sha512-fwSOJsbbNzZ/CUFpqFBqYfYNLj1NbMPm8MMCIzHjC83iSJRBEGmDUxU+WP661BaBQImeC2yHwXtz+P/O9o+XEg==}
-    engines: {node: '>= 10'}
+  default-gateway@7.2.2:
+    resolution: {integrity: sha512-AD7TrdNNPXRZIGw63dw+lnGmT4v7ggZC5NHNJgAYWm5njrwoze1q5JSAW9YuLy2tjnoLUG/r8FEB93MCh9QJPg==}
+    engines: {node: '>= 16'}
 
   define-data-property@1.1.4:
     resolution: {integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==}
@@ -3103,9 +3103,9 @@ packages:
     resolution: {integrity: sha512-Y/URAVapfbYy2Xp/gb6A0E7iR8xeqOCXsuuaoMn7A5PzrXUK84E1gyiEfq0wQd/GHA6GsoHWwhNq8anb0mleIw==}
     engines: {node: ^8.12.0 || >=9.7.0}
 
-  execa@5.1.1:
-    resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
-    engines: {node: '>=10'}
+  execa@7.2.0:
+    resolution: {integrity: sha512-UduyVP7TLB5IcAQl+OzLyLcS/l32W/GLg+AhHJ+ow40FOk2U3SAllPwR44v4vmdFwIWqpdwxxpQbF1n5ta9seA==}
+    engines: {node: ^14.18.0 || ^16.14.0 || >=18.0.0}
 
   execa@8.0.1:
     resolution: {integrity: sha512-VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==}
@@ -3455,9 +3455,9 @@ packages:
     resolution: {integrity: sha512-rl+NFV0l67/0W7fZwk4LB5gS6HdhtSFLpCpf1N+KD5WQAXtPXX1QE8H0cP8VNJii18rtpTkE9eAHdUfJ0goAnQ==}
     hasBin: true
 
-  human-signals@2.1.0:
-    resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
-    engines: {node: '>=10.17.0'}
+  human-signals@4.3.1:
+    resolution: {integrity: sha512-nZXjEF2nbo7lIw3mgYjItAfgQXog3OjJogSbKa2CQIIvSGWcKgeJnQlNXip6NglNzYH45nSRiEVimMvYL8DDqQ==}
+    engines: {node: '>=14.18.0'}
 
   human-signals@5.0.0:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
@@ -4135,10 +4135,6 @@ packages:
 
   npm-run-path@3.1.0:
     resolution: {integrity: sha512-Dbl4A/VfiVGLgQv29URL9xshU8XDY1GeLy+fsaZ1AA8JDSfjvr5P5+pzRbWqRSBxk6/DW7MIh8lTM/PaGnP2kg==}
-    engines: {node: '>=8'}
-
-  npm-run-path@4.0.1:
-    resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
     engines: {node: '>=8'}
 
   npm-run-path@5.3.0:
@@ -5139,8 +5135,8 @@ packages:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
 
-  torrent-discovery@11.0.15:
-    resolution: {integrity: sha512-O5kCZ/PDcK0PMD5lH4VdwUrL4Wfe1Kt3pjcrMp3yieNQq/ZcnLuae6jnjSvpzoa7DxpYc5OqhkiIOYGyvj1tbA==}
+  torrent-discovery@11.0.16:
+    resolution: {integrity: sha512-TPM+p5IYGLAX9G4u85R6omTJUXChvJFvCy6B5NT43f/n5tPqenmLemnQrb5LHHDmitYrcXcxv4dTxKCnrwKvEA==}
     engines: {node: '>=16.0.0'}
 
   torrent-piece@3.0.1:
@@ -5628,8 +5624,8 @@ packages:
     resolution: {integrity: sha512-sOn0bj3/noUdzQX7rvk0jFbBurqWDGGo2ipl+WfgoOe/x3cxbGLk/ZUY+WHCISSlLaIeBumi1X3wxQZnUESExQ==}
     engines: {node: '>=16.0.0'}
 
-  webtorrent@2.6.0:
-    resolution: {integrity: sha512-+JmlCkYnJAE+vnXq5GdGtjVVdtFGlshcila9OvmJpPsU/SYae9lURR+UHZezG0eppH/meLG8QIaNqju32/RmhA==}
+  webtorrent@2.6.3:
+    resolution: {integrity: sha512-5Skuyj4qyz/jfwS4UQrXtft+/b2CdocJULJeR9EUFfozWVcZLkCOQ21014PaTZX0oELDze1zG4zpZlcDDdWwPg==}
     engines: {node: '>=16'}
 
   whatwg-url@7.1.0:
@@ -7300,12 +7296,12 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
-  '@silentbot1/nat-api@0.4.7':
+  '@silentbot1/nat-api@0.4.8':
     dependencies:
       chrome-dgram: 3.0.6
       cross-fetch-ponyfill: 1.0.3
       debug: 4.4.0
-      default-gateway: 6.0.3
+      default-gateway: 7.2.2
       unordered-array-remove: 1.0.2
       xml2js: 0.6.2
     transitivePeerDependencies:
@@ -8477,9 +8473,9 @@ snapshots:
       bundle-name: 4.1.0
       default-browser-id: 5.0.0
 
-  default-gateway@6.0.3:
+  default-gateway@7.2.2:
     dependencies:
-      execa: 5.1.1
+      execa: 7.2.0
 
   define-data-property@1.1.4:
     dependencies:
@@ -8805,17 +8801,17 @@ snapshots:
       signal-exit: 3.0.7
       strip-final-newline: 2.0.0
 
-  execa@5.1.1:
+  execa@7.2.0:
     dependencies:
       cross-spawn: 7.0.6
       get-stream: 6.0.1
-      human-signals: 2.1.0
-      is-stream: 2.0.1
+      human-signals: 4.3.1
+      is-stream: 3.0.0
       merge-stream: 2.0.0
-      npm-run-path: 4.0.1
-      onetime: 5.1.2
+      npm-run-path: 5.3.0
+      onetime: 6.0.0
       signal-exit: 3.0.7
-      strip-final-newline: 2.0.0
+      strip-final-newline: 3.0.0
 
   execa@8.0.1:
     dependencies:
@@ -9281,7 +9277,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  human-signals@2.1.0: {}
+  human-signals@4.3.1: {}
 
   human-signals@5.0.0: {}
 
@@ -9888,10 +9884,6 @@ snapshots:
   normalize-range@0.1.2: {}
 
   npm-run-path@3.1.0:
-    dependencies:
-      path-key: 3.1.1
-
-  npm-run-path@4.0.1:
     dependencies:
       path-key: 3.1.1
 
@@ -11015,7 +11007,7 @@ snapshots:
 
   toidentifier@1.0.1: {}
 
-  torrent-discovery@11.0.15:
+  torrent-discovery@11.0.16:
     dependencies:
       bittorrent-dht: 11.0.9
       bittorrent-lsd: 2.0.0
@@ -11619,9 +11611,9 @@ snapshots:
       node-datachannel: 0.12.0
       node-domexception: 1.0.0
 
-  webtorrent@2.6.0:
+  webtorrent@2.6.3:
     dependencies:
-      '@silentbot1/nat-api': 0.4.7
+      '@silentbot1/nat-api': 0.4.8
       '@thaunknown/simple-peer': 10.0.11
       '@webtorrent/http-node': 1.3.0
       addr-to-ip-port: 2.0.0
@@ -11654,7 +11646,7 @@ snapshots:
       speed-limiter: 1.0.2
       streamx: 2.22.0
       throughput: 1.0.1
-      torrent-discovery: 11.0.15
+      torrent-discovery: 11.0.16
       torrent-piece: 3.0.1
       uint8-util: 2.2.5
       unordered-array-remove: 1.0.2
