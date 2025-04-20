@@ -45,6 +45,10 @@ export async function generateDownloadTask(
         }
       }
 
+      if (rhs.provider !== lhs.provider) {
+        return rhs.provider.localeCompare(lhs.provider);
+      }
+
       const createdAt = new Date(rhs.createdAt).getTime() - new Date(lhs.createdAt).getTime();
       if (createdAt) {
         return createdAt;
