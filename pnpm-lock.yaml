@@ -254,8 +254,8 @@ importers:
         specifier: ^0.38.3
         version: 0.38.3
       bangumi-data:
-        specifier: ^0.3.167
-        version: 0.3.167
+        specifier: ^0.3.170
+        version: 0.3.170
 
   packages/core:
     dependencies:
@@ -2371,8 +2371,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  bangumi-data@0.3.167:
-    resolution: {integrity: sha512-TGz3PASl0ajoFis59OdnESJAyOVv1BMPUV7osSaRO2qc9V3xp9JdWC7S7wIVQb50qOtUgB65aEkCemrAP55MDQ==}
+  bangumi-data@0.3.170:
+    resolution: {integrity: sha512-nEQv8rrS+82Icv0332iGOto7hFZBL8jVmuwmeRhqZOxWJxDaEtpOJjK2xR2B9EiP8He6upZNVPQYp0rQ2F/JBA==}
 
   bare-addon-resolve@1.9.4:
     resolution: {integrity: sha512-unn6Vy/Yke6F99vg/7tcrvM2KUvIhTNniaSqDbam4AWkd4NhvDVSrQiRYVlNzUV2P7SPobkCK7JFVxrJk9btCg==}
@@ -7847,7 +7847,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  bangumi-data@0.3.167: {}
+  bangumi-data@0.3.170: {}
 
   bare-addon-resolve@1.9.4(bare-url@2.1.5):
     dependencies:
