@@ -254,7 +254,7 @@ importers:
         specifier: ^0.38.3
         version: 0.38.3
       bangumi-data:
-        specifier: ^0.3.171
+        specifier: ^0.3.172
         version: 0.3.172
 
   packages/core:
