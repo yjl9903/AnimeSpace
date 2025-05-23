@@ -159,8 +159,8 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       webtorrent:
-        specifier: ^2.6.7
-        version: 2.6.7
+        specifier: ^2.6.8
+        version: 2.6.8
       zod:
         specifier: ^3.25.7
         version: 3.25.7
@@ -5607,8 +5607,8 @@ packages:
     resolution: {integrity: sha512-sOn0bj3/noUdzQX7rvk0jFbBurqWDGGo2ipl+WfgoOe/x3cxbGLk/ZUY+WHCISSlLaIeBumi1X3wxQZnUESExQ==}
     engines: {node: '>=16.0.0'}
 
-  webtorrent@2.6.7:
-    resolution: {integrity: sha512-Z3aakL5QfxM5MP0D8l2r2mUstlZqijJF9Uv4MLvnyHovPl1qb1dWeuZGJ5Nlzp1la6+JDyuEreUb0Zt8dF1ZLw==}
+  webtorrent@2.6.8:
+    resolution: {integrity: sha512-ZflZwJOmLPa7v5VXCJUV5FW/5CvOxlbRbfgXaHNEkQvBwt0aP7djXLo1e76LyqR+e+/CL6nG9ff8gySjJ4UqnA==}
     engines: {node: '>=16'}
 
   whatwg-url@7.1.0:
@@ -11578,7 +11578,7 @@ snapshots:
       node-datachannel: 0.12.0
       node-domexception: 1.0.0
 
-  webtorrent@2.6.7:
+  webtorrent@2.6.8:
     dependencies:
       '@silentbot1/nat-api': 0.4.8
       '@thaunknown/simple-peer': 10.0.11
