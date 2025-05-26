@@ -31,7 +31,6 @@ export function inferRoot() {
     if (envRoot) {
       return path.resolve(envRoot);
     }
-  } finally {
-    return path.resolve(os.homedir(), '.animespace');
-  }
+  } catch {}
+  return path.resolve(os.homedir(), '.animespace');
 }
