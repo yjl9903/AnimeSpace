@@ -44,7 +44,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@animegarden/client": "^0.5.1",
+    "@animegarden/client": "^0.5.2",
     "@animespace/core": "workspace:*",
     "@breadc/color": "^0.9.7",
     "@naria2/node": "^0.1.2",

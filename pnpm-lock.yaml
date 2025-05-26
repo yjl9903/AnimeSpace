@@ -105,8 +105,8 @@ importers:
   packages/animegarden:
     dependencies:
       '@animegarden/client':
-        specifier: ^0.5.1
-        version: 0.5.1
+        specifier: ^0.5.2
+        version: 0.5.2
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
@@ -172,8 +172,8 @@ importers:
   packages/bangumi:
     dependencies:
       '@animegarden/client':
-        specifier: ^0.5.1
-        version: 0.5.1
+        specifier: ^0.5.2
+        version: 0.5.2
       '@animespace/core':
         specifier: workspace:*
         version: link:../core
@@ -417,8 +417,8 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
-  '@animegarden/client@0.5.1':
-    resolution: {integrity: sha512-icpnzwt5jw06TCMoY0bicXJJQ4WaBtEOYQ2YxCUp8Z0kk1Zy1D+6100HHm2gEs1XF1cRvk4G+82awO120pO1Tw==}
+  '@animegarden/client@0.5.2':
+    resolution: {integrity: sha512-tt3Cv1UKc7GtBP77lL3bY9Vj+gzwDFv4dyWoXBhAYwia64+YAY2Vf3exQ03MiDAYq8P8cEADlfVTwDNbaq7M9g==}
     engines: {node: '>=v18.16.0'}
 
   '@antfu/install-pkg@1.1.0':
@@ -2268,8 +2268,8 @@ packages:
     resolution: {integrity: sha512-n73BVorL4HIwKlfJKb4SEzAYkR3Buwfwbh+MYxg2mloFph2fFGV58E90QTzdbfzWrLn4HE5Czx/WTjI8fcHaMg==}
     engines: {node: '>= 14.0.0'}
 
-  anipar@0.5.1:
-    resolution: {integrity: sha512-2VkTIEtAQsVya2raBwWm0YuCfLmpYSUFCXK2owBqNUmKPknSwPg8HPMcuxeHH8SvlhqIm76lRiLUNQpJ+b8kcQ==}
+  anipar@0.5.2:
+    resolution: {integrity: sha512-6I+Zc2Jk8qWgvaaDy+GABc06EwP+TPuPUClBqe2hp7Y3uTT/xxmDRSZhIGP184d8kgyjTTPeulqBE4NDTTRCJA==}
     engines: {node: '>=v18.16.0'}
 
   anitomy@0.0.35:
@@ -5865,9 +5865,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@animegarden/client@0.5.1':
+  '@animegarden/client@0.5.2':
     dependencies:
-      anipar: 0.5.1
+      anipar: 0.5.2
       ohash: 2.0.11
       simptrad: 0.2.0
       zod: 3.25.28
@@ -7749,7 +7749,7 @@ snapshots:
       '@algolia/requester-fetch': 5.25.0
       '@algolia/requester-node-http': 5.25.0
 
-  anipar@0.5.1: {}
+  anipar@0.5.2: {}
 
   anitomy@0.0.35: {}
 
