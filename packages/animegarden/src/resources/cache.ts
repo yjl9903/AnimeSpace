@@ -4,7 +4,7 @@ import {
   type FetchResourcesOptions,
   type Resource,
   fetchResources,
-  makeResourcesFilter,
+  makeResourcesFilter
 } from '@animegarden/client';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';

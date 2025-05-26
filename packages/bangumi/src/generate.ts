@@ -8,11 +8,16 @@ import { bold, lightBlue, lightRed } from '@breadc/color';
 import { format, getYear, subMonths } from 'date-fns';
 import { BgmClient, type CollectionInformation } from 'bgmc';
 
+import { version } from '../package.json';
+
 type Item<T> = T extends Array<infer R> ? R : never;
 
 type CollectionItem = Item<NonNullable<CollectionInformation['data']>>;
 
-const client = new BgmClient(ufetch, { maxRetry: 1 });
+const client = new BgmClient(ufetch, {
+  maxRetry: 1,
+  userAgent: `animespace/${version} (https://github.com/yjl9903/AnimeSpace)`
+});
 
 export async function generatePlan(
   system: AnimeSystem,
