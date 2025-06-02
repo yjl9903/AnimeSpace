@@ -46,7 +46,7 @@
     "@animegarden/client": "^0.5.2",
     "@animespace/core": "workspace:*",
     "@breadc/color": "^0.9.7",
-    "bgmc": "^0.0.11",
+    "bgmc": "^0.0.12",
     "date-fns": "^4.1.0",
     "fs-extra": "^11.3.0",
     "prompts": "^2.4.2"
