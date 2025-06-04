@@ -4,7 +4,8 @@ import {
   type FetchResourcesOptions,
   type Resource,
   fetchResources,
-  makeResourcesFilter
+  normalizeTitle,
+  makeResourcesFilter,
 } from '@animegarden/client';
 
 import { Anime, AnimeSystem, ufetch } from '@animespace/core';
@@ -84,8 +85,8 @@ export class ResourcesCache {
     await Promise.all([this.animeRoot.ensureDir(), this.resourcesRoot.ensureDir()]);
 
     const latest = await this.loadLatestResources();
-    const timestamp = latest?.resources[0]?.fetchedAt
-      ? new Date(latest.resources[0].fetchedAt)
+    const timestamp = latest?.resources[0]?.createdAt
+      ? new Date(latest.resources[0].createdAt)
       : undefined;
 
     // There is no cache found or the cache is old
@@ -114,7 +115,7 @@ export class ResourcesCache {
         }
 
         const newItems = delta.filter(
-          (item) => new Date(item.fetchedAt).getTime() > timestamp.getTime()
+          (item) => new Date(item.createdAt).getTime() > timestamp.getTime()
         );
         if (newItems.length === 0) {
           ac.abort();
@@ -182,7 +183,11 @@ export class ResourcesCache {
           return false;
         }
 
-        const stringify = (keys?: string[]) => (keys ?? []).join(',');
+        const stringify = (keys?: string[]) =>
+          (keys ?? [])
+            .map((v) => normalizeTitle(v).toLowerCase())
+            .sort()
+            .join(',');
 
         if (
           !cache.filter?.include ||
