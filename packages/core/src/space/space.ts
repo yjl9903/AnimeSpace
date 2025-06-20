@@ -82,11 +82,39 @@ export async function loadSpace(_root: string, importPlugin?: PluginLoader): Pro
  * Load space from root or create a new space directory
  */
 async function loadRawSpace(root: LocalPath) {
+  const { config } = await import('dotenv');
+  await config({ path: [root.join('.env').toString()] });
+
   const configPath = root.join(DefaultConfigFilename);
+
   if (await configPath.exists()) {
     // Load space config file
     const configContent = await configPath.readText();
-    return parse(configContent);
+
+    return parse(configContent, {
+      customTags: [
+        {
+          tag: '!env',
+          resolve(value: string, onError: (message: string) => void) {
+            const vars = Array.isArray(value) ? value : [value];
+            const fallback = Array.isArray(value) && value.length > 1 ? vars.pop() : undefined;
+
+            for (const name of vars) {
+              const v = process.env[name];
+              if (v !== undefined) {
+                return parse(v);
+              }
+            }
+            if (fallback !== undefined) return fallback;
+            return null;
+          },
+          stringify(item) {
+            return `!env ${item}`;
+          },
+          identify: () => false
+        }
+      ]
+    });
   } else {
     // Create new empty space directory
     return await makeNewSpace(root.path);
