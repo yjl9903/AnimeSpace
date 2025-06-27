@@ -60,7 +60,7 @@
     "open-editor": "^5.1.0",
     "pathe": "^2.0.3",
     "prompts": "^2.4.2",
-    "undici": "^7.10.0"
+    "undici": "^7.11.0"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.6",
