@@ -44,9 +44,9 @@
   "dependencies": {
     "@breadc/color": "^0.9.7",
     "@breadc/death": "^0.9.7",
-    "@breadfs/webdav": "^0.1.8",
+    "@breadfs/webdav": "^0.1.9",
     "anitomy": "^0.0.35",
-    "breadfs": "^0.1.8",
+    "breadfs": "^0.1.9",
     "consola": "3.1.0",
     "date-fns": "^4.1.0",
     "debug": "^4.4.1",

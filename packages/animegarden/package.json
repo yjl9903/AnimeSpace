@@ -50,7 +50,7 @@
     "@naria2/node": "^0.1.2",
     "@onekuma/map": "^0.1.10",
     "anitomy": "^0.0.35",
-    "breadfs": "^0.1.8",
+    "breadfs": "^0.1.9",
     "cli-progress": "^3.12.0",
     "date-fns": "^4.1.0",
     "debug": "^4.4.1",

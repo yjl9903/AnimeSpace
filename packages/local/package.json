@@ -45,7 +45,7 @@
     "@animespace/core": "workspace:*",
     "@breadc/color": "^0.9.7",
     "anitomy": "^0.0.35",
-    "breadfs": "^0.1.8",
+    "breadfs": "^0.1.9",
     "memofunc": "^0.1.6"
   },
   "engines": {
