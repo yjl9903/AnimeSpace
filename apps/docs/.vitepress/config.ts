@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress';
 
 import { injectScriptTags } from 'unplugin-analytics/vitepress';
 
-const APP_HOST = `https://animespace.onekuma.cn/`;
+const APP_HOST = `https://docs.animes.garden/`;
 
 export default defineConfig({
   lang: 'zh-CN',

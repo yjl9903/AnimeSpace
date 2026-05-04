@@ -14,7 +14,6 @@ AnimeSpace is yet another complete **solution** for **automatically following ba
 All the bangumi resources are automatically collected and downloaded from [動漫花園](https://share.dmhy.org/). **Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.**
 
 + 📖 [中文文档](https://docs.animes.garden/)
-+ 📚 [部署博客](https://blog.onekuma.cn/alidriver-alist-rclone-animepaste)
 
 > **Notice**:
 >

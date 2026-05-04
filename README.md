@@ -14,7 +14,6 @@ AnimeSpace is yet another complete **solution** for **automatically following ba
 All the bangumi resources are automatically collected and downloaded from [動漫花園](https://share.dmhy.org/). **Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.**
 
 + 📖 [中文文档](https://docs.animes.garden/)
-+ 📚 [部署博客](https://blog.onekuma.cn/alidriver-alist-rclone-animepaste)
 
 > **Notice**:
 >
@@ -74,7 +73,7 @@ anime refresh
 ## Related Projects
 
 + [AnimeGarden](https://github.com/yjl9903/AnimeGarden): 動漫花園 3-rd party [mirror site](https://animes.garden/) and API endpoint
-+ [bgmc](https://github.com/yjl9903/bgmx): Bangumi Data / API Clients
++ [bgmx](https://github.com/yjl9903/bgmx): Bangumi Data / API Clients
 + [nfo.js](https://github.com/yjl9903/nfo.js): Parse and stringify nfo files
 + [naria2](https://github.com/yjl9903/naria2): Convenient BitTorrent Client based on the aria2 JSON-RPC
 + [BreadFS](https://github.com/yjl9903/BreadFS): Unified File System Abstraction
