@@ -1,36 +1,31 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "noEmit": true,
-    "target": "ES2018",
-    "module": "ESNext",
+    "target": "ESNext",
+    "module": "preserve",
     "lib": [
       "ESNext",
       "DOM"
     ],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "allowImportingTsExtensions": true,
     "paths": {
-      "@animespace/animegarden": [
-        "./packages/animegarden/src/index.ts"
+      "animespace": [
+        "./apps/animespace/src/index.ts"
       ],
-      "@animespace/bangumi": [
-        "./packages/bangumi/src/index.ts"
-      ],
-      "@animespace/core": [
-        "./packages/core/src/index.ts"
-      ],
-      "@animespace/local": [
-        "./packages/local/src/index.ts"
+      "@animespace/shared": [
+        "./packages/shared/src/index.ts"
       ]
     }
   },
   "exclude": [
-    "**/dist/**",
-    "**/node_modules/**"
+    "node_modules"
   ]
 }

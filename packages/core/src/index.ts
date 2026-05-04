@@ -1,13 +1,1 @@
-export * from './plan';
-
-export * from './space';
-
-export * from './anime';
-
-export * from './plugin';
-
-export * from './system';
-
-export * from './error';
-
-export * from './utils';
+export const hello = 1;

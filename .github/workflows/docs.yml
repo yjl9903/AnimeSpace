@@ -6,7 +6,7 @@ on:
     branches:    
       - main
     paths:
-      - docs/**
+      - apps/docs/**
 
 jobs:
   deploy:
@@ -23,7 +23,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.17.1
+          node-version: 24.15.0
           cache: pnpm
 
       - name: Install
@@ -42,4 +42,4 @@ jobs:
       - name: Deploy To OSS
         run: |
           ossutil rm oss://${{ secrets.BUCKET_NAME }}/ -rf
-          ossutil cp ./docs/.vitepress/dist oss://${{ secrets.BUCKET_NAME }}/ -rf
+          ossutil cp ./apps/docs/.vitepress/dist oss://${{ secrets.BUCKET_NAME }}/ -rf

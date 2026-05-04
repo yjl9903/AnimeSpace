@@ -1,0 +1,51 @@
+{
+  "name": "@animespace/shared",
+  "private": true,
+  "version": "0.1.0-beta.25",
+  "description": "Create your own Anime Space",
+  "keywords": [
+    "dmhy",
+    "moe",
+    "bangumi",
+    "animegarden",
+    "animespace"
+  ],
+  "homepage": "https://github.com/yjl9903/AnimeSpace#readme",
+  "bugs": {
+    "url": "https://github.com/yjl9903/AnimeSpace/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yjl9903/AnimeSpace.git"
+  },
+  "license": "AGPL-3.0",
+  "author": "XLor",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
+    "test": "vitest",
+    "test:ci": "vitest --run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "simptrad": "^0.2.0"
+  },
+  "engines": {
+    "node": ">=v24.0.0"
+  }
+}

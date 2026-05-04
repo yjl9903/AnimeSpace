@@ -1,9 +1,0 @@
-{
-  "mode": "major",
-  "write": true,
-  "recursive": true,
-  "exclude": [
-    "mediainfo.js",
-    "vitepress"
-  ]
-}
