@@ -2,6 +2,7 @@
 
 [![version](https://img.shields.io/npm/v/animespace?label=AnimeSpace)](https://www.npmjs.com/package/animespace)
 [![CI](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml/badge.svg)](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/yjl9903/AnimeSpace)
 [![License](https://img.shields.io/github/license/yjl9903/AnimeSpace)](./LICENSE)
 
 <p align="center">「 你所热爱的就是你的动画 」</p>
