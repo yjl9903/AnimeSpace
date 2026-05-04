@@ -2,7 +2,7 @@
 
 [![version](https://img.shields.io/npm/v/animespace?label=AnimeSpace)](https://www.npmjs.com/package/animespace)
 [![CI](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml/badge.svg)](https://github.com/yjl9903/AnimeSpace/actions/workflows/ci.yml)
-[![Docs](https://img.shields.io/badge/AnimeSpace-Demo-brightgreen)](https://animespace.onekuma.cn/)
+[![Docs](https://img.shields.io/badge/AnimeSpace-Demo-brightgreen)](https://docs.animes.garden/)
 [![License](https://img.shields.io/github/license/yjl9903/AnimeSpace)](./LICENSE)
 
 <p align="center">「 你所热爱的就是你的动画 」</p>
@@ -13,7 +13,7 @@ AnimeSpace is yet another complete **solution** for **automatically following ba
 
 All the bangumi resources are automatically collected and downloaded from [動漫花園](https://share.dmhy.org/). **Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.**
 
-+ 📖 [中文文档](https://animespace.onekuma.cn/)
++ 📖 [中文文档](https://docs.animes.garden/)
 + 📚 [部署博客](https://blog.onekuma.cn/alidriver-alist-rclone-animepaste)
 
 > **Notice**:
@@ -36,7 +36,7 @@ All the bangumi resources are automatically collected and downloaded from [動�
 >
 > Install latest [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/) globally.
 
-See [部署 | AnimeSpace](https://animespace.onekuma.cn/deploy/) and [安装 CLI | AnimeSpace](https://animespace.onekuma.cn/admin/).
+See [部署 | AnimeSpace](https://docs.animes.garden/deploy/) and [安装 CLI | AnimeSpace](https://docs.animes.garden/admin/).
 
 ## Usage
 
@@ -59,7 +59,7 @@ Second, just the following simple command.
 anime bangumi generate --fansub --create "<plan filename>.yaml"
 ```
 
-See [放映计划 | AnimeSpace](https://animespace.onekuma.cn/admin/plan.html) to get more details.
+See [放映计划 | AnimeSpace](https://docs.animes.garden/admin/plan.html) to get more details.
 
 Alternatively, if you share similiar interests in animation with me, you can just clone my [.animespace](https://github.com/yjl9903/.animespace) config space directory.
 
@@ -74,7 +74,7 @@ anime refresh
 ## Related Projects
 
 + [AnimeGarden](https://github.com/yjl9903/AnimeGarden): 動漫花園 3-rd party [mirror site](https://animes.garden/) and API endpoint
-+ [bgmc](https://github.com/yjl9903/bgmc): Bangumi Data / API Clients
++ [bgmc](https://github.com/yjl9903/bgmx): Bangumi Data / API Clients
 + [nfo.js](https://github.com/yjl9903/nfo.js): Parse and stringify nfo files
 + [naria2](https://github.com/yjl9903/naria2): Convenient BitTorrent Client based on the aria2 JSON-RPC
 + [BreadFS](https://github.com/yjl9903/BreadFS): Unified File System Abstraction
