@@ -26,7 +26,7 @@ hero:
 features:
   - title: 自动化
     details: 自动抓取 / 下载 / 整理动画资源
-  - title: 动画花园 Anime Garden
+  - title: Anime Garden
     details: 動漫花園第三方镜像站 
   - title: 集成媒体库
     details: 本地资源可被 Jellyfin, Infuse 等软件自动识别

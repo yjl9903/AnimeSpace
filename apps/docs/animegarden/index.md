@@ -1,4 +1,4 @@
-# 🌸 动画花园 AnimeGarden
+# 🌸 Anime Garden
 
 [動漫花園](https://share.dmhy.org/) 第三方 [镜像站](https://animes.garden) 以及 [动画 BT 资源聚合站](https://animes.garden).
 
@@ -9,7 +9,7 @@
 + ⭐ 搜索条件收藏夹和生成聚合的 RSS 订阅链接
 + 👷‍♂️ 支持与 [AutoBangumi](https://www.autobangumi.org/) 和 [AnimeSpace](https://github.com/yjl9903/AnimeSpace) 集成
 
-![home](https://cdn.jsdelivr.net/gh/yjl9903/animegarden/assets/home.png)
+![home](https://cdn.jsdelivr.net/gh/yjl9903/animegarden/assets/home.jpeg)
 
 ## 高级搜索
 
