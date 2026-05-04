@@ -47,11 +47,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@animegarden/client": "0.5.3",
+    "@animegarden/client": "0.5.4",
     "@breadfs/aliyundrive": "0.1.13",
     "@breadfs/webdav": "0.1.13",
     "@node-rs/jieba": "2.0.1",
-    "anipar": "0.5.3",
+    "anipar": "0.5.4",
     "better-sqlite3": "12.9.0",
     "bgmc": "0.2.0",
     "bgmt": "0.1.3",
