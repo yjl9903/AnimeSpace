@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v6.0.3
+        uses: pnpm/action-setup@v6.0.5
 
       - name: Setup node
         uses: actions/setup-node@v6
@@ -46,7 +46,7 @@ jobs:
           ${{ matrix.binary }} --help
           ${{ matrix.binary }} space
       
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: anime-${{ matrix.target }}
           path: ${{ matrix.binary }}
