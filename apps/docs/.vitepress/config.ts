@@ -49,8 +49,6 @@ export default defineConfig({
       {
         text: '生态系统',
         items: [
-          { text: 'AnimeSpace', link: '/animespace/' },
-          { text: 'AnimeGarden', link: '/animegarden/' },
           { text: 'anipar', link: '/anipar/' },
           { text: 'bgmd', link: '/bgmd/' },
           { text: 'bgmc', link: '/bgmc/' },
@@ -113,10 +111,22 @@ export default defineConfig({
         }
       ],
       '/animegarden/': [
-        { text: 'AnimeGarden', link: '/animegarden/' },
-        { text: '高级搜索', link: '/animegarden/search' },
-        { text: '收藏夹管理', link: '/animegarden/collection' },
-        { text: 'RSS 订阅', link: '/animegarden/rss' }
+        {
+          text: '使用',
+          items: [
+            { text: 'AnimeGarden', link: '/animegarden/' },
+            { text: '高级搜索', link: '/animegarden/search' },
+            { text: '收藏夹管理', link: '/animegarden/collection' },
+            { text: 'RSS 订阅', link: '/animegarden/rss' }
+          ]
+        },
+        {
+          text: 'AI 智能体',
+          items: [
+            { text: 'Skills', link: '/animegarden/skills' },
+            { text: 'MCP 服务', link: '/animegarden/mcp' }
+          ]
+        }
       ]
     }
   }
