@@ -15,7 +15,7 @@
     "preversion": "pnpm test:ci"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "4.20260426.1",
+    "@cloudflare/workers-types": "4.20260504.1",
     "@total-typescript/ts-reset": "0.6.1",
     "@types/better-sqlite3": "7.6.13",
     "@types/debug": "^4.1.13",
@@ -29,7 +29,7 @@
     "typescript": "6.0.3",
     "unbuild": "3.6.1",
     "vitest": "4.1.5",
-    "wrangler": "4.85.0"
+    "wrangler": "4.87.0"
   },
   "packageManager": "pnpm@10.33.2",
   "engines": {
