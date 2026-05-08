@@ -9,3 +9,7 @@ allowBuilds:
   sharp: true
   utf-8-validate: true
   workerd: true
+
+ignoreWorkspaceRootCheck: true
+shamefullyHoist: true
+strictPeerDependencies: false
