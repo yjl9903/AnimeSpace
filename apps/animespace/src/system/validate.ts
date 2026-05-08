@@ -19,11 +19,9 @@ export async function validateStorage(system: System) {
       try {
         await storage.list();
       } catch (error) {
-        system.logger.error(
-          `校验存储失败 ${name} ${storage.fs.name}://${storage.path} 原因:`,
-          error instanceof BreadFSError ? (error.cause as any)?.message : '',
-          error
-        );
+        system.logger.error(`校验存储失败 ${name} ${storage.fs.name}://${storage.path}`);
+        system.logger.error(error instanceof Error ? (error.cause ?? error) : error);
+
         if (i + 1 === MAX_RETRY) {
           throw error;
         } else {
