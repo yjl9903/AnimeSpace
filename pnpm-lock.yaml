@@ -131,7 +131,7 @@ importers:
         version: 3.5.34(typescript@6.0.3)
     devDependencies:
       '@algolia/client-search':
-        specifier: ^5.52.0
+        specifier: ^5.52.1
         version: 5.52.1
       '@iconify-json/carbon':
         specifier: ^1.2.20
