@@ -20,7 +20,7 @@
     "@types/better-sqlite3": "7.6.13",
     "@types/debug": "^4.1.13",
     "@types/fs-extra": "11.0.4",
-    "@types/node": "24.12.3",
+    "@types/node": "24.12.4",
     "bumpp": "latest",
     "drizzle-kit": "0.31.10",
     "prettier": "3.8.3",
