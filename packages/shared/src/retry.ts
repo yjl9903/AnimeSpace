@@ -6,7 +6,10 @@ export interface RetryOptions {
   shouldRetry?: (error: unknown, attempt: number) => boolean;
 }
 
-export async function retryFn<T>(fn: () => Promise<T>, options: RetryOptions): Promise<T> {
+export async function retryFn<T>(
+  fn: (turn: number) => Promise<T>,
+  options: RetryOptions
+): Promise<T> {
   const { signal, shouldRetry } = options;
   let { count } = options;
 
@@ -16,7 +19,7 @@ export async function retryFn<T>(fn: () => Promise<T>, options: RetryOptions): P
   let e: unknown;
   for (let i = 0; i <= count; i++) {
     try {
-      return await fn();
+      return await fn(i);
     } catch (err) {
       e = err;
       if (signal?.aborted) {

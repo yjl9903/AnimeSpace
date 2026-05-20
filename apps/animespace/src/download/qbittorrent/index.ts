@@ -3,6 +3,8 @@ import { lightRed } from 'breadc';
 import { QBittorrent } from 'nqbt';
 import { and, eq, inArray, sql } from 'drizzle-orm';
 
+import { retryFn, sleep } from '@animespace/shared';
+
 import type { System } from '../../system/system.ts';
 
 import { md5File } from '../../utils/checksum.ts';
@@ -341,40 +343,47 @@ export class QbittorrentDownloader extends Downloader {
       return undefined;
     }
 
-    const [torrent] = await this.getClient().getTorrentList({
-      hashes: [hash]
-    });
-    if (!torrent) {
-      return undefined;
-    }
+    // 接口是异步的, 重试几次
+    return retryFn(
+      async (turn) => {
+        const [torrent] = await this.getClient().getTorrentList({
+          hashes: [hash]
+        });
+        if (!torrent) {
+          await sleep(Math.min(30 * 1000, 500 * 2 ** turn));
+          throw new Error('Torrent is missing');
+        }
 
-    const files = await this.upsertFiles(infoHash);
+        const files = await this.upsertFiles(infoHash);
 
-    return {
-      infoHash: torrent.hash,
-      name: torrent.name,
-      status: mapQbittorrentStatus(torrent.state),
-      progress: torrent.progress,
-      downloadSpeed: torrent.dlspeed,
-      uploadSpeed: torrent.upspeed,
-      peerCount: torrent.num_seeds + torrent.num_leechs,
-      seedCount: torrent.num_seeds,
-      leechCount: torrent.num_leechs,
-      swarmSeedCount: torrent.num_complete,
-      swarmLeechCount: torrent.num_incomplete,
-      size: torrent.size,
-      totalSize: torrent.total_size,
-      amountLeft: torrent.amount_left,
-      eta: torrent.eta,
-      downloaded: torrent.downloaded,
-      uploaded: torrent.uploaded,
-      savePath: torrent.save_path,
-      contentPath: torrent.content_path,
-      addedOn: torrent.added_on,
-      completionOn: torrent.completion_on,
-      lastActivity: torrent.last_activity,
-      files: files ?? []
-    };
+        return {
+          infoHash: torrent.hash,
+          name: torrent.name,
+          status: mapQbittorrentStatus(torrent.state),
+          progress: torrent.progress,
+          downloadSpeed: torrent.dlspeed,
+          uploadSpeed: torrent.upspeed,
+          peerCount: torrent.num_seeds + torrent.num_leechs,
+          seedCount: torrent.num_seeds,
+          leechCount: torrent.num_leechs,
+          swarmSeedCount: torrent.num_complete,
+          swarmLeechCount: torrent.num_incomplete,
+          size: torrent.size,
+          totalSize: torrent.total_size,
+          amountLeft: torrent.amount_left,
+          eta: torrent.eta,
+          downloaded: torrent.downloaded,
+          uploaded: torrent.uploaded,
+          savePath: torrent.save_path,
+          contentPath: torrent.content_path,
+          addedOn: torrent.added_on,
+          completionOn: torrent.completion_on,
+          lastActivity: torrent.last_activity,
+          files: files ?? []
+        };
+      },
+      { count: 3 }
+    ).catch(() => undefined);
   }
 
   private async syncCategoryStatesToDatabase() {
