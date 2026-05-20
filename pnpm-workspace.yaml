@@ -3,7 +3,6 @@ packages:
   - packages/*
 
 allowBuilds:
-  better-sqlite3: true
   bufferutil: true
   esbuild: true
   sharp: true

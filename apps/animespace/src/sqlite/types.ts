@@ -1,11 +1,11 @@
-import type { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
+import type { NodeSQLiteDatabase } from 'drizzle-sqlite';
 
 import type { metadata } from './metadata.ts';
 import type { torrents } from './torrent.ts';
 import type { subjects, subjectFiles } from './subject.ts';
 import type { resources, filters, filterResources } from './animegarden.ts';
 
-export type Database = BetterSQLite3Database<{
+export type Database = NodeSQLiteDatabase<{
   metadata: typeof metadata;
   subjects: typeof subjects;
   subjectFiles: typeof subjectFiles;

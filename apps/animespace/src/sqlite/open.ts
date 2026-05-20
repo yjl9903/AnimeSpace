@@ -1,7 +1,8 @@
-import Sqlite from 'better-sqlite3';
+import type { DatabaseSync } from 'node:sqlite';
+
 import createDebug from 'debug';
 import { sql } from 'drizzle-orm';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { drizzle } from 'drizzle-sqlite';
 
 import type { Space } from '../system/space.ts';
 
@@ -18,14 +19,13 @@ const CURRENT_SCHEMA_VERSION = 1;
 
 export async function openDatabase(
   space: Space
-): Promise<{ client: Sqlite.Database; database: Database }> {
+): Promise<{ client: DatabaseSync; database: Database }> {
   debug('start opening database', space.sqlite.path.path);
 
-  const client = new Sqlite(space.sqlite.path.path);
-
-  const database = drizzle(client, {
+  const database = drizzle(space.sqlite.path.path, {
     schema: { metadata, subjects, subjectFiles, resources, filters, filterResources, torrents }
   });
+  const client = database.$client;
 
   await migrateDatabase(database);
 
