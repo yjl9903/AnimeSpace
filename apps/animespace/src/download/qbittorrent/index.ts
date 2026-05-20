@@ -174,44 +174,49 @@ export class QbittorrentDownloader extends Downloader {
     await this.initialize();
 
     const client = this.getClient();
-    const deduped = [...new Set(hashes.map((hash) => hash.trim()).filter(Boolean))];
-    if (deduped.length === 0) {
+    const waiting = new Set(hashes.map((hash) => hash.trim()).filter(Boolean));
+    if (waiting.size === 0) {
       return [];
     }
 
     this.debug('runScheduler', hashes);
 
-    const states = await this.getTorrentStates();
-    await this.upsertStates(states);
+    let retryTurn = 0;
 
-    const byHash = new Map(states.map((state) => [state.infoHash, state]));
-    const active = states.filter((s) => s.status === TorrentStatus.downloading);
+    const running: string[] = [];
     const { concurrency } = this.getConfig();
 
-    if (active.length >= concurrency) {
-      this.debug('active download count exceeds configured concurrency', active);
-    }
+    while (waiting.size > 0 && retryTurn < 10) {
+      const states = await this.getTorrentStates();
+      await this.upsertStates(states);
 
-    const toStart: string[] = [];
-    const running: string[] = [];
-    for (const hash of deduped) {
-      const state = byHash.get(hash);
-      if (!state) {
-        continue;
-      }
+      const statesMap = new Map(states.map((state) => [state.infoHash, state]));
+      const activeState = states.filter((s) => s.status === TorrentStatus.downloading);
 
-      if (state.status === TorrentStatus.pending) {
-        if (toStart.length < concurrency - active.length) {
-          running.push(hash);
-          toStart.push(hash);
+      const toStart: string[] = [];
+      for (const hash of [...waiting.keys()]) {
+        const state = statesMap.get(hash);
+        if (!state) {
+          continue;
         }
-      } else if (state.status === TorrentStatus.downloading) {
-        running.push(hash);
-      }
-    }
 
-    if (toStart.length > 0) {
-      await client.startTorrents(toStart);
+        waiting.delete(hash);
+        if (state.status === TorrentStatus.pending) {
+          if (toStart.length < concurrency - activeState.length) {
+            running.push(hash);
+            toStart.push(hash);
+          }
+        } else if (state.status === TorrentStatus.downloading) {
+          running.push(hash);
+        }
+      }
+
+      if (toStart.length > 0) {
+        await client.startTorrents(toStart);
+      }
+
+      retryTurn += 1;
+      await sleep(1000);
     }
 
     return running;
