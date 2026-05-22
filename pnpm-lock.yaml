@@ -134,8 +134,8 @@ importers:
         specifier: ^5.52.1
         version: 5.52.1
       '@iconify-json/carbon':
-        specifier: ^1.2.21
-        version: 1.2.21
+        specifier: ^1.2.22
+        version: 1.2.22
       '@unocss/reset':
         specifier: ^66.6.8
         version: 66.6.8
@@ -1642,8 +1642,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@iconify-json/carbon@1.2.21':
-    resolution: {integrity: sha512-yCutC5KWR7uiXdCum1MqNrnfUhq118WYhHkUiBux6wekc6UnlVKvIte54AER0B2uEe0wfKxFIMoJqJugjViATQ==}
+  '@iconify-json/carbon@1.2.22':
+    resolution: {integrity: sha512-x/L1tVgBp6ailSU0b8QDlxM3MLLbrmzefoqOt1gpBbywTF3xNSKDcL/PrOoLGZHwoFsNXujg2xrCvYsAWpykgA==}
 
   '@iconify-json/simple-icons@1.2.81':
     resolution: {integrity: sha512-Utjw4sPtoVdbpAQAkC4O0cYpt4ehQZYr6aFHhmvdeW8mQwkINyAe0ogTPqNptSSKogZ2lfgXM8zpuhO961Wnng==}
@@ -6945,7 +6945,7 @@ snapshots:
   '@esbuild/win32-x64@0.27.7':
     optional: true
 
-  '@iconify-json/carbon@1.2.21':
+  '@iconify-json/carbon@1.2.22':
     dependencies:
       '@iconify/types': 2.0.0
 
