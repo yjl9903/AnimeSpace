@@ -23,7 +23,7 @@
     "unplugin-analytics": "^0.0.13",
     "unplugin-vue-components": "^32.0.0",
     "vite": "^8.0.14",
-    "vite-plugin-pwa": "^1.2.0",
+    "vite-plugin-pwa": "^1.3.0",
     "vitepress": "1.6.4",
     "workbox-window": "^7.4.0"
   }
