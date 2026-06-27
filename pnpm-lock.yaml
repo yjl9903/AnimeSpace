@@ -33,8 +33,8 @@ importers:
         specifier: 0.31.10
         version: 0.31.10
       prettier:
-        specifier: 3.8.3
-        version: 3.8.3
+        specifier: 3.8.5
+        version: 3.8.5
       tsx:
         specifier: 4.21.0
         version: 4.21.0
@@ -4654,8 +4654,8 @@ packages:
     deprecated: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
     hasBin: true
 
-  prettier@3.8.3:
-    resolution: {integrity: sha512-7igPTM53cGHMW8xWuVTydi2KO233VFiTNyF5hLJqpilHfmn8C8gPf+PS7dUT64YcXFbiMGZxS9pCSxL/Dxm/Jw==}
+  prettier@3.8.5:
+    resolution: {integrity: sha512-zxcTTCedNGJM4R8sj/Cq/F0W/c4iE0afWBcBwMTRtw4WHYP9TWkYjdiH3npPRUYsXQCPR0hTU9yjovOu+E6EQA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -9923,7 +9923,7 @@ snapshots:
       tar-fs: 2.1.4
       tunnel-agent: 0.6.0
 
-  prettier@3.8.3: {}
+  prettier@3.8.5: {}
 
   pretty-bytes@5.6.0: {}
 
