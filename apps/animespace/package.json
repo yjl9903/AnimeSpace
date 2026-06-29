@@ -49,6 +49,8 @@
   "dependencies": {
     "@animegarden/client": "0.5.4",
     "@breadfs/aliyundrive": "0.1.13",
+    "@breadfs/core": "0.1.13",
+    "@breadfs/node": "0.1.13",
     "@breadfs/webdav": "0.1.13",
     "@node-rs/jieba": "2.0.1",
     "anipar": "0.5.4",

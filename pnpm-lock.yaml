@@ -59,6 +59,12 @@ importers:
       '@breadfs/aliyundrive':
         specifier: 0.1.13
         version: 0.1.13
+      '@breadfs/core':
+        specifier: 0.1.13
+        version: 0.1.13
+      '@breadfs/node':
+        specifier: 0.1.13
+        version: 0.1.13
       '@breadfs/webdav':
         specifier: 0.1.13
         version: 0.1.13
