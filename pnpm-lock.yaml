@@ -81,8 +81,8 @@ importers:
         specifier: 0.1.3
         version: 0.1.3
       breadc:
-        specifier: 1.0.0-beta.15
-        version: 1.0.0-beta.15
+        specifier: 1.0.0-beta.17
+        version: 1.0.0-beta.17
       breadfs:
         specifier: 0.1.13
         version: 0.1.13(tslib@2.8.1)
@@ -96,8 +96,8 @@ importers:
         specifier: 0.45.2
         version: 0.45.2(@cloudflare/workers-types@4.20260504.1)
       drizzle-sqlite:
-        specifier: 0.0.1
-        version: 0.0.1(drizzle-orm@0.45.2(@cloudflare/workers-types@4.20260504.1))
+        specifier: 0.1.0
+        version: 0.1.0(drizzle-orm@0.45.2(@cloudflare/workers-types@4.20260504.1))
       fast-glob:
         specifier: 3.3.3
         version: 3.3.3
@@ -105,7 +105,7 @@ importers:
         specifier: 0.1.1
         version: 0.1.1
       prompts:
-        specifier: ^2.4.2
+        specifier: 2.4.2
         version: 2.4.2
       undici:
         specifier: 8.1.0
@@ -776,17 +776,17 @@ packages:
   '@breadc/color@0.9.7':
     resolution: {integrity: sha512-kO795IASRzZrlr4XOkyAS11MLeJOmKDVFSuetsim5VLrUPaFz+R01c1uYB4ggxIPaveRSIOfVEoPLwF+9dZm9g==}
 
-  '@breadc/color@1.0.0-beta.15':
-    resolution: {integrity: sha512-+MsvbAa/FItcwQNwnI8btpsOkhl5C1ls51doerSVS3bXgBovQ/0n0hIW6U1RkPbqQQIajHpFMXrjA5A/qwBrJg==}
+  '@breadc/color@1.0.0-beta.17':
+    resolution: {integrity: sha512-dSYneiJL+nuMv7PcQ2ZnllSuggZX9vuyfYZ+AkB3+e0fUwBuhJsQvLoUDL+ok5MjtO2orV+NvsNxaVDxsXAMmA==}
 
-  '@breadc/core@1.0.0-beta.15':
-    resolution: {integrity: sha512-nLVdjVVZrhqJ0JDNn9uMsQFVcseBknTdmyXj4UOi7EnleN0YT1p3ofs1sjYx7HB5Kd35l0XtX2CAQ1Qom31ssQ==}
+  '@breadc/core@1.0.0-beta.17':
+    resolution: {integrity: sha512-c+8h+N58KjOhYgm1oA41yNNfwKhSglwEatQIpzZ81sR0N8jOUs7n6ohmXmNaR+Id/oZiZ7c1aum1L46jXqDP1Q==}
 
-  '@breadc/death@1.0.0-beta.15':
-    resolution: {integrity: sha512-cerDS3oXK18CtUusg2Jy2hxdYTdz5sk4bGIVZW9nLLPiT7l+ehxMnEjxuYv9GnvBv8olG0NSgbchxlhAPWNZRQ==}
+  '@breadc/death@1.0.0-beta.17':
+    resolution: {integrity: sha512-4Gt0HRsul5RnBR2UVXiRHvI8cvqm88i04tVoNIMjlt+pc5EQdH7yvJF8/0YNWFAAvJnRjh81WM1fyWDPQTf7Qg==}
 
-  '@breadc/tui@1.0.0-beta.15':
-    resolution: {integrity: sha512-WL7jP+BCecQsLQ4iwv2Y0GswcGuRAwY82axo7+DvuksZqG79gWSTuBHRKOAbnFjLf3KOyR1c4wIJS/5QP1GhbA==}
+  '@breadc/tui@1.0.0-beta.17':
+    resolution: {integrity: sha512-whsiEmvXbvp0WofrYWyHJPjbv5xkMD1Qu02xgUvvwaCcS5paMonmyw9HZOpfEHJJoscrn/M6YWKszendaixxLA==}
 
   '@breadfs/aliyundrive@0.1.13':
     resolution: {integrity: sha512-nlShR6Vyo4jKyDJ6NUrMZRqkUmYwaggwlqyNnMi8WEcteCtrRVyOPqtEknvzAII2pwf+DcHObqBqLj7SlBP1bQ==}
@@ -3027,8 +3027,8 @@ packages:
   breadc@0.9.7:
     resolution: {integrity: sha512-0eJNb27GKlGPlMJfmBZ0D+dEENwj+QDkSWlH+2bW2g3OWs00mCGh6Me1+yDhLbZyqS7pnSLPgx7AigHDzIKoug==}
 
-  breadc@1.0.0-beta.15:
-    resolution: {integrity: sha512-q2Odd3daDlwDENFv0s1oeVMIrsdXJuMItwo4ejKhL59sCYQmPeI/s+76URas9I6mZQxUbR4S99LyKolcgh3m7w==}
+  breadc@1.0.0-beta.17:
+    resolution: {integrity: sha512-xLmWETFx5SReU2WS453Y0dfOGXnihLnwQt+00clK8f4wrEzlqsUjdg39o7IxVW6+4IR2iK2eE3y0ljxF/gq9Mw==}
 
   breadfs@0.1.13:
     resolution: {integrity: sha512-puBCNmtwu3LZn4sP/2IsYyfhqTjLWwid/cfffLNitXB2C2t5IndsQ7fAqL29p7wLQToNa1ffKKJkJSUXgBxc9w==}
@@ -3424,9 +3424,9 @@ packages:
       sqlite3:
         optional: true
 
-  drizzle-sqlite@0.0.1:
-    resolution: {integrity: sha512-ZHQMVwc7q+pnRNcXJ8SuuXnMbuFp6F6lE2UfRSDXYIJvgrqAPMB+JmEFalCV7cfUEZpyTSo75oZQh4vuSfIOvA==}
-    engines: {node: '>=v24.0.0'}
+  drizzle-sqlite@0.1.0:
+    resolution: {integrity: sha512-WJn0flxreGojdCh7EKCouhrxzV2vgStBxdRSQNMsmKG2AZgzzY9tL4DFCEnGcc26eUPOOHd8UYpEafKOOgffJw==}
+    engines: {node: '>=22.16.0'}
     peerDependencies:
       drizzle-orm: ^0.45.2
 
@@ -6341,17 +6341,17 @@ snapshots:
 
   '@breadc/color@0.9.7': {}
 
-  '@breadc/color@1.0.0-beta.15': {}
+  '@breadc/color@1.0.0-beta.17': {}
 
-  '@breadc/core@1.0.0-beta.15':
+  '@breadc/core@1.0.0-beta.17':
     dependencies:
-      '@breadc/color': 1.0.0-beta.15
+      '@breadc/color': 1.0.0-beta.17
 
-  '@breadc/death@1.0.0-beta.15': {}
+  '@breadc/death@1.0.0-beta.17': {}
 
-  '@breadc/tui@1.0.0-beta.15':
+  '@breadc/tui@1.0.0-beta.17':
     dependencies:
-      '@breadc/color': 1.0.0-beta.15
+      '@breadc/color': 1.0.0-beta.17
       get-east-asian-width: 1.6.0
       std-env: 4.1.0
       strip-ansi: 7.2.0
@@ -8036,7 +8036,7 @@ snapshots:
 
   bgmc@0.2.0:
     dependencies:
-      breadc: 1.0.0-beta.15
+      breadc: 1.0.0-beta.17
 
   bgmt@0.1.3:
     dependencies:
@@ -8082,12 +8082,12 @@ snapshots:
     dependencies:
       '@breadc/color': 0.9.7
 
-  breadc@1.0.0-beta.15:
+  breadc@1.0.0-beta.17:
     dependencies:
-      '@breadc/color': 1.0.0-beta.15
-      '@breadc/core': 1.0.0-beta.15
-      '@breadc/death': 1.0.0-beta.15
-      '@breadc/tui': 1.0.0-beta.15
+      '@breadc/color': 1.0.0-beta.17
+      '@breadc/core': 1.0.0-beta.17
+      '@breadc/death': 1.0.0-beta.17
+      '@breadc/tui': 1.0.0-beta.17
 
   breadfs@0.1.13(tslib@2.8.1):
     dependencies:
@@ -8414,7 +8414,7 @@ snapshots:
     optionalDependencies:
       '@cloudflare/workers-types': 4.20260504.1
 
-  drizzle-sqlite@0.0.1(drizzle-orm@0.45.2(@cloudflare/workers-types@4.20260504.1)):
+  drizzle-sqlite@0.1.0(drizzle-orm@0.45.2(@cloudflare/workers-types@4.20260504.1)):
     dependencies:
       drizzle-orm: 0.45.2(@cloudflare/workers-types@4.20260504.1)
 
