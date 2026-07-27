@@ -121,53 +121,87 @@ export class QbittorrentDownloader extends Downloader {
     const tickets: DownloadTicket[] = [];
     for (const req of deduped) {
       const prev = existedMap.get(req.infoHash);
+      let status = prev ? DownloadTicketStatus.existing : DownloadTicketStatus.created;
+
       if (prev) {
         if (prev.category !== config.category) {
           await client.setTorrentCategory(req.infoHash, config.category);
         }
-        tickets.push({
-          infoHash: req.infoHash,
-          status: DownloadTicketStatus.existing,
-          subject: req.subject,
-          resource: req.resource
-        });
-        continue;
+      } else {
+        try {
+          await client.addNewMagnet(req.magnet, {
+            category: config.category,
+            savepath: config.savePath,
+            paused: true
+          });
+        } catch (error) {
+          this.system.logger.log(`${lightRed('下载失败')} ${req.magnet}`);
+          this.system.logger.error(error);
+          status = DownloadTicketStatus.failed;
+        }
       }
 
-      try {
-        await client.addNewMagnet(req.magnet, {
-          category: config.category,
-          savepath: config.savePath,
-          paused: true
-        });
-      } catch (error) {
-        this.system.logger.log(`${lightRed('下载失败')} ${req.magnet}`);
-        this.system.logger.error(error);
-        tickets.push({
-          infoHash: req.infoHash,
-          status: DownloadTicketStatus.failed,
-          subject: req.subject,
-          resource: req.resource
-        });
-        continue;
-      }
-
-      try {
-        await client.setTorrentShareLimits(req.infoHash, DEFAULT_QBITTORRENT_SHARE_LIMITS);
-      } catch (error) {
-        // Some qBittorrent versions may not apply immediately after add.
-        this.debug('set torrent share limits failed', req.infoHash, error);
+      if (
+        status !== DownloadTicketStatus.failed &&
+        (!prev || !hasDefaultShareLimits(prev)) &&
+        !(await this.ensureTorrentShareLimits(req.infoHash))
+      ) {
+        status = DownloadTicketStatus.failed;
       }
 
       tickets.push({
         infoHash: req.infoHash,
-        status: DownloadTicketStatus.created,
+        status,
         subject: req.subject,
         resource: req.resource
       });
     }
 
     return tickets;
+  }
+
+  private async ensureTorrentShareLimits(infoHash: string): Promise<boolean> {
+    try {
+      const SHARE_LIMIT_RETRY_COUNT = 5;
+      const SHARE_LIMIT_RETRY_BASE_DELAY_MS = 250;
+
+      await retryFn(
+        async (turn) => {
+          if (turn > 0) {
+            await sleep(
+              Math.min(2_000, SHARE_LIMIT_RETRY_BASE_DELAY_MS * 2 ** Math.max(0, turn - 1))
+            );
+          }
+
+          const [torrent] = await this.getClient().getTorrentList({
+            hashes: [infoHash]
+          });
+          if (!torrent) {
+            throw new Error(`Torrent "${infoHash}" is not visible yet.`);
+          }
+
+          if (hasDefaultShareLimits(torrent)) {
+            return;
+          }
+
+          await this.getClient().setTorrentShareLimits(infoHash, DEFAULT_QBITTORRENT_SHARE_LIMITS);
+
+          const [updated] = await this.getClient().getTorrentList({
+            hashes: [infoHash]
+          });
+          if (!updated || !hasDefaultShareLimits(updated)) {
+            throw new Error(`Torrent "${infoHash}" share limits were not applied.`);
+          }
+        },
+        { count: SHARE_LIMIT_RETRY_COUNT }
+      );
+      return true;
+    } catch (error) {
+      this.system.logger.log(`${lightRed('做种规则配置失败')} ${infoHash}`);
+      this.system.logger.error(error);
+      this.debug('set torrent share limits failed', infoHash, error);
+      return false;
+    }
   }
 
   public async runScheduler(hashes: string[]): Promise<string[]> {
@@ -559,6 +593,19 @@ function mapQbittorrentConnectionStatus(status: string): DownloaderConnectionSta
     default:
       return undefined;
   }
+}
+
+function hasDefaultShareLimits(torrent: {
+  ratio_limit: number;
+  seeding_time_limit: number;
+  inactive_seeding_time_limit?: number;
+}): boolean {
+  return (
+    torrent.ratio_limit === DEFAULT_QBITTORRENT_SHARE_LIMITS.ratioLimit &&
+    torrent.seeding_time_limit === DEFAULT_QBITTORRENT_SHARE_LIMITS.seedingTimeLimit &&
+    torrent.inactive_seeding_time_limit ===
+      DEFAULT_QBITTORRENT_SHARE_LIMITS.inactiveSeedingTimeLimit
+  );
 }
 
 function waitFor(delayMs: number) {
