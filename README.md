@@ -13,7 +13,7 @@ AnimeSpace is yet another complete **solution** for **automatically following ba
 
 All the bangumi resources are automatically collected and downloaded from [動漫花園](https://share.dmhy.org/). **Sincere thanks to [動漫花園](https://share.dmhy.org/) and all the fansubs.**
 
-+ 📖 [中文文档](https://docs.animes.garden/)
+- 📖 [中文文档](https://docs.animes.garden/)
 
 > **Notice**:
 >
@@ -23,11 +23,11 @@ All the bangumi resources are automatically collected and downloaded from [動�
 
 ## Features
 
-+ :gear: **Automatically** collect, download and organize anime resources
-+ :construction_worker_man: **Scrape anime metadata** from [Bangumi 番组计划](https://bangumi.tv/) and generate NFO file (WIP)
-+ :film_strip: **Support any media server** including [Infuse](https://firecore.com/infuse), [Plex](https://www.plex.tv/), [Jellyfin](https://github.com/jellyfin/jellyfin), [Kodi](https://kodi.tv/) and so on...
+- :gear: **Automatically** collect, download and organize anime resources
+- :construction_worker_man: **Scrape anime metadata** from [Bangumi 番组计划](https://bangumi.tv/) and generate NFO file (WIP)
+- :film_strip: **Support any media server** including [Infuse](https://firecore.com/infuse), [Plex](https://www.plex.tv/), [Jellyfin](https://github.com/jellyfin/jellyfin), [Kodi](https://kodi.tv/) and so on...
 
-![Jellyfin](./docs/public/Jellyfin.jpeg)
+![Jellyfin](./apps/docs/public/Jellyfin.jpeg)
 
 ## Installation
 
@@ -72,21 +72,21 @@ anime refresh
 
 ## Related Projects
 
-+ [AnimeGarden](https://github.com/yjl9903/AnimeGarden): 動漫花園 3-rd party [mirror site](https://animes.garden/) and API endpoint
-+ [bgmx](https://github.com/yjl9903/bgmx): Bangumi Data / API Clients
-+ [nfo.js](https://github.com/yjl9903/nfo.js): Parse and stringify nfo files
-+ [naria2](https://github.com/yjl9903/naria2): Convenient BitTorrent Client based on the aria2 JSON-RPC
-+ [BreadFS](https://github.com/yjl9903/BreadFS): Unified File System Abstraction
-+ [Breadc](https://github.com/yjl9903/Breadc): Yet another Command Line Application Framework with fully TypeScript support
-+ [memofunc](https://github.com/yjl9903/memofunc): Memorize your function call automatically
+- [AnimeGarden](https://github.com/yjl9903/AnimeGarden): 動漫花園 3-rd party [mirror site](https://animes.garden/) and API endpoint
+- [bgmx](https://github.com/yjl9903/bgmx): Bangumi Data / API Clients
+- [nfo.js](https://github.com/yjl9903/nfo.js): Parse and stringify nfo files
+- [naria2](https://github.com/yjl9903/naria2): Convenient BitTorrent Client based on the aria2 JSON-RPC
+- [BreadFS](https://github.com/yjl9903/BreadFS): Unified File System Abstraction
+- [Breadc](https://github.com/yjl9903/Breadc): Yet another Command Line Application Framework with fully TypeScript support
+- [memofunc](https://github.com/yjl9903/memofunc): Memorize your function call automatically
 
 ## Credits
 
-+ **[動漫花園](https://share.dmhy.org/) and all the fansubs**
-+ [Bangumi 番组计划](https://bangumi.tv/) provides a platform for sharing anything about ACG
-+ [Bangumi Data](https://github.com/bangumi-data/bangumi-data) collects the infomation of animes
-+ [aria2](能干猫今天也忧郁) and [WebTorrent](https://webtorrent.io/) provide the ability to download magnet links
-+ [Anime Tracker List](https://github.com/DeSireFire/animeTrackerList) collects trackers for downloading bangumi resources
+- **[動漫花園](https://share.dmhy.org/) and all the fansubs**
+- [Bangumi 番组计划](https://bangumi.tv/) provides a platform for sharing anything about ACG
+- [Bangumi Data](https://github.com/bangumi-data/bangumi-data) collects the infomation of animes
+- [aria2](能干猫今天也忧郁) and [WebTorrent](https://webtorrent.io/) provide the ability to download magnet links
+- [Anime Tracker List](https://github.com/DeSireFire/animeTrackerList) collects trackers for downloading bangumi resources
 
 ## License
 
