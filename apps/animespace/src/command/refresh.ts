@@ -160,13 +160,22 @@ async function pullSubject(subject: Subject, options: PullOptions) {
   }
 
   const subjectId = (await subject.getSubject()).id;
-  const subjectFiles = await subject.getSubjectFiles();
+  const subjectFiles = (await subject.getSubjectFiles()).filter(
+    (file) => file.storage === subject.storage.driver
+  );
+  const listedPaths = new Set<string>();
   const storageFiles = (
     await subject
       .getStorage()
       .list()
       .catch(() => [])
-  ).filter((file) => ['.mp4', '.mkv', '.ass'].includes(file.extname));
+  ).filter((file) => {
+    if (!['.mp4', '.mkv', '.ass'].includes(file.extname) || listedPaths.has(file.path)) {
+      return false;
+    }
+    listedPaths.add(file.path);
+    return true;
+  });
   system.logger.log(
     `${lightBlue('快照状态')} 本地已同步 ${subjectFiles.length} 个文件 (共 ${storageFiles.length} 个文件)`
   );
@@ -181,15 +190,11 @@ async function pullSubject(subject: Subject, options: PullOptions) {
   }
 
   const unknown: typeof storageFiles = [];
+  // Snapshot identity is storage + path, regardless of resource associations.
+  const syncedPaths = new Set(subjectFiles.map((file) => file.path));
 
   for (const storageFile of storageFiles) {
-    if (
-      fetched.some(
-        (res) =>
-          res.subjectFiles &&
-          res.subjectFiles.some((subjectFile) => subjectFile.path === storageFile.path)
-      )
-    ) {
+    if (syncedPaths.has(storageFile.path)) {
       continue;
     }
 
@@ -200,12 +205,9 @@ async function pullSubject(subject: Subject, options: PullOptions) {
     if (bound) {
       const stat = await storageFile.stat();
 
-      system.logger.log(
-        `${lightGreen('绑定快照')} ${storageFile.path} -> ${link(bound.name, bound.url)}`
-      );
-
-      await database.insert(subjectFilesSchema).values([
-        {
+      const inserted = await database
+        .insert(subjectFilesSchema)
+        .values({
           subjectId,
           storage: subject.storage.driver,
           path: storageFile.path,
@@ -216,8 +218,18 @@ async function pullSubject(subject: Subject, options: PullOptions) {
           animegardenProviderId: bound.animegarden?.providerId,
           torrentInfoHash: bound.animegarden ? getInfoHash(bound.animegarden.magnet) : undefined,
           torrentFilePath: undefined
-        }
-      ]);
+        })
+        .onConflictDoNothing({ target: [subjectFilesSchema.storage, subjectFilesSchema.path] })
+        .returning({ id: subjectFilesSchema.id });
+      syncedPaths.add(storageFile.path);
+
+      if (inserted.length > 0) {
+        system.logger.log(
+          `${lightGreen('绑定快照')} ${storageFile.path} -> ${link(bound.name, bound.url)}`
+        );
+      } else {
+        system.logger.log(`${lightYellow('快照已存在')} ${storageFile.path}`);
+      }
 
       continue;
     }
