@@ -10,8 +10,8 @@ allowBuilds:
   workerd: true
 
 minimumReleaseAgeExclude:
-  - '@nqbt/core@0.1.2'
-  - nqbt@0.1.2
+  - '@nqbt/core@0.1.3'
+  - nqbt@0.1.3
 
 ignoreWorkspaceRootCheck: true
 shamefullyHoist: true
