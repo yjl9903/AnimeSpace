@@ -27,15 +27,13 @@ describe('load space', () => {
       sqlitePath: path.relative(root, space.sqlite.path.path),
       collections: space.collections.map((file) => path.relative(root, file.path)),
       downloader: space.downloader.provider
-    }).toMatchInlineSnapshot(`
-      {
-        "collections": [],
-        "downloader": "qbittorrent",
-        "rootBasename": "space-default",
-        "sqlitePath": "animespace.db",
-        "storageDefault": "anime",
-      }
-    `);
+    }).toEqual({
+      collections: [],
+      downloader: 'qbittorrent',
+      rootBasename: 'space-default',
+      sqlitePath: 'animespace.db',
+      storageDefault: 'anime'
+    });
   });
 
   it('loads .env values and resolves collections/sqlite/storage paths', async () => {
@@ -47,15 +45,11 @@ describe('load space', () => {
       storageDefault: path.relative(root, space.storage.default.path),
       sqlitePath: path.relative(root, space.sqlite.path.path),
       collections: space.collections.map((file) => path.relative(root, file.path))
-    }).toMatchInlineSnapshot(`
-      {
-        "collections": [
-          "collections/demo.yaml",
-        ],
-        "sqlitePath": "data/animespace.db",
-        "storageDefault": "library/anime",
-      }
-    `);
+    }).toEqual({
+      collections: [path.join('collections', 'demo.yaml')],
+      sqlitePath: path.join('data', 'animespace.db'),
+      storageDefault: path.join('library', 'anime')
+    });
   });
 
   it('loads bangumi uid from anime.yaml', async () => {
