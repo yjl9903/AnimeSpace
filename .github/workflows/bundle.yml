@@ -24,7 +24,7 @@ jobs:
             binary: .\packages\cli\bin\anime.exe
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6.1.0
