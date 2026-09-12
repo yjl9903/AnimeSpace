@@ -9,6 +9,10 @@ allowBuilds:
   utf-8-validate: true
   workerd: true
 
+minimumReleaseAgeExclude:
+  - '@nqbt/core@0.1.2'
+  - nqbt@0.1.2
+
 ignoreWorkspaceRootCheck: true
 shamefullyHoist: true
 strictPeerDependencies: false

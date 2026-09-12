@@ -260,8 +260,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
       nqbt:
-        specifier: 0.1.1
-        version: 0.1.1
+        specifier: 0.1.2
+        version: 0.1.2
       prompts:
         specifier: 2.4.2
         version: 2.4.2
@@ -2226,8 +2226,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nqbt/core@0.1.1':
-    resolution: {integrity: sha512-mztuu7O4omXOjVxX98AGMSSrBOK9Xs1qeujpTevHxicpKjOrsyg5MhWxEES2ow7l0fF3E4pVdg1wqNUgp3T34g==}
+  '@nqbt/core@0.1.2':
+    resolution: {integrity: sha512-Gh8beEiDANY5JrMc4pKRgGjOmdBSGPNVxjIuNIGEA0fmP8iiWqvWAYceH8I0kmFAjbFzDI9c+TnlCi90FguW1A==}
     engines: {node: '>=v24.0.0'}
 
   '@oxc-parser/binding-android-arm-eabi@0.124.0':
@@ -3498,6 +3498,10 @@ packages:
     resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
     engines: {node: '>=18'}
 
+  cookie@2.0.1:
+    resolution: {integrity: sha512-yuToqVvRrj6pfDXREyQAAv8SkAEk/8GS3jQRTiUMm66TVtBYmqQeoEjL2Lmq8Rpo6271vH76InTChTitEAm65w==}
+    engines: {node: '>=22'}
+
   copy-anything@4.0.5:
     resolution: {integrity: sha512-7Vv6asjS4gMOuILabD3l739tsaxFQmC+a7pLZm02zyvs8p977bL3zEgq3yDk5rn9B0PbYgIv++jmHcuUab4RhA==}
     engines: {node: '>=18'}
@@ -4525,8 +4529,8 @@ packages:
   node-releases@2.0.44:
     resolution: {integrity: sha512-5WUyunoPMsvvEhS8AxHtRzP+oA8UCkJ7YRxatWKjngndhDGLiqEVAQKWjFAiAiuL8zMRGzGSJxFnLetoa43qGQ==}
 
-  nqbt@0.1.1:
-    resolution: {integrity: sha512-TwDX9S1i0vSdG38oUpgMyutis2cpkMLBOtK15vCxB2v7rpMQ2A7yh1bm4Ejir4wNyCsKFLEJGby6v927CzDagw==}
+  nqbt@0.1.2:
+    resolution: {integrity: sha512-HBSpLMRHEzk/ikGcRJShykkeqHU2LLgjTfOqfrCpipVU2hS6zujpPNkWXfZYi/yrdWJUUxU04tl4bFVlnKbATQ==}
     engines: {node: '>=v24.0.0'}
 
   object-assign@4.1.1:
@@ -7326,9 +7330,9 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@nqbt/core@0.1.1':
+  '@nqbt/core@0.1.2':
     dependencies:
-      cookie: 1.1.1
+      cookie: 2.0.1
 
   '@oxc-parser/binding-android-arm-eabi@0.124.0':
     optional: true
@@ -7554,7 +7558,7 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.9
       estree-walker: 2.0.2
-      picomatch: 4.0.4
+      picomatch: 4.0.7
     optionalDependencies:
       rollup: 4.60.4
 
@@ -8419,6 +8423,8 @@ snapshots:
   cookie@0.7.2: {}
 
   cookie@1.1.1: {}
+
+  cookie@2.0.1: {}
 
   copy-anything@4.0.5:
     dependencies:
@@ -9508,9 +9514,9 @@ snapshots:
 
   node-releases@2.0.44: {}
 
-  nqbt@0.1.1:
+  nqbt@0.1.2:
     dependencies:
-      '@nqbt/core': 0.1.1
+      '@nqbt/core': 0.1.2
 
   object-assign@4.1.1: {}
 
