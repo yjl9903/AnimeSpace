@@ -336,8 +336,8 @@ importers:
   packages/shared:
     dependencies:
       simptrad:
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
 
 packages:
 
@@ -4935,6 +4935,9 @@ packages:
 
   simptrad@0.2.0:
     resolution: {integrity: sha512-SADENHX3KNuTLThG/LQCZvIywDOwCFTC2aLufwmSgjVbHUEZKIjRzleb28J856kL4ozkKptv08eR3GyJFRCnMg==}
+
+  simptrad@0.3.0:
+    resolution: {integrity: sha512-ppFu4RuncoKhXj0wvD2SDZbYKDTGp5JdJrF02AxhUpBsTc8ga5bCYaHZ/QxuZftcsCCoW9tGiMQhhVLQ5euMcw==}
 
   sirv@3.0.2:
     resolution: {integrity: sha512-2wcC/oGxHis/BoHkkPwldgiPSYcpZK3JU28WoMVv55yHJgcZ8rlXvuG9iZggz+sU1d4bRgIGASwyWqjxu3FM0g==}
@@ -10049,6 +10052,8 @@ snapshots:
   signal-exit@4.1.0: {}
 
   simptrad@0.2.0: {}
+
+  simptrad@0.3.0: {}
 
   sirv@3.0.2:
     dependencies:
