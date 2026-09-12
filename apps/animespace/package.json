@@ -38,7 +38,7 @@
     "*.mjs"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "tsdown",
     "drizzle": "drizzle-kit",
     "drizzle:generate": "drizzle-kit generate",
     "format": "prettier --write 'src/**/*.ts' 'test/**/*.ts'",
