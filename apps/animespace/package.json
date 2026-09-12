@@ -54,7 +54,7 @@
     "@breadfs/webdav": "0.1.13",
     "@node-rs/jieba": "2.0.1",
     "anipar": "0.5.4",
-    "bgmc": "0.2.0",
+    "bgmc": "0.3.0",
     "bgmt": "0.3.1",
     "breadc": "1.0.0-beta.17",
     "breadfs": "0.1.13",

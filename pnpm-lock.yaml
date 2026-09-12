@@ -233,8 +233,8 @@ importers:
         specifier: 0.5.4
         version: 0.5.4
       bgmc:
-        specifier: 0.2.0
-        version: 0.2.0
+        specifier: 0.3.0
+        version: 0.3.0
       bgmt:
         specifier: 0.3.1
         version: 0.3.1
@@ -3336,11 +3336,6 @@ packages:
   baseline-browser-mapping@2.10.31:
     resolution: {integrity: sha512-MujYO3eP72uvmSE0i4wltsodRfIpZATP3jvzRNRGGxgzId7aVocVJJV3nf01qnzzKFGxQVC9bpWxl5cjxTr/7Q==}
     engines: {node: '>=6.0.0'}
-    hasBin: true
-
-  bgmc@0.2.0:
-    resolution: {integrity: sha512-TrGX8fzwR/VZXsUlOLOWqYSK+4WrKP0lWOc9Y/7KjRAkQ9Kh6edyVSq+SGGW83EcYIX9eHhSIajr4lm72Ztqpg==}
-    engines: {node: '>=v20.8.0'}
     hasBin: true
 
   bgmc@0.3.0:
@@ -8245,10 +8240,6 @@ snapshots:
   base-64@1.0.0: {}
 
   baseline-browser-mapping@2.10.31: {}
-
-  bgmc@0.2.0:
-    dependencies:
-      breadc: 1.0.0-beta.17
 
   bgmc@0.3.0:
     dependencies:
