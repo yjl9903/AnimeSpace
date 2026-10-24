@@ -117,7 +117,8 @@ export default defineConfig({
             { text: 'AnimeGarden', link: '/animegarden/' },
             { text: '高级搜索', link: '/animegarden/search' },
             { text: '收藏夹管理', link: '/animegarden/collection' },
-            { text: 'RSS 订阅', link: '/animegarden/rss' }
+            { text: 'RSS 订阅', link: '/animegarden/rss' },
+            { text: 'Ani-RSS 集成', link: '/animegarden/ani-rss' }
           ]
         },
         {
