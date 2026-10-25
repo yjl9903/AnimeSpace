@@ -26,5 +26,5 @@
 ## 注意事项
 
 - RSS 默认返回最新 100 条（`pageSize` 最大 1000）；补档或长期未更新的订阅建议配合 `after` 使用；
-- Bangumi 条目绑定仍在完善中，个别资源没有 `subjectId`，建议同时用 `keyword` / `search` 条件兜底；
+- Bangumi 条目绑定仍在完善中，个别资源没有 `subjectId`。注意 `keyword` / `search` 等条件会与 `subject` 取交集，无法补回未绑定条目的资源——如需覆盖这部分，建议另建一条不含 `subject` 的订阅，或用[收藏夹](./collection)把两条条件聚合起来；
 - AnimeGarden 每约 5 分钟同步一次上游来源，订阅轮询间隔无需低于此值。
