@@ -57,6 +57,8 @@ export async function pullSubjects(system: System, subjects: Subject[], options:
     system.logger.log(lightRed('同步存储 Anime Space 快照失败'));
     system.logger.error(error);
     system.logger.log();
+
+    throw error;
   }
 }
 
@@ -164,11 +166,13 @@ async function pullSubject(subject: Subject, options: PullOptions) {
     (file) => file.storage === subject.storage.driver
   );
   const listedPaths = new Set<string>();
+
+  const storage = subject.getStorage();
   const storageFiles = (
-    await subject
-      .getStorage()
-      .list()
-      .catch(() => [])
+    await storage.list().catch((cause) => {
+      // A failed read is not an empty directory: keep the existing snapshots.
+      throw new Error(`读取存储目录失败 ${storage.fs.name}://${storage.path}`, { cause });
+    })
   ).filter((file) => {
     if (!['.mp4', '.mkv', '.ass'].includes(file.extname) || listedPaths.has(file.path)) {
       return false;
@@ -176,6 +180,7 @@ async function pullSubject(subject: Subject, options: PullOptions) {
     listedPaths.add(file.path);
     return true;
   });
+
   system.logger.log(
     `${lightBlue('快照状态')} 本地已同步 ${subjectFiles.length} 个文件 (共 ${storageFiles.length} 个文件)`
   );
