@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { pullSubjects } from '../src/command/refresh.ts';
 import { subjects, subjectFiles } from '../src/sqlite/subject.ts';
+import type { System } from '../src/system/system.ts';
 import { nameResource } from '../src/subject/source/extract.ts';
 import { SubjectType } from '../src/subject/source/schema.ts';
 import { LocalFS } from '../src/utils/fs.ts';
@@ -169,6 +170,36 @@ async function setupStorageSnapshots() {
   return { system, subject, storage, database, log };
 }
 
+async function createSyncedSubject(system: System, name: string) {
+  const subject = kit.createSubjectFromSource(system, { include: [name] }, { name });
+  const database = await system.openDatabase();
+  const [row] = await database
+    .insert(subjects)
+    .values({
+      name: subject.name,
+      enabled: true,
+      source: subject.source,
+      naming: subject.naming,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    })
+    .returning();
+  const storage = subject.getStorage();
+  await storage.ensureDir();
+  const file = storage.join('episode-1.mkv');
+  await file.writeFile(Buffer.from('video'));
+  await database.insert(subjectFiles).values({
+    subjectId: row!.id,
+    storage: subject.storage.driver,
+    path: file.path,
+    size: 123,
+    checksum: 'checksum'
+  });
+  const fetched = vi.spyOn(subject, 'fetchResources').mockResolvedValue([]);
+  vi.spyOn(subject, 'extractResources').mockResolvedValue([]);
+  return { subject, storage, file, fetched };
+}
+
 describe('pull storage snapshots', () => {
   it.each(['connection timeout', 'token expired', 'permission denied'])(
     'preserves snapshots and stops pulling when listing fails: %s',
@@ -203,9 +234,134 @@ describe('pull storage snapshots', () => {
     }
   );
 
-  it('preserves snapshots when the storage directory cannot be found', async () => {
-    const { system, subject, database } = await setupStorageSnapshots();
+  it('treats a missing storage directory as an empty snapshot and continues', async () => {
+    const { system, subject, database, log } = await setupStorageSnapshots();
     const before = await database.select().from(subjectFiles);
+    const next = await createSyncedSubject(system, 'Subject-B');
+
+    await pullSubjects(system, [subject, next.subject]);
+
+    const rows = await database.select().from(subjectFiles);
+    expect(rows.map((row) => row.path)).toEqual([next.file.path]);
+    expect(rows).not.toEqual(before);
+    expect(next.fetched).toHaveBeenCalled();
+    const output = log.mock.calls.flat().join('\n');
+    expect(output).toContain('存储目录不存在');
+    expect(output).toContain('按空快照继续');
+    expect(output).toContain('删除快照');
+    expect(output).toContain('成功同步 Anime Space 存储快照');
+    expect(system.logger.error).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    {
+      label: 'aliyundrive path not found',
+      message: (storagePath: string) => `${storagePath} not found`
+    },
+    {
+      label: 'webdav 404',
+      message: () => 'Invalid response: 404 Not Found'
+    },
+    {
+      label: 'node ENOENT message',
+      message: (storagePath: string) =>
+        `ENOENT: no such file or directory, scandir '${storagePath}'`
+    }
+  ])('continues after a provider not-found listing error ($label)', async ({ message }) => {
+    const { system, subject, storage, database, log } = await setupStorageSnapshots();
+    await storage.ensureDir();
+    const next = await createSyncedSubject(system, 'Subject-B');
+    const list = storage.fs.provider.list.bind(storage.fs.provider);
+    vi.spyOn(storage.fs.provider, 'list').mockImplementation(async (listedPath, options) => {
+      if (listedPath === storage.path) {
+        throw new Error(message(storage.path));
+      }
+      return list(listedPath, options);
+    });
+
+    await pullSubjects(system, [subject, next.subject]);
+
+    expect((await database.select().from(subjectFiles)).map((row) => row.path)).toEqual([
+      next.file.path
+    ]);
+    expect(next.fetched).toHaveBeenCalled();
+    expect(log.mock.calls.flat().join('\n')).toContain('存储目录不存在');
+    expect(system.logger.error).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    {
+      label: 'parent directory not found',
+      message: (storagePath: string) => `Parent directory not found: ${storagePath}`
+    },
+    {
+      label: 'not a directory',
+      message: (storagePath: string) => `${storagePath} is not a directory`
+    },
+    { label: 'webdav 401', message: () => 'Invalid response: 401 Unauthorized' },
+    { label: 'webdav 403', message: () => 'Invalid response: 403 Forbidden' },
+    { label: 'unrelated not found text', message: () => 'token not found' }
+  ])('still stops pulling on a non-missing storage read error ($label)', async ({ message }) => {
+    const { system, subject, storage, database, log } = await setupStorageSnapshots();
+    await storage.ensureDir();
+    const next = await createSyncedSubject(system, 'Subject-B');
+    const before = await database.select().from(subjectFiles);
+    vi.spyOn(storage.fs.provider, 'list').mockRejectedValue(new Error(message(storage.path)));
+
+    await expect(pullSubjects(system, [subject, next.subject])).rejects.toThrow('读取存储目录失败');
+
+    expect(await database.select().from(subjectFiles)).toEqual(before);
+    expect(next.fetched).not.toHaveBeenCalled();
+    expect(log.mock.calls.flat().join('\n')).not.toContain('删除快照');
+    expect(log.mock.calls.flat().join('\n')).not.toContain('成功同步 Anime Space 存储快照');
+  });
+
+  it('honors a NotFoundError name after BreadFS wraps the provider error', async () => {
+    const { system, subject, storage, database } = await setupStorageSnapshots();
+    await storage.ensureDir();
+    const list = storage.fs.provider.list.bind(storage.fs.provider);
+    vi.spyOn(storage.fs.provider, 'list').mockImplementation(async (listedPath, options) => {
+      if (listedPath === storage.path) {
+        const error = new Error('provider failed');
+        error.name = 'NotFoundError';
+        throw error;
+      }
+      return list(listedPath, options);
+    });
+
+    await pullSubjects(system, [subject]);
+
+    expect(await database.select().from(subjectFiles)).toEqual([]);
+    expect(system.logger.error).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['NotFound.File', { code: 'NotFound.File' }],
+    ['ENOENT', { code: 'ENOENT' }],
+    ['HTTP 404', { status: 404 }]
+  ] as const)(
+    'honors a typed not-found signal when list() preserves it: %s',
+    async (_label, fields) => {
+      const { system, subject, storage, database } = await setupStorageSnapshots();
+      await storage.ensureDir();
+      vi.spyOn(storage.fs, 'list').mockRejectedValue(
+        Object.assign(new Error('provider failed'), fields)
+      );
+
+      await pullSubjects(system, [subject]);
+
+      expect(await database.select().from(subjectFiles)).toEqual([]);
+      expect(system.logger.error).not.toHaveBeenCalled();
+    }
+  );
+
+  it('still stops when a preserved provider code is not not-found', async () => {
+    const { system, subject, storage, database } = await setupStorageSnapshots();
+    await storage.ensureDir();
+    const before = await database.select().from(subjectFiles);
+    vi.spyOn(storage.fs, 'list').mockRejectedValue(
+      Object.assign(new Error('provider failed'), { code: 'EACCES' })
+    );
 
     await expect(pullSubjects(system, [subject])).rejects.toThrow('读取存储目录失败');
 

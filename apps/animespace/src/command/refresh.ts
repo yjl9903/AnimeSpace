@@ -170,6 +170,14 @@ async function pullSubject(subject: Subject, options: PullOptions) {
   const storage = subject.getStorage();
   const storageFiles = (
     await storage.list().catch((cause) => {
+      if (isMissingStorageDirectory(cause, storage.path)) {
+        // The folder was never created. Sync it as an empty snapshot and keep going.
+        system.logger.log(
+          `${lightYellow('存储目录不存在')} ${storage.fs.name}://${storage.path}，按空快照继续`
+        );
+        return [];
+      }
+
       // A failed read is not an empty directory: keep the existing snapshots.
       throw new Error(`读取存储目录失败 ${storage.fs.name}://${storage.path}`, { cause });
     })
@@ -271,4 +279,76 @@ async function pullSubject(subject: Subject, options: PullOptions) {
     );
     system.logger.log();
   }
+}
+
+const NOT_FOUND_CODES = new Set(['ENOENT', 'ENOTFOUND', 'NotFound', 'NOT_FOUND']);
+
+/**
+ * Prefer a typed not-found from BreadFS (`NotFoundError`, `code`, or HTTP 404).
+ * breadfs@0.1.13's BreadFSError copies `name` and `message` only, so today's
+ * Aliyun / Node / WebDAV failures are still recognized by message. That
+ * fallback should go away once BreadFS owns and preserves the typed signal:
+ * https://github.com/yjl9903/BreadFS
+ */
+function isMissingStorageDirectory(error: unknown, storagePath: string): boolean {
+  const seen = new Set<unknown>();
+  const pending: unknown[] = [error];
+
+  while (pending.length > 0) {
+    const current = pending.pop();
+    if (!current || typeof current !== 'object' || seen.has(current)) {
+      continue;
+    }
+    seen.add(current);
+
+    if (isTypedNotFound(current)) {
+      return true;
+    }
+    if (current instanceof Error && isLegacyMissingPathMessage(current.message, storagePath)) {
+      return true;
+    }
+    if ('cause' in current) {
+      pending.push(current.cause);
+    }
+    if ('raw' in current) {
+      pending.push(current.raw);
+    }
+  }
+
+  return false;
+}
+
+function isTypedNotFound(error: object): boolean {
+  if ('code' in error && typeof error.code === 'string') {
+    if (NOT_FOUND_CODES.has(error.code) || error.code.startsWith('NotFound.')) {
+      return true;
+    }
+  }
+  if ('name' in error && typeof error.name === 'string' && error.name.endsWith('NotFoundError')) {
+    return true;
+  }
+  return 'status' in error && error.status === 404;
+}
+
+function isLegacyMissingPathMessage(message: string, storagePath: string): boolean {
+  const paths = new Set<string>();
+  const trimmed = storagePath.replace(/\\/g, '/').replace(/\/+$/, '');
+  if (trimmed && trimmed !== '/' && trimmed !== '.') {
+    paths.add(trimmed);
+    paths.add(storagePath);
+    if (!trimmed.startsWith('/') && !/^[A-Za-z]:/.test(trimmed)) {
+      paths.add(`/${trimmed}`);
+    }
+  }
+
+  if ([...paths].some((path) => message === `${path} not found`)) {
+    return true;
+  }
+  if (
+    message.includes('ENOENT') &&
+    [...paths].some((path) => message.includes(`'${path}'`) || message.includes(`"${path}"`))
+  ) {
+    return true;
+  }
+  return /^Invalid response: 404(?:\s|$)/.test(message);
 }
