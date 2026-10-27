@@ -247,8 +247,6 @@ describe('pull storage snapshots', () => {
     expect(rows).not.toEqual(before);
     expect(next.fetched).toHaveBeenCalled();
     const output = log.mock.calls.flat().join('\n');
-    expect(output).toContain('存储目录不存在');
-    expect(output).toContain('按空快照继续');
     expect(output).toContain('删除快照');
     expect(output).toContain('成功同步 Anime Space 存储快照');
     expect(system.logger.error).not.toHaveBeenCalled();
@@ -261,7 +259,7 @@ describe('pull storage snapshots', () => {
   ] satisfies BreadFSErrorSource[])(
     'continues after a normalized ENOENT from $provider',
     async (source) => {
-      const { system, subject, storage, database, log } = await setupStorageSnapshots();
+      const { system, subject, storage, database } = await setupStorageSnapshots();
       const next = await createSyncedSubject(system, 'Subject-B');
       const error = new BreadFSError('provider failed', {
         code: 'ENOENT',
@@ -278,7 +276,6 @@ describe('pull storage snapshots', () => {
         next.file.path
       ]);
       expect(next.fetched).toHaveBeenCalled();
-      expect(log.mock.calls.flat().join('\n')).toContain('存储目录不存在');
       expect(system.logger.error).not.toHaveBeenCalled();
     }
   );

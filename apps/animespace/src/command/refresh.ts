@@ -172,10 +172,6 @@ async function pullSubject(subject: Subject, options: PullOptions) {
   const storageFiles = (
     await storage.list().catch((cause) => {
       if (cause instanceof BreadFSError && cause.code === 'ENOENT') {
-        // A missing directory is an empty snapshot; other read failures must abort.
-        system.logger.log(
-          `${lightYellow('存储目录不存在')} ${storage.fs.name}://${storage.path}，按空快照继续`
-        );
         return [];
       }
 
