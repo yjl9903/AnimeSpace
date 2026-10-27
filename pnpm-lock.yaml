@@ -258,8 +258,8 @@ importers:
         specifier: 0.5.5
         version: 0.5.5
       bgmc:
-        specifier: 0.2.0
-        version: 0.2.0
+        specifier: 0.3.1
+        version: 0.3.1
       bgmt:
         specifier: 0.1.3
         version: 0.1.3
@@ -3070,9 +3070,9 @@ packages:
     engines: {node: '>=v20.8.0'}
     hasBin: true
 
-  bgmc@0.2.0:
-    resolution: {integrity: sha512-TrGX8fzwR/VZXsUlOLOWqYSK+4WrKP0lWOc9Y/7KjRAkQ9Kh6edyVSq+SGGW83EcYIX9eHhSIajr4lm72Ztqpg==}
-    engines: {node: '>=v20.8.0'}
+  bgmc@0.3.1:
+    resolution: {integrity: sha512-p9XjdKnbOGrG6hXDarL+XvkKpxzaSbeJUOp8jJ1ldWb/qunppZrixMSI9hZXRa8BIpzdVfDLpf57dn8s/6C+/Q==}
+    engines: {node: '>=24.0.0'}
     hasBin: true
 
   bgmt@0.1.3:
@@ -7918,7 +7918,7 @@ snapshots:
     dependencies:
       breadc: 0.9.7
 
-  bgmc@0.2.0:
+  bgmc@0.3.1:
     dependencies:
       breadc: 1.0.0-beta.23
 
