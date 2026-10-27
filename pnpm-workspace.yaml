@@ -12,6 +12,12 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - '@nqbt/core@0.1.3'
   - nqbt@0.1.3
+  - '@breadfs/aliyundrive@0.1.14'
+  - '@breadfs/core@0.1.14'
+  - '@breadfs/mem@0.1.14'
+  - '@breadfs/node@0.1.14'
+  - '@breadfs/webdav@0.1.14'
+  - breadfs@0.1.14
 
 ignoreWorkspaceRootCheck: true
 shamefullyHoist: true

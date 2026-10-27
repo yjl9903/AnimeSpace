@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { BreadFSError, type BreadFSErrorSource } from 'breadfs';
 
 import { pullSubjects } from '../src/command/refresh.ts';
 import { subjects, subjectFiles } from '../src/sqlite/subject.ts';
@@ -254,61 +255,64 @@ describe('pull storage snapshots', () => {
   });
 
   it.each([
-    {
-      label: 'aliyundrive path not found',
-      message: (storagePath: string) => `${storagePath} not found`
-    },
-    {
-      label: 'webdav 404',
-      message: () => 'Invalid response: 404 Not Found'
-    },
-    {
-      label: 'node ENOENT message',
-      message: (storagePath: string) =>
-        `ENOENT: no such file or directory, scandir '${storagePath}'`
+    { provider: 'node', code: 'ENOENT' },
+    { provider: 'webdav', status: 404 },
+    { provider: 'aliyundrive' }
+  ] satisfies BreadFSErrorSource[])(
+    'continues after a normalized ENOENT from $provider',
+    async (source) => {
+      const { system, subject, storage, database, log } = await setupStorageSnapshots();
+      const next = await createSyncedSubject(system, 'Subject-B');
+      const error = new BreadFSError('provider failed', {
+        code: 'ENOENT',
+        operation: 'list',
+        path: storage.path,
+        source
+      });
+      // Exercise the public BreadFS wrapper as well as the pull error handler.
+      vi.spyOn(storage.fs.provider, 'list').mockRejectedValueOnce(error);
+
+      await pullSubjects(system, [subject, next.subject]);
+
+      expect((await database.select().from(subjectFiles)).map((row) => row.path)).toEqual([
+        next.file.path
+      ]);
+      expect(next.fetched).toHaveBeenCalled();
+      expect(log.mock.calls.flat().join('\n')).toContain('存储目录不存在');
+      expect(system.logger.error).not.toHaveBeenCalled();
     }
-  ])('continues after a provider not-found listing error ($label)', async ({ message }) => {
-    const { system, subject, storage, database, log } = await setupStorageSnapshots();
-    await storage.ensureDir();
-    const next = await createSyncedSubject(system, 'Subject-B');
-    const list = storage.fs.provider.list.bind(storage.fs.provider);
-    vi.spyOn(storage.fs.provider, 'list').mockImplementation(async (listedPath, options) => {
-      if (listedPath === storage.path) {
-        throw new Error(message(storage.path));
-      }
-      return list(listedPath, options);
-    });
-
-    await pullSubjects(system, [subject, next.subject]);
-
-    expect((await database.select().from(subjectFiles)).map((row) => row.path)).toEqual([
-      next.file.path
-    ]);
-    expect(next.fetched).toHaveBeenCalled();
-    expect(log.mock.calls.flat().join('\n')).toContain('存储目录不存在');
-    expect(system.logger.error).not.toHaveBeenCalled();
-  });
+  );
 
   it.each([
-    {
-      label: 'parent directory not found',
-      message: (storagePath: string) => `Parent directory not found: ${storagePath}`
-    },
-    {
-      label: 'not a directory',
-      message: (storagePath: string) => `${storagePath} is not a directory`
-    },
-    { label: 'webdav 401', message: () => 'Invalid response: 401 Unauthorized' },
-    { label: 'webdav 403', message: () => 'Invalid response: 403 Forbidden' },
-    { label: 'unrelated not found text', message: () => 'token not found' }
-  ])('still stops pulling on a non-missing storage read error ($label)', async ({ message }) => {
+    'EACCES',
+    'ENOTDIR',
+    'ENOTFOUND',
+    'ETIMEDOUT',
+    'ERR_BREADFS_AUTH',
+    'ERR_BREADFS_REMOTE',
+    'ERR_BREADFS_UNKNOWN'
+  ])('preserves snapshots and stops pulling for BreadFS code %s', async (code) => {
     const { system, subject, storage, database, log } = await setupStorageSnapshots();
-    await storage.ensureDir();
     const next = await createSyncedSubject(system, 'Subject-B');
     const before = await database.select().from(subjectFiles);
-    vi.spyOn(storage.fs.provider, 'list').mockRejectedValue(new Error(message(storage.path)));
+    // Neither legacy text nor nested provider details may override the normalized code.
+    const raw = Object.assign(new Error(`${storage.path} not found`), {
+      name: 'NotFoundError',
+      code: 'NotFound.File',
+      status: 404
+    });
+    const error = new BreadFSError(raw, {
+      code,
+      operation: 'list',
+      path: storage.path,
+      source: { provider: 'aliyundrive', code: 'NotFound.File', status: 404 }
+    });
+    vi.spyOn(storage.fs.provider, 'list').mockRejectedValueOnce(error);
 
-    await expect(pullSubjects(system, [subject, next.subject])).rejects.toThrow('读取存储目录失败');
+    await expect(pullSubjects(system, [subject, next.subject])).rejects.toMatchObject({
+      message: expect.stringContaining('读取存储目录失败'),
+      cause: error
+    });
 
     expect(await database.select().from(subjectFiles)).toEqual(before);
     expect(next.fetched).not.toHaveBeenCalled();
@@ -316,51 +320,17 @@ describe('pull storage snapshots', () => {
     expect(log.mock.calls.flat().join('\n')).not.toContain('成功同步 Anime Space 存储快照');
   });
 
-  it('honors a NotFoundError name after BreadFS wraps the provider error', async () => {
-    const { system, subject, storage, database } = await setupStorageSnapshots();
-    await storage.ensureDir();
-    const list = storage.fs.provider.list.bind(storage.fs.provider);
-    vi.spyOn(storage.fs.provider, 'list').mockImplementation(async (listedPath, options) => {
-      if (listedPath === storage.path) {
-        const error = new Error('provider failed');
-        error.name = 'NotFoundError';
-        throw error;
-      }
-      return list(listedPath, options);
-    });
-
-    await pullSubjects(system, [subject]);
-
-    expect(await database.select().from(subjectFiles)).toEqual([]);
-    expect(system.logger.error).not.toHaveBeenCalled();
-  });
-
   it.each([
-    ['NotFound.File', { code: 'NotFound.File' }],
-    ['ENOENT', { code: 'ENOENT' }],
-    ['HTTP 404', { status: 404 }]
-  ] as const)(
-    'honors a typed not-found signal when list() preserves it: %s',
-    async (_label, fields) => {
-      const { system, subject, storage, database } = await setupStorageSnapshots();
-      await storage.ensureDir();
-      vi.spyOn(storage.fs, 'list').mockRejectedValue(
-        Object.assign(new Error('provider failed'), fields)
-      );
-
-      await pullSubjects(system, [subject]);
-
-      expect(await database.select().from(subjectFiles)).toEqual([]);
-      expect(system.logger.error).not.toHaveBeenCalled();
-    }
-  );
-
-  it('still stops when a preserved provider code is not not-found', async () => {
+    ['path message', {}],
+    ['error name', { name: 'NotFoundError' }],
+    ['provider code', { code: 'NotFound.File' }],
+    ['bare ENOENT', { code: 'ENOENT' }],
+    ['HTTP status', { status: 404 }]
+  ])('does not infer missing directories from an unnormalized %s', async (_label, fields) => {
     const { system, subject, storage, database } = await setupStorageSnapshots();
-    await storage.ensureDir();
     const before = await database.select().from(subjectFiles);
     vi.spyOn(storage.fs, 'list').mockRejectedValue(
-      Object.assign(new Error('provider failed'), { code: 'EACCES' })
+      Object.assign(new Error(`${storage.path} not found`), fields)
     );
 
     await expect(pullSubjects(system, [subject])).rejects.toThrow('读取存储目录失败');
