@@ -155,9 +155,14 @@ export class AnimeGardenSourceManager {
       retry: this.retryCount,
       tracker: true
     });
-    if (!remote.ok || !remote.timestamp) {
-      throw remote.error ?? new Error('Failed to fetch resources from AnimeGarden.');
+
+    if (!remote.ok) {
+      throw remote.error;
     }
+    if (!remote.timestamp) {
+      throw new Error('Failed to fetch resources from AnimeGarden.');
+    }
+
     this.latestFetchedAt = new Date(
       Math.max(
         this.latestFetchedAt.getTime(),
@@ -350,8 +355,11 @@ export class AnimeGardenSourceManager {
         tracker: true
       });
 
-      if (!remote.ok || !remote.timestamp) {
-        throw remote.error ?? new Error('Failed to initialize AnimeGarden source manager.');
+      if (!remote.ok) {
+        throw remote.error;
+      }
+      if (!remote.timestamp) {
+        throw new Error('Failed to initialize AnimeGarden source manager.');
       }
 
       const missingCount = await this.countMissingResources(database, remote.resources);
@@ -446,7 +454,6 @@ function makeCachedResponse(
       pageSize: resources.length,
       complete: true
     },
-    timestamp,
-    error: undefined
+    timestamp
   };
 }
