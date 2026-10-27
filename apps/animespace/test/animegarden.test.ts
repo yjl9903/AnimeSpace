@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
+import { AnimeGardenError } from '@animegarden/client';
 import type { Resource, FetchResourcesOptions, FetchResourcesResult } from '@animegarden/client';
 
 import { createAnimeSpaceTestKit } from './helpers/animespace.ts';
@@ -86,7 +87,7 @@ describe('anime garden source manager', () => {
   it('throws when remote request fails', async () => {
     const system = await kit.createSystem({ openDatabase: true });
     const manager = system.managers.animegarden;
-    const remoteError = new Error('remote failed');
+    const remoteError = new AnimeGardenError('remote failed');
 
     fetchResourcesMock
       .mockResolvedValueOnce(makeSuccessResult([makeResource(1, 'Init')])) // initialize
@@ -169,18 +170,18 @@ function makeSuccessResult(
       complete: true
     },
     filter: {},
-    timestamp: new Date('2025-01-03T00:00:00.000Z'),
-    error: undefined
+    timestamp: new Date('2025-01-03T00:00:00.000Z')
   };
 }
 
-function makeFailureResult(error: Error): FetchResourcesResult<FetchResourcesOptions> {
+function makeFailureResult(error: AnimeGardenError): FetchResourcesResult<FetchResourcesOptions> {
   return {
     ok: false,
+    code: error.code,
+    error,
     resources: [],
     pagination: undefined,
     filter: undefined,
-    timestamp: undefined,
-    error
+    timestamp: undefined
   };
 }

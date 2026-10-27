@@ -15,22 +15,22 @@
     "preversion": "pnpm test:ci"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "4.20260504.1",
+    "@cloudflare/workers-types": "5.20261026.1",
     "@total-typescript/ts-reset": "0.6.1",
     "@types/debug": "^4.1.13",
     "@types/fs-extra": "11.0.4",
-    "@types/node": "24.12.2",
+    "@types/node": "24.19.2",
     "bumpp": "latest",
-    "drizzle-kit": "0.31.10",
-    "prettier": "3.8.3",
-    "tsdown": "0.23.0",
-    "tsx": "4.21.0",
-    "turbo": "2.9.8",
+    "drizzle-kit": "0.31.11",
+    "prettier": "3.9.10",
+    "tsdown": "0.23.2",
+    "tsx": "4.23.15",
+    "turbo": "2.11.10",
     "typescript": "6.0.3",
-    "vitest": "4.1.5",
-    "wrangler": "4.87.0"
+    "vitest": "4.1.12",
+    "wrangler": "4.152.0"
   },
-  "packageManager": "pnpm@12.4.1",
+  "packageManager": "pnpm@12.15.0",
   "engines": {
     "node": ">=v24.0.0"
   }
