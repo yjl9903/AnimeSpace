@@ -4,6 +4,7 @@ import type { Resource, FetchResourcesResult } from '@animegarden/client';
 
 import type { SubjectSource } from '../src/subject/source/source.ts';
 import type { SubjectResource } from '../src/subject/source/resource.ts';
+import { parseResource } from '../src/subject/source/parser.ts';
 
 import { createAnimeSpaceTestKit } from './helpers/animespace.ts';
 
@@ -460,6 +461,46 @@ describe('fetch source resources', () => {
     });
 
     await expect(subject.fetchResources()).rejects.toThrow('fetch failed');
+  });
+});
+
+describe('resource revision selection', () => {
+  function release(episode: string, fansub = '今晚月色真美', language = '简'): SubjectResource {
+    return {
+      name: `【${fansub}】[女友的朋友 / 彼女の友達 / Kanojo no Tomodachi][${episode}][WebRip][1080P][AVC-8bit][AAC][${language}日内嵌][无修正]`,
+      url: `https://example.com/${fansub}/${episode}/${language}`,
+      metadata: {}
+    };
+  }
+
+  it.each([
+    { episodes: ['01', '01v2', '01v3'], expected: 3 },
+    { episodes: ['01v3', '01v10', '01', '01v2'], expected: 10 }
+  ])(
+    'selects v$expected numerically instead of the title order',
+    async ({ episodes, expected }) => {
+      const system = await kit.createSystem();
+      const subject = kit.createSubjectFromSource(system, { include: ['女友的朋友'] });
+      const resources = episodes.map((episode) => parseResource(subject, release(episode)));
+      const selected = await subject.extractResources(resources);
+      expect(selected).toHaveLength(1);
+      expect(selected[0].parsed).toMatchObject({ episode: 1, version: expected });
+    }
+  );
+
+  it.each([
+    { order: { fansubs: ['优先组', '今晚月色真美'] }, preferred: release('01', '优先组') },
+    {
+      order: { keywords: { language: ['繁', '简'] } },
+      preferred: release('01', '今晚月色真美', '繁')
+    }
+  ])('keeps configured preferences ahead of revisions', async ({ order, preferred }) => {
+    const system = await kit.createSystem();
+    const subject = kit.createSubjectFromSource(system, { include: ['女友的朋友'], order });
+    const selected = await subject.extractResources(
+      [release('01v3'), preferred].map((resource) => parseResource(subject, resource))
+    );
+    expect(selected[0].url).toBe(preferred.url);
   });
 });
 

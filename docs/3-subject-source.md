@@ -96,6 +96,7 @@
 4. 排序优先级：
    - `order.fansubs`
    - `order.keywords`
+   - `parsed.version desc`（默认 `1`）
    - `name.localeCompare`
 
 ## 7. 当前实现风险提醒

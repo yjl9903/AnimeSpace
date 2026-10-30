@@ -274,7 +274,11 @@ function sortResources(subject: Subject, resources: ExtractedSubjectResource[]) 
       }
     }
 
-    // 3. Fallback to compare name
+    // 3. Prefer newer revisions when configured preferences are equal; unmarked releases are v1.
+    const version = (rhs.parsed.version ?? 1) - (lhs.parsed.version ?? 1);
+    if (version !== 0) return version;
+
+    // 4. Fallback to compare name
     return lhs.name.localeCompare(rhs.name);
   });
 }

@@ -12,6 +12,8 @@ export interface SubjectResourceMetadata {
 
   episode?: number;
 
+  version?: number;
+
   fansub?: string;
 
   year?: number;

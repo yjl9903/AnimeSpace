@@ -98,7 +98,8 @@
 
 1. 先按 `order.fansubs` 顺序。
 2. 再按 `order.keywords` 组顺序。
-3. 最后按 `name.localeCompare`。
+3. 同优先级下按资源版本号降序，未标版本按 v1。
+4. 最后按 `name.localeCompare`。
 
 ## 7. Naming 当前实现
 

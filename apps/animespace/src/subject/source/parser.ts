@@ -13,6 +13,7 @@ export function parseResource(subject: Subject, resource: SubjectResource): Pars
       type: resource.metadata.type ?? subject.type, // TODO: infer type
       season: resource.metadata.season ?? info.season?.number,
       episode: resource.metadata.episode ?? info.episode?.number,
+      version: resource.metadata.version ?? info.version,
       fansub:
         resource.metadata.fansub ??
         (typeof info.fansub === 'object' ? info.fansub?.name : info.fansub),
