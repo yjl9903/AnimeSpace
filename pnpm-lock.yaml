@@ -285,8 +285,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
       nqbt:
-        specifier: 0.1.3
-        version: 0.1.3
+        specifier: 0.1.4
+        version: 0.1.4
       prompts:
         specifier: 2.4.2
         version: 2.4.2
@@ -2110,8 +2110,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nqbt/core@0.1.3':
-    resolution: {integrity: sha512-uxbDBwJuXH2T3W9aBOOAbY7enOV0qz9wv/1Hw+PWVKbyW9IlzE3t7OB7ljnlrphqeTZGRdYJV9KpJ4IqIM4p7g==}
+  '@nqbt/core@0.1.4':
+    resolution: {integrity: sha512-NTqoqhPCstiAQn+KVvOe/1re+fc6ny1hAJiEclB4eSrPP/GdWGlIk5O0CFLAwvfWHW/OT1o84F2p3Unp+RlReg==}
     engines: {node: '>=v24.0.0'}
 
   '@oxc-parser/binding-android-arm-eabi@0.153.0':
@@ -3222,8 +3222,8 @@ packages:
     resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
     engines: {node: '>=18'}
 
-  cookie@2.0.1:
-    resolution: {integrity: sha512-yuToqVvRrj6pfDXREyQAAv8SkAEk/8GS3jQRTiUMm66TVtBYmqQeoEjL2Lmq8Rpo6271vH76InTChTitEAm65w==}
+  cookie@2.0.2:
+    resolution: {integrity: sha512-SL0cVuEdETEp7pN0FuZb01toc3vnODEfVUCooxG1SJN0yIirh7JMb9X9bvfCFf0vzzbT68RdbKDHYTiWy7a7iw==}
     engines: {node: '>=22'}
 
   copy-anything@4.0.5:
@@ -4286,8 +4286,8 @@ packages:
   nostics@1.3.0:
     resolution: {integrity: sha512-wzRsrJwNlFbqIRQt8aCeL2WE8USip/uuvGSOZV1D02CxX8ABTMbw8IywKjH7yWHETMXbWJI4OBpihg9rmz2Vyg==}
 
-  nqbt@0.1.3:
-    resolution: {integrity: sha512-0tbpJYlnZod0sFTupapbabbsK/Nx9xuMtQoMrEWNrKKgvsaAAWGNUScP3FHzCh7YYrDHgAyeBQoCn0aSANFApQ==}
+  nqbt@0.1.4:
+    resolution: {integrity: sha512-F75zfp/WhnR6IIheK7FH6CqOfAO73TL1LaYOAio73Pis0vouxeRATwgldoZeJS+VTebKdgdUEx6J6NXStTN6QQ==}
     engines: {node: '>=v24.0.0'}
 
   object-assign@4.1.1:
@@ -7049,9 +7049,9 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
 
-  '@nqbt/core@0.1.3':
+  '@nqbt/core@0.1.4':
     dependencies:
-      cookie: 2.0.1
+      cookie: 2.0.2
 
   '@oxc-parser/binding-android-arm-eabi@0.153.0':
     optional: true
@@ -8086,7 +8086,7 @@ snapshots:
 
   cookie@1.1.1: {}
 
-  cookie@2.0.1: {}
+  cookie@2.0.2: {}
 
   copy-anything@4.0.5:
     dependencies:
@@ -9174,9 +9174,9 @@ snapshots:
 
   nostics@1.3.0: {}
 
-  nqbt@0.1.3:
+  nqbt@0.1.4:
     dependencies:
-      '@nqbt/core': 0.1.3
+      '@nqbt/core': 0.1.4
 
   object-assign@4.1.1: {}
 

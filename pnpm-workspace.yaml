@@ -10,8 +10,8 @@ allowBuilds:
   workerd: true
 
 minimumReleaseAgeExclude:
-  - '@nqbt/core@0.1.3'
-  - nqbt@0.1.3
+  - '@nqbt/core@0.1.4'
+  - nqbt@0.1.4
   - '@breadfs/aliyundrive@0.1.14'
   - '@breadfs/core@0.1.14'
   - '@breadfs/mem@0.1.14'

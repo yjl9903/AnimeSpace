@@ -1,3 +1,4 @@
+import { QBittorrent } from 'nqbt';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import type { System } from '../src/system/system.ts';
@@ -72,6 +73,27 @@ afterEach(() => {
 });
 
 describe('QbittorrentDownloader share limits', () => {
+  it('sends all share-limit fields required by qBittorrent 5.3', async () => {
+    const fetch = vi.fn<typeof globalThis.fetch>().mockResolvedValue(new Response());
+    const client = new QBittorrent({ baseURL: 'http://localhost/api/v2', fetch });
+    client.state.auth = { sid: 'test', expires: new Date(Date.now() + 60_000) };
+
+    await client.setTorrentShareLimits('abc123', DEFAULT_QBITTORRENT_SHARE_LIMITS);
+
+    const [url, init] = fetch.mock.calls[0]!;
+    expect(url).toBe('http://localhost/api/v2/torrents/setShareLimits');
+    expect(init?.method).toBe('POST');
+    const form = await new Request(url, init).formData();
+    expect(Object.fromEntries(form)).toMatchObject({
+      hashes: 'abc123',
+      ratioLimit: '1',
+      seedingTimeLimit: '0',
+      inactiveSeedingTimeLimit: '0',
+      shareLimitsMode: 'Default',
+      shareLimitAction: 'Default'
+    });
+  });
+
   it('waits until a newly added torrent is visible and verifies its share limits', async () => {
     const client = {
       getTorrentList: vi
